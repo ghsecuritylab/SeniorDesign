@@ -1,0 +1,351 @@
+Designator Footprint               Mid X         Mid Y         Ref X         Ref Y         Pad X         Pad Y TB      Rotation Comment        
+L202       AP3-00005             -51.3mm    -33.1261mm       -51.3mm    -33.1261mm       -51.3mm    -32.4261mm  T        270.00 INDUCTOR       
+L201       AP3-00005           -43.175mm      -34.95mm     -43.175mm      -34.95mm     -43.175mm      -34.25mm  T        270.00 INDUCTOR       
+JS201      AP8-00525           -224.08mm     -202.48mm    -61.5501mm      -44.23mm     -224.08mm     -202.48mm  T         90.00 To be used by request from ESCATEC
+J201       AP8-00733            -61.55mm      -44.23mm      -61.55mm      -44.23mm      -61.55mm       -45.5mm  T         90.00 HEADER 1x2     
+U105       AP6-00087          -69.9201mm     -11.125mm    -69.9201mm     -11.125mm    -70.8731mm        -9.9mm  B        270.00                
+R136       AP2-00000           -66.325mm     -13.475mm     -66.325mm     -13.475mm     -66.925mm     -13.475mm  B        360.00 ?              
+R135       AP2-00000           -66.325mm       -12.3mm     -66.325mm       -12.3mm     -65.725mm       -12.3mm  B        180.00 R2             
+D101       AP4-00007            -65.75mm      -4.475mm      -65.75mm      -4.475mm       -66.7mm      -5.425mm  B        360.00 SCHOTTKY_SMD_31
+D100       AP5-00002           -63.025mm      -13.05mm     -63.025mm      -13.05mm     -61.975mm       -12.1mm  B        180.00 DUAL_SCHOTTKY_123
+R234       AP2-00000             -22.5mm     -78.525mm       -22.5mm     -78.525mm       -23.1mm     -78.525mm  T        360.00 R2             
+J405       AP8-00878               -78mm      -83.95mm         -78mm      -83.95mm      -75.13mm       -91.2mm  T        360.00 For SMSC MediaLB, Mates with QTH-020-01-X-D-DP-XXX
+R921       AP2-00000          -30.2814mm    -28.1622mm    -30.2814mm    -28.1622mm    -30.2814mm    -27.5622mm  B        270.00 R2             
+U104       AP6-00380             -56.3mm       -13.2mm       -56.3mm       -13.2mm      -55.05mm      -15.15mm  B         90.00 Auto-mode, no sync.
+U601       AP6-00400           -53.922mm     -75.525mm     -53.922mm     -75.525mm     -51.972mm     -80.075mm  T        180.00 FBGA60         
+J507       AP8-00259            -41.26mm    -100.104mm      -41.26mm    -100.104mm      -19.67mm     -98.834mm  T        180.00 HEADER 2x18 FEMALE
+C103       AP1-00122           -62.325mm       -8.15mm     -62.325mm       -8.15mm     -62.325mm      -12.95mm  T         90.00 For reflow soldering
+J100       AP8-00853             -76.9mm       -10.7mm      -74.45mm        -7.7mm      -74.45mm        -7.7mm  T        270.00 DC_JACK        
+J403       AP8-00910           -40.325mm     -19.875mm     -40.325mm     -19.875mm      -34.61mm      -17.84mm  T        270.00 FTSH-110-01-F-DV-007-K
+U200       AP6-00118               -45mm         -50mm         -45mm         -50mm       -55.6mm      -41.25mm  T        360.00 Engineering Sample 2
+J502       AP8-00823            -67.93mm     -64.544mm      -67.93mm     -64.544mm      -67.93mm     -55.654mm  T        270.00 HEADER 1x8 FEMALE
+J501       AP8-00823            -67.93mm     -41.684mm      -67.93mm     -41.684mm      -67.93mm     -32.794mm  T        270.00 HEADER 1x8 FEMALE
+J506       AP8-00182            -42.53mm     -69.751mm      -42.53mm     -69.751mm      -39.99mm     -68.481mm  T        180.00 HEADER 2x3     
+J505       AP8-00823            -19.67mm     -82.324mm      -19.67mm     -82.324mm      -19.67mm     -91.214mm  T         90.00 HEADER 1x8 FEMALE
+J503       AP8-00823            -19.67mm     -59.464mm      -19.67mm     -59.464mm      -19.67mm     -68.354mm  T         90.00 HEADER 1x8 FEMALE
+J500       AP8-00822            -19.67mm      -35.08mm      -19.67mm      -35.08mm      -19.67mm      -46.51mm  T         90.00 HEADER 1x10 FEMALE
+J700       AP8-00749           -16.075mm    -119.135mm     -16.075mm    -121.125mm      -9.465mm    -109.175mm  T        180.00 RJ45           
+J600       AP8-00377          -45.0525mm     -116.95mm    -45.0525mm      -115.2mm    -38.7475mm      -104.7mm  B        360.00 SD/MMC Card socket
+J302       AP8-00852           -48.434mm     -3.2375mm     -48.434mm      -1.675mm     -47.134mm      -4.475mm  T        180.00 2,000 pieces per reel
+R115       AP2-00000            -9.875mm      -14.85mm      -9.875mm      -14.85mm     -10.475mm      -14.85mm  B        360.00 R2             
+J404       AP8-00774               -87mm      -79.35mm      -88.15mm      -79.35mm      -86.15mm       -67.1mm  T        270.00 Used for Xplained Pro MCU board on top layer.
+Q900       AP5-00001            -3.725mm        -8.8mm      -3.725mm        -8.8mm      -4.375mm      -7.875mm  B        270.00 Same as 2N7002 but with two MOSFETs in one package
+U102       AP6-00054           -18.475mm      -7.125mm     -18.475mm      -7.125mm     -15.625mm       -6.15mm  B        180.00 TPS2112        
+SW100      AP8-00137               -26mm        -4.9mm         -26mm        -4.9mm         -28mm       -7.65mm  T         90.00 Can be ordered in low volumes from Mouser
+SW300      AP8-00137               -33mm        -4.9mm         -33mm        -4.9mm         -35mm       -7.65mm  T         90.00 Can be ordered in low volumes from Mouser
+R920       AP2-00000             -57.7mm       -2.65mm       -57.7mm       -2.65mm       -57.7mm       -2.05mm  B        270.00 R2             
+R909       AP2-00000              -2.4mm       -11.1mm        -2.4mm       -11.1mm        -1.8mm       -11.1mm  B        180.00 R2             
+R907       AP2-00000              -4.9mm       -11.1mm        -4.9mm       -11.1mm        -4.3mm       -11.1mm  B        180.00 R2             
+R906       AP2-00000              -5.7mm        -9.2mm        -5.7mm        -9.2mm        -5.7mm        -8.6mm  B        270.00 R2             
+R908       AP2-00000              -1.8mm        -9.2mm        -1.8mm        -9.2mm        -1.8mm        -9.8mm  B         90.00 R2             
+R901       AP2-00000           -10.725mm       -26.5mm     -10.725mm       -26.5mm     -11.325mm       -26.5mm  B        360.00 R2             
+R903       AP2-00000              -6.4mm       -26.5mm        -6.4mm       -26.5mm          -7mm       -26.5mm  B        360.00 R2             
+R902       AP2-00000              -6.4mm       -25.2mm        -6.4mm       -25.2mm          -7mm       -25.2mm  B        360.00 R2             
+R303       AP2-00000           -35.675mm      -11.95mm     -35.675mm      -11.95mm     -35.675mm      -12.55mm  T         90.00 R2             
+R106       AP2-00011           -21.475mm        -9.8mm     -21.475mm        -9.8mm     -21.975mm        -9.8mm  T        360.00 R2             
+R100       AP2-00000           -59.075mm       -2.65mm     -59.075mm       -2.65mm     -59.075mm       -3.25mm  B         90.00 R2             
+R119       AP2-00000             -11.8mm       -15.5mm       -11.8mm       -15.5mm       -11.8mm       -16.1mm  B         90.00 R2             
+R118       AP2-00000             -13.8mm      -9.075mm       -13.8mm      -9.075mm       -13.2mm      -9.075mm  B        180.00 R2             
+R116       AP2-00000           -13.675mm      -7.175mm     -13.675mm      -7.175mm     -13.675mm      -7.775mm  B         90.00 R2             
+R114       AP2-00000             -17.1mm       -11.1mm       -17.1mm       -11.1mm       -17.1mm       -11.7mm  B         90.00 R2             
+R113       AP2-00000             -21.2mm      -3.525mm       -21.2mm      -3.525mm       -20.6mm      -3.525mm  B        180.00 R2             
+Q105       AP5-00002             -14.5mm         -15mm       -14.5mm         -15mm      -13.45mm      -14.05mm  B        180.00 MOSFET_N_GSD   
+Q104       AP5-00002             -14.5mm      -11.45mm       -14.5mm      -11.45mm      -15.55mm       -12.4mm  B        360.00 MOSFET_P_GSD   
+Q103       AP5-00002             -10.4mm       -12.4mm       -10.4mm       -12.4mm      -11.45mm      -13.35mm  B        360.00 MOSFET_P_GSD   
+JS100      AP8-00525           -224.08mm     -202.48mm       -40.1mm        -5.3mm     -224.08mm     -202.48mm  T          0.00 To be used by request from ESCATEC
+J102       AP8-00367               -40mm      -10.95mm         -40mm      -10.95mm      -41.27mm      -10.95mm  T          0.00 HEADER 1x2     
+J101       AP8-00628              -5.7mm      -14.76mm        -5.7mm      -14.76mm       -6.97mm      -13.49mm  T        270.00 HEADER 2x2     
+D900       AP4-00013             -8.75mm        -2.5mm       -8.75mm        -2.5mm       -8.75mm       -3.55mm  T         90.00 Green          
+D901       AP4-00013              -6.5mm        -2.5mm        -6.5mm        -2.5mm        -6.5mm       -3.55mm  T         90.00 Yellow         
+D301       AP4-00013             -33.1mm         -12mm       -33.1mm         -12mm      -32.05mm         -12mm  T        180.00 Yellow         
+C106       AP1-00001            -20.65mm     -10.675mm      -20.65mm     -10.675mm       -20.1mm     -10.675mm  B        180.00 CAP-NONPOL     
+C105       AP1-00001             -21.2mm       -4.65mm       -21.2mm       -4.65mm      -20.65mm       -4.65mm  B        180.00 CAP-NONPOL     
+J402       AP8-00622              -5.7mm      -75.72mm        -5.7mm      -75.72mm       -6.97mm      -64.29mm  T        270.00 HEADER 2x10    
+J900       AP8-00852             -15.6mm     -3.2375mm       -15.6mm      -1.675mm       -14.3mm      -4.475mm  T        180.00 2,000 pieces per reel
+U900       AP6-00206             -24.9mm     -17.475mm       -24.9mm     -17.475mm     -21.975mm       -20.4mm  B         90.00 100 ball VFBGA 
+C900       AP1-00053             -16.9mm       -21.7mm       -16.9mm       -21.7mm       -16.9mm     -22.175mm  B         90.00 22p            
+C901       AP1-00053             -16.9mm       -19.8mm       -16.9mm       -19.8mm       -16.9mm     -19.325mm  B        270.00 22p            
+C902       AP1-00053           -17.475mm     -16.425mm     -17.475mm     -16.425mm      -17.95mm     -16.425mm  B        360.00 10p            
+C904       AP1-00053            -31.55mm       -15.6mm      -31.55mm       -15.6mm     -31.075mm       -15.6mm  B        180.00 100n           
+C905       AP1-00053           -25.375mm       -11.8mm     -25.375mm       -11.8mm       -24.9mm       -11.8mm  B        180.00 Farnell no: 1288200
+C906       AP1-00053           -25.375mm       -12.7mm     -25.375mm       -12.7mm       -24.9mm       -12.7mm  B        180.00 1 nF C0G       
+C909       AP1-00053           -23.275mm       -11.8mm     -23.275mm       -11.8mm      -23.75mm       -11.8mm  B        360.00 Farnell no: 1288200
+C910       AP1-00053           -23.275mm       -12.7mm     -23.275mm       -12.7mm      -23.75mm       -12.7mm  B        360.00 100n           
+C911       AP1-00053           -19.675mm         -18mm     -19.675mm         -18mm      -20.15mm         -18mm  B        360.00 100n           
+C912       AP1-00053            -25.25mm       -22.2mm      -25.25mm       -22.2mm     -25.725mm       -22.2mm  B        360.00 100n           
+C913       AP1-00053           -29.875mm       -18.6mm     -29.875mm       -18.6mm     -29.875mm     -18.125mm  B        270.00 100n           
+C914       AP1-00053            -30.75mm       -18.6mm      -30.75mm       -18.6mm      -30.75mm     -18.125mm  B        270.00 Farnell no: 1288200
+C915       AP1-00053            -25.25mm      -22.95mm      -25.25mm      -22.95mm     -25.725mm      -22.95mm  B        360.00 Farnell no: 1288200
+C907       AP1-00053             -12.6mm        -9.1mm       -12.6mm        -9.1mm       -12.6mm      -8.625mm  T        270.00 1 nF C0G       
+C908       AP1-00053             -11.3mm        -9.1mm       -11.3mm        -9.1mm       -11.3mm      -8.625mm  T        270.00 1 nF C0G       
+D902       AP4-00001           -15.275mm      -7.928mm     -16.325mm      -7.178mm     -16.325mm      -7.178mm  T          0.00 PRTR5V0U2X     
+D302       AP4-00001           -48.109mm      -7.928mm     -49.159mm      -7.178mm     -49.159mm      -7.178mm  T          0.00 PRTR5V0U2X     
+E1         AP8-00192           -224.08mm     -202.48mm          -9mm        -4.5mm     -224.08mm     -202.48mm  B        180.00 RUBBER FEET    
+E2         AP8-00192           -224.08mm     -202.48mm         -81mm        -4.5mm     -224.08mm     -202.48mm  B        180.00 RUBBER FEET    
+E3         AP8-00192           -224.08mm     -202.48mm          -9mm      -130.5mm     -224.08mm     -202.48mm  B        180.00 RUBBER FEET    
+E4         AP8-00192           -224.08mm     -202.48mm         -81mm      -130.5mm     -224.08mm     -202.48mm  B        180.00 RUBBER FEET    
+L901       AP3-00005            -31.95mm       -16.7mm      -31.95mm       -16.7mm      -32.65mm       -16.7mm  B        360.00 BLM18PG471SN1  
+L900       AP3-00005             -11.9mm        -7.5mm       -11.9mm        -7.5mm       -12.6mm        -7.5mm  T        360.00 BLM18PG471SN1  
+LABEL1     AP8-00317           -224.08mm     -202.48mm     -6.6115mm   -125.3956mm     -224.08mm     -202.48mm  B         90.00 Only use for Early kits that contains "ES" version IC
+R910       AP2-00000          -31.8814mm     -28.169mm    -31.8814mm     -28.169mm    -31.8814mm     -28.769mm  B         90.00 R2             
+R911       AP2-00000          -26.0156mm    -28.1622mm    -26.0156mm    -28.1622mm    -26.0156mm    -28.7622mm  B         90.00 R2             
+R912       AP2-00000          -24.7406mm    -28.1622mm    -24.7406mm    -28.1622mm    -24.7406mm    -28.7622mm  B         90.00 R2             
+R913       AP2-00000          -23.4656mm    -28.1622mm    -23.4656mm    -28.1622mm    -23.4656mm    -28.7622mm  B         90.00 R2             
+R914       AP2-00000          -22.1906mm    -28.1622mm    -22.1906mm    -28.1622mm    -22.1906mm    -28.7622mm  B         90.00 R2             
+R915       AP2-00000          -33.4814mm     -28.169mm    -33.4814mm     -28.169mm    -33.4814mm     -27.569mm  B        270.00 R2             
+R916       AP2-00011           -20.175mm       -13.4mm     -20.175mm       -13.4mm     -20.175mm       -13.9mm  B         90.00 R2             
+R917       AP2-00011           -20.175mm       -15.4mm     -20.175mm       -15.4mm     -20.175mm       -14.9mm  B        270.00 R2             
+R918       AP2-00011           -17.475mm     -15.525mm     -17.475mm     -15.525mm     -16.975mm     -15.525mm  B        180.00 R2             
+XC900      AP7-00039            -14.25mm      -20.25mm      -14.25mm      -20.25mm       -15.4mm      -22.15mm  B         90.00 12.0MHz        
+J401       AP8-00622              -5.7mm      -40.16mm        -5.7mm      -40.16mm       -6.97mm      -28.73mm  T        270.00 HEADER 2x10    
+C104       AP1-00053             -23.6mm     -10.675mm       -23.6mm     -10.675mm     -23.125mm     -10.675mm  T        180.00 10n            
+R110       AP2-00011             -23.6mm        -9.8mm       -23.6mm        -9.8mm       -24.1mm        -9.8mm  T        360.00 R2             
+R300       AP2-00011            -30.65mm       -9.85mm      -30.65mm       -9.85mm      -31.15mm       -9.85mm  T        360.00 R2             
+R102       AP2-00000             -36.6mm      -11.55mm       -36.6mm      -11.55mm       -36.6mm      -12.15mm  B         90.00 R2             
+R103       AP2-00000           -35.325mm      -11.55mm     -35.325mm      -11.55mm     -35.325mm      -10.95mm  B        270.00 R2             
+R117       AP2-00000            -20.65mm        -9.5mm      -20.65mm        -9.5mm      -21.25mm        -9.5mm  B        360.00 R2             
+J801       AP8-00397           -67.925mm      -124.4mm     -67.925mm    -127.025mm     -64.075mm    -122.025mm  T        180.00 Farnell No:1216980
+J800       AP8-00397           -80.425mm     -124.45mm     -80.425mm    -127.075mm     -76.575mm    -122.075mm  T        180.00 Farnell No:1216980
+J400       AP8-00884           -76.185mm    -37.8739mm     -76.185mm    -37.8739mm     -73.467mm    -55.6539mm  T         90.00 HEADER 2x15    
+C100       AP1-00003             -65.2mm         -20mm       -65.2mm         -20mm       -65.2mm     -20.825mm  B         90.00 CAP-NONPOL     
+C101       AP1-00003             -67.6mm       -16.3mm       -67.6mm       -16.3mm     -68.425mm       -16.3mm  B        360.00 CAP-NONPOL     
+C102       AP1-00001           -72.125mm     -18.775mm     -72.125mm     -18.775mm     -72.125mm     -18.225mm  B        270.00 CAP-NONPOL     
+C107       AP1-00039           -52.275mm     -16.225mm     -52.275mm     -16.225mm    -52.9735mm     -16.225mm  B        360.00 CAP-NONPOL     
+C108       AP1-00053            -60.55mm      -13.15mm      -60.55mm      -13.15mm      -60.55mm     -12.675mm  B        270.00 Farnell no: 1288200
+C109       AP1-00053           -52.275mm     -10.425mm     -52.275mm     -10.425mm      -52.75mm     -10.425mm  B        360.00 Farnell no: 1288200
+C110       AP1-00053           -52.275mm    -11.3438mm     -52.275mm    -11.3438mm      -52.75mm    -11.3438mm  B        360.00 Farnell no: 1288200
+C111       AP1-00053           -52.275mm       -15.1mm     -52.275mm       -15.1mm      -52.75mm       -15.1mm  B        360.00 Farnell no: 1288200
+C112       AP1-00041           -57.134mm     -17.425mm      -58.15mm     -17.425mm      -58.15mm     -17.425mm  B        360.00 The MPN for this component is X5R, not X7R as previously documented.
+C113       AP1-00041           -57.159mm      -8.925mm     -58.175mm      -8.925mm     -58.175mm      -8.925mm  B        360.00 The MPN for this component is X5R, not X7R as previously documented.
+C114       AP1-00053           -53.575mm     -22.425mm     -53.575mm     -22.425mm     -53.575mm       -22.9mm  B         90.00 CAP-NONPOL     
+C115       AP1-00041           -56.584mm     -20.225mm       -57.6mm     -20.225mm       -57.6mm     -20.225mm  B        360.00 The MPN for this component is X5R, not X7R as previously documented.
+C116       AP1-00053             -54.4mm      -4.025mm       -54.4mm      -4.025mm       -54.4mm       -3.55mm  B        270.00 CAP-NONPOL     
+C117       AP1-00041           -56.584mm      -6.175mm       -57.6mm      -6.175mm       -57.6mm      -6.175mm  B        360.00 The MPN for this component is X5R, not X7R as previously documented.
+C118       AP1-00053             -54.4mm      -6.475mm       -54.4mm      -6.475mm       -54.4mm          -6mm  B        270.00 CAP-NONPOL     
+C119       AP1-00053           -52.275mm    -12.7625mm     -52.275mm    -12.7625mm      -52.75mm    -12.7625mm  B        360.00 CAP-NONPOL     
+C120       AP1-00053           -52.275mm    -13.6813mm     -52.275mm    -13.6813mm      -52.75mm    -13.6813mm  B        360.00 CAP-NONPOL     
+C200       AP1-00001             -58.8mm       -43.3mm       -58.8mm       -43.3mm      -58.25mm       -43.3mm  T        180.00 CAP-NONPOL     
+C201       AP1-00001             -58.8mm      -55.75mm       -58.8mm      -55.75mm      -58.25mm      -55.75mm  T        180.00 CAP-NONPOL     
+C202       AP1-00001            -50.75mm       -63.8mm      -50.75mm       -63.8mm      -50.75mm      -63.25mm  T        270.00 CAP-NONPOL     
+C203       AP1-00001            -36.25mm       -63.8mm      -36.25mm       -63.8mm      -36.25mm      -63.25mm  T        270.00 CAP-NONPOL     
+C204       AP1-00001             -31.2mm      -55.25mm       -31.2mm      -55.25mm      -31.75mm      -55.25mm  T        360.00 CAP-NONPOL     
+C205       AP1-00001             -31.2mm      -47.25mm       -31.2mm      -47.25mm      -31.75mm      -47.25mm  T        360.00 CAP-NONPOL     
+C206       AP1-00001            -48.25mm       -36.9mm      -48.25mm       -36.9mm       -48.8mm       -36.9mm  T        360.00 CAP-NONPOL     
+C207       AP1-00001            -56.05mm      -38.25mm      -56.05mm      -38.25mm       -55.5mm      -38.25mm  T        180.00 CAP-NONPOL     
+C208       AP1-00001             -58.8mm       -42.2mm       -58.8mm       -42.2mm      -58.25mm       -42.2mm  T        180.00 CAP-NONPOL     
+C209       AP1-00001             -58.8mm      -54.65mm       -58.8mm      -54.65mm      -58.25mm      -54.65mm  T        180.00 CAP-NONPOL     
+C210       AP1-00001             -58.8mm      -57.25mm       -58.8mm      -57.25mm      -58.25mm      -57.25mm  T        180.00 CAP-NONPOL     
+C211       AP1-00001            -47.25mm       -63.8mm      -47.25mm       -63.8mm      -47.25mm      -63.25mm  T        270.00 CAP-NONPOL     
+C212       AP1-00001             -31.2mm      -54.15mm       -31.2mm      -54.15mm      -31.75mm      -54.15mm  T        360.00 CAP-NONPOL     
+C213       AP1-00001             -31.2mm      -41.75mm       -31.2mm      -41.75mm      -31.75mm      -41.75mm  T        360.00 CAP-NONPOL     
+C214       AP1-00001           -43.825mm       -36.9mm     -43.825mm       -36.9mm     -43.275mm       -36.9mm  T        180.00 CAP-NONPOL     
+C215       AP1-00036            -60.65mm     -40.125mm      -60.65mm     -40.125mm     -59.175mm     -40.125mm  T        180.00 ESR = 6 ohm    
+C216       AP1-00041           -30.709mm     -45.725mm     -31.725mm     -45.725mm     -31.725mm     -45.725mm  T        360.00 CAP-NONPOL     
+C217       AP1-00001             -51.3mm       -36.2mm       -51.3mm       -36.2mm       -51.3mm      -36.75mm  T         90.00 CAP-NONPOL     
+C218       AP1-00001             -58.8mm      -45.25mm       -58.8mm      -45.25mm      -58.25mm      -45.25mm  T        180.00 CAP-NONPOL     
+C219       AP1-00053            -52.45mm       -36.5mm      -52.45mm       -36.5mm      -52.45mm     -36.975mm  T         90.00 10p            
+C300       AP1-00001           -59.275mm     -59.075mm     -59.275mm     -59.075mm     -58.725mm     -59.075mm  T        180.00 CAP-NONPOL     
+C301       AP1-00001           -62.225mm     -59.075mm     -62.225mm     -59.075mm     -61.675mm     -59.075mm  T        180.00 CAP-NONPOL     
+C302       AP1-00001           -53.275mm     -32.925mm     -53.275mm     -32.925mm     -53.275mm     -33.475mm  T         90.00 CAP-NONPOL     
+C303       AP1-00001            -59.35mm      -35.75mm      -59.35mm      -35.75mm       -58.8mm      -35.75mm  T        180.00 CAP-NONPOL     
+C600       AP1-00001           -38.025mm     -86.925mm     -38.025mm     -86.925mm     -37.475mm     -86.925mm  T        180.00 CAP-NONPOL     
+C603       AP1-00053           -57.272mm       -81.3mm     -57.272mm       -81.3mm     -57.272mm     -80.825mm  B        270.00 Farnell no: 1288200
+C604       AP1-00053           -56.422mm       -81.3mm     -56.422mm       -81.3mm     -56.422mm     -80.825mm  B        270.00 CAP-NONPOL     
+C605       AP1-00053           -55.547mm       -79.9mm     -55.547mm       -79.9mm     -55.547mm     -79.425mm  B        270.00 CAP-NONPOL     
+C606       AP1-00053           -52.297mm      -79.25mm     -52.297mm      -79.25mm     -52.297mm     -78.775mm  B        270.00 CAP-NONPOL     
+C607       AP1-00053           -52.297mm       -77.3mm     -52.297mm       -77.3mm     -52.297mm     -76.825mm  B        270.00 CAP-NONPOL     
+C608       AP1-00053           -55.547mm      -77.95mm     -55.547mm      -77.95mm     -55.547mm     -77.475mm  B        270.00 CAP-NONPOL     
+C609       AP1-00053           -55.547mm         -76mm     -55.547mm         -76mm     -55.547mm     -75.525mm  B        270.00 CAP-NONPOL     
+C610       AP1-00053           -55.547mm       -70.5mm     -55.547mm       -70.5mm     -55.547mm     -70.975mm  B         90.00 CAP-NONPOL     
+C611       AP1-00001           -25.325mm       -68.1mm     -25.325mm       -68.1mm     -25.325mm      -68.65mm  T         90.00 CAP-NONPOL     
+C612       AP1-00041           -47.823mm    -105.566mm     -47.823mm     -104.55mm     -47.823mm     -104.55mm  T        270.00 The MPN for this component is X5R, not X7R as previously documented.
+C613       AP1-00001           -46.248mm     -105.15mm     -46.248mm     -105.15mm     -46.248mm      -104.6mm  T        270.00 CAP-NONPOL     
+C700       AP1-00001            -10.25mm      -100.2mm      -10.25mm      -100.2mm      -10.25mm      -99.65mm  T        270.00 CAP-NONPOL     
+C701       AP1-00003             -9.05mm     -102.55mm       -9.05mm     -102.55mm      -8.225mm     -102.55mm  T        180.00 CAP-NONPOL     
+C702       AP1-00001              -4.4mm     -94.625mm        -4.4mm     -94.625mm       -4.95mm     -94.625mm  T        360.00 CAP-NONPOL     
+C703       AP1-00003              -5.9mm    -103.325mm        -5.9mm    -103.325mm        -5.9mm     -104.15mm  T         90.00 CAP-NONPOL     
+C704       AP1-00001           -11.525mm     -100.45mm     -11.525mm     -100.45mm     -11.525mm        -101mm  T         90.00 CAP-NONPOL     
+C705       AP1-00001            -4.075mm    -113.575mm      -4.075mm    -113.575mm      -4.075mm    -113.025mm  T        270.00 CAP-NONPOL     
+C706       AP1-00001            -4.075mm      -116.1mm      -4.075mm      -116.1mm      -4.075mm     -116.65mm  T         90.00 CAP-NONPOL     
+C707       AP1-00001              -5.1mm     -99.675mm        -5.1mm     -99.675mm        -5.1mm     -99.125mm  T        270.00 CAP-NONPOL     
+C708       AP1-00041            -3.525mm    -100.166mm      -3.525mm      -99.15mm      -3.525mm      -99.15mm  T        270.00 CAP-NONPOL     
+C709       AP1-00001            -15.65mm      -98.65mm      -15.65mm      -98.65mm       -16.2mm      -98.65mm  T        360.00 CAP-NONPOL     
+C710       AP1-00001              -4.4mm     -97.825mm        -4.4mm     -97.825mm       -4.95mm     -97.825mm  T        360.00 CAP-NONPOL     
+C711       AP1-00001            -13.95mm     -96.125mm      -13.95mm     -96.125mm       -13.4mm     -96.125mm  T        180.00 CAP-NONPOL     
+C712       AP1-00041           -14.166mm     -93.275mm      -13.15mm     -93.275mm      -13.15mm     -93.275mm  T        180.00 CAP-NONPOL     
+C713       AP1-00001            -15.75mm     -96.575mm      -15.75mm     -96.575mm      -15.75mm     -96.025mm  T        270.00 CAP-NONPOL     
+C801       AP1-00001             -79.4mm     -116.15mm       -79.4mm     -116.15mm      -79.95mm     -116.15mm  T        360.00 CAP-NONPOL     
+C802       AP1-00001             -85.4mm     -116.15mm       -85.4mm     -116.15mm      -84.85mm     -116.15mm  T        180.00 CAP-NONPOL     
+C803       AP1-00001             -79.4mm     -117.35mm       -79.4mm     -117.35mm      -79.95mm     -117.35mm  T        360.00 8819904  @ element14
+C804       AP1-00001             -85.4mm     -117.35mm       -85.4mm     -117.35mm      -84.85mm     -117.35mm  T        180.00 8819904  @ element14
+C805       AP1-00038          -70.3326mm   -114.3762mm    -70.3326mm   -114.3762mm    -70.3326mm   -114.9012mm  T         90.00 CAP-NONPOL     
+C808       AP1-00039             -75.4mm      -112.7mm       -75.4mm      -112.7mm       -75.4mm   -112.0015mm  T        270.00 CAP-NONPOL     
+C809       AP1-00038           -66.802mm   -114.3762mm     -66.802mm   -114.3762mm     -66.802mm   -114.9012mm  T         90.00 CAP-NONPOL     
+C810       AP1-00001             -80.3mm      -105.6mm       -80.3mm      -105.6mm      -80.85mm      -105.6mm  T        360.00 Farnell no: 1288200
+C811       AP1-00039             -76.6mm      -112.7mm       -76.6mm      -112.7mm       -76.6mm   -112.0015mm  T        270.00 CAP-NONPOL     
+C812       AP1-00001            -71.55mm      -117.5mm      -71.55mm      -117.5mm         -71mm      -117.5mm  T        180.00 CAP-NONPOL     
+C813       AP1-00001           -65.575mm      -117.5mm     -65.575mm      -117.5mm     -66.125mm      -117.5mm  T        360.00 CAP-NONPOL     
+C814       AP1-00001             -80.3mm      -107.8mm       -80.3mm      -107.8mm      -79.75mm      -107.8mm  T        180.00 Recommended by Escatec. No datasheet available yet.
+C815       AP1-00001             -80.3mm      -106.7mm       -80.3mm      -106.7mm      -79.75mm      -106.7mm  T        180.00 Recommended by Escatec. No datasheet available yet.
+C816       AP1-00001           -78.875mm     -112.75mm     -78.875mm     -112.75mm     -78.325mm     -112.75mm  T        180.00 CAP-NONPOL     
+C817       AP1-00039           -78.975mm     -111.55mm     -78.975mm     -111.55mm    -78.2765mm     -111.55mm  T        180.00 CAP-NONPOL     
+C818       AP1-00001            -75.25mm   -103.2825mm      -75.25mm   -103.2825mm      -75.25mm   -103.8325mm  T         90.00 CAP-NONPOL     
+C819       AP1-00039           -74.025mm   -103.1825mm     -74.025mm   -103.1825mm     -74.025mm    -103.881mm  T         90.00 CAP-NONPOL     
+C820       AP1-00001             -73.5mm    -111.975mm       -73.5mm    -111.975mm      -74.05mm    -111.975mm  T        360.00 Farnell no: 1288200
+C821       AP1-00001             -73.5mm    -110.875mm       -73.5mm    -110.875mm      -74.05mm    -110.875mm  T        360.00 CAP-NONPOL     
+C822       AP1-00001            -55.65mm      -85.35mm      -55.65mm      -85.35mm       -55.1mm      -85.35mm  T        180.00 CAP-NONPOL     
+C823       AP1-00001           -58.975mm     -93.425mm     -58.975mm     -93.425mm     -58.975mm     -92.875mm  T        270.00 CAP-NONPOL     
+C824       AP1-00001           -61.375mm     -85.625mm     -61.375mm     -85.625mm     -61.925mm     -85.625mm  T        360.00 CAP-NONPOL     
+C825       AP1-00039           -81.175mm    -103.675mm     -81.175mm    -103.675mm     -81.175mm   -104.3735mm  T         90.00 CAP-NONPOL     
+C826       AP1-00001           -79.975mm    -103.775mm     -79.975mm    -103.775mm     -79.975mm    -104.325mm  T         90.00 CAP-NONPOL     
+C827       AP1-00001            -78.85mm    -103.775mm      -78.85mm    -103.775mm      -78.85mm    -104.325mm  T         90.00 CAP-NONPOL     
+C828       AP1-00039            -77.05mm    -101.075mm      -77.05mm    -101.075mm    -76.3515mm    -101.075mm  T        180.00 CAP-NONPOL     
+C829       AP1-00001            -77.75mm    -103.275mm      -77.75mm    -103.275mm      -77.75mm    -103.825mm  T         90.00 CAP-NONPOL     
+C1000      AP1-00003            -53.95mm    -122.455mm      -53.95mm    -122.455mm     -54.775mm    -122.455mm  T        360.00 CAP-NONPOL     
+C1001      AP1-00001             -56.4mm     -116.58mm       -56.4mm     -116.58mm      -55.85mm     -116.58mm  T        180.00 CAP-NONPOL     
+C1002      AP1-00001           -53.925mm     -116.58mm     -53.925mm     -116.58mm     -54.475mm     -116.58mm  T        360.00 CAP-NONPOL     
+C1003      AP1-00001            -56.25mm     -119.83mm      -56.25mm     -119.83mm      -56.25mm     -120.38mm  T         90.00 CAP-NONPOL     
+D300       AP4-00013          -86.0045mm      -28.35mm    -86.0045mm      -28.35mm    -84.9545mm      -28.35mm  T        180.00 Yellow         
+J200       AP8-00733           -27.442mm     -53.025mm     -27.442mm     -53.025mm     -27.442mm     -54.295mm  T         90.00 HEADER 1x2     
+J1000      AP8-00733            -60.35mm    -131.675mm      -60.35mm    -131.675mm      -60.35mm    -132.945mm  T         90.00 HEADER 1x2     
+JS200      AP8-00525           -224.08mm     -202.48mm     -28.675mm    -51.6958mm     -224.08mm     -202.48mm  T        180.00 To be used by request from ESCATEC
+L100       AP3-00119             -67.5mm     -24.125mm       -67.5mm     -24.125mm     -68.685mm     -24.125mm  B        360.00 INDUCTOR       
+L101       AP3-00119           -60.425mm     -20.575mm     -60.425mm     -20.575mm     -60.425mm      -19.39mm  B        270.00 INDUCTOR       
+L102       AP3-00119           -60.425mm       -5.85mm     -60.425mm       -5.85mm     -60.425mm      -7.035mm  B         90.00 INDUCTOR       
+L200       AP3-00005           -58.775mm       -46.4mm     -58.775mm       -46.4mm     -59.475mm       -46.4mm  T        360.00 INDUCTOR       
+L700       AP3-00005            -8.875mm    -104.225mm      -8.875mm    -104.225mm      -9.575mm    -104.225mm  T        360.00 INDUCTOR       
+L701       AP3-00005            -1.925mm     -98.475mm      -1.925mm     -98.475mm      -1.925mm     -97.775mm  T        270.00 INDUCTOR       
+L702       AP3-00005            -3.325mm    -118.075mm      -3.325mm    -118.075mm      -2.625mm    -118.075mm  T        180.00 INDUCTOR       
+L800       AP3-00028           -83.075mm     -116.75mm     -83.075mm     -116.75mm     -83.075mm     -116.15mm  T        270.00 INDUCTOR       
+L801       AP3-00028           -81.725mm     -116.75mm     -81.725mm     -116.75mm     -81.725mm     -116.15mm  T        270.00 INDUCTOR       
+L802       AP3-00028           -69.225mm      -116.8mm     -69.225mm      -116.8mm     -69.225mm      -117.4mm  T         90.00 INDUCTOR       
+L803       AP3-00028             -67.9mm      -116.8mm       -67.9mm      -116.8mm       -67.9mm      -117.4mm  T         90.00 INDUCTOR       
+L804       AP3-00104            -79.05mm      -114.3mm      -79.05mm      -114.3mm     -80.066mm      -114.3mm  T        360.00 INDUCTOR       
+L805       AP3-00104           -72.975mm    -113.525mm     -72.975mm    -113.525mm     -71.959mm    -113.525mm  T        180.00 INDUCTOR       
+L806       AP3-00104           -83.325mm     -103.25mm     -83.325mm     -103.25mm     -83.325mm    -102.234mm  T        270.00 INDUCTOR       
+Q100       AP5-00002            -74.45mm     -16.975mm      -74.45mm     -16.975mm       -75.4mm     -15.925mm  B        270.00 MOSFET_P_GSD   
+Q101       AP5-00002             -69.8mm        -7.2mm       -69.8mm        -7.2mm      -70.85mm       -8.15mm  B        360.00 MOSFET_P_GSD   
+Q102       AP5-00002           -64.525mm     -8.2875mm     -64.525mm     -8.2875mm     -63.475mm     -7.3375mm  B        180.00 MOSFET_P_GSD   
+Q106       AP5-00002           -85.825mm      -10.55mm     -85.825mm      -10.55mm     -86.775mm        -9.5mm  B        270.00 MOSFET_P_GSD   
+Q107       AP5-00002           -85.825mm     -14.425mm     -85.825mm     -14.425mm     -86.775mm     -13.375mm  B        270.00 MOSFET_N_GSD   
+R101       AP2-00000             -71.3mm     -23.675mm       -71.3mm     -23.675mm       -71.3mm     -24.275mm  B         90.00 R2             
+R104       AP2-00000             -65.3mm     -10.725mm       -65.3mm     -10.725mm       -65.9mm     -10.725mm  B        360.00 R2             
+R107       AP2-00011           -21.475mm     -10.675mm     -21.475mm     -10.675mm     -20.975mm     -10.675mm  T        180.00 R2             
+R108       AP2-00000            -66.35mm      -1.775mm      -66.35mm      -1.775mm      -65.75mm      -1.775mm  B        180.00 R2             
+R109       AP2-00000           -68.375mm      -3.575mm     -68.375mm      -3.575mm     -68.375mm      -2.975mm  B        270.00 R2             
+R111       AP2-00000            -67.15mm       -10.3mm      -67.15mm       -10.3mm      -67.15mm       -10.9mm  B         90.00 R2             
+R120       AP2-00011            -28.95mm      -6.575mm      -28.95mm      -6.575mm      -28.95mm      -6.075mm  B        270.00 R2             
+R121       AP2-00011            -28.95mm      -4.575mm      -28.95mm      -4.575mm      -28.95mm      -4.075mm  B        270.00 R2             
+R122       AP2-00011             -54.4mm      -22.45mm       -54.4mm      -22.45mm       -54.4mm      -21.95mm  B        270.00 R2             
+R123       AP2-00011             -54.4mm     -20.025mm       -54.4mm     -20.025mm       -54.4mm     -19.525mm  B        270.00 R2             
+R124       AP2-00011           -53.525mm      -4.025mm     -53.525mm      -4.025mm     -53.525mm      -4.525mm  B         90.00 R2             
+R125       AP2-00011           -86.325mm      -16.95mm     -86.325mm      -16.95mm     -86.825mm      -16.95mm  B        360.00 R2             
+R126       AP2-00011           -53.525mm      -6.475mm     -53.525mm      -6.475mm     -53.525mm      -5.975mm  B        270.00 R2             
+R127       AP2-00011           -85.825mm      -8.025mm     -85.825mm      -8.025mm     -86.325mm      -8.025mm  B        360.00 R2             
+R128       AP2-00011           -49.775mm    -12.2125mm     -49.775mm    -12.2125mm     -49.775mm    -11.7125mm  B        270.00 R2             
+R129       AP2-00011           -88.175mm     -15.125mm     -88.175mm     -15.125mm     -88.175mm     -14.625mm  B        270.00 R2             
+R130       AP2-00011           -50.675mm    -12.2125mm     -50.675mm    -12.2125mm     -50.675mm    -12.7125mm  B         90.00 R2             
+R131       AP2-00011           -88.175mm       -12.5mm     -88.175mm       -12.5mm     -88.175mm         -12mm  B        270.00 R2             
+R132       AP2-00011           -49.775mm    -14.2313mm     -49.775mm    -14.2313mm     -49.775mm    -14.7313mm  B         90.00 R2             
+R133       AP2-00011           -50.675mm    -14.2313mm     -50.675mm    -14.2313mm     -50.675mm    -13.7313mm  B        270.00 R2             
+R134       AP2-00011           -53.825mm       -18.1mm     -53.825mm       -18.1mm     -54.325mm       -18.1mm  B        360.00 R2             
+R201       AP2-00000            -11.45mm     -43.975mm      -11.45mm     -43.975mm      -12.05mm     -43.975mm  T        360.00 R2             
+R202       AP2-00000            -11.45mm     -45.125mm      -11.45mm     -45.125mm      -12.05mm     -45.125mm  T        360.00 R2             
+R204       AP2-00000          -38.3284mm    -64.9494mm    -38.3284mm    -64.9494mm    -38.3284mm    -64.3494mm  B        270.00 R2             
+R205       AP2-00000          -42.8784mm    -64.9494mm    -42.8784mm    -64.9494mm    -42.8784mm    -64.3494mm  B        270.00 R2             
+R206       AP2-00000          -41.7284mm    -64.9494mm    -41.7284mm    -64.9494mm    -41.7284mm    -65.5494mm  B         90.00 R2             
+R207       AP2-00000             -22.5mm     -73.419mm       -22.5mm     -73.419mm       -23.1mm     -73.419mm  T        360.00 R2             
+R208       AP2-00000             -22.5mm     -75.969mm       -22.5mm     -75.969mm       -23.1mm     -75.969mm  T        360.00 R2             
+R209       AP2-00000            -11.45mm     -73.175mm      -11.45mm     -73.175mm      -12.05mm     -73.175mm  T        360.00 R2             
+R211       AP2-00000           -23.475mm     -95.875mm     -23.475mm     -95.875mm     -23.475mm     -95.275mm  T        270.00 R2             
+R212       AP2-00000          -39.4784mm    -64.9494mm    -39.4784mm    -64.9494mm    -39.4784mm    -64.3494mm  B        270.00 R2             
+R213       AP2-00000           -26.025mm     -95.869mm     -26.025mm     -95.869mm     -26.025mm     -95.269mm  T        270.00 R2             
+R214       AP2-00000          -44.0284mm    -64.9494mm    -44.0284mm    -64.9494mm    -44.0284mm    -65.5494mm  B         90.00 R2             
+R215       AP2-00000           -65.075mm     -55.644mm     -65.075mm     -55.644mm     -64.475mm     -55.644mm  T        180.00 R2             
+R219       AP2-00000           -65.075mm     -78.519mm     -65.075mm     -78.519mm     -64.475mm     -78.519mm  T        180.00 R2             
+R220       AP2-00000           -65.075mm     -81.069mm     -65.075mm     -81.069mm     -64.475mm     -81.069mm  T        180.00 R2             
+R221       AP2-00000           -65.075mm     -83.594mm     -65.075mm     -83.594mm     -64.475mm     -83.594mm  T        180.00 R2             
+R223       AP2-00000           -66.725mm     -107.45mm     -66.725mm     -107.45mm     -66.125mm     -107.45mm  T        180.00 R2             
+R224       AP2-00000           -66.725mm     -109.75mm     -66.725mm     -109.75mm     -66.125mm     -109.75mm  T        180.00 R2             
+R225       AP2-00000             -59.4mm     -83.675mm       -59.4mm     -83.675mm         -60mm     -83.675mm  T        360.00 R2             
+R226       AP2-00000           -66.725mm      -108.6mm     -66.725mm      -108.6mm     -66.125mm      -108.6mm  T        180.00 R2             
+R227       AP2-00000             -40.6mm      -64.95mm       -40.6mm      -64.95mm       -40.6mm      -64.35mm  B        270.00 R2             
+R228       AP2-00000           -66.725mm      -106.3mm     -66.725mm      -106.3mm     -66.125mm      -106.3mm  T        180.00 R2             
+R229       AP2-00000           -66.725mm     -105.15mm     -66.725mm     -105.15mm     -66.125mm     -105.15mm  T        180.00 R2             
+R230       AP2-00000             -54.1mm     -88.075mm       -54.1mm     -88.075mm       -54.1mm     -87.475mm  T        270.00 R2             
+R231       AP2-00000           -49.075mm       -89.5mm     -49.075mm       -89.5mm     -48.475mm       -89.5mm  T        180.00 R2             
+R232       AP2-00000           -49.075mm      -90.65mm     -49.075mm      -90.65mm     -48.475mm      -90.65mm  T        180.00 R2             
+R233       AP2-00000          -53.1278mm    -34.9681mm    -53.1278mm    -34.9681mm    -52.5278mm    -34.9681mm  T        180.00 R2             
+R301       AP2-00011            -82.05mm     -24.925mm      -82.05mm     -24.925mm      -82.05mm     -24.425mm  T        270.00 R2             
+R302       AP2-00000            -85.85mm    -29.9686mm      -85.85mm    -29.9686mm      -86.45mm    -29.9686mm  T        360.00 R2             
+R400       AP2-00000            -77.45mm     -48.034mm      -77.45mm     -48.034mm      -78.05mm     -48.034mm  B        360.00 R2             
+R401       AP2-00000            -77.45mm     -45.494mm      -77.45mm     -45.494mm      -78.05mm     -45.494mm  B        360.00 R2             
+R402       AP2-00000          -81.7588mm      -35.56mm    -81.7588mm      -35.56mm    -82.3588mm      -35.56mm  B        360.00 R2             
+R600       AP2-00000             -42.9mm     -89.675mm       -42.9mm     -89.675mm       -42.3mm     -89.675mm  T        180.00 R2             
+R601       AP2-00000             -42.9mm     -88.525mm       -42.9mm     -88.525mm       -42.3mm     -88.525mm  T        180.00 R2             
+R602       AP2-00000             -42.9mm     -87.375mm       -42.9mm     -87.375mm       -42.3mm     -87.375mm  T        180.00 R2             
+R603       AP2-00000           -35.525mm     -88.425mm     -35.525mm     -88.425mm     -34.925mm     -88.425mm  T        180.00 R2             
+R604       AP2-00000           -57.997mm         -73mm     -57.997mm         -73mm     -57.997mm       -72.4mm  T        270.00 R2             
+R605       AP2-00000           -25.325mm       -63.7mm     -25.325mm       -63.7mm     -25.325mm       -64.3mm  T         90.00 R2             
+R606       AP2-00000           -41.253mm     -105.15mm     -41.253mm     -105.15mm     -41.253mm     -104.55mm  T        270.00 R2             
+R607       AP2-00000           -38.753mm     -105.15mm     -38.753mm     -105.15mm     -38.753mm     -104.55mm  T        270.00 R2             
+R608       AP2-00000           -36.253mm     -105.15mm     -36.253mm     -105.15mm     -36.253mm     -104.55mm  T        270.00 R2             
+R609       AP2-00000          -55.3775mm     -105.15mm    -55.3775mm     -105.15mm    -55.3775mm     -104.55mm  T        270.00 R2             
+R610       AP2-00000          -53.6775mm     -105.15mm    -53.6775mm     -105.15mm    -53.6775mm     -104.55mm  T        270.00 R2             
+R611       AP2-00000          -57.3775mm     -105.15mm    -57.3775mm     -105.15mm    -57.3775mm     -104.55mm  T        270.00 R2             
+R612       AP2-00000             -59.7mm      -126.7mm       -59.7mm      -126.7mm       -59.7mm      -126.1mm  T        270.00 R2             
+R700       AP2-00000           -28.469mm     -91.048mm     -28.469mm     -91.048mm     -27.869mm     -91.048mm  T        180.00 R2             
+R701       AP2-00000             -8.85mm    -105.775mm       -8.85mm    -105.775mm       -9.45mm    -105.775mm  T        360.00 R2             
+R702       AP2-00000           -16.875mm     -96.575mm     -16.875mm     -96.575mm     -16.875mm     -95.975mm  T        270.00 R2             
+R703       AP2-00000             -23.3mm      -105.8mm       -23.3mm      -105.8mm       -23.9mm      -105.8mm  T        360.00 R2             
+R704       AP2-00000            -13.95mm      -97.25mm      -13.95mm      -97.25mm      -14.55mm      -97.25mm  T        360.00 R2             
+R706       AP2-00000           -28.469mm     -87.623mm     -28.469mm     -87.623mm     -27.869mm     -87.623mm  T        180.00 R2             
+R710       AP2-00000           -28.469mm     -89.923mm     -28.469mm     -89.923mm     -27.869mm     -89.923mm  T        180.00 R2             
+R711       AP2-00000           -28.469mm     -85.323mm     -28.469mm     -85.323mm     -27.869mm     -85.323mm  T        180.00 R2             
+R712       AP2-00000            -13.45mm     -94.825mm      -13.45mm     -94.825mm      -12.85mm     -94.825mm  T        180.00 R2             
+R713       AP2-00000           -28.469mm     -88.773mm     -28.469mm     -88.773mm     -27.869mm     -88.773mm  T        180.00 R2             
+R714       AP2-00000           -25.194mm     -86.473mm     -25.194mm     -86.473mm     -25.794mm     -86.473mm  T        360.00 R2             
+R715       AP2-00000           -25.194mm     -83.023mm     -25.194mm     -83.023mm     -25.794mm     -83.023mm  T        360.00 R2             
+R716       AP2-00000           -25.194mm     -81.873mm     -25.194mm     -81.873mm     -25.794mm     -81.873mm  T        360.00 R2             
+R719       AP2-00000          -25.1878mm     -84.173mm    -25.1878mm     -84.173mm    -25.7877mm     -84.173mm  T        360.00 R2             
+R800       AP2-00000           -83.075mm     -114.25mm     -83.075mm     -114.25mm     -83.075mm     -113.65mm  T        270.00 R2             
+R801       AP2-00000             -72.5mm    -107.875mm       -72.5mm    -107.875mm       -71.9mm    -107.875mm  T        180.00 R2             
+R802       AP2-00000           -81.725mm     -114.25mm     -81.725mm     -114.25mm     -81.725mm     -113.65mm  T        270.00 R2             
+R803       AP2-00000           -69.225mm      -114.3mm     -69.225mm      -114.3mm     -69.225mm      -114.9mm  T         90.00 R2             
+R804       AP2-00000             -67.9mm      -114.3mm       -67.9mm      -114.3mm       -67.9mm      -114.9mm  T         90.00 R2             
+R200       AP2-00000           -66.725mm        -104mm     -66.725mm        -104mm     -66.125mm        -104mm  T        180.00 R2             
+R806       AP2-00000             -70.3mm      -111.6mm       -70.3mm      -111.6mm       -70.3mm      -112.2mm  T         90.00 R2             
+R807       AP2-00000           -77.075mm     -116.75mm     -77.075mm     -116.75mm     -77.075mm     -117.35mm  T         90.00 R2             
+R808       AP2-00000           -87.725mm     -116.75mm     -87.725mm     -116.75mm     -87.725mm     -117.35mm  T         90.00 R2             
+R811       AP2-00000           -67.475mm    -112.025mm     -67.475mm    -112.025mm     -66.875mm    -112.025mm  T        180.00 R2             
+R814       AP2-00000           -84.475mm      -106.4mm     -84.475mm      -106.4mm     -85.075mm      -106.4mm  T        360.00 R2             
+R815       AP2-00000             -74.2mm    -117.225mm       -74.2mm    -117.225mm       -74.2mm    -117.825mm  T         90.00 R2             
+R816       AP2-00000               -71mm    -102.025mm         -71mm    -102.025mm       -70.4mm    -102.025mm  T        180.00 R2             
+R817       AP2-00000            -58.15mm     -85.325mm      -58.15mm     -85.325mm      -57.55mm     -85.325mm  T        180.00 R2             
+R818       AP2-00000             -56.5mm     -93.425mm       -56.5mm     -93.425mm       -56.5mm     -94.025mm  T         90.00 R2             
+R819       AP2-00000           -76.625mm    -103.275mm     -76.625mm    -103.275mm     -76.625mm    -102.675mm  T        270.00 R2             
+R900       AP2-00000          -35.1314mm     -28.169mm    -35.1314mm     -28.169mm    -35.1314mm     -27.569mm  B        270.00 R2             
+R904       AP2-00000          -28.9564mm    -28.1622mm    -28.9564mm    -28.1622mm    -28.9564mm    -27.5622mm  B        270.00 R2             
+R905       AP2-00000          -27.6314mm    -28.1622mm    -27.6314mm    -28.1622mm    -27.6314mm    -27.5622mm  B        270.00 R2             
+R1000      AP2-00008           -52.305mm     -125.85mm     -52.305mm     -125.85mm     -52.305mm      -124.4mm  T        270.00 0.5W           
+R1001      AP2-00008           -55.605mm     -125.85mm     -55.605mm     -125.85mm     -55.605mm      -127.3mm  T         90.00 0.5W           
+SW101      AP8-00137            -85.85mm     -11.075mm      -85.85mm     -11.075mm      -87.85mm     -13.825mm  T         90.00 Can be ordered in low volumes from Mouser
+SW301      AP8-00137            -85.85mm       -21.7mm      -85.85mm       -21.7mm      -87.85mm      -24.45mm  T         90.00 Can be ordered in low volumes from Mouser
+U100       AP6-00313           -69.425mm     -19.675mm     -69.425mm     -19.675mm     -68.675mm      -21.15mm  B         90.00 100% duty-cycle mode, supports input voltage close to 5V with 5V output!
+U101       AP6-00382           -72.375mm        -2.4mm     -72.375mm        -2.4mm    -74.6869mm     -3.3751mm  B         90.00 TPS3619-33     
+U103       AP6-00087           -26.725mm       -5.65mm     -26.725mm       -5.65mm     -25.772mm      -6.875mm  B         90.00 STMPS2161      
+U600       AP6-00186           -38.975mm     -88.775mm     -38.975mm     -88.775mm      -40.45mm     -88.025mm  T        360.00 AT24MAC-8PIN   
+U604       AP6-00402            -28.65mm       -65.8mm      -28.65mm       -65.8mm     -26.745mm       -63.1mm  T        270.00 Also available as 32- and 64-Mbit.
+U700       AP6-00349            -8.675mm     -95.875mm      -8.675mm     -95.875mm     -10.425mm     -98.225mm  T         90.00 KSZ8061RNB     
+U800       AP6-00420             -76.4mm    -107.675mm       -76.4mm    -107.675mm         -75mm    -105.625mm  T        270.00 Wolfson Microelectronics
+U801       AP6-00097            -56.55mm       -89.1mm      -56.55mm       -89.1mm      -55.55mm       -87.1mm  T        270.00 CS2100         
+U1000      AP6-00407            -53.95mm   -119.0803mm      -53.95mm     -119.08mm     -52.975mm    -117.668mm  T        270.00 ATA6561        
+XC300      AP7-00044           -61.475mm      -63.75mm     -61.475mm     -60.625mm     -60.175mm     -60.625mm  T        180.00 Farnell order no:1539364
+XC301      AP7-00039           -58.275mm     -33.075mm     -58.275mm     -33.075mm     -60.175mm     -34.225mm  T        360.00 CRYSTAL1324    
+XC700      AP7-00067          -14.3764mm   -102.4636mm    -14.3764mm   -102.4636mm    -13.2764mm   -104.3136mm  T         90.00 CRYSTAL1324    
+XC800      AP7-00039           -60.525mm       -89.2mm     -60.525mm       -89.2mm     -61.675mm       -87.3mm  T        270.00 CRYSTAL1324    
+J406       AP8-00744            -85.71mm     -44.224mm      -85.71mm     -44.224mm      -84.44mm     -55.654mm  T         90.00 Same as A08-1514 but with 1mm hole
+J504       AP8-00823            -67.93mm     -87.404mm      -67.93mm     -87.404mm      -67.93mm     -78.514mm  T        270.00 HEADER 1x8 FEMALE
+R403       AP2-00000          -78.7771mm    -40.4214mm    -78.7771mm    -40.4214mm    -79.3771mm    -40.4214mm  B        360.00 R2             
+R105       AP2-00000            -67.15mm       -7.75mm      -67.15mm       -7.75mm      -67.15mm       -8.35mm  B         90.00 R2             
+

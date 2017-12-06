@@ -1,0 +1,4 @@
+Layer Pairs Export File for PCB: E:\svn\devkits\SAMV7_Xplained_Ultra\06_Hardware\SAMV71_Xplained_Ultra_rev2\SAMV71_Xplained_Ultra.PcbDoc
+LayersSetName=Top_Bot_Plated_Thru_Holes|DrillFile=samv71_xplained_ultra-roundholes-plated.txt|LayerPairs=gtl,gbl
+LayersSetName=Top_Bot_Plated_Slot_Holes|DrillFile=samv71_xplained_ultra-slotholes-plated.txt|LayerPairs=gtl,gbl
+LayersSetName=Top_Bot_NonPlated_Thru_Holes|DrillFile=samv71_xplained_ultra-roundholes-nonplated.txt|LayerPairs=gtl,gbl

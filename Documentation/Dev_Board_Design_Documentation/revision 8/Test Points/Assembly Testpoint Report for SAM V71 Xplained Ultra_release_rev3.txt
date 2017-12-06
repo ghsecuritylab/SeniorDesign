@@ -1,0 +1,306 @@
+Net         Name        X Coord     Y Coord     Side        Hole Size   Type        
+VBAT        J501-1        -67.93mm   -32.794mm  Bottom             1mm  Through hole
+TARGET_RESETJ501-3        -67.93mm   -37.874mm  Bottom             1mm  Through hole
+VCC_EXT_P5V0_P14V0J501-8        -67.93mm   -50.574mm  Bottom             1mm  Through hole
+PD19        J505-4        -19.67mm   -83.594mm  Bottom             1mm  Through hole
+PD18        J505-3        -19.67mm   -86.134mm  Bottom             1mm  Through hole
+NetJ505_7   J505-7        -19.67mm   -75.974mm  Bottom             1mm  Through hole
+NetJ505_8   J505-8        -19.67mm   -73.434mm  Bottom             1mm  Through hole
+NetJ505_6   J505-6        -19.67mm   -78.514mm  Bottom             1mm  Through hole
+PD15        J505-5        -19.67mm   -81.054mm  Bottom             1mm  Through hole
+SHIELD      J900-7      -19.6875mm    -1.675mm  Bottom         0.825mm  Through hole
+ID1         J401-1         -6.97mm    -28.73mm  Bottom             1mm  Through hole
+PA03        J401-11        -6.97mm    -41.43mm  Bottom             1mm  Through hole
+PA04        J401-12        -4.43mm    -41.43mm  Bottom             1mm  Through hole
+NetJ401_14  J401-14        -4.43mm    -43.97mm  Bottom             1mm  Through hole
+NetJ401_13  J401-13        -6.97mm    -43.97mm  Bottom             1mm  Through hole
+PD21        J401-16        -4.43mm    -46.51mm  Bottom             1mm  Through hole
+PD25        J401-15        -6.97mm    -46.51mm  Bottom             1mm  Through hole
+NetJ401_18  J401-18        -4.43mm    -49.05mm  Bottom             1mm  Through hole
+PD20        J401-17        -6.97mm    -49.05mm  Bottom             1mm  Through hole
+PD28        J401-9         -6.97mm    -38.89mm  Bottom             1mm  Through hole
+PA00        J401-7         -6.97mm    -36.35mm  Bottom             1mm  Through hole
+PC30        J401-8         -4.43mm    -36.35mm  Bottom             1mm  Through hole
+PB03        J401-5         -6.97mm    -33.81mm  Bottom             1mm  Through hole
+PB02        J401-6         -4.43mm    -33.81mm  Bottom             1mm  Through hole
+PC31        J401-3         -6.97mm    -31.27mm  Bottom             1mm  Through hole
+PA19        J401-4         -4.43mm    -31.27mm  Bottom             1mm  Through hole
+PA05        J401-10        -4.43mm    -38.89mm  Bottom             1mm  Through hole
+PB12        J200-2       -27.442mm   -51.755mm  Bottom             1mm  Through hole
+CANL        J1000-2       -60.35mm  -130.405mm  Bottom             1mm  Through hole
+CANH        J1000-1       -60.35mm  -132.945mm  Bottom             1mm  Through hole
+NetJ504_1   J504-1        -67.93mm   -78.514mm  Bottom             1mm  Through hole
+NetJ504_2   J504-2        -67.93mm   -81.054mm  Bottom             1mm  Through hole
+NetJ504_4   J504-4        -67.93mm   -86.134mm  Bottom             1mm  Through hole
+NetJ504_3   J504-3        -67.93mm   -83.594mm  Bottom             1mm  Through hole
+PD00        J504-6        -67.93mm   -91.214mm  Bottom             1mm  Through hole
+PB13        J504-5        -67.93mm   -88.674mm  Bottom             1mm  Through hole
+V_SUPERCAP  J103-1        -62.51mm  -20.9873mm  Bottom             1mm  Through hole
+NetJ506_3   J506-3        -42.53mm   -68.481mm  Bottom             1mm  Through hole
+NetJ507_9   J507-9        -29.83mm   -98.834mm  Bottom             1mm  Through hole
+NetJ507_10  J507-10       -29.83mm  -101.374mm  Bottom             1mm  Through hole
+NetJ507_5   J507-5        -24.75mm   -98.834mm  Bottom             1mm  Through hole
+NetJ507_6   J507-6        -24.75mm  -101.374mm  Bottom             1mm  Through hole
+PA18        J507-3        -22.21mm   -98.834mm  Bottom             1mm  Through hole
+NetJ507_4   J507-4        -22.21mm  -101.374mm  Bottom             1mm  Through hole
+NetJ507_11  J507-11       -32.37mm   -98.834mm  Bottom             1mm  Through hole
+NetJ507_12  J507-12       -32.37mm  -101.374mm  Bottom             1mm  Through hole
+NetJ507_14  J507-14       -34.91mm  -101.374mm  Bottom             1mm  Through hole
+NetJ507_13  J507-13       -34.91mm   -98.834mm  Bottom             1mm  Through hole
+NetJ507_16  J507-16       -37.45mm  -101.374mm  Bottom             1mm  Through hole
+NetJ507_15  J507-15       -37.45mm   -98.834mm  Bottom             1mm  Through hole
+NetJ507_18  J507-18       -39.99mm  -101.374mm  Bottom             1mm  Through hole
+NetJ507_17  J507-17       -39.99mm   -98.834mm  Bottom             1mm  Through hole
+NetJ507_19  J507-19       -42.53mm   -98.834mm  Bottom             1mm  Through hole
+PC12        J507-33       -60.31mm   -98.834mm  Bottom             1mm  Through hole
+PC14        J507-34       -60.31mm  -101.374mm  Bottom             1mm  Through hole
+NetJ507_31  J507-31       -57.77mm   -98.834mm  Bottom             1mm  Through hole
+NetJ507_32  J507-32       -57.77mm  -101.374mm  Bottom             1mm  Through hole
+NetJ507_29  J507-29       -55.23mm   -98.834mm  Bottom             1mm  Through hole
+NetJ507_30  J507-30       -55.23mm  -101.374mm  Bottom             1mm  Through hole
+PA25        J507-25       -50.15mm   -98.834mm  Bottom             1mm  Through hole
+NetJ507_22  J507-22       -45.07mm  -101.374mm  Bottom             1mm  Through hole
+NetJ507_24  J507-24       -47.61mm  -101.374mm  Bottom             1mm  Through hole
+NetJ507_23  J507-23       -47.61mm   -98.834mm  Bottom             1mm  Through hole
+VCC_BACKUP_P3V3J102-2        -38.73mm    -10.95mm  Bottom             1mm  Through hole
+VCC_MCU_P3V3J102-1        -41.27mm    -10.95mm  Bottom             1mm  Through hole
+ID2         J402-1         -6.97mm    -64.29mm  Bottom             1mm  Through hole
+PB04        J402-14        -4.43mm    -79.53mm  Bottom             1mm  Through hole
+PA21        J402-13        -6.97mm    -79.53mm  Bottom             1mm  Through hole
+PD27        J402-15        -6.97mm    -82.07mm  Bottom             1mm  Through hole
+NetJ402_18  J402-18        -4.43mm    -84.61mm  Bottom             1mm  Through hole
+PA02        J402-9         -6.97mm    -74.45mm  Bottom             1mm  Through hole
+PC19        J402-7         -6.97mm    -71.91mm  Bottom             1mm  Through hole
+NetJ402_8   J402-8         -4.43mm    -71.91mm  Bottom             1mm  Through hole
+PA06        J402-5         -6.97mm    -69.37mm  Bottom             1mm  Through hole
+PD11        J402-6         -4.43mm    -69.37mm  Bottom             1mm  Through hole
+PD30        J402-3         -6.97mm    -66.83mm  Bottom             1mm  Through hole
+PC13        J402-4         -4.43mm    -66.83mm  Bottom             1mm  Through hole
+PA24        J402-10        -4.43mm    -74.45mm  Bottom             1mm  Through hole
+VCC_EXT_P5V0J101-1         -6.97mm    -13.49mm  Bottom             1mm  Through hole
+VCC_P5V0    J101-3         -6.97mm    -16.03mm  Bottom             1mm  Through hole
+VCC_TARGET_P3V3J101-4         -4.43mm    -16.03mm  Bottom             1mm  Through hole
+NetJ406_15  J406-15       -84.44mm   -37.874mm  Bottom             1mm  Through hole
+NetJ406_13  J406-13       -84.44mm   -40.414mm  Bottom             1mm  Through hole
+NetJ406_7   J406-7        -84.44mm   -48.034mm  Bottom             1mm  Through hole
+NetJ406_9   J406-9        -84.44mm   -45.494mm  Bottom             1mm  Through hole
+PC09_VBUS_DETECTJ202-3       -27.442mm    -36.35mm  Bottom             1mm  Through hole
+PC09        J202-2       -27.442mm    -38.89mm  Bottom             1mm  Through hole
+NetJ500_6   J500-6        -19.67mm    -33.81mm  Bottom             1mm  Through hole
+ADVREF      J500-8        -19.67mm    -28.73mm  Bottom             1mm  Through hole
+PC09_LED    J500-2        -19.67mm    -43.97mm  Bottom             1mm  Through hole
+NetJ502_1   J502-1        -67.93mm   -55.654mm  Bottom             1mm  Through hole
+NetJ502_7   J502-7        -67.93mm   -70.894mm  Bottom             1mm  Through hole
+NetJ502_8   J502-8        -67.93mm   -73.434mm  Bottom             1mm  Through hole
+NetJ502_6   J502-6        -67.93mm   -68.354mm  Bottom             1mm  Through hole
+TARGET_USB_SHIELDJ302-7      -52.5215mm    -1.675mm  Bottom         0.825mm  Through hole
+VIN         J100-3        -74.45mm     -13.7mm  Bottom           1.2mm  Through hole
+CAP_CHARGE_ENFree-0      -62.0979mm   -5.8808mm  Bottom             0mm  Surface mount
+NetC102_1   Free-2       -73.625mm   -19.525mm  Bottom             0mm  Surface mount
+NetL101_1   Free-1       -60.982mm    -17.73mm  Bottom             0mm  Surface mount
+NetL102_1   Free-0       -60.707mm     -8.48mm  Bottom             0mm  Surface mount
+NetR109_2   Free-3         -73.3mm    -4.675mm  Bottom             0mm  Surface mount
+VMAX        Free-1      -68.4106mm  -14.3128mm  Bottom             0mm  Surface mount
+NetD101_3   Free-0       -61.425mm     -1.65mm  Bottom             0mm  Surface mount
+NetC904_1   Free-3         -30.1mm    -17.15mm  Bottom             0mm  Surface mount
+NetR120_2   Free-3        -29.85mm    -7.075mm  Bottom             0mm  Surface mount
+NetC905_1   Free-3         -24.9mm     -10.9mm  Bottom             0mm  Surface mount
+NetC902_1   Free-3        -19.05mm   -16.425mm  Bottom             0mm  Surface mount
+VCC_EDBG_USB_P5V0Free-3           -21mm     -11.9mm  Bottom             0mm  Surface mount
+NetQ900_3   Free-3        -3.075mm     -6.55mm  Bottom             0mm  Surface mount
+NetQ900_6   Free-3         -5.45mm     -12.3mm  Bottom             0mm  Surface mount
+VCC_IN_P5V0 Free-3         -9.25mm   -17.125mm  Bottom             0mm  Surface mount
+NetQ107_3   Free-3        -87.05mm   -15.825mm  Bottom             0mm  Surface mount
+E\N\A\B\L\E\Free-3         -84.6mm   -11.925mm  Bottom             0mm  Surface mount
+NetR101_2   Free-3         -71.3mm   -21.875mm  Bottom             0mm  Surface mount
+NetL100_1   Free-3        -70.75mm   -25.675mm  Bottom             0mm  Surface mount
+NetR113_1   Free-3       -16.275mm    -4.125mm  Bottom             0mm  Surface mount
+NetR118_2   Free-3       -15.625mm    -9.075mm  Bottom             0mm  Surface mount
+NetQ105_1   Free-3       -13.125mm   -12.675mm  Bottom             0mm  Surface mount
+NetQ104_1   Free-3         -15.9mm   -16.225mm  Bottom             0mm  Surface mount
+NetR300_1   TP300-1          -33mm      -1.5mm  Bottom             0mm  Surface mount
+VCC_EDBG_P3V3TP907-1        -38.6mm      -7.5mm  Bottom             0mm  Surface mount
+EDBG_RESET_NTP906-1        -38.6mm      -3.5mm  Bottom             0mm  Surface mount
+EDBG_JTAG_TMSTP905-1        -41.6mm      -7.5mm  Bottom             0mm  Surface mount
+EDBG_JTAG_TDOTP904-1        -38.6mm      -5.5mm  Bottom             0mm  Surface mount
+EDBG_JTAG_TDITP903-1        -41.6mm      -5.5mm  Bottom             0mm  Surface mount
+EDBG_JTAG_TCKTP902-1        -41.6mm      -3.5mm  Bottom             0mm  Surface mount
+EDBG_FORCE_BOOTTP901-1        -38.6mm      -1.5mm  Bottom             0mm  Surface mount
+GND         TP900-1        -41.6mm      -1.5mm  Bottom             0mm  Surface mount
+TST         TP200-1      -31.825mm    -52.75mm  Bottom             0mm  Surface mount
+JTAGSEL     TP201-1       -31.95mm    -43.25mm  Bottom             0mm  Surface mount
+NetJ600_12  TP600-1        -62.5mm    -126.1mm  Bottom             0mm  Surface mount
+NetR110_1   TP100-1          -26mm      -1.5mm  Bottom             0mm  Surface mount
+PD31        Via            -26.2mm   -42.875mm  Bottom          0.25mm  Through hole
+TARGET_USB_IDVia          -49.084mm   -5.7465mm  Bottom          0.25mm  Through hole
+VDDUTMIC    Via         -51.1108mm  -37.9659mm  Bottom          0.25mm  Through hole
+VDDPLL      Via         -40.2992mm  -33.7743mm  Bottom          0.25mm  Through hole
+PB07_SWCLK  Via           -35.88mm  -19.8934mm  Bottom          0.25mm  Through hole
+PB05        Via         -38.3679mm  -29.0527mm  Bottom          0.25mm  Through hole
+PD08        Via           -40.96mm  -19.8934mm  Bottom          0.25mm  Through hole
+PD07        Via           -46.04mm  -23.9689mm  Bottom          0.25mm  Through hole
+PD05        Via            -43.5mm  -23.9689mm  Bottom          0.25mm  Through hole
+PA01        Via          -52.757mm   -17.205mm  Bottom          0.25mm  Through hole
+NetC114_2   Via          -51.907mm   -20.805mm  Bottom          0.25mm  Through hole
+NetR817_1   Via          -57.175mm     -84.4mm  Bottom          0.25mm  Through hole
+NetR806_2   Via          -71.075mm      -111mm  Bottom          0.25mm  Through hole
+NetR801_2   Via            -73.1mm   -108.65mm  Bottom          0.25mm  Through hole
+NetR224_2   Via          -68.425mm   -109.75mm  Bottom          0.25mm  Through hole
+NetR704_2   Via          -12.225mm   -97.475mm  Bottom          0.25mm  Through hole
+PA29        Via          -33.525mm    -34.95mm  Bottom          0.25mm  Through hole
+NetR301_1   Via           -83.85mm   -21.725mm  Bottom          0.25mm  Through hole
+NetR230_2   Via          -57.275mm   -88.675mm  Bottom          0.25mm  Through hole
+NetR225_2   Via            -58.8mm   -84.475mm  Bottom          0.25mm  Through hole
+NetR206_1   Via           -42.53mm   -25.675mm  Bottom          0.25mm  Through hole
+VCC_P2V0    Via          -55.782mm   -22.005mm  Bottom          0.25mm  Through hole
+NetC907_1   Via            -14.3mm    -3.275mm  Bottom          0.25mm  Through hole
+NetR800_1   Via          -85.675mm    -111.7mm  Bottom          0.25mm  Through hole
+NetC807_1   Via           -78.85mm  -110.375mm  Bottom          0.25mm  Through hole
+NetC806_1   Via            -79.6mm  -109.275mm  Bottom          0.25mm  Through hole
+EDBG_TARGET_RESETVia          -19.075mm    -19.25mm  Bottom          0.25mm  Through hole
+AUDIO_GND   Via          -82.025mm    -106.4mm  Bottom          0.25mm  Through hole
+P\H\Y\_\R\E\S\E\T\Via         -16.8611mm  -94.5861mm  Bottom          0.25mm  Through hole
+ID4         Via         -81.1861mm  -26.4111mm  Bottom          0.25mm  Through hole
+NetR818_2   Via           -55.55mm    -92.83mm  Bottom          0.25mm  Through hole
+NetC806_2   Via           -82.55mm  -109.225mm  Bottom          0.25mm  Through hole
+NetC807_2   Via          -82.525mm  -110.525mm  Bottom          0.25mm  Through hole
+NetC810_1   Via           -78.45mm  -105.625mm  Bottom          0.25mm  Through hole
+NetR223_2   Via          -68.525mm  -106.775mm  Bottom          0.25mm  Through hole
+NetR802_1   Via          -81.725mm  -112.525mm  Bottom          0.25mm  Through hole
+NetC809_2   Via            -66.8mm  -112.925mm  Bottom          0.25mm  Through hole
+NetR200_2   Via          -68.875mm      -104mm  Bottom          0.25mm  Through hole
+NetR229_2   Via         -68.2947mm   -105.15mm  Bottom          0.25mm  Through hole
+VCC_P1V8    Via           -71.95mm  -112.125mm  Bottom          0.25mm  Through hole
+PB01        Via          -65.025mm   -109.75mm  Bottom          0.25mm  Through hole
+PD26        Via          -65.025mm   -105.15mm  Bottom          0.25mm  Through hole
+PD24        Via          -73.625mm   -60.125mm  Bottom          0.25mm  Through hole
+NetJ400_18  Via         -78.6615mm   -36.587mm  Bottom          0.25mm  Through hole
+PC17        Via           -81.55mm     -44.1mm  Bottom          0.25mm  Through hole
+PD12        Via           -76.15mm     -27.7mm  Bottom          0.25mm  Through hole
+PC16        Via            -39.1mm    -30.25mm  Bottom          0.25mm  Through hole
+PA10        Via          -65.725mm   -82.325mm  Bottom          0.25mm  Through hole
+PD06        Via           -31.25mm   -37.375mm  Bottom          0.25mm  Through hole
+STATUS_LED_CTRLVia             -3.3mm    -12.15mm  Bottom          0.25mm  Through hole
+NetD900_1   Via            -6.85mm    -10.05mm  Bottom          0.25mm  Through hole
+POWER_LED_CTRLVia            -6.85mm     -8.75mm  Bottom          0.25mm  Through hole
+DGI_GPIO0   Via         -26.0092mm  -26.3682mm  Bottom          0.25mm  Through hole
+DGI_GPIO1   Via         -24.7342mm  -26.3682mm  Bottom          0.25mm  Through hole
+DGI_GPIO2   Via         -23.4592mm  -26.3682mm  Bottom          0.25mm  Through hole
+DGI_GPIO3   Via         -22.1842mm  -26.3682mm  Bottom          0.25mm  Through hole
+SWDIO       Via          -27.625mm  -26.3682mm  Bottom          0.25mm  Through hole
+SWCLK       Via           -28.95mm  -26.3682mm  Bottom          0.25mm  Through hole
+TARGET_CHIP_ERASEVia          -35.125mm   -26.375mm  Bottom          0.25mm  Through hole
+PB06_SWDIO  Via           -36.05mm    -55.75mm  Bottom          0.25mm  Through hole
+TRACESWO    Via          -30.275mm  -26.3682mm  Bottom          0.25mm  Through hole
+EDBG_SPI_DGI_MISOVia          -33.475mm   -26.375mm  Bottom          0.25mm  Through hole
+EDBG_CDC_UART_TXVia          -31.875mm   -26.375mm  Bottom          0.25mm  Through hole
+PA23        Via         -24.7342mm   -30.725mm  Bottom          0.25mm  Through hole
+PA09        Via         -26.0092mm  -30.1658mm  Bottom          0.25mm  Through hole
+PD04        Via          -26.825mm   -88.773mm  Bottom          0.25mm  Through hole
+VDDCORE     Via          -46.425mm     -57.3mm  Bottom          0.25mm  Through hole
+NetR132_1   Via          -47.332mm  -14.7112mm  Bottom          0.25mm  Through hole
+NetR128_1   Via          -47.332mm  -11.6925mm  Bottom          0.25mm  Through hole
+AUDIO_AVDD  Via          -73.975mm  -114.875mm  Bottom          0.25mm  Through hole
+VCC_P1V2    Via           -13.15mm   -91.625mm  Bottom          0.25mm  Through hole
+PA16        Via          -51.672mm   -81.025mm  Bottom          0.25mm  Through hole
+PA11        Via          -27.475mm     -60.2mm  Bottom          0.25mm  Through hole
+PA12        Via          -29.925mm   -60.525mm  Bottom          0.25mm  Through hole
+PA17        Via            -29.3mm   -57.225mm  Bottom          0.25mm  Through hole
+VCC_P3V3    Via          -56.032mm     -4.53mm  Bottom          0.25mm  Through hole
+NetD300_2   Via            -87.3mm     -29.7mm  Bottom          0.25mm  Through hole
+PE04        Via           -63.55mm   -78.025mm  Bottom          0.25mm  Through hole
+PE05        Via          -61.425mm   -80.925mm  Bottom          0.25mm  Through hole
+PC00        Via            -85.1mm     -68.1mm  Bottom          0.25mm  Through hole
+PC01        Via            -83.9mm     -68.6mm  Bottom          0.25mm  Through hole
+PC02        Via            -82.7mm     -69.1mm  Bottom          0.25mm  Through hole
+PC03        Via            -85.1mm     -69.6mm  Bottom          0.25mm  Through hole
+PC04        Via            -82.7mm     -70.6mm  Bottom          0.25mm  Through hole
+PC06        Via            -83.9mm     -71.6mm  Bottom          0.25mm  Through hole
+PC05        Via            -85.1mm     -71.1mm  Bottom          0.25mm  Through hole
+PC07        Via            -82.7mm     -72.1mm  Bottom          0.25mm  Through hole
+PE02        Via            -85.1mm     -74.1mm  Bottom          0.25mm  Through hole
+PE01        Via            -82.7mm     -73.6mm  Bottom          0.25mm  Through hole
+PE00        Via            -83.9mm     -73.1mm  Bottom          0.25mm  Through hole
+PE03        Via            -83.9mm     -74.6mm  Bottom          0.25mm  Through hole
+NetC809_1   Via          -67.075mm    -116.2mm  Bottom          0.25mm  Through hole
+NetC813_1   Via           -67.05mm    -117.5mm  Bottom          0.25mm  Through hole
+NetC812_1   Via           -70.05mm    -117.5mm  Bottom          0.25mm  Through hole
+NetC805_1   Via           -70.05mm  -116.125mm  Bottom          0.25mm  Through hole
+NetC804_1   Via          -83.925mm   -117.35mm  Bottom          0.25mm  Through hole
+NetC802_2   Via            -86.9mm   -116.15mm  Bottom          0.25mm  Through hole
+NetC801_2   Via            -77.9mm   -116.15mm  Bottom          0.25mm  Through hole
+NetC808_1   Via            -75.4mm  -111.025mm  Bottom          0.25mm  Through hole
+AUDIO_CPVDD Via          -82.025mm  -104.3735mm  Bottom          0.25mm  Through hole
+AUDIO_DCVDD Via          -75.925mm   -101.85mm  Bottom          0.25mm  Through hole
+AUDIO_MICVDDVia         -77.6645mm   -110.95mm  Bottom          0.25mm  Through hole
+NetR228_2   Via          -69.625mm  -106.075mm  Bottom          0.25mm  Through hole
+NetC801_1   Via            -80.9mm   -116.05mm  Bottom          0.25mm  Through hole
+NetC803_1   Via          -80.875mm   -117.35mm  Bottom          0.25mm  Through hole
+NetC802_1   Via          -83.925mm   -116.05mm  Bottom          0.25mm  Through hole
+PA22        Via            -60.3mm   -79.725mm  Bottom          0.25mm  Through hole
+NetC116_2   Via          -58.957mm    -11.68mm  Bottom          0.25mm  Through hole
+PHY_LED0    Via          -11.305mm   -105.85mm  Bottom          0.25mm  Through hole
+PD14        Via           -46.45mm    -53.25mm  Bottom          0.25mm  Through hole
+PA20        Via          -50.922mm   -72.925mm  Bottom          0.25mm  Through hole
+PC29        Via         -50.4275mm  -48.7524mm  Bottom          0.25mm  Through hole
+PC15        Via           -51.55mm    -49.75mm  Bottom          0.25mm  Through hole
+PC23        Via            -47.1mm   -45.125mm  Bottom          0.25mm  Through hole
+PC24        Via            -51.3mm    -69.65mm  Bottom          0.25mm  Through hole
+PC25        Via            -52.6mm   -69.875mm  Bottom          0.25mm  Through hole
+PC26        Via            -50.3mm   -70.475mm  Bottom          0.25mm  Through hole
+PC27        Via          -53.925mm    -70.55mm  Bottom          0.25mm  Through hole
+PC28        Via         -48.6274mm  -72.2035mm  Bottom          0.25mm  Through hole
+PD02        Via            -13.8mm   -86.575mm  Bottom          0.25mm  Through hole
+PD03        Via          -13.425mm   -87.925mm  Bottom          0.25mm  Through hole
+PD09        Via          -26.825mm   -91.048mm  Bottom          0.25mm  Through hole
+PD10        Via          -79.225mm     -89.7mm  Bottom          0.25mm  Through hole
+PD13        Via          -50.475mm    -51.25mm  Bottom          0.25mm  Through hole
+PD16        Via          -45.625mm    -56.25mm  Bottom          0.25mm  Through hole
+PD17        Via         -44.6522mm  -58.2028mm  Bottom          0.25mm  Through hole
+PD01        Via          -12.075mm     -87.2mm  Bottom          0.25mm  Through hole
+PA26        Via            -44.4mm     -92.7mm  Bottom          0.25mm  Through hole
+PA31        Via         -55.3775mm    -102.9mm  Bottom          0.25mm  Through hole
+PA30        Via         -53.6775mm    -102.9mm  Bottom          0.25mm  Through hole
+PA28        Via         -41.2475mm    -102.9mm  Bottom          0.25mm  Through hole
+PC08        Via         -70.6535mm  -59.6279mm  Bottom          0.25mm  Through hole
+MAC24_A0    Via            -40.8mm    -87.35mm  Bottom          0.25mm  Through hole
+MAC24_A2    Via          -41.375mm   -89.825mm  Bottom          0.25mm  Through hole
+MAC24_A1    Via            -41.4mm   -88.525mm  Bottom          0.25mm  Through hole
+MAC24_WP    Via           -35.75mm   -89.375mm  Bottom          0.25mm  Through hole
+PC11        Via         -70.6535mm  -51.7525mm  Bottom          0.25mm  Through hole
+PC18        Via          -44.125mm   -43.325mm  Bottom          0.25mm  Through hole
+PC20        Via           -53.45mm   -72.275mm  Bottom          0.25mm  Through hole
+PC21        Via         -45.7522mm  -44.4272mm  Bottom          0.25mm  Through hole
+PC22        Via          -46.475mm     -47.1mm  Bottom          0.25mm  Through hole
+PD22        Via          -41.752mm   -62.178mm  Bottom          0.25mm  Through hole
+PD23        Via           -43.75mm     -59.2mm  Bottom          0.25mm  Through hole
+PD29        Via          -42.925mm    -43.85mm  Bottom          0.25mm  Through hole
+PHY_AD0     Via           -3.425mm   -95.625mm  Bottom          0.25mm  Through hole
+PB00        Via          -57.875mm   -51.225mm  Bottom          0.25mm  Through hole
+PHY_AD1     Via           -5.325mm     -93.7mm  Bottom          0.25mm  Through hole
+PHY_CONFIG1 Via              -12mm   -94.825mm  Bottom          0.25mm  Through hole
+PHY_LED1    Via           -20.85mm  -105.825mm  Bottom          0.25mm  Through hole
+PSU_ENABLE  Via           -87.85mm   -16.875mm  Bottom          0.25mm  Through hole
+RJ45_GND    Via           -15.85mm  -129.225mm  Bottom          0.25mm  Through hole
+TCT         Via            -12.9mm  -113.025mm  Bottom          0.25mm  Through hole
+RCT         Via          -16.585mm  -114.665mm  Bottom          0.25mm  Through hole
+VCC_TARGET_USB_P5V0Via              -34mm      -5.6mm  Bottom          0.25mm  Through hole
+NetC700_1   Via           -9.425mm    -99.25mm  Bottom          0.25mm  Through hole
+NetC707_1   Via           -1.925mm  -100.425mm  Bottom          0.25mm  Through hole
+NetC805_2   Via            -70.3mm   -113.05mm  Bottom          0.25mm  Through hole
+NetR811_2   Via          -69.175mm  -110.925mm  Bottom          0.25mm  Through hole
+AUDIO_MICBIASVia          -69.225mm    -112.3mm  Bottom          0.25mm  Through hole
+EDBG_ADC0   Via           -33.05mm   -13.775mm  Bottom          0.25mm  Through hole
+NetD301_2   Via          -35.675mm   -13.825mm  Bottom          0.25mm  Through hole
+NetJ700_1   Via            -9.45mm  -105.025mm  Bottom          0.25mm  Through hole
+PA13        Via          -50.825mm   -68.075mm  Bottom          0.25mm  Through hole
+PA15        Via          -46.975mm   -79.425mm  Bottom          0.25mm  Through hole
+NetJ700_12  Via            -23.4mm  -104.575mm  Bottom          0.25mm  Through hole
+NetD901_1   Via             -1.8mm     -7.25mm  Bottom          0.25mm  Through hole
+PA27        Via         -38.7475mm    -102.9mm  Bottom          0.25mm  Through hole
+NetC219_1   Via          -53.475mm   -36.125mm  Bottom          0.25mm  Through hole
+VDDOUT      Via         -48.6177mm  -34.1967mm  Bottom          0.25mm  Through hole
+PA14        Via         -44.8022mm  -73.7786mm  Bottom          0.25mm  Through hole
+NetJ103_2   Via          -65.475mm     -1.65mm  Bottom          0.25mm  Through hole
+NetJ404_44  Via         -83.7082mm  -82.5501mm  Bottom          0.25mm  Through hole
+PAD         Via           -28.65mm       -65mm  Bottom          0.25mm  Through hole

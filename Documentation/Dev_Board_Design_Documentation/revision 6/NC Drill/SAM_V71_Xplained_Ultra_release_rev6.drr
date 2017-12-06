@@ -1,0 +1,31 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: SAMV71_Xplained_Ultra.PcbDoc   24.11.2014  15:47:52
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer LF-Signals to Bottom Layer LF-Signals
+ASCII Plated RoundHoles File : SAMV71_Xplained_Ultra-RoundHoles-Plated.TXT
+ASCII Non-Plated RoundHoles File : SAMV71_Xplained_Ultra-RoundHoles-NonPlated.TXT
+ASCII Plated SlotHoles File : SAMV71_Xplained_Ultra-SlotHoles-Plated.TXT
+EIA File   : SAMV71_Xplained_Ultra.DRL
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        0.2mm (7.874mil)         Round          23               36.52 mm (1.44 Inch)
+T2        0.25mm (9.842mil)        Round          930              3003.86 mm (118.26 Inch)
+T3        0.33mm (12.992mil)       Round          4                3.60 mm (0.14 Inch)
+T4        0.35mm (13.78mil)        Round          9                8.00 mm (0.31 Inch)
+T5        0.65mm (25.591mil)       Slot           4                7182.28 mm (282.77 Inch)
+T6        0.825mm (32.48mil)       Slot           4                7218.22 mm (284.18 Inch)
+T7        1mm (39.37mil)           Round          164              795.29 mm (31.31 Inch)
+T8        1.2mm (47.244mil)        Slot           2                7127.93 mm (280.63 Inch)
+T9        1.3mm (51.181mil)        Slot           1                7120.59 mm (280.34 Inch)
+T10       2.7mm (106.299mil)       Round          4                326.34 mm (12.85 Inch)
+T11       1.02mm (40.157mil)       Round          2         NPTH   20.12 mm (0.79 Inch)
+T12       1.19mm (46.85mil)        Round          2         NPTH   33.02 mm (1.30 Inch)
+T13       1.3mm (51.181mil)        Round          4         NPTH   25.10 mm (0.99 Inch)
+T14       1.5mm (59.055mil)        Round          2         NPTH   24.60 mm (0.97 Inch)
+T15       3mm (118.11mil)          Round          2         NPTH   12.70 mm (0.50 Inch)
+---------------------------------------------------------------------------
+Totals                                            1157             32938.16 mm (1296.78 Inch)
+
+Total Processing Time (hh:mm:ss) : 00:00:01

@@ -1,0 +1,31 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: SAMV71_Xplained_Ultra.PcbDoc   28.03.2017  12:18:41
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer LF-Signals to Bottom Layer LF-Signals
+ASCII Plated RoundHoles File : SAMV71_Xplained_Ultra-RoundHoles-Plated.TXT
+ASCII Non-Plated RoundHoles File : SAMV71_Xplained_Ultra-RoundHoles-NonPlated.TXT
+ASCII Plated SlotHoles File : SAMV71_Xplained_Ultra-SlotHoles-Plated.TXT
+EIA File   : SAMV71_Xplained_Ultra.DRL
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      0.2mm (8mil)                                              Round             67        PTH        213.49mm (8.41inch)
+T2      0.25mm (10mil)                                            Round             941       PTH        3091.84mm (121.73inch)
+T3      0.33mm (13mil)                                            Round             4         PTH        3.60mm (0.14inch)
+T4      0.35mm (14mil)                                            Round             9         PTH        8.00mm (0.31inch)
+T5      0.65mm (26mil)                                            Slot              4         PTH        75.38mm (2.97inch)
+T6      0.825mm (32mil)                                           Slot              4         PTH        101.13mm (3.98inch)
+T7      1mm (39mil)                                               Round             169       PTH        822.57mm (32.38inch)
+T8      1.2mm (47mil)                                             Slot              2         PTH        16.45mm (0.65inch)
+T9      1.3mm (51mil)                                             Slot              1         PTH        1.70mm (0.07inch)
+T10     2.7mm (106mil)                                            Round             4         PTH        326.34mm (12.85inch)
+T11     1.02mm (40mil)                                            Round             2         NPTH       20.12mm (0.79inch)
+T12     1.19mm (47mil)                                            Round             2         NPTH       33.02mm (1.30inch)
+T13     1.3mm (51mil)                                             Round             4         NPTH       25.10mm (0.99inch)
+T14     1.5mm (59mil)                                             Round             2         NPTH       24.60mm (0.97inch)
+T15     3mm (118mil)                                              Round             2         NPTH       12.70mm (0.50inch)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              1217
+
+Total Processing Time (hh:mm:ss) : 00:00:01
