@@ -23,6 +23,15 @@
 #define XDMA_CH_SSC_RX    0
 #define XDMA_CH_SSC_TX    1
 
+/** Micro-block length for single transfer  */
+#define MICROBLOCK_LEN          0x100
+
+/** XDMA Descriptor */
+#define TOTAL_BUFFERS     2
+
+/** Size of each buffer */
+#define BUF_SIZE (TOTAL_BUFFERS * MICROBLOCK_LEN * (BITS_BY_SLOT/8))
+
 /********************************** Defines **********************************/
 
 

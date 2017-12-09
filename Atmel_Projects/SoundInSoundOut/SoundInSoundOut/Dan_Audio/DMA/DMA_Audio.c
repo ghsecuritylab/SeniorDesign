@@ -9,14 +9,7 @@
 #include "DMA_Audio.h"
 
 /********************************** Defines **********************************/
-/** Micro-block length for single transfer  */
-#define MICROBLOCK_LEN          0x100
 
-/** XDMA Descriptor */
-#define TOTAL_BUFFERS     2
-
-/** Size of each buffer */
-#define BUF_SIZE (TOTAL_BUFFERS * MICROBLOCK_LEN * (BITS_BY_SLOT/8))
 /********************************** Defines **********************************/
 
 
@@ -24,12 +17,8 @@
 static lld_view1 linklist_write[TOTAL_BUFFERS];
 static lld_view1 linklist_read[TOTAL_BUFFERS];
 
-static uint16_t AudioBuffer[BUF_SIZE];
+volatile uint16_t AudioBuffer[BUF_SIZE];
 
-volatile int sin_idx = 0; 
-static const uint16_t SIN_WAVE[44] = {32767,37420,41978,46350,50446,54185,57489,60292,62538,64180,65185,65534,
-	65218,	64245,	62634,	60418,	57641,	54361,	50643,	46562,	42202,	37651,	33000,	28345,	23780,	19397,	15285,
-	11527,	8199,	5369,	3095,	1422,	384,	2,	284,	1225,	2804,	4991,	7741,	10998,	14696,	18761,	23109,	27653};
 /********************************** Static Variables **********************************/
 
 
@@ -45,15 +34,7 @@ void XDMAC_Handler(void)
 	dma_status = xdmac_channel_get_interrupt_status(XDMAC, XDMA_CH_SSC_RX);
 	if (dma_status & XDMAC_CIS_BIS)
 	{
-		int i;
 		flag = 0;
-		for (i = 0; i < BUF_SIZE; i++)
-		{
-			AudioBuffer[i] +=  SIN_WAVE[sin_idx++];
-
-			if (sin_idx == 44) 
-				sin_idx = 0;
-		}
 	}
 }
 
@@ -87,7 +68,7 @@ void configure_xdma(void)
 	xdmac_configure_transfer(XDMAC, XDMA_CH_SSC_RX, &xdmac_channel_cfg);
 
 	/* Initialize linked list descriptor */
-	src = &AudioBuffer[0];
+	src = (uint16_t *)&AudioBuffer[0];
 	for(i = 0; i < TOTAL_BUFFERS; i++) {
 		linklist_read[i].mbr_ubc = XDMAC_UBC_NVIEW_NDV1
 		| XDMAC_UBC_NDE_FETCH_EN
@@ -124,7 +105,7 @@ void configure_xdma(void)
 	| XDMAC_CC_PERID(32);
 	xdmac_configure_transfer(XDMAC, XDMA_CH_SSC_TX, &xdmac_channel_cfg);
 
-	src = &AudioBuffer[0];
+	src = (uint16_t *)&AudioBuffer[0];
 	for(i = 0; i < TOTAL_BUFFERS; i++) {
 		linklist_write[i].mbr_ubc = XDMAC_UBC_NVIEW_NDV1
 		| XDMAC_UBC_NDE_FETCH_EN

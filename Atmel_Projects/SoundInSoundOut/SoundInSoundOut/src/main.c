@@ -28,6 +28,11 @@
 #include "DMA_Audio.h" 
 
 volatile int flag; 
+extern volatile uint16_t AudioBuffer[BUF_SIZE]; 
+volatile int sin_idx = 0;
+const uint16_t SIN_WAVE[44] = {32767,37420,41978,46350,50446,54185,57489,60292,62538,64180,65185,65534,
+	65218,	64245,	62634,	60418,	57641,	54361,	50643,	46562,	42202,	37651,	33000,	28345,	23780,	19397,	15285,
+11527,	8199,	5369,	3095,	1422,	384,	2,	284,	1225,	2804,	4991,	7741,	10998,	14696,	18761,	23109,	27653};
 
 
 int main(void)
@@ -71,13 +76,22 @@ int main(void)
 	xdmac_channel_enable(XDMAC, XDMA_CH_SSC_TX);
 	
 	flag = 1;
-
 	while(1)
 	{
 		
 		if(!flag)
 		{
 			pio_set(PIOA, PIO_PA23);
+		
+		
+			for (volatile int i = 0; i < BUF_SIZE; i++)
+			{
+				AudioBuffer[i] +=  SIN_WAVE[sin_idx++];
+				if (sin_idx == 44)
+				{
+					sin_idx = 0;
+				}
+			}
 		}
 	}
 }
