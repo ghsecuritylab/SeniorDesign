@@ -9,7 +9,11 @@
 #ifndef WM8904_DRIVER_H_
 #define WM8904_DRIVER_H_
 
-#include "DMA_Audio.h"
+/** Wav slot per frame */
+#define SLOT_BY_FRAME           (1)
+
+/** Bits per slot */
+#define BITS_BY_SLOT            (16)
 
 void configure_ssc(void); 
 void configure_codec(void);

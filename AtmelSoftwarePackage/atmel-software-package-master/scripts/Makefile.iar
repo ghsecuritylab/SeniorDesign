@@ -1,0 +1,63 @@
+# ----------------------------------------------------------------------------
+#         SAM Software Package License
+# ----------------------------------------------------------------------------
+# Copyright (c) 2015, Atmel Corporation
+#
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# - Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the disclaimer below.
+#
+# Atmel's name may not be used to endorse or promote products derived from
+# this software without specific prior written permission.
+#
+# DISCLAIMER: THIS SOFTWARE IS PROVIDED BY ATMEL "AS IS" AND ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE
+# DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+# EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# ----------------------------------------------------------------------------
+
+iar-workspace-template-y ?= $(TOP)/scripts/iar_workspace.template
+iar-project-template-y ?= $(TOP)/scripts/iar_project.template
+iar-debug-template-y ?= $(TOP)/scripts/iar_debug.template
+iar-program-entry-y ?= __iar_program_start
+
+iar:
+	+$(Q)bash $(TOP)/scripts/iar_project.sh "$(shell pwd)" "$(TOP)" "$(BINNAME)" \
+		"$(SELECTED_TARGET)" "$(ALL_VARIANTS)" "$(iar-workspace-template-y)" \
+		"$(iar-project-template-y)" "$(iar-debug-template-y)"
+
+clean-env:
+	rm -f .env-$(VARIANT).sh
+
+iar-env:
+	$(Q)rm -f .env-$(VARIANT).sh
+	$(Q)echo GEN Environment .env-$(VARIANT).sh
+	$(Q)touch .env-$(VARIANT).sh
+	$(Q)echo TOP=\"$(TOP)\"                               >> .env-$(VARIANT).sh
+	$(Q)echo CFLAGS_DEFS=\'$(CFLAGS_DEFS)\'               >> .env-$(VARIANT).sh
+	$(Q)echo CFLAGS_INC=\"$(CFLAGS_INC)\"                 >> .env-$(VARIANT).sh
+	$(Q)echo iar_linker_script_y=\"$(iar-linker-script-y)\" >> .env-$(VARIANT).sh
+	$(Q)echo iar_debug_script_y=\"$(iar-debug-script-y)\" >> .env-$(VARIANT).sh
+	$(Q)echo iar_flashloader_script_y=\"$(iar-flashloader-script-y)\" >> .env-$(VARIANT).sh
+	$(Q)echo iar_program_entry_y=\"$(iar-program-entry-y)\" >> .env-$(VARIANT).sh
+	$(Q)echo target_y=\"$(target-y) $(iar-cstartup-y)\"   >> .env-$(VARIANT).sh
+	$(Q)echo utils_y=\"$(utils-y)\"                       >> .env-$(VARIANT).sh
+	$(Q)echo arch_y=\"$(arch-y)\"                         >> .env-$(VARIANT).sh
+	$(Q)echo drivers_y=\"$(drivers-y)\"                   >> .env-$(VARIANT).sh
+	$(Q)echo lwip_y=\"$(lwip-y)\"                         >> .env-$(VARIANT).sh
+	$(Q)echo uip_y=\"$(uip-y)\"                           >> .env-$(VARIANT).sh
+	$(Q)echo usb_y=\"$(usb-y)\"                           >> .env-$(VARIANT).sh
+	$(Q)echo libsdmmc_y=\"$(libsdmmc-y)\"                 >> .env-$(VARIANT).sh
+	$(Q)echo libfatfs_y=\"$(libfatfs-y)\"                 >> .env-$(VARIANT).sh
+	$(Q)echo obj_y=\"$(obj-y)\"                           >> .env-$(VARIANT).sh
+	$(Q)sed -i 's/\(SOFTPACK_VERSION=".*\) \(.*"\) /\1:\2 /' .env-$(VARIANT).sh

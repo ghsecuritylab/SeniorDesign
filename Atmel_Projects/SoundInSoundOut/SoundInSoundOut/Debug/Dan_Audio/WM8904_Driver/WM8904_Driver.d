@@ -178,7 +178,7 @@ Dan_Audio/WM8904_Driver/WM8904_Driver.d \
  ../src/ASF/sam/components/audio/codec/wm8904/wm8904.h \
  ../src/config/conf_wm8904.h ../src/ASF/sam/drivers/xdmac/xdmac.h \
  ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../Dan_Audio/WM8904_Driver/WM8904_Driver.h ../Dan_Audio/DMA/DMA_Audio.h
+ ../Dan_Audio/WM8904_Driver/WM8904_Driver.h
 
 ../src/asf.h:
 
@@ -549,5 +549,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam/drivers/pio/pio_handler.h:
 
 ../Dan_Audio/WM8904_Driver/WM8904_Driver.h:
-
-../Dan_Audio/DMA/DMA_Audio.h:
