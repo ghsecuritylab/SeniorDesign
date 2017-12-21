@@ -29,13 +29,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_ranges 000008d0  00000000  00000000  00040678  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  00022a57  00000000  00000000  00040f48  2**0
+ 13 .debug_macro  00022a5d  00000000  00000000  00040f48  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   0000e07a  00000000  00000000  0006399f  2**0
+ 14 .debug_line   0000e07a  00000000  00000000  000639a5  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    000935bc  00000000  00000000  00071a19  2**0
+ 15 .debug_str    000935c9  00000000  00000000  00071a1f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_frame  00001e94  00000000  00000000  00104fd8  2**2
+ 16 .debug_frame  00001e94  00000000  00000000  00104fe8  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -161,7 +161,7 @@ __STATIC_INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
   4001d4:	4b24      	ldr	r3, [pc, #144]	; (400268 <configure_xdma+0xbc>)
   4001d6:	9303      	str	r3, [sp, #12]
     | XDMAC_CC_SIF_AHB_IF1
-    | XDMAC_CC_DIF_AHB_IF0
+    | XDMAC_CC_DIF_AHB_IF1
     | XDMAC_CC_SAM_FIXED_AM
     | XDMAC_CC_DAM_INCREMENTED_AM
     | XDMAC_CC_PERID(33);
@@ -228,7 +228,7 @@ static inline void xdmac_channel_set_descriptor_control(Xdmac *xdmac, uint32_t c
     xdmac_channel_cfg.mbr_cfg = XDMAC_CC_TYPE_PER_TRAN
   400216:	4b1a      	ldr	r3, [pc, #104]	; (400280 <configure_xdma+0xd4>)
   400218:	9303      	str	r3, [sp, #12]
-    | XDMAC_CC_SIF_AHB_IF0
+    | XDMAC_CC_SIF_AHB_IF1
     | XDMAC_CC_DIF_AHB_IF1
     | XDMAC_CC_SAM_INCREMENTED_AM
     | XDMAC_CC_DAM_FIXED_AM
@@ -291,13 +291,13 @@ static inline void xdmac_channel_set_descriptor_control(Xdmac *xdmac, uint32_t c
   40025c:	004016fd 	.word	0x004016fd
   400260:	00400c51 	.word	0x00400c51
   400264:	e000e100 	.word	0xe000e100
-  400268:	21042801 	.word	0x21042801
+  400268:	21046801 	.word	0x21046801
   40026c:	40078000 	.word	0x40078000
   400270:	204009dc 	.word	0x204009dc
   400274:	0b000200 	.word	0x0b000200
   400278:	40004020 	.word	0x40004020
   40027c:	204012d0 	.word	0x204012d0
-  400280:	20014811 	.word	0x20014811
+  400280:	20016811 	.word	0x20016811
   400284:	204009fc 	.word	0x204009fc
   400288:	20400ad0 	.word	0x20400ad0
   40028c:	40004024 	.word	0x40004024

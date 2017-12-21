@@ -21,6 +21,7 @@
 
 /** Micro-block length for single transfer  */
 #define MICROBLOCK_LEN          512
+#define BUF_SIZE          512
 
 /** Size of each buffer */
 // #define BUF_SIZE (TOTAL_BUFFERS * MICROBLOCK_LEN * (BITS_BY_SLOT/8))

@@ -40,13 +40,13 @@
         </dependencies>
       </framework-data>
     </AsfFrameworkConfig>
-    <avrtool>com.atmel.avrdbg.tool.edbg</avrtool>
-    <avrtoolserialnumber>ATML2407120200009662</avrtoolserialnumber>
+    <avrtool>com.atmel.avrdbg.tool.samice</avrtool>
+    <avrtoolserialnumber>20126404</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0xA1220E00</avrdeviceexpectedsignature>
     <com_atmel_avrdbg_tool_samice>
       <ToolOptions>
         <InterfaceProperties>
-          <SwdClock>0</SwdClock>
+          <SwdClock>4000000</SwdClock>
         </InterfaceProperties>
         <InterfaceName>SWD</InterfaceName>
       </ToolOptions>
@@ -55,11 +55,11 @@
       <ToolName>SAM-ICE</ToolName>
     </com_atmel_avrdbg_tool_samice>
     <avrtoolinterface>SWD</avrtoolinterface>
-    <avrtoolinterfaceclock>2000000</avrtoolinterfaceclock>
+    <avrtoolinterfaceclock>4000000</avrtoolinterfaceclock>
     <com_atmel_avrdbg_tool_edbg>
       <ToolOptions>
         <InterfaceProperties>
-          <SwdClock>2000000</SwdClock>
+          <SwdClock>0</SwdClock>
         </InterfaceProperties>
         <InterfaceName>SWD</InterfaceName>
       </ToolOptions>
@@ -133,7 +133,6 @@
   <armgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\arm\cmsis\5.0.1\CMSIS\Include\</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.2.129\samv71\include</Value>
       <Value>../libboard/include</Value>
       <Value>../libboard/source</Value>
       <Value>../libboard</Value>
@@ -142,6 +141,7 @@
       <Value>../libchip/source</Value>
       <Value>../libchip/include/samv71/component</Value>
       <Value>../libchip/include/samv71/pio</Value>
+      <Value>../libchip/include/samv71</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize debugging experience (-Og)</armgcc.compiler.optimization.level>
@@ -366,6 +366,99 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="libchip\include\afe_dma.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_CAN.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_Common.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_ETH.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_ETH_MAC.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_ETH_PHY.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_Flash.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_I2C.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_MCI.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_NAND.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_SAI.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_SPI.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_USART.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_USB.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_USBD.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Driver\Include\Driver_USBH.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\arm_common_tables.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\arm_const_structs.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\arm_math.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\cmsis_armcc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\cmsis_armcc_V6.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\cmsis_gcc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\core_cm0.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\core_cm0plus.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\core_cm3.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\core_cm4.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\core_cm7.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\core_cmFunc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\core_cmInstr.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\core_cmSimd.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\core_sc000.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="libchip\include\cmsis\CMSIS\Include\core_sc300.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="libchip\include\dac_dma.h">
@@ -710,6 +803,9 @@
     <Compile Include="libchip\include\samv71\samv71.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="libchip\include\samv71\samv71q21.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="libchip\include\samv71\system_samv71.h">
       <SubType>compile</SubType>
     </Compile>
@@ -916,6 +1012,14 @@
     <Folder Include="libboard\source\" />
     <Folder Include="libchip\" />
     <Folder Include="libchip\include\" />
+    <Folder Include="libchip\include\cmsis\" />
+    <Folder Include="libchip\include\cmsis\CMSIS\" />
+    <Folder Include="libchip\include\cmsis\CMSIS\Driver\" />
+    <Folder Include="libchip\include\cmsis\CMSIS\Driver\Include\" />
+    <Folder Include="libchip\include\cmsis\CMSIS\Include\" />
+    <Folder Include="libchip\include\cmsis\CMSIS\Lib\" />
+    <Folder Include="libchip\include\cmsis\CMSIS\Lib\ARM\" />
+    <Folder Include="libchip\include\cmsis\CMSIS\Lib\GCC\" />
     <Folder Include="libchip\include\samv71\" />
     <Folder Include="libchip\include\samv71\component\" />
     <Folder Include="libchip\include\samv71\instance\" />
@@ -933,6 +1037,72 @@
       <SubType>compile</SubType>
     </None>
     <None Include="libchip\chip.dir">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM0b_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM0l_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM3b_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM3l_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM4bf_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM4b_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM4l_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM7bfdp_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM7bfsp_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM7b_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM7lfdp_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM7lfsp_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\ARM\arm_cortexM7l_math.lib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\GCC\libarm_cortexM0l_math.a">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\GCC\libarm_cortexM3l_math.a">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\GCC\libarm_cortexM4lf_math.a">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\GCC\libarm_cortexM4l_math.a">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\GCC\libarm_cortexM7lfdp_math.a">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\GCC\libarm_cortexM7lfsp_math.a">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\GCC\libarm_cortexM7l_math.a">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="libchip\include\cmsis\CMSIS\Lib\license.txt">
       <SubType>compile</SubType>
     </None>
     <None Include="libchip\include\samv71\component\component_usbhs.h.orig">

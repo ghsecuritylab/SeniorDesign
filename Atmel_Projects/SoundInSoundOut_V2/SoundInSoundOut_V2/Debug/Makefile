@@ -39,6 +39,14 @@ SUBDIRS :=  \
 ../libboard/source/ \
 ../libchip/ \
 ../libchip/include/ \
+../libchip/include/cmsis/ \
+../libchip/include/cmsis/CMSIS/ \
+../libchip/include/cmsis/CMSIS/Driver/ \
+../libchip/include/cmsis/CMSIS/Driver/Include/ \
+../libchip/include/cmsis/CMSIS/Include/ \
+../libchip/include/cmsis/CMSIS/Lib/ \
+../libchip/include/cmsis/CMSIS/Lib/ARM/ \
+../libchip/include/cmsis/CMSIS/Lib/GCC/ \
 ../libchip/include/samv71/ \
 ../libchip/include/samv71/component/ \
 ../libchip/include/samv71/instance/ \
@@ -581,28 +589,28 @@ LINKER_SCRIPT_DEP+=  \
 Device_Startup/%.o: ../Device_Startup/%.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include" -I"../libboard/include" -I"../libboard/source" -I"../libboard" -I"../libchip" -I"../libchip/include" -I"../libchip/source" -I"../libchip/include/samv71/component" -I"../libchip/include/samv71/pio"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include" -I"../libboard/include" -I"../libboard/source" -I"../libboard" -I"../libchip" -I"../libchip/include" -I"../libchip/source" -I"../libchip/include/samv71/component" -I"../libchip/include/samv71/pio" -I"../libchip/include/samv71"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 libboard/source/%.o: ../libboard/source/%.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include" -I"../libboard/include" -I"../libboard/source" -I"../libboard" -I"../libchip" -I"../libchip/include" -I"../libchip/source" -I"../libchip/include/samv71/component" -I"../libchip/include/samv71/pio"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include" -I"../libboard/include" -I"../libboard/source" -I"../libboard" -I"../libchip" -I"../libchip/include" -I"../libchip/source" -I"../libchip/include/samv71/component" -I"../libchip/include/samv71/pio" -I"../libchip/include/samv71"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 libchip/source/%.o: ../libchip/source/%.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include" -I"../libboard/include" -I"../libboard/source" -I"../libboard" -I"../libchip" -I"../libchip/include" -I"../libchip/source" -I"../libchip/include/samv71/component" -I"../libchip/include/samv71/pio"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include" -I"../libboard/include" -I"../libboard/source" -I"../libboard" -I"../libchip" -I"../libchip/include" -I"../libchip/source" -I"../libchip/include/samv71/component" -I"../libchip/include/samv71/pio" -I"../libchip/include/samv71"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./%.o: .././%.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include" -I"../libboard/include" -I"../libboard/source" -I"../libboard" -I"../libchip" -I"../libchip/include" -I"../libchip/source" -I"../libchip/include/samv71/component" -I"../libchip/include/samv71/pio"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include" -I"../libboard/include" -I"../libboard/source" -I"../libboard" -I"../libchip" -I"../libchip/include" -I"../libchip/source" -I"../libchip/include/samv71/component" -I"../libchip/include/samv71/pio" -I"../libchip/include/samv71"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 

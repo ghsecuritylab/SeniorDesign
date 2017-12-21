@@ -7418,7 +7418,7 @@ Discarded input sections
  .debug_macro   0x00000000     0x16e2 src/main.o
  .debug_macro   0x00000000      0x1ad src/main.o
  .debug_macro   0x00000000       0x16 src/main.o
- .debug_macro   0x00000000       0x22 src/main.o
+ .debug_macro   0x00000000       0x28 src/main.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-exit.o)
@@ -8579,7 +8579,7 @@ OUTPUT(SoundInSoundOut.elf elf32-littlearm)
  .debug_ranges  0x00000848       0x50 src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .debug_ranges  0x00000898       0x38 src/main.o
 
-.debug_macro    0x00000000    0x22a57
+.debug_macro    0x00000000    0x22a5d
  .debug_macro   0x00000000      0x828 Dan_Audio/DMA/DMA_Audio.o
  .debug_macro   0x00000828      0x8ce Dan_Audio/DMA/DMA_Audio.o
  .debug_macro   0x000010f6      0x16d Dan_Audio/DMA/DMA_Audio.o
@@ -8746,50 +8746,50 @@ OUTPUT(SoundInSoundOut.elf elf32-littlearm)
  .debug_macro   0x00019297       0x10 Dan_Audio/DMA/DMA_Audio.o
  .debug_macro   0x000192a7     0x16e2 Dan_Audio/DMA/DMA_Audio.o
  .debug_macro   0x0001a989      0x1ad Dan_Audio/DMA/DMA_Audio.o
- .debug_macro   0x0001ab36       0x22 Dan_Audio/DMA/DMA_Audio.o
- .debug_macro   0x0001ab58      0x829 Dan_Audio/WM8904_Driver/WM8904_Driver.o
- .debug_macro   0x0001b381       0x16 Dan_Audio/WM8904_Driver/WM8904_Driver.o
- .debug_macro   0x0001b397      0x6e7 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_macro   0x0001ba7e      0x2c0 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_macro   0x0001bd3e      0x67b src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_macro   0x0001c3b9       0x22 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_macro   0x0001c3db      0x66b src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_macro   0x0001ca46      0x66b src/ASF/common/utils/stdio/read.o
- .debug_macro   0x0001d0b1      0x66b src/ASF/common/utils/stdio/write.o
- .debug_macro   0x0001d71c      0x722 src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_macro   0x0001de3e       0x1c src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_macro   0x0001de5a       0x82 src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_macro   0x0001dedc      0x72a src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_macro   0x0001e606       0x10 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_macro   0x0001e616      0x681 src/ASF/sam/drivers/pio/pio.o
- .debug_macro   0x0001ec97       0x8e src/ASF/sam/drivers/pio/pio.o
- .debug_macro   0x0001ed25      0x68c src/ASF/sam/drivers/pio/pio_handler.o
- .debug_macro   0x0001f3b1      0x681 src/ASF/sam/drivers/pmc/pmc.o
- .debug_macro   0x0001fa32       0x6a src/ASF/sam/drivers/pmc/pmc.o
- .debug_macro   0x0001fa9c      0x699 src/ASF/sam/drivers/ssc/ssc.o
- .debug_macro   0x00020135       0x52 src/ASF/sam/drivers/ssc/ssc.o
- .debug_macro   0x00020187       0x8d src/ASF/sam/drivers/ssc/ssc.o
- .debug_macro   0x00020214       0x57 src/ASF/sam/drivers/ssc/ssc.o
- .debug_macro   0x0002026b       0x10 src/ASF/sam/drivers/ssc/ssc.o
- .debug_macro   0x0002027b       0x1c src/ASF/sam/drivers/ssc/ssc.o
- .debug_macro   0x00020297       0x4c src/ASF/sam/drivers/ssc/ssc.o
- .debug_macro   0x000202e3      0x69f src/ASF/sam/drivers/twihs/twihs.o
- .debug_macro   0x00020982       0x46 src/ASF/sam/drivers/twihs/twihs.o
- .debug_macro   0x000209c8      0x686 src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_macro   0x0002104e      0x1a7 src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_macro   0x000211f5      0x67a src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_macro   0x0002186f       0x10 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_macro   0x0002187f      0x469 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
- .debug_macro   0x00021ce8      0x1d6 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00021ebe       0x97 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00021f55       0xf6 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0002204b       0x4c src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00022097       0x16 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x000220ad       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x000220bd       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x000220cd       0x35 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00022102      0x122 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00022224      0x833 src/main.o
+ .debug_macro   0x0001ab36       0x28 Dan_Audio/DMA/DMA_Audio.o
+ .debug_macro   0x0001ab5e      0x829 Dan_Audio/WM8904_Driver/WM8904_Driver.o
+ .debug_macro   0x0001b387       0x16 Dan_Audio/WM8904_Driver/WM8904_Driver.o
+ .debug_macro   0x0001b39d      0x6e7 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_macro   0x0001ba84      0x2c0 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_macro   0x0001bd44      0x67b src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_macro   0x0001c3bf       0x22 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_macro   0x0001c3e1      0x66b src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_macro   0x0001ca4c      0x66b src/ASF/common/utils/stdio/read.o
+ .debug_macro   0x0001d0b7      0x66b src/ASF/common/utils/stdio/write.o
+ .debug_macro   0x0001d722      0x722 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_macro   0x0001de44       0x1c src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_macro   0x0001de60       0x82 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_macro   0x0001dee2      0x72a src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_macro   0x0001e60c       0x10 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_macro   0x0001e61c      0x681 src/ASF/sam/drivers/pio/pio.o
+ .debug_macro   0x0001ec9d       0x8e src/ASF/sam/drivers/pio/pio.o
+ .debug_macro   0x0001ed2b      0x68c src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_macro   0x0001f3b7      0x681 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_macro   0x0001fa38       0x6a src/ASF/sam/drivers/pmc/pmc.o
+ .debug_macro   0x0001faa2      0x699 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_macro   0x0002013b       0x52 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_macro   0x0002018d       0x8d src/ASF/sam/drivers/ssc/ssc.o
+ .debug_macro   0x0002021a       0x57 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_macro   0x00020271       0x10 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_macro   0x00020281       0x1c src/ASF/sam/drivers/ssc/ssc.o
+ .debug_macro   0x0002029d       0x4c src/ASF/sam/drivers/ssc/ssc.o
+ .debug_macro   0x000202e9      0x69f src/ASF/sam/drivers/twihs/twihs.o
+ .debug_macro   0x00020988       0x46 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_macro   0x000209ce      0x686 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_macro   0x00021054      0x1a7 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_macro   0x000211fb      0x67a src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_macro   0x00021875       0x10 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_macro   0x00021885      0x469 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_macro   0x00021cee      0x1d6 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00021ec4       0x97 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00021f5b       0xf6 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00022051       0x4c src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0002209d       0x16 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x000220b3       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x000220c3       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x000220d3       0x35 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00022108      0x122 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0002222a      0x833 src/main.o
 
 .debug_line     0x00000000     0xe07a
  .debug_line    0x00000000      0xf9e Dan_Audio/DMA/DMA_Audio.o
@@ -8812,45 +8812,45 @@ OUTPUT(SoundInSoundOut.elf elf32-littlearm)
  .debug_line    0x0000cbd7      0x40b src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .debug_line    0x0000cfe2     0x1098 src/main.o
 
-.debug_str      0x00000000    0x935bc
- .debug_str     0x00000000    0x8fdf1 Dan_Audio/DMA/DMA_Audio.o
-                              0x90516 (size before relaxing)
- .debug_str     0x0008fdf1      0x2a3 Dan_Audio/WM8904_Driver/WM8904_Driver.o
+.debug_str      0x00000000    0x935c9
+ .debug_str     0x00000000    0x8fdfe Dan_Audio/DMA/DMA_Audio.o
+                              0x90523 (size before relaxing)
+ .debug_str     0x0008fdfe      0x2a3 Dan_Audio/WM8904_Driver/WM8904_Driver.o
                               0x8ffc5 (size before relaxing)
- .debug_str     0x00090094      0x423 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_str     0x000900a1      0x423 src/ASF/common/services/clock/samv71/sysclk.o
                               0x86a4e (size before relaxing)
- .debug_str     0x000904b7       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_str     0x000904c4       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
                               0x81d4d (size before relaxing)
- .debug_str     0x000904ec       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_str     0x000904f9       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                               0x81c1d (size before relaxing)
- .debug_str     0x00090580       0x2c src/ASF/common/utils/stdio/read.o
+ .debug_str     0x0009058d       0x2c src/ASF/common/utils/stdio/read.o
                               0x81bc6 (size before relaxing)
- .debug_str     0x000905ac       0x26 src/ASF/common/utils/stdio/write.o
+ .debug_str     0x000905b9       0x26 src/ASF/common/utils/stdio/write.o
                               0x81bc7 (size before relaxing)
- .debug_str     0x000905d2      0x853 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_str     0x000905df      0x853 src/ASF/sam/boards/samv71_xplained_ultra/init.o
                               0x875e8 (size before relaxing)
- .debug_str     0x00090e25      0x240 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_str     0x00090e32      0x240 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
                               0x8de65 (size before relaxing)
- .debug_str     0x00091065      0x581 src/ASF/sam/drivers/pio/pio.o
+ .debug_str     0x00091072      0x581 src/ASF/sam/drivers/pio/pio.o
                               0x82773 (size before relaxing)
- .debug_str     0x000915e6      0x111 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_str     0x000915f3      0x111 src/ASF/sam/drivers/pio/pio_handler.o
                               0x8289e (size before relaxing)
- .debug_str     0x000916f7      0x6b5 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_str     0x00091704      0x6b5 src/ASF/sam/drivers/pmc/pmc.o
                               0x828d7 (size before relaxing)
- .debug_str     0x00091dac      0x35c src/ASF/sam/drivers/ssc/ssc.o
+ .debug_str     0x00091db9      0x35c src/ASF/sam/drivers/ssc/ssc.o
                               0x8223d (size before relaxing)
- .debug_str     0x00092108      0x373 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_str     0x00092115      0x373 src/ASF/sam/drivers/twihs/twihs.o
                               0x821d1 (size before relaxing)
- .debug_str     0x0009247b      0x194 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_str     0x00092488      0x194 src/ASF/sam/drivers/xdmac/xdmac.o
                               0x82713 (size before relaxing)
- .debug_str     0x0009260f      0x64e src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_str     0x0009261c      0x64e src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
                               0x823ec (size before relaxing)
- .debug_str     0x00092c5d      0x137 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_str     0x00092c6a      0x137 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
                               0x724f6 (size before relaxing)
- .debug_str     0x00092d94      0x76d src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x00092da1      0x76d src/ASF/sam/utils/syscalls/gcc/syscalls.o
                                0x748a (size before relaxing)
- .debug_str     0x00093501       0xbb src/main.o
-                              0x905ce (size before relaxing)
+ .debug_str     0x0009350e       0xbb src/main.o
+                              0x905db (size before relaxing)
 
 .debug_frame    0x00000000     0x1e94
  .debug_frame   0x00000000       0x38 Dan_Audio/DMA/DMA_Audio.o

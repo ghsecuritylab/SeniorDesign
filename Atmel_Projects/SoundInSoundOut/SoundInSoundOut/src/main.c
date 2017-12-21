@@ -34,6 +34,13 @@ extern volatile uint16_t WriteBuffer[2*MICROBLOCK_LEN];
 extern volatile uint16_t ProcessBuffer[MICROBLOCK_LEN];
 
 /*
+extern volatile uint16_t inPingBuffer[BUF_SIZE];
+extern volatile uint16_t inPongBuffer[BUF_SIZE];
+extern volatile uint16_t outPingBuffer[BUF_SIZE];
+extern volatile uint16_t outPongBuffer[BUF_SIZE];
+*/
+
+/*
 const int16_t SIN_WAVE[44] = {0,4653,9211,13583,17679,21418,24722,27525,29771,31413,
 	32418,32767,32451,31478,29867,27651,24874,21594,17876,13795,9435,4884,233,-4422,
 	-8987,-13370,-17482,-21240,-24568,-27398,-29672,-31345,-32383,-32765,-32483,-31542,

@@ -26,6 +26,13 @@ volatile uint16_t WriteBuffer[2*MICROBLOCK_LEN];
 //COMPILER_ALIGNED(8)
 volatile uint16_t ProcessBuffer[MICROBLOCK_LEN]; 
 
+/*
+COMPILER_ALIGNED(8) volatile uint16_t inPingBuffer[BUF_SIZE];
+COMPILER_ALIGNED(8) volatile uint16_t inPongBuffer[BUF_SIZE];
+COMPILER_ALIGNED(8) volatile uint16_t outPingBuffer[BUF_SIZE];
+COMPILER_ALIGNED(8) volatile uint16_t outPongBuffer[BUF_SIZE];
+*/
+
 /********************************** Static Variables **********************************/
 
 
@@ -69,7 +76,7 @@ void configure_xdma(void)
     | XDMAC_CC_CSIZE_CHK_1
     | XDMAC_CC_DWIDTH_HALFWORD
     | XDMAC_CC_SIF_AHB_IF1
-    | XDMAC_CC_DIF_AHB_IF0
+    | XDMAC_CC_DIF_AHB_IF1
     | XDMAC_CC_SAM_FIXED_AM
     | XDMAC_CC_DAM_INCREMENTED_AM
     | XDMAC_CC_PERID(33);
@@ -109,7 +116,7 @@ void configure_xdma(void)
     | XDMAC_CC_DSYNC_MEM2PER
     | XDMAC_CC_CSIZE_CHK_1
     | XDMAC_CC_DWIDTH_HALFWORD
-    | XDMAC_CC_SIF_AHB_IF0
+    | XDMAC_CC_SIF_AHB_IF1
     | XDMAC_CC_DIF_AHB_IF1
     | XDMAC_CC_SAM_INCREMENTED_AM
     | XDMAC_CC_DAM_FIXED_AM

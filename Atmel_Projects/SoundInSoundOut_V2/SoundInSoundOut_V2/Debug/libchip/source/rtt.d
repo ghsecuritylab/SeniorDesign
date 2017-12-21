@@ -1,7 +1,6 @@
 libchip/source/rtt.d libchip/source/rtt.o: ../libchip/source/rtt.c \
  ../libchip/chip.h ../libchip/compiler.h \
- ../libchip/include/samv71/samv71.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/samv71q21.h \
+ ../libchip/include/samv71/samv71.h ../libchip/include/samv71/samv71q21.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
@@ -12,99 +11,99 @@ libchip/source/rtt.d libchip/source/rtt.o: ../libchip/source/rtt.c \
  C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include/core_cm7.h \
  C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include/cmsis_compiler.h \
  C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include/cmsis_gcc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/system_samv71.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/acc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/aes.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/afec.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/chipid.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/dacc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/efc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/gmac.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/gpbr.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/hsmci.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/icm.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/isi.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/matrix.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/mcan.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/mlb.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/pio.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/pmc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/pwm.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/qspi.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/rstc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/rswdt.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/rtc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/rtt.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/sdramc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/smc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/spi.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/ssc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/supc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/tc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/trng.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/twihs.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/uart.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/usart.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/usbhs.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/utmi.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/wdt.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/xdmac.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/acc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/aes.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/afec0.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/afec1.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/chipid.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/dacc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/efc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/gmac.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/gpbr.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/hsmci.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/icm.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/isi.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/matrix.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/mcan0.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/mcan1.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/mlb.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pioa.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/piob.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pioc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/piod.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pioe.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pmc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pwm0.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pwm1.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/qspi.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/rstc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/rswdt.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/rtc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/rtt.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/sdramc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/smc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/spi0.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/spi1.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/ssc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/supc.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/tc0.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/tc1.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/tc2.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/tc3.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/trng.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/twihs0.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/twihs1.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/twihs2.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/uart0.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/uart1.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/uart2.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/uart3.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/uart4.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/usart0.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/usart1.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/usart2.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/usbhs.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/utmi.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/wdt.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/xdmac.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/pio/samv71q21.h \
+ ../libchip/include/samv71/system_samv71.h \
+ ../libchip/include/samv71/component/component_acc.h \
+ ../libchip/include/samv71/component/component_aes.h \
+ ../libchip/include/samv71/component/component_afec.h \
+ ../libchip/include/samv71/component/component_chipid.h \
+ ../libchip/include/samv71/component/component_dacc.h \
+ ../libchip/include/samv71/component/component_efc.h \
+ ../libchip/include/samv71/component/component_gmac.h \
+ ../libchip/include/samv71/component/component_gpbr.h \
+ ../libchip/include/samv71/component/component_hsmci.h \
+ ../libchip/include/samv71/component/component_icm.h \
+ ../libchip/include/samv71/component/component_isi.h \
+ ../libchip/include/samv71/component/component_matrix.h \
+ ../libchip/include/samv71/component/component_mcan.h \
+ ../libchip/include/samv71/component/component_mlb.h \
+ ../libchip/include/samv71/component/component_pio.h \
+ ../libchip/include/samv71/component/component_pmc.h \
+ ../libchip/include/samv71/component/component_pwm.h \
+ ../libchip/include/samv71/component/component_qspi.h \
+ ../libchip/include/samv71/component/component_rstc.h \
+ ../libchip/include/samv71/component/component_rswdt.h \
+ ../libchip/include/samv71/component/component_rtc.h \
+ ../libchip/include/samv71/component/component_rtt.h \
+ ../libchip/include/samv71/component/component_sdramc.h \
+ ../libchip/include/samv71/component/component_smc.h \
+ ../libchip/include/samv71/component/component_spi.h \
+ ../libchip/include/samv71/component/component_ssc.h \
+ ../libchip/include/samv71/component/component_supc.h \
+ ../libchip/include/samv71/component/component_tc.h \
+ ../libchip/include/samv71/component/component_trng.h \
+ ../libchip/include/samv71/component/component_twihs.h \
+ ../libchip/include/samv71/component/component_uart.h \
+ ../libchip/include/samv71/component/component_usart.h \
+ ../libchip/include/samv71/component/component_usbhs.h \
+ ../libchip/include/samv71/component/component_utmi.h \
+ ../libchip/include/samv71/component/component_wdt.h \
+ ../libchip/include/samv71/component/component_xdmac.h \
+ ../libchip/include/samv71/instance/instance_hsmci.h \
+ ../libchip/include/samv71/instance/instance_ssc.h \
+ ../libchip/include/samv71/instance/instance_spi0.h \
+ ../libchip/include/samv71/instance/instance_tc0.h \
+ ../libchip/include/samv71/instance/instance_tc1.h \
+ ../libchip/include/samv71/instance/instance_tc2.h \
+ ../libchip/include/samv71/instance/instance_twihs0.h \
+ ../libchip/include/samv71/instance/instance_twihs1.h \
+ ../libchip/include/samv71/instance/instance_pwm0.h \
+ ../libchip/include/samv71/instance/instance_usart0.h \
+ ../libchip/include/samv71/instance/instance_usart1.h \
+ ../libchip/include/samv71/instance/instance_usart2.h \
+ ../libchip/include/samv71/instance/instance_mcan0.h \
+ ../libchip/include/samv71/instance/instance_mcan1.h \
+ ../libchip/include/samv71/instance/instance_usbhs.h \
+ ../libchip/include/samv71/instance/instance_afec0.h \
+ ../libchip/include/samv71/instance/instance_dacc.h \
+ ../libchip/include/samv71/instance/instance_acc.h \
+ ../libchip/include/samv71/instance/instance_icm.h \
+ ../libchip/include/samv71/instance/instance_isi.h \
+ ../libchip/include/samv71/instance/instance_gmac.h \
+ ../libchip/include/samv71/instance/instance_tc3.h \
+ ../libchip/include/samv71/instance/instance_spi1.h \
+ ../libchip/include/samv71/instance/instance_pwm1.h \
+ ../libchip/include/samv71/instance/instance_twihs2.h \
+ ../libchip/include/samv71/instance/instance_afec1.h \
+ ../libchip/include/samv71/instance/instance_mlb.h \
+ ../libchip/include/samv71/instance/instance_aes.h \
+ ../libchip/include/samv71/instance/instance_trng.h \
+ ../libchip/include/samv71/instance/instance_xdmac.h \
+ ../libchip/include/samv71/instance/instance_qspi.h \
+ ../libchip/include/samv71/instance/instance_smc.h \
+ ../libchip/include/samv71/instance/instance_sdramc.h \
+ ../libchip/include/samv71/instance/instance_matrix.h \
+ ../libchip/include/samv71/instance/instance_utmi.h \
+ ../libchip/include/samv71/instance/instance_pmc.h \
+ ../libchip/include/samv71/instance/instance_uart0.h \
+ ../libchip/include/samv71/instance/instance_chipid.h \
+ ../libchip/include/samv71/instance/instance_uart1.h \
+ ../libchip/include/samv71/instance/instance_efc.h \
+ ../libchip/include/samv71/instance/instance_pioa.h \
+ ../libchip/include/samv71/instance/instance_piob.h \
+ ../libchip/include/samv71/instance/instance_pioc.h \
+ ../libchip/include/samv71/instance/instance_piod.h \
+ ../libchip/include/samv71/instance/instance_pioe.h \
+ ../libchip/include/samv71/instance/instance_rstc.h \
+ ../libchip/include/samv71/instance/instance_supc.h \
+ ../libchip/include/samv71/instance/instance_rtt.h \
+ ../libchip/include/samv71/instance/instance_wdt.h \
+ ../libchip/include/samv71/instance/instance_rtc.h \
+ ../libchip/include/samv71/instance/instance_gpbr.h \
+ ../libchip/include/samv71/instance/instance_rswdt.h \
+ ../libchip/include/samv71/instance/instance_uart2.h \
+ ../libchip/include/samv71/instance/instance_uart3.h \
+ ../libchip/include/samv71/instance/instance_uart4.h \
+ ../libchip/include/samv71/pio/pio_samv71q21.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
@@ -165,7 +164,7 @@ libchip/source/rtt.d libchip/source/rtt.o: ../libchip/source/rtt.c \
 
 ../libchip/include/samv71/samv71.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/samv71q21.h:
+../libchip/include/samv71/samv71q21.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h:
 
@@ -187,191 +186,191 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include/cm
 
 C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\arm\cmsis\5.0.1\CMSIS\Include/cmsis_gcc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/system_samv71.h:
+../libchip/include/samv71/system_samv71.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/acc.h:
+../libchip/include/samv71/component/component_acc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/aes.h:
+../libchip/include/samv71/component/component_aes.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/afec.h:
+../libchip/include/samv71/component/component_afec.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/chipid.h:
+../libchip/include/samv71/component/component_chipid.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/dacc.h:
+../libchip/include/samv71/component/component_dacc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/efc.h:
+../libchip/include/samv71/component/component_efc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/gmac.h:
+../libchip/include/samv71/component/component_gmac.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/gpbr.h:
+../libchip/include/samv71/component/component_gpbr.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/hsmci.h:
+../libchip/include/samv71/component/component_hsmci.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/icm.h:
+../libchip/include/samv71/component/component_icm.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/isi.h:
+../libchip/include/samv71/component/component_isi.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/matrix.h:
+../libchip/include/samv71/component/component_matrix.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/mcan.h:
+../libchip/include/samv71/component/component_mcan.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/mlb.h:
+../libchip/include/samv71/component/component_mlb.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/pio.h:
+../libchip/include/samv71/component/component_pio.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/pmc.h:
+../libchip/include/samv71/component/component_pmc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/pwm.h:
+../libchip/include/samv71/component/component_pwm.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/qspi.h:
+../libchip/include/samv71/component/component_qspi.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/rstc.h:
+../libchip/include/samv71/component/component_rstc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/rswdt.h:
+../libchip/include/samv71/component/component_rswdt.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/rtc.h:
+../libchip/include/samv71/component/component_rtc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/rtt.h:
+../libchip/include/samv71/component/component_rtt.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/sdramc.h:
+../libchip/include/samv71/component/component_sdramc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/smc.h:
+../libchip/include/samv71/component/component_smc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/spi.h:
+../libchip/include/samv71/component/component_spi.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/ssc.h:
+../libchip/include/samv71/component/component_ssc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/supc.h:
+../libchip/include/samv71/component/component_supc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/tc.h:
+../libchip/include/samv71/component/component_tc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/trng.h:
+../libchip/include/samv71/component/component_trng.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/twihs.h:
+../libchip/include/samv71/component/component_twihs.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/uart.h:
+../libchip/include/samv71/component/component_uart.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/usart.h:
+../libchip/include/samv71/component/component_usart.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/usbhs.h:
+../libchip/include/samv71/component/component_usbhs.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/utmi.h:
+../libchip/include/samv71/component/component_utmi.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/wdt.h:
+../libchip/include/samv71/component/component_wdt.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/component/xdmac.h:
+../libchip/include/samv71/component/component_xdmac.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/acc.h:
+../libchip/include/samv71/instance/instance_hsmci.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/aes.h:
+../libchip/include/samv71/instance/instance_ssc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/afec0.h:
+../libchip/include/samv71/instance/instance_spi0.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/afec1.h:
+../libchip/include/samv71/instance/instance_tc0.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/chipid.h:
+../libchip/include/samv71/instance/instance_tc1.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/dacc.h:
+../libchip/include/samv71/instance/instance_tc2.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/efc.h:
+../libchip/include/samv71/instance/instance_twihs0.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/gmac.h:
+../libchip/include/samv71/instance/instance_twihs1.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/gpbr.h:
+../libchip/include/samv71/instance/instance_pwm0.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/hsmci.h:
+../libchip/include/samv71/instance/instance_usart0.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/icm.h:
+../libchip/include/samv71/instance/instance_usart1.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/isi.h:
+../libchip/include/samv71/instance/instance_usart2.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/matrix.h:
+../libchip/include/samv71/instance/instance_mcan0.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/mcan0.h:
+../libchip/include/samv71/instance/instance_mcan1.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/mcan1.h:
+../libchip/include/samv71/instance/instance_usbhs.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/mlb.h:
+../libchip/include/samv71/instance/instance_afec0.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pioa.h:
+../libchip/include/samv71/instance/instance_dacc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/piob.h:
+../libchip/include/samv71/instance/instance_acc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pioc.h:
+../libchip/include/samv71/instance/instance_icm.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/piod.h:
+../libchip/include/samv71/instance/instance_isi.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pioe.h:
+../libchip/include/samv71/instance/instance_gmac.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pmc.h:
+../libchip/include/samv71/instance/instance_tc3.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pwm0.h:
+../libchip/include/samv71/instance/instance_spi1.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/pwm1.h:
+../libchip/include/samv71/instance/instance_pwm1.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/qspi.h:
+../libchip/include/samv71/instance/instance_twihs2.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/rstc.h:
+../libchip/include/samv71/instance/instance_afec1.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/rswdt.h:
+../libchip/include/samv71/instance/instance_mlb.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/rtc.h:
+../libchip/include/samv71/instance/instance_aes.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/rtt.h:
+../libchip/include/samv71/instance/instance_trng.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/sdramc.h:
+../libchip/include/samv71/instance/instance_xdmac.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/smc.h:
+../libchip/include/samv71/instance/instance_qspi.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/spi0.h:
+../libchip/include/samv71/instance/instance_smc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/spi1.h:
+../libchip/include/samv71/instance/instance_sdramc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/ssc.h:
+../libchip/include/samv71/instance/instance_matrix.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/supc.h:
+../libchip/include/samv71/instance/instance_utmi.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/tc0.h:
+../libchip/include/samv71/instance/instance_pmc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/tc1.h:
+../libchip/include/samv71/instance/instance_uart0.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/tc2.h:
+../libchip/include/samv71/instance/instance_chipid.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/tc3.h:
+../libchip/include/samv71/instance/instance_uart1.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/trng.h:
+../libchip/include/samv71/instance/instance_efc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/twihs0.h:
+../libchip/include/samv71/instance/instance_pioa.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/twihs1.h:
+../libchip/include/samv71/instance/instance_piob.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/twihs2.h:
+../libchip/include/samv71/instance/instance_pioc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/uart0.h:
+../libchip/include/samv71/instance/instance_piod.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/uart1.h:
+../libchip/include/samv71/instance/instance_pioe.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/uart2.h:
+../libchip/include/samv71/instance/instance_rstc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/uart3.h:
+../libchip/include/samv71/instance/instance_supc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/uart4.h:
+../libchip/include/samv71/instance/instance_rtt.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/usart0.h:
+../libchip/include/samv71/instance/instance_wdt.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/usart1.h:
+../libchip/include/samv71/instance/instance_rtc.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/usart2.h:
+../libchip/include/samv71/instance/instance_gpbr.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/usbhs.h:
+../libchip/include/samv71/instance/instance_rswdt.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/utmi.h:
+../libchip/include/samv71/instance/instance_uart2.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/wdt.h:
+../libchip/include/samv71/instance/instance_uart3.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/instance/xdmac.h:
+../libchip/include/samv71/instance/instance_uart4.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.2.129\samv71\include/pio/samv71q21.h:
+../libchip/include/samv71/pio/pio_samv71q21.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h:
 
