@@ -2,9 +2,11 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-Dan_Audio\DMA\DMA_Audio.c
+DanLib\DMA\DMA_Audio.c
 
-Dan_Audio\WM8904_Driver\WM8904_Driver.c
+DanLib\WM8904_Driver\WM8904_Driver.c
+
+main.c
 
 src\ASF\common\services\clock\samv71\sysclk.c
 
@@ -47,6 +49,4 @@ src\ASF\sam\utils\cmsis\samv71\source\templates\gcc\startup_samv71.c
 src\ASF\sam\utils\cmsis\samv71\source\templates\system_samv71.c
 
 src\ASF\sam\utils\syscalls\gcc\syscalls.c
-
-src\main.c
 

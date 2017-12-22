@@ -487,8 +487,9 @@
       <Value>../src/ASF/sam/components/audio/codec/wm8904/example/samv71q21_samv71_xplained_ultra</Value>
       <Value>../src</Value>
       <Value>../src/config</Value>
-      <Value>../Dan_Audio/DMA</Value>
-      <Value>../Dan_Audio/WM8904_Driver</Value>
+      <Value>../DanLib</Value>
+      <Value>../DanLib/DMA</Value>
+      <Value>../DanLib/WM8904_Driver</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -590,9 +591,9 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Dan_Audio" />
-    <Folder Include="Dan_Audio\DMA" />
-    <Folder Include="Dan_Audio\WM8904_Driver" />
+    <Folder Include="DanLib\" />
+    <Folder Include="DanLib\DMA\" />
+    <Folder Include="DanLib\WM8904_Driver\" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -660,18 +661,6 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dan_Audio\DMA\DMA_Audio.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Dan_Audio\DMA\DMA_Audio.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Dan_Audio\WM8904_Driver\WM8904_Driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Dan_Audio\WM8904_Driver\WM8904_Driver.h">
-      <SubType>compile</SubType>
-    </Compile>
     <None Include="src\asf.h">
       <SubType>compile</SubType>
     </None>
@@ -1164,6 +1153,24 @@
     <None Include="src\ASF\common\services\clock\osc.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="DanLib\DanLib.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\DMA\DMA_Audio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\DMA\DMA_Audio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\WM8904_Driver\WM8904_Driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\WM8904_Driver\WM8904_Driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\ASF\common\services\clock\samv71\sysclk.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1255,9 +1262,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\sam\utils\syscalls\gcc\syscalls.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\main.c">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\thirdparty\CMSIS\Lib\GCC\libarm_cortexM7lfsp_math.a">
