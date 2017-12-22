@@ -25,13 +25,13 @@ void configure_ssc(void)
 	tx_clk_option.ul_cki = 0;
 	tx_clk_option.ul_ckg = SSC_TCMR_CKG_CONTINUOUS;
 	tx_clk_option.ul_start_sel = SSC_TCMR_START_TF_EDGE;
-	tx_clk_option.ul_sttdly = SSC_TCMR_STTDLY(1);
-	tx_clk_option.ul_period = SSC_TCMR_PERIOD(0);
+	tx_clk_option.ul_sttdly = 1;
+	tx_clk_option.ul_period = BITS_BY_SLOT - 1;
 	/* Transmitter frame mode configuration. */
 	tx_data_frame_option.ul_datlen = BITS_BY_SLOT - 1;
 	tx_data_frame_option.ul_msbf = SSC_TFMR_MSBF;
 	tx_data_frame_option.ul_datnb = 0;
-	tx_data_frame_option.ul_fslen = SLOT_BY_FRAME - 1;
+	tx_data_frame_option.ul_fslen = BITS_BY_SLOT - 1;
 	tx_data_frame_option.ul_fslen_ext = 0;
 	tx_data_frame_option.ul_fsos = SSC_TFMR_FSOS_NONE;
 	tx_data_frame_option.ul_fsedge = SSC_TFMR_FSEDGE_POSITIVE;
@@ -44,13 +44,13 @@ void configure_ssc(void)
 	rx_clk_option.ul_cki = SSC_RCMR_CKI;
 	rx_clk_option.ul_ckg = SSC_RCMR_CKG_CONTINUOUS;
 	rx_clk_option.ul_start_sel = SSC_RCMR_START_RF_EDGE;
-	rx_clk_option.ul_sttdly = SSC_RCMR_STTDLY(1);
-	rx_clk_option.ul_period = SSC_RCMR_PERIOD(0);
+	rx_clk_option.ul_sttdly = 1;	
+	rx_clk_option.ul_period = BITS_BY_SLOT;	
 	/* Receiver frame mode configuration. */
 	rx_data_frame_option.ul_datlen = BITS_BY_SLOT - 1;
 	rx_data_frame_option.ul_msbf = SSC_RFMR_MSBF;
 	rx_data_frame_option.ul_datnb = 0;
-	rx_data_frame_option.ul_fslen = SLOT_BY_FRAME - 1;
+	rx_data_frame_option.ul_fslen = BITS_BY_SLOT - 1;	
 	rx_data_frame_option.ul_fslen_ext = 0;
 	rx_data_frame_option.ul_fsos = SSC_TFMR_FSOS_NONE;
 	rx_data_frame_option.ul_fsedge = SSC_TFMR_FSEDGE_POSITIVE;
@@ -77,8 +77,8 @@ void configure_codec(void)
 		while(1);
 	}
 
-	wm8904_write_register(WM8904_BIAS_CONTROL_0, WM8904_ISEL_HP_BIAS);
-	wm8904_write_register(WM8904_VMID_CONTROL_0, WM8904_VMID_BUF_ENA |
+	wm8904_write_register(WM8904_BIAS_CONTROL_0, WM8904_ISEL_HP_BIAS);	
+	wm8904_write_register(WM8904_VMID_CONTROL_0, WM8904_VMID_BUF_ENA |	
 	WM8904_VMID_RES_FAST | WM8904_VMID_ENA);
 	delay_ms(5);
 	wm8904_write_register(WM8904_VMID_CONTROL_0, WM8904_VMID_BUF_ENA |
@@ -100,7 +100,7 @@ void configure_codec(void)
 	wm8904_write_register(WM8904_CLOCK_RATES_0, 0x0000);
 	wm8904_write_register(WM8904_CLOCK_RATES_2,
 	WM8904_SYSCLK_SRC | WM8904_CLK_SYS_ENA | WM8904_CLK_DSP_ENA);
-	wm8904_write_register(WM8904_AUDIO_INTERFACE_1, WM8904_BCLK_DIR | WM8904_AIF_FMT_I2S);
+	wm8904_write_register(WM8904_AUDIO_INTERFACE_1, WM8904_BCLK_DIR | WM8904_AIF_FMT_I2S); 
 	wm8904_write_register(WM8904_AUDIO_INTERFACE_2, WM8904_BCLK_DIV(8));
 	wm8904_write_register(WM8904_AUDIO_INTERFACE_3, WM8904_LRCLK_DIR | WM8904_LRCLK_RATE(0x20));
 	wm8904_write_register(WM8904_POWER_MANAGEMENT_6,

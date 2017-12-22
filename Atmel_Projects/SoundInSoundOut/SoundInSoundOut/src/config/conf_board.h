@@ -47,8 +47,8 @@
 #ifndef CONF_BOARD_H_INCLUDED
 #define CONF_BOARD_H_INCLUDED
 
-/* Enable ICache and DCache */
-#define CONF_BOARD_ENABLE_CACHE_AT_INIT
+/* Enable ICache and DCache */	// Fuck this cache 
+//#define CONF_BOARD_ENABLE_CACHE_AT_INIT
 
 /** Configure TWI pins */
 #define CONF_BOARD_TWIHS0

@@ -159,10 +159,10 @@ COMPILER_ALIGNED(32) static LinkedListDescriporView1 dmaReadLinkList[TOTAL_Buffe
 */
 #define BUF_SIZE          MAX_DMA_SIZE
 
-COMPILER_ALIGNED(32) volatile static uint16_t inPingBuffer[BUF_SIZE];
-COMPILER_ALIGNED(32) volatile static uint16_t inPongBuffer[BUF_SIZE];
-COMPILER_ALIGNED(32) volatile static uint16_t outPingBuffer[BUF_SIZE];
-COMPILER_ALIGNED(32) volatile static uint16_t outPongBuffer[BUF_SIZE];
+static uint16_t inPingBuffer[BUF_SIZE];
+static uint16_t inPongBuffer[BUF_SIZE];
+static uint16_t outPingBuffer[BUF_SIZE];
+static uint16_t outPongBuffer[BUF_SIZE];
 
 volatile static uint32_t inPingPong = 1; 
 volatile static uint32_t outPingPong = 1; 
@@ -233,7 +233,6 @@ static void sscDmaTxClk(uint32_t Channel, void* pArg)
 	}
 	outPingPong = !outPingPong;
 	XDMAC_EnableChannel(pXdmac, sscDmaTxChannel);
-
 }
 
 /**
@@ -251,8 +250,8 @@ static void Dma_configure(void)
 	/* Allocate DMA channels for SSC */
 	sscDmaTxChannel = XDMAD_AllocateChannel(pDmad, XDMAD_TRANSFER_MEMORY, ID_SSC);
 	sscDmaRxChannel = XDMAD_AllocateChannel(pDmad, ID_SSC, XDMAD_TRANSFER_MEMORY);
-	if (sscDmaTxChannel == XDMAD_ALLOC_FAILED
-			|| sscDmaRxChannel == XDMAD_ALLOC_FAILED) {
+	if (sscDmaTxChannel == XDMAD_ALLOC_FAILED || sscDmaRxChannel == XDMAD_ALLOC_FAILED) 
+	{
 		printf("xDMA channel allocation error\n\r");
 		while (1);
 	}
@@ -277,7 +276,7 @@ static void PlayRecording(void)
 	xdmadCfg.mbr_ubc = BUF_SIZE; 
 	
 	/* Source Address Member */ 
-	xdmadCfg.mbr_sa = 0x40004020;	// SSC receive holding register 
+	xdmadCfg.mbr_sa = (uint32_t)&(AUDIO_IF->SSC_RHR);
 	
 	/* Destination Address Member */ 
 	xdmadCfg.mbr_da = (uint32_t)&inPingBuffer[0]; 
@@ -289,7 +288,7 @@ static void PlayRecording(void)
 		| XDMAC_CC_CSIZE_CHK_1
 		| XDMAC_CC_DWIDTH_HALFWORD
 		| XDMAC_CC_SIF_AHB_IF1
-		| XDMAC_CC_DIF_AHB_IF1
+		| XDMAC_CC_DIF_AHB_IF0
 		| XDMAC_CC_SAM_FIXED_AM
 		| XDMAC_CC_DAM_INCREMENTED_AM
 		| XDMAC_CC_PERID(XDMAIF_Get_ChannelNumber(ID_SSC, XDMAD_TRANSFER_RX));
@@ -309,9 +308,6 @@ static void PlayRecording(void)
 	/* Next Descriptor Control Register */ 
 	xdmaCndc = XDMAC_CNDC_NDE_DSCR_FETCH_DIS; 
 
-	//SCB_CleanDCache_by_Addr((uint32_t *)inPingBuffer, sizeof(inPingBuffer));
-	//SCB_CleanDCache_by_Addr((uint32_t *)inPongBuffer, sizeof(inPongBuffer));
-
 	/*XDMAC_CIE_BIE make interrupts can be generated on per block basis*/
 	XDMAD_ConfigureTransfer( &dmad, sscDmaRxChannel, &xdmadCfg, xdmaCndc,
 			(uint32_t)&inPingBuffer[0], XDMAC_CIE_BIE);
@@ -324,7 +320,7 @@ static void PlayRecording(void)
 	xdmadCfg.mbr_sa = (uint32_t)&outPingBuffer[0];
 	
 	/* Destination Address Member */
-	xdmadCfg.mbr_da = 0x40004024;	// SSC transmit holding register 
+	xdmadCfg.mbr_da = (uint32_t)&(AUDIO_IF->SSC_THR);	
 	
 	/* Configuration Register */
 	xdmadCfg.mbr_cfg = XDMAC_CC_TYPE_PER_TRAN
@@ -332,7 +328,7 @@ static void PlayRecording(void)
 	| XDMAC_CC_DSYNC_MEM2PER
 	| XDMAC_CC_CSIZE_CHK_1
 	| XDMAC_CC_DWIDTH_HALFWORD
-	| XDMAC_CC_SIF_AHB_IF1
+	| XDMAC_CC_SIF_AHB_IF0
 	| XDMAC_CC_DIF_AHB_IF1
 	| XDMAC_CC_SAM_INCREMENTED_AM
 	| XDMAC_CC_DAM_FIXED_AM
@@ -349,9 +345,6 @@ static void PlayRecording(void)
 	
 	/* Destination Microblock Stride Member */
 	xdmadCfg.mbr_dus = 0;
-
- 	//SCB_CleanDCache_by_Addr((uint32_t *)outPingBuffer, sizeof(outPingBuffer));
- 	//SCB_CleanDCache_by_Addr((uint32_t *)outPongBuffer, sizeof(outPongBuffer));
 	 
 	XDMAD_ConfigureTransfer( &dmad, sscDmaTxChannel, &xdmadCfg, xdmaCndc,
 			(uint32_t)&outPingBuffer[0], XDMAC_CIE_BIE);
@@ -359,8 +352,7 @@ static void PlayRecording(void)
 	SSC_EnableReceiver(AUDIO_IF);
 	XDMAD_StartTransfer( &dmad, sscDmaRxChannel);
 
-
-	//Wait(75);
+	//Wait(50);
 	/* Enable playback(SSC TX) */
 	SSC_EnableTransmitter(AUDIO_IF);
 	XDMAD_StartTransfer( &dmad, sscDmaTxChannel);
@@ -422,7 +414,7 @@ int main( void )
 	NVIC_EnableIRQ(TWIHS0_IRQn);
 
 	/* check that WM8904 is present */
-	WM8904_Write(&twid,			WM8904_SLAVE_ADDRESS, 22, 0);
+	WM8904_Write(&twid,WM8904_SLAVE_ADDRESS, 22, 0);
 	data=WM8904_Read(&twid, WM8904_SLAVE_ADDRESS, 0);
 	if (data != 0x8904) {
 		printf("WM8904 not found!\n\r");
@@ -434,6 +426,7 @@ int main( void )
 	/* Enable the DAC master clock */
 	PMC_ConfigurePCK2(PMC_MCKR_CSS_SLOW_CLK, PMC_MCKR_PRES_CLK_1);
 	printf("Insert Line-in cable with PC Headphone output\n\r");
+	
 	PlayRecording();
 
 	int i; 
@@ -442,11 +435,10 @@ int main( void )
 	while (1) {
 		if (dataReceived == 1) {
 			/*
-			for(i = 0; i < BUF_SIZE; i+=2)
+			for(i = 0; i < BUF_SIZE; i++)
 			{
 				
 				outBuffer[i] = SIN_WAVE[sinIdx] >> 8; //inBuffer[i]; 
-				outBuffer[i+1] = SIN_WAVE[sinIdx] >> 8;
 				sinIdx++;  
 				if(sinIdx == 44)
 				{
@@ -454,12 +446,15 @@ int main( void )
 				}
 				
 			}
-			*/ 
+			*/
+			
+
 			for(i = 0; i < BUF_SIZE; i++)
 			{
-							
-				outBuffer[i] = inBuffer[i];
+		
+				outBuffer[i] = (uint16_t)( (int16_t)inBuffer[i] / 2); 
 			}
+			 
 
 			dataReceived = 0; 
 		}
