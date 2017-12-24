@@ -12,6 +12,8 @@ LCDLib\gfx\sysfont.c
 
 LCDLib\LCDLib.c
 
+LCDLib\touch\touch.c
+
 src\ASF\common\components\touch\mxt\mxt_device_1.c
 
 src\ASF\sam\components\display\ili9488\ili9488.c

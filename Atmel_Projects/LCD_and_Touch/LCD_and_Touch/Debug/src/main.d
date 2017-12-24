@@ -1,4 +1,4 @@
-src/main.d src/main.o: ../src/main.c ../src/ASF/common/boards/board.h \
+src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/sam/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h \
@@ -143,15 +143,16 @@ src/main.d src/main.o: ../src/main.c ../src/ASF/common/boards/board.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h \
  ../src/ASF/common/utils/interrupt.h \
  ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h \
- ../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h \
+ ../src/ASF/sam/utils/status_codes.h \
+ ../src/ASF/common/services/delay/delay.h \
  ../src/ASF/common/services/clock/sysclk.h ../src/config/conf_clock.h \
  ../src/ASF/common/services/clock/samv71/sysclk.h \
  ../src/ASF/common/services/clock/osc.h \
  ../src/ASF/common/services/clock/samv71/osc.h \
+ ../src/ASF/common/boards/board.h \
+ ../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h \
  ../src/ASF/sam/drivers/pmc/pmc.h ../src/ASF/common/services/clock/pll.h \
- ../src/ASF/common/services/clock/samv71/pll.h ../src/asf.h \
- ../src/ASF/sam/utils/status_codes.h \
- ../src/ASF/common/services/delay/delay.h \
+ ../src/ASF/common/services/clock/samv71/pll.h \
  ../src/ASF/common/services/delay/sam/cycle_counter.h \
  ../src/ASF/sam/components/display/ili9488/ili9488.h \
  ../src/config/conf_ili9488.h ../src/ASF/common/services/gpio/gpio.h \
@@ -171,14 +172,14 @@ src/main.d src/main.o: ../src/main.c ../src/ASF/common/boards/board.h \
  ../src/ASF/common/services/twi/twihs_slave.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../src/config/conf_board.h ../src/config/conf_example.h \
  ../LCDLib/LCDLib.h ../LCDLib/gfx/gfx.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
  ../LCDLib/gfx/gfx_ili9488_90_00028_a0.h ../LCDLib/gfx/gfx_generic.h \
  ../LCDLib/gfx/sysfont.h ../src/config/conf_sysfont.h ../LCDLib/gfx/gfx.h \
- ../LCDLib/gfx/gfx_text.h ../LCDLib/Images/Keyboard.h ../LCDLib/gfx/gfx.h
+ ../LCDLib/gfx/gfx_text.h ../LCDLib/touch/touch.h ../src/asf.h \
+ ../LCDLib/gfx/gfx.h ../LCDLib/Images/keyboard.h
 
-../src/ASF/common/boards/board.h:
+../src/asf.h:
 
 ../src/ASF/sam/utils/compiler.h:
 
@@ -468,7 +469,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h:
 
-../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h:
+../src/ASF/sam/utils/status_codes.h:
+
+../src/ASF/common/services/delay/delay.h:
 
 ../src/ASF/common/services/clock/sysclk.h:
 
@@ -480,17 +483,15 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/common/services/clock/samv71/osc.h:
 
+../src/ASF/common/boards/board.h:
+
+../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h:
+
 ../src/ASF/sam/drivers/pmc/pmc.h:
 
 ../src/ASF/common/services/clock/pll.h:
 
 ../src/ASF/common/services/clock/samv71/pll.h:
-
-../src/asf.h:
-
-../src/ASF/sam/utils/status_codes.h:
-
-../src/ASF/common/services/delay/delay.h:
 
 ../src/ASF/common/services/delay/sam/cycle_counter.h:
 
@@ -536,10 +537,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam/drivers/pio/pio_handler.h:
 
-../src/config/conf_board.h:
-
-../src/config/conf_example.h:
-
 ../LCDLib/LCDLib.h:
 
 ../LCDLib/gfx/gfx.h:
@@ -558,6 +555,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../LCDLib/gfx/gfx_text.h:
 
-../LCDLib/Images/Keyboard.h:
+../LCDLib/touch/touch.h:
+
+../src/asf.h:
 
 ../LCDLib/gfx/gfx.h:
+
+../LCDLib/Images/keyboard.h:

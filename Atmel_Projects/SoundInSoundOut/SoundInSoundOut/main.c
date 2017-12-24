@@ -181,7 +181,8 @@ int main(void)
     /* Start playing */
     ssc_enable_rx(SSC);
     xdmac_channel_enable(XDMAC, XDMA_CH_SSC_RX);
-	delay_ms(300);
+	//delay_ms(300);
+	// TODO: Might want to go back and wait for first transfer later 
     ssc_enable_tx(SSC);
     xdmac_channel_enable(XDMAC, XDMA_CH_SSC_TX);
     

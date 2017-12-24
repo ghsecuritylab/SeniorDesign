@@ -8,3 +8,10 @@
 #include "LCDLib.h"
 #include "asf.h"
 
+/*********************************** Public Functions Start ***********************************/
+void lcd_init(void)
+{
+	gfx_init();
+	mxt_init();
+}
+/*********************************** Public Functions End ***********************************/

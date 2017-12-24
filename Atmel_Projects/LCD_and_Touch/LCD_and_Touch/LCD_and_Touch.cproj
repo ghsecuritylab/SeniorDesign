@@ -450,6 +450,7 @@
       <Value>../src/ASF/common/services/twi</Value>
       <Value>../src/ASF/sam/drivers/ebi/smc</Value>
       <Value>../src/ASF/sam/components/display/ili9488</Value>
+      <Value>../LCDLib/touch</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -541,7 +542,8 @@
   <ItemGroup>
     <Folder Include="LCDLib\" />
     <Folder Include="LCDLib\gfx\" />
-    <Folder Include="LCDLib\Images\" />
+    <Folder Include="LCDLib\images" />
+    <Folder Include="LCDLib\touch" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -630,7 +632,7 @@
     <Compile Include="LCDLib\gfx\sysfont.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="LCDLib\Images\Keyboard.h">
+    <Compile Include="LCDLib\images\keyboard.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="LCDLib\LCDLib.c">
@@ -639,13 +641,16 @@
     <Compile Include="LCDLib\LCDLib.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="LCDLib\touch\touch.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\touch\touch.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\sam\components\display\ili9488\ili9488.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\config\conf_example.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\config\conf_sysfont.h">
