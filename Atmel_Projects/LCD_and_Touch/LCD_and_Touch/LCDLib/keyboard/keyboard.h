@@ -4970,7 +4970,4 @@ struct gfx_bitmap keyboard = {
 };
 
 
-
-
-
 #endif /* KEYBOARD_H_ */

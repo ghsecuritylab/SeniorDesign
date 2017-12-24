@@ -1,4 +1,6 @@
-src/main.d src/main.o: ../src/main.c ../src/asf.h \
+LCDLib/keyboard/keyboard_coordinates.d \
+ LCDLib/keyboard/keyboard_coordinates.o: \
+ ../LCDLib/keyboard/keyboard_coordinates.c ../src/asf.h \
  ../src/ASF/sam/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h \
@@ -172,13 +174,10 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/common/services/twi/twihs_slave.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../LCDLib/LCDLib.h ../LCDLib/gfx/gfx.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
- ../LCDLib/gfx/gfx_ili9488_90_00028_a0.h ../LCDLib/gfx/gfx_generic.h \
- ../LCDLib/gfx/sysfont.h ../src/config/conf_sysfont.h ../LCDLib/gfx/gfx.h \
- ../LCDLib/gfx/gfx_text.h ../LCDLib/touch/touch.h ../src/asf.h \
- ../LCDLib/gfx/gfx.h ../LCDLib/keyboard/keyboard.h \
- ../LCDLib/keyboard/keyboard_coordinates.h
+ ../LCDLib/keyboard/keyboard_coordinates.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h
 
 ../src/asf.h:
 
@@ -538,30 +537,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam/drivers/pio/pio_handler.h:
 
-../LCDLib/LCDLib.h:
-
-../LCDLib/gfx/gfx.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h:
-
-../LCDLib/gfx/gfx_ili9488_90_00028_a0.h:
-
-../LCDLib/gfx/gfx_generic.h:
-
-../LCDLib/gfx/sysfont.h:
-
-../src/config/conf_sysfont.h:
-
-../LCDLib/gfx/gfx.h:
-
-../LCDLib/gfx/gfx_text.h:
-
-../LCDLib/touch/touch.h:
-
-../src/asf.h:
-
-../LCDLib/gfx/gfx.h:
-
-../LCDLib/keyboard/keyboard.h:
-
 ../LCDLib/keyboard/keyboard_coordinates.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:

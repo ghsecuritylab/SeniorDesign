@@ -442,7 +442,6 @@
       <Value>../src</Value>
       <Value>../src/config</Value>
       <Value>../LCDLib</Value>
-      <Value>../LCDLib/Images</Value>
       <Value>../LCDLib/gfx</Value>
       <Value>../src/ASF/sam/drivers/twihs</Value>
       <Value>../src/ASF/common/components/touch/mxt</Value>
@@ -451,6 +450,7 @@
       <Value>../src/ASF/sam/drivers/ebi/smc</Value>
       <Value>../src/ASF/sam/components/display/ili9488</Value>
       <Value>../LCDLib/touch</Value>
+      <Value>../LCDLib/keyboard</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -542,7 +542,7 @@
   <ItemGroup>
     <Folder Include="LCDLib\" />
     <Folder Include="LCDLib\gfx\" />
-    <Folder Include="LCDLib\images" />
+    <Folder Include="LCDLib\keyboard" />
     <Folder Include="LCDLib\touch" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
@@ -632,7 +632,13 @@
     <Compile Include="LCDLib\gfx\sysfont.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="LCDLib\images\keyboard.h">
+    <Compile Include="LCDLib\keyboard\keyboard.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\keyboard\keyboard_coordinates.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\keyboard\keyboard_coordinates.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="LCDLib\LCDLib.c">

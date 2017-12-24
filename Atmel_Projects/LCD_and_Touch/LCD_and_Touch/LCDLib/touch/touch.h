@@ -19,7 +19,6 @@
 #define MAXTOUCH_TWI_ADDRESS             0x4A
 #define MAXTOUCH_XPRO_CHG_PIO			 PIO_PD28_IDX
 #define MAXTOUCH_CHG_PIN				 PIO_PD28
-
 /*********************************** Defines End ***********************************/
 
 /*********************************** Data Structures Start ***********************************/

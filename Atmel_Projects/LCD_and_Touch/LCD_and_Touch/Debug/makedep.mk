@@ -10,6 +10,8 @@ LCDLib\gfx\gfx_text.c
 
 LCDLib\gfx\sysfont.c
 
+LCDLib\keyboard\keyboard_coordinates.c
+
 LCDLib\LCDLib.c
 
 LCDLib\touch\touch.c
