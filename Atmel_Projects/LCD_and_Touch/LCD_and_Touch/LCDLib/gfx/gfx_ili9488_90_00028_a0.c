@@ -52,6 +52,7 @@
 #include "gfx.h"
 #include "gfx_ili9488_90_00028_a0.h"
 #include "ili9488.h"
+#include "pio.h"
 
 gfx_coord_t gfx_height, gfx_width;
 gfx_coord_t gfx_min_x, gfx_min_y;
@@ -131,29 +132,49 @@ void gfx_ili9488_draw_line_pixel(gfx_coord_t x, gfx_coord_t y,
 	ili9488_write_gram(color);
 }
 
+static void ili9488_write_register(uint8_t uc_reg, const ili9488_color_t *us_data, uint32_t size)
+{
+	/* CDS pin is set low level when writing command*/
+	pio_clear(PIN_EBI_CDS_PIO, PIN_EBI_CDS_MASK);
+	LCD_IR(uc_reg);
+
+	if(size == 0) {
+		return;
+	}
+
+	/* CDS pin is set high level when writing parameters or image data*/
+	pio_set(PIN_EBI_CDS_PIO, PIN_EBI_CDS_MASK);
+	LCD_MULTI_WD(us_data, size);
+}
+
 void gfx_ili9488_init(void)
 {
 	struct ili9488_opt_t g_ili9488_display_opt;
 
-	/* initialize globals */
+	/* Initialize globals */
 	gfx_width = ILI9488_LCD_WIDTH;
 	gfx_height = ILI9488_LCD_HEIGHT;
 
 	/* Initialize display parameter */
 	g_ili9488_display_opt.ul_width= ILI9488_LCD_WIDTH;
 	g_ili9488_display_opt.ul_height = ILI9488_LCD_HEIGHT;
-	g_ili9488_display_opt.foreground_color= COLOR_BLACK;
-	g_ili9488_display_opt.background_color = COLOR_WHITE;
+	g_ili9488_display_opt.foreground_color= COLOR_WHITE;
+	g_ili9488_display_opt.background_color = COLOR_BLACK;
 
 	ili9488_init(&g_ili9488_display_opt);
+	
+	/* Attempt to make display brighter :( */ 
+	ili9488_color_t param = 0x24;
+	ili9488_write_register(ILI9488_CMD_WRITE_CTRL_DISPLAY, &param, 1); 
+	ili9488_write_brightness(0xFFFF);
+
 	ili9488_display_on();
 
 	/* Set clipping area to whole screen initially */
 	gfx_set_clipping(0, 0, gfx_width, gfx_height);
 
 	gfx_set_orientation(GFX_FLIP_Y);
-	gfx_draw_filled_rect(0, 0, gfx_width, gfx_height,
-			GFX_COLOR_BLACK);			
+	gfx_draw_filled_rect(0, 0, gfx_width, gfx_height, g_ili9488_display_opt.background_color);			
 }
 
 /**

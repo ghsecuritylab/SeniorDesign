@@ -706,7 +706,7 @@ uint32_t ili9488_init(struct ili9488_opt_t *p_opt)
 	ili9488_write_register(ILI9488_CMD_NORMAL_DISP_MODE_ON, 0, 0);
 	ili9488_delay(100);
 #endif
-
+	
 	ili9488_display_on();
 	ili9488_delay(100);
 

@@ -149,7 +149,8 @@ LCDLib/gfx/gfx_ili9488_90_00028_a0.d LCDLib/gfx/gfx_ili9488_90_00028_a0.o: \
  ../src/ASF/sam/components/display/ili9488/ili9488.h \
  ../src/ASF/common/boards/board.h \
  ../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h \
- ../src/config/conf_ili9488.h ../LCDLib/gfx/gfx_generic.h
+ ../src/config/conf_ili9488.h ../LCDLib/gfx/gfx_generic.h \
+ ../src/ASF/sam/drivers/pio/pio.h
 
 ../LCDLib/gfx/gfx.h:
 
@@ -454,3 +455,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/config/conf_ili9488.h:
 
 ../LCDLib/gfx/gfx_generic.h:
+
+../src/ASF/sam/drivers/pio/pio.h:

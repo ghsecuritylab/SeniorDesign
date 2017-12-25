@@ -23,7 +23,7 @@ int main(void)
 		{
 			touch_handler(&touched_point);
 			get_key(touched_point.x, touched_point.y, case_option, &keyPressed[0]); 
-			gfx_draw_string_aligned((const char *)&keyPressed,
+			gfx_draw_string_aligned((const char *)keyPressed,
 				xCoord, 2, &sysfont,
 				GFX_COLOR_TRANSPARENT, GFX_COLOR_RED,
 				TEXT_POS_LEFT, TEXT_ALIGN_LEFT);
