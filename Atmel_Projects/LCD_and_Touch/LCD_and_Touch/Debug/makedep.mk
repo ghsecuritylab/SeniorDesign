@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+GUI\song_title\keyboard\keyboard_coordinates.c
+
 LCDLib\gfx\gfx_generic.c
 
 LCDLib\gfx\gfx_ili9488_90_00028_a0.c
@@ -9,8 +11,6 @@ LCDLib\gfx\gfx_ili9488_90_00028_a0.c
 LCDLib\gfx\gfx_text.c
 
 LCDLib\gfx\sysfont.c
-
-LCDLib\keyboard\keyboard_coordinates.c
 
 LCDLib\LCDLib.c
 

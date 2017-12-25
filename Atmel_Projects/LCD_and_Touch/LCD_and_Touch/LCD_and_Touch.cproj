@@ -450,7 +450,8 @@
       <Value>../src/ASF/sam/drivers/ebi/smc</Value>
       <Value>../src/ASF/sam/components/display/ili9488</Value>
       <Value>../LCDLib/touch</Value>
-      <Value>../LCDLib/keyboard</Value>
+      <Value>../GUI/Images</Value>
+      <Value>../GUI/song_title/keyboard</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -540,10 +541,13 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="GUI\Images\" />
+    <Folder Include="GUI\song_title" />
+    <Folder Include="GUI\song_title\keyboard\" />
     <Folder Include="LCDLib\" />
     <Folder Include="LCDLib\gfx\" />
-    <Folder Include="LCDLib\keyboard" />
     <Folder Include="LCDLib\touch" />
+    <Folder Include="GUI" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -605,6 +609,21 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\Images\instruments.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\Images\keyboard.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\Images\main_menu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\song_title\keyboard\keyboard_coordinates.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\song_title\keyboard\keyboard_coordinates.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="LCDLib\gfx\gfx.h">
       <SubType>compile</SubType>
     </Compile>
@@ -630,15 +649,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="LCDLib\gfx\sysfont.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LCDLib\keyboard\keyboard.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LCDLib\keyboard\keyboard_coordinates.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LCDLib\keyboard\keyboard_coordinates.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="LCDLib\LCDLib.c">

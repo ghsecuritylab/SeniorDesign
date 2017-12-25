@@ -1,6 +1,6 @@
-LCDLib/keyboard/keyboard_coordinates.d \
- LCDLib/keyboard/keyboard_coordinates.o: \
- ../LCDLib/keyboard/keyboard_coordinates.c ../src/asf.h \
+GUI/song_title/keyboard/keyboard_coordinates.d \
+ GUI/song_title/keyboard/keyboard_coordinates.o: \
+ ../GUI/song_title/keyboard/keyboard_coordinates.c ../src/asf.h \
  ../src/ASF/sam/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h \
@@ -174,7 +174,7 @@ LCDLib/keyboard/keyboard_coordinates.d \
  ../src/ASF/common/services/twi/twihs_slave.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../LCDLib/keyboard/keyboard_coordinates.h \
+ ../GUI/song_title/keyboard/keyboard_coordinates.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h
@@ -537,7 +537,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam/drivers/pio/pio_handler.h:
 
-../LCDLib/keyboard/keyboard_coordinates.h:
+../GUI/song_title/keyboard/keyboard_coordinates.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h:
 

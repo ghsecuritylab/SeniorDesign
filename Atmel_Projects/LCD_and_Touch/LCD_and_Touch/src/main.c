@@ -1,9 +1,8 @@
 #include "asf.h"
 #include "LCDLib.h"
 #include "keyboard.h"
+#include "instruments.h"
 #include "keyboard_coordinates.h"
-
-const char example_string[] = "BOOP!";
 
 int main(void)
 {
@@ -12,8 +11,9 @@ int main(void)
 	lcd_init(); 
 
 	/* Draw the keyboard at the bottom of the screen */
-	gfx_draw_bitmap(&keyboard, (gfx_get_width() - keyboard.width) / 2, gfx_get_height() - keyboard.height);
+	gfx_draw_bitmap(&instruments, (gfx_get_width() - instruments.width) / 2, gfx_get_height() - instruments.height);
 	
+	while(1); 
 	touch_t touched_point;
 	char keyPressed[2] = " ";  
 	uint16_t xCoord = 2; 
