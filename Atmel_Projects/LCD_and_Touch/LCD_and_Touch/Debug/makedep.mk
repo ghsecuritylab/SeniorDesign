@@ -2,7 +2,11 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+GUI\GUI.c
+
 GUI\song_title\keyboard\keyboard_coordinates.c
+
+GUI\tempo\tempo.c
 
 LCDLib\gfx\gfx_generic.c
 

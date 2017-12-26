@@ -10,7 +10,7 @@
 #include "touch.h"
 
 /*********************************** Global Variables Start ***********************************/
-struct mxt_device device;
+static struct mxt_device device;
 /*********************************** Global Variables End ***********************************/
 
 /*********************************** Static Functions Start ***********************************/
@@ -39,7 +39,6 @@ static void get_finger_display_coordinates(const struct mxt_touch_event *touch_e
 /*********************************** Static Functions End ***********************************/
 
 /*********************************** Public Functions Start ***********************************/
-#define MAX_ENTRIES        2
 void touch_handler(touch_t *touched_point)
 {
 	uint8_t i = 0;

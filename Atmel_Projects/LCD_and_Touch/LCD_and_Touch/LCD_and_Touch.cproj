@@ -459,6 +459,8 @@
       <Value>../GUI/Images</Value>
       <Value>../GUI/song_title/keyboard</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../GUI</Value>
+      <Value>../GUI/tempo</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -551,6 +553,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="GUI\Images\" />
+    <Folder Include="GUI\tempo" />
     <Folder Include="GUI\song_title" />
     <Folder Include="GUI\song_title\keyboard\" />
     <Folder Include="LCDLib\" />
@@ -620,6 +623,12 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\GUI.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\GUI.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="GUI\Images\instruments.h">
       <SubType>compile</SubType>
     </Compile>
@@ -629,13 +638,19 @@
     <Compile Include="GUI\Images\main_menu.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="GUI\Images\tapTempo.h">
+    <Compile Include="GUI\Images\tapTempoImg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GUI\song_title\keyboard\keyboard_coordinates.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GUI\song_title\keyboard\keyboard_coordinates.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\tempo\tempo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\tempo\tempo.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="LCDLib\gfx\gfx.h">

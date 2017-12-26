@@ -14,18 +14,18 @@
 #define SHIFT       0x0F
 #define SPACE       0x20
 
-char upper_chars[33] = {'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P' , BACKSPACE,
+static char upper_chars[33] = {'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P' , BACKSPACE,
     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', RETURN,
     SHIFT, 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '!', '?', SHIFT,
     SPACE
 }; 
-char lower_chars[33] = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p' , BACKSPACE,
+static char lower_chars[33] = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p' , BACKSPACE,
     'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', RETURN,
     SHIFT, 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', SHIFT,
     SPACE
 }; 
 
-enum letter_idx
+static enum letter_idx
 {
     Q = 0, W = 1, E = 2, R = 3, T = 4, Y = 5, U = 6, I = 7, O = 8, P = 9, BS = 10,
     A = 11, S = 12, D = 13, F = 14, G = 15, H = 16, J = 17, K = 18, L = 19, RET = 20,
@@ -33,7 +33,7 @@ enum letter_idx
     SP = 32
 };
 
-key_coord_t key_coordinates[] = {
+static key_coord_t key_coordinates[] = {
 	{20, 175},  // Q
 	{63, 175},  // W
 	{105, 175}, // E
