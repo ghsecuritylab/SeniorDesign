@@ -54,7 +54,10 @@ void touch_handler(touch_t *touched_point)
 
 bool lcd_touched(void)
 {
-	return mxt_is_message_pending(&device); 
+	if (mxt_is_message_pending(&device))
+		return true; 
+	else 
+		return false; 
 }
 
 void mxt_init(void)

@@ -169,7 +169,7 @@ LCDLib/LCDLib.d LCDLib/LCDLib.o: ../LCDLib/LCDLib.c ../LCDLib/LCDLib.h \
  ../src/ASF/sam/drivers/mpu/mpu.h ../src/ASF/sam/drivers/pmc/sleep.h \
  ../src/ASF/sam/utils/fpu/fpu.h \
  ../src/ASF/sam/boards/samv71_xplained_ultra/led.h \
- ../src/ASF/sam/drivers/ebi/smc/smc.h \
+ ../src/ASF/sam/drivers/ebi/smc/smc.h ../src/ASF/sam/drivers/tc/tc.h \
  ../src/ASF/sam/drivers/twihs/twihs.h \
  ../src/ASF/common/services/twi/sam_twihs/twihs_master.h \
  ../src/ASF/common/services/twi/sam_twihs/twihs_slave.h \
@@ -539,6 +539,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam/boards/samv71_xplained_ultra/led.h:
 
 ../src/ASF/sam/drivers/ebi/smc/smc.h:
+
+../src/ASF/sam/drivers/tc/tc.h:
 
 ../src/ASF/sam/drivers/twihs/twihs.h:
 

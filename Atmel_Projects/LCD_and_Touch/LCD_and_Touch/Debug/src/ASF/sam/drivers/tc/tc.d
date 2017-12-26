@@ -1,5 +1,13 @@
-src/main.d src/main.o: ../src/main.c ../src/asf.h \
- ../src/ASF/sam/utils/compiler.h \
+src/ASF/sam/drivers/tc/tc.d src/ASF/sam/drivers/tc/tc.o: \
+ ../src/ASF/sam/drivers/tc/tc.c \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h \
+ ../src/ASF/sam/drivers/tc/tc.h ../src/ASF/sam/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h \
  ../src/ASF/sam/utils/preprocessor/preprocessor.h \
@@ -13,8 +21,6 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
@@ -115,10 +121,6 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/sam/utils/cmsis/samv71/include/instance/uart4.h \
  ../src/ASF/sam/utils/cmsis/samv71/include/pio/samv71q21.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\reent.h \
@@ -142,46 +144,23 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h \
  ../src/ASF/common/utils/interrupt.h \
- ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h \
- ../src/ASF/sam/utils/status_codes.h \
- ../src/ASF/common/services/delay/delay.h \
- ../src/ASF/common/services/clock/sysclk.h ../src/config/conf_clock.h \
- ../src/ASF/common/services/clock/samv71/sysclk.h \
- ../src/ASF/common/services/clock/osc.h \
- ../src/ASF/common/services/clock/samv71/osc.h \
- ../src/ASF/common/boards/board.h \
- ../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h \
- ../src/ASF/sam/drivers/pmc/pmc.h ../src/ASF/common/services/clock/pll.h \
- ../src/ASF/common/services/clock/samv71/pll.h \
- ../src/ASF/common/services/delay/sam/cycle_counter.h \
- ../src/ASF/sam/components/display/ili9488/ili9488.h \
- ../src/config/conf_ili9488.h ../src/ASF/common/services/gpio/gpio.h \
- ../src/ASF/common/services/gpio/sam_gpio/sam_gpio.h \
- ../src/ASF/sam/drivers/pio/pio.h \
- ../src/ASF/common/services/ioport/ioport.h \
- ../src/ASF/common/services/ioport/sam/ioport_pio.h \
- ../src/ASF/sam/drivers/mpu/mpu.h ../src/ASF/sam/drivers/pmc/sleep.h \
- ../src/ASF/sam/utils/fpu/fpu.h \
- ../src/ASF/sam/boards/samv71_xplained_ultra/led.h \
- ../src/ASF/sam/drivers/ebi/smc/smc.h ../src/ASF/sam/drivers/tc/tc.h \
- ../src/ASF/sam/drivers/twihs/twihs.h \
- ../src/ASF/common/services/twi/sam_twihs/twihs_master.h \
- ../src/ASF/common/services/twi/sam_twihs/twihs_slave.h \
- ../src/ASF/common/services/twi/twihs_master.h \
- ../src/ASF/common/services/twi/sam_twihs/twihs_master.h \
- ../src/ASF/common/services/twi/twihs_slave.h \
- ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
- ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../LCDLib/LCDLib.h ../LCDLib/gfx/gfx.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
- ../LCDLib/gfx/gfx_ili9488_90_00028_a0.h ../LCDLib/gfx/gfx_generic.h \
- ../LCDLib/gfx/sysfont.h ../src/config/conf_sysfont.h ../LCDLib/gfx/gfx.h \
- ../LCDLib/gfx/gfx_text.h ../LCDLib/touch/touch.h ../src/asf.h \
- ../LCDLib/gfx/gfx.h ../GUI/Images/keyboard.h ../GUI/Images/instruments.h \
- ../GUI/song_title/keyboard/keyboard_coordinates.h \
- ../GUI/Images/tapTempo.h
+ ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h
 
-../src/asf.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h:
+
+../src/ASF/sam/drivers/tc/tc.h:
 
 ../src/ASF/sam/utils/compiler.h:
 
@@ -210,10 +189,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gc
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h:
 
@@ -415,14 +390,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h:
-
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h:
@@ -470,105 +437,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/common/utils/interrupt.h:
 
 ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h:
-
-../src/ASF/sam/utils/status_codes.h:
-
-../src/ASF/common/services/delay/delay.h:
-
-../src/ASF/common/services/clock/sysclk.h:
-
-../src/config/conf_clock.h:
-
-../src/ASF/common/services/clock/samv71/sysclk.h:
-
-../src/ASF/common/services/clock/osc.h:
-
-../src/ASF/common/services/clock/samv71/osc.h:
-
-../src/ASF/common/boards/board.h:
-
-../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h:
-
-../src/ASF/sam/drivers/pmc/pmc.h:
-
-../src/ASF/common/services/clock/pll.h:
-
-../src/ASF/common/services/clock/samv71/pll.h:
-
-../src/ASF/common/services/delay/sam/cycle_counter.h:
-
-../src/ASF/sam/components/display/ili9488/ili9488.h:
-
-../src/config/conf_ili9488.h:
-
-../src/ASF/common/services/gpio/gpio.h:
-
-../src/ASF/common/services/gpio/sam_gpio/sam_gpio.h:
-
-../src/ASF/sam/drivers/pio/pio.h:
-
-../src/ASF/common/services/ioport/ioport.h:
-
-../src/ASF/common/services/ioport/sam/ioport_pio.h:
-
-../src/ASF/sam/drivers/mpu/mpu.h:
-
-../src/ASF/sam/drivers/pmc/sleep.h:
-
-../src/ASF/sam/utils/fpu/fpu.h:
-
-../src/ASF/sam/boards/samv71_xplained_ultra/led.h:
-
-../src/ASF/sam/drivers/ebi/smc/smc.h:
-
-../src/ASF/sam/drivers/tc/tc.h:
-
-../src/ASF/sam/drivers/twihs/twihs.h:
-
-../src/ASF/common/services/twi/sam_twihs/twihs_master.h:
-
-../src/ASF/common/services/twi/sam_twihs/twihs_slave.h:
-
-../src/ASF/common/services/twi/twihs_master.h:
-
-../src/ASF/common/services/twi/sam_twihs/twihs_master.h:
-
-../src/ASF/common/services/twi/twihs_slave.h:
-
-../src/ASF/common/components/touch/mxt/mxt_device_1.h:
-
-../src/config/conf_mxt.h:
-
-../src/ASF/sam/drivers/pio/pio_handler.h:
-
-../LCDLib/LCDLib.h:
-
-../LCDLib/gfx/gfx.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h:
-
-../LCDLib/gfx/gfx_ili9488_90_00028_a0.h:
-
-../LCDLib/gfx/gfx_generic.h:
-
-../LCDLib/gfx/sysfont.h:
-
-../src/config/conf_sysfont.h:
-
-../LCDLib/gfx/gfx.h:
-
-../LCDLib/gfx/gfx_text.h:
-
-../LCDLib/touch/touch.h:
-
-../src/asf.h:
-
-../LCDLib/gfx/gfx.h:
-
-../GUI/Images/keyboard.h:
-
-../GUI/Images/instruments.h:
-
-../GUI/song_title/keyboard/keyboard_coordinates.h:
-
-../GUI/Images/tapTempo.h:

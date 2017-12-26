@@ -20,6 +20,8 @@ src\ASF\common\components\touch\mxt\mxt_device_1.c
 
 src\ASF\sam\components\display\ili9488\ili9488.c
 
+src\ASF\sam\drivers\tc\tc.c
+
 src\ASF\sam\drivers\ebi\smc\smc.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
