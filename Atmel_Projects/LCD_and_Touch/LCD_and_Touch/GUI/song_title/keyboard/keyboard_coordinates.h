@@ -9,7 +9,6 @@
 #ifndef KEYBOARD_COORDINATES_H_
 #define KEYBOARD_COORDINATES_H_
 
-
 typedef struct key_coord
 {
 	int16_t x;

@@ -97,7 +97,7 @@ void get_key(int16_t x, int16_t y, uint32_t case_option, char *key_pressed)
 		if (dist < min)
 		{
 			min = dist; 
-			key_pressed[0] = keys[i]; 
+			*key_pressed = keys[i]; 
 		}
 	}
 }

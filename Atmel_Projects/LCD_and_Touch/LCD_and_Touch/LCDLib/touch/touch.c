@@ -17,7 +17,7 @@ static struct mxt_device device;
 static void mxt_make_highchg(struct mxt_device *data)
 {
 	struct mxt_conf_messageprocessor_t5 message;
-	int count = 320;
+	int count = 350;
 	/* Read dummy message to make high CHG pin */
 	do
 	{

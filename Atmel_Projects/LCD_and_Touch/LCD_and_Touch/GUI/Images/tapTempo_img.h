@@ -6,8 +6,8 @@
  */ 
 
 
-#ifndef TAPTEMPOIMG_H_
-#define TAPTEMPOIMG_H_
+#ifndef TAPTEMPO_IMG_H_
+#define TAPTEMPO_IMG_H_
 
 
 PROGMEM_DECLARE(gfx_color_t, tempoData[153600]) ={
@@ -9612,10 +9612,10 @@ PROGMEM_DECLARE(gfx_color_t, tempoData[153600]) ={
 	0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020,   // 0x257F0 (153584) pixels
 	0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0000, 0x0000, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020, 0x0020,   // 0x25800 (153600) pixels
 };
-struct gfx_bitmap tapTempoImg = {
+struct gfx_bitmap tap_tempo_img = {
 	.width = 480, .height = 320, .type = GFX_BITMAP_PROGMEM,
 	.data.progmem = (gfx_color_t PROGMEM_PTR_T)tempoData
 };
 
 
-#endif /* TAPTEMPOIMG_H_ */
+#endif /* TAPTEMPO_IMG_H_ */

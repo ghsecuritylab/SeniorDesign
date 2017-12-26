@@ -177,7 +177,8 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../LCDLib/gfx/gfx_ili9488_90_00028_a0.h ../LCDLib/gfx/gfx_generic.h \
  ../LCDLib/gfx/sysfont.h ../src/config/conf_sysfont.h ../LCDLib/gfx/gfx.h \
  ../LCDLib/gfx/gfx_text.h ../LCDLib/touch/touch.h ../src/asf.h \
- ../LCDLib/gfx/gfx.h ../GUI/Images/keyboard.h ../GUI/Images/instruments.h \
+ ../LCDLib/gfx/gfx.h ../GUI/Images/keyboard_img.h \
+ ../GUI/Images/instruments.h \
  ../GUI/song_title/keyboard/keyboard_coordinates.h ../GUI/tempo/tempo.h
 
 ../src/asf.h:
@@ -564,7 +565,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../LCDLib/gfx/gfx.h:
 
-../GUI/Images/keyboard.h:
+../GUI/Images/keyboard_img.h:
 
 ../GUI/Images/instruments.h:
 

@@ -177,7 +177,10 @@ GUI/tempo/tempo.d GUI/tempo/tempo.o: ../GUI/tempo/tempo.c ../src/asf.h \
  ../LCDLib/gfx/gfx_ili9488_90_00028_a0.h ../LCDLib/gfx/gfx_generic.h \
  ../LCDLib/gfx/sysfont.h ../src/config/conf_sysfont.h ../LCDLib/gfx/gfx.h \
  ../LCDLib/gfx/gfx_text.h ../LCDLib/touch/touch.h ../LCDLib/gfx/gfx.h \
- ../GUI/Images/tapTempoImg.h
+ ../GUI/Images/tapTempo_img.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h
 
 ../src/asf.h:
 
@@ -563,4 +566,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../LCDLib/gfx/gfx.h:
 
-../GUI/Images/tapTempoImg.h:
+../GUI/Images/tapTempo_img.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:

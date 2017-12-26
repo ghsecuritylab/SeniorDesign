@@ -632,13 +632,13 @@
     <Compile Include="GUI\Images\instruments.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="GUI\Images\keyboard.h">
+    <Compile Include="GUI\Images\keyboard_img.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GUI\Images\main_menu.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="GUI\Images\tapTempoImg.h">
+    <Compile Include="GUI\Images\tapTempo_img.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GUI\song_title\keyboard\keyboard_coordinates.c">

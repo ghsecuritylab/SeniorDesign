@@ -6,8 +6,8 @@
  */ 
 
 
-#ifndef KEYBOARD_H_
-#define KEYBOARD_H_
+#ifndef KEYBOARD_IMG_H_
+#define KEYBOARD_IMG_H_
 
 #include "gfx.h"
 
@@ -4964,10 +4964,10 @@ PROGMEM_DECLARE(gfx_color_t, keyboardData[79200]) ={
 	0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB,   // 0x13560 (79200) pixels
 };
 
-struct gfx_bitmap keyboard = {
+struct gfx_bitmap keyboard_img = {
 	.width = 480, .height = 165, .type = GFX_BITMAP_PROGMEM,
 	.data.progmem = (gfx_color_t PROGMEM_PTR_T)keyboardData
 };
 
 
-#endif /* KEYBOARD_H_ */
+#endif /* KEYBOARD_IMG_H_ */

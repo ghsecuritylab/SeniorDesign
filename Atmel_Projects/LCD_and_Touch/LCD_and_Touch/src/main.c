@@ -1,6 +1,6 @@
 #include "asf.h"
 #include "LCDLib.h"
-#include "keyboard.h"
+#include "keyboard_img.h"
 #include "instruments.h"
 #include "keyboard_coordinates.h"
 #include "tempo.h"
@@ -15,7 +15,7 @@ int main(void)
 
 	int bpm = tempoMenu(100); 
 	/* Draw the keyboard at the bottom of the screen */
-	//gfx_draw_bitmap(&instruments, (gfx_get_width() - instruments.width) / 2, gfx_get_height() - instruments.height);
+	gfx_draw_bitmap(&instruments, (gfx_get_width() - instruments.width) / 2, gfx_get_height() - instruments.height);
 	//gfx_draw_bitmap(&keyboard, (gfx_get_width() - keyboard.width) / 2, gfx_get_height() - keyboard.height);
 
 	
