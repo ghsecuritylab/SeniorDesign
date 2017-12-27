@@ -2,11 +2,17 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-GUI\GUI.c
+GUI\main_menu.c
+
+GUI\playback_instrument\playback_instrument.c
 
 GUI\song_title\keyboard\keyboard_coordinates.c
 
+GUI\song_title\song_title.c
+
 GUI\tempo\tempo.c
+
+GUI\time_signature\time_signature.c
 
 LCDLib\gfx\gfx_generic.c
 

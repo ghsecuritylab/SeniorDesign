@@ -1,10 +1,6 @@
 #include "asf.h"
 #include "LCDLib.h"
-#include "keyboard_img.h"
-#include "instruments.h"
-#include "keyboard_coordinates.h"
-#include "tempo.h"
-
+#include "main_menu.h"
 
 int main(void)
 {
@@ -12,15 +8,15 @@ int main(void)
 	sysclk_init();
 	lcd_init(); 
 
-
-	int bpm = tempoMenu(100); 
+	start_g8rscribe(); 
+	
+	while(1); 
 	/* Draw the keyboard at the bottom of the screen */
-	gfx_draw_bitmap(&instruments, (gfx_get_width() - instruments.width) / 2, gfx_get_height() - instruments.height);
 	//gfx_draw_bitmap(&keyboard, (gfx_get_width() - keyboard.width) / 2, gfx_get_height() - keyboard.height);
 
 	
 	while(1); 
-	
+	/*
 	static touch_t touched_point;
 	char keyPressed[2] = " ";  
 	uint16_t xCoord = 2; 
@@ -39,4 +35,5 @@ int main(void)
 				xCoord += 9; 
 		}
 	}
+	*/ 
 }

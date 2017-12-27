@@ -1,1 +1,0 @@
-GUI/GUI.d GUI/GUI.o: ../GUI/GUI.c

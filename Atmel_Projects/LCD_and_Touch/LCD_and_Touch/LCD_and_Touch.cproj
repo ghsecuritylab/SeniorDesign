@@ -461,6 +461,9 @@
       <Value>../src/ASF/sam/drivers/tc</Value>
       <Value>../GUI</Value>
       <Value>../GUI/tempo</Value>
+      <Value>../GUI/song_title</Value>
+      <Value>../GUI/playback_instrument</Value>
+      <Value>../GUI/time_signature</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -553,6 +556,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="GUI\Images\" />
+    <Folder Include="GUI\time_signature" />
+    <Folder Include="GUI\playback_instrument\" />
     <Folder Include="GUI\tempo" />
     <Folder Include="GUI\song_title" />
     <Folder Include="GUI\song_title\keyboard\" />
@@ -623,22 +628,31 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\GUI.c">
+    <Compile Include="GUI\Images\instruments_img.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="GUI\GUI.h">
+    <Compile Include="GUI\Images\time_signatures_img.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="GUI\Images\instruments.h">
+    <Compile Include="GUI\Images\title_img.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="GUI\Images\keyboard_img.h">
+    <Compile Include="GUI\main_menu.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="GUI\Images\main_menu.h">
+    <Compile Include="GUI\main_menu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\Images\main_menu_img.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GUI\Images\tapTempo_img.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\playback_instrument\playback_instrument.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\playback_instrument\playback_instrument.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GUI\song_title\keyboard\keyboard_coordinates.c">
@@ -647,10 +661,22 @@
     <Compile Include="GUI\song_title\keyboard\keyboard_coordinates.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="GUI\song_title\song_title.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\song_title\song_title.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="GUI\tempo\tempo.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GUI\tempo\tempo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\time_signature\time_signature.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\time_signature\time_signature.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="LCDLib\gfx\gfx.h">

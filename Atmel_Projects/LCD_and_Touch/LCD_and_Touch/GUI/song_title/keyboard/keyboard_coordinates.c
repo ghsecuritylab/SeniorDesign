@@ -9,11 +9,6 @@
 #include "keyboard_coordinates.h"
 #include "fastmath.h"
 
-#define BACKSPACE   0x08
-#define RETURN      0x0D
-#define SHIFT       0x0F
-#define SPACE       0x20
-
 static char upper_chars[33] = {'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P' , BACKSPACE,
     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', RETURN,
     SHIFT, 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '!', '?', SHIFT,
@@ -25,13 +20,19 @@ static char lower_chars[33] = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p' 
     SPACE
 }; 
 
-static enum letter_idx
+enum letter_idx
 {
-    Q = 0, W = 1, E = 2, R = 3, T = 4, Y = 5, U = 6, I = 7, O = 8, P = 9, BS = 10,
-    A = 11, S = 12, D = 13, F = 14, G = 15, H = 16, J = 17, K = 18, L = 19, RET = 20,
-    SH1 = 21, Z = 22, X = 23, C = 24, V = 25, B = 26, N = 27, M = 28, COM = 29, PER = 30, SH2 = 31,
-    SP = 32
+	Q = 0, W = 1, E = 2, R = 3, T = 4, Y = 5, U = 6, I = 7, O = 8, P = 9, BS = 10,
+	A = 11, S = 12, D = 13, F = 14, G = 15, H = 16, J = 17, K = 18, L = 19, RET = 20,
+	SH1 = 21, Z = 22, X = 23, C = 24, V = 25, B = 26, N = 27, M = 28, COM = 29, PER = 30, SH2 = 31,
+	SP = 32
 };
+
+typedef struct key_coord
+{
+	int16_t x;
+	int16_t y;
+} key_coord_t;
 
 static key_coord_t key_coordinates[] = {
 	{20, 175},  // Q
@@ -57,18 +58,18 @@ static key_coord_t key_coordinates[] = {
     {382, 214}, // L
     {440, 214}, // RET
     
-    {19,  253},  // SH1
-    {60,  253},  // Z
-    {103, 253}, // X
-    {145, 253}, // C
-    {188, 253}, // V
-    {232, 253}, // B
-    {274, 253}, // N
-    {317, 253}, // M
-    {358, 253}, // C
-    {401, 253}, // P
-    {450, 253}, // SH2
-    {252, 294}  // SPACE
+    {19,  258},  // SH1
+    {60,  258},  // Z
+    {103, 258}, // X
+    {145, 258}, // C
+    {188, 258}, // V
+    {232, 258}, // B
+    {274, 258}, // N
+    {317, 258}, // M
+    {358, 258}, // C
+    {401, 258}, // P
+    {450, 258}, // SH2
+    {252, 296}  // SPACE
 }; 
 
 void get_key(int16_t x, int16_t y, uint32_t case_option, char *key_pressed)
