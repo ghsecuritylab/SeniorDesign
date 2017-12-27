@@ -31,6 +31,13 @@ typedef enum button
 	DOWN = 3
 } button_t; 
 
+
+typedef struct button_coord
+{
+	int16_t x;
+	int16_t y;
+} button_coord_t;
+
 static button_coord_t button_coordinates[] = 
 {
 	{47, 19}, // Back 

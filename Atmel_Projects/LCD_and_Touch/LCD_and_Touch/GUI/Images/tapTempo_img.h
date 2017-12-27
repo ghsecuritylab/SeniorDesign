@@ -1,5 +1,5 @@
 /*
- * tapTempo.h
+ * tapTempo_img.h
  *
  * Created: 12/25/2017 9:29:42 PM
  *  Author: Daniel Gonzalez
