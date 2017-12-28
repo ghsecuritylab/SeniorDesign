@@ -490,6 +490,8 @@
       <Value>../DanLib</Value>
       <Value>../DanLib/DMA</Value>
       <Value>../DanLib/WM8904_Driver</Value>
+      <Value>../LCDLib</Value>
+      <Value>../LCDLib/gfx</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -594,6 +596,9 @@
     <Folder Include="DanLib\" />
     <Folder Include="DanLib\DMA\" />
     <Folder Include="DanLib\WM8904_Driver\" />
+    <Folder Include="LCDLib\" />
+    <Folder Include="LCDLib\gfx\" />
+    <Folder Include="LCDLib\touch\" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -1166,6 +1171,45 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\WM8904_Driver\WM8904_Driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\gfx\gfx.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\gfx\gfx_generic.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\gfx\gfx_generic.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\gfx\gfx_ili9488_90_00028_a0.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\gfx\gfx_ili9488_90_00028_a0.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\gfx\gfx_text.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\gfx\gfx_text.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\gfx\sysfont.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\gfx\sysfont.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\LCDLib.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\LCDLib.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\touch\touch.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCDLib\touch\touch.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
