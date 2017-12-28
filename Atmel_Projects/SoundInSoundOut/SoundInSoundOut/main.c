@@ -1,14 +1,12 @@
 #include <asf.h>
 #include <pio.h>
 #include "DanLib.h"
-#include "LCDLib.h"
 
 int main(void)
 {
     /* Initialize the SAM system. */
     sysclk_init();
     board_init();
-	//lcd_init(); 
     
     /* Initialize WM8904 TWI interface*/
     if (wm8904_twi_init() != TWIHS_SUCCESS) {

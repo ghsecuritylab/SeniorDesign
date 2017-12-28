@@ -6,6 +6,18 @@ DanLib\DMA\DMA_Audio.c
 
 DanLib\WM8904_Driver\WM8904_Driver.c
 
+LCDLib\gfx\gfx_generic.c
+
+LCDLib\gfx\gfx_ili9488_90_00028_a0.c
+
+LCDLib\gfx\gfx_text.c
+
+LCDLib\gfx\sysfont.c
+
+LCDLib\LCDLib.c
+
+LCDLib\touch\touch.c
+
 main.c
 
 src\ASF\common\services\clock\samv71\sysclk.c

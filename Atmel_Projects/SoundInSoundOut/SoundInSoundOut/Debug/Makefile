@@ -36,6 +36,9 @@ SUBDIRS :=  \
 ../DanLib/ \
 ../DanLib/DMA/ \
 ../DanLib/WM8904_Driver/ \
+../LCDLib/ \
+../LCDLib/gfx/ \
+../LCDLib/touch/ \
 ../src/ \
 ../src/ASF/ \
 ../src/ASF/common/ \
@@ -107,6 +110,12 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../DanLib/DMA/DMA_Audio.c \
 ../DanLib/WM8904_Driver/WM8904_Driver.c \
+../LCDLib/gfx/gfx_generic.c \
+../LCDLib/gfx/gfx_ili9488_90_00028_a0.c \
+../LCDLib/gfx/gfx_text.c \
+../LCDLib/gfx/sysfont.c \
+../LCDLib/LCDLib.c \
+../LCDLib/touch/touch.c \
 ../main.c \
 ../src/ASF/common/services/clock/samv71/sysclk.c \
 ../src/ASF/common/services/delay/sam/cycle_counter.c \
@@ -140,6 +149,12 @@ ASM_SRCS +=
 OBJS +=  \
 DanLib/DMA/DMA_Audio.o \
 DanLib/WM8904_Driver/WM8904_Driver.o \
+LCDLib/gfx/gfx_generic.o \
+LCDLib/gfx/gfx_ili9488_90_00028_a0.o \
+LCDLib/gfx/gfx_text.o \
+LCDLib/gfx/sysfont.o \
+LCDLib/LCDLib.o \
+LCDLib/touch/touch.o \
 main.o \
 src/ASF/common/services/clock/samv71/sysclk.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
@@ -166,6 +181,12 @@ src/ASF/sam/utils/syscalls/gcc/syscalls.o
 OBJS_AS_ARGS +=  \
 DanLib/DMA/DMA_Audio.o \
 DanLib/WM8904_Driver/WM8904_Driver.o \
+LCDLib/gfx/gfx_generic.o \
+LCDLib/gfx/gfx_ili9488_90_00028_a0.o \
+LCDLib/gfx/gfx_text.o \
+LCDLib/gfx/sysfont.o \
+LCDLib/LCDLib.o \
+LCDLib/touch/touch.o \
 main.o \
 src/ASF/common/services/clock/samv71/sysclk.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
@@ -192,6 +213,12 @@ src/ASF/sam/utils/syscalls/gcc/syscalls.o
 C_DEPS +=  \
 DanLib/DMA/DMA_Audio.d \
 DanLib/WM8904_Driver/WM8904_Driver.d \
+LCDLib/gfx/gfx_generic.d \
+LCDLib/gfx/gfx_ili9488_90_00028_a0.d \
+LCDLib/gfx/gfx_text.d \
+LCDLib/gfx/sysfont.d \
+LCDLib/LCDLib.d \
+LCDLib/touch/touch.d \
 main.d \
 src/ASF/common/services/clock/samv71/sysclk.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
@@ -218,6 +245,12 @@ src/ASF/sam/utils/syscalls/gcc/syscalls.d
 C_DEPS_AS_ARGS +=  \
 DanLib/DMA/DMA_Audio.d \
 DanLib/WM8904_Driver/WM8904_Driver.d \
+LCDLib/gfx/gfx_generic.d \
+LCDLib/gfx/gfx_ili9488_90_00028_a0.d \
+LCDLib/gfx/gfx_text.d \
+LCDLib/gfx/sysfont.d \
+LCDLib/LCDLib.d \
+LCDLib/touch/touch.d \
 main.d \
 src/ASF/common/services/clock/samv71/sysclk.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
@@ -305,6 +338,18 @@ LINKER_SCRIPT_DEP+=  \
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 DanLib/DMA/%.o: ../DanLib/DMA/%.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
@@ -313,6 +358,27 @@ DanLib/DMA/%.o: ../DanLib/DMA/%.c
 	
 
 DanLib/WM8904_Driver/%.o: ../DanLib/WM8904_Driver/%.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG -D__SAMV71Q21__ -Dscanf=iscanf -DARM_MATH_CM7=true -Dprintf=iprintf -DBOARD=SAMV71_XPLAINED_ULTRA  -I"../src/ASF/sam/utils/cmsis/samv71/source/templates" -I"../src/ASF/sam/utils/cmsis/samv71/include" -I"../src/ASF/sam/components/audio/codec/wm8904" -I"../src/ASF/common/services/twi" -I"../src/ASF/common/services/clock" -I"../src/ASF/sam/drivers/pmc" -I"../src/ASF/sam/utils" -I"../src/ASF/sam/utils/header_files" -I"../src/ASF/sam/utils/preprocessor" -I"../src/ASF/thirdparty/CMSIS/Include" -I"../src/ASF/thirdparty/CMSIS/Lib/GCC" -I"../src/ASF/sam/utils/fpu" -I"../src/ASF/common/utils" -I"../src/ASF/sam/drivers/twihs" -I"../src/ASF/sam/drivers/pio" -I"../src/ASF/sam/drivers/ssc" -I"../src/ASF/sam/drivers/xdmac" -I"../src/ASF/common/utils/stdio/stdio_serial" -I"../src/ASF/common/services/serial/sam_uart" -I"../src/ASF/common/services/serial" -I"../src/ASF/sam/drivers/uart" -I"../src/ASF/sam/drivers/usart" -I"../src/ASF/common/services/delay" -I"../src/ASF/sam/boards/samv71_xplained_ultra" -I"../src/ASF/sam/boards" -I"../src/ASF/common/boards" -I"../src/ASF/common/services/ioport" -I"../src/ASF/common/services/gpio" -I"../src/ASF/sam/drivers/mpu" -I"../src/ASF/sam/components/audio/codec/wm8904/example/samv71q21_samv71_xplained_ultra" -I"../src" -I"../src/config" -I"../DanLib" -I"../DanLib/DMA" -I"../DanLib/WM8904_Driver"  -O1 -fdata-sections -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500 -mfloat-abi=softfp -mfpu=fpv5-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+LCDLib/gfx/%.o: ../LCDLib/gfx/%.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG -D__SAMV71Q21__ -Dscanf=iscanf -DARM_MATH_CM7=true -Dprintf=iprintf -DBOARD=SAMV71_XPLAINED_ULTRA  -I"../src/ASF/sam/utils/cmsis/samv71/source/templates" -I"../src/ASF/sam/utils/cmsis/samv71/include" -I"../src/ASF/sam/components/audio/codec/wm8904" -I"../src/ASF/common/services/twi" -I"../src/ASF/common/services/clock" -I"../src/ASF/sam/drivers/pmc" -I"../src/ASF/sam/utils" -I"../src/ASF/sam/utils/header_files" -I"../src/ASF/sam/utils/preprocessor" -I"../src/ASF/thirdparty/CMSIS/Include" -I"../src/ASF/thirdparty/CMSIS/Lib/GCC" -I"../src/ASF/sam/utils/fpu" -I"../src/ASF/common/utils" -I"../src/ASF/sam/drivers/twihs" -I"../src/ASF/sam/drivers/pio" -I"../src/ASF/sam/drivers/ssc" -I"../src/ASF/sam/drivers/xdmac" -I"../src/ASF/common/utils/stdio/stdio_serial" -I"../src/ASF/common/services/serial/sam_uart" -I"../src/ASF/common/services/serial" -I"../src/ASF/sam/drivers/uart" -I"../src/ASF/sam/drivers/usart" -I"../src/ASF/common/services/delay" -I"../src/ASF/sam/boards/samv71_xplained_ultra" -I"../src/ASF/sam/boards" -I"../src/ASF/common/boards" -I"../src/ASF/common/services/ioport" -I"../src/ASF/common/services/gpio" -I"../src/ASF/sam/drivers/mpu" -I"../src/ASF/sam/components/audio/codec/wm8904/example/samv71q21_samv71_xplained_ultra" -I"../src" -I"../src/config" -I"../DanLib" -I"../DanLib/DMA" -I"../DanLib/WM8904_Driver"  -O1 -fdata-sections -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500 -mfloat-abi=softfp -mfpu=fpv5-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+LCDLib/%.o: ../LCDLib/%.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG -D__SAMV71Q21__ -Dscanf=iscanf -DARM_MATH_CM7=true -Dprintf=iprintf -DBOARD=SAMV71_XPLAINED_ULTRA  -I"../src/ASF/sam/utils/cmsis/samv71/source/templates" -I"../src/ASF/sam/utils/cmsis/samv71/include" -I"../src/ASF/sam/components/audio/codec/wm8904" -I"../src/ASF/common/services/twi" -I"../src/ASF/common/services/clock" -I"../src/ASF/sam/drivers/pmc" -I"../src/ASF/sam/utils" -I"../src/ASF/sam/utils/header_files" -I"../src/ASF/sam/utils/preprocessor" -I"../src/ASF/thirdparty/CMSIS/Include" -I"../src/ASF/thirdparty/CMSIS/Lib/GCC" -I"../src/ASF/sam/utils/fpu" -I"../src/ASF/common/utils" -I"../src/ASF/sam/drivers/twihs" -I"../src/ASF/sam/drivers/pio" -I"../src/ASF/sam/drivers/ssc" -I"../src/ASF/sam/drivers/xdmac" -I"../src/ASF/common/utils/stdio/stdio_serial" -I"../src/ASF/common/services/serial/sam_uart" -I"../src/ASF/common/services/serial" -I"../src/ASF/sam/drivers/uart" -I"../src/ASF/sam/drivers/usart" -I"../src/ASF/common/services/delay" -I"../src/ASF/sam/boards/samv71_xplained_ultra" -I"../src/ASF/sam/boards" -I"../src/ASF/common/boards" -I"../src/ASF/common/services/ioport" -I"../src/ASF/common/services/gpio" -I"../src/ASF/sam/drivers/mpu" -I"../src/ASF/sam/components/audio/codec/wm8904/example/samv71q21_samv71_xplained_ultra" -I"../src" -I"../src/config" -I"../DanLib" -I"../DanLib/DMA" -I"../DanLib/WM8904_Driver"  -O1 -fdata-sections -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500 -mfloat-abi=softfp -mfpu=fpv5-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+LCDLib/touch/%.o: ../LCDLib/touch/%.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG -D__SAMV71Q21__ -Dscanf=iscanf -DARM_MATH_CM7=true -Dprintf=iprintf -DBOARD=SAMV71_XPLAINED_ULTRA  -I"../src/ASF/sam/utils/cmsis/samv71/source/templates" -I"../src/ASF/sam/utils/cmsis/samv71/include" -I"../src/ASF/sam/components/audio/codec/wm8904" -I"../src/ASF/common/services/twi" -I"../src/ASF/common/services/clock" -I"../src/ASF/sam/drivers/pmc" -I"../src/ASF/sam/utils" -I"../src/ASF/sam/utils/header_files" -I"../src/ASF/sam/utils/preprocessor" -I"../src/ASF/thirdparty/CMSIS/Include" -I"../src/ASF/thirdparty/CMSIS/Lib/GCC" -I"../src/ASF/sam/utils/fpu" -I"../src/ASF/common/utils" -I"../src/ASF/sam/drivers/twihs" -I"../src/ASF/sam/drivers/pio" -I"../src/ASF/sam/drivers/ssc" -I"../src/ASF/sam/drivers/xdmac" -I"../src/ASF/common/utils/stdio/stdio_serial" -I"../src/ASF/common/services/serial/sam_uart" -I"../src/ASF/common/services/serial" -I"../src/ASF/sam/drivers/uart" -I"../src/ASF/sam/drivers/usart" -I"../src/ASF/common/services/delay" -I"../src/ASF/sam/boards/samv71_xplained_ultra" -I"../src/ASF/sam/boards" -I"../src/ASF/common/boards" -I"../src/ASF/common/services/ioport" -I"../src/ASF/common/services/gpio" -I"../src/ASF/sam/drivers/mpu" -I"../src/ASF/sam/components/audio/codec/wm8904/example/samv71q21_samv71_xplained_ultra" -I"../src" -I"../src/config" -I"../DanLib" -I"../DanLib/DMA" -I"../DanLib/WM8904_Driver"  -O1 -fdata-sections -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500 -mfloat-abi=softfp -mfpu=fpv5-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

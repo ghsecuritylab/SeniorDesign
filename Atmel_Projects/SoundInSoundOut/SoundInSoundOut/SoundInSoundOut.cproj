@@ -490,8 +490,6 @@
       <Value>../DanLib</Value>
       <Value>../DanLib/DMA</Value>
       <Value>../DanLib/WM8904_Driver</Value>
-      <Value>../LCDLib</Value>
-      <Value>../LCDLib/gfx</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -1171,9 +1169,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\WM8904_Driver\WM8904_Driver.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LCDLib\gfx\gfx.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="LCDLib\gfx\gfx_generic.c">
