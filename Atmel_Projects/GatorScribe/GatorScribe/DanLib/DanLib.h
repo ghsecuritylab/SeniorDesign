@@ -12,6 +12,7 @@
 
 #include "DMA_Audio.h"
 #include "WM8904_Driver.h"
+#include "LCDLib.h"
 
 
 #endif /* DANLIB_H_ */

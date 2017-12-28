@@ -59,6 +59,9 @@
 // From module: Delay routines
 #include <delay.h>
 
+// From module: Display - ILI9488 LCD Controller (EBI)
+#include <ili9488.h>
+
 // From module: GPIO - General purpose Input/Output
 #include <gpio.h>
 
@@ -89,6 +92,9 @@
 
 // From module: SAMV71 XULTRA LED support enabled
 #include <led.h>
+
+// From module: SMC - Static Memory Controller
+#include <smc.h>
 
 // From module: SSC - Synchronous Serial Controller
 #include <ssc.h>
@@ -122,6 +128,9 @@
 
 // From module: XDMAC - XDMA Controller
 #include <xdmac.h>
+
+// From module: maXTouch - ATMXT122S Controller
+#include <mxt_device_1.h>
 
 // From module: pio_handler support enabled
 #include <pio_handler.h>

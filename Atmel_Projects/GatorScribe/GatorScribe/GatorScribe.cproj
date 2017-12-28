@@ -393,6 +393,7 @@
       <Value>ARM_MATH_CM7=true</Value>
       <Value>printf=iprintf</Value>
       <Value>BOARD=SAMV71_XPLAINED_ULTRA</Value>
+      <Value>ILI9488_EBIMODE</Value>
     </ListValues>
   </armgcc.compiler.symbols.DefSymbols>
   <armgcc.compiler.directories.IncludePaths>
@@ -433,6 +434,20 @@
       <Value>../DanLib</Value>
       <Value>../DanLib/DMA</Value>
       <Value>../DanLib/WM8904_Driver</Value>
+      <Value>../DanLib/LCDLib</Value>
+      <Value>../src/ASF/sam/components/display/ili9488</Value>
+      <Value>../DanLib/LCDLib/gfx</Value>
+      <Value>../src/ASF/common/components/touch/mxt</Value>
+      <Value>../src/ASF/sam/drivers/ebi/smc</Value>
+      <Value>../DanLib/LCDLib/touch</Value>
+      <Value>../DanLib/GUI</Value>
+      <Value>../DanLib/GUI/Images</Value>
+      <Value>../DanLib/GUI/key_signature</Value>
+      <Value>../DanLib/GUI/playback_instrument</Value>
+      <Value>../DanLib/GUI/song_title/keyboard</Value>
+      <Value>../DanLib/GUI/song_title</Value>
+      <Value>../DanLib/GUI/tempo</Value>
+      <Value>../DanLib/GUI/time_signature</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -512,11 +527,25 @@
   <ItemGroup>
     <Folder Include="DanLib\" />
     <Folder Include="DanLib\DMA\" />
+    <Folder Include="DanLib\GUI\" />
+    <Folder Include="DanLib\GUI\Images\" />
+    <Folder Include="DanLib\GUI\key_signature\" />
+    <Folder Include="DanLib\GUI\playback_instrument\" />
+    <Folder Include="DanLib\GUI\song_title\" />
+    <Folder Include="DanLib\GUI\song_title\keyboard\" />
+    <Folder Include="DanLib\GUI\tempo\" />
+    <Folder Include="DanLib\GUI\time_signature\" />
+    <Folder Include="DanLib\LCDLib\" />
+    <Folder Include="DanLib\LCDLib\gfx\" />
+    <Folder Include="DanLib\LCDLib\touch\" />
     <Folder Include="DanLib\WM8904_Driver\" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
     <Folder Include="src\ASF\common\boards\" />
+    <Folder Include="src\ASF\common\components\" />
+    <Folder Include="src\ASF\common\components\touch\" />
+    <Folder Include="src\ASF\common\components\touch\mxt\" />
     <Folder Include="src\ASF\common\services\" />
     <Folder Include="src\ASF\common\services\clock\" />
     <Folder Include="src\ASF\common\services\clock\samv71\" />
@@ -543,7 +572,11 @@
     <Folder Include="src\ASF\sam\components\audio\codec\wm8904\" />
     <Folder Include="src\ASF\sam\components\audio\codec\wm8904\example\" />
     <Folder Include="src\ASF\sam\components\audio\codec\wm8904\example\samv71q21_samv71_xplained_ultra\" />
+    <Folder Include="src\ASF\sam\components\display\" />
+    <Folder Include="src\ASF\sam\components\display\ili9488\" />
     <Folder Include="src\ASF\sam\drivers\" />
+    <Folder Include="src\ASF\sam\drivers\ebi\" />
+    <Folder Include="src\ASF\sam\drivers\ebi\smc\" />
     <Folder Include="src\ASF\sam\drivers\mpu\" />
     <Folder Include="src\ASF\sam\drivers\pio\" />
     <Folder Include="src\ASF\sam\drivers\pmc\" />
@@ -589,10 +622,115 @@
     <Compile Include="DanLib\DMA\DMA_Audio.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="DanLib\GUI\Images\instruments_img.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\Images\key_signatures_img.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\Images\main_menu_img.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\Images\tapTempo_img.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\Images\time_signatures_img.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\Images\title_img.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\key_signature\key_signature.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\key_signature\key_signature.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\main_menu.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\main_menu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\playback_instrument\playback_instrument.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\playback_instrument\playback_instrument.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\song_title\keyboard\keyboard_coordinates.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\song_title\keyboard\keyboard_coordinates.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\song_title\song_title.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\song_title\song_title.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\tempo\tempo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\tempo\tempo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\time_signature\time_signature.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\GUI\time_signature\time_signature.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\gfx\gfx.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\gfx\gfx_generic.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\gfx\gfx_generic.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\gfx\gfx_ili9488_90_00028_a0.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\gfx\gfx_ili9488_90_00028_a0.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\gfx\gfx_text.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\gfx\gfx_text.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\gfx\sysfont.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\gfx\sysfont.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\LCDLib.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\LCDLib.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\touch\touch.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\LCDLib\touch\touch.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="DanLib\WM8904_Driver\WM8904_Driver.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\WM8904_Driver\WM8904_Driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\common\services\delay\delay.h">
@@ -643,6 +781,18 @@
     <Compile Include="src\ASF\sam\components\audio\codec\wm8904\wm8904.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\ASF\sam\components\display\ili9488\ili9488.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam\components\display\ili9488\ili9488.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam\drivers\ebi\smc\smc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam\drivers\ebi\smc\smc.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\ASF\sam\drivers\ssc\ssc.c">
       <SubType>compile</SubType>
     </Compile>
@@ -671,6 +821,15 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\sam\drivers\xdmac\xdmac.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\config\conf_ili9488.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\config\conf_mxt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\config\conf_sysfont.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\config\conf_uart_serial.h">

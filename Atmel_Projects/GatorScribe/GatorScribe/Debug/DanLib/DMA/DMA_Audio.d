@@ -154,7 +154,8 @@ DanLib/DMA/DMA_Audio.d DanLib/DMA/DMA_Audio.o: ../DanLib/DMA/DMA_Audio.c \
  ../src/ASF/sam/drivers/pmc/pmc.h ../src/ASF/common/services/clock/pll.h \
  ../src/ASF/common/services/clock/samv71/pll.h \
  ../src/ASF/common/services/delay/sam/cycle_counter.h \
- ../src/ASF/common/services/gpio/gpio.h \
+ ../src/ASF/sam/components/display/ili9488/ili9488.h \
+ ../src/config/conf_ili9488.h ../src/ASF/common/services/gpio/gpio.h \
  ../src/ASF/common/services/gpio/sam_gpio/sam_gpio.h \
  ../src/ASF/sam/drivers/pio/pio.h \
  ../src/ASF/common/services/ioport/ioport.h \
@@ -162,7 +163,7 @@ DanLib/DMA/DMA_Audio.d DanLib/DMA/DMA_Audio.o: ../DanLib/DMA/DMA_Audio.c \
  ../src/ASF/sam/drivers/mpu/mpu.h ../src/ASF/sam/drivers/pmc/sleep.h \
  ../src/ASF/sam/utils/fpu/fpu.h \
  ../src/ASF/sam/boards/samv71_xplained_ultra/led.h \
- ../src/ASF/sam/drivers/ssc/ssc.h \
+ ../src/ASF/sam/drivers/ebi/smc/smc.h ../src/ASF/sam/drivers/ssc/ssc.h \
  ../src/ASF/common/utils/stdio/stdio_serial/stdio_serial.h \
  ../src/ASF/common/services/serial/serial.h \
  ../src/ASF/common/services/serial/sam_uart/uart_serial.h \
@@ -174,7 +175,9 @@ DanLib/DMA/DMA_Audio.d DanLib/DMA/DMA_Audio.o: ../DanLib/DMA/DMA_Audio.c \
  ../src/ASF/common/services/twi/sam_twihs/twihs_slave.h \
  ../src/ASF/sam/components/audio/codec/wm8904/wm8904.h \
  ../src/config/conf_wm8904.h ../src/ASF/sam/drivers/xdmac/xdmac.h \
- ../src/ASF/sam/drivers/pio/pio_handler.h ../DanLib/DMA/DMA_Audio.h
+ ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
+ ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
+ ../DanLib/DMA/DMA_Audio.h
 
 ../src/asf.h:
 
@@ -492,6 +495,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/common/services/delay/sam/cycle_counter.h:
 
+../src/ASF/sam/components/display/ili9488/ili9488.h:
+
+../src/config/conf_ili9488.h:
+
 ../src/ASF/common/services/gpio/gpio.h:
 
 ../src/ASF/common/services/gpio/sam_gpio/sam_gpio.h:
@@ -509,6 +516,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam/utils/fpu/fpu.h:
 
 ../src/ASF/sam/boards/samv71_xplained_ultra/led.h:
+
+../src/ASF/sam/drivers/ebi/smc/smc.h:
 
 ../src/ASF/sam/drivers/ssc/ssc.h:
 
@@ -539,6 +548,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/config/conf_wm8904.h:
 
 ../src/ASF/sam/drivers/xdmac/xdmac.h:
+
+../src/ASF/common/components/touch/mxt/mxt_device_1.h:
+
+../src/config/conf_mxt.h:
 
 ../src/ASF/sam/drivers/pio/pio_handler.h:
 

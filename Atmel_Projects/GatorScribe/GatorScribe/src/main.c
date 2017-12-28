@@ -1,14 +1,14 @@
 #include <asf.h>
 #include <pio.h>
 #include "DanLib.h"
-//#include "main_menu.h"
+#include "main_menu.h"
 
 int main(void)
 {
 	/* Initialize the SAM system. */
 	sysclk_init();
 	board_init();
-	//lcd_init();
+	lcd_init();
 	
 	/* Initialize WM8904 TWI interface*/
 	if (wm8904_twi_init() != TWIHS_SUCCESS) {
@@ -40,21 +40,13 @@ int main(void)
 	ssc_enable_tx(SSC);
 	xdmac_channel_enable(XDMAC, XDMA_CH_SSC_TX);
 	
-	//start_gatorscribe();
+	start_gatorscribe();
 
 	while(1)
 	{
-		if(dataReceived)
+		if (dataReceived)
 		{
-			
-			for(int i = 0; i < BUF_SIZE; i++)
-			{
-						
-				outBuffer[i] = inBuffer[i];
-				//outBuffer[i] = (uint16_t) ( ( (int32_t)((int16_t)inBuffer[i]) + (int32_t)(sin_wave[sinIdx++]/16) ) / 2 );
-				//if(sinIdx == SIN_WAVE_LENGTH) sinIdx = 0;
-			}
-			dataReceived = !dataReceived; 
+			dataReceived = 0; 
 		}
 		
 	}

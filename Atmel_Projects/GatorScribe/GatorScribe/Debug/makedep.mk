@@ -4,7 +4,35 @@
 
 DanLib\DMA\DMA_Audio.c
 
+DanLib\GUI\key_signature\key_signature.c
+
+DanLib\GUI\main_menu.c
+
+DanLib\GUI\playback_instrument\playback_instrument.c
+
+DanLib\GUI\song_title\keyboard\keyboard_coordinates.c
+
+DanLib\GUI\song_title\song_title.c
+
+DanLib\GUI\tempo\tempo.c
+
+DanLib\GUI\time_signature\time_signature.c
+
+DanLib\LCDLib\gfx\gfx_generic.c
+
+DanLib\LCDLib\gfx\gfx_ili9488_90_00028_a0.c
+
+DanLib\LCDLib\gfx\gfx_text.c
+
+DanLib\LCDLib\gfx\sysfont.c
+
+DanLib\LCDLib\LCDLib.c
+
+DanLib\LCDLib\touch\touch.c
+
 DanLib\WM8904_Driver\WM8904_Driver.c
+
+src\ASF\common\components\touch\mxt\mxt_device_1.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
 
@@ -15,6 +43,10 @@ src\ASF\common\utils\stdio\read.c
 src\ASF\common\utils\stdio\write.c
 
 src\ASF\sam\components\audio\codec\wm8904\wm8904.c
+
+src\ASF\sam\components\display\ili9488\ili9488.c
+
+src\ASF\sam\drivers\ebi\smc\smc.c
 
 src\ASF\sam\drivers\ssc\ssc.c
 

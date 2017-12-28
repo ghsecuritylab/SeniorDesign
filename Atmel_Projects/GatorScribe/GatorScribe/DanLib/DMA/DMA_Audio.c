@@ -172,7 +172,7 @@ void XDMAC_Handler(void)
 		}
 		inPingMode = !inPingMode; 
 		dataReceived = 1; 
-		/*
+		
 		for(int i = 0; i < BUF_SIZE; i++)
 		{
 						
@@ -180,7 +180,7 @@ void XDMAC_Handler(void)
 			//outBuffer[i] = (uint16_t) ( ( (int32_t)((int16_t)inBuffer[i]) + (int32_t)(sin_wave[sinIdx++]/16) ) / 2 );
 			//if(sinIdx == SIN_WAVE_LENGTH) sinIdx = 0;
 		}
-		*/
+		
     }
 	
 	dma_status = xdmac_channel_get_interrupt_status(XDMAC, XDMA_CH_SSC_TX);

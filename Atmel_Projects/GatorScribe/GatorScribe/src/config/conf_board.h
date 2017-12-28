@@ -49,10 +49,7 @@
 /* Enable ICache and DCache */
 //#define CONF_BOARD_ENABLE_CACHE_AT_INIT
 
-/* Indicates board has an ILI9488 external component to control LCD */
-//#define CONF_BOARD_ILI9488
-
-//#define CONF_BOARD_MAXTOUCH_XPRO
+#define CONF_BOARD_CONFIG_MPU_AT_INIT
 
 /** Configure TWI pins */
 #define CONF_BOARD_TWIHS0
@@ -60,5 +57,8 @@
 /** Enable Com Port. */
 #define CONF_BOARD_UART_CONSOLE
 
+/* Indicates board has an ILI9488 external component to control LCD */
+#define CONF_BOARD_ILI9488
+#define CONF_BOARD_MAXTOUCH_XPRO
 
 #endif /* CONF_BOARD_H */

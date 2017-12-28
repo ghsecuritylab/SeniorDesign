@@ -155,7 +155,7 @@ src/ASF/sam/boards/samv71_xplained_ultra/init.d \
  ../src/ASF/common/services/clock/samv71/osc.h \
  ../src/ASF/sam/drivers/pmc/pmc.h ../src/ASF/common/services/clock/pll.h \
  ../src/ASF/common/services/clock/samv71/pll.h \
- ../src/ASF/sam/drivers/pio/pio.h
+ ../src/ASF/sam/drivers/pio/pio.h ../src/ASF/sam/drivers/mpu/mpu.h
 
 ../src/ASF/sam/utils/compiler.h:
 
@@ -472,3 +472,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/common/services/clock/samv71/pll.h:
 
 ../src/ASF/sam/drivers/pio/pio.h:
+
+../src/ASF/sam/drivers/mpu/mpu.h:
