@@ -12,6 +12,7 @@
 #include "fastmath.h"
 
 #define DISABLE_SYSTICK() (SysTick->CTRL  = 0) 
+#define NUMBER_OF_TEMPO_BUTTONS 4
 
 #define TEXT_X 195
 #define TEXT_Y 173
@@ -64,7 +65,7 @@ static button_t get_button_pressed(int16_t x, int16_t y)
 	uint32_t dist;
 	button_t buttonPressed = 0; 
 	
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < NUMBER_OF_TEMPO_BUTTONS; i++)
 	{
 		x_diff = x - button_coordinates[i].x;
 		y_diff = y - button_coordinates[i].y;
@@ -86,11 +87,11 @@ void SysTick_Handler(void)
 	led_indicator_duration++;
 }
 
-int tempoMenu(int initial_bpm) 
+int tempoMenu(uint32_t initial_bpm) 
 {
-	int bpmIdx = 0;
-	int averageBpm = initial_bpm;
-	int tempBpm;	// used for printing 
+	uint32_t bpmIdx = 0;
+	uint32_t averageBpm = initial_bpm;
+	uint32_t tempBpm;	// used for printing 
 	touch_t touched_point;
 	button_t button_pressed;
 	
@@ -120,7 +121,7 @@ int tempoMenu(int initial_bpm)
 	}
 	
 	/* Initial timer counters */ 
-	int current_ms_count =  60000 / initial_bpm; 
+	uint32_t current_ms_count =  60000 / initial_bpm; 
 	led_indicator_freq = current_ms_count; 
 	led_indicator_duration = 0; 
 	msCount = 0; 

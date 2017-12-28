@@ -9,6 +9,8 @@
 #include "keyboard_coordinates.h"
 #include "fastmath.h"
 
+#define NUMBER_OF_KEYBOARD_KEYS 33
+
 static char upper_chars[33] = {'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P' , BACKSPACE,
     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', RETURN,
     SHIFT, 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '!', '?', SHIFT,
@@ -90,7 +92,7 @@ void get_key(int16_t x, int16_t y, uint32_t case_option, char *key_pressed)
 		keys = lower_chars; 
 	}
 	
-	for (int i = 0; i < 33; i++)
+	for (int i = 0; i < NUMBER_OF_KEYBOARD_KEYS; i++)
 	{
 		x_diff = x - key_coordinates[i].x; 
 		y_diff = y - key_coordinates[i].y; 

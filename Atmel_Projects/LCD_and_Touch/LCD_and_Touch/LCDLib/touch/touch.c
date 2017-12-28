@@ -41,8 +41,6 @@ static void get_finger_display_coordinates(const struct mxt_touch_event *touch_e
 /*********************************** Public Functions Start ***********************************/
 void touch_handler(touch_t *touched_point)
 {
-	uint8_t i = 0;
-
 	struct mxt_touch_event touch_event;	
 	mxt_read_touch_event(&device, &touch_event);
 	

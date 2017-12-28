@@ -464,6 +464,7 @@
       <Value>../GUI/song_title</Value>
       <Value>../GUI/playback_instrument</Value>
       <Value>../GUI/time_signature</Value>
+      <Value>../GUI/key_signature</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -556,6 +557,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="GUI\Images\" />
+    <Folder Include="GUI\key_signature" />
     <Folder Include="GUI\time_signature" />
     <Folder Include="GUI\playback_instrument\" />
     <Folder Include="GUI\tempo" />
@@ -631,10 +633,19 @@
     <Compile Include="GUI\Images\instruments_img.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="GUI\Images\key_signatures_img.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="GUI\Images\time_signatures_img.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GUI\Images\title_img.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\key_signature\key_signature.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GUI\key_signature\key_signature.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GUI\main_menu.c">

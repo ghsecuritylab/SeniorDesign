@@ -12,6 +12,8 @@
 #include "time_signatures_img.h"
 #include "fastmath.h"
 
+#define NUMBER_OF_TIME_SIGNATURES 4
+
 typedef struct time_signature_coord
 {
 	int16_t x;
@@ -42,7 +44,7 @@ static time_signature_t get_button_pressed(int16_t x, int16_t y)
 	uint32_t dist;
 	time_signature_t timeSignaturePressed = time_signatures[0];
 	
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < NUMBER_OF_TIME_SIGNATURES; i++)
 	{
 		x_diff = x - time_signature_coordinates[i].x;
 		y_diff = y - time_signature_coordinates[i].y;

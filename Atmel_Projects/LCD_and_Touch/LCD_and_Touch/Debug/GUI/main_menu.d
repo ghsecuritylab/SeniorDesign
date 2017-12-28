@@ -177,7 +177,8 @@ GUI/main_menu.d GUI/main_menu.o: ../GUI/main_menu.c ../src/asf.h \
  ../LCDLib/gfx/gfx_ili9488_90_00028_a0.h ../LCDLib/gfx/gfx_generic.h \
  ../GUI/playback_instrument/playback_instrument.h \
  ../GUI/song_title/song_title.h ../GUI/tempo/tempo.h \
- ../GUI/time_signature/time_signature.h ../LCDLib/LCDLib.h \
+ ../GUI/time_signature/time_signature.h \
+ ../GUI/key_signature/key_signature.h ../LCDLib/LCDLib.h \
  ../LCDLib/gfx/gfx.h ../LCDLib/gfx/sysfont.h ../src/config/conf_sysfont.h \
  ../LCDLib/gfx/gfx.h ../LCDLib/gfx/gfx_text.h ../LCDLib/touch/touch.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h \
@@ -566,6 +567,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../GUI/tempo/tempo.h:
 
 ../GUI/time_signature/time_signature.h:
+
+../GUI/key_signature/key_signature.h:
 
 ../LCDLib/LCDLib.h:
 

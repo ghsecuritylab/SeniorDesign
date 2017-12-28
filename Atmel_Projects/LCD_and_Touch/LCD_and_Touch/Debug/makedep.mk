@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+GUI\key_signature\key_signature.c
+
 GUI\main_menu.c
 
 GUI\playback_instrument\playback_instrument.c

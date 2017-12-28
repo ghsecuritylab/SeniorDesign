@@ -10,6 +10,6 @@
 #define TEMPO_H_
 
 
-int tempoMenu(int initial_bpm); 
+int tempoMenu(uint32_t initial_bpm); 
 
 #endif /* TEMPO_H_ */

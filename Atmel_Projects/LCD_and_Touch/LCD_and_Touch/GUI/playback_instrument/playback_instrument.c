@@ -11,6 +11,8 @@
 #include "instruments_img.h"
 #include "fastmath.h"
 
+#define NUMBER_OF_INSTRUMENTS 6
+
 typedef struct instrument_coord
 {
 	int16_t x;
@@ -37,7 +39,7 @@ static midi_instrument_t get_button_pressed(int16_t x, int16_t y)
 	uint32_t dist;
 	midi_instrument_t instrumentPressed = midi_instruments[0];
 	
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < NUMBER_OF_INSTRUMENTS; i++)
 	{
 		x_diff = x - instrument_coordinates[i].x;
 		y_diff = y - instrument_coordinates[i].y;

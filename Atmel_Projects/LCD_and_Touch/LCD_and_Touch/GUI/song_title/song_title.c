@@ -23,8 +23,8 @@ void titleMenu(char *str)
 	gfx_draw_bitmap(&title_img, (gfx_get_width() - title_img.width) / 2, gfx_get_height() - title_img.height);
 	
 	touch_t touched_point;
-	int str_len = 0; 
-    int cursor = TITLE_START_X; 
+	uint32_t str_len = 0; 
+    uint32_t cursor = TITLE_START_X; 
 	bool case_option = UPPER_CASE; 
 	char keyPressed[2] = " ";
 	char * tempStr = str; 
