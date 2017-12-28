@@ -75,13 +75,18 @@ void titleMenu(char *str)
 			}
 			else if (keyPressed[0] == BACKSPACE)
 			{
-				cursor -= CHAR_WIDTH; 
-				str_len--; 
-				gfx_draw_string_aligned((const char *)&str[str_len],
-					cursor, TITLE_Y, &sysfont,
-					GFX_COLOR_TRANSPARENT, GFX_COLOR_BLACK,
-					TEXT_POS_LEFT, TEXT_ALIGN_LEFT); 
-				str[str_len] = 0; 
+				if (str_len > 0)
+				{
+					cursor -= CHAR_WIDTH; 
+					str_len--; 
+					gfx_draw_string_aligned((const char *)&str[str_len],
+						cursor, TITLE_Y, &sysfont,
+						GFX_COLOR_TRANSPARENT, GFX_COLOR_BLACK,
+						TEXT_POS_LEFT, TEXT_ALIGN_LEFT); 
+					str[str_len] = 0; 
+				}
+				if (str_len == 0)
+					case_option = UPPER_CASE;
 			}
 			else 
 			{

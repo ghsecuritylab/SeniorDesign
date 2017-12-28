@@ -1,7 +1,6 @@
 #include <asf.h>
 #include <pio.h>
 #include "DanLib.h"
-#include "main_menu.h"
 
 int main(void)
 {
@@ -35,8 +34,7 @@ int main(void)
 	/* Start playing */
 	ssc_enable_rx(SSC);
 	xdmac_channel_enable(XDMAC, XDMA_CH_SSC_RX);
-	//delay_ms(300);
-	// TODO: Might want to go back and wait for first transfer later
+	// might want to enable in the first xdma interrupt (if you care) 
 	ssc_enable_tx(SSC);
 	xdmac_channel_enable(XDMAC, XDMA_CH_SSC_TX);
 	
