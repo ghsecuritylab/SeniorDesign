@@ -9,11 +9,8 @@
 #ifndef DANLIB_H_
 #define DANLIB_H_
 
-
-#include "DMA_Audio.h"
-#include "WM8904_Driver.h"
+#include "audio.h"
 #include "LCDLib.h"
 #include "main_menu.h"
-
 
 #endif /* DANLIB_H_ */

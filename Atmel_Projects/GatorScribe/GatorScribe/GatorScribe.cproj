@@ -432,8 +432,6 @@
       <Value>../src/ASF/common/utils/stdio/stdio_serial</Value>
       <Value>../src/ASF/sam/components/audio/codec/wm8904</Value>
       <Value>../DanLib</Value>
-      <Value>../DanLib/DMA</Value>
-      <Value>../DanLib/WM8904_Driver</Value>
       <Value>../DanLib/LCDLib</Value>
       <Value>../src/ASF/sam/components/display/ili9488</Value>
       <Value>../DanLib/LCDLib/gfx</Value>
@@ -448,6 +446,9 @@
       <Value>../DanLib/GUI/song_title</Value>
       <Value>../DanLib/GUI/tempo</Value>
       <Value>../DanLib/GUI/time_signature</Value>
+      <Value>../DanLib/Audio/DMA</Value>
+      <Value>../DanLib/Audio/WM8904_Driver</Value>
+      <Value>../DanLib/Audio</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -526,7 +527,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="DanLib\" />
-    <Folder Include="DanLib\DMA\" />
+    <Folder Include="DanLib\Audio\DMA\" />
+    <Folder Include="DanLib\Audio\WM8904_Driver\" />
     <Folder Include="DanLib\GUI\" />
     <Folder Include="DanLib\GUI\Images\" />
     <Folder Include="DanLib\GUI\key_signature\" />
@@ -538,7 +540,7 @@
     <Folder Include="DanLib\LCDLib\" />
     <Folder Include="DanLib\LCDLib\gfx\" />
     <Folder Include="DanLib\LCDLib\touch\" />
-    <Folder Include="DanLib\WM8904_Driver\" />
+    <Folder Include="DanLib\Audio" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -613,13 +615,25 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DanLib\Audio\DMA\DMA_Audio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Audio\DMA\DMA_Audio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Audio\audio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Audio\audio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Audio\WM8904_Driver\WM8904_Driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Audio\WM8904_Driver\WM8904_Driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="DanLib\DanLib.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\DMA\DMA_Audio.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\DMA\DMA_Audio.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\GUI\Images\instruments_img.h">
@@ -719,12 +733,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\LCDLib\touch\touch.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\WM8904_Driver\WM8904_Driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\WM8904_Driver\WM8904_Driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.c">

@@ -2,7 +2,11 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-DanLib\DMA\DMA_Audio.c
+DanLib\Audio\DMA\DMA_Audio.c
+
+DanLib\Audio\audio.c
+
+DanLib\Audio\WM8904_Driver\WM8904_Driver.c
 
 DanLib\GUI\key_signature\key_signature.c
 
@@ -29,8 +33,6 @@ DanLib\LCDLib\gfx\sysfont.c
 DanLib\LCDLib\LCDLib.c
 
 DanLib\LCDLib\touch\touch.c
-
-DanLib\WM8904_Driver\WM8904_Driver.c
 
 src\ASF\common\components\touch\mxt\mxt_device_1.c
 
