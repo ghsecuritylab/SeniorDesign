@@ -9,6 +9,9 @@
 #include "audio.h"
 #include <pio.h>
 
+#include "DMA_Audio.h"
+#include "WM8904_Driver.h"
+
 void audio_init(void)
 {
 	/* Initialize WM8904 TWI interface*/

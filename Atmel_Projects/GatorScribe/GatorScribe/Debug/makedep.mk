@@ -34,6 +34,8 @@ DanLib\LCDLib\LCDLib.c
 
 DanLib\LCDLib\touch\touch.c
 
+DanLib\Yin\Yin.c
+
 src\ASF\common\components\touch\mxt\mxt_device_1.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c

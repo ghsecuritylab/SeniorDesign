@@ -5,7 +5,7 @@ varOut = 0.5; %noise parameter for observation equation
 varState = 0.01; %noise parameter for state transition equations
 noi = 0.01; %noise for test
 
-locationToSaveResult = '.\'; %set to current folder in Matlab
+locationToSaveResult = './'; %set to current folder in Matlab
 epoch = 6; %how many times algorithm should go over all the notes
 %% train the model
 trainingVar2(s, k, varOut, varState, locationToSaveResult, epoch);

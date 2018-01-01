@@ -449,6 +449,7 @@
       <Value>../DanLib/Audio/DMA</Value>
       <Value>../DanLib/Audio/WM8904_Driver</Value>
       <Value>../DanLib/Audio</Value>
+      <Value>../DanLib/Yin</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -541,6 +542,7 @@
     <Folder Include="DanLib\LCDLib\gfx\" />
     <Folder Include="DanLib\LCDLib\touch\" />
     <Folder Include="DanLib\Audio" />
+    <Folder Include="DanLib\Yin\" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -733,6 +735,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\LCDLib\touch\touch.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Yin\Yin.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Yin\Yin.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.c">

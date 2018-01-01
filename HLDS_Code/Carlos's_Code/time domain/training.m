@@ -26,7 +26,6 @@ P = eye(k+n+s);                 % Initialization of covariance matrix for joint 
 
 % Filter bank
 fn = n;
-fft_s = 512;                    % not really used here
 M = 1000;
 op = 2;
 [H1,h] = givemeGammatoneFDomain(Fs,fn,fft_s,M,op);
@@ -49,14 +48,9 @@ H = eye(m);
 for i=1:k
     PDG(1,i)={eye(k+s)};
 end
-for i=1:m
-    PH(1,i)={eye(n)};                                                                   %%%%%% not used
-end
+
 for i=1:n
     PBF(1,i)={eye(k+n)};
-end
-for i=1:s
-    PC(1,i)={eye(s)};                                                                   %%%%%% not used
 end
 
 % Joint state transition matrix
@@ -86,7 +80,7 @@ for i = 1:tr
     musict = [musict auxx];
 end
 l_auxx = length(auxx);
-epoch_idx
+%epoch_idx
 
 prevIIR = zeros(n,1);
 epoch = 1;
@@ -101,7 +95,7 @@ for i = M:length(musict)
     end
     
     % Filtering - Inner product
-    musicin = musict(i-M+1:i);                              % M samples for online filtering
+    musicin = musict(i-M+1:i);                       % M samples for online filtering
     filtpp = zeros(n,1);
     % Point-by-point Filtering
     for j = 1:n
@@ -126,15 +120,15 @@ for i = M:length(musict)
         Z = XJ(1:s);
         U = XJ(s+1:s+k);
         X = XJ(s+k+1:s+k+n);
+
         % Parameter estimation for layer 2
         DG = [D,G];
-        %[DG,PDG] = parameter_estimate2(DG,[Z(:,in-1);U(:,in-1)],U(:,in),r,PDG);
         [DG,PDG] = parameter_estimate2(DG,[Zp;Up],U,r,PDG);
         D = DG(:,1:s);
         G = DG(:,s+1:s+k);
+
         % parameter estimation for layer 1
         BF = [B,F];
-        %[BF,PBF] = parameter_estimate2(BF,[U(:,in-1);X(:,in-1)],X(:,in),r,PBF);
         [BF,PBF] = parameter_estimate2(BF,[Up;Xp],X,r,PBF);
         B = BF(:,1:k);
         F = BF(:,k+1:k+n);
@@ -182,3 +176,5 @@ subplot(2,4,8)
 imagesc(G)
 title('Final G matrix')
 colorbar
+
+save trumpet_training_params.mat FJ h 

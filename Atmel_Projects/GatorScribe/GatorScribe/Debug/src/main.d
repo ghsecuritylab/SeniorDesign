@@ -179,8 +179,8 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
  ../DanLib/DanLib.h ../DanLib/Audio/audio.h \
  ../DanLib/Audio/DMA/DMA_Audio.h \
- ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h ../DanLib/LCDLib/LCDLib.h \
- ../DanLib/LCDLib/gfx/gfx.h \
+ ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h ../DanLib/Yin/Yin.h \
+ ../DanLib/LCDLib/LCDLib.h ../DanLib/LCDLib/gfx/gfx.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
  ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
  ../DanLib/LCDLib/gfx/gfx_generic.h ../DanLib/LCDLib/gfx/sysfont.h \
@@ -571,6 +571,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../DanLib/Audio/DMA/DMA_Audio.h:
 
 ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h:
+
+../DanLib/Yin/Yin.h:
 
 ../DanLib/LCDLib/LCDLib.h:
 

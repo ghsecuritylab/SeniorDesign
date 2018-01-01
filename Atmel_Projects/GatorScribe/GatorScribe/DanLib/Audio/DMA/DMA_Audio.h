@@ -11,20 +11,24 @@
 
 /********************************** Defines Start **********************************/
 /** Sampling rate */
-#define SAMPLE_RATE             (48000)
+//#define SAMPLE_RATE             (44100)
 
 /** XDMA channels used */
 #define XDMA_CH_SSC_RX    0
 #define XDMA_CH_SSC_TX    1
 
 /** Micro-block length for single transfer  */
-#define BUF_SIZE          512
+#define BUF_SIZE          1024
+
+#define TOTAL_PROCESS_BUFFERS 8 
+#define PROCESS_BUF_SIZE (BUF_SIZE >> 1)
 /********************************** Defines End **********************************/
 
 /********************************** Externs Start **********************************/
 extern volatile uint16_t *inBuffer;
 extern volatile uint16_t *outBuffer;
-extern volatile int32_t dataReceived;
+extern volatile bool dataReceived;
+extern volatile int16_t *processBuffer;
 /********************************** Externs End **********************************/
 
 
