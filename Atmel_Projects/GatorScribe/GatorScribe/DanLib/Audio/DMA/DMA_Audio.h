@@ -10,18 +10,15 @@
 #define DMA_AUDIO_H_
 
 /********************************** Defines Start **********************************/
-/** Sampling rate */
-//#define SAMPLE_RATE             (44100)
-
 /** XDMA channels used */
 #define XDMA_CH_SSC_RX    0
 #define XDMA_CH_SSC_TX    1
 
 /** Micro-block length for single transfer  */
-#define BUF_SIZE          1024
+#define BUF_SIZE          128
 
-#define TOTAL_PROCESS_BUFFERS 8 
-#define PROCESS_BUF_SIZE (BUF_SIZE >> 1)
+#define TOTAL_PROCESS_BUFFERS 64
+#define PROCESS_BUF_SIZE ((BUF_SIZE >> 1) >> 1)	// left channel, decimated by /2
 /********************************** Defines End **********************************/
 
 /********************************** Externs Start **********************************/

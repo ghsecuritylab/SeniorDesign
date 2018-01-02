@@ -394,6 +394,7 @@
       <Value>printf=iprintf</Value>
       <Value>BOARD=SAMV71_XPLAINED_ULTRA</Value>
       <Value>ILI9488_EBIMODE</Value>
+      <Value>__FPU_PRESENT</Value>
     </ListValues>
   </armgcc.compiler.symbols.DefSymbols>
   <armgcc.compiler.directories.IncludePaths>

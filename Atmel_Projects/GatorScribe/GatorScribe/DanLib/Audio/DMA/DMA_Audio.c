@@ -157,7 +157,7 @@ volatile int16_t *fillBuffer = processPingBuffer;
 volatile uint16_t *inBuffer = inPingBuffer;
 volatile uint16_t *outBuffer = outPingBuffer;
 volatile bool dataReceived = false;
- volatile bool outOfTime = 0; 
+volatile bool outOfTime = 0; 
 /********************************** Public Variables End **********************************/
 
 /******************************* XDMAC Interrupt Handler Start *******************************/ 
@@ -185,7 +185,7 @@ void XDMAC_Handler(void)
 			//outBuffer[i] = (uint16_t) ( ( (int32_t)((int16_t)inBuffer[i]) + (int32_t)(sin_wave[sinIdx++]/16) ) / 2 );
 			//if(sinIdx == SIN_WAVE_LENGTH) sinIdx = 0;
 
-			if ((i & 1) == 0)
+			if (i % 4 == 0)
 				fillBuffer[processIdx++] = (int16_t)inBuffer[i]; 
 		}
 		

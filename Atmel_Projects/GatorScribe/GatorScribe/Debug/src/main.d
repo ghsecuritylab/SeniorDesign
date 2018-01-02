@@ -180,6 +180,12 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../DanLib/DanLib.h ../DanLib/Audio/audio.h \
  ../DanLib/Audio/DMA/DMA_Audio.h \
  ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h ../DanLib/Yin/Yin.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
+ ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
+ ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  ../DanLib/LCDLib/LCDLib.h ../DanLib/LCDLib/gfx/gfx.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
  ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
@@ -573,6 +579,18 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h:
 
 ../DanLib/Yin/Yin.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
+../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
+
+../src/ASF/thirdparty/CMSIS/Include/core_cm7.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
 
 ../DanLib/LCDLib/LCDLib.h:
 

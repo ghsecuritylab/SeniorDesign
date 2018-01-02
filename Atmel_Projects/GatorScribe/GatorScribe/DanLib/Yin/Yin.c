@@ -17,19 +17,27 @@ static void Yin_difference(int16_t* buffer)
 {
 	int16_t i;
 	int16_t tau;
-	float delta;
+	float32_t delta;
+	// float32_t multOutput; 
 
 	/* Calculate the difference for difference shift values (tau) for the half of the samples */
-	for(tau = 0 ; tau < yin.halfBufferSize; tau++){
-
+	for(tau = 0 ; tau < yin.halfBufferSize; tau++)
+	{
 		/* Take the difference of the signal with a shifted version of itself, then square it.
-		 * (This is the Yin algorithm's tweak on autocorellation) */ 
+		 * (This is the Yin algorithm's tweak on autocorrelation) */ 
 		
-		// might be able to #pragma unroll(N) 
-		for(i = 0; i < yin.halfBufferSize; i++){
+		/* compute first value to avoid having to zero out buffer */ 
+		delta = buffer[0] - buffer[tau];
+		yin.yinBuffer[tau] = delta*delta; 
+		for(i = 1; i < yin.halfBufferSize; i++)
+		{
 			//__SSUB16 here maybe ... look at example. need to be in int32 first 
 			delta = buffer[i] - buffer[i + tau];
 			yin.yinBuffer[tau] += delta * delta;
+			
+			// Why is this slower??? 
+			//arm_mult_f32(&delta, &delta, &multOutput, 1);
+			//arm_add_f32(&yin.yinBuffer[tau], &multOutput, &yin.yinBuffer[tau], 1);
 		}
 	}
 }
@@ -43,7 +51,7 @@ static void Yin_difference(int16_t* buffer)
 static void Yin_cumulativeMeanNormalizedDifference(void)
 {
 	int16_t tau;
-	float runningSum = 0;
+	float32_t runningSum = 0;
 	yin.yinBuffer[0] = 1;
 
 	/* Sum all the values in the autocorellation buffer and nomalise the result, replacing
@@ -51,7 +59,7 @@ static void Yin_cumulativeMeanNormalizedDifference(void)
 	for (tau = 1; tau < yin.halfBufferSize; tau++) {
 		runningSum += yin.yinBuffer[tau];
 		
-		// floating point divide here 
+		// float32_ting point divide here 
 		yin.yinBuffer[tau] *= tau / runningSum;
 	}
 }
@@ -102,8 +110,8 @@ static int16_t Yin_absoluteThreshold(void){
  * As we only autocorellated using integer shifts we should check that there isn't a better fractional 
  * shift value.
  */
-static float Yin_parabolicInterpolation(int16_t tauEstimate) {
-	float betterTau;
+static float32_t Yin_parabolicInterpolation(int16_t tauEstimate) {
+	float32_t betterTau;
 	int16_t x0;
 	int16_t x2;
 	
@@ -126,28 +134,28 @@ static float Yin_parabolicInterpolation(int16_t tauEstimate) {
 	/* Algorithm to parabolically interpolate the shift value tau to find a better estimate */
 	if (x0 == tauEstimate) {
 		if (yin.yinBuffer[tauEstimate] <= yin.yinBuffer[x2]) {
-			betterTau = (float)tauEstimate;
+			betterTau = (float32_t)tauEstimate;
 		} 
 		else {
-			betterTau = (float)x2;
+			betterTau = (float32_t)x2;
 		}
 	} 
 	else if (x2 == tauEstimate) {
 		if (yin.yinBuffer[tauEstimate] <= yin.yinBuffer[x0]) {
-			betterTau = (float)tauEstimate;
+			betterTau = (float32_t)tauEstimate;
 		} 
 		else {
-			betterTau = (float)x0;
+			betterTau = (float32_t)x0;
 		}
 	} 
 	else {
-		float s0, s1, s2;
+		float32_t s0, s1, s2;
 		s0 = yin.yinBuffer[x0];
 		s1 = yin.yinBuffer[tauEstimate];
 		s2 = yin.yinBuffer[x2];
 		// fixed AUBIO implementation, thanks to Karl Helgason:
 		// (2.0f * s1 - s2 - s0) was incorrectly multiplied with -1
-		betterTau = (float)(tauEstimate) + (s2 - s0) / (2.0 * (2.0 * s1 - s2 - s0));
+		betterTau = (float32_t)(tauEstimate) + (s2 - s0) / (2.0 * (2.0 * s1 - s2 - s0));
 	}
 
 	return betterTau;
@@ -161,20 +169,15 @@ static float Yin_parabolicInterpolation(int16_t tauEstimate) {
  * @param bufferSize Length of the audio buffer to analyse
  * @param threshold  Allowed uncertainty (e.g 0.05 will return a pitch with ~95% probability)
  */
-void Yin_init(int16_t bufferSize, float threshold){
+void Yin_init(int16_t bufferSize, float32_t threshold){
 	/* Initialise the fields of the Yin structure passed in */
 	yin.bufferSize = bufferSize;
 	yin.halfBufferSize = bufferSize / 2;
 	yin.probability = 0.0;
 	yin.threshold = threshold;
 	
-	/* Allocate the autocorellation buffer and initialise it to zero */
-	yin.yinBuffer = (float *) malloc(sizeof(float)* yin.halfBufferSize);
-
-	int16_t i;
-	for(i = 0; i < yin.halfBufferSize; i++){
-		yin.yinBuffer[i] = 0.0;
-	}
+	/* Allocate the autocorellation buffer */
+	yin.yinBuffer = (float32_t *) malloc(sizeof(float32_t)* yin.halfBufferSize);
 }
 
 /**
@@ -182,15 +185,10 @@ void Yin_init(int16_t bufferSize, float threshold){
  * @param  buffer Buffer of samples to analyse
  * @return        Fundamental frequency of the signal in Hz. Returns -1 if pitch can't be found
  */
-float Yin_getPitch(int16_t* buffer){
+float32_t Yin_getPitch(int16_t* buffer){
 	int16_t tauEstimate = -1;
-	float pitchInHertz = -1;
-	
-	int16_t i;
-	for(i = 0; i < yin.halfBufferSize; i++){
-		yin.yinBuffer[i] = 0.0;
-	}
-	
+	float32_t pitchInHertz = -1;
+
 	/* Step 1: Calculates the squared difference of the signal with a shifted version of itself. */
 	Yin_difference(buffer);
 	
@@ -211,7 +209,7 @@ float Yin_getPitch(int16_t* buffer){
  * Certainty of the pitch found 
  * @return     Returns the certainty of the note found as a decimal (i.e 0.3 is 30%)
  */
-float Yin_getProbability(void){
+float32_t Yin_getProbability(void){
 	return yin.probability;
 }
 
