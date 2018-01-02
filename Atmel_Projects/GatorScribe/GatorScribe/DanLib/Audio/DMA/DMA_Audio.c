@@ -150,8 +150,8 @@ uint16_t inPingBuffer[BUF_SIZE];
 uint16_t inPongBuffer[BUF_SIZE];
 uint16_t outPingBuffer[BUF_SIZE];
 uint16_t outPongBuffer[BUF_SIZE];
-int16_t processPingBuffer[PROCESS_BUF_SIZE*TOTAL_PROCESS_BUFFERS];	
-int16_t processPongBuffer[PROCESS_BUF_SIZE*TOTAL_PROCESS_BUFFERS];
+volatile int16_t processPingBuffer[PROCESS_BUF_SIZE*TOTAL_PROCESS_BUFFERS];	
+volatile int16_t processPongBuffer[PROCESS_BUF_SIZE*TOTAL_PROCESS_BUFFERS];
 volatile int16_t *processBuffer = processPongBuffer; 
 volatile int16_t *fillBuffer = processPingBuffer;
 volatile uint16_t *inBuffer = inPingBuffer;
@@ -229,6 +229,7 @@ void XDMAC_Handler(void)
 				fillBuffer += PROCESS_BUF_SIZE;
 			}
 		}
+		
     }
 	
 	dma_status = xdmac_channel_get_interrupt_status(XDMAC, XDMA_CH_SSC_TX);

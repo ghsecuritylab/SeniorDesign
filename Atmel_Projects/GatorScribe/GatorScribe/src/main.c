@@ -1,20 +1,18 @@
 #include <asf.h>
 #include "DanLib.h"
+//#include <math.h>
+//#include "arm_math.h"
 
-
-
-
-static volatile Yin yin;
 static volatile float pitch; 
 extern volatile bool outOfTime; 
 int main(void)
 {
 	sysclk_init();
 	board_init();
-	lcd_init();
-	audio_init(); 
-	
-	
+	lcd_init(); 
+	Yin_init(PROCESS_BUF_SIZE, YIN_DEFAULT_THRESHOLD);
+	audio_init();
+
 	
 	//start_gatorscribe();
 	int16_t *audio; 
@@ -23,7 +21,7 @@ int main(void)
 		if (dataReceived)
 		{
 			
-			//audio = (int16_t *)processBuffer; 
+			audio = (int16_t *)processBuffer; 
 			/*
 			for(int i = 0; i < TOTAL_PROCESS_BUFFERS; i++)
 			{
@@ -32,8 +30,7 @@ int main(void)
 				audio += BUF_SIZE;
 			}
 			*/
-			Yin_init((Yin *)&yin, PROCESS_BUF_SIZE, 0.05);
-			pitch = Yin_getPitch((Yin *)&yin, (int16_t *)processBuffer);
+			pitch = Yin_getPitch((int16_t *)processBuffer);
 			
 			// Average pitch 
 			//pitch = pitch / TOTAL_PROCESS_BUFFERS; 

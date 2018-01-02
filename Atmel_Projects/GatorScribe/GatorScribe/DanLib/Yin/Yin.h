@@ -2,9 +2,11 @@
 #define Yin_h
 
 #include <stdint.h>
+//#include <math.h>
+//#include "arm_math.h"
 
 #define YIN_SAMPLING_RATE 46500
-#define YIN_DEFAULT_THRESHOLD 0.15
+#define YIN_DEFAULT_THRESHOLD 0.05
 
 /**
  * @struct  Yin
@@ -20,27 +22,22 @@ typedef struct _Yin {
 
 /**
  * Initialise the Yin pitch detection object
- * @param yin        Yin pitch detection object to initialise
  * @param bufferSize Length of the audio buffer to analyse
  * @param threshold  Allowed uncertainty (e.g 0.05 will return a pitch with ~95% probability)
  */
-void Yin_init(Yin *yin, int16_t bufferSize, float threshold);
+void Yin_init(int16_t bufferSize, float threshold);
 
 /**
  * Runs the Yin pitch detection algortihm
- * @param  yin    Initialised Yin object
  * @param  buffer Buffer of samples to analyse
  * @return        Fundamental frequency of the signal in Hz. Returns -1 if pitch can't be found
  */
-float Yin_getPitch(Yin *yin, int16_t* buffer);
+float Yin_getPitch(int16_t* buffer);
 
 /**
  * Certainty of the pitch found 
- * @param  yin Yin object that has been run over a buffer
  * @return     Returns the certainty of the note found as a decimal (i.e 0.3 is 30%)
  */
-float Yin_getProbability(Yin *yin);
-	
-
+float Yin_getProbability(void);
 
 #endif
