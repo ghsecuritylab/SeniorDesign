@@ -9,11 +9,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   2 .relocate     000009f0  20400000  00409d2c  00020000  2**3
                   CONTENTS, ALLOC, LOAD, CODE
-  3 .bss          00002618  204009f0  0040a71c  000209f0  2**2
+  3 .bss          00002818  204009f0  0040a71c  000209f0  2**2
                   ALLOC
-  4 .stack        00002000  20403008  0040cd34  000209f0  2**0
+  4 .stack        00002000  20403208  0040cf34  000209f0  2**0
                   ALLOC
-  5 .heap         00000200  20405008  0040ed34  000209f0  2**0
+  5 .heap         00000200  20405208  0040ef34  000209f0  2**0
                   ALLOC
   6 .ARM.attributes 0000002e  00000000  00000000  000209f0  2**0
                   CONTENTS, READONLY
@@ -29,19 +29,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_ranges 00000e90  00000000  00000000  00059e2a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  00029490  00000000  00000000  0005acba  2**0
+ 13 .debug_macro  0002949b  00000000  00000000  0005acba  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   00018db2  00000000  00000000  0008414a  2**0
+ 14 .debug_line   00018de2  00000000  00000000  00084155  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    0009d0f1  00000000  00000000  0009cefc  2**0
+ 15 .debug_str    0009d103  00000000  00000000  0009cf37  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_frame  000031ec  00000000  00000000  00139ff0  2**2
+ 16 .debug_frame  000031ec  00000000  00000000  0013a03c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00400000 <exception_table>:
-  400000:	08 50 40 20 cd 26 40 00 c9 26 40 00 cb 26 40 00     .P@ .&@..&@..&@.
+  400000:	08 52 40 20 cd 26 40 00 c9 26 40 00 cb 26 40 00     .R@ .&@..&@..&@.
   400010:	c9 26 40 00 c9 26 40 00 c9 26 40 00 00 00 00 00     .&@..&@..&@.....
 	...
   40002c:	c9 26 40 00 c9 26 40 00 00 00 00 00 c9 26 40 00     .&@..&@......&@.
@@ -173,7 +173,7 @@ void XDMAC_Handler(void)
   4001e2:	e7f0      	b.n	4001c6 <XDMAC_Handler+0x1a>
 		for(int i = 0; i < BUF_SIZE; i++)
   4001e4:	3301      	adds	r3, #1
-  4001e6:	2b40      	cmp	r3, #64	; 0x40
+  4001e6:	2b80      	cmp	r3, #128	; 0x80
   4001e8:	d012      	beq.n	400210 <XDMAC_Handler+0x64>
 			outBuffer[i] = inBuffer[i];
   4001ea:	6802      	ldr	r2, [r0, #0]
@@ -212,7 +212,7 @@ void XDMAC_Handler(void)
 			else 
 			{
 				fillBuffer += PROCESS_BUF_SIZE; 
-  400222:	3320      	adds	r3, #32
+  400222:	3340      	adds	r3, #64	; 0x40
   400224:	4a38      	ldr	r2, [pc, #224]	; (400308 <XDMAC_Handler+0x15c>)
   400226:	6013      	str	r3, [r2, #0]
   400228:	4b32      	ldr	r3, [pc, #200]	; (4002f4 <XDMAC_Handler+0x148>)
@@ -251,7 +251,7 @@ void XDMAC_Handler(void)
   40024c:	bc70      	pop	{r4, r5, r6}
   40024e:	4770      	bx	lr
 				processBuffer = processPingBuffer; 
-  400250:	f5a2 627e 	sub.w	r2, r2, #4064	; 0xfe0
+  400250:	f5a2 627c 	sub.w	r2, r2, #4032	; 0xfc0
   400254:	4b32      	ldr	r3, [pc, #200]	; (400320 <XDMAC_Handler+0x174>)
   400256:	601a      	str	r2, [r3, #0]
 				fillBuffer = processPongBuffer; 
@@ -284,12 +284,12 @@ void XDMAC_Handler(void)
   400284:	4293      	cmp	r3, r2
   400286:	d003      	beq.n	400290 <XDMAC_Handler+0xe4>
 				fillBuffer += PROCESS_BUF_SIZE;
-  400288:	3320      	adds	r3, #32
+  400288:	3340      	adds	r3, #64	; 0x40
   40028a:	4a1f      	ldr	r2, [pc, #124]	; (400308 <XDMAC_Handler+0x15c>)
   40028c:	6013      	str	r3, [r2, #0]
   40028e:	e7cb      	b.n	400228 <XDMAC_Handler+0x7c>
 				processBuffer = processPongBuffer;
-  400290:	f5a2 627e 	sub.w	r2, r2, #4064	; 0xfe0
+  400290:	f5a2 627c 	sub.w	r2, r2, #4032	; 0xfc0
   400294:	4b22      	ldr	r3, [pc, #136]	; (400320 <XDMAC_Handler+0x174>)
   400296:	601a      	str	r2, [r3, #0]
 				fillBuffer = processPingBuffer; 
@@ -347,22 +347,22 @@ void XDMAC_Handler(void)
   4002f2:	bf00      	nop
   4002f4:	40078000 	.word	0x40078000
   4002f8:	20400014 	.word	0x20400014
-  4002fc:	20402f48 	.word	0x20402f48
+  4002fc:	204030c8 	.word	0x204030c8
   400300:	20400010 	.word	0x20400010
   400304:	20400018 	.word	0x20400018
   400308:	2040000c 	.word	0x2040000c
   40030c:	20401dc8 	.word	0x20401dc8
   400310:	20400024 	.word	0x20400024
-  400314:	20401da8 	.word	0x20401da8
+  400314:	20401d88 	.word	0x20401d88
   400318:	2040001c 	.word	0x2040001c
-  40031c:	20401e48 	.word	0x20401e48
+  40031c:	20401ec8 	.word	0x20401ec8
   400320:	20400020 	.word	0x20400020
-  400324:	20401f48 	.word	0x20401f48
+  400324:	204020c8 	.word	0x204020c8
   400328:	20400a0c 	.word	0x20400a0c
   40032c:	20400a50 	.word	0x20400a50
-  400330:	20402f28 	.word	0x20402f28
+  400330:	20403088 	.word	0x20403088
   400334:	20400dc8 	.word	0x20400dc8
-  400338:	20401ec8 	.word	0x20401ec8
+  400338:	20401fc8 	.word	0x20401fc8
 
 0040033c <configure_xdma>:
 /******************************* XDMAC Interrupt Handler End *******************************/
@@ -547,15 +547,15 @@ static inline void xdmac_channel_set_descriptor_control(Xdmac *xdmac, uint32_t c
   4003f4:	21042801 	.word	0x21042801
   4003f8:	40078000 	.word	0x40078000
   4003fc:	20400a10 	.word	0x20400a10
-  400400:	0b000040 	.word	0x0b000040
+  400400:	0b000080 	.word	0x0b000080
   400404:	40004020 	.word	0x40004020
-  400408:	20402f48 	.word	0x20402f48
+  400408:	204030c8 	.word	0x204030c8
   40040c:	20401dc8 	.word	0x20401dc8
   400410:	20014811 	.word	0x20014811
   400414:	20400a30 	.word	0x20400a30
-  400418:	20401e48 	.word	0x20401e48
+  400418:	20401ec8 	.word	0x20401ec8
   40041c:	40004024 	.word	0x40004024
-  400420:	20401ec8 	.word	0x20401ec8
+  400420:	20401fc8 	.word	0x20401fc8
   400424:	00401da1 	.word	0x00401da1
 
 00400428 <audio_init>:
@@ -1057,12 +1057,12 @@ void gfx_set_clipping(gfx_coord_t min_x, gfx_coord_t min_y,
 }
   4006e6:	f85d 4b04 	ldr.w	r4, [sp], #4
   4006ea:	4770      	bx	lr
-  4006ec:	20402fc8 	.word	0x20402fc8
-  4006f0:	20402fd2 	.word	0x20402fd2
-  4006f4:	20402fcc 	.word	0x20402fcc
-  4006f8:	20402fd0 	.word	0x20402fd0
-  4006fc:	20402fca 	.word	0x20402fca
-  400700:	20402fce 	.word	0x20402fce
+  4006ec:	204031c8 	.word	0x204031c8
+  4006f0:	204031d2 	.word	0x204031d2
+  4006f4:	204031cc 	.word	0x204031cc
+  4006f8:	204031d0 	.word	0x204031d0
+  4006fc:	204031ca 	.word	0x204031ca
+  400700:	204031ce 	.word	0x204031ce
 
 00400704 <gfx_generic_draw_filled_rect>:
 		gfx_color_t color)
@@ -1219,10 +1219,10 @@ void gfx_set_clipping(gfx_coord_t min_x, gfx_coord_t min_y,
   4007be:	b209      	sxth	r1, r1
   4007c0:	e7ab      	b.n	40071a <gfx_generic_draw_filled_rect+0x16>
   4007c2:	4770      	bx	lr
-  4007c4:	20402fca 	.word	0x20402fca
-  4007c8:	20402fce 	.word	0x20402fce
-  4007cc:	20402fcc 	.word	0x20402fcc
-  4007d0:	20402fd0 	.word	0x20402fd0
+  4007c4:	204031ca 	.word	0x204031ca
+  4007c8:	204031ce 	.word	0x204031ce
+  4007cc:	204031cc 	.word	0x204031cc
+  4007d0:	204031d0 	.word	0x204031d0
   4007d4:	0040190d 	.word	0x0040190d
   4007d8:	004019c1 	.word	0x004019c1
 
@@ -1284,8 +1284,8 @@ void gfx_ili9488_set_orientation(uint8_t flags)
   400824:	e7e9      	b.n	4007fa <gfx_ili9488_set_orientation+0x1e>
   400826:	bf00      	nop
   400828:	00401935 	.word	0x00401935
-  40082c:	20402fc8 	.word	0x20402fc8
-  400830:	20402fd2 	.word	0x20402fd2
+  40082c:	204031c8 	.word	0x204031c8
+  400830:	204031d2 	.word	0x204031d2
   400834:	004006b1 	.word	0x004006b1
 
 00400838 <gfx_ili9488_draw_pixel>:
@@ -1335,10 +1335,10 @@ void gfx_ili9488_draw_pixel(gfx_coord_t x, gfx_coord_t y, gfx_color_t color)
   400872:	4798      	blx	r3
   400874:	e7f5      	b.n	400862 <gfx_ili9488_draw_pixel+0x2a>
   400876:	bf00      	nop
-  400878:	20402fcc 	.word	0x20402fcc
-  40087c:	20402fca 	.word	0x20402fca
-  400880:	20402fd0 	.word	0x20402fd0
-  400884:	20402fce 	.word	0x20402fce
+  400878:	204031cc 	.word	0x204031cc
+  40087c:	204031ca 	.word	0x204031ca
+  400880:	204031d0 	.word	0x204031d0
+  400884:	204031ce 	.word	0x204031ce
   400888:	0040190d 	.word	0x0040190d
   40088c:	00401981 	.word	0x00401981
 
@@ -1445,8 +1445,8 @@ void gfx_ili9488_init(void)
 }
   400916:	b006      	add	sp, #24
   400918:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
-  40091c:	20402fc8 	.word	0x20402fc8
-  400920:	20402fd2 	.word	0x20402fd2
+  40091c:	204031c8 	.word	0x204031c8
+  400920:	204031d2 	.word	0x204031d2
   400924:	00401781 	.word	0x00401781
   400928:	00402179 	.word	0x00402179
   40092c:	00402175 	.word	0x00402175
@@ -3112,8 +3112,8 @@ _read (int file, char * ptr, int len)
   40146e:	4680      	mov	r8, r0
   401470:	e7f7      	b.n	401462 <_read+0x22>
   401472:	bf00      	nop
-  401474:	20402fdc 	.word	0x20402fdc
-  401478:	20402fd4 	.word	0x20402fd4
+  401474:	204031dc 	.word	0x204031dc
+  401478:	204031d4 	.word	0x204031d4
 
 0040147c <_write>:
 int __attribute__((weak))
@@ -3164,8 +3164,8 @@ _write (int file, const char *ptr, int len)
 }
   4014be:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
   4014c2:	bf00      	nop
-  4014c4:	20402fd8 	.word	0x20402fd8
-  4014c8:	20402fdc 	.word	0x20402fdc
+  4014c4:	204031d8 	.word	0x204031d8
+  4014c8:	204031dc 	.word	0x204031dc
 
 004014cc <wm8904_write_register>:
  *
@@ -6513,7 +6513,7 @@ static inline void cpu_irq_restore(irqflags_t flags)
   402768:	20400000 	.word	0x20400000
   40276c:	00409d2c 	.word	0x00409d2c
   402770:	204009f0 	.word	0x204009f0
-  402774:	20403008 	.word	0x20403008
+  402774:	20403208 	.word	0x20403208
   402778:	204009f0 	.word	0x204009f0
   40277c:	e000ed00 	.word	0xe000ed00
   402780:	00400000 	.word	0x00400000
@@ -6828,7 +6828,7 @@ void system_init_flash( uint32_t ul_clk )
   402956:	bf00      	nop
   402958:	20400d88 	.word	0x20400d88
   40295c:	2045fffc 	.word	0x2045fffc
-  402960:	20405208 	.word	0x20405208
+  402960:	20405408 	.word	0x20405408
 
 00402964 <_close>:
 }
@@ -8463,13 +8463,13 @@ int main(void)
   403a94:	4801      	ldr	r0, [pc, #4]	; (403a9c <__malloc_lock+0x8>)
   403a96:	f003 be33 	b.w	407700 <__retarget_lock_acquire_recursive>
   403a9a:	bf00      	nop
-  403a9c:	20402ff0 	.word	0x20402ff0
+  403a9c:	204031f0 	.word	0x204031f0
 
 00403aa0 <__malloc_unlock>:
   403aa0:	4801      	ldr	r0, [pc, #4]	; (403aa8 <__malloc_unlock+0x8>)
   403aa2:	f003 be2f 	b.w	407704 <__retarget_lock_release_recursive>
   403aa6:	bf00      	nop
-  403aa8:	20402ff0 	.word	0x20402ff0
+  403aa8:	204031f0 	.word	0x204031f0
 
 00403aac <_sbrk_r>:
   403aac:	b538      	push	{r3, r4, r5, lr}
@@ -8487,7 +8487,7 @@ int main(void)
   403ac6:	d0fb      	beq.n	403ac0 <_sbrk_r+0x14>
   403ac8:	602b      	str	r3, [r5, #0]
   403aca:	bd38      	pop	{r3, r4, r5, pc}
-  403acc:	20403004 	.word	0x20403004
+  403acc:	20403204 	.word	0x20403204
 
 00403ad0 <sprintf>:
   403ad0:	b40e      	push	{r1, r2, r3}
@@ -13722,20 +13722,20 @@ int main(void)
   406faa:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
   406fae:	f000 bba9 	b.w	407704 <__retarget_lock_release_recursive>
   406fb2:	bf00      	nop
-  406fb4:	20402fec 	.word	0x20402fec
+  406fb4:	204031ec 	.word	0x204031ec
   406fb8:	00406f09 	.word	0x00406f09
 
 00406fbc <__sfp_lock_acquire>:
   406fbc:	4801      	ldr	r0, [pc, #4]	; (406fc4 <__sfp_lock_acquire+0x8>)
   406fbe:	f000 bb9f 	b.w	407700 <__retarget_lock_acquire_recursive>
   406fc2:	bf00      	nop
-  406fc4:	20403000 	.word	0x20403000
+  406fc4:	20403200 	.word	0x20403200
 
 00406fc8 <__sfp_lock_release>:
   406fc8:	4801      	ldr	r0, [pc, #4]	; (406fd0 <__sfp_lock_release+0x8>)
   406fca:	f000 bb9b 	b.w	407704 <__retarget_lock_release_recursive>
   406fce:	bf00      	nop
-  406fd0:	20403000 	.word	0x20403000
+  406fd0:	20403200 	.word	0x20403200
 
 00406fd4 <__libc_fini_array>:
   406fd4:	b538      	push	{r3, r4, r5, lr}
@@ -16187,7 +16187,7 @@ int main(void)
   4087da:	6033      	str	r3, [r6, #0]
   4087dc:	bd70      	pop	{r4, r5, r6, pc}
   4087de:	bf00      	nop
-  4087e0:	20403004 	.word	0x20403004
+  4087e0:	20403204 	.word	0x20403204
 
 004087e4 <__register_exitproc>:
   4087e4:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -16317,7 +16317,7 @@ int main(void)
   408922:	d0fb      	beq.n	40891c <_close_r+0x14>
   408924:	602b      	str	r3, [r5, #0]
   408926:	bd38      	pop	{r3, r4, r5, pc}
-  408928:	20403004 	.word	0x20403004
+  408928:	20403204 	.word	0x20403204
 
 0040892c <_fclose_r>:
   40892c:	b570      	push	{r4, r5, r6, lr}
@@ -16421,7 +16421,7 @@ int main(void)
   408a0e:	d0fb      	beq.n	408a08 <_fstat_r+0x18>
   408a10:	602b      	str	r3, [r5, #0]
   408a12:	bd38      	pop	{r3, r4, r5, pc}
-  408a14:	20403004 	.word	0x20403004
+  408a14:	20403204 	.word	0x20403204
 
 00408a18 <_isatty_r>:
   408a18:	b538      	push	{r3, r4, r5, lr}
@@ -16439,7 +16439,7 @@ int main(void)
   408a32:	d0fb      	beq.n	408a2c <_isatty_r+0x14>
   408a34:	602b      	str	r3, [r5, #0]
   408a36:	bd38      	pop	{r3, r4, r5, pc}
-  408a38:	20403004 	.word	0x20403004
+  408a38:	20403204 	.word	0x20403204
 
 00408a3c <_lseek_r>:
   408a3c:	b570      	push	{r4, r5, r6, lr}
@@ -16461,7 +16461,7 @@ int main(void)
   408a5e:	6033      	str	r3, [r6, #0]
   408a60:	bd70      	pop	{r4, r5, r6, pc}
   408a62:	bf00      	nop
-  408a64:	20403004 	.word	0x20403004
+  408a64:	20403204 	.word	0x20403204
 
 00408a68 <_read_r>:
   408a68:	b570      	push	{r4, r5, r6, lr}
@@ -16483,7 +16483,7 @@ int main(void)
   408a8a:	6033      	str	r3, [r6, #0]
   408a8c:	bd70      	pop	{r4, r5, r6, pc}
   408a8e:	bf00      	nop
-  408a90:	20403004 	.word	0x20403004
+  408a90:	20403204 	.word	0x20403204
 
 00408a94 <__aeabi_d2iz>:
   408a94:	ea4f 0241 	mov.w	r2, r1, lsl #1
@@ -17104,19 +17104,19 @@ void portable_delay_cycles(unsigned long n)
 2040000c:	0dc8 2040                                   ..@ 
 
 20400010 <inBuffer>:
-20400010:	2f48 2040                                   H/@ 
+20400010:	30c8 2040                                   .0@ 
 
 20400014 <inPingMode>:
 20400014:	0001 0000                                   ....
 
 20400018 <outBuffer>:
-20400018:	1e48 2040                                   H.@ 
+20400018:	1ec8 2040                                   ..@ 
 
 2040001c <outPingMode>:
 2040001c:	0001 0000                                   ....
 
 20400020 <processBuffer>:
-20400020:	1f48 2040                                   H.@ 
+20400020:	20c8 2040                                   . @ 
 
 20400024 <processPingMode>:
 20400024:	0001 0000                                   ....
@@ -17217,7 +17217,7 @@ void portable_delay_cycles(unsigned long n)
 2040087c:	0000 0002                                   ....
 
 20400880 <__atexit_recursive_mutex>:
-20400880:	2fe0 2040                                   ./@ 
+20400880:	31e0 2040                                   .1@ 
 
 20400884 <__global_locale>:
 20400884:	0043 0000 0000 0000 0000 0000 0000 0000     C...............

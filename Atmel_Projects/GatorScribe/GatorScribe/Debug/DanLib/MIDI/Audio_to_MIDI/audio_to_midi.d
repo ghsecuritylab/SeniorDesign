@@ -1,4 +1,6 @@
-src/main.d src/main.o: ../src/main.c ../src/asf.h \
+DanLib/MIDI/Audio_to_MIDI/audio_to_midi.d \
+ DanLib/MIDI/Audio_to_MIDI/audio_to_midi.o: \
+ ../DanLib/MIDI/Audio_to_MIDI/audio_to_midi.c ../src/asf.h \
  ../src/ASF/sam/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h \
@@ -177,23 +179,13 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/config/conf_wm8904.h ../src/ASF/sam/drivers/xdmac/xdmac.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../DanLib/DanLib.h ../DanLib/Audio/audio.h \
- ../DanLib/Audio/DMA/DMA_Audio.h \
- ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h ../DanLib/Yin/Yin.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../DanLib/LCDLib/LCDLib.h ../DanLib/LCDLib/gfx/gfx.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
- ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
- ../DanLib/LCDLib/gfx/gfx_generic.h ../DanLib/LCDLib/gfx/sysfont.h \
- ../src/config/conf_sysfont.h ../DanLib/LCDLib/gfx/gfx.h \
- ../DanLib/LCDLib/gfx/gfx_text.h ../DanLib/LCDLib/touch/touch.h \
- ../DanLib/LCDLib/gfx/gfx.h ../DanLib/GUI/main_menu.h \
- ../DanLib/MIDI/Audio_to_MIDI/audio_to_midi.h
+ ../DanLib/MIDI/Audio_to_MIDI/audio_to_midi.h ../DanLib/Yin/Yin.h
 
 ../src/asf.h:
 
@@ -571,16 +563,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam/drivers/pio/pio_handler.h:
 
-../DanLib/DanLib.h:
-
-../DanLib/Audio/audio.h:
-
-../DanLib/Audio/DMA/DMA_Audio.h:
-
-../DanLib/Audio/WM8904_Driver/WM8904_Driver.h:
-
-../DanLib/Yin/Yin.h:
-
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
 
 ../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
@@ -593,28 +575,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
 
-../DanLib/LCDLib/LCDLib.h:
-
-../DanLib/LCDLib/gfx/gfx.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h:
-
-../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h:
-
-../DanLib/LCDLib/gfx/gfx_generic.h:
-
-../DanLib/LCDLib/gfx/sysfont.h:
-
-../src/config/conf_sysfont.h:
-
-../DanLib/LCDLib/gfx/gfx.h:
-
-../DanLib/LCDLib/gfx/gfx_text.h:
-
-../DanLib/LCDLib/touch/touch.h:
-
-../DanLib/LCDLib/gfx/gfx.h:
-
-../DanLib/GUI/main_menu.h:
-
 ../DanLib/MIDI/Audio_to_MIDI/audio_to_midi.h:
+
+../DanLib/Yin/Yin.h:

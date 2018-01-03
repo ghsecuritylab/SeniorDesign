@@ -34,6 +34,8 @@ DanLib\LCDLib\LCDLib.c
 
 DanLib\LCDLib\touch\touch.c
 
+DanLib\MIDI\Audio_to_MIDI\audio_to_midi.c
+
 DanLib\Yin\Yin.c
 
 src\ASF\common\components\touch\mxt\mxt_device_1.c

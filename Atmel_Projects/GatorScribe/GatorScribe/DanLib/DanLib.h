@@ -13,5 +13,6 @@
 #include "LCDLib.h"
 #include "main_menu.h"
 #include "Yin.h"
+#include "audio_to_midi.h"
 
 #endif /* DANLIB_H_ */
