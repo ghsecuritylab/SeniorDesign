@@ -28,12 +28,9 @@ extern volatile bool dataReceived;
 extern volatile int16_t *processBuffer;
 /********************************** Externs End **********************************/
 
-
 /********************************** Public Functions Start **********************************/
 void configure_xdma(void);
 /********************************** Public Functions End **********************************/
-
-
 
 #endif /* DMA_AUDIO_H_ */
 

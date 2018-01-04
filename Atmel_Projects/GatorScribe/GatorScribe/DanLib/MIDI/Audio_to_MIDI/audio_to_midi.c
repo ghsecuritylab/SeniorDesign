@@ -34,30 +34,25 @@ const float32_t midi_note_frequencies[128] = {
 	}; 
 
 /**************************** Private Functions Start *********************************/
-static uint8_t get_midi_velocity(int16_t *buffer)
+static int16_t get_midi_velocity(int16_t *buffer)
 {
 	// TODO: analyze power of the signal 
 	return 64; 
 }
 
 static uint8_t get_midi_number(float32_t frequency)
-{
-	int i; 
-	float32_t abs_diff = 1000000; 
-	uint8_t midi_number = 0; 
-	float32_t temp_abs_diff;  
+{	
+	// start at C0 
+	uint8_t i = 12; 
+	float32_t abs_diff = abs(frequency - midi_note_frequencies[i++]); 
+	float32_t temp_abs_diff = abs(frequency - midi_note_frequencies[i++]);   
 	
-	// start at C0 - O(n) search 
-	for (i = 12; i < 128; i++)
+	while (temp_abs_diff < abs_diff && i < 128)
 	{
-		temp_abs_diff = abs(frequency - midi_note_frequencies[i]); 
-		if (temp_abs_diff < abs_diff)
-		{
-			abs_diff = temp_abs_diff; 
-			midi_number = i; 
-		}
+		abs_diff = temp_abs_diff; 
+		temp_abs_diff = abs(frequency - midi_note_frequencies[i++]);   
 	}
-	return midi_number; 
+	return (i-2); 
 }
 /**************************** Private Functions End *********************************/
 
@@ -65,12 +60,23 @@ static uint8_t get_midi_number(float32_t frequency)
 void get_midi_note(int16_t *buffer, midi_note_t *note)
 {
 	float32_t freq = Yin_getPitch(buffer); 
+	if (freq < 0)
+	{
+		note->note_number = -1; 
+		note->velocity = -1; 
+		return; 
+	}
 	note->note_number = get_midi_number(freq); 
 	note->velocity = get_midi_velocity(buffer); 
 }
 
-void get_midi_note_name(char *note_name, uint8_t note_number)
+void get_midi_note_name(char *note_name, int16_t note_number)
 {
+	if (note_number == -1)
+	{
+		strcpy(note_name, "No note");
+		return;
+	}
 	strcpy(note_name, &midi_note_names[note_number][0]);
 }
 

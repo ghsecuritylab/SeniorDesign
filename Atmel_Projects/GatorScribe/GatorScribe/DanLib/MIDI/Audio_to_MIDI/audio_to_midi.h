@@ -11,18 +11,18 @@
 
 typedef struct midi_note 
 {
-	uint8_t note_number; 
-	uint8_t velocity; 
+	int16_t note_number; 
+	int16_t  velocity; 
 }midi_note_t;
 
 typedef struct midi_event
 {
-	uint8_t note_number;
-	uint8_t velocity;
+	int16_t note_number;
+	int16_t velocity;
 	uint8_t rhythm; 
 }midi_event_t;
 
 void get_midi_note(int16_t *buffer, midi_note_t *midi_note);
-void get_midi_note_name(char *str, uint8_t note_number); 
+void get_midi_note_name(char *str, int16_t note_number); 
 
 #endif /* AUDIO_TO_MIDI_H_ */

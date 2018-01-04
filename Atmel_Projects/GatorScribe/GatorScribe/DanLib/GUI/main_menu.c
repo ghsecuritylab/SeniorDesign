@@ -265,5 +265,6 @@ void start_gatorscribe(void)
 			key_signature_menu(&key_signature);
 			tappedNewMenu = true;
 		}
+		// next button: START -- send all the info to recording function 
 	}
 }

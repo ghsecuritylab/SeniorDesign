@@ -6,12 +6,12 @@
 #include <string.h>
 #include <stdio.h>
 
-#define PITCH_BUF_SIZE 1600
+#define PITCH_BUF_SIZE 2048
 #define LCD_DELAY 50
 
 extern volatile bool outOfTime; 
-static volatile float32_t oldPitch = 0.0;
-static volatile float32_t pitch = -1;
+static volatile midi_note_t oldNote = {0, 0};
+static volatile midi_note_t note = {-1,0};
 static volatile int lcd_refresh = 0;
 int main(void)
 {
@@ -30,29 +30,27 @@ int main(void)
 		lcd_refresh++;
 		if (lcd_refresh == LCD_DELAY)
 		{
-			if ((int)oldPitch != (int)pitch)
+			if (oldNote.note_number != note.note_number)
 			{
-				sprintf(str, " %.2f", oldPitch);
+				get_midi_note_name(str, oldNote.note_number); 
 				gfx_draw_string_aligned((const char *)str,
 				150, 150, &sysfont,
 				GFX_COLOR_TRANSPARENT, GFX_COLOR_BLACK,
 				TEXT_POS_LEFT, TEXT_ALIGN_LEFT);
 				
-				sprintf(str, " %.2f", pitch);
+				get_midi_note_name(str, note.note_number);
 				gfx_draw_string_aligned((const char *)str,
 				150, 150, &sysfont,
 				GFX_COLOR_TRANSPARENT, GFX_COLOR_WHITE,
 				TEXT_POS_LEFT, TEXT_ALIGN_LEFT);
-				oldPitch = pitch;
+				oldNote.note_number = note.note_number;
 			}
 			lcd_refresh = 0;
 		}
 		if (dataReceived)
 		{
 			
-
-			pitch = Yin_getPitch((int16_t *)processBuffer);
-			
+			get_midi_note((int16_t *)processBuffer, (midi_note_t *)&note); 
 			
 			dataReceived = false; 
 		}
