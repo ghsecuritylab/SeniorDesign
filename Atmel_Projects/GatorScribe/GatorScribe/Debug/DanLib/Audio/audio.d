@@ -177,7 +177,8 @@ DanLib/Audio/audio.d DanLib/Audio/audio.o: ../DanLib/Audio/audio.c \
  ../src/config/conf_wm8904.h ../src/ASF/sam/drivers/xdmac/xdmac.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../DanLib/Audio/audio.h ../DanLib/Audio/DMA/DMA_Audio.h \
+ ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/Audio/audio.h \
+ ../DanLib/Audio/DMA/DMA_Audio.h \
  ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h ../DanLib/Yin/Yin.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
@@ -561,6 +562,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/config/conf_mxt.h:
 
 ../src/ASF/sam/drivers/pio/pio_handler.h:
+
+../src/ASF/sam/drivers/rtt/rtt.h:
 
 ../DanLib/Audio/audio.h:
 

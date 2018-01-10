@@ -452,6 +452,7 @@
       <Value>../DanLib/Audio</Value>
       <Value>../DanLib/Yin</Value>
       <Value>../DanLib/MIDI/Audio_to_MIDI</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -588,6 +589,7 @@
     <Folder Include="src\ASF\sam\drivers\mpu\" />
     <Folder Include="src\ASF\sam\drivers\pio\" />
     <Folder Include="src\ASF\sam\drivers\pmc\" />
+    <Folder Include="src\ASF\sam\drivers\rtt\" />
     <Folder Include="src\ASF\sam\drivers\ssc\" />
     <Folder Include="src\ASF\sam\drivers\twihs\" />
     <Folder Include="src\ASF\sam\drivers\uart\" />
@@ -817,6 +819,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\sam\drivers\ebi\smc\smc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam\drivers\rtt\rtt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam\drivers\rtt\rtt.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\sam\drivers\ssc\ssc.c">

@@ -17,7 +17,6 @@ static lld_view1 linklist_read[2];
 
 volatile static bool inPingMode = 1;
 volatile static bool outPingMode = 1;
-volatile static bool processPingMode = 1; 
 
 static int16_t sin_wave[SIN_WAVE_LENGTH] =
 {
@@ -150,15 +149,21 @@ uint16_t inPingBuffer[BUF_SIZE];
 uint16_t inPongBuffer[BUF_SIZE];
 uint16_t outPingBuffer[BUF_SIZE];
 uint16_t outPongBuffer[BUF_SIZE];
-volatile int16_t processPingBuffer[PROCESS_BUF_SIZE*TOTAL_PROCESS_BUFFERS];	
-volatile int16_t processPongBuffer[PROCESS_BUF_SIZE*TOTAL_PROCESS_BUFFERS];
+
+volatile int16_t processPingBuffer[PROCESS_BUF_SIZE];	
+volatile int16_t processPongBuffer[PROCESS_BUF_SIZE];
 volatile int16_t *processBuffer = processPongBuffer; 
 volatile int16_t *fillBuffer = processPingBuffer;
 volatile uint16_t *inBuffer = inPingBuffer;
 volatile uint16_t *outBuffer = outPingBuffer;
-volatile bool dataReceived = false;
+
+volatile bool processPingMode = 1;
+
 volatile bool outOfTime = 0; 
 /********************************** Public Variables End **********************************/
+
+/********************************** Extern Variables Start **********************************/
+extern volatile bool recording; 
 
 /******************************* XDMAC Interrupt Handler Start *******************************/ 
 void XDMAC_Handler(void)
@@ -185,51 +190,33 @@ void XDMAC_Handler(void)
 			//outBuffer[i] = (uint16_t) ( ( (int32_t)((int16_t)inBuffer[i]) + (int32_t)(sin_wave[sinIdx++]/16) ) / 2 );
 			//if(sinIdx == SIN_WAVE_LENGTH) sinIdx = 0;
 
-			if (i % 4 == 0)
+			/* Check if divisible by 4 for decimation by 2 */ 
+			if ((i & 0x3) == 0)
 				fillBuffer[processIdx++] = (int16_t)inBuffer[i]; 
 		}
 		
 		if (processPingMode)
 		{
-			if (fillBuffer == &processPingBuffer[(TOTAL_PROCESS_BUFFERS-1)*PROCESS_BUF_SIZE])
+			if (fillBuffer == &processPingBuffer[PROCESS_BUF_SIZE - (BUF_SIZE >> 1)])
 			{
-				processBuffer = processPingBuffer; 
-				fillBuffer = processPongBuffer; 
-				processPingMode = !processPingMode; 
-				
-				if (dataReceived)
-				{
-					outOfTime = 1; 
-				}
-				else 
-					dataReceived = 1; 
+				// out of time 				
 			}	
 			else 
 			{
-				fillBuffer += PROCESS_BUF_SIZE; 
+				fillBuffer += PROCESS_BUF_SIZE_INCREMENT; 
 			}
 		}
 		else 
 		{
-			if (fillBuffer == &processPongBuffer[(TOTAL_PROCESS_BUFFERS-1)*PROCESS_BUF_SIZE])
+			if (fillBuffer == &processPongBuffer[PROCESS_BUF_SIZE - (BUF_SIZE >> 1)])
 			{
-				processBuffer = processPongBuffer;
-				fillBuffer = processPingBuffer; 
-				processPingMode = !processPingMode;
-				
-				if (dataReceived)
-				{
-					outOfTime = 1;
-				}
-				else
-					dataReceived = 1;
+				// out of time 
 			}
 			else
 			{
-				fillBuffer += PROCESS_BUF_SIZE;
+				fillBuffer += PROCESS_BUF_SIZE_INCREMENT;
 			}
 		}
-		
     }
 	
 	dma_status = xdmac_channel_get_interrupt_status(XDMAC, XDMA_CH_SSC_TX);

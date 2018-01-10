@@ -177,15 +177,15 @@ DanLib/GUI/main_menu.d DanLib/GUI/main_menu.o: ../DanLib/GUI/main_menu.c \
  ../src/config/conf_wm8904.h ../src/ASF/sam/drivers/xdmac/xdmac.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../DanLib/GUI/main_menu.h ../DanLib/GUI/Images/main_menu_img.h \
- ../DanLib/LCDLib/gfx/gfx.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
- ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
- ../DanLib/LCDLib/gfx/gfx_generic.h \
+ ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/GUI/main_menu.h \
  ../DanLib/GUI/playback_instrument/playback_instrument.h \
  ../DanLib/GUI/song_title/song_title.h ../DanLib/GUI/tempo/tempo.h \
  ../DanLib/GUI/time_signature/time_signature.h \
- ../DanLib/GUI/key_signature/key_signature.h ../DanLib/LCDLib/LCDLib.h \
+ ../DanLib/GUI/key_signature/key_signature.h \
+ ../DanLib/GUI/Images/main_menu_img.h ../DanLib/LCDLib/gfx/gfx.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
+ ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
+ ../DanLib/LCDLib/gfx/gfx_generic.h ../DanLib/LCDLib/LCDLib.h \
  ../DanLib/LCDLib/gfx/gfx.h ../DanLib/LCDLib/gfx/sysfont.h \
  ../src/config/conf_sysfont.h ../DanLib/LCDLib/gfx/gfx.h \
  ../DanLib/LCDLib/gfx/gfx_text.h ../DanLib/LCDLib/touch/touch.h \
@@ -572,17 +572,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam/drivers/pio/pio_handler.h:
 
+../src/ASF/sam/drivers/rtt/rtt.h:
+
 ../DanLib/GUI/main_menu.h:
-
-../DanLib/GUI/Images/main_menu_img.h:
-
-../DanLib/LCDLib/gfx/gfx.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h:
-
-../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h:
-
-../DanLib/LCDLib/gfx/gfx_generic.h:
 
 ../DanLib/GUI/playback_instrument/playback_instrument.h:
 
@@ -593,6 +585,16 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../DanLib/GUI/time_signature/time_signature.h:
 
 ../DanLib/GUI/key_signature/key_signature.h:
+
+../DanLib/GUI/Images/main_menu_img.h:
+
+../DanLib/LCDLib/gfx/gfx.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h:
+
+../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h:
+
+../DanLib/LCDLib/gfx/gfx_generic.h:
 
 ../DanLib/LCDLib/LCDLib.h:
 

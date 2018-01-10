@@ -5,5 +5,11 @@
  *  Author: Daniel Gonzalez
  */ 
 
+#include "playback_instrument.h"
+#include "song_title.h"
+#include "tempo.h"
+#include "time_signature.h"
+#include "key_signature.h"
 
-void start_gatorscribe(void); 
+void main_menu(uint32_t *bpm, midi_instrument_t *playback_instrument, 
+	time_signature_t *time_signature , key_signature_t *key_signature, char *title); 

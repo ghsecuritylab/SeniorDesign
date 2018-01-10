@@ -54,6 +54,8 @@ src\ASF\sam\components\display\ili9488\ili9488.c
 
 src\ASF\sam\drivers\ebi\smc\smc.c
 
+src\ASF\sam\drivers\rtt\rtt.c
+
 src\ASF\sam\drivers\ssc\ssc.c
 
 src\ASF\sam\drivers\twihs\twihs.c

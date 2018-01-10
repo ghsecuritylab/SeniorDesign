@@ -8,11 +8,6 @@
 #include "asf.h"
 #include "main_menu.h"
 #include "main_menu_img.h"
-#include "playback_instrument.h"
-#include "song_title.h"
-#include "tempo.h"
-#include "time_signature.h"
-#include "key_signature.h"
 #include "LCDLib.h"
 #include "fastmath.h"
 #include <string.h>
@@ -210,27 +205,21 @@ static void print_key_signature(key_signature_t * ksig)
 		TEXT_POS_CENTER_X, TEXT_ALIGN_LEFT);
 }
 
-void start_gatorscribe(void)
+void main_menu(uint32_t *bpm, midi_instrument_t *playback_instrument, time_signature_t *time_signature , key_signature_t *key_signature, char *title)
 {
 	touch_t touched_point;
 	button_t button_pressed;
 	bool tappedNewMenu = true; 
-	char title[MAX_TITLE_SIZE] = " "; 
-	uint32_t bpm = 100;
-	midi_instrument_t playback_instrument = PIANO; 
-	time_signature_t time_signature = {4,4, FOUR_FOUR}; 
-	key_signature_t key_signature = {C_MAJOR, MAJOR};
-
 	while(1)
 	{
 		if (tappedNewMenu)
 		{
 			gfx_draw_bitmap(&main_menu_img, (gfx_get_width() - main_menu_img.width) / 2, gfx_get_height() - main_menu_img.height);
-			print_bpm(bpm);
+			print_bpm(*bpm);
 			print_title(title);
-			print_instrument(playback_instrument); 
-			print_time_signature(&time_signature); 
-			print_key_signature(&key_signature);
+			print_instrument(*playback_instrument); 
+			print_time_signature(time_signature); 
+			print_key_signature(key_signature);
 			tappedNewMenu = false; 
 		}
 
@@ -242,7 +231,7 @@ void start_gatorscribe(void)
 		
 		if (button_pressed == TEMPO)
 		{
-			bpm = tempoMenu(bpm);
+			*bpm = tempoMenu(*bpm);
 			tappedNewMenu = true; 
 		}
 		else if (button_pressed == TITLE)
@@ -252,19 +241,20 @@ void start_gatorscribe(void)
 		}
 		else if (button_pressed == PLAYBACK_INSTRUMENT)
 		{
-			playback_instrument = instrument_menu();
+			*playback_instrument = instrument_menu();
 			tappedNewMenu = true;
 		}
 		else if (button_pressed == TIME_SIGNATURE)
 		{
-			time_signature_menu(&time_signature); 
+			time_signature_menu(time_signature); 
 			tappedNewMenu = true;
 		}
 		else if (button_pressed == KEY_SIGNATURE)
 		{
-			key_signature_menu(&key_signature);
+			key_signature_menu(key_signature);
 			tappedNewMenu = true;
 		}
-		// next button: START -- send all the info to recording function 
+		else if (button_pressed == START) 
+			return; 
 	}
 }

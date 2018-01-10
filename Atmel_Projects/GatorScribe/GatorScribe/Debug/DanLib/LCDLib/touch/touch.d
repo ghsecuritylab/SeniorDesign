@@ -178,7 +178,8 @@ DanLib/LCDLib/touch/touch.d DanLib/LCDLib/touch/touch.o: \
  ../src/config/conf_wm8904.h ../src/ASF/sam/drivers/xdmac/xdmac.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../DanLib/LCDLib/touch/touch.h ../DanLib/LCDLib/gfx/gfx.h \
+ ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/LCDLib/touch/touch.h \
+ ../DanLib/LCDLib/gfx/gfx.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
  ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
  ../DanLib/LCDLib/gfx/gfx_generic.h
@@ -558,6 +559,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/config/conf_mxt.h:
 
 ../src/ASF/sam/drivers/pio/pio_handler.h:
+
+../src/ASF/sam/drivers/rtt/rtt.h:
 
 ../DanLib/LCDLib/touch/touch.h:
 

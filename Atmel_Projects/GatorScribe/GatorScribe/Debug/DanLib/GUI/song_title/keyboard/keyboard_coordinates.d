@@ -179,6 +179,7 @@ DanLib/GUI/song_title/keyboard/keyboard_coordinates.d \
  ../src/config/conf_wm8904.h ../src/ASF/sam/drivers/xdmac/xdmac.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
+ ../src/ASF/sam/drivers/rtt/rtt.h \
  ../DanLib/GUI/song_title/keyboard/keyboard_coordinates.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
@@ -559,6 +560,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/config/conf_mxt.h:
 
 ../src/ASF/sam/drivers/pio/pio_handler.h:
+
+../src/ASF/sam/drivers/rtt/rtt.h:
 
 ../DanLib/GUI/song_title/keyboard/keyboard_coordinates.h:
 
