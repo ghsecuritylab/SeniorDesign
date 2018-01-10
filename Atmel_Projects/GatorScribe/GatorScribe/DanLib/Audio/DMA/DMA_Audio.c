@@ -191,7 +191,7 @@ void XDMAC_Handler(void)
 			//if(sinIdx == SIN_WAVE_LENGTH) sinIdx = 0;
 
 			/* Check if divisible by 4 for decimation by 2 */ 
-			if ((i & 0x3) == 0)
+			if ((i & 0x03) == 0)
 				fillBuffer[processIdx++] = (int16_t)inBuffer[i]; 
 		}
 		

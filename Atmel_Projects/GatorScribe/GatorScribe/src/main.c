@@ -1,12 +1,5 @@
 #include <asf.h>
 #include "DanLib.h"
-#include <math.h>
-#include "arm_math.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-
-
 
 int main(void)
 {
@@ -15,7 +8,7 @@ int main(void)
 	lcd_init(); 
 	audio_init();
 	
-	/* Gatorscribe params */ 
+	/* Initial Gatorscribe params */ 
 	uint32_t bpm = 100;
 	midi_instrument_t playback_instrument = PIANO;
 	time_signature_t time_signature = {4,4, FOUR_FOUR};

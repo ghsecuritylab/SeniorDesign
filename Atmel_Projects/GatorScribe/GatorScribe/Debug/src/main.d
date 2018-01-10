@@ -179,7 +179,8 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
  ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/DanLib.h \
  ../DanLib/Audio/audio.h ../DanLib/Audio/DMA/DMA_Audio.h \
- ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h ../DanLib/Yin/Yin.h \
+ ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h \
+ ../DanLib/Recording/Yin/Yin.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
@@ -197,7 +198,8 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../DanLib/GUI/song_title/song_title.h ../DanLib/GUI/tempo/tempo.h \
  ../DanLib/GUI/time_signature/time_signature.h \
  ../DanLib/GUI/key_signature/key_signature.h \
- ../DanLib/MIDI/Audio_to_MIDI/audio_to_midi.h
+ ../DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.h \
+ ../DanLib/Recording/recording.h
 
 ../src/asf.h:
 
@@ -585,7 +587,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h:
 
-../DanLib/Yin/Yin.h:
+../DanLib/Recording/Yin/Yin.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
 
@@ -633,4 +635,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/GUI/key_signature/key_signature.h:
 
-../DanLib/MIDI/Audio_to_MIDI/audio_to_midi.h:
+../DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.h:
+
+../DanLib/Recording/recording.h:
