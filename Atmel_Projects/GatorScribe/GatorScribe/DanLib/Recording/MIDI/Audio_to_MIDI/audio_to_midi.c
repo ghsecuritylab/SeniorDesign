@@ -75,7 +75,7 @@ void get_midi_note_name(char *note_name, int16_t note_number)
 {
 	if (note_number == -1)
 	{
-		strcpy(note_name, "No note");
+		strcpy(note_name, "None");
 		return;
 	}
 	strcpy(note_name, &midi_note_names[note_number][0]);

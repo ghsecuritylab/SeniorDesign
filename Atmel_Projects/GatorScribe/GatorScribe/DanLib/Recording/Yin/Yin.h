@@ -8,7 +8,7 @@
 //#define YIN_SAMPLING_RATE 46500
 #define YIN_SAMPLING_RATE 23250
 
-#define YIN_DEFAULT_THRESHOLD 0.05 // 5
+#define YIN_DEFAULT_THRESHOLD 0.05 
 
 /**
  * @struct  Yin

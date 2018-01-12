@@ -17,15 +17,12 @@ static void yin_difference(int16_t* buffer)
 {
 	int16_t i;
 	int16_t tau;
+	float32_t multOutput;
 	float32_t delta;
-	// float32_t multOutput; 
-
+	
 	/* Calculate the difference for difference shift values (tau) for the half of the samples */
 	for(tau = 0 ; tau < yin.halfBufferSize; tau++)
-	{
-		/* Take the difference of the signal with a shifted version of itself, then square it.
-		 * (This is the Yin algorithm's tweak on autocorrelation) */ 
-		
+	{		
 		/* compute first value to avoid having to zero out buffer */ 
 		delta = buffer[0] - buffer[tau];
 		yin.yinBuffer[tau] = delta*delta; 
@@ -48,7 +45,7 @@ static void yin_difference(int16_t* buffer)
  * This goes through the Yin autocorellation values and finds out roughly where shift is which 
  * produced the smallest difference
  */
-static void yin_cumulativeMeanNormalizedDifference(void)
+static inline void yin_cumulativeMeanNormalizedDifference(void)
 {
 	int16_t tau;
 	float32_t runningSum = 0;
@@ -68,30 +65,23 @@ static void yin_cumulativeMeanNormalizedDifference(void)
  * Step 3: Search through the normalised cumulative mean array and find values that are over the threshold
  * @return Shift (tau) which caused the best approximate autocorellation. -1 if no suitable value is found over the threshold.
  */
-static int16_t yin_absoluteThreshold(void){
-	int16_t tau;
-
+static inline int16_t yin_absoluteThreshold(void){
+	uint32_t tau;
+	float32_t min_result; 
 	/* Search through the array of cumulative mean values, and look for ones that are over the threshold 
 	 * The first two positions in yinBuffer are always so start at the third (index 2) */
+	
 	for (tau = 2; tau < yin.halfBufferSize ; tau++) {
 		if (yin.yinBuffer[tau] < yin.threshold) {
 			while (tau + 1 < yin.halfBufferSize && yin.yinBuffer[tau + 1] < yin.yinBuffer[tau]) {
 				tau++;
 			}
-			/* found tau, exit loop and return
-			 * store the probability
-			 * From the YIN paper: The yin.threshold determines the list of
-			 * candidates admitted to the set, and can be interpreted as the
-			 * proportion of aperiodic power tolerated
-			 * within a periodic signal.
-			 *
-			 * Since we want the periodicity and not aperiodicity:
-			 * periodicity = 1 - aperiodicity */
+			
 			yin.probability = 1 - yin.yinBuffer[tau];
 			break;
 		}
 	}
-
+	
 	/* if no pitch found, tau => -1 */
 	if (tau == yin.halfBufferSize || yin.yinBuffer[tau] >= yin.threshold) {
 		tau = -1;
@@ -110,7 +100,7 @@ static int16_t yin_absoluteThreshold(void){
  * As we only autocorellated using integer shifts we should check that there isn't a better fractional 
  * shift value.
  */
-static float32_t yin_parabolicInterpolation(int16_t tauEstimate) {
+static inline float32_t yin_parabolicInterpolation(int16_t tauEstimate) {
 	float32_t betterTau;
 	int16_t x0;
 	int16_t x2;
