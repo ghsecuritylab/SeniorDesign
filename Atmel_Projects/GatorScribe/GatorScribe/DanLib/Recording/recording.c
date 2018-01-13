@@ -145,9 +145,10 @@ void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 	
 	//yin_init((uint32_t)(23250.0f * 30.0f /(float)bpm), 0.05);
 	//yin_init(timer_count_for_16th_note/4, 0.05);
-	uint32_t yin_buffer_size = -20*bpm + 2000 + 1300; 
-	yin_init(yin_buffer_size, 0.05);
-	// not fast enough for 2000 @ 10bpm 
+	uint32_t yin_buffer_size = -20*bpm + 2000 + 1300; // allows for 1600 at 100bpm, and 2200 at 70bpm 
+	//yin_init(yin_buffer_size, 0.05);
+	yin_init(1700, 0.05);
+	// not fast enough for 2000 @ 100bpm 
 
 	
 	

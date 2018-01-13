@@ -20,6 +20,8 @@ typedef struct _Yin {
 	float32_t* yinBuffer;		/**< Buffer that stores the results of the intermediate processing steps of the algorithm */
 	float32_t probability;		/**< Probability that the pitch found is correct as a decimal (i.e 0.85 is 85%) */
 	float32_t threshold;		/**< Allowed uncertainty in the result as a decimal (i.e 0.15 is 15%) */
+	float32_t* deltaBuffer; 
+	float32_t* runningSum; 
 } Yin;
 
 /**

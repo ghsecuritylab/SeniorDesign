@@ -181,6 +181,7 @@ DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.d \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
  ../src/ASF/sam/drivers/rtt/rtt.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
  ../DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.h \
  ../DanLib/Recording/Yin/Yin.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
@@ -568,6 +569,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam/drivers/rtt/rtt.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
 
 ../DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.h:
 

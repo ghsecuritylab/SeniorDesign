@@ -182,6 +182,7 @@ DanLib/Audio/audio.d DanLib/Audio/audio.o: ../DanLib/Audio/audio.c \
  ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h \
  ../DanLib/Recording/Yin/Yin.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
@@ -575,6 +576,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../DanLib/Recording/Yin/Yin.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
 
 ../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
 
