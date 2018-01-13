@@ -19,6 +19,8 @@
 volatile bool recording = false;
 volatile bool metronome_on = false; 
 extern volatile bool outOfTime;
+volatile bool one_beat = false;  
+volatile bool up_beat = false; 
 /**************************** Global Variables End *********************************/
 
 /**************************** Private Variables Start *********************************/
@@ -27,6 +29,10 @@ static volatile midi_note_t oldNote = {0, 0};
 static volatile midi_note_t note = {-1,0};
 
 static volatile uint8_t sixteenth_note_cnt = 0; 
+static volatile uint8_t beat_cnt = 0; 
+static uint8_t number_of_beats_in_a_measure = 0; 
+
+static time_signature_identifier_t time_sig = 0; 
 
 //static midi_note_t notes_in_time[1000];
 //static midi_event_t events_in_time[1000];
@@ -61,6 +67,29 @@ static void configure_rtt(uint32_t count_8_note)
 	rtt_enable_interrupt(RTT, RTT_MR_RTTINCIEN);
 }
 
+/**
+ * \brief Configure the console UART.
+ *
+ *   - 115200 baud rate
+ *   - 8 bits of data
+ *   - No parity
+ *   - 1 stop bit
+ *   - No flow control
+ */
+static void configure_console(void)
+{
+	const usart_serial_options_t uart_serial_options = {
+		.baudrate = CONF_UART_BAUDRATE,
+		.charlength = CONF_UART_CHAR_LENGTH,
+		.paritytype = CONF_UART_PARITY,
+		.stopbits = CONF_UART_STOP_BITS,
+	};
+
+	/* Configure console UART. */
+	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
+	stdio_serial_init(CONF_UART, &uart_serial_options);
+}
+
 /**************************** Private Functions End *********************************/
 
 /**************************** RTT Interrupt Handler Start *********************************/
@@ -92,16 +121,49 @@ void RTT_Handler(void)
 			fillBuffer = processPingBuffer;
 			processPingMode = !processPingMode;
 		}
-		note_16_received = true; 
 		
-		if ((sixteenth_note_cnt & 0x03) == 3)
+		note_16_received = true; 
+		one_beat = false; 
+		up_beat = false; 
+		
+		// One beat, or quarter note has passed 
+		if (sixteenth_note_cnt == 4)
 		{
-			metronome_on = true; 
-			sixteenth_note_cnt = 0; 
+			metronome_on = true;
+			sixteenth_note_cnt = 1;
+			
+			if (beat_cnt == number_of_beats_in_a_measure)
+			{
+				one_beat = true;
+				beat_cnt = 1;
+			}
+			else
+			{
+				beat_cnt++;
+			}
 		}
 		else
 		{
-			sixteenth_note_cnt++; 
+			// Check for every other 16th note -> eigth note 
+			if (time_sig == FOUR_FOUR || time_sig == TWO_FOUR)
+			{
+				if (sixteenth_note_cnt == 2 || sixteenth_note_cnt == 4)
+				{
+					metronome_on = true;
+					up_beat = true;
+				}
+			}
+			/*
+			else 
+			{
+				if (sixteenth_note_cnt == 2 || sixteenth_note_cnt == 3 || sixteenth_note_cnt == 5 || sixteenth_note_cnt == 6)
+				{
+					metronome_on = true;
+					up_beat = true;	
+				}
+			}
+			*/p
+			sixteenth_note_cnt++;
 		}
 	}
 }
@@ -109,49 +171,35 @@ void RTT_Handler(void)
 /**************************** RTT Interrupt Handler End *********************************/
 
 /**************************** Public Functions Start *********************************/
-/**
- * \brief Configure the console UART.
- *
- *   - 115200 baud rate
- *   - 8 bits of data
- *   - No parity
- *   - 1 stop bit
- *   - No flow control
- */
-static void configure_console(void)
-{
-	const usart_serial_options_t uart_serial_options = {
-		.baudrate = CONF_UART_BAUDRATE,
-		.charlength = CONF_UART_CHAR_LENGTH,
-		.paritytype = CONF_UART_PARITY,
-		.stopbits = CONF_UART_STOP_BITS,
-	};
 
-	/* Configure console UART. */
-	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
-	stdio_serial_init(CONF_UART, &uart_serial_options);
-}
 void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title)
 {
-	recording = true; 
 	char str[20]; 
 	
-	uint32_t timer_count_for_16th_note = 32768 * 15 / bpm; 
-	configure_console(); 
-	
-	sixteenth_note_cnt = 0; 
-	metronome_on = false; 
-	configure_rtt(timer_count_for_16th_note);
-	
-	//yin_init((uint32_t)(23250.0f * 30.0f /(float)bpm), 0.05);
-	//yin_init(timer_count_for_16th_note/4, 0.05);
-	uint32_t yin_buffer_size = (uint32_t)(-20*bpm + 2000 + 1600); // allows for 1600 at 100bpm, and 2200 at 70bpm 
-	yin_init(yin_buffer_size, 0.2);
-	//yin_init(2000, 0.05);
-	// not fast enough for 2000 @ 100bpm 
+	uint32_t yin_buffer_size = (uint32_t)(-20*bpm + 2000 + 1600); // allows for 1600 at 100bpm, and 2200 at 70bpm
+	yin_init(yin_buffer_size, 0.2);	// not fast enough for 2000 @ 100bpm
 
-	// todo: count down metronome per time signature 
-	// if current note length is 16th and next 16th is none, make the note an 8th 
+	configure_console(); 
+	time_sig = time_signature.sig; 
+	
+	if (time_sig == FOUR_FOUR)
+		number_of_beats_in_a_measure = 4; 
+	else if (time_sig == THREE_FOUR)
+		number_of_beats_in_a_measure = 3; 
+	else if (time_sig == TWO_FOUR)
+		number_of_beats_in_a_measure = 2; 
+	else // 6/8 
+		number_of_beats_in_a_measure = 6; 
+	
+	sixteenth_note_cnt = 4; 
+	beat_cnt = number_of_beats_in_a_measure; 
+	one_beat = false; 
+	up_beat = false; 
+	recording = true;
+	metronome_on = false;
+	configure_rtt(32768 * 15 / bpm);
+	
+	// wait till for beats 
 	
 	while(1)
 	{
@@ -168,7 +216,7 @@ void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 			note_16_received = false;
 		}
 	}
-	
+	recording = false; 
 	yin_free_buffer(); 
 }
 
