@@ -145,24 +145,11 @@ void RTT_Handler(void)
 		else
 		{
 			// Check for every other 16th note -> eigth note 
-			if (time_sig == FOUR_FOUR || time_sig == TWO_FOUR)
+			if (sixteenth_note_cnt == 2)
 			{
-				if (sixteenth_note_cnt == 2 || sixteenth_note_cnt == 4)
-				{
-					metronome_on = true;
-					up_beat = true;
-				}
+				metronome_on = true;
+				up_beat = true;
 			}
-			/*
-			else 
-			{
-				if (sixteenth_note_cnt == 2 || sixteenth_note_cnt == 3 || sixteenth_note_cnt == 5 || sixteenth_note_cnt == 6)
-				{
-					metronome_on = true;
-					up_beat = true;	
-				}
-			}
-			*/p
 			sixteenth_note_cnt++;
 		}
 	}
