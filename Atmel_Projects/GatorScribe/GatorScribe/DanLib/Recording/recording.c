@@ -145,13 +145,11 @@ void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 	
 	//yin_init((uint32_t)(23250.0f * 30.0f /(float)bpm), 0.05);
 	//yin_init(timer_count_for_16th_note/4, 0.05);
-	uint32_t yin_buffer_size = -20*bpm + 2000 + 1300; // allows for 1600 at 100bpm, and 2200 at 70bpm 
-	//yin_init(yin_buffer_size, 0.05);
-	yin_init(1700, 0.05);
+	uint32_t yin_buffer_size = (uint32_t)(-20*bpm + 2000 + 1600); // allows for 1600 at 100bpm, and 2200 at 70bpm 
+	yin_init(yin_buffer_size, 0.2);
+	//yin_init(2000, 0.05);
 	// not fast enough for 2000 @ 100bpm 
 
-	
-	
 	// todo: count down metronome per time signature 
 	// if current note length is 16th and next 16th is none, make the note an 8th 
 	
@@ -165,23 +163,6 @@ void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 			
 			get_midi_note((int16_t *)&processBuffer[600], (midi_note_t *)&note);
 			
-			//if (oldNote.note_number != note.note_number)
-			//{
-				/*
-				get_midi_note_name(str, oldNote.note_number);
-				gfx_draw_string_aligned((const char *)str,
-				150, 150, &sysfont,
-				GFX_COLOR_TRANSPARENT, GFX_COLOR_BLACK,
-				TEXT_POS_LEFT, TEXT_ALIGN_LEFT);
-			
-				get_midi_note_name(str, note.note_number);
-				gfx_draw_string_aligned((const char *)str,
-				150, 150, &sysfont,
-				GFX_COLOR_TRANSPARENT, GFX_COLOR_WHITE,
-				TEXT_POS_LEFT, TEXT_ALIGN_LEFT);
-				*/
-
-			//}
 			
 				
 			note_16_received = false;

@@ -17,7 +17,7 @@ static void yin_difference(int16_t* buffer)
 {
 	int16_t i;
 	int16_t tau;
-    float32_t delta;
+    int32_t delta;
 	float32_t runningSum = 0;
 
 	/* Calculate the difference for difference shift values (tau) for the half of the samples */
@@ -25,36 +25,15 @@ static void yin_difference(int16_t* buffer)
 	for(tau = 1 ; tau < yin.halfBufferSize; tau++)
 	{		
 		/* compute first value to avoid having to zero out buffer */ 
-		yin.deltaBuffer[0] = buffer[0] - buffer[tau];
+		delta = buffer[0] - buffer[tau];
+		yin.yinBuffer[tau] = (float)(delta*delta); 
 		for(i = 1; i < yin.halfBufferSize; i++)
 		{
-			yin.deltaBuffer[i] = buffer[i] - buffer[i+tau];
+			delta = buffer[i] - buffer[i+tau];
+			yin.yinBuffer[tau] += (float)(delta*delta); 
 		}
-		arm_power_f32(yin.deltaBuffer, yin.halfBufferSize, &yin.yinBuffer[tau]); 
 		runningSum += yin.yinBuffer[tau];
-		yin.yinBuffer[tau] *= tau / runningSum;
-	}
-}
-
-
-/**
- * Step 2: Calculate the cumulative mean on the normalised difference calculated in step 1
- * This goes through the Yin autocorellation values and finds out roughly where shift is which 
- * produced the smallest difference
- */
-static inline void yin_cumulativeMeanNormalizedDifference(void)
-{
-	int16_t tau;
-	float32_t runningSum = 0;
-	yin.yinBuffer[0] = 1;
-
-	/* Sum all the values in the autocorellation buffer and nomalise the result, replacing
-	 * the value in the autocorellation buffer with a cumulative mean of the normalised difference */
-	for (tau = 1; tau < yin.halfBufferSize; tau++) {
-		runningSum += yin.yinBuffer[tau];
-		
-		// float32_ting point divide here 
-		yin.yinBuffer[tau] *= tau / runningSum;
+		yin.yinBuffer[tau] *= (float32_t)tau / runningSum;
 	}
 }
 
@@ -63,7 +42,7 @@ static inline void yin_cumulativeMeanNormalizedDifference(void)
  * @return Shift (tau) which caused the best approximate autocorellation. -1 if no suitable value is found over the threshold.
  */
 static inline int16_t yin_absoluteThreshold(void){
-	uint32_t tau;
+	int16_t tau;
 	/* Search through the array of cumulative mean values, and look for ones that are over the threshold 
 	 * The first two positions in yinBuffer are always so start at the third (index 2) */
 	
@@ -96,10 +75,10 @@ static inline int16_t yin_absoluteThreshold(void){
  * As we only autocorellated using integer shifts we should check that there isn't a better fractional 
  * shift value.
  */
-static inline float32_t yin_parabolicInterpolation(int16_t tauEstimate) {
+static inline float32_t yin_parabolicInterpolation(int32_t tauEstimate) {
 	float32_t betterTau;
-	int16_t x0;
-	int16_t x2;
+	int32_t x0;
+	int32_t x2;
 	
 	/* Calculate the first polynomial coeffcient based on the current estimate of tau */
 	if (tauEstimate < 1) {
@@ -146,6 +125,17 @@ static inline float32_t yin_parabolicInterpolation(int16_t tauEstimate) {
 
 	return betterTau;
 }
+
+static uint32_t yin_get_average_power (int16_t *buffer)
+{
+	int32_t i; 
+	uint32_t power = 0; 
+	for ( i = 0; i < yin.halfBufferSize/2; i++)
+	{
+		power += (abs(buffer[i]))^2; 
+	}
+	return (power/(yin.halfBufferSize/2)); 
+}
 /***************************** Static Functions End *****************************/
 
 /***************************** Public Functions Start *****************************/
@@ -164,7 +154,6 @@ void yin_init(int16_t bufferSize, float32_t threshold){
 	
 	/* Allocate the autocorellation buffer */
 	yin.yinBuffer = (float32_t *) malloc(sizeof(float32_t)* yin.halfBufferSize);
-	yin.deltaBuffer = (float32_t *) malloc(sizeof(float32_t)* yin.halfBufferSize);
 }
 
 /**
@@ -175,12 +164,14 @@ void yin_init(int16_t bufferSize, float32_t threshold){
 float32_t yin_getPitch(int16_t* buffer){
 	int16_t tauEstimate = -1;
 	float32_t pitchInHertz = -1;
+	
+	uint32_t power = yin_get_average_power(buffer); 
+	
+	if (power < 350)
+		return -1; 
 
 	/* Step 1: Calculates the squared difference of the signal with a shifted version of itself. */
 	yin_difference(buffer);
-	
-	/* Step 2: Calculate the cumulative mean on the normalised difference calculated in step 1 */
-	//yin_cumulativeMeanNormalizedDifference();
 	
 	/* Step 3: Search through the normalised cumulative mean array and find values that are over the threshold */
 	tauEstimate = yin_absoluteThreshold();
@@ -203,7 +194,6 @@ float32_t yin_getProbability(void){
 void yin_free_buffer(void)
 {
 	free(yin.yinBuffer); 	
-	free(yin.deltaBuffer);
 }
 
 

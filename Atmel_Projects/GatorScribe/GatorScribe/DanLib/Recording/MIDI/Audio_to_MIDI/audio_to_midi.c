@@ -41,27 +41,37 @@ static int16_t get_midi_velocity(int16_t *buffer)
 
 static uint8_t get_midi_number(float32_t frequency)
 {	
-	// start at C0 
-	uint8_t i = 12; 
-	float32_t abs_diff = abs(frequency - midi_note_frequencies[i++]); 
-	float32_t temp_abs_diff = abs(frequency - midi_note_frequencies[i++]);   
-	
-	while (temp_abs_diff < abs_diff && i < 128)
+	uint32_t lo = 12; // lowest at C0 
+	uint32_t hi = 127; 
+	uint32_t mid; 
+	uint32_t d1; 
+	uint32_t d2; 
+	while (lo < hi)
 	{
-		abs_diff = temp_abs_diff; 
-		temp_abs_diff = abs(frequency - midi_note_frequencies[i++]);   
+		mid = (hi + lo) >> 1; 
+		d1 = abs(midi_note_frequencies[mid] - frequency); 
+		d2 = abs(midi_note_frequencies[mid+1] - frequency);
+        if (d2 <= d1)
+        {
+	        lo = mid+1;
+        }
+        else
+        {
+	        hi = mid;
+        }
 	}
-	return (i-2); 
+	return hi; 
 }
 
 /**************************** Private Functions End *********************************/
 
 /**************************** Public Functions Start *********************************/
-
 void get_midi_note(int16_t *buffer, midi_note_t *note)
 {
 	float32_t freq = yin_getPitch(buffer);
-	if (freq < 0)
+	
+	// Don't count notes below C1 
+	if (freq < 32.0)
 	{
 		note->note_number = -1;
 		note->velocity = -1;
