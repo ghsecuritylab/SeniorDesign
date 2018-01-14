@@ -163,11 +163,7 @@ void RTT_Handler(void)
 void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title)
 {
 	char str[20]; 
-	
-	uint32_t yin_buffer_size = (uint32_t)(-20*bpm + 2000 + 1600); // allows for 1600 at 100bpm, and 2200 at 70bpm
-	//yin_init(yin_buffer_size, 0.2);	// not fast enough for 2000 @ 100bpm
-
-	aubio_pitchyinfast_t *yin = new_aubio_pitchyinfast(2048); 
+	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast(YIN_BUF_SIZE); 
 	configure_console(); 
 	time_sig = time_signature.sig; 
 	
@@ -188,26 +184,22 @@ void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 	metronome_on = false;
 	configure_rtt(32768 * 15 / bpm);
 	
-	// wait till for beats 
+	// wait till four beats 
 	
 	while(1)
 	{
 		if (note_16_received)
 		{
 			get_midi_note_name(str, note.note_number);
-			//get_frequency_str(str, note.note_number); 
 			printf("Beat %d : %s\n\r", ((sixteenth_note_cnt-3) & 3) + 1, str); 
-			//oldNote.note_number = note.note_number;
 			
-			get_midi_note((float32_t *)&processBuffer[600], (midi_note_t *)&note, yin);
+			get_midi_note((float32_t *)&processBuffer[600], (midi_note_t *)&note, yin_instance);
 			
-			
-				
 			note_16_received = false;
 		}
 	}
 	recording = false; 
-	yin_free_buffer(); 
+	del_aubio_pitchyinfast(yin_instance); 
 }
 
 /**************************** Public Functions End *********************************/

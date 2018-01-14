@@ -13,7 +13,6 @@
 #include "pitchyinfast.h"
 #include "fvec.h"
 
-
 static const char midi_note_names[128][5] = {
 	"C-1","C#-1","D-1","D#-1","E-1","F-1","F#-1","G-1","G#-1","A-1","A#-1","B-1","C0","C#0","D0","D#0","E0",
 	"F0","F#0","G0","G#0","A0","A#0","B0","C1","C#1","D1","D#1","E1","F1","F#1","G1","G#1","A1","A#1",
@@ -36,12 +35,6 @@ static const float32_t midi_note_frequencies[128] = {
 	}; 
 
 /**************************** Private Functions Start *********************************/
-static int16_t get_midi_velocity(float32_t *buffer)
-{
-	// TODO: analyze power of the signal 
-	return 64; 
-}
-
 static uint8_t get_midi_number(float32_t frequency)
 {	
 	uint32_t lo = 12; // lowest at C0 
@@ -66,27 +59,46 @@ static uint8_t get_midi_number(float32_t frequency)
 	return hi; 
 }
 
+static uint32_t get_average_power (float32_t *buffer)
+{
+	int32_t i;
+	uint32_t power = 0;
+	for ( i = 0; i < YIN_BUF_SIZE/2; i++)
+	{
+		power += (abs(buffer[i]))^2;
+	}
+	return (power/(YIN_BUF_SIZE/2));
+}
+
 /**************************** Private Functions End *********************************/
 
 /**************************** Public Functions Start *********************************/
 void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *object)
 {
-	//float32_t freq = yin_getPitch(buffer);
 	fvec_t input; 
-	fvec_t *output = new_fvec(2048); 
 	input.data = (smpl_t *)buffer; 
-	input.length = 2048;
-	float32_t freq = aubio_pitchyinfast_do(object, (const fvec_t *)&input, output); 
+	input.length = YIN_BUF_SIZE;
+	
+	uint32_t power = get_average_power(buffer);
+	
+	if (power < 350)
+	{
+		note->note_number = -1;
+		note->velocity = -1;
+		return;
+	}
+
+	float32_t freq = aubio_pitchyinfast_do(object, (const fvec_t *)&input); 
+	
 	// Don't count notes below C1 
-//	if (freq < 32.0)
-	if (freq < 0.0)
+	if (freq < 32.0)
 	{
 		note->note_number = -1;
 		note->velocity = -1;
 		return;
 	}
 	note->note_number = get_midi_number(freq);
-	note->velocity = get_midi_velocity(buffer);
+	note->velocity = power >> 2;
 }
 
 void get_midi_note_name(char *note_name, int16_t note_number)
@@ -99,14 +111,14 @@ void get_midi_note_name(char *note_name, int16_t note_number)
 	strcpy(note_name, &midi_note_names[note_number][0]);
 }
 
-void get_frequency_str(char *note_name, int16_t note_number)
+void get_frequency_str(char *freq_name, int16_t note_number)
 {
 	if (note_number == -1)
 	{
-		strcpy(note_name, "None");
+		strcpy(freq_name, "None");
 		return;
 	}
-	sprintf(note_name, "%d", (int)midi_note_frequencies[note_number]);
+	sprintf(freq_name, "%d", (int)midi_note_frequencies[note_number]);
 }
 
 /**************************** Public Functions End *********************************/

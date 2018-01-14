@@ -24,6 +24,6 @@ typedef struct midi_event
 
 void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *object);
 void get_midi_note_name(char *note_name, int16_t note_number);
-void get_frequency_str(char *note_name, int16_t note_number);
+void get_frequency_str(char *freq_name, int16_t note_number);
 
 #endif /* AUDIO_TO_MIDI_H_ */

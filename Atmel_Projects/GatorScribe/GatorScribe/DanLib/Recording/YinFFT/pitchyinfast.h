@@ -46,6 +46,9 @@ extern "C" {
 #include "arm_math.h"
 #include "fvec.h"
 
+#define YIN_SAMPLING_RATE 23250
+#define YIN_BUF_SIZE 2048
+
 /** pitch detection object */
 typedef struct _aubio_pitchyinfast_t aubio_pitchyinfast_t;
 
@@ -71,7 +74,7 @@ void del_aubio_pitchyinfast (aubio_pitchyinfast_t * o);
 
 */
 float32_t
-aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, const fvec_t * input, fvec_t * out); 
+aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, const fvec_t * input); 
 
 
 /** set tolerance parameter for YIN algorithm
