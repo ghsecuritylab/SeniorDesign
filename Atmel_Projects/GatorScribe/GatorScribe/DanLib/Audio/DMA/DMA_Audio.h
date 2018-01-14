@@ -9,6 +9,7 @@
 #ifndef DMA_AUDIO_H_
 #define DMA_AUDIO_H_
 
+#include "arm_math.h"
 /********************************** Defines Start **********************************/
 /** XDMA channels used */
 #define XDMA_CH_SSC_RX    0
@@ -26,12 +27,12 @@
 extern volatile uint16_t *inBuffer;
 extern volatile uint16_t *outBuffer;
 extern volatile bool dataReceived;
-extern volatile int16_t *processBuffer;
-extern volatile int16_t *fillBuffer; 
+extern volatile float32_t *processBuffer;
+extern volatile float32_t *fillBuffer; 
 extern volatile bool processPingMode; 
 
-extern volatile int16_t processPingBuffer[PROCESS_BUF_SIZE];
-extern volatile int16_t processPongBuffer[PROCESS_BUF_SIZE];
+extern volatile float32_t processPingBuffer[PROCESS_BUF_SIZE];
+extern volatile float32_t processPongBuffer[PROCESS_BUF_SIZE];
 /********************************** Externs End **********************************/
 
 /********************************** Public Functions Start **********************************/

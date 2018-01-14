@@ -8,6 +8,7 @@
 #include <asf.h>
 #include "DMA_Audio.h"
 #include "clicks.h"
+#include "arm_math.h"
 
 
 /********************************** Static Variables Start **********************************/
@@ -31,11 +32,11 @@ uint16_t outPingBuffer[BUF_SIZE];
 uint16_t outPongBuffer[BUF_SIZE];
 
 COMPILER_WORD_ALIGNED
-volatile int16_t processPingBuffer[PROCESS_BUF_SIZE];	
+volatile float32_t processPingBuffer[PROCESS_BUF_SIZE];	
 COMPILER_WORD_ALIGNED
-volatile int16_t processPongBuffer[PROCESS_BUF_SIZE];
-volatile int16_t *processBuffer = processPongBuffer; 
-volatile int16_t *fillBuffer = processPingBuffer;
+volatile float32_t processPongBuffer[PROCESS_BUF_SIZE];
+volatile float32_t *processBuffer = processPongBuffer; 
+volatile float32_t *fillBuffer = processPingBuffer;
 volatile uint16_t *inBuffer = inPingBuffer;
 volatile uint16_t *outBuffer = outPingBuffer;
 
@@ -115,7 +116,7 @@ void XDMAC_Handler(void)
 		{
 			/* Check if divisible by 4 for decimation by 2 */
 			if ((i & 0x03) == 0)
-				fillBuffer[processIdx++] = (int16_t)inBuffer[i];
+				fillBuffer[processIdx++] = (float32_t)((int16_t)inBuffer[i]);
 		}
 		
 		if (processPingMode)

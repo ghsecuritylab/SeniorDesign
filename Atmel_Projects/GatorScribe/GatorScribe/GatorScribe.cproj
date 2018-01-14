@@ -454,6 +454,7 @@
       <Value>../DanLib/Recording/MIDI/Audio_to_MIDI</Value>
       <Value>../DanLib/Recording/Yin</Value>
       <Value>../DanLib/Recording</Value>
+      <Value>../DanLib/Recording/YinFFT</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize more (-O2)</armgcc.compiler.optimization.level>
@@ -550,6 +551,7 @@
     <Folder Include="DanLib\Recording\" />
     <Folder Include="DanLib\Recording\MIDI\" />
     <Folder Include="DanLib\Recording\MIDI\Audio_to_MIDI\" />
+    <Folder Include="DanLib\Recording\YinFFT" />
     <Folder Include="DanLib\Recording\Yin\" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
@@ -759,6 +761,48 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\Recording\recording.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\aubio_priv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\cvec.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\cvec.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\fft.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\fft.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\fvec.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\fvec.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\mathutils.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\mathutils.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\musicutils.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\ooura_fft8g.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\pitchyinfast.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\pitchyinfast.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\types.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\Recording\Yin\Yin.c">

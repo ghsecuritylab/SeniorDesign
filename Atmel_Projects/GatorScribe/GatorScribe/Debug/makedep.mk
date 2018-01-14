@@ -38,6 +38,18 @@ DanLib\Recording\MIDI\Audio_to_MIDI\audio_to_midi.c
 
 DanLib\Recording\recording.c
 
+DanLib\Recording\YinFFT\cvec.c
+
+DanLib\Recording\YinFFT\fft.c
+
+DanLib\Recording\YinFFT\fvec.c
+
+DanLib\Recording\YinFFT\mathutils.c
+
+DanLib\Recording\YinFFT\ooura_fft8g.c
+
+DanLib\Recording\YinFFT\pitchyinfast.c
+
 DanLib\Recording\Yin\Yin.c
 
 src\ASF\common\components\touch\mxt\mxt_device_1.c

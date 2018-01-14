@@ -8,7 +8,7 @@
 
 #ifndef AUDIO_TO_MIDI_H_
 #define AUDIO_TO_MIDI_H_
-
+#include "pitchyinfast.h"
 typedef struct midi_note 
 {
 	int16_t note_number; 
@@ -22,7 +22,8 @@ typedef struct midi_event
     float rhythm;
 }midi_event_t;
 
-void get_midi_note(int16_t *buffer, midi_note_t *note);
+void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *object);
 void get_midi_note_name(char *note_name, int16_t note_number);
+void get_frequency_str(char *note_name, int16_t note_number);
 
 #endif /* AUDIO_TO_MIDI_H_ */

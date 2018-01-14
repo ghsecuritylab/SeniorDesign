@@ -181,16 +181,16 @@ DanLib/Recording/recording.d DanLib/Recording/recording.o: \
  ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/Recording/recording.h \
  ../DanLib/DanLib.h ../DanLib/Audio/audio.h \
  ../DanLib/Audio/DMA/DMA_Audio.h \
- ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h \
- ../DanLib/Recording/Yin/Yin.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../DanLib/LCDLib/LCDLib.h ../DanLib/LCDLib/gfx/gfx.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
+ ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h \
+ ../DanLib/Recording/Yin/Yin.h ../DanLib/LCDLib/LCDLib.h \
+ ../DanLib/LCDLib/gfx/gfx.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
  ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
  ../DanLib/LCDLib/gfx/gfx_generic.h ../DanLib/LCDLib/gfx/sysfont.h \
@@ -202,6 +202,8 @@ DanLib/Recording/recording.d DanLib/Recording/recording.o: \
  ../DanLib/GUI/time_signature/time_signature.h \
  ../DanLib/GUI/key_signature/key_signature.h \
  ../DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.h \
+ ../DanLib/Recording/YinFFT/pitchyinfast.h \
+ ../DanLib/Recording/YinFFT/fvec.h ../DanLib/Recording/YinFFT/types.h \
  ../DanLib/Recording/recording.h
 
 ../src/asf.h:
@@ -590,14 +592,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/Audio/DMA/DMA_Audio.h:
 
-../DanLib/Audio/WM8904_Driver/WM8904_Driver.h:
-
-../DanLib/Recording/Yin/Yin.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
-
 ../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
 
 ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h:
@@ -607,6 +601,14 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
+
+../DanLib/Audio/WM8904_Driver/WM8904_Driver.h:
+
+../DanLib/Recording/Yin/Yin.h:
 
 ../DanLib/LCDLib/LCDLib.h:
 
@@ -643,5 +645,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../DanLib/GUI/key_signature/key_signature.h:
 
 ../DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.h:
+
+../DanLib/Recording/YinFFT/pitchyinfast.h:
+
+../DanLib/Recording/YinFFT/fvec.h:
+
+../DanLib/Recording/YinFFT/types.h:
 
 ../DanLib/Recording/recording.h:
