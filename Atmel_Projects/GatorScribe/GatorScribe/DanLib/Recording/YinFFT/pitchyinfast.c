@@ -155,13 +155,13 @@ float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, const fvec_t * input)
 		if (tau > 4 && (yin->data[period] < tol) && (yin->data[period] < yin->data[period + 1]))
 		{
 			o->peak_pos = (uint_t)period;
-			return YIN_SAMPLING_RATE / fvec_quadratic_peak_pos (yin, o->peak_pos);
+			return YIN_FFT_SAMPLING_RATE / fvec_quadratic_peak_pos (yin, o->peak_pos);
 		}
 	}
 		
 	// use global minimum
 	o->peak_pos = (uint_t)fvec_min_elem (yin);
-	return YIN_SAMPLING_RATE / fvec_quadratic_peak_pos (yin, o->peak_pos);
+	return YIN_FFT_SAMPLING_RATE / fvec_quadratic_peak_pos (yin, o->peak_pos);
 }
 
 smpl_t aubio_pitchyinfast_get_confidence (aubio_pitchyinfast_t * o) 

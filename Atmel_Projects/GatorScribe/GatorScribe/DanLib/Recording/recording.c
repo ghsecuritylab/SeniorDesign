@@ -35,8 +35,8 @@ static uint8_t number_of_beats_in_a_measure = 0;
 
 static time_signature_identifier_t time_sig = 0; 
 
-//static midi_note_t notes_in_time[1000];
-//static midi_event_t events_in_time[1000];
+static midi_note_t notes_in_time[10000];
+static midi_event_t events_in_time[10000];
 /**************************** Private Variables End *********************************/
 
 /**************************** Private Functions Start *********************************/
@@ -193,7 +193,7 @@ void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 			get_midi_note_name(str, note.note_number);
 			printf("Beat %d : %s\n\r", ((sixteenth_note_cnt-3) & 3) + 1, str); 
 			
-			get_midi_note((float32_t *)&processBuffer[600], (midi_note_t *)&note, yin_instance);
+			get_midi_note((float32_t *)&processBuffer[700], (midi_note_t *)&note, yin_instance);
 			
 			note_16_received = false;
 		}
