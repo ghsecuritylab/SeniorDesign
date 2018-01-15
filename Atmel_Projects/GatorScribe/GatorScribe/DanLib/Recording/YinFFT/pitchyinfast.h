@@ -73,8 +73,7 @@ void del_aubio_pitchyinfast (aubio_pitchyinfast_t * o);
   \param cands_out pitch period candidates, in samples
 
 */
-float32_t
-aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, const fvec_t * input); 
+float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, const fvec_t * input); 
 
 
 /** set tolerance parameter for YIN algorithm

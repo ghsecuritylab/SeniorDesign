@@ -12,19 +12,6 @@
 #include "fastmath.h"
 #include <string.h>
 
-#define NUMBER_OF_MAIN_MENU_BUTTONS 6
-
-#define TITLE_TEXT_Y 58
-#define TITLE_TEXT_X 85
-#define BPM_TEXT_X	134
-#define BPM_TEXT_Y	242
-#define INSTRUMENT_TEXT_X 341 
-#define INSTRUMENT_TEXT_Y BPM_TEXT_Y
-#define TIME_SIG_TEXT_X BPM_TEXT_X
-#define TIME_SIG_TEXT_Y 151
-#define KEY_SIG_TEXT_X INSTRUMENT_TEXT_X
-#define KEY_SIG_TEXT_Y TIME_SIG_TEXT_Y
-
 typedef struct button_coord
 {
 	int16_t x;

@@ -10,6 +10,8 @@
 #include "rtt.h"
 #include "pitchyinfast.h"
 
+void touch_interrupt_handler(uint32_t x, uint32_t y); 
+
 /**************************** Defines Start *********************************/
 /* How many samples to process for a 16th note */ 
 #define PITCH_BUF_SIZE 2048
@@ -38,6 +40,13 @@ static time_signature_identifier_t time_sig = 0;
 static midi_note_t notes_in_time[10000];
 static midi_event_t events_in_time[10000];
 /**************************** Private Variables End *********************************/
+
+void touch_interrupt_handler(uint32_t x, uint32_t y)
+{
+	touch_t touched_point;
+	touch_handler(&touched_point);
+	recording = false; 
+}
 
 /**************************** Private Functions Start *********************************/
 
@@ -68,29 +77,25 @@ static void configure_rtt(uint32_t count_8_note)
 	rtt_enable_interrupt(RTT, RTT_MR_RTTINCIEN);
 }
 
-/**
- * \brief Configure the console UART.
- *
- *   - 115200 baud rate
- *   - 8 bits of data
- *   - No parity
- *   - 1 stop bit
- *   - No flow control
- */
-static void configure_console(void)
+static void configure_lcd_interrupt(void)
 {
-	const usart_serial_options_t uart_serial_options = {
-		.baudrate = CONF_UART_BAUDRATE,
-		.charlength = CONF_UART_CHAR_LENGTH,
-		.paritytype = CONF_UART_PARITY,
-		.stopbits = CONF_UART_STOP_BITS,
-	};
+	/* Configure PIO as inputs. */
+	pio_configure(PIOD, PIO_INPUT, PIO_PD28, PIO_PULLUP);
 
-	/* Configure console UART. */
-	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
-	stdio_serial_init(CONF_UART, &uart_serial_options);
+	/* Adjust PIO denounce filter parameters, uses 10 Hz filter. */
+	pio_set_debounce_filter(PIOD, PIO_PD28, 5);
+
+	/* Initialize PIO interrupt handlers, see PIO definition in board.h. */
+	pio_handler_set(PIOD, ID_PIOD, PIO_PD28, PIO_IT_FALL_EDGE, touch_interrupt_handler);
+
+	/* Enable PIO controller IRQs. */
+	NVIC_EnableIRQ(PIOD_IRQn);
+	NVIC_SetPriority(PIOD_IRQn, 10); 
+	touch_interrupt_handler(1,1);
+	/* Enable PIO line interrupts. */
+	pio_get_interrupt_status(PIOD);
+	pio_enable_interrupt(PIOD, PIO_PD28);
 }
-
 /**************************** Private Functions End *********************************/
 
 /**************************** RTT Interrupt Handler Start *********************************/
@@ -164,7 +169,7 @@ void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 {
 	char str[20]; 
 	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast(YIN_BUF_SIZE); 
-	configure_console(); 
+	configure_lcd_interrupt(); 
 	time_sig = time_signature.sig; 
 	
 	if (time_sig == FOUR_FOUR)
@@ -180,13 +185,18 @@ void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 	beat_cnt = number_of_beats_in_a_measure; 
 	one_beat = false; 
 	up_beat = false; 
-	recording = true;
 	metronome_on = false;
+	recording = true;
 	configure_rtt(32768 * 15 / bpm);
 	
-	// wait till four beats 
-	
-	while(1)
+	// Wait a measure 
+	int i; 
+	for (i = 0; i < 4*number_of_beats_in_a_measure + 1;i++)
+	{
+		while(!note_16_received); 
+		note_16_received = 0; 
+	}
+	while(recording)
 	{
 		if (note_16_received)
 		{
@@ -198,8 +208,10 @@ void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 			note_16_received = false;
 		}
 	}
-	recording = false; 
+	metronome_on = false;
 	del_aubio_pitchyinfast(yin_instance); 
+	pio_disable_interrupt(PIOD, PIO_PD28);
+	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN);
 }
 
 /**************************** Public Functions End *********************************/

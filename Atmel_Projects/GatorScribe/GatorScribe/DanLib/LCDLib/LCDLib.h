@@ -14,8 +14,6 @@
 #include "gfx/sysfont.h"
 #include "touch/touch.h"
 
-//#include "Images/keyboard.h"
-
 /*********************************** Public Functions Start ***********************************/
 void lcd_init(void); 
 /*********************************** Public Functions End ***********************************/

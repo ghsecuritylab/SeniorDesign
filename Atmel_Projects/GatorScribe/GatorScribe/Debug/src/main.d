@@ -186,15 +186,14 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
- ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h \
- ../DanLib/Recording/Yin/Yin.h ../DanLib/LCDLib/LCDLib.h \
+ ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h ../DanLib/LCDLib/LCDLib.h \
  ../DanLib/LCDLib/gfx/gfx.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
  ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
  ../DanLib/LCDLib/gfx/gfx_generic.h ../DanLib/LCDLib/gfx/sysfont.h \
  ../src/config/conf_sysfont.h ../DanLib/LCDLib/gfx/gfx.h \
  ../DanLib/LCDLib/gfx/gfx_text.h ../DanLib/LCDLib/touch/touch.h \
- ../DanLib/LCDLib/gfx/gfx.h ../DanLib/GUI/main_menu.h \
+ ../src/asf.h ../DanLib/LCDLib/gfx/gfx.h ../DanLib/GUI/main_menu.h \
  ../DanLib/GUI/playback_instrument/playback_instrument.h \
  ../DanLib/GUI/song_title/song_title.h ../DanLib/GUI/tempo/tempo.h \
  ../DanLib/GUI/time_signature/time_signature.h \
@@ -604,8 +603,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h:
 
-../DanLib/Recording/Yin/Yin.h:
-
 ../DanLib/LCDLib/LCDLib.h:
 
 ../DanLib/LCDLib/gfx/gfx.h:
@@ -625,6 +622,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../DanLib/LCDLib/gfx/gfx_text.h:
 
 ../DanLib/LCDLib/touch/touch.h:
+
+../src/asf.h:
 
 ../DanLib/LCDLib/gfx/gfx.h:
 

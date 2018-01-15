@@ -8,7 +8,6 @@
 #include <asf.h>
 #include <math.h>
 #include "audio_to_midi.h"
-#include "Yin.h"
 #include <string.h>
 #include "pitchyinfast.h"
 #include "fvec.h"

@@ -11,7 +11,6 @@
 
 #include "DMA_Audio.h"
 #include "WM8904_Driver.h"
-#include "Yin.h"
 
 void audio_init(void);
 

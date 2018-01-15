@@ -804,9 +804,6 @@
     <Compile Include="DanLib\Recording\YinFFT\types.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\Recording\Yin\Yin.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="DanLib\Recording\Yin\Yin.h">
       <SubType>compile</SubType>
     </Compile>

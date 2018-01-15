@@ -46,7 +46,6 @@ volatile bool outOfTime = 0;
 /********************************** Public Variables End **********************************/
 
 /********************************** Extern Variables Start **********************************/
-extern volatile bool recording; 
 extern volatile bool metronome_on; 
 extern volatile bool one_beat; 
 extern volatile bool up_beat; 

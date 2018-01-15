@@ -50,8 +50,6 @@ DanLib\Recording\YinFFT\ooura_fft8g.c
 
 DanLib\Recording\YinFFT\pitchyinfast.c
 
-DanLib\Recording\Yin\Yin.c
-
 src\ASF\common\components\touch\mxt\mxt_device_1.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c

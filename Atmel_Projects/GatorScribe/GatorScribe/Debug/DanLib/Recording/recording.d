@@ -188,8 +188,7 @@ DanLib/Recording/recording.d DanLib/Recording/recording.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
- ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h \
- ../DanLib/Recording/Yin/Yin.h ../DanLib/LCDLib/LCDLib.h \
+ ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h ../DanLib/LCDLib/LCDLib.h \
  ../DanLib/LCDLib/gfx/gfx.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
  ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
@@ -607,8 +606,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
 
 ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h:
-
-../DanLib/Recording/Yin/Yin.h:
 
 ../DanLib/LCDLib/LCDLib.h:
 
