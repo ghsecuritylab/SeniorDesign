@@ -21,19 +21,19 @@ int main(int argc, const char * argv[]) {
 
     
     events[0].note_number = 72;
-    events[0].rhythm = 0.5;
+    events[0].rhythm = 1;
     events[0].velocity = 64;
     
     events[1].note_number = 72;
-    events[1].rhythm = 0.5;
+    events[1].rhythm = 1;
     events[1].velocity = 64;
     
     events[2].note_number = 79;
-    events[2].rhythm = 0.5;
+    events[2].rhythm = 1;
     events[2].velocity = 64;
     
     events[3].note_number = 79;
-    events[3].rhythm = 0.5;
+    events[3].rhythm = 1;
     events[3].velocity = 64;
     
     events[4].note_number = 81;
@@ -49,15 +49,15 @@ int main(int argc, const char * argv[]) {
     events[6].velocity = 64;
     
     events[7].note_number = 77;
-    events[7].rhythm = 0.5;
+    events[7].rhythm = 1;
     events[7].velocity = 64;
     
     events[8].note_number = 77;
     events[8].rhythm = 1;
     events[8].velocity = 64;
     
-    events[9].note_number = 76;
-    events[9].rhythm = 1;
+    events[9].note_number = -1;
+    events[9].rhythm = 2;
     events[9].velocity = 64;
     
     events[10].note_number = 76;

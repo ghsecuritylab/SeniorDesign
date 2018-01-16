@@ -163,22 +163,31 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
     write_out(0x7f & playback_instrument);
     
     // write out track data
-    int actiontick;
+    int actiontick = 0;
     for (i = 0; i < number_of_events; i++)
     {
-        // note on
-        writeVLValue(0);
-        write_out(0x90 | (0x0f & channel));
-        write_out(events[i].note_number & 0x7f);
-        write_out(events[i].velocity & 0x7f);
-        
-        actiontick = TICKS_PER_QUARTER_NOTE * events[i].rhythm;
-        
-        // note off
-        writeVLValue(actiontick);
-        write_out(0x80 | (0x0f & channel));
-        write_out(events[i].note_number & 0x7f);
-        write_out(events[i].velocity & 0x7f);
+        if (events[i].note_number >= 0)
+        {
+            // note on
+            writeVLValue(actiontick);
+            write_out(0x90 | (0x0f & channel));
+            write_out(events[i].note_number & 0x7f);
+            write_out(events[i].velocity & 0x7f);
+            
+            actiontick = TICKS_PER_QUARTER_NOTE * events[i].rhythm;
+            
+            // note off
+            writeVLValue(actiontick);
+            write_out(0x80 | (0x0f & channel));
+            write_out(events[i].note_number & 0x7f);
+            write_out(events[i].velocity & 0x7f);
+            actiontick = 0;
+        }
+        else
+        {
+            // length of rest
+            actiontick += TICKS_PER_QUARTER_NOTE * events[i].rhythm;
+        }
     }
     
     // end of header track
