@@ -14,6 +14,7 @@
 #include "main_menu.h"
 #include "audio_to_midi.h"
 #include "recording.h"
+#include "MidiFile.h"
 
 
 #endif /* DANLIB_H_ */

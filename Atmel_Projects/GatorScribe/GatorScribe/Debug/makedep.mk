@@ -36,6 +36,8 @@ DanLib\LCDLib\touch\touch.c
 
 DanLib\Recording\MIDI\Audio_to_MIDI\audio_to_midi.c
 
+DanLib\Recording\MIDI\Generate_MIDI\MidiFile.c
+
 DanLib\Recording\recording.c
 
 DanLib\Recording\YinFFT\cvec.c

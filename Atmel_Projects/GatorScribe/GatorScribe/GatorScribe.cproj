@@ -451,9 +451,9 @@
       <Value>../DanLib/Audio</Value>
       <Value>../src/ASF/sam/drivers/rtt</Value>
       <Value>../DanLib/Recording/MIDI/Audio_to_MIDI</Value>
-      <Value>../DanLib/Recording/Yin</Value>
       <Value>../DanLib/Recording</Value>
       <Value>../DanLib/Recording/YinFFT</Value>
+      <Value>../DanLib/Recording/MIDI/Generate_MIDI</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize more (-O2)</armgcc.compiler.optimization.level>
@@ -550,8 +550,8 @@
     <Folder Include="DanLib\Recording\" />
     <Folder Include="DanLib\Recording\MIDI\" />
     <Folder Include="DanLib\Recording\MIDI\Audio_to_MIDI\" />
+    <Folder Include="DanLib\Recording\MIDI\Generate_MIDI\" />
     <Folder Include="DanLib\Recording\YinFFT" />
-    <Folder Include="DanLib\Recording\Yin\" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -756,6 +756,12 @@
     <Compile Include="DanLib\Recording\MIDI\Audio_to_MIDI\audio_to_midi.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="DanLib\Recording\MIDI\Generate_MIDI\MidiFile.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Recording\MIDI\Generate_MIDI\MidiFile.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="DanLib\Recording\recording.c">
       <SubType>compile</SubType>
     </Compile>
@@ -802,9 +808,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\Recording\YinFFT\types.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\Yin\Yin.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.c">

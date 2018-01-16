@@ -33,19 +33,24 @@ int main(void)
 	audio_init();
 	configure_console();
 	
-	
 	/* Initial Gatorscribe params */ 
 	uint32_t bpm = 100;
 	midi_instrument_t playback_instrument = PIANO;
 	time_signature_t time_signature = {4,4, FOUR_FOUR};
 	key_signature_t key_signature = {C_MAJOR, MAJOR};
 	char title[MAX_TITLE_SIZE] = " ";
+	
+	midi_note_t notes_in_time[100000];
+	midi_event_t events_in_time[100000];
+	uint32_t number_of_events = 0; 
 
 	while(1)
 	{
 		main_menu(&bpm, &playback_instrument, &time_signature, &key_signature, &title[0]);
 		gfx_draw_filled_rect(0, 0, gfx_get_width(), gfx_get_height(), GFX_COLOR_BLACK);
-		start_recording(bpm, playback_instrument, time_signature, key_signature, title);
+		start_recording(notes_in_time, bpm, playback_instrument, time_signature, key_signature, title);
+		convert_midi_notes_to_events(notes_in_time, events_in_time, &number_of_events); 
+		write_midi_file(bpm, playback_instrument, &time_signature, &key_signature, title, events_in_time, number_of_events);
 	}
 }
 

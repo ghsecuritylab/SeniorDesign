@@ -8,10 +8,7 @@
 
 #include "MidiFile.h"
 
-#define CLOCKS_PER_CLICK 24
-#define NUM_32NDS_PER_QUARTER 8
-
-static unsigned char out[10000];
+unsigned char out[10000];
 static int outIdx = 0;
 
 static inline void write_out(char val)
@@ -40,11 +37,9 @@ static inline void writeBigEndianUShort(uint16_t value)
 static inline void writeVLValue(uint32_t value)
 {
     unsigned char bytes[4];
-    // most significant 7 bits
     bytes[0] = (unsigned char)((value >> 21) & 0x7f);
     bytes[1] = (unsigned char)((value >> 14) & 0x7f);
     bytes[2] = (unsigned char)((value >> 7)  & 0x7f);
-    // least significant 7 bits
     bytes[3] = (unsigned char)(value & 0x7f);
     
     int start = 0;
@@ -137,8 +132,6 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
     for (i = 0; i < 4; i++)
         write_out(endoftrack[i]);
     
-    
-    
     // 7. Write melody track
     ch = 'M'; write_out(ch);
     ch = 'T'; write_out(ch);
@@ -151,6 +144,7 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
     while(track_name[size_of_track_name++]); // size of track name
     
     // size of melody
+    // number_events * 2 for on/off, * 4 for 4 chars each
     longdata = 11 + number_of_events*8 + size_of_track_name - 1;
     writeBigEndianULong(longdata);
     
@@ -169,17 +163,16 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
     write_out(0x7f & playback_instrument);
     
     // write out track data
-    int actiontick = 0;
+    int actiontick;
     for (i = 0; i < number_of_events; i++)
     {
-        actiontick = 0;
         // note on
-        writeVLValue(actiontick);
+        writeVLValue(0);
         write_out(0x90 | (0x0f & channel));
         write_out(events[i].note_number & 0x7f);
         write_out(events[i].velocity & 0x7f);
         
-        actiontick += 120 * events[i].rhythm;
+        actiontick = TICKS_PER_QUARTER_NOTE * events[i].rhythm;
         
         // note off
         writeVLValue(actiontick);

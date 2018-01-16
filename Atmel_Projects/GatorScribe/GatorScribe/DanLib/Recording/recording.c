@@ -37,8 +37,6 @@ static uint8_t number_of_beats_in_a_measure = 0;
 
 static time_signature_identifier_t time_sig = 0; 
 
-static midi_note_t notes_in_time[10000];
-static midi_event_t events_in_time[10000];
 /**************************** Private Variables End *********************************/
 
 void touch_interrupt_handler(uint32_t x, uint32_t y)
@@ -165,9 +163,10 @@ void RTT_Handler(void)
 
 /**************************** Public Functions Start *********************************/
 
-void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title)
+void start_recording(midi_note_t *notes, uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title)
 {
 	char str[20]; 
+	int note_cnt = 0; 
 	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast(YIN_BUF_SIZE); 
 	configure_lcd_interrupt(); 
 	time_sig = time_signature.sig; 
@@ -200,11 +199,11 @@ void start_recording(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 	{
 		if (note_16_received)
 		{
+			get_midi_note((float32_t *)&processBuffer[700], &notes[note_cnt++], yin_instance);
+			
+			// might need to fix indexing here 
 			get_midi_note_name(str, note.note_number);
-			printf("Beat %d : %s\n\r", ((sixteenth_note_cnt-3) & 3) + 1, str); 
-			
-			get_midi_note((float32_t *)&processBuffer[700], (midi_note_t *)&note, yin_instance);
-			
+			printf("Beat %d : %s\n\r", ((sixteenth_note_cnt-3) & 3) + 1, str);
 			note_16_received = false;
 		}
 	}
