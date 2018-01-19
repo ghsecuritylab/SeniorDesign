@@ -38,10 +38,10 @@ int main(void)
 	midi_instrument_t playback_instrument = PIANO;
 	time_signature_t time_signature = {4,4, FOUR_FOUR};
 	key_signature_t key_signature = {C_MAJOR, MAJOR};
-	char title[MAX_TITLE_SIZE] = " ";
+	char title[MAX_TITLE_SIZE] = "Title Here";
 	
-	midi_note_t notes_in_time[100000];
-	midi_event_t events_in_time[100000];
+	midi_note_t notes_in_time[1000];
+	midi_event_t events_in_time[1000];
 	uint32_t number_of_events = 0; 
 
 	while(1)

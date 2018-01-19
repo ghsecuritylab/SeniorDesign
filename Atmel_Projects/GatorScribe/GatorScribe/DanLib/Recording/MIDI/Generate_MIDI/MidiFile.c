@@ -7,6 +7,7 @@
 //
 
 #include "MidiFile.h"
+#include "math.h"
 
 unsigned char out[100000];
 static uint32_t outIdx = 0;
@@ -99,7 +100,7 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
         write_out(title[i]);
     
     // tempo
-    int microseconds = (int)(60.0 / bpm * 1000000.0 + 0.5);
+    int microseconds = (int)(60.0 / bpm * 1000000.0);
     write_out(0x00); // tick
     write_out(0xFF);
     write_out(0x51);
@@ -108,9 +109,13 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
     write_out((microseconds >> 8) & 0xff);
     write_out((microseconds >> 0) & 0xff);
 
-    // time signature
-    int base2 = 0;
-    while( time_signature->bottom >>=1) base2++;
+    // time signature - base2 should be determined with log2(bottom) 
+	uint8_t base2; 
+	if (time_signature->bottom == 4)
+		base2 = 2; 
+	else // 8 
+		base2 = 3; 
+	
     write_out(0x00); // tick
     write_out(0xFF);
     write_out(0x58);
@@ -163,7 +168,7 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
     write_out(0x7f & playback_instrument);
     
     // write out track data
-    uint32_t actiontick;
+    uint32_t actiontick = 0;
     for (i = 0; i < number_of_events; i++)
     {
         if (events[i].note_number >= 0)
@@ -194,20 +199,46 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
     for (i = 0; i < 4; i++)
         write_out(endoftrack[i]);
     
-	printf("\n\n-------- MIDI FILE --------\n\n");
+	//printf("\n\n-------- MIDI FILE --------\n\n\r");
+	printf("-"); // flag for beginning of midi file 
     for (i = 0; i < outIdx; i++)
     {
         printf("%02x", out[i]);
+		/*
         if ((i+1) % 16 == 0)
-            printf("\n");
+            printf("\n\r");
         else if ((i+1) % 2 == 0)
             printf(" ");
+		*/
     }
+	printf("-"); // flag for end 
 }
 
 void convert_midi_notes_to_events(midi_note_t *notes, midi_event_t *events, uint32_t *number_of_events)
 {
 	// TODO: group consecutive notes and also look at differences
 	// in velocities to separate individual notes of the same pitch
+	*number_of_events = 0; 
+	int i = 0; 
+	int16_t current_note = notes[i++].note_number; 
+	// do velocity later 
+	float current_rhythm = 0.25; // 16th notes 
 	
+	while (notes[i].note_number != END_OF_RECORDING)
+	{
+		if (notes[i].note_number != notes[i-1].note_number)
+		{
+			events[*number_of_events].note_number = current_note; 
+			events[*number_of_events].velocity = 64; 
+			events[*number_of_events].rhythm = current_rhythm; 
+			(*number_of_events)++;
+			current_note = notes[i].note_number; 
+			current_rhythm = 0.25; 
+		}
+		else
+		{
+			current_rhythm += 0.25; 
+		}
+		i++; 
+	}
 }

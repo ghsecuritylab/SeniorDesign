@@ -10,6 +10,11 @@
 #define AUDIO_TO_MIDI_H_
 #include "pitchyinfast.h"
 
+#define NO_NOTE -1 
+#define END_OF_RECORDING -2 
+
+#define POWER_THRESHOLD 350
+
 typedef struct midi_note 
 {
 	int16_t note_number; 

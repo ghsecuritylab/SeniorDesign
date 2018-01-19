@@ -28,8 +28,6 @@ volatile bool up_beat = false;
 
 /**************************** Private Variables Start *********************************/
 static volatile bool note_16_received = false;
-static volatile midi_note_t oldNote = {0, 0};
-static volatile midi_note_t note = {-1,0};
 
 static volatile uint8_t sixteenth_note_cnt = 0; 
 static volatile uint8_t beat_cnt = 0; 
@@ -165,6 +163,7 @@ void RTT_Handler(void)
 
 void start_recording(midi_note_t *notes, uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title)
 {
+	//printf("\n\n\n\n\n\r");
 	char str[20]; 
 	int note_cnt = 0; 
 	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast(YIN_BUF_SIZE); 
@@ -199,18 +198,21 @@ void start_recording(midi_note_t *notes, uint32_t bpm, midi_instrument_t playbac
 	{
 		if (note_16_received)
 		{
-			get_midi_note((float32_t *)&processBuffer[700], &notes[note_cnt++], yin_instance);
+			get_midi_note((float32_t *)&processBuffer[0], &notes[note_cnt], yin_instance);
 			
 			// might need to fix indexing here 
-			get_midi_note_name(str, note.note_number);
-			printf("Beat %d : %s\n\r", ((sixteenth_note_cnt-3) & 3) + 1, str);
+			get_midi_note_name(str, notes[note_cnt].note_number);
+			//printf("Beat %d : %s\n\r", ((sixteenth_note_cnt-2) & 3) + 1, str);
+			note_cnt++; 
 			note_16_received = false;
 		}
 	}
 	metronome_on = false;
+	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN);
 	del_aubio_pitchyinfast(yin_instance); 
 	pio_disable_interrupt(PIOD, PIO_PD28);
-	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN);
+	notes[note_cnt].note_number = END_OF_RECORDING; 
+	notes[note_cnt].velocity = END_OF_RECORDING; 
 }
 
 /**************************** Public Functions End *********************************/

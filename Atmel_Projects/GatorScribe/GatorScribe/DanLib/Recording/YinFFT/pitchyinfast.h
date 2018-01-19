@@ -46,7 +46,7 @@ extern "C" {
 #include "arm_math.h"
 #include "fvec.h"
 
-#define YIN_FFT_SAMPLING_RATE 22800
+#define YIN_FFT_SAMPLING_RATE 22900
 #define YIN_BUF_SIZE 2048
 
 /** pitch detection object */

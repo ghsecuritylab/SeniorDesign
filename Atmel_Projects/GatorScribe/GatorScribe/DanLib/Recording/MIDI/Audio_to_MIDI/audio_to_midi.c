@@ -80,10 +80,10 @@ void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *o
 	
 	uint32_t power = get_average_power(buffer);
 	
-	if (power < 350)
+	if (power < POWER_THRESHOLD)
 	{
-		note->note_number = -1;
-		note->velocity = -1;
+		note->note_number = NO_NOTE;
+		note->velocity = NO_NOTE;
 		return;
 	}
 
@@ -92,8 +92,8 @@ void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *o
 	// Don't count notes below C1 
 	if (freq < 32.0)
 	{
-		note->note_number = -1;
-		note->velocity = -1;
+		note->note_number = NO_NOTE;
+		note->velocity = NO_NOTE;
 		return;
 	}
 	note->note_number = get_midi_number(freq);
@@ -102,7 +102,7 @@ void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *o
 
 void get_midi_note_name(char *note_name, int16_t note_number)
 {
-	if (note_number == -1)
+	if (note_number == NO_NOTE)
 	{
 		strcpy(note_name, "None");
 		return;
@@ -112,7 +112,7 @@ void get_midi_note_name(char *note_name, int16_t note_number)
 
 void get_frequency_str(char *freq_name, int16_t note_number)
 {
-	if (note_number == -1)
+	if (note_number == NO_NOTE)
 	{
 		strcpy(freq_name, "None");
 		return;

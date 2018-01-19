@@ -7,6 +7,7 @@
 //
 
 #include "MidiFile.h"
+#include "math.h"
 
 unsigned char out[10000];
 static int outIdx = 0;
@@ -99,7 +100,7 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
         write_out(title[i]);
     
     // tempo
-    int microseconds = (int)(60.0 / bpm * 1000000.0 + 0.5);
+    int microseconds = (int)(60.0 / bpm * 1000000.0);
     write_out(0x00); // tick
     write_out(0xFF);
     write_out(0x51);
@@ -109,8 +110,10 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
     write_out((microseconds >> 0) & 0xff);
 
     // time signature
-    int base2 = 0;
-    while( time_signature->bottom >>=1) base2++;
+    uint8_t base2 = 0;
+//    while( time_signature->bottom >>=1) base2++;
+    base2 = log2(time_signature->bottom);
+    printf("%d\n\n\n\n", base2); 
     write_out(0x00); // tick
     write_out(0xFF);
     write_out(0x58);

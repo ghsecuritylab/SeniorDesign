@@ -11,9 +11,9 @@
 
 int main(int argc, const char * argv[]) {
     
-    uint32_t bpm = 104;
+    uint32_t bpm = 111;
     midi_instrument_t playback_instrument = VIOLIN;
-    time_signature_t time_signature = {4,4, FOUR_FOUR};
+    time_signature_t time_signature = {6,8, SIX_EIGHT};
     key_signature_t key_signature = {C_MAJOR, MAJOR};
     char title[128] = "Twinkle, Twinkle Little Star";
     midi_event_t events[100];
