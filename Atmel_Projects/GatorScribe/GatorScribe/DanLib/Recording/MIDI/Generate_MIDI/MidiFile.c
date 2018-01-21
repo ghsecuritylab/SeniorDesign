@@ -199,17 +199,11 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
     for (i = 0; i < 4; i++)
         write_out(endoftrack[i]);
     
-	//printf("\n\n-------- MIDI FILE --------\n\n\r");
+	
 	printf("-"); // flag for beginning of midi file 
     for (i = 0; i < outIdx; i++)
     {
         printf("%02x", out[i]);
-		/*
-        if ((i+1) % 16 == 0)
-            printf("\n\r");
-        else if ((i+1) % 2 == 0)
-            printf(" ");
-		*/
     }
 	printf("-"); // flag for end 
 }
@@ -226,7 +220,7 @@ void convert_midi_notes_to_events(midi_note_t *notes, midi_event_t *events, uint
 	
 	while (notes[i].note_number != END_OF_RECORDING)
 	{
-		if (notes[i].note_number != notes[i-1].note_number)
+		if (notes[i].note_number != notes[i-1].note_number || (notes[i].velocity - notes[i-1].velocity) > 300 || notes[i+1].note_number == END_OF_RECORDING)
 		{
 			events[*number_of_events].note_number = current_note; 
 			events[*number_of_events].velocity = 64; 

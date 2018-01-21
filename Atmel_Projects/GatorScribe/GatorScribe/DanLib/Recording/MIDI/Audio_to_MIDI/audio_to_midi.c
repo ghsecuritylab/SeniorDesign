@@ -62,22 +62,18 @@ static uint32_t get_average_power (float32_t *buffer)
 {
 	int32_t i;
 	uint32_t power = 0;
-	for ( i = 0; i < YIN_BUF_SIZE/2; i++)
+	for ( i = 0; i < YIN_BUF_SIZE; i++)
 	{
 		power += (abs(buffer[i]))^2;
 	}
-	return (power/(YIN_BUF_SIZE/2));
+	return (power/(YIN_BUF_SIZE));
 }
 
 /**************************** Private Functions End *********************************/
 
 /**************************** Public Functions Start *********************************/
 void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *object)
-{
-	fvec_t input; 
-	input.data = (smpl_t *)buffer; 
-	input.length = YIN_BUF_SIZE;
-	
+{	
 	uint32_t power = get_average_power(buffer);
 	
 	if (power < POWER_THRESHOLD)
@@ -86,8 +82,12 @@ void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *o
 		note->velocity = NO_NOTE;
 		return;
 	}
+	
+	fvec_t input;
+	input.data = (smpl_t *)buffer;
+	input.length = YIN_BUF_SIZE;
 
-	float32_t freq = aubio_pitchyinfast_do(object, (const fvec_t *)&input); 
+	float32_t freq = aubio_pitchyinfast_do(object, &input); 
 	
 	// Don't count notes below C1 
 	if (freq < 32.0)
@@ -97,7 +97,7 @@ void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *o
 		return;
 	}
 	note->note_number = get_midi_number(freq);
-	note->velocity = power >> 2;
+	note->velocity = power;
 }
 
 void get_midi_note_name(char *note_name, int16_t note_number)

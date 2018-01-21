@@ -33,6 +33,7 @@
 #include "cvec.h"
 #include "fft.h"
 #include "pitchyinfast.h"
+#include "hanning.h"
 
 struct _aubio_pitchyinfast_t
 {
@@ -74,7 +75,7 @@ void del_aubio_pitchyinfast (aubio_pitchyinfast_t * o)
 	AUBIO_FREE (o);
 }
 
-float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, const fvec_t * input)
+float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input)
 {
 	const smpl_t tol = o->tol;
 	fvec_t* yin = o->yin;
@@ -82,9 +83,13 @@ float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, const fvec_t * input)
 	uint_t B = o->tmpdata->length;
 	uint_t W = o->yin->length; // B / 2
 	fvec_t tmp_slice, kernel_ptr;
-	uint_t tau;
+	uint_t tau, i;
 	sint_t period;
 	smpl_t tmp2 = 0.0;
+	
+	// apply hanning window 
+	for (i = 0; i < input->length; i++)
+		input->data[i] *= hanning[i]; 
 
   // compute r_t(0) + r_t + tau(0)
   {

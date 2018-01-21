@@ -200,9 +200,9 @@ void start_recording(midi_note_t *notes, uint32_t bpm, midi_instrument_t playbac
 		{
 			get_midi_note((float32_t *)&processBuffer[0], &notes[note_cnt], yin_instance);
 			
-			// might need to fix indexing here 
 			get_midi_note_name(str, notes[note_cnt].note_number);
 			//printf("Beat %d : %s\n\r", ((sixteenth_note_cnt-2) & 3) + 1, str);
+			
 			note_cnt++; 
 			note_16_received = false;
 		}

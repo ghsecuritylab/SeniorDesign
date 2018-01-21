@@ -789,6 +789,9 @@
     <Compile Include="DanLib\Recording\YinFFT\fvec.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="DanLib\Recording\YinFFT\hanning.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="DanLib\Recording\YinFFT\mathutils.c">
       <SubType>compile</SubType>
     </Compile>
