@@ -40,9 +40,9 @@ int main(void)
 	key_signature_t key_signature = {C_MAJOR, MAJOR};
 	char title[MAX_TITLE_SIZE] = "Title Here";
 	
-	// todo: need to check for out of bounds when recording 
-	midi_note_t notes_in_time[1000];
-	midi_event_t events_in_time[1000];
+	// TODO: need to check for out of bounds when recording 
+	midi_note_t notes_in_time[10000];
+	midi_event_t events_in_time[10000];
 	uint32_t number_of_events = 0; 
 
 	while(1)

@@ -9,9 +9,9 @@
 #include "asf.h"
 #include "touch.h"
 
-/*********************************** Global Variables Start ***********************************/
+/*********************************** Static Variables Start ***********************************/
 static struct mxt_device device;
-/*********************************** Global Variables End ***********************************/
+/*********************************** Static Variables End ***********************************/
 
 /*********************************** Static Functions Start ***********************************/
 static void mxt_make_highchg(struct mxt_device *data)

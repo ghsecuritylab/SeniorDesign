@@ -92,6 +92,8 @@ float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input)
 		input->data[i] *= hanning[i]; 
 
   // compute r_t(0) + r_t + tau(0)
+  // actually computing r_t(0) -> constant on line 109
+  // r_t+tau(0) -> zero lag term done in the for loop for every tau
   {
     fvec_t *squares = o->tmpdata;
     fvec_weighted_copy(input, input, squares);
@@ -107,6 +109,7 @@ float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input)
     fvec_add(o->sqdiff, o->sqdiff->data[0]);
   }
   // compute r_t(tau) = -2.*ifft(fft(samples)*fft(samples[W-1::-1]))
+  // https://stackoverflow.com/questions/3949324/calculate-autocorrelation-using-fft-in-matlab
   {
     fvec_t *compmul = o->tmpdata;
     fvec_t *rt_of_tau = o->samples_fft;

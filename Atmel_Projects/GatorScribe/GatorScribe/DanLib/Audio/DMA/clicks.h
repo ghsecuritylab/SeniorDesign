@@ -12,7 +12,7 @@
 #define CLICK_LENGTH 8820
 #define CLICK_DURATION 4000
 
-int16_t click_low[] = {
+const int16_t click_low[] = {
 	223,223,
 	1423,1423,
 	4769,4769,
@@ -4425,7 +4425,7 @@ int16_t click_low[] = {
 	10,10
 };
 
-int16_t click_high[] = {
+const int16_t click_high[] = {
 	833,833,
 	3270,3270,
 	6633,6633,
