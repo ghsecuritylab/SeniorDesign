@@ -194,7 +194,7 @@ void start_recording(midi_note_t *notes, uint32_t bpm, midi_instrument_t playbac
 		while(!note_16_received); 
 		note_16_received = 0; 
 	}
-	while(recording)
+	while(recording || note_cnt == MAX_NUM_NOTES)
 	{
 		if (note_16_received)
 		{
@@ -203,10 +203,13 @@ void start_recording(midi_note_t *notes, uint32_t bpm, midi_instrument_t playbac
 			get_midi_note_name(str, notes[note_cnt].note_number);
 			//printf("Beat %d : %s\n\r", ((sixteenth_note_cnt-2) & 3) + 1, str);
 			
+			// can just create midi file here and creater small circular buffer of midi notes -- say 50 16th notes idk 
+			
 			note_cnt++; 
 			note_16_received = false;
 		}
 	}
+	recording = false; 
 	metronome_on = false;
 	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN);
 	del_aubio_pitchyinfast(yin_instance); 

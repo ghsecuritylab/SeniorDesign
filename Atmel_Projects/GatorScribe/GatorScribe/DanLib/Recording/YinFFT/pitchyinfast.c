@@ -58,7 +58,7 @@ aubio_pitchyinfast_t * new_aubio_pitchyinfast (uint_t bufsize)
 	o->samples_fft = new_fvec (bufsize);
 	o->kernel_fft = new_fvec (bufsize);
 	o->fft = new_aubio_fft (bufsize);
-	o->tol = 0.15;
+	o->tol = 0.1; // changed from 0.15
 	o->peak_pos = 0;
 	return o;
 }
@@ -170,6 +170,7 @@ float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input)
 	// use global minimum
 	o->peak_pos = (uint_t)fvec_min_elem (yin);
 	return YIN_FFT_SAMPLING_RATE / fvec_quadratic_peak_pos (yin, o->peak_pos);
+	//return -1; 
 }
 
 smpl_t aubio_pitchyinfast_get_confidence (aubio_pitchyinfast_t * o) 

@@ -11,6 +11,8 @@
 
 #include "DanLib.h"
 
+#define MAX_NUM_NOTES 5000
+
 void start_recording(midi_note_t *notes, uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title);
 
 #endif /* RECORDING_H_ */

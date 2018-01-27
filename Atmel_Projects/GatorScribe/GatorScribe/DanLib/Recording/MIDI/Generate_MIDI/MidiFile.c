@@ -220,7 +220,7 @@ void convert_midi_notes_to_events(midi_note_t *notes, midi_event_t *events, uint
 	
 	while (notes[i].note_number != END_OF_RECORDING)
 	{
-		if (notes[i].note_number != notes[i-1].note_number || (notes[i].velocity - notes[i-1].velocity) > 300 || notes[i+1].note_number == END_OF_RECORDING)
+		if (notes[i].note_number != notes[i-1].note_number || (notes[i].velocity > 1.04*notes[i-1].velocity) || notes[i+1].note_number == END_OF_RECORDING)
 		{
 			events[*number_of_events].note_number = current_note; 
 			events[*number_of_events].velocity = 64; 
