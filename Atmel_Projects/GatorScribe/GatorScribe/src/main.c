@@ -40,13 +40,12 @@ int main(void)
 	key_signature_t key_signature = {C_MAJOR, MAJOR};
 	char title[MAX_TITLE_SIZE] = "Title Here";
 	
-	// TODO: need to check for out of bounds when recording 
 	midi_event_t events_in_time[MAX_NUM_EVENTS];
 	uint32_t number_of_events = 0; 
+	max_power = 100; // minimum initial max power
 
 	while(1)
 	{
-		max_power = 100; // minimum initial max power  
 		main_menu(&bpm, &playback_instrument, &time_signature, &key_signature, &title[0]);
 		gfx_draw_filled_rect(0, 0, gfx_get_width(), gfx_get_height(), GFX_COLOR_BLACK);
 		start_recording(events_in_time, &number_of_events, bpm, playback_instrument, time_signature, key_signature, title);
