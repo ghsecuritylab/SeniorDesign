@@ -160,23 +160,31 @@ void RTT_Handler(void)
 /**************************** RTT Interrupt Handler End *********************************/
 
 /**************************** Public Functions Start *********************************/
-
-void start_recording(midi_note_t *notes, uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title)
+#define NOTE_BUF_SIZE 128 
+#define NOTE_MASK (NOTE_BUF_SIZE-1)
+static midi_note_t notes[NOTE_BUF_SIZE]; 
+void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title)
 {
+	// for uart debug 
 	//printf("\n\n\n\n\n\r");
-	char str[20]; 
-	int note_cnt = 0; 
-	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast(YIN_BUF_SIZE); 
-	configure_lcd_interrupt(); 
-	time_sig = time_signature.sig; 
+	//char str[20]; 
 	
+	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast(YIN_BUF_SIZE);
+	configure_lcd_interrupt();
+	
+	/******** midi event variables *********/ 
+	*number_of_events = 0; 
+	float current_rhythm = 0.25;  // 16th note
+	int note_cnt = 0; 
+	
+	time_sig = time_signature.sig;
 	if (time_sig == FOUR_FOUR)
-		number_of_beats_in_a_measure = 4; 
+		number_of_beats_in_a_measure = 4;
 	else if (time_sig == THREE_FOUR)
-		number_of_beats_in_a_measure = 3; 
+		number_of_beats_in_a_measure = 3;
 	else if (time_sig == TWO_FOUR)
-		number_of_beats_in_a_measure = 2; 
-	else // 6/8 
+		number_of_beats_in_a_measure = 2;
+	else // 6/8
 		number_of_beats_in_a_measure = 6; 
 	
 	sixteenth_note_cnt = 4; 
@@ -194,17 +202,31 @@ void start_recording(midi_note_t *notes, uint32_t bpm, midi_instrument_t playbac
 		while(!note_16_received); 
 		note_16_received = 0; 
 	}
-	while(recording || note_cnt == MAX_NUM_NOTES)
+	while(recording || *number_of_events == MAX_NUM_EVENTS-1)
 	{
 		if (note_16_received)
 		{
-			get_midi_note((float32_t *)&processBuffer[0], &notes[note_cnt], yin_instance);
+			get_midi_note((float32_t *)&processBuffer[0], &notes[note_cnt & NOTE_MASK], yin_instance);
 			
-			get_midi_note_name(str, notes[note_cnt].note_number);
+			// for UART debug 
+			//get_midi_note_name(str, notes[note_cnt].note_number);
 			//printf("Beat %d : %s\n\r", ((sixteenth_note_cnt-2) & 3) + 1, str);
 			
-			// can just create midi file here and creater small circular buffer of midi notes -- say 50 16th notes idk 
-			
+			if (note_cnt > 0)
+			{
+				if (notes[note_cnt & NOTE_MASK].note_number != notes[(note_cnt-1) & NOTE_MASK].note_number || notes[note_cnt & NOTE_MASK].velocity > 1.05*notes[(note_cnt-1) & NOTE_MASK].velocity)
+				{
+					events[*number_of_events].note_number = notes[(note_cnt-1) & NOTE_MASK].note_number;
+					events[*number_of_events].velocity = 64;
+					events[*number_of_events].rhythm = current_rhythm;
+					(*number_of_events)++;
+					current_rhythm = 0.25;
+				}
+				else
+				{
+					current_rhythm += 0.25;
+				}
+			}
 			note_cnt++; 
 			note_16_received = false;
 		}
@@ -214,8 +236,12 @@ void start_recording(midi_note_t *notes, uint32_t bpm, midi_instrument_t playbac
 	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN);
 	del_aubio_pitchyinfast(yin_instance); 
 	pio_disable_interrupt(PIOD, PIO_PD28);
-	notes[note_cnt].note_number = END_OF_RECORDING; 
-	notes[note_cnt].velocity = END_OF_RECORDING; 
+	
+	// add last note 
+	events[*number_of_events].note_number = notes[(note_cnt-1) & NOTE_MASK].note_number;
+	events[*number_of_events].velocity = 64;
+	events[*number_of_events].rhythm = current_rhythm;
+	(*number_of_events)++;
 }
 
 /**************************** Public Functions End *********************************/

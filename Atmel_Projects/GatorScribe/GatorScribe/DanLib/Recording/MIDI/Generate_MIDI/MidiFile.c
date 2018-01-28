@@ -208,31 +208,3 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
 	printf("-"); // flag for end 
 }
 
-void convert_midi_notes_to_events(midi_note_t *notes, midi_event_t *events, uint32_t *number_of_events)
-{
-	// TODO: group consecutive notes and also look at differences
-	// in velocities to separate individual notes of the same pitch
-	*number_of_events = 0; 
-	int i = 0; 
-	int16_t current_note = notes[i++].note_number; 
-	// do velocity later 
-	float current_rhythm = 0.25; // 16th notes 
-	
-	while (notes[i].note_number != END_OF_RECORDING)
-	{
-		if (notes[i].note_number != notes[i-1].note_number || (notes[i].velocity > 1.04*notes[i-1].velocity) || notes[i+1].note_number == END_OF_RECORDING)
-		{
-			events[*number_of_events].note_number = current_note; 
-			events[*number_of_events].velocity = 64; 
-			events[*number_of_events].rhythm = current_rhythm; 
-			(*number_of_events)++;
-			current_note = notes[i].note_number; 
-			current_rhythm = 0.25; 
-		}
-		else
-		{
-			current_rhythm += 0.25; 
-		}
-		i++; 
-	}
-}
