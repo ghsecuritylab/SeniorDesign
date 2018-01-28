@@ -80,7 +80,7 @@ void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *o
 		max_power = power;
 	}
 	
-	if (power < 0.2*max_power)
+	if (power < 0.15*max_power)
 	{
 		note->note_number = NO_NOTE;
 		note->velocity = NO_NOTE;
