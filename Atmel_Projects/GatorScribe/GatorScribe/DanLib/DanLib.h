@@ -11,10 +11,8 @@
 
 #include "audio.h"
 #include "LCDLib.h"
-#include "main_menu.h"
-#include "audio_to_midi.h"
-#include "recording.h"
-#include "MidiFile.h"
+#include "pitchyinfast.h"
+#include "PSOLA.h"
 
 
 #endif /* DANLIB_H_ */

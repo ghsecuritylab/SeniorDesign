@@ -15,24 +15,18 @@
 #define XDMA_CH_SSC_RX    0
 #define XDMA_CH_SSC_TX    1
 
-/** Micro-block wlength for single transfer  */
-#define BUF_SIZE          128	// 128 in total, 64 left & 64 right 
-#define BUF_SIZE_PER_CHANNEL (BUF_SIZE >> 1)
+/** Micro-block w-length for single transfer  */
+#define BUF_SIZE          4096	// 4096 in total, 2048 left & 2048 right 
+#define BUF_SIZE_PER_CHANNEL (BUF_SIZE >> 1) // 2048 
 
-#define PROCESS_BUF_SIZE 16384	
-#define PROCESS_BUF_SIZE_INCREMENT (BUF_SIZE_PER_CHANNEL >> 1)	// left channel, decimated by 2
+// 1024 
+#define PROCESS_BUF_SIZE (BUF_SIZE_PER_CHANNEL >> 1) // input decimated by 2 -- every other sample 	
 /********************************** Defines End **********************************/
 
 /********************************** Externs Start **********************************/
-extern volatile uint16_t *inBuffer;
-extern volatile uint16_t *outBuffer;
 extern volatile bool dataReceived;
 extern volatile float32_t *processBuffer;
-extern volatile float32_t *fillBuffer; 
-extern volatile bool processPingMode; 
-
-extern volatile float32_t processPingBuffer[PROCESS_BUF_SIZE];
-extern volatile float32_t processPongBuffer[PROCESS_BUF_SIZE];
+extern volatile uint16_t *outBuffer; 
 /********************************** Externs End **********************************/
 
 /********************************** Public Functions Start **********************************/

@@ -7,9 +7,7 @@
 
 #include <asf.h>
 #include "DMA_Audio.h"
-#include "clicks.h"
 #include "arm_math.h"
-
 
 /********************************** Static Variables Start **********************************/
 COMPILER_WORD_ALIGNED
@@ -19,36 +17,30 @@ static lld_view1 linklist_read[2];
 
 volatile static bool inPingMode = 1;
 volatile static bool outPingMode = 1;
-
-
-static int clickIdx = 0;
-volatile static uint32_t metronome_time_elapsed = 0; 
 /********************************** Static Variables End **********************************/
 
 /********************************** Public Variables Start **********************************/
-uint16_t inPingBuffer[BUF_SIZE];
-uint16_t inPongBuffer[BUF_SIZE];
-uint16_t outPingBuffer[BUF_SIZE];
-uint16_t outPongBuffer[BUF_SIZE];
+COMPILER_WORD_ALIGNED uint16_t inPingBuffer[BUF_SIZE];
+COMPILER_WORD_ALIGNED uint16_t inPongBuffer[BUF_SIZE];
+COMPILER_WORD_ALIGNED uint16_t outPingBuffer[BUF_SIZE];
+COMPILER_WORD_ALIGNED uint16_t outPongBuffer[BUF_SIZE];
 
-COMPILER_WORD_ALIGNED
-volatile float32_t processPingBuffer[PROCESS_BUF_SIZE];	
-COMPILER_WORD_ALIGNED
-volatile float32_t processPongBuffer[PROCESS_BUF_SIZE];
-volatile float32_t *processBuffer = processPongBuffer; 
-volatile float32_t *fillBuffer = processPingBuffer;
+COMPILER_WORD_ALIGNED float32_t processPingBuffer[PROCESS_BUF_SIZE];	
+COMPILER_WORD_ALIGNED float32_t processPongBuffer[PROCESS_BUF_SIZE];
+
+// in and process buffers are synchronized 
+volatile float32_t *processBuffer = processPingBuffer;
 volatile uint16_t *inBuffer = inPingBuffer;
 volatile uint16_t *outBuffer = outPingBuffer;
 
-volatile bool processPingMode = 1;
-
 volatile bool outOfTime = 0; 
+volatile bool dataReceived = false; 
 /********************************** Public Variables End **********************************/
 
 /********************************** Extern Variables Start **********************************/
-extern volatile bool metronome_on; 
-extern volatile bool one_beat; 
-extern volatile bool up_beat; 
+
+/*********************************** Extern Variables End ***********************************/
+
 /******************************* XDMAC Interrupt Handler Start *******************************/ 
 void XDMAC_Handler(void)
 {
@@ -57,94 +49,32 @@ void XDMAC_Handler(void)
     dma_status = xdmac_channel_get_interrupt_status(XDMAC, XDMA_CH_SSC_RX);
     if (dma_status & XDMAC_CIS_BIS)
     {
+		// Update input, process, and fill buffers to be used 
 		if(inPingMode)
 		{
 			inBuffer = inPingBuffer; 
+			processBuffer = processPingBuffer; 
 		}
 		else 
 		{
 			inBuffer = inPongBuffer; 
+			processBuffer = processPongBuffer; 
 		}
 		inPingMode = !inPingMode; 
-		int processIdx = 0; 
-		if (metronome_on)
-		{	
-			if (one_beat)
-			{
-				for(int i = 0; i < BUF_SIZE; i++)
-				{
-					outBuffer[i] = (uint16_t) ( ( (int32_t)((int16_t)inBuffer[i]) + (int32_t)(click_high[clickIdx++]) ) / 2 );
-					if(clickIdx == CLICK_LENGTH) 
-						clickIdx = 0;
-				}
-			}
-			else if (up_beat)
-			{
-				for(int i = 0; i < BUF_SIZE; i++)
-				{
-					outBuffer[i] = (uint16_t) ( ( (int32_t)((int16_t)inBuffer[i]) + (int32_t)(click_low[clickIdx++]/6) ) / 2 );
-					if(clickIdx == CLICK_LENGTH)
-						clickIdx = 0;
-				}
-			}
-			else
-			{
-				for(int i = 0; i < BUF_SIZE; i++)
-				{
-					outBuffer[i] = (uint16_t) ( ( (int32_t)((int16_t)inBuffer[i]) + (int32_t)(click_low[clickIdx++]) ) / 2 );
-					if(clickIdx == CLICK_LENGTH)
-						clickIdx = 0;
-				}				
-			}
-			metronome_time_elapsed += BUF_SIZE_PER_CHANNEL; 
-			if (metronome_time_elapsed >= CLICK_DURATION)
-			{ 
-				metronome_on = false; 
-				metronome_time_elapsed = 0; 
-				clickIdx = 0; 
-			}
-		}
-		else 
-		{
-			for(int i = 0; i < BUF_SIZE; i++)
-				outBuffer[i] = (uint16_t)((int16_t)inBuffer[i] / 2);	
-		}
 		
-		// Fill process buffer 
-		for(int i = 0; i < BUF_SIZE; i++)
+		int processIdx = 0;
+		// Fill process buffer - only left channel decimated by 1
+		for(int i = 0; i < BUF_SIZE; i+=4)
 		{
-			/* Check if divisible by 4 for decimation by 2 */
-			if ((i & 0x03) == 0)
-				fillBuffer[processIdx++] = (float32_t)((int16_t)inBuffer[i]);
+			processBuffer[processIdx++] = ((float32_t)(int16_t)inBuffer[i]) / INT16_MAX; 
 		}
-		
-		if (processPingMode)
-		{
-			if (fillBuffer == &processPingBuffer[PROCESS_BUF_SIZE - (BUF_SIZE >> 1)])
-			{
-				// out of time 				
-			}	
-			else 
-			{
-				fillBuffer += PROCESS_BUF_SIZE_INCREMENT; 
-			}
-		}
-		else 
-		{
-			if (fillBuffer == &processPongBuffer[PROCESS_BUF_SIZE - (BUF_SIZE >> 1)])
-			{
-				// out of time 
-			}
-			else
-			{
-				fillBuffer += PROCESS_BUF_SIZE_INCREMENT;
-			}
-		}
+		dataReceived = true; // can check for out of time here 
     }
 	
 	dma_status = xdmac_channel_get_interrupt_status(XDMAC, XDMA_CH_SSC_TX);
 	if (dma_status & XDMAC_CIS_BIS)
 	{
+		// update output buffer to be used 
 		if(outPingMode)
 		{
 			outBuffer = outPingBuffer; 
