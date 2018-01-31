@@ -380,7 +380,7 @@ void aubio_fft_do_complex(aubio_fft_t * s, const fvec_t * input, fvec_t * compsp
   compspec->data[s->winsize / 2] = s->in[1];
   for (i = 1; i < s->fft_size - 1; i++) {
     compspec->data[i] = s->in[2 * i];
-    compspec->data[s->winsize - i] = -s->in[2 * i + 1];
+    compspec->data[s->winsize - i] = - s->in[2 * i + 1];
   }
 #endif /* using OOURA */
 }

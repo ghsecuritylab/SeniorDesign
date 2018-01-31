@@ -35,8 +35,7 @@ DanLib/YinFFT/pitchyinfast.d DanLib/YinFFT/pitchyinfast.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
  ../DanLib/YinFFT/types.h ../DanLib/YinFFT/mathutils.h \
  ../DanLib/YinFFT/fvec.h ../DanLib/YinFFT/musicutils.h \
- ../DanLib/YinFFT/cvec.h ../DanLib/YinFFT/fft.h \
- ../DanLib/YinFFT/pitchyinfast.h \
+ ../DanLib/YinFFT/cvec.h ../DanLib/YinFFT/pitchyinfast.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
@@ -47,7 +46,8 @@ DanLib/YinFFT/pitchyinfast.d DanLib/YinFFT/pitchyinfast.o: \
  ../src/ASF/thirdparty/CMSIS/Include/core_cmSimd.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
+ ../DanLib/YinFFT/fft.h
 
 ../DanLib/YinFFT/aubio_priv.h:
 
@@ -127,8 +127,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/YinFFT/cvec.h:
 
-../DanLib/YinFFT/fft.h:
-
 ../DanLib/YinFFT/pitchyinfast.h:
 
 ../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
@@ -152,3 +150,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
+
+../DanLib/YinFFT/fft.h:

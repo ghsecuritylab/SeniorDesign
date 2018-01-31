@@ -6,87 +6,127 @@
  */ 
 
 #include "PSOLA.h"
+#include "DMA_Audio.h"
 
-uint32_t _bufferLen;
-float32_t *_workingBuffer;
-float32_t *_storageBuffer;
-float32_t *_window;
+static float32_t gInFIFO[PROCESS_BUF_SIZE];
+static float32_t gOutFIFO[PROCESS_BUF_SIZE];
+static float32_t gFFTworksp[2*PROCESS_BUF_SIZE];
+static float32_t gLastPhase[PROCESS_BUF_SIZE/2+1];
+static float32_t gSumPhase[PROCESS_BUF_SIZE/2+1];
+static float32_t gOutputAccum[2*PROCESS_BUF_SIZE];
+static float32_t gAnaFreq[PROCESS_BUF_SIZE];
+static float32_t gAnaMagn[PROCESS_BUF_SIZE];
+static float32_t gSynFreq[PROCESS_BUF_SIZE];
+static float32_t gSynMagn[PROCESS_BUF_SIZE];
 
-static void hanning_win(float32_t *window, int length)
+void PSOLA_init(uint32_t bufferSize)
 {
-	for (int i = 0; i < length-1; i++) {
-		window[i] = 0.5 * (1 - cos(2*PI*i/(length-1)));
-	}
+	memset(gInFIFO, 0, bufferSize*sizeof(float32_t));
+	memset(gOutFIFO, 0, bufferSize*sizeof(float32_t));
+	memset(gFFTworksp, 0, 2*bufferSize*sizeof(float32_t));
+	memset(gLastPhase, 0, (bufferSize/2+1)*sizeof(float32_t));
+	memset(gSumPhase, 0, (bufferSize/2+1)*sizeof(float32_t));
+	memset(gOutputAccum, 0, 2*bufferSize*sizeof(float32_t));
+	memset(gAnaFreq, 0, bufferSize*sizeof(float32_t));
+	memset(gAnaMagn, 0, bufferSize*sizeof(float32_t));
 }
 
-void PSOLA_init(uint32_t bufferLen) 
+void pitch_shift_do(float32_t * outData, uint32_t pitch_shift, cvec_t *mags_and_phases)
 {
-	if (bufferLen < 1) {
-		_bufferLen = DEFAULT_BUFFER_SIZE;
-		} else {
-		_bufferLen = bufferLen;
-	}
-	// allow for twice the room to deal with the case when the end of the buffer may not be sufficient
-	_workingBuffer = malloc(2*bufferLen*sizeof(float32_t)); 
-	// allow for twice the room so we can move new data into this buffer
-	_storageBuffer = malloc(2*bufferLen*sizeof(float32_t)); ;
-	// allocates maximum size for window to avoid reinitialization cost
-	_window = malloc(bufferLen*sizeof(float32_t));  
-}
+	double magn, phase, tmp, window, real, imag;
+	double freqPerBin, expct;
+	long i,k, qpd, index;
 
-void pitchCorrect(float32_t* input, int Fs, float inputPitch, float desiredPitch) {
-	// Move things into the storage buffer
-	for (uint32_t i = 0; i < _bufferLen; i++) {
-		//slide the past data into the front
-		_storageBuffer[i] = _storageBuffer[i + _bufferLen];
-		//load up next set of data
-		_storageBuffer[i + _bufferLen] = input[i];
-	}
-	// Percent change of frequency
-	float32_t scalingFactor = 1 + (inputPitch - desiredPitch)/desiredPitch;
-	// PSOLA constants
-	uint32_t analysisShift = ceil(Fs/inputPitch);
-	uint32_t analysisShiftHalfed = round(analysisShift/2);
-	int32_t synthesisShift = round(analysisShift*scalingFactor);
-	uint32_t analysisIndex = 0;
-	uint32_t synthesisIndex = 0;
-	int32_t analysisBlockStart;
-	uint32_t analysisBlockEnd;
-	uint32_t synthesisBlockEnd;
-	uint32_t analysisLimit = _bufferLen - analysisShift - 1;
-	// Window declaration
-	int winLength = analysisShift + analysisShiftHalfed + 1;
-	int windowIndex;
-	hanning_win(_window, winLength); 
-	// PSOLA Algorithm
-	while (analysisIndex < analysisLimit) {
-		// Analysis blocks are two pitch periods long
-		analysisBlockStart = (int32_t)analysisIndex - (int32_t)analysisShiftHalfed;
-	//	if (analysisBlockStart < 0) {
-	//		analysisBlockStart = 0;
-	//	}
-		analysisBlockEnd = analysisBlockStart + analysisShift + analysisShiftHalfed;
-		if (analysisBlockEnd > _bufferLen - 1) {
-			analysisBlockEnd = _bufferLen - 1;
-		}
-		// Overlap and add
-		synthesisBlockEnd = synthesisIndex + analysisBlockEnd - analysisBlockStart;
-		uint32_t inputIndex = (uint32_t)((int32_t)_bufferLen + analysisBlockStart);
-		windowIndex = 0;
-		for (uint32_t j = synthesisIndex; j <= synthesisBlockEnd; j++) {
-			_workingBuffer[j] += _storageBuffer[inputIndex]*_window[windowIndex];
-			inputIndex++;
-			windowIndex++;
-		}
-		// Update pointers
-		analysisIndex += analysisShift;
-		synthesisIndex += synthesisShift;
-	}
-	// Write back to input
-	for (uint32_t i = 0; i < _bufferLen; i++) {
-		input[i] = (input[i] + _workingBuffer[i]) / 2; 
-		// clean out the buffer
-		_workingBuffer[i] = 0.0;
-	}
-}
+	/* set up some handy variables */
+	freqPerBin = FFT_SAMPLE_RATE/(double)FFT_FRAME_SIZE;
+	expct = 2.*M_PI*(double)STEP_SIZE/(double)FFT_FRAME_SIZE;
+	
+	/* ***************** ANALYSIS ******************* */
+	/* this is the analysis step */
+	for (k = 0; k <= FRAME_SIZE_2; k++) {
+		
+		magn = mags_and_phases->norm[k]; 
+		phase = mags_and_phases->phas[k]; 
 
+		/* compute phase difference */
+		tmp = phase - gLastPhase[k];
+		gLastPhase[k] = phase;
+
+		/* subtract expected phase difference */
+		tmp -= (double)k*expct;
+
+		/* map delta phase into +/- Pi interval */
+		qpd = tmp/M_PI;
+		if (qpd >= 0) qpd += qpd&1;
+		else qpd -= qpd&1;
+		tmp -= M_PI*(double)qpd;
+
+		/* get deviation from bin frequency from the +/- Pi interval */
+		tmp = NUM_OF_OVERLAPS*tmp/(2.*M_PI);
+
+		/* compute the k-th partials' true frequency */
+		tmp = (double)k*freqPerBin + tmp*freqPerBin;
+
+		/* store magnitude and true frequency in analysis arrays */
+		gAnaMagn[k] = magn;
+		gAnaFreq[k] = tmp;
+	}
+	
+	memset(gSynMagn, 0, FFT_FRAME_SIZE*sizeof(float32_t));
+	memset(gSynFreq, 0, FFT_FRAME_SIZE*sizeof(float32_t));
+	for (k = 0; k <= FRAME_SIZE_2; k++) {
+		index = k*pitch_shift;
+		if (index <= FRAME_SIZE_2) {
+			gSynMagn[index] += gAnaMagn[k];
+			gSynFreq[index] = gAnaFreq[k] * pitch_shift;
+		}
+	}
+	
+	/* ***************** SYNTHESIS ******************* */
+	/* this is the synthesis step */
+	for (k = 0; k <= FRAME_SIZE_2; k++) {
+
+		/* get magnitude and true frequency from synthesis arrays */
+		magn = gSynMagn[k];
+		tmp = gSynFreq[k];
+
+		/* subtract bin mid frequency */
+		tmp -= (double)k*freqPerBin;
+
+		/* get bin deviation from freq deviation */
+		tmp /= freqPerBin;
+
+		/* take number of overlaps into account */
+		tmp = 2.*M_PI*tmp/NUM_OF_OVERLAPS;
+
+		/* add the overlap phase advance back in */
+		tmp += (double)k*expct;
+
+		/* accumulate delta phase to get bin phase */
+		gSumPhase[k] += tmp;
+		phase = gSumPhase[k];
+
+		/* get real and imag part and re-interleave */
+		gFFTworksp[2*k] = magn*cos(phase);
+		gFFTworksp[2*k+1] = magn*sin(phase);
+	}
+
+	/* zero negative frequencies */
+	for (k = FFT_FRAME_SIZE+2; k < 2*FFT_FRAME_SIZE; k++) gFFTworksp[k] = 0.;
+
+	/* do inverse transform */
+	//smbFft(gFFTworksp, FFT_FRAME_SIZE, 1);
+
+	/* do windowing and add to output accumulator */
+	/*
+	for(k=0; k < FFT_FRAME_SIZE; k++) {
+		gOutputAccum[k] += hanning[k]*gFFTworksp[2*k]; 
+	}
+	*/
+	// problem for output 
+	for (k = 0; k < STEP_SIZE; k++) gOutFIFO[k] = gOutputAccum[k];
+
+	/* shift accumulator */
+	memmove(gOutputAccum, gOutputAccum+STEP_SIZE, FFT_FRAME_SIZE*sizeof(float));
+
+}

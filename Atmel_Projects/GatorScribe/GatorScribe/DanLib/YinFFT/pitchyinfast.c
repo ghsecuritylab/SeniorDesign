@@ -31,21 +31,7 @@
 #include "fvec.h"
 #include "mathutils.h"
 #include "cvec.h"
-#include "fft.h"
 #include "pitchyinfast.h"
-
-struct _aubio_pitchyinfast_t
-{
-	fvec_t *yin;
-	smpl_t tol;
-	uint_t peak_pos;
-	fvec_t *tmpdata;
-	fvec_t *sqdiff;
-	fvec_t *kernel;
-	fvec_t *samples_fft;
-	fvec_t *kernel_fft;
-	aubio_fft_t *fft;
-};
 
 aubio_pitchyinfast_t * new_aubio_pitchyinfast (uint_t bufsize)
 {
@@ -74,7 +60,7 @@ void del_aubio_pitchyinfast (aubio_pitchyinfast_t * o)
 	AUBIO_FREE (o);
 }
 
-float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input, cvec_t *phase)
+float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input)
 {
 	const smpl_t tol = o->tol;
 	fvec_t* yin = o->yin;
@@ -108,10 +94,6 @@ float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input, cvec_
   {
     fvec_t *compmul = o->tmpdata;
     fvec_t *rt_of_tau = o->samples_fft;
-    aubio_fft_do_complex(o->fft, input, o->samples_fft);
-	
-	// get phase 
-	aubio_fft_get_phas((const fvec_t*)o->samples_fft, phase); 
 	
     // build kernel, take a copy of first half of samples
     tmp_slice.data = input->data;

@@ -20,10 +20,10 @@ volatile static bool outPingMode = 1;
 /********************************** Static Variables End **********************************/
 
 /********************************** Public Variables Start **********************************/
-COMPILER_WORD_ALIGNED uint16_t inPingBuffer[BUF_SIZE];
-COMPILER_WORD_ALIGNED uint16_t inPongBuffer[BUF_SIZE];
-COMPILER_WORD_ALIGNED uint16_t outPingBuffer[BUF_SIZE];
-COMPILER_WORD_ALIGNED uint16_t outPongBuffer[BUF_SIZE];
+COMPILER_WORD_ALIGNED uint16_t inPingBuffer[IO_BUF_SIZE];
+COMPILER_WORD_ALIGNED uint16_t inPongBuffer[IO_BUF_SIZE];
+COMPILER_WORD_ALIGNED uint16_t outPingBuffer[IO_BUF_SIZE];
+COMPILER_WORD_ALIGNED uint16_t outPongBuffer[IO_BUF_SIZE];
 
 COMPILER_WORD_ALIGNED float32_t processPingBuffer[PROCESS_BUF_SIZE];	
 COMPILER_WORD_ALIGNED float32_t processPongBuffer[PROCESS_BUF_SIZE];
@@ -64,7 +64,7 @@ void XDMAC_Handler(void)
 		
 		int processIdx = 0;
 		// Fill process buffer - only left channel decimated by 1
-		for(int i = 0; i < BUF_SIZE; i+=4)
+		for(int i = 0; i < IO_BUF_SIZE; i+=4)
 		{
 			processBuffer[processIdx++] = ((float32_t)(int16_t)inBuffer[i]) / INT16_MAX; 
 		}
@@ -123,7 +123,7 @@ void configure_xdma(void)
     linklist_read[0].mbr_ubc = XDMAC_UBC_NVIEW_NDV1
 		| XDMAC_UBC_NDE_FETCH_EN
 		| XDMAC_UBC_NSEN_UPDATED
-		| XDMAC_CUBC_UBLEN(BUF_SIZE);
+		| XDMAC_CUBC_UBLEN(IO_BUF_SIZE);
     linklist_read[0].mbr_sa  = (uint32_t)&(SSC->SSC_RHR);
     linklist_read[0].mbr_da = (uint32_t)(src);
     linklist_read[0].mbr_nda = (uint32_t)&linklist_read[1];
@@ -131,7 +131,7 @@ void configure_xdma(void)
 	linklist_read[1].mbr_ubc = XDMAC_UBC_NVIEW_NDV1
 	    | XDMAC_UBC_NDE_FETCH_EN
 	    | XDMAC_UBC_NSEN_UPDATED
-	    | XDMAC_CUBC_UBLEN(BUF_SIZE);
+	    | XDMAC_CUBC_UBLEN(IO_BUF_SIZE);
 	linklist_read[1].mbr_sa  = (uint32_t)&(SSC->SSC_RHR);
 	linklist_read[1].mbr_da = (uint32_t)(src);
 	linklist_read[1].mbr_nda = (uint32_t)&linklist_read[0];
@@ -164,7 +164,7 @@ void configure_xdma(void)
     linklist_write[0].mbr_ubc = XDMAC_UBC_NVIEW_NDV1
 		 | XDMAC_UBC_NDE_FETCH_EN
 		 | XDMAC_UBC_NSEN_UPDATED
-			| XDMAC_CUBC_UBLEN(BUF_SIZE);
+			| XDMAC_CUBC_UBLEN(IO_BUF_SIZE);
     linklist_write[0].mbr_sa = (uint32_t)(src);
     linklist_write[0].mbr_da = (uint32_t)&(SSC->SSC_THR);
     linklist_write[0].mbr_nda = (uint32_t)&linklist_write[1];
@@ -173,7 +173,7 @@ void configure_xdma(void)
 	linklist_write[1].mbr_ubc = XDMAC_UBC_NVIEW_NDV1
 	    | XDMAC_UBC_NDE_FETCH_EN
 	    | XDMAC_UBC_NSEN_UPDATED
-	    | XDMAC_CUBC_UBLEN(BUF_SIZE);
+	    | XDMAC_CUBC_UBLEN(IO_BUF_SIZE);
 	linklist_write[1].mbr_sa = (uint32_t)(src);
 	linklist_write[1].mbr_da = (uint32_t)&(SSC->SSC_THR);
 	linklist_write[1].mbr_nda = (uint32_t)&linklist_write[0];

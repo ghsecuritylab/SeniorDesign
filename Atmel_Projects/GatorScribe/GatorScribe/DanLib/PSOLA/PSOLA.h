@@ -11,15 +11,15 @@
 
 #include "asf.h"
 #include "arm_math.h"
+#include "pitchyinfast.h"
 
-#define DEFAULT_BUFFER_SIZE 512
-#define FIXED_BITS        16
-#define FIXED_WBITS       0
-#define FIXED_FBITS       15
-#define Q15_RESOLUTION   (1 << (FIXED_FBITS - 1))
-#define LARGEST_Q15_NUM   32767
+#define NUM_OF_OVERLAPS 4
+#define FFT_SAMPLE_RATE YIN_FFT_SAMPLING_RATE
+#define STEP_SIZE (PROCESS_BUF_SIZE/NUM_OF_OVERLAPS)
+#define FFT_FRAME_SIZE (PROCESS_BUF_SIZE)
+#define FRAME_SIZE_2 (FFT_FRAME_SIZE/2)
 
-void PSOLA_init(uint32_t bufferLen); 
-void pitchCorrect(float32_t* input, int Fs, float inputPitch, float desiredPitch); 
+void PSOLA_init(uint32_t bufferSize);
+void pitch_shift_do(float32_t * outData, uint32_t pitch_shift, cvec_t *mags_and_phases); 
 
 #endif /* PSOLA_H_ */

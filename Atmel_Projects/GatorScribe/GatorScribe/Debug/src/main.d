@@ -195,8 +195,9 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../DanLib/LCDLib/gfx/gfx_text.h ../DanLib/LCDLib/touch/touch.h \
  ../src/asf.h ../DanLib/LCDLib/gfx/gfx.h ../DanLib/YinFFT/pitchyinfast.h \
  ../DanLib/YinFFT/fvec.h ../DanLib/YinFFT/types.h ../DanLib/YinFFT/cvec.h \
- ../DanLib/PSOLA/PSOLA.h ../DanLib/YinFFT/hanning.h \
- ../DanLib/YinFFT/cvec.h
+ ../DanLib/YinFFT/fft.h ../DanLib/PSOLA/PSOLA.h \
+ ../DanLib/YinFFT/hanning.h ../DanLib/YinFFT/cvec.h \
+ ../DanLib/YinFFT/fft.h
 
 ../src/asf.h:
 
@@ -630,8 +631,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/YinFFT/cvec.h:
 
+../DanLib/YinFFT/fft.h:
+
 ../DanLib/PSOLA/PSOLA.h:
 
 ../DanLib/YinFFT/hanning.h:
 
 ../DanLib/YinFFT/cvec.h:
+
+../DanLib/YinFFT/fft.h:

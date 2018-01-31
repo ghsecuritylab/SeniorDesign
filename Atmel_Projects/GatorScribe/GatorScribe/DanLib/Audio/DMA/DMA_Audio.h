@@ -16,11 +16,11 @@
 #define XDMA_CH_SSC_TX    1
 
 /** Micro-block w-length for single transfer  */
-#define BUF_SIZE          4096	// 4096 in total, 2048 left & 2048 right 
-#define BUF_SIZE_PER_CHANNEL (BUF_SIZE >> 1) // 2048 
+#define IO_BUF_SIZE          4096	// 4096 in total, 2048 left & 2048 right 
+#define IO_BUF_SIZE_PER_CHANNEL (IO_BUF_SIZE >> 1) // 2048 
 
 // 1024 
-#define PROCESS_BUF_SIZE (BUF_SIZE_PER_CHANNEL >> 1) // input decimated by 2 -- every other sample 	
+#define PROCESS_BUF_SIZE (IO_BUF_SIZE_PER_CHANNEL >> 1) // input decimated by 2 -- every other sample 	
 /********************************** Defines End **********************************/
 
 /********************************** Externs Start **********************************/
