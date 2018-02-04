@@ -3,6 +3,7 @@
 #include "hanning.h"
 #include "cvec.h"
 #include "fft.h"
+#include "arm_math.h"
 
 /**
  * \brief Configure the console UART.
@@ -27,11 +28,11 @@ static void configure_console(void)
 	stdio_serial_init(CONF_UART, &uart_serial_options);
 }
 
-static float32_t get_average_power (float32_t *buffer)
+static float  get_average_power (float  *buffer)
 {
 	uint32_t i;
-	float32_t p = 0.0;
-	for ( i = 0; i < (PROCESS_BUF_SIZE); i++)
+	float  p = 0.0;
+	for ( i = 0; i < (WIN_SIZE); i++)
 	{
 		p = p + buffer[i]*buffer[i];
 	}
@@ -39,11 +40,12 @@ static float32_t get_average_power (float32_t *buffer)
 }
 
 // LP filter 10-4000Hz
-static const float32_t lp_filter[] = {0.0027, 0.0103, 0.0258, 0.0499, 0.0801, 0.1105, 0.1332, 0.1416, 0.1332, 0.1105, 0.0801, 0.0499, 0.0258, 0.0103, 0.0027};
+static const float  lp_filter[] = {0.0027, 0.0103, 0.0258, 0.0499, 0.0801, 0.1105, 0.1332, 0.1416, 0.1332, 0.1105, 0.0801, 0.0499, 0.0258, 0.0103, 0.0027};
 static const uint32_t lp_filter_length = 15;
 
-static void apply_lp_filter(const float32_t *src, float32_t *dest, uint32_t sig_length)
+static void apply_lp_filter(const float  *src, float  *dest, uint32_t sig_length)
 {
+	/*
 	uint32_t j,i; 
 	for (j = 0; j < lp_filter_length; j++)
 		dest[j] = src[j];
@@ -55,10 +57,25 @@ static void apply_lp_filter(const float32_t *src, float32_t *dest, uint32_t sig_
 			dest[j] += src[j-i]*lp_filter[i];
 		}
 	}
+	*/ 
+	for(uint32_t i = 0; i < sig_length; i++)
+		dest[i] = src[i]; 
 }
 
-static float32_t x[2*PROCESS_BUF_SIZE]; // 2*bufsize to hold past values (values are lp-filtered) 
-static smpl_t workingBuffer[PROCESS_BUF_SIZE]; 
+// defines for circular filtered buffer 
+#define CIRC_MASK (WIN_SIZE-1)
+COMPILER_ALIGNED(WIN_SIZE) static float  x_circle_filt[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static smpl_t workingBuffer[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static smpl_t workingBuffer2[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
+COMPILER_ALIGNED(WIN_SIZE) static float  temp_buffer[NEW_DATA_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static smpl_t _norm[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static smpl_t _phas[WIN_SIZE]; 
+volatile float  inputPitch; 
+
+volatile float32_t arm_fft_result[WIN_SIZE]; 
+volatile float32_t temp_rearranged_buffer[WIN_SIZE]; 
+
+extern void aubio_ooura_rdft(int, int, smpl_t *, int *, smpl_t *);
 
 int main(void)
 {
@@ -67,73 +84,98 @@ int main(void)
 	lcd_init(); 
 	audio_init();
 	configure_console();
-	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast(PROCESS_BUF_SIZE);
-	PSOLA_init(PROCESS_BUF_SIZE);
+	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast();
+	PSOLA_init();
 	gfx_draw_filled_rect(0, 0, gfx_get_width(), gfx_get_height(), GFX_COLOR_BLACK);
 
-	//q15_t input15[PROCESS_BUF_SIZE];
-	uint32_t i;
-	float32_t power;
-	cvec_t *mags_and_phases = new_cvec(PROCESS_BUF_SIZE); 
+	uint32_t i,j;
+	float  power;
+	cvec_t mags_and_phases; // = new_cvec(PROCESS_BUF_SIZE); 
+	mags_and_phases.length = WIN_SIZE/2 + 1; 
+	mags_and_phases.norm = _norm; 
+	mags_and_phases.phas = _phas; 
+	
+	fvec_t *workingVec = AUBIO_NEW(fvec_t);
+	workingVec->length = WIN_SIZE;
+	workingVec->data = workingBuffer; 
+	
+	fvec_t *workingVec2 = AUBIO_NEW(fvec_t); 
+	workingVec2->length = WIN_SIZE;
+	workingVec2->data = workingBuffer2;
+	
 	printf("Hellooooo\n\n\n\r"); 
 	char str[20]; 
+	uint32_t circ_buff_idx = 0; 
+	
+	arm_rfft_fast_instance_f32 fftInstance;
+	arm_rfft_fast_init_f32(&fftInstance, WIN_SIZE);
 	
 	while(1)
 	{
 		if (dataReceived)
 		{	
 			// store lp-filtered values 
-			apply_lp_filter(processBuffer, &x[PROCESS_BUF_SIZE], PROCESS_BUF_SIZE);
+			uint32_t fill_index = (circ_buff_idx & CIRC_MASK); 
+			apply_lp_filter((float  *)processBuffer, &x_circle_filt[fill_index], NEW_DATA_SIZE);
 			
-			power = get_average_power((float32_t *)&x[PROCESS_BUF_SIZE]);
-			
-			fvec_t workingVec;
-			workingVec.length = PROCESS_BUF_SIZE;
-			workingVec.data = workingBuffer; 
-			uint32_t starting_index = PROCESS_BUF_SIZE/NUM_OF_OVERLAPS; 
-			
-			// take fft of the windowed signal and get mag & phase
-			aubio_fft_do_complex(yin_instance->fft, &workingVec, yin_instance->samples_fft);
-			aubio_fft_get_spectrum((const fvec_t *)yin_instance->samples_fft, mags_and_phases);
+			//power = get_average_power((float  *)&x[PROCESS_BUF_SIZE]);
 						
-			// compute pitch -- requires prior fft in yin_instance
-			float32_t inputPitch = aubio_pitchyinfast_do(yin_instance, &workingVec);
-			
-			for (i = 0; i < 1; i++) // should loop for NUM_OF_OVERLAPS
-			{							
-				float32_t *temp_input = &x[starting_index + i*STEP_SIZE]; 
-				// apply hanning window
-				for (i = 0; i < workingVec.length; i++)
-					workingVec.data[i] = temp_input[i] * hanning[i];
-							
-				// take fft of the windowed signal and get mag & phase
-				aubio_fft_do_complex(yin_instance->fft, &workingVec, yin_instance->samples_fft);
-				aubio_fft_get_spectrum((const fvec_t *)yin_instance->samples_fft, mags_and_phases);
-							
-							
-				// debug frequency detection
-				sprintf(str, "%f", inputPitch);
-				printf("Freq: %s\n\r", str);
-							
-				float32_t desiredPitch = 440.0;
-				float32_t pitch_shift = 1 + (inputPitch - desiredPitch)/desiredPitch;
-				pitch_shift_do((float32_t *)&processBuffer, pitch_shift, mags_and_phases);
-			}
-			 
+			uint32_t starting_index = (fill_index + NEW_DATA_SIZE) & CIRC_MASK; 
 				
-			// shift input back 
-			memmove(&x[0], &x[PROCESS_BUF_SIZE], PROCESS_BUF_SIZE*sizeof(float32_t)); 
+			// apply hanning window
+			for (j = starting_index, i = 0; j < starting_index + workingVec->length; j++, i++){
+				workingVec->data[i] = x_circle_filt[j & CIRC_MASK] * hanning[i];
+				workingVec2->data[i] = workingVec->data[i]; 
+			}
+							
+			// take fft of the windowed signal and get mag & phase -- can replace with aubio_fft_do
+			aubio_fft_do_complex(yin_instance->fft, workingVec, yin_instance->samples_fft);
+			/*
+			for(i = 0; i < yin_instance->samples_fft->length; i++)
+			{
+				yin_instance->samples_fft->data[i] = workingVec->data[i]; 
+			}
+			aubio_ooura_rdft(WIN_SIZE, 1, yin_instance->samples_fft->data, yin_instance->fft->ip, yin_instance->fft->w); 
+			//aubio_fft_get_spectrum((const fvec_t *)yin_instance->samples_fft, &mags_and_phases);
+			*/
+			
+			//arm_rfft_fast_f32(&fftInstance, workingVec->data, (float32_t *)yin_instance->samples_fft->data, 0);
+
+			/*
+			uint sampleCnt = 1; 
+			temp_rearranged_buffer[0] = arm_fft_result[0]; 
+			temp_rearranged_buffer[WIN_SIZE>>1] = arm_fft_result[1]; 
+			for(i = 2; i < WIN_SIZE; i+=2)
+			{
+				temp_rearranged_buffer[sampleCnt]  = arm_fft_result[i]; 
+				temp_rearranged_buffer[WIN_SIZE - sampleCnt]  = arm_fft_result[i + 1]; 
+				sampleCnt++; 
+			}
+			*/
+			
+			// compute pitch -- requires prior fft in yin_instance
+			inputPitch = aubio_pitchyinfast_do(yin_instance, workingVec2, &fftInstance);
+							
+			// debug frequency detection
+			sprintf(str, "%f", inputPitch);
+			printf("Freq: %s\n\r", str);
+							
+			float  desiredPitch = 440.0;
+			float  pitch_shift = 1 + (inputPitch - desiredPitch)/desiredPitch;
+
+			//pitch_shift_do(temp_buffer, pitch_shift, &mags_and_phases);
 			
 			// TODO: interpolate 
-		
-			int processIdx = 0;
+			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the voice 
+			int processIdx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=4)
 			{
 				outBuffer[i] = (uint16_t)(int16_t)(processBuffer[processIdx++] * INT16_MAX); // sound in / sound out
-				outBuffer[i+1] = outBuffer[i];
-				outBuffer[i+2] = outBuffer[i];
-				outBuffer[i+3] = outBuffer[i];
+				outBuffer[i+1] = outBuffer[i]; 
+				outBuffer[i+2] = outBuffer[i]; 
+				outBuffer[i+3] = outBuffer[i]; 
 			}
+			circ_buff_idx += NEW_DATA_SIZE; 
 			dataReceived = false; 
 		}
 	}

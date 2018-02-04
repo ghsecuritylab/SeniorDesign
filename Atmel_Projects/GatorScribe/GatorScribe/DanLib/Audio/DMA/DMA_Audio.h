@@ -9,23 +9,25 @@
 #ifndef DMA_AUDIO_H_
 #define DMA_AUDIO_H_
 
-#include "arm_math.h"
+#include <math.h>
+
 /********************************** Defines Start **********************************/
 /** XDMA channels used */
 #define XDMA_CH_SSC_RX    0
 #define XDMA_CH_SSC_TX    1
 
 /** Micro-block w-length for single transfer  */
-#define IO_BUF_SIZE          4096	// 4096 in total, 2048 left & 2048 right 
-#define IO_BUF_SIZE_PER_CHANNEL (IO_BUF_SIZE >> 1) // 2048 
+#define IO_BUF_SIZE          1024	// 1024 in total, 512 left & 512 right 
+#define IO_BUF_SIZE_PER_CHANNEL (IO_BUF_SIZE >> 1) // 512 
 
-// 1024 
-#define PROCESS_BUF_SIZE (IO_BUF_SIZE_PER_CHANNEL >> 1) // input decimated by 2 -- every other sample 	
+#define NUM_OF_OVERLAPS 4
+#define WIN_SIZE ((IO_BUF_SIZE_PER_CHANNEL*NUM_OF_OVERLAPS) >> 1) // decimated by 2, length 1024
+#define NEW_DATA_SIZE ((IO_BUF_SIZE >> 1)>>1)  // 256
 /********************************** Defines End **********************************/
 
 /********************************** Externs Start **********************************/
 extern volatile bool dataReceived;
-extern volatile float32_t *processBuffer;
+extern volatile float *processBuffer;
 extern volatile uint16_t *outBuffer; 
 /********************************** Externs End **********************************/
 

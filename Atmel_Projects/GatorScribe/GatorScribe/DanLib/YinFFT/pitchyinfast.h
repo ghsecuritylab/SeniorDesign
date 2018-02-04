@@ -43,16 +43,21 @@
 extern "C" {
 #endif
 
-#include "arm_math.h"
+#include <math.h>
+#include "aubio_priv.h"
 #include "fvec.h"
+#include "mathutils.h"
 #include "cvec.h"
 #include "fft.h"
+#include "arm_math.h"
+
 
 //#define YIN_FFT_SAMPLING_RATE 22900 
 
 // using sine wave 
 #define YIN_FFT_SAMPLING_RATE 23250
 
+//#define YIN_FFT_SAMPLING_RATE 46500
 
 /** pitch detection object */
 struct _aubio_pitchyinfast_t
@@ -74,14 +79,14 @@ typedef struct _aubio_pitchyinfast_t aubio_pitchyinfast_t;
   \param buf_size size of the input buffer to analyse
 
 */
-aubio_pitchyinfast_t *new_aubio_pitchyinfast (uint_t buf_size);
+aubio_pitchyinfast_t *new_aubio_pitchyinfast (void);
 
 /** deletion of the pitch detection object
 
   \param o pitch detection object as returned by new_aubio_pitchyin()
 
 */
-void del_aubio_pitchyinfast (aubio_pitchyinfast_t * o);
+//void del_aubio_pitchyinfast (aubio_pitchyinfast_t * o);
 
 /** execute pitch detection an input buffer
 
@@ -90,8 +95,7 @@ void del_aubio_pitchyinfast (aubio_pitchyinfast_t * o);
   \param cands_out pitch period candidates, in samples
 
 */
-float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input); 
-
+float aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftInstance);
 
 /** set tolerance parameter for YIN algorithm
 

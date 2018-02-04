@@ -18,18 +18,16 @@ static lld_view1 linklist_read[2];
 volatile static bool inPingMode = 1;
 volatile static bool outPingMode = 1;
 /********************************** Static Variables End **********************************/
+COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t inPingBuffer[IO_BUF_SIZE];
+COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t inPongBuffer[IO_BUF_SIZE];
+COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t outPingBuffer[IO_BUF_SIZE];
+COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t outPongBuffer[IO_BUF_SIZE];
 
-/********************************** Public Variables Start **********************************/
-COMPILER_WORD_ALIGNED uint16_t inPingBuffer[IO_BUF_SIZE];
-COMPILER_WORD_ALIGNED uint16_t inPongBuffer[IO_BUF_SIZE];
-COMPILER_WORD_ALIGNED uint16_t outPingBuffer[IO_BUF_SIZE];
-COMPILER_WORD_ALIGNED uint16_t outPongBuffer[IO_BUF_SIZE];
-
-COMPILER_WORD_ALIGNED float32_t processPingBuffer[PROCESS_BUF_SIZE];	
-COMPILER_WORD_ALIGNED float32_t processPongBuffer[PROCESS_BUF_SIZE];
+COMPILER_ALIGNED(IO_BUF_SIZE) float  processPingBuffer[IO_BUF_SIZE];	
+COMPILER_ALIGNED(IO_BUF_SIZE) float  processPongBuffer[IO_BUF_SIZE];
 
 // in and process buffers are synchronized 
-volatile float32_t *processBuffer = processPingBuffer;
+volatile float  *processBuffer = processPingBuffer;
 volatile uint16_t *inBuffer = inPingBuffer;
 volatile uint16_t *outBuffer = outPingBuffer;
 
@@ -66,7 +64,7 @@ void XDMAC_Handler(void)
 		// Fill process buffer - only left channel decimated by 1
 		for(int i = 0; i < IO_BUF_SIZE; i+=4)
 		{
-			processBuffer[processIdx++] = ((float32_t)(int16_t)inBuffer[i]) / INT16_MAX; 
+			processBuffer[processIdx++] = ((float )(int16_t)inBuffer[i]) / (float)INT16_MAX; 
 		}
 		dataReceived = true; // can check for out of time here 
     }

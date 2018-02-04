@@ -35,7 +35,8 @@ DanLib/YinFFT/fft.d DanLib/YinFFT/fft.o: ../DanLib/YinFFT/fft.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
  ../DanLib/YinFFT/types.h ../DanLib/YinFFT/mathutils.h \
  ../DanLib/YinFFT/fvec.h ../DanLib/YinFFT/musicutils.h \
- ../DanLib/YinFFT/cvec.h ../DanLib/YinFFT/fft.h
+ ../DanLib/YinFFT/cvec.h ../DanLib/YinFFT/fft.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h
 
 ../DanLib/YinFFT/aubio_priv.h:
 
@@ -116,3 +117,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../DanLib/YinFFT/cvec.h:
 
 ../DanLib/YinFFT/fft.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h:

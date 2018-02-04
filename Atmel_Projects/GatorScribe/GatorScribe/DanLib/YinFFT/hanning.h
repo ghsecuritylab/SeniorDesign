@@ -8,9 +8,9 @@
 #ifndef hanning_h
 #define hanning_h
 
-#include "math.h"
+#include <math.h>
 
-const float32_t hanning[1024] = 
+COMPILER_ALIGNED(1024) const float hanning[1024] = 
 {
 	0,
 	9.4307688e-06,

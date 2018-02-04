@@ -43,6 +43,37 @@ extern "C" {
   This object computes forward and backward FFTs.
 
 */
+struct _aubio_fft_t {
+	uint_t winsize;
+	uint_t fft_size;
+
+	#ifdef HAVE_FFTW3             // using FFTW3
+	real_t *in, *out;
+	fftw_plan pfw, pbw;
+	fft_data_t * specdata; /* complex spectral data */
+
+	#elif defined HAVE_ACCELERATE  // using ACCELERATE
+	int log2fftsize;
+	aubio_FFTSetup fftSetup;
+	aubio_DSPSplitComplex spec;
+	smpl_t *in, *out;
+
+	#elif defined HAVE_INTEL_IPP  // using Intel IPP
+	smpl_t *in, *out;
+	Ipp8u* memSpec;
+	Ipp8u* memInit;
+	Ipp8u* memBuffer;
+	struct aubio_FFTSpec* fftSpec;
+	aubio_IppComplex* complexOut;
+	#else                         // using OOURA
+	smpl_t *in, *out;
+	smpl_t *w;
+	int *ip;
+	#endif /* using OOURA */
+
+	fvec_t * compspec;
+};
+
 typedef struct _aubio_fft_t aubio_fft_t;
 
 /** create new FFT computation object

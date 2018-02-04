@@ -446,7 +446,7 @@
       <Value>../DanLib/PSOLA</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
-  <armgcc.compiler.optimization.level>Optimize more (-O2)</armgcc.compiler.optimization.level>
+  <armgcc.compiler.optimization.level>Optimize most (-O3)</armgcc.compiler.optimization.level>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
   <armgcc.compiler.optimization.EnableFastMath>True</armgcc.compiler.optimization.EnableFastMath>
@@ -456,6 +456,7 @@
   <armgcc.linker.libraries.Libraries>
     <ListValues>
       <Value>libarm_cortexM7lfsp_math_softfp</Value>
+      <Value>libm.a</Value>
       <Value>libm</Value>
     </ListValues>
   </armgcc.linker.libraries.Libraries>
@@ -466,7 +467,7 @@
   </armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
   <armgcc.linker.memorysettings.ExternalRAM />
-  <armgcc.linker.miscellaneous.LinkerFlags>-Wl,--entry=Reset_Handler -Wl,--cref -mthumb -T../src/ASF/sam/utils/linker_scripts/samv71/samv71q21/gcc/flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
+  <armgcc.linker.miscellaneous.LinkerFlags>-Wl,--entry=Reset_Handler -Wl,--cref -mthumb -mfloat-abi=softfp -mfpu=fpv5-sp-d16 -T../src/ASF/sam/utils/linker_scripts/samv71/samv71q21/gcc/flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
   <armgcc.assembler.general.IncludePaths>
     <ListValues>
       <Value>../src/ASF/common/boards</Value>
@@ -520,6 +521,18 @@
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
 </ArmGcc>
     </ToolchainSettings>
+    <UsesExternalMakeFile>False</UsesExternalMakeFile>
+    <OutputDirectory>
+    </OutputDirectory>
+    <BuildTarget>all</BuildTarget>
+    <CleanTarget>clean</CleanTarget>
+    <ExternalMakeFilePath>C:\Users\Daniel Gonzalez\Dropbox (UFL)\Spring2018\Senior_Design\SeniorDesignRepo\Atmel_Projects\GatorScribe\GatorScribe\Debug\Makefile</ExternalMakeFilePath>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>copy "$(MSBuildProjectDirectory)\Debug\$(MSBuildProjectName).elf" "$(MSBuildProjectDirectory)\$(MSBuildProjectName).elf"</PostBuildEvent>
+    <OutputFileName>GatorScribe</OutputFileName>
+    <OutputFileExtension>.elf</OutputFileExtension>
+    <OutputType>Executable</OutputType>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="DanLib\" />
