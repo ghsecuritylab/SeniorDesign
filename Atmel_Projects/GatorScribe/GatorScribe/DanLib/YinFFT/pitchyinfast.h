@@ -64,13 +64,12 @@ struct _aubio_pitchyinfast_t
 {
 	fvec_t *yin;
 	smpl_t tol;
-	uint_t peak_pos;
+	uint32_t peak_pos;
 	fvec_t *tmpdata;
 	fvec_t *sqdiff;
 	fvec_t *kernel;
 	fvec_t *samples_fft;
 	fvec_t *kernel_fft;
-	aubio_fft_t *fft;
 };
 typedef struct _aubio_pitchyinfast_t aubio_pitchyinfast_t;
 

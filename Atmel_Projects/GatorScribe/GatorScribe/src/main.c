@@ -43,7 +43,7 @@ static float  get_average_power (float  *buffer)
 static const float  lp_filter[] = {0.0027, 0.0103, 0.0258, 0.0499, 0.0801, 0.1105, 0.1332, 0.1416, 0.1332, 0.1105, 0.0801, 0.0499, 0.0258, 0.0103, 0.0027};
 static const uint32_t lp_filter_length = 15;
 
-static void apply_lp_filter(const float  *src, float  *dest, uint32_t sig_length)
+static inline void apply_lp_filter(const float  *src, float  *dest, uint32_t sig_length)
 {
 	/*
 	uint32_t j,i; 
@@ -67,15 +67,9 @@ static void apply_lp_filter(const float  *src, float  *dest, uint32_t sig_length
 COMPILER_ALIGNED(WIN_SIZE) static float  x_circle_filt[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static smpl_t workingBuffer[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static smpl_t workingBuffer2[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
-COMPILER_ALIGNED(WIN_SIZE) static float  temp_buffer[NEW_DATA_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static smpl_t _norm[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static smpl_t _phas[WIN_SIZE]; 
 volatile float  inputPitch; 
-
-volatile float32_t arm_fft_result[WIN_SIZE]; 
-volatile float32_t temp_rearranged_buffer[WIN_SIZE]; 
-
-extern void aubio_ooura_rdft(int, int, smpl_t *, int *, smpl_t *);
 
 int main(void)
 {
@@ -87,7 +81,7 @@ int main(void)
 	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast();
 	PSOLA_init();
 	gfx_draw_filled_rect(0, 0, gfx_get_width(), gfx_get_height(), GFX_COLOR_BLACK);
-
+	
 	uint32_t i,j;
 	float  power;
 	cvec_t mags_and_phases; // = new_cvec(PROCESS_BUF_SIZE); 
@@ -118,40 +112,20 @@ int main(void)
 			uint32_t fill_index = (circ_buff_idx & CIRC_MASK); 
 			apply_lp_filter((float  *)processBuffer, &x_circle_filt[fill_index], NEW_DATA_SIZE);
 			
+			// can use arm function! arm_power_f32 
 			//power = get_average_power((float  *)&x[PROCESS_BUF_SIZE]);
 						
 			uint32_t starting_index = (fill_index + NEW_DATA_SIZE) & CIRC_MASK; 
 				
 			// apply hanning window
-			for (j = starting_index, i = 0; j < starting_index + workingVec->length; j++, i++){
+			for (j = starting_index, i = 0; j < starting_index + workingVec->length; j++, i++)
 				workingVec->data[i] = x_circle_filt[j & CIRC_MASK] * hanning[i];
-				workingVec2->data[i] = workingVec->data[i]; 
-			}
-							
-			// take fft of the windowed signal and get mag & phase -- can replace with aubio_fft_do
-			aubio_fft_do_complex(yin_instance->fft, workingVec, yin_instance->samples_fft);
-			/*
-			for(i = 0; i < yin_instance->samples_fft->length; i++)
-			{
-				yin_instance->samples_fft->data[i] = workingVec->data[i]; 
-			}
-			aubio_ooura_rdft(WIN_SIZE, 1, yin_instance->samples_fft->data, yin_instance->fft->ip, yin_instance->fft->w); 
-			//aubio_fft_get_spectrum((const fvec_t *)yin_instance->samples_fft, &mags_and_phases);
-			*/
 			
-			//arm_rfft_fast_f32(&fftInstance, workingVec->data, (float32_t *)yin_instance->samples_fft->data, 0);
-
-			/*
-			uint sampleCnt = 1; 
-			temp_rearranged_buffer[0] = arm_fft_result[0]; 
-			temp_rearranged_buffer[WIN_SIZE>>1] = arm_fft_result[1]; 
-			for(i = 2; i < WIN_SIZE; i+=2)
-			{
-				temp_rearranged_buffer[sampleCnt]  = arm_fft_result[i]; 
-				temp_rearranged_buffer[WIN_SIZE - sampleCnt]  = arm_fft_result[i + 1]; 
-				sampleCnt++; 
-			}
-			*/
+			// save input since fft changes it 
+			arm_copy_f32(workingVec->data, workingVec2->data, workingVec->length); 
+							
+			// take fft of the windowed signal and get mag & phase
+			arm_rfft_fast_f32(&fftInstance, workingVec->data, yin_instance->samples_fft->data, 0);
 			
 			// compute pitch -- requires prior fft in yin_instance
 			inputPitch = aubio_pitchyinfast_do(yin_instance, workingVec2, &fftInstance);
