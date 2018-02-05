@@ -46,15 +46,11 @@ extern "C" {
 #include <math.h>
 #include "aubio_priv.h"
 #include "fvec.h"
-#include "mathutils.h"
-#include "cvec.h"
-#include "fft.h"
 #include "arm_math.h"
-
 
 //#define YIN_FFT_SAMPLING_RATE 22900 
 
-// using sine wave 
+// using sine wave to determine best rate 
 #define YIN_FFT_SAMPLING_RATE 23250
 
 //#define YIN_FFT_SAMPLING_RATE 46500

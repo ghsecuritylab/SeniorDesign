@@ -191,14 +191,14 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/asf.h ../DanLib/LCDLib/gfx/gfx.h ../DanLib/YinFFT/pitchyinfast.h \
  ../DanLib/YinFFT/aubio_priv.h ../DanLib/YinFFT/types.h \
  ../DanLib/YinFFT/mathutils.h ../DanLib/YinFFT/fvec.h \
- ../DanLib/YinFFT/musicutils.h ../DanLib/YinFFT/cvec.h \
- ../DanLib/YinFFT/fft.h ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
+ ../DanLib/YinFFT/musicutils.h \
+ ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../DanLib/PSOLA/PSOLA.h ../DanLib/YinFFT/hanning.h \
- ../DanLib/YinFFT/cvec.h ../DanLib/YinFFT/fft.h
+ ../DanLib/PSOLA/PSOLA.h ../DanLib/YinFFT/cvec.h \
+ ../DanLib/YinFFT/hanning.h ../DanLib/YinFFT/fft.h
 
 ../src/asf.h:
 
@@ -626,10 +626,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/YinFFT/musicutils.h:
 
-../DanLib/YinFFT/cvec.h:
-
-../DanLib/YinFFT/fft.h:
-
 ../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
 
 ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h:
@@ -642,8 +638,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/PSOLA/PSOLA.h:
 
-../DanLib/YinFFT/hanning.h:
-
 ../DanLib/YinFFT/cvec.h:
+
+../DanLib/YinFFT/hanning.h:
 
 ../DanLib/YinFFT/fft.h:

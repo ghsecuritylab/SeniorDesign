@@ -50,7 +50,6 @@ aubio_pitchyinfast_t * new_aubio_pitchyinfast (void)
 	o->kernel = new_fvec (WIN_SIZE);
 	o->samples_fft = new_fvec (WIN_SIZE);
 	o->kernel_fft = new_fvec (WIN_SIZE);
-	o->fft = new_aubio_fft (WIN_SIZE);
 	*/
 	o->tol = 0.05; // changed from 0.15
 	o->peak_pos = 0;
@@ -144,7 +143,7 @@ float aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input, arm_rfft_
 	{
 		kernel_ptr.data[i] = input->data[kernel_ptr.length-i-1]; 
 	}
-	o->kernel->data[0] = 0; 
+	o->kernel->data[0] = 0.0; 
 	arm_fill_f32(0.0, &o->kernel->data[kernel_ptr.length], kernel_ptr.length); 
 	
     // compute fft(kernel)	
@@ -157,11 +156,12 @@ float aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input, arm_rfft_
 	arm_rfft_fast_f32(fftInstance, compmul->data, rt_of_tau->data, 1); 
 
     // compute square difference r_t(tau) = sqdiff - 2 * r_t_tau[W-1:-1]
-    for (tau = 0; tau < W; tau++) 
-		o->yin->data[tau] = o->sqdiff->data[tau] - 2. * rt_of_tau->data[tau+W];
+	fvec_t *scaled_rt = o->tmpdata;
+	arm_scale_f32(&rt_of_tau->data[W], 2.0, scaled_rt->data, W);
+	arm_sub_f32(o->sqdiff->data, scaled_rt->data, o->yin->data, o->sqdiff->length); 
   }
 
-	// now build yin and look for first minimum
+	// now compute the cumulative mean normalized difference function and look for first minimum
 	o->yin->data[0] = 1.0;
 	tmp2 = 0.0; 
 	for (tau = 1; tau < 5; tau++)

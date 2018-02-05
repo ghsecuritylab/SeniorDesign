@@ -11,6 +11,7 @@
 
 #include "asf.h"
 #include "pitchyinfast.h"
+#include "cvec.h" // prolly take out later
 
 #define FFT_SAMPLE_RATE YIN_FFT_SAMPLING_RATE
 #define STEP_SIZE (WIN_SIZE/NUM_OF_OVERLAPS)
