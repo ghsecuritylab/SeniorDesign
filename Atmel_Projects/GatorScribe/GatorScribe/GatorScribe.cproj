@@ -688,7 +688,7 @@
     <Compile Include="DanLib\PSOLA\PSOLA.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\YinFFT\hanning.h">
+    <Compile Include="DanLib\YinFFT\hanning.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\YinFFT\pitchyinfast.c">

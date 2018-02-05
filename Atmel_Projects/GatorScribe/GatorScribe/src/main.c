@@ -1,6 +1,5 @@
 #include "asf.h"
 #include "DanLib.h"
-#include "hanning.h"
 #include "arm_math.h"
 
 /**

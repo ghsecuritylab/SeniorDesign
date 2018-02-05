@@ -1,15 +1,10 @@
 //
-//  hanning.h
+//  hanning.c
 //  
 //
 //  Created by Daniel Gonzalez on 1/20/18.
 //
-
-#ifndef hanning_h
-#define hanning_h
-
-#include <math.h>
-
+#include "asf.h"
 COMPILER_ALIGNED(1024) const float hanning[1024] = 
 {
 	0,
@@ -1037,6 +1032,3 @@ COMPILER_ALIGNED(1024) const float hanning[1024] =
 	9.4307688e-06,
 	0
 };
-
-
-#endif /* hanning_h */

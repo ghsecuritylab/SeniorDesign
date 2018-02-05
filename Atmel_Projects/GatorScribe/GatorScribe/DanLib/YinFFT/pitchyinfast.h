@@ -46,6 +46,9 @@ extern "C" {
 #include <math.h>
 #include "arm_math.h"
 
+extern const float hanning[1024];
+
+
 //#define YIN_FFT_SAMPLING_RATE 22900 
 
 // using sine wave to determine best rate 
