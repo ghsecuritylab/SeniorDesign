@@ -129,11 +129,6 @@ C_SRCS +=  \
 ../DanLib/LCDLib/LCDLib.c \
 ../DanLib/LCDLib/touch/touch.c \
 ../DanLib/PSOLA/PSOLA.c \
-../DanLib/YinFFT/cvec.c \
-../DanLib/YinFFT/fft.c \
-../DanLib/YinFFT/fvec.c \
-../DanLib/YinFFT/mathutils.c \
-../DanLib/YinFFT/ooura_fft8g.c \
 ../DanLib/YinFFT/pitchyinfast.c \
 ../src/ASF/common/components/touch/mxt/mxt_device_1.c \
 ../src/ASF/common/services/delay/sam/cycle_counter.c \
@@ -180,11 +175,6 @@ DanLib/LCDLib/gfx/sysfont.o \
 DanLib/LCDLib/LCDLib.o \
 DanLib/LCDLib/touch/touch.o \
 DanLib/PSOLA/PSOLA.o \
-DanLib/YinFFT/cvec.o \
-DanLib/YinFFT/fft.o \
-DanLib/YinFFT/fvec.o \
-DanLib/YinFFT/mathutils.o \
-DanLib/YinFFT/ooura_fft8g.o \
 DanLib/YinFFT/pitchyinfast.o \
 src/ASF/common/components/touch/mxt/mxt_device_1.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
@@ -224,11 +214,6 @@ DanLib/LCDLib/gfx/sysfont.o \
 DanLib/LCDLib/LCDLib.o \
 DanLib/LCDLib/touch/touch.o \
 DanLib/PSOLA/PSOLA.o \
-DanLib/YinFFT/cvec.o \
-DanLib/YinFFT/fft.o \
-DanLib/YinFFT/fvec.o \
-DanLib/YinFFT/mathutils.o \
-DanLib/YinFFT/ooura_fft8g.o \
 DanLib/YinFFT/pitchyinfast.o \
 src/ASF/common/components/touch/mxt/mxt_device_1.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
@@ -268,11 +253,6 @@ DanLib/LCDLib/gfx/sysfont.d \
 DanLib/LCDLib/LCDLib.d \
 DanLib/LCDLib/touch/touch.d \
 DanLib/PSOLA/PSOLA.d \
-DanLib/YinFFT/cvec.d \
-DanLib/YinFFT/fft.d \
-DanLib/YinFFT/fvec.d \
-DanLib/YinFFT/mathutils.d \
-DanLib/YinFFT/ooura_fft8g.d \
 DanLib/YinFFT/pitchyinfast.d \
 src/ASF/common/components/touch/mxt/mxt_device_1.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
@@ -312,11 +292,6 @@ DanLib/LCDLib/gfx/sysfont.d \
 DanLib/LCDLib/LCDLib.d \
 DanLib/LCDLib/touch/touch.d \
 DanLib/PSOLA/PSOLA.d \
-DanLib/YinFFT/cvec.d \
-DanLib/YinFFT/fft.d \
-DanLib/YinFFT/fvec.d \
-DanLib/YinFFT/mathutils.d \
-DanLib/YinFFT/ooura_fft8g.d \
 DanLib/YinFFT/pitchyinfast.d \
 src/ASF/common/components/touch/mxt/mxt_device_1.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
@@ -360,16 +335,6 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
-
-
-
-
-
-
-
-
-
-
 
 
 

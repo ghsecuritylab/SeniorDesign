@@ -1,8 +1,6 @@
 #include "asf.h"
 #include "DanLib.h"
 #include "hanning.h"
-#include "cvec.h"
-#include "fft.h"
 #include "arm_math.h"
 
 /**
@@ -43,9 +41,10 @@ static float  get_average_power (float  *buffer)
 static const float  lp_filter[] = {0.0027, 0.0103, 0.0258, 0.0499, 0.0801, 0.1105, 0.1332, 0.1416, 0.1332, 0.1105, 0.0801, 0.0499, 0.0258, 0.0103, 0.0027};
 static const uint32_t lp_filter_length = 15;
 
-static inline void apply_lp_filter(const float  *src, float  *dest, uint32_t sig_length)
+static inline void apply_lp_filter(float  *src, float  *dest, uint32_t sig_length)
 {
 	/*
+	// can use arm convolution for this!
 	uint32_t j,i; 
 	for (j = 0; j < lp_filter_length; j++)
 		dest[j] = src[j];
@@ -58,17 +57,16 @@ static inline void apply_lp_filter(const float  *src, float  *dest, uint32_t sig
 		}
 	}
 	*/ 
-	for(uint32_t i = 0; i < sig_length; i++)
-		dest[i] = src[i]; 
+	arm_copy_f32(src, dest, sig_length); 
 }
 
 // defines for circular filtered buffer 
 #define CIRC_MASK (WIN_SIZE-1)
 COMPILER_ALIGNED(WIN_SIZE) static float  x_circle_filt[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static smpl_t workingBuffer[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static smpl_t workingBuffer2[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
-COMPILER_ALIGNED(WIN_SIZE) static smpl_t _norm[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static smpl_t _phas[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer2[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
+COMPILER_ALIGNED(WIN_SIZE) static float _norm[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static float _phas[WIN_SIZE]; 
 volatile float  inputPitch; 
 
 int main(void)
@@ -78,26 +76,26 @@ int main(void)
 	lcd_init(); 
 	audio_init();
 	configure_console();
-	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast();
+	yin_t *yin_instance = yin_init();
 	PSOLA_init();
 	gfx_draw_filled_rect(0, 0, gfx_get_width(), gfx_get_height(), GFX_COLOR_BLACK);
 	
 	uint32_t i,j;
 	float  power;
-	cvec_t mags_and_phases; // = new_cvec(PROCESS_BUF_SIZE); 
-	mags_and_phases.length = WIN_SIZE/2 + 1; 
-	mags_and_phases.norm = _norm; 
-	mags_and_phases.phas = _phas; 
+	cvec_t *mags_and_phases = (cvec_t*)calloc(sizeof(cvec_t), 1); 
+	mags_and_phases->length = WIN_SIZE/2 + 1; 
+	mags_and_phases->norm = _norm; 
+	mags_and_phases->phas = _phas; 
 	
-	fvec_t *workingVec = AUBIO_NEW(fvec_t);
+	fvec_t *workingVec = (fvec_t*)calloc(sizeof(fvec_t), 1);
 	workingVec->length = WIN_SIZE;
 	workingVec->data = workingBuffer; 
 	
-	fvec_t *workingVec2 = AUBIO_NEW(fvec_t); 
+	fvec_t *workingVec2 = (fvec_t*)calloc(sizeof(fvec_t), 1);
 	workingVec2->length = WIN_SIZE;
 	workingVec2->data = workingBuffer2;
 	
-	printf("Hellooooo\n\n\n\r"); 
+	printf("Starting Program\n\n\n\r"); 
 	char str[20]; 
 	uint32_t circ_buff_idx = 0; 
 	
@@ -117,7 +115,8 @@ int main(void)
 						
 			uint32_t starting_index = (fill_index + NEW_DATA_SIZE) & CIRC_MASK; 
 				
-			// apply hanning window
+			// apply hanning window - might consider using arm mult function and just shifting data instead of circular buffer 
+			// could do a benchmark for this 
 			for (j = starting_index, i = 0; j < starting_index + workingVec->length; j++, i++)
 				workingVec->data[i] = x_circle_filt[j & CIRC_MASK] * hanning[i];
 			
@@ -128,7 +127,7 @@ int main(void)
 			arm_rfft_fast_f32(&fftInstance, workingVec->data, yin_instance->samples_fft->data, 0);
 			
 			// compute pitch -- requires prior fft in yin_instance
-			inputPitch = aubio_pitchyinfast_do(yin_instance, workingVec2, &fftInstance);
+			inputPitch = yin_get_pitch(yin_instance, workingVec2, &fftInstance);
 							
 			// debug frequency detection
 			sprintf(str, "%f", inputPitch);
@@ -137,7 +136,7 @@ int main(void)
 			float  desiredPitch = 440.0;
 			float  pitch_shift = 1 + (inputPitch - desiredPitch)/desiredPitch;
 
-			//pitch_shift_do(temp_buffer, pitch_shift, &mags_and_phases);
+			//pitch_shift_do(temp_buffer, pitch_shift, mags_and_phases);
 			
 			// TODO: interpolate 
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the voice 

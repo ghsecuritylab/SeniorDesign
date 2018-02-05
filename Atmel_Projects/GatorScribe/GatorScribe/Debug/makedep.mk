@@ -22,16 +22,6 @@ DanLib\LCDLib\touch\touch.c
 
 DanLib\PSOLA\PSOLA.c
 
-DanLib\YinFFT\cvec.c
-
-DanLib\YinFFT\fft.c
-
-DanLib\YinFFT\fvec.c
-
-DanLib\YinFFT\mathutils.c
-
-DanLib\YinFFT\ooura_fft8g.c
-
 DanLib\YinFFT\pitchyinfast.c
 
 src\ASF\common\components\touch\mxt\mxt_device_1.c

@@ -180,15 +180,12 @@ DanLib/PSOLA/PSOLA.d DanLib/PSOLA/PSOLA.o: ../DanLib/PSOLA/PSOLA.c \
  ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/YinFFT/pitchyinfast.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
- ../DanLib/YinFFT/aubio_priv.h ../DanLib/YinFFT/types.h \
- ../DanLib/YinFFT/mathutils.h ../DanLib/YinFFT/fvec.h \
- ../DanLib/YinFFT/musicutils.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../DanLib/YinFFT/cvec.h ../DanLib/Audio/DMA/DMA_Audio.h \
+ ../DanLib/Audio/DMA/DMA_Audio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\fastmath.h
 
 ../DanLib/PSOLA/PSOLA.h:
@@ -577,16 +574,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
 
-../DanLib/YinFFT/aubio_priv.h:
-
-../DanLib/YinFFT/types.h:
-
-../DanLib/YinFFT/mathutils.h:
-
-../DanLib/YinFFT/fvec.h:
-
-../DanLib/YinFFT/musicutils.h:
-
 ../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
 
 ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h:
@@ -596,8 +583,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
-
-../DanLib/YinFFT/cvec.h:
 
 ../DanLib/Audio/DMA/DMA_Audio.h:
 

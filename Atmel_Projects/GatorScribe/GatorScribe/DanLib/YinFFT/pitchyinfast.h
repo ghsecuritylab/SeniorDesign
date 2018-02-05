@@ -44,8 +44,6 @@ extern "C" {
 #endif
 
 #include <math.h>
-#include "aubio_priv.h"
-#include "fvec.h"
 #include "arm_math.h"
 
 //#define YIN_FFT_SAMPLING_RATE 22900 
@@ -55,66 +53,32 @@ extern "C" {
 
 //#define YIN_FFT_SAMPLING_RATE 46500
 
+typedef struct {
+	uint32_t length;  /**< length of buffer */
+	float *data;   /**< data vector of length ::fvec_t.length */
+} fvec_t;
+
 /** pitch detection object */
-struct _aubio_pitchyinfast_t
+typedef struct 
 {
 	fvec_t *yin;
-	smpl_t tol;
+	float tol;
 	uint32_t peak_pos;
 	fvec_t *tmpdata;
 	fvec_t *sqdiff;
 	fvec_t *kernel;
 	fvec_t *samples_fft;
 	fvec_t *kernel_fft;
-};
-typedef struct _aubio_pitchyinfast_t aubio_pitchyinfast_t;
+}yin_t;
 
-/** creation of the pitch detection object
 
-  \param buf_size size of the input buffer to analyse
+yin_t *yin_init (void);
 
-*/
-aubio_pitchyinfast_t *new_aubio_pitchyinfast (void);
+//void del_yin (yin_t * o); 
 
-/** deletion of the pitch detection object
+float yin_get_pitch (yin_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftInstance);
 
-  \param o pitch detection object as returned by new_aubio_pitchyin()
-
-*/
-//void del_aubio_pitchyinfast (aubio_pitchyinfast_t * o);
-
-/** execute pitch detection an input buffer
-
-  \param o pitch detection object as returned by new_aubio_pitchyin()
-  \param samples_in input signal vector (length as specified at creation time)
-  \param cands_out pitch period candidates, in samples
-
-*/
-float aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftInstance);
-
-/** set tolerance parameter for YIN algorithm
-
-  \param o YIN pitch detection object
-  \param tol tolerance parameter for minima selection [default 0.15]
-
-*/
-uint_t aubio_pitchyinfast_set_tolerance (aubio_pitchyinfast_t * o, smpl_t tol);
-
-/** get tolerance parameter for YIN algorithm
-
-  \param o YIN pitch detection object
-  \return tolerance parameter for minima selection [default 0.15]
-
-*/
-smpl_t aubio_pitchyinfast_get_tolerance (aubio_pitchyinfast_t * o);
-
-/** get current confidence of YIN algorithm
-
-  \param o YIN pitch detection object
-  \return confidence parameter
-
-*/
-smpl_t aubio_pitchyinfast_get_confidence (aubio_pitchyinfast_t * o);
+float yin_get_confidence (yin_t * o);
 
 #ifdef __cplusplus
 }

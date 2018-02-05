@@ -688,49 +688,13 @@
     <Compile Include="DanLib\PSOLA\PSOLA.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\YinFFT\aubio_priv.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\cvec.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\cvec.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\fft.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\fft.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\fvec.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\fvec.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="DanLib\YinFFT\hanning.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\mathutils.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\mathutils.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\musicutils.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\ooura_fft8g.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\YinFFT\pitchyinfast.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\YinFFT\pitchyinfast.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\types.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.c">
