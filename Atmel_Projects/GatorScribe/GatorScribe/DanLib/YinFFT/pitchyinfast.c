@@ -57,14 +57,7 @@ yin_t * yin_init (void)
 {
 	uint32_t i; 
 	yin_t *o = (yin_t*)calloc(sizeof(yin_t), 1);
-	/*
-	o->yin = new_fvec (WIN_SIZE / 2);
-	o->tmpdata = new_fvec (WIN_SIZE);
-	o->sqdiff = new_fvec (WIN_SIZE / 2);
-	o->kernel = new_fvec (WIN_SIZE);
-	o->samples_fft = new_fvec (WIN_SIZE);
-	o->kernel_fft = new_fvec (WIN_SIZE);
-	*/
+
 	o->tol = 0.05; // changed from 0.15
 	o->peak_pos = 0;
 	
@@ -168,12 +161,13 @@ float yin_get_pitch (yin_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftI
 	arm_rfft_fast_f32(fftInstance, compmul->data, rt_of_tau->data, 1); 
 
     // compute square difference r_t(tau) = sqdiff - 2 * r_t_tau[W-1:-1]
-	fvec_t *scaled_rt = o->tmpdata;
-	arm_scale_f32(&rt_of_tau->data[W], 2.0, scaled_rt->data, W);
-	arm_sub_f32(o->sqdiff->data, scaled_rt->data, o->yin->data, o->sqdiff->length); 
+	arm_scale_f32(&rt_of_tau->data[W], 2.0, &rt_of_tau->data[W], W);
+	arm_sub_f32(o->sqdiff->data, &rt_of_tau->data[W], o->yin->data, o->sqdiff->length); 
   }
 
 	// now compute the cumulative mean normalized difference function and look for first minimum
+	// TODO: might be able to get rid of the checks by adding small constant ... 
+	// will have to look at power of the signal since it doesnt give me true 0 hertz if i do that with my current method 
 	o->yin->data[0] = 1.0;
 	tmp_f = 0.0; 
 	for (tau = 1; tau < 5; tau++)
@@ -187,7 +181,6 @@ float yin_get_pitch (yin_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftI
 		{
 			o->yin->data[tau] = 1.0;
 		}
-		o->yin->data[tau] *= tau / tmp_f;
 	}
 	for (tau = 5; tau < o->yin->length; tau++) 
 	{
@@ -200,7 +193,6 @@ float yin_get_pitch (yin_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftI
 		{
 			o->yin->data[tau] = 1.0;
 		}
-		o->yin->data[tau] *= tau / tmp_f;
 
 		period = tau - 3;
 		if ((o->yin->data[period] < o->tol) && (o->yin->data[period] < o->yin->data[period + 1]))

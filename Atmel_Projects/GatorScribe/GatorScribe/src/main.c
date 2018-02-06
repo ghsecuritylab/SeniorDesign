@@ -36,6 +36,30 @@ static float  get_average_power (float  *buffer)
 	return p ;
 }
 
+const float ONEQTR_PI = M_PI / 4.0;
+const float THRQTR_PI = 3.0 * M_PI / 4.0;
+static inline float atan2_approximation(float y, float x)
+{
+	float r, angle;
+	float abs_y = abs(y) + 1e-10f;      // kludge to prevent 0/0 condition
+	if ( x < 0.0f )
+	{
+		r = (x + abs_y) / (abs_y - x);
+		angle = THRQTR_PI;
+	}
+	else
+	{
+		r = (x - abs_y) / (x + abs_y);
+		angle = ONEQTR_PI;
+	}
+	angle += (0.1963f * r * r - 0.9817f) * r;
+	if ( y < 0.0f )
+		return( -angle );     // negate if in quad III or IV
+	else
+		return( angle );
+}
+
+
 // LP filter 10-4000Hz
 static const float  lp_filter[] = {0.0027, 0.0103, 0.0258, 0.0499, 0.0801, 0.1105, 0.1332, 0.1416, 0.1332, 0.1105, 0.0801, 0.0499, 0.0258, 0.0103, 0.0027};
 static const uint32_t lp_filter_length = 15;
@@ -60,14 +84,17 @@ static inline void apply_lp_filter(float  *src, float  *dest, uint32_t sig_lengt
 }
 
 // defines for circular filtered buffer 
-#define CIRC_MASK (WIN_SIZE-1)
-COMPILER_ALIGNED(WIN_SIZE) static float  x_circle_filt[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static float  x_filt[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer2[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
 COMPILER_ALIGNED(WIN_SIZE) static float _norm[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float _phas[WIN_SIZE]; 
 volatile float  inputPitch; 
 
+COMPILER_ALIGNED(WIN_SIZE) static float harmonized_output[WIN_SIZE];
+
+volatile float temp1[] = {1.0, 2.0, 3.0, 4.0};
+volatile float temp2[] = {1.0, 2.0, 3.0, 4.0};
 int main(void)
 {
 	sysclk_init();
@@ -82,7 +109,7 @@ int main(void)
 	uint32_t i,j;
 	float  power;
 	cvec_t *mags_and_phases = (cvec_t*)calloc(sizeof(cvec_t), 1); 
-	mags_and_phases->length = WIN_SIZE/2 + 1; 
+	mags_and_phases->length = FRAME_SIZE_2 + 1; 
 	mags_and_phases->norm = _norm; 
 	mags_and_phases->phas = _phas; 
 	
@@ -96,7 +123,6 @@ int main(void)
 	
 	printf("Starting Program\n\n\n\r"); 
 	char str[20]; 
-	uint32_t circ_buff_idx = 0; 
 	
 	arm_rfft_fast_instance_f32 fftInstance;
 	arm_rfft_fast_init_f32(&fftInstance, WIN_SIZE);
@@ -105,25 +131,38 @@ int main(void)
 	{
 		if (dataReceived)
 		{	
-			// store lp-filtered values 
-			uint32_t fill_index = (circ_buff_idx & CIRC_MASK); 
-			apply_lp_filter((float  *)processBuffer, &x_circle_filt[fill_index], NEW_DATA_SIZE);
+			// store lp-filtered values into last quarter of buffer 
+			// TODO: going to have to end up changing DMA buffers again to do pitch detections every 1024 samples 
+			apply_lp_filter((float  *)processBuffer, &x_filt[WIN_SIZE-STEP_SIZE], NEW_DATA_SIZE);
 			
 			// can use arm function! arm_power_f32 
 			//power = get_average_power((float  *)&x[PROCESS_BUF_SIZE]);
-						
-			uint32_t starting_index = (fill_index + NEW_DATA_SIZE) & CIRC_MASK; 
-				
-			// apply hanning window - might consider using arm mult function and just shifting data instead of circular buffer 
-			// could do a benchmark for this 
-			for (j = starting_index, i = 0; j < starting_index + workingVec->length; j++, i++)
-				workingVec->data[i] = x_circle_filt[j & CIRC_MASK] * hanning[i];
+										
+			// apply hanning window 
+			arm_mult_f32(x_filt, (float32_t *)hanning, workingVec->data, WIN_SIZE); 
 			
 			// save input since fft changes it 
 			arm_copy_f32(workingVec->data, workingVec2->data, workingVec->length); 
 							
-			// take fft of the windowed signal and get mag & phase
+			// take fft of the windowed signal
 			arm_rfft_fast_f32(&fftInstance, workingVec->data, yin_instance->samples_fft->data, 0);
+			
+			// compute magnitude and phase 
+			arm_cmplx_mag_f32(yin_instance->samples_fft->data, mags_and_phases->norm, mags_and_phases->length); 
+			arm_scale_f32(mags_and_phases->norm, 2.0, mags_and_phases->norm, mags_and_phases->length); 
+			if (yin_instance->samples_fft->data[0] < 0) 
+				mags_and_phases->phas[0] = PI;
+			else 
+				mags_and_phases->phas[0] = 0.0;			
+			if (yin_instance->samples_fft->data[1] < 0)
+				mags_and_phases->phas[1] = PI;
+			else
+				mags_and_phases->phas[1] = 0.0;
+			
+			for (j = 2, i = 2; i < yin_instance->samples_fft->length; i+=2, j++)
+			{
+				mags_and_phases->phas[j] = atan2_approximation(yin_instance->samples_fft->data[i+1], yin_instance->samples_fft->data[i]); 
+			}
 			
 			// compute pitch -- requires prior fft in yin_instance
 			inputPitch = yin_get_pitch(yin_instance, workingVec2, &fftInstance);
@@ -135,7 +174,7 @@ int main(void)
 			float  desiredPitch = 440.0;
 			float  pitch_shift = 1 + (inputPitch - desiredPitch)/desiredPitch;
 
-			//pitch_shift_do(temp_buffer, pitch_shift, mags_and_phases);
+			pitch_shift_do(harmonized_output, pitch_shift, mags_and_phases);
 			
 			// TODO: interpolate 
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the voice 
@@ -147,7 +186,9 @@ int main(void)
 				outBuffer[i+2] = outBuffer[i]; 
 				outBuffer[i+3] = outBuffer[i]; 
 			}
-			circ_buff_idx += NEW_DATA_SIZE; 
+			
+			// shift input back one quarter 
+			arm_copy_f32(&x_filt[STEP_SIZE], &x_filt[0], WIN_SIZE-STEP_SIZE); 
 			dataReceived = false; 
 		}
 	}

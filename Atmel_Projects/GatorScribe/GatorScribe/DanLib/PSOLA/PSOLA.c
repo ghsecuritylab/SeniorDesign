@@ -11,18 +11,27 @@
 #include "fastmath.h"
 
 static const float Pi = M_PI; 
-static const float OneOverTwoPi = 0.15915494309f; 
-static const float TwoPi = 2.0f * 3.14159f;
+//static const float OneOverTwoPi = 0.15915494309f; 
+//static const float TwoPi = 2.0f * M_PI;
 static const float OneOverPi = 0.318309886f; 
+static const float Overlap_x_OneOverTwoPi = (float)NUM_OF_OVERLAPS * 0.15915494309f;
+static const float TwoPi_d_Overlap =  2.0f * M_PI / (float)NUM_OF_OVERLAPS;
+static const float ifft_scale = 2.0/((float)FFT_FRAME_SIZE*(float)NUM_OF_OVERLAPS); 
 
-COMPILER_ALIGNED(2*WIN_SIZE) float gFFTworksp[2*WIN_SIZE];
+static const float freqPerBin = (float)FFT_SAMPLE_RATE/(float)FFT_FRAME_SIZE;
+static const float expct = 2.0f * M_PI / (float)NUM_OF_OVERLAPS;// expected phase shift
+
+
 static float gLastPhase[WIN_SIZE/2+1];
 static float gSumPhase[WIN_SIZE/2+1];
+COMPILER_ALIGNED(2*WIN_SIZE) float gFFTworksp[2*WIN_SIZE];
 COMPILER_ALIGNED(2*WIN_SIZE) static float gOutputAccum[2*WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float gAnaFreq[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float gAnaMagn[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float gSynFreq[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float gSynMagn[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static float scaled_hanning[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static float ifft_real_values[WIN_SIZE];
 
 static void smbFft(float *fftBuffer, long fftFrameSize, long sign)
 /* 
@@ -59,8 +68,8 @@ static void smbFft(float *fftBuffer, long fftFrameSize, long sign)
 		ur = 1.0;
 		ui = 0.0;
 		arg = Pi / (le2>>1);
-		wr = cosf(arg);
-		wi = sign*sinf(arg);
+		wr = arm_cos_f32(arg);
+		wi = sign*arm_sin_f32(arg);
 		for (j = 0; j < le2; j += 2) {
 			p1r = fftBuffer+j; p1i = p1r+1;
 			p2r = p1r+le2; p2i = p2r+1;
@@ -100,31 +109,20 @@ void PSOLA_init(void)
 		gFFTworksp[i] = 0.0; 
 		gOutputAccum[i] = 0.0; 
 	}
+	arm_scale_f32((float *)hanning, ifft_scale, scaled_hanning, WIN_SIZE); 
 }
 
 void pitch_shift_do(float * outData, uint32_t pitch_shift, cvec_t *mags_and_phases)
 {
-	float magn, phase, tmp;
-	float freqPerBin, expct;
-	long i,k, qpd, index;
+	float tmp;
+	uint32_t k, qpd, index;
 
-	/* set up some handy variables */
-	freqPerBin = FFT_SAMPLE_RATE/(float)FFT_FRAME_SIZE;
-	//expct = 2.*M_PI*(float)STEP_SIZE/(float)FFT_FRAME_SIZE;
-	
-	// expected phase shift 
-	expct = TwoPi / (float)NUM_OF_OVERLAPS; 
-	
 	/* ***************** ANALYSIS ******************* */
 	/* this is the analysis step */
 	for (k = 0; k <= FRAME_SIZE_2; k++) {
-		
-		magn = 2.0*mags_and_phases->norm[k]; 
-		phase = mags_and_phases->phas[k]; 
-
 		/* compute phase difference */
-		tmp = phase - gLastPhase[k];
-		gLastPhase[k] = phase;
+		tmp = mags_and_phases->phas[k] - gLastPhase[k];
+		gLastPhase[k] = mags_and_phases->phas[k]; 
 
 		/* subtract expected phase difference */
 		tmp -= (float)k*expct;
@@ -138,22 +136,21 @@ void pitch_shift_do(float * outData, uint32_t pitch_shift, cvec_t *mags_and_phas
 		tmp -= Pi*(float)qpd;
 
 		/* get deviation from bin frequency from the +/- Pi interval */
-		tmp = NUM_OF_OVERLAPS*tmp*OneOverTwoPi;
+		tmp = Overlap_x_OneOverTwoPi*tmp;
 
 		/* compute the k-th partials' true frequency */
-		tmp = (float)k*freqPerBin + tmp*freqPerBin;
+		//tmp = (float)k*freqPerBin + tmp*freqPerBin;
+		//tmp = freqPerBin * ((float)k + tmp); 
 
 		/* store magnitude and true frequency in analysis arrays */
-		gAnaMagn[k] = magn;
-		gAnaFreq[k] = tmp;
+		gAnaMagn[k] = mags_and_phases->norm[k];
+		gAnaFreq[k] = freqPerBin * ((float)k + tmp); 
 	}
 	
 	/* ***************** PROCESSING ******************* */
-	for (i = 0; i < WIN_SIZE; i++)
-	{
-		gSynFreq[i] = 0.0;
-		gSynMagn[i] = 0.0;
-	}
+	
+	arm_fill_f32(0.0, gSynFreq, WIN_SIZE); 
+	arm_fill_f32(0.0, gSynMagn, WIN_SIZE); 
 	for (k = 0; k <= FRAME_SIZE_2; k++) {
 		index = k*pitch_shift;
 		if (index <= FRAME_SIZE_2) {
@@ -164,55 +161,46 @@ void pitch_shift_do(float * outData, uint32_t pitch_shift, cvec_t *mags_and_phas
 	
 	/* ***************** SYNTHESIS ******************* */
 	/* this is the synthesis step */
-	for (k = 0; k <= FRAME_SIZE_2; k++) {
-
-		/* get magnitude and true frequency from synthesis arrays */
-		magn = gSynMagn[k];
+	for (k = 0; k <= FRAME_SIZE_2; k++) 
+	{
+		// get true frequency from synthesis arrays 
 		tmp = gSynFreq[k];
 
-		/* subtract bin mid frequency */
+		// subtract bin mid frequency 
 		tmp -= (float)k*freqPerBin;
 
-		/* get bin deviation from freq deviation */
+		// get bin deviation from freq deviation 
 		tmp /= freqPerBin;
 
-		/* take number of overlaps into account */
-		tmp = TwoPi*tmp/(float)NUM_OF_OVERLAPS;
+		// take number of overlaps into account 
+		tmp = TwoPi_d_Overlap*tmp;
 
-		/* add the overlap phase advance back in */
+		// add the overlap phase advance back in 
 		tmp += (float)k*expct;
 
-		/* accumulate delta phase to get bin phase */
+		// accumulate delta phase to get bin phase 
 		gSumPhase[k] += tmp;
-		phase = gSumPhase[k];
 
-		/* get real and imag part and re-interleave */
-		gFFTworksp[2*k] = magn*cosf(phase);
-		gFFTworksp[2*k+1] = magn*sinf(phase);
+		// get real and imag part and re-interleave 
+		gFFTworksp[k<<1] = gSynMagn[k]*arm_cos_f32(gSumPhase[k]);
+		gFFTworksp[(k<<1)+1] = gSynMagn[k]*arm_sin_f32(gSumPhase[k]);
 	}
-
 	/* zero negative frequencies */
-	for (k = FFT_FRAME_SIZE+2; k < 2*FFT_FRAME_SIZE; k++) 
-		gFFTworksp[k] = 0.;
+	arm_fill_f32(0.0, &gFFTworksp[FFT_FRAME_SIZE+2], FFT_FRAME_SIZE - 2); 
 
 	/* do inverse transform */
-	smbFft(gFFTworksp, FFT_FRAME_SIZE, 1);
+	//smbFft(gFFTworksp, FFT_FRAME_SIZE, 1);
 
 	/* do windowing and add to output accumulator */
-	
-	float scale = 2.0/((float)FFT_FRAME_SIZE*(float)NUM_OF_OVERLAPS); 
-	for(k=0; k < FFT_FRAME_SIZE; k++) {
-		gOutputAccum[k] += scale*hanning[k]*gFFTworksp[2*k]; 
-	}
+	for(k=0; k < WIN_SIZE; k++) 
+		ifft_real_values[k] = gFFTworksp[k<<1]; 
+
+	arm_mult_f32(scaled_hanning, ifft_real_values, ifft_real_values, WIN_SIZE); 
+	arm_add_f32(gOutputAccum, ifft_real_values, gOutputAccum, WIN_SIZE); 
 	
 	// output 
-	for (k = 0; k < STEP_SIZE; k++) 
-		outData[k] = gOutputAccum[k];
+	arm_copy_f32(gOutputAccum, outData, STEP_SIZE); 
 
 	/* shift accumulator */
-	for (i = 0; i < FFT_FRAME_SIZE; i++)
-	{
-		gOutputAccum[i] = gOutputAccum[i+WIN_SIZE]; 
-	}
-
+	arm_copy_f32(&gOutputAccum[WIN_SIZE], gOutputAccum, WIN_SIZE); 
 }
