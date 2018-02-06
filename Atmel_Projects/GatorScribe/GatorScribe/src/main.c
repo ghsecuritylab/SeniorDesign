@@ -36,27 +36,24 @@ static float  get_average_power (float  *buffer)
 	return p ;
 }
 
-const float ONEQTR_PI = M_PI / 4.0;
-const float THRQTR_PI = 3.0 * M_PI / 4.0;
+const float poly_term_1 = -0.0464964749f; 
+const float poly_term_2 = 0.15931422f; 
+const float poly_term_3 = 0.327622764f; 
 static inline float atan2_approximation(float y, float x)
 {
-	float r, angle;
-	float abs_y = abs(y) + 1e-10f;      // kludge to prevent 0/0 condition
-	if ( x < 0.0f )
-	{
-		r = (x + abs_y) / (abs_y - x);
-		angle = THRQTR_PI;
-	}
-	else
-	{
-		r = (x - abs_y) / (x + abs_y);
-		angle = ONEQTR_PI;
-	}
-	angle += (0.1963f * r * r - 0.9817f) * r;
-	if ( y < 0.0f )
-		return( -angle );     // negate if in quad III or IV
-	else
-		return( angle );
+	float y_abs = abs(y); 
+	float x_abs = abs(x); 
+	float a = min(x_abs, y_abs) / max(x_abs, y_abs); 
+	float s = a * a; 
+	float r = ((poly_term_1 * s + poly_term_2) * s - poly_term_3) * s * a + a; 
+	if (y_abs > x_abs) 
+		r =  M_PI_2 - r; 
+	if (x < 0)
+		r = M_PI - r; 
+	if (y < 0)
+		r = -r; 
+		
+	return r; 
 }
 
 
@@ -87,14 +84,12 @@ static inline void apply_lp_filter(float  *src, float  *dest, uint32_t sig_lengt
 COMPILER_ALIGNED(WIN_SIZE) static float  x_filt[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer2[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
-COMPILER_ALIGNED(WIN_SIZE) static float _norm[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static float _phas[WIN_SIZE]; 
+static float _norm[FRAME_SIZE_2 + 1]; 
+static float _phas[FRAME_SIZE_2 + 1]; 
 volatile float  inputPitch; 
 
-COMPILER_ALIGNED(WIN_SIZE) static float harmonized_output[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static volatile float harmonized_output[WIN_SIZE];
 
-volatile float temp1[] = {1.0, 2.0, 3.0, 4.0};
-volatile float temp2[] = {1.0, 2.0, 3.0, 4.0};
 int main(void)
 {
 	sysclk_init();
@@ -126,7 +121,7 @@ int main(void)
 	
 	arm_rfft_fast_instance_f32 fftInstance;
 	arm_rfft_fast_init_f32(&fftInstance, WIN_SIZE);
-	
+			
 	while(1)
 	{
 		if (dataReceived)
@@ -148,8 +143,9 @@ int main(void)
 			arm_rfft_fast_f32(&fftInstance, workingVec->data, yin_instance->samples_fft->data, 0);
 			
 			// compute magnitude and phase 
-			arm_cmplx_mag_f32(yin_instance->samples_fft->data, mags_and_phases->norm, mags_and_phases->length); 
+			arm_cmplx_mag_f32(yin_instance->samples_fft->data, mags_and_phases->norm, WIN_SIZE>>1); 
 			arm_scale_f32(mags_and_phases->norm, 2.0, mags_and_phases->norm, mags_and_phases->length); 
+			
 			if (yin_instance->samples_fft->data[0] < 0) 
 				mags_and_phases->phas[0] = PI;
 			else 
@@ -174,6 +170,7 @@ int main(void)
 			float  desiredPitch = 440.0;
 			float  pitch_shift = 1 + (inputPitch - desiredPitch)/desiredPitch;
 
+			// find source of NaNs 
 			pitch_shift_do(harmonized_output, pitch_shift, mags_and_phases);
 			
 			// TODO: interpolate 
@@ -181,7 +178,7 @@ int main(void)
 			int processIdx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=4)
 			{
-				outBuffer[i] = (uint16_t)(int16_t)(processBuffer[processIdx++] * INT16_MAX); // sound in / sound out
+				outBuffer[i] = (uint16_t)(int16_t)(harmonized_output[processIdx++] * INT16_MAX); // sound in / sound out
 				outBuffer[i+1] = outBuffer[i]; 
 				outBuffer[i+2] = outBuffer[i]; 
 				outBuffer[i+3] = outBuffer[i]; 

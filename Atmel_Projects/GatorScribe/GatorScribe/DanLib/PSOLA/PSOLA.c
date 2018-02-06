@@ -115,8 +115,8 @@ void PSOLA_init(void)
 void pitch_shift_do(float * outData, uint32_t pitch_shift, cvec_t *mags_and_phases)
 {
 	float tmp;
-	uint32_t k, qpd, index;
-
+	uint32_t k, index;
+	int32_t qpd; 
 	/* ***************** ANALYSIS ******************* */
 	/* this is the analysis step */
 	for (k = 0; k <= FRAME_SIZE_2; k++) {
@@ -128,7 +128,7 @@ void pitch_shift_do(float * outData, uint32_t pitch_shift, cvec_t *mags_and_phas
 		tmp -= (float)k*expct;
 
 		/* map delta phase into +/- Pi interval */
-		qpd = tmp*OneOverPi;
+		qpd = (int32_t)(tmp*OneOverPi);
 		if (qpd >= 0) 
 			qpd += qpd & 1;
 		else 
@@ -189,7 +189,7 @@ void pitch_shift_do(float * outData, uint32_t pitch_shift, cvec_t *mags_and_phas
 	arm_fill_f32(0.0, &gFFTworksp[FFT_FRAME_SIZE+2], FFT_FRAME_SIZE - 2); 
 
 	/* do inverse transform */
-	//smbFft(gFFTworksp, FFT_FRAME_SIZE, 1);
+	smbFft(gFFTworksp, FFT_FRAME_SIZE, 1);
 
 	/* do windowing and add to output accumulator */
 	for(k=0; k < WIN_SIZE; k++) 
