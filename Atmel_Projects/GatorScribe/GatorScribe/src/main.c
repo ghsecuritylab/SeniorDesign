@@ -65,8 +65,8 @@ static inline float atan2_approximation(float y, float x)
 static const float  lp_filter[] = {0.0027, 0.0103, 0.0258, 0.0499, 0.0801, 0.1105, 0.1332, 0.1416, 0.1332, 0.1105, 0.0801, 0.0499, 0.0258, 0.0103, 0.0027};
 static const uint32_t lp_filter_length = 15;
 
-static const float lp_filter_8000[] = {0.0344 ,   0.1466  ,  0.2718 ,   0.2718 ,   0.1466  ,  0.0344}; 
-static const uint32_t lp_filter_8000_length = 6;
+static const float lp_filter_10000[] = {0.0607  ,  0.2266  ,  0.3323  ,  0.2266 ,   0.0607}; 
+static const uint32_t lp_filter_10000_length = 5;
 
 static inline void apply_lp_filter(float  *src, float  *dest, uint32_t sig_length)
 {
@@ -78,12 +78,12 @@ static inline void apply_lp_filter(float  *src, float  *dest, uint32_t sig_lengt
 		dest[j] = src[j];
 		*/ 
 	uint32_t k = 0; 
-	for(j = lp_filter_8000_length; j < sig_length + lp_filter_8000_length; j++, k++)
+	for(j = lp_filter_10000_length; j < sig_length + lp_filter_10000_length; j++, k++)
 	{
 		dest[k] = 0;
-		for(i = 0; i < lp_filter_8000_length; i++)
+		for(i = 0; i < lp_filter_10000_length; i++)
 		{
-			dest[k] += src[j-i]*lp_filter_8000[i];
+			dest[k] += src[j-i]*lp_filter_10000[i];
 		}
 	}
 	
@@ -101,9 +101,6 @@ COMPILER_ALIGNED(STEP_SIZE) static volatile float harmonized_output[2*STEP_SIZE]
 COMPILER_ALIGNED(STEP_SIZE) static volatile float harmonized_output_filt[STEP_SIZE];
 
 volatile float pitch_shift; 
-
-COMPILER_ALIGNED(WIN_SIZE) volatile float temp_original_ifft[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) volatile float temp_original_real_imag[WIN_SIZE]; 
 
 COMPILER_ALIGNED(FRAME_SIZE_2) static volatile float _phas[FRAME_SIZE_2];
 COMPILER_ALIGNED(FRAME_SIZE_2) static volatile float _norm[FRAME_SIZE_2];
@@ -164,31 +161,11 @@ int main(void)
 			// compute magnitude and phase 
 			arm_cmplx_mag_f32(yin_instance->samples_fft->data, mags_and_phases->norm, WIN_SIZE >> 1); 
 			arm_scale_f32(mags_and_phases->norm, 2.0, mags_and_phases->norm, mags_and_phases->length); 
-			/*
-			if (yin_instance->samples_fft->data[0] < 0) 
-				mags_and_phases->phas[0] = PI;
-			else 
-				mags_and_phases->phas[0] = 0.0;			
-			if (yin_instance->samples_fft->data[1] < 0)
-				mags_and_phases->phas[1] = PI;
-			else
-				mags_and_phases->phas[1] = 0.0;
-				*/ 
-			
+				
 			for (j = 0, i = 0; i < WIN_SIZE; i+=2, j++)
 			{
 				mags_and_phases->phas[j] = atan2_approximation(yin_instance->samples_fft->data[i+1], yin_instance->samples_fft->data[i]); 
 			}
-			
-			/* // test ifft 
-			for(i = 0; i < (WIN_SIZE>>1)+1; i++)
-			{
-				temp_original_real_imag[2*i] = mags_and_phases->norm[i]*arm_cos_f32(mags_and_phases->phas[i]); 
-				temp_original_real_imag[2*i + 1] = mags_and_phases->norm[i]*arm_sin_f32(mags_and_phases->phas[i]);
-			}
-			
-			arm_rfft_fast_f32(&fftInstance, temp_original_real_imag, temp_original_ifft, 1); 
-			*/ 
 			
 			// compute pitch -- requires prior fft in yin_instance -- corrupts samples_fft->data 
 		    inputPitch = yin_get_pitch(yin_instance, workingVec2, &fftInstance);
@@ -199,10 +176,11 @@ int main(void)
 							
 			float  desiredPitch = 440.0;
 			//pitch_shift = 1.0 - (inputPitch - desiredPitch)/desiredPitch;
-			pitch_shift = 1; 
+			pitch_shift = 1.5; 
 		    pitch_shift_do(&harmonized_output[STEP_SIZE], pitch_shift, mags_and_phases, &fftInstance);
 			
-			apply_lp_filter(&harmonized_output[STEP_SIZE - lp_filter_8000_length], harmonized_output_filt, STEP_SIZE); 
+			// can probably use circular buffer here if filtering needed 
+			apply_lp_filter(&harmonized_output[STEP_SIZE - lp_filter_10000_length], harmonized_output_filt, STEP_SIZE); 
 			
 			for (i = 0; i < STEP_SIZE; i++)
 			{

@@ -11,7 +11,7 @@
 #include "fastmath.h"
 
 static const float Pi = M_PI; 
-//static const float OneOverTwoPi = 0.15915494309f; 
+static const float OneOverTwoPi = 0.15915494309f; 
 static const float TwoPi = 2.0f * M_PI;
 static const float OneOverPi = 0.318309886f; 
 static const float Overlap_x_OneOverTwoPi = (float)NUM_OF_OVERLAPS * 0.15915494309f;
@@ -19,6 +19,7 @@ static const float TwoPi_d_Overlap =  2.0f * M_PI / (float)NUM_OF_OVERLAPS;
 static const float ifft_scale = 2.0 / (float)NUM_OF_OVERLAPS; // 2.0 /((float)FRAME_SIZE_2*(float)NUM_OF_OVERLAPS); 
 
 static const float freqPerBin = (float)FFT_SAMPLE_RATE/(float)FFT_FRAME_SIZE;
+static const float oneOverFreqPerBin = (float)FFT_FRAME_SIZE / (float)FFT_SAMPLE_RATE; 
 static const float expct = 2.0f * M_PI / (float)NUM_OF_OVERLAPS;// expected phase shift
 
 
@@ -65,7 +66,7 @@ void PSOLA_init(void)
 
 static float princarg(float inPhase)
 {
-	return (inPhase - (float)(round(inPhase/TwoPi)) * TwoPi); 
+	return (inPhase - (float)(round(inPhase*OneOverTwoPi)) * TwoPi); 
 }
 
 void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance)
@@ -77,22 +78,20 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 	int32_t temp_a; 
 	/* ***************** ANALYSIS ******************* */
 	/* this is the analysis step */
-	for (k = 0; k <= FRAME_SIZE_2; k++) {
+	for (k = 0; k < FRAME_SIZE_2; k++) {
 		/* compute phase difference */
 		tmp = mags_and_phases->phas[k] - prevAnaPhase[k]; 
 		prevAnaPhase[k] = mags_and_phases->phas[k]; 
 
 		/* subtract expected phase difference */
-		tmp -= omega[k]; // can store these values in an array 
+		tmp -= omega[k]; 
 		
-		// different phase unwrapping: 
+		/* map delta phase into +/- Pi interval */
 		tmp = princarg(tmp); 
 
-		/* map delta phase into +/- Pi interval */
-		//qpd = (int32_t)(tmp*OneOverPi);
-		
 		// raz code //
 		/*
+		qpd = (int32_t)(tmp*OneOverPi);
 		uint32_t signMap = (uint32_t)qpd >> 31; 
 		signMap ^= 1; 
 		qpd += (int32_t)signMap; 
@@ -100,14 +99,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 		tmp -= (float)qpd * TwoPi; 
 		// raz code //
 		*/ 
-		/*
-		if (qpd >= 0) 
-			qpd += qpd & 1;
-		else 
-			qpd -= qpd & 1;
-			
-		tmp -= Pi*(float)qpd;
-		*/ 
+
 		// get deviation from bin frequency from the +/- Pi interval
 		tmp = Overlap_x_OneOverTwoPi*tmp;
 		
@@ -122,10 +114,9 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 	}
 	
 	/* ***************** PROCESSING ******************* */
-	
 	arm_fill_f32(0.0, gSynFreq, WIN_SIZE); 
 	arm_fill_f32(0.0, gSynMagn, WIN_SIZE); 
-	for (k = 0; k <= FRAME_SIZE_2; k++) 
+	for (k = 0; k < FRAME_SIZE_2; k++) 
 	{
 		index = k*shift_amount;
 		if (index <= FRAME_SIZE_2) {
@@ -136,7 +127,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 	
 	/* ***************** SYNTHESIS ******************* */
 	/* this is the synthesis step */
-	for (k = 0; k <= FRAME_SIZE_2; k++) 
+	for (k = 0; k < FRAME_SIZE_2; k++) 
 	{
 		// get true frequency from synthesis arrays 
 		tmp = gSynFreq[k];
@@ -145,7 +136,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 		tmp -= (float)k*freqPerBin;
 
 		// get bin deviation from freq deviation 
-		tmp /= freqPerBin;
+		tmp *= oneOverFreqPerBin;
 
 		// take number of overlaps into account 
 		tmp = TwoPi_d_Overlap*tmp;
@@ -160,8 +151,6 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 		gFFTworksp[k<<1] = gSynMagn[k]*arm_cos_f32(gSumPhase[k]);
 		gFFTworksp[(k<<1)+1] = gSynMagn[k]*arm_sin_f32(gSumPhase[k]);
 	}
-	/* zero negative frequencies */
-	//arm_fill_f32(0.0, &gFFTworksp[FFT_FRAME_SIZE+2], FFT_FRAME_SIZE - 2); 
 
 	/* do inverse transform */	
 	arm_rfft_fast_f32(fftInstance, gFFTworksp, ifft_real_values, 1); 
