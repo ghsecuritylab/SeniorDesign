@@ -23,8 +23,8 @@ COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t inPongBuffer[IO_BUF_SIZE];
 COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t outPingBuffer[IO_BUF_SIZE];
 COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t outPongBuffer[IO_BUF_SIZE];
 
-COMPILER_ALIGNED(IO_BUF_SIZE) float  processPingBuffer[IO_BUF_SIZE];	
-COMPILER_ALIGNED(IO_BUF_SIZE) float  processPongBuffer[IO_BUF_SIZE];
+COMPILER_ALIGNED(IO_BUF_SIZE) float  processPingBuffer[NEW_DATA_SIZE];	
+COMPILER_ALIGNED(IO_BUF_SIZE) float  processPongBuffer[NEW_DATA_SIZE];
 
 // in and process buffers are synchronized 
 volatile float  *processBuffer = processPingBuffer;

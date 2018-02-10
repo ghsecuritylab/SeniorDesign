@@ -26,6 +26,6 @@ typedef struct {
 
 
 void PSOLA_init(void);
-void pitch_shift_do(float * outData, uint32_t pitch_shift, cvec_t *mags_and_phases); 
+void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance); 
 
 #endif /* PSOLA_H_ */

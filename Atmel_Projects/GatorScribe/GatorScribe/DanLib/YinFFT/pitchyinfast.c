@@ -155,7 +155,7 @@ float yin_get_pitch (yin_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftI
 	arm_rfft_fast_f32(fftInstance, o->kernel->data, o->kernel_fft->data, 0);
 
     // compute complex product		
-	arm_cmplx_mult_cmplx_f32(o->kernel_fft->data, o->samples_fft->data, compmul->data, compmul->length); 
+	arm_cmplx_mult_cmplx_f32(o->kernel_fft->data, o->samples_fft->data, compmul->data, compmul->length >> 1); 
 
     // compute inverse fft
 	arm_rfft_fast_f32(fftInstance, compmul->data, rt_of_tau->data, 1); 
