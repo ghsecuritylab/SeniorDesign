@@ -115,7 +115,6 @@ static float  get_average_power (float  *buffer)
 	return p ;
 }
 
-
 static inline float atan2_approximation(float y, float x)
 {
 	float y_abs = Abs(y); 
@@ -134,8 +133,8 @@ static inline float atan2_approximation(float y, float x)
 	return r; 
 }
 
-static const float lp_filter_10000[] = {0.0607, 0.2266, 0.3323, 0.2266, 0.0607}; 
-static const uint32_t lp_filter_10000_length = 5;
+static const float lp_filter_11k[] = {0.1155  ,  0.3406  ,  0.3406 ,   0.1155}; 
+static const uint32_t lp_filter_11k_length = 4;
 
 COMPILER_ALIGNED(WIN_SIZE) static float  x_in[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float inWindowBuffer[WIN_SIZE]; 
@@ -225,16 +224,16 @@ int main(void)
 			else 
 				pitch_shift = 1.0; 
 
-		    pitch_shift_do(&harmonized_output[lp_filter_10000_length], pitch_shift, mags_and_phases, &fftInstance);
+		    pitch_shift_do(&harmonized_output[lp_filter_11k_length], pitch_shift, mags_and_phases, &fftInstance);
 			
 			// lp - filter 10k cut off 
-			arm_conv_f32(&harmonized_output[0], STEP_SIZE+lp_filter_10000_length, (float *)lp_filter_10000, lp_filter_10000_length, harmonized_output_filt); 
+			arm_conv_f32(&harmonized_output[0], STEP_SIZE+lp_filter_11k_length, (float *)lp_filter_11k, lp_filter_11k_length, harmonized_output_filt); 
 			
 			// shift last filter length harmonized values for filter memory 
-			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_10000_length);
+			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_11k_length);
 			
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
-			int processIdx = lp_filter_10000_length; 
+			int processIdx = lp_filter_11k_length; 
 			for(i = 0; i < IO_BUF_SIZE; i+=4)
 			{
 				outBuffer[i] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx++] * (float)INT16_MAX); 
