@@ -16,7 +16,8 @@ static const float TwoPi = 2.0f * M_PI;
 static const float OneOverPi = 0.318309886f; 
 static const float Overlap_x_OneOverTwoPi = (float)NUM_OF_OVERLAPS * 0.15915494309f;
 static const float TwoPi_d_Overlap =  2.0f * M_PI / (float)NUM_OF_OVERLAPS;
-static const float ifft_scale = 2.0 / (float)NUM_OF_OVERLAPS; // 2.0 /((float)FRAME_SIZE_2*(float)NUM_OF_OVERLAPS); 
+
+static const float ifft_scale = 2.0 / (float)NUM_OF_OVERLAPS; 
 
 static const float freqPerBin = (float)FFT_SAMPLE_RATE/(float)FFT_FRAME_SIZE;
 static const float oneOverFreqPerBin = (float)FFT_FRAME_SIZE / (float)FFT_SAMPLE_RATE; 

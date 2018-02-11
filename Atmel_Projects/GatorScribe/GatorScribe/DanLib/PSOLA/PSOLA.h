@@ -12,7 +12,7 @@
 #include "asf.h"
 #include "pitchyinfast.h"
 
-#define FFT_SAMPLE_RATE YIN_FFT_SAMPLING_RATE
+#define FFT_SAMPLE_RATE 24000 //YIN_FFT_SAMPLING_RATE
 #define STEP_SIZE (WIN_SIZE/NUM_OF_OVERLAPS)
 #define FFT_FRAME_SIZE (WIN_SIZE)
 #define FRAME_SIZE_2 (FFT_FRAME_SIZE>>1)
