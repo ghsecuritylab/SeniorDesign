@@ -23,8 +23,8 @@ COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t inPongBuffer[IO_BUF_SIZE];
 COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t outPingBuffer[IO_BUF_SIZE];
 COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t outPongBuffer[IO_BUF_SIZE];
 
-COMPILER_ALIGNED(IO_BUF_SIZE) float  processPingBuffer[NEW_DATA_SIZE];	
-COMPILER_ALIGNED(IO_BUF_SIZE) float  processPongBuffer[NEW_DATA_SIZE];
+COMPILER_ALIGNED(NEW_DATA_SIZE) float  processPingBuffer[NEW_DATA_SIZE];	
+COMPILER_ALIGNED(NEW_DATA_SIZE) float  processPongBuffer[NEW_DATA_SIZE];
 
 // in and process buffers are synchronized 
 volatile float  *processBuffer = processPingBuffer;
@@ -47,7 +47,7 @@ void XDMAC_Handler(void)
     dma_status = xdmac_channel_get_interrupt_status(XDMAC, XDMA_CH_SSC_RX);
     if (dma_status & XDMAC_CIS_BIS)
     {
-		// Update input, process, and fill buffers to be used 
+		// Update input and process buffers to be used 
 		if(inPingMode)
 		{
 			inBuffer = inPingBuffer; 

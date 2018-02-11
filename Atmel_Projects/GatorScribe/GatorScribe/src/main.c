@@ -25,93 +25,6 @@ static void configure_console(void)
 	stdio_serial_init(CONF_UART, &uart_serial_options);
 }
 
-static float  get_average_power (float  *buffer)
-{
-	uint32_t i;
-	float  p = 0.0;
-	for ( i = 0; i < (WIN_SIZE); i++)
-	{
-		p = p + buffer[i]*buffer[i];
-	}
-	return p ;
-}
-
-
-static inline float atan2_approximation(float y, float x)
-{
-	float y_abs = y; 
-	float x_abs = x; 
-	
-	if (y_abs < 0) y_abs *= -1; 
-	if (x_abs < 0) x_abs *= -1; 
-
-	float a = min(x_abs, y_abs) / max(x_abs, y_abs); 
-	float s = a * a; 
-	float r = ((-0.0464964749f * s + 0.15931422f) * s - 0.327622764f) * s * a + a; 
-	if (y_abs > x_abs) 
-		r =  M_PI_2 - r; 
-	if (x < 0)
-		r = M_PI - r; 
-	if (y < 0)
-		r = -r; 
-		
-	return r; 
-}
-
-
-// LP filter 10-4000Hz
-static const float  lp_filter[] = {0.0027, 0.0103, 0.0258, 0.0499, 0.0801, 0.1105, 0.1332, 0.1416, 0.1332, 0.1105, 0.0801, 0.0499, 0.0258, 0.0103, 0.0027};
-static const uint32_t lp_filter_length = 15;
-
-static const float lp_filter_10000[] = {0.0607  ,  0.2266  ,  0.3323  ,  0.2266 ,   0.0607}; 
-static const uint32_t lp_filter_10000_length = 5;
-
-static inline void apply_lp_filter(float  *src, float  *dest, uint32_t sig_length)
-{
-	
-	// can use arm convolution for this!
-	uint32_t j,i; 
-	/*
-	for (j = 0; j < lp_filter_2000_length; j++)
-		dest[j] = src[j];
-		*/ 
-	uint32_t k = 0; 
-	for(j = lp_filter_10000_length; j < sig_length + lp_filter_10000_length; j++, k++)
-	{
-		dest[k] = 0;
-		for(i = 0; i < lp_filter_10000_length; i++)
-		{
-			dest[k] += src[j-i]*lp_filter_10000[i];
-		}
-	}
-}
-
-// defines for circular filtered buffer 
-COMPILER_ALIGNED(WIN_SIZE) static float  x_in[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer2[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
-
-volatile float inputPitch; 
-
-COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output[2*STEP_SIZE];
-COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output_filt[STEP_SIZE];
-
-volatile float pitch_shift; 
-
-COMPILER_ALIGNED(FRAME_SIZE_2) static float _phas[FRAME_SIZE_2];
-COMPILER_ALIGNED(FRAME_SIZE_2) static float _norm[FRAME_SIZE_2];
-
-static const float frequencies[128] = {
-	8.176,8.662,9.177,9.723,10.301,10.913,11.562,12.250,12.978,13.750,14.568,15.434,16.352,17.324,18.354,19.445,20.602,21.827,23.125,24.500,
-	25.957,27.500,29.135,30.868,32.703,34.648,36.708,38.891,41.203,43.654,46.249,48.999,51.913,55.000,58.270,61.735,65.406,69.296,73.416,
-	77.782,82.407,87.307,92.499,97.999,103.826,110.000,116.541,123.471,130.813,138.591,146.832,155.563,164.814,174.614,184.997,195.998,
-	207.652,220.000,233.082,246.942,261.626,277.183,293.665,311.127,329.628,349.228,369.994,391.995,415.305,440.000,466.164,493.883,
-	523.251,554.365,587.330,622.254,659.255,698.456,739.989,783.991,830.609,880.000,932.328,987.767,1046.502,1108.731,1174.659,1244.508,
-	1318.510,1396.913,1479.978,1567.982,1661.219,1760.000,1864.655,1975.533,2093.005,2217.461,2349.318,2489.016,2637.020,2793.826,2959.955,
-	3135.963,3322.438,3520.000,3729.310,3951.066,4186.009,4434.922,4698.636,4978.032,5274.041,5587.652,5919.911,6271.927,6644.875,7040.000,
-	7458.620,7902.133,8372.018,8869.844,9397.273,9956.063,10548.080,11175.300,11839.820,12543.850
-};
-
 static const float key_C[] = {16.35	,
 	18.35	,
 	20.60	,
@@ -163,9 +76,9 @@ static const float key_C[] = {16.35	,
 	1975.53	,
 	2093.00	,
 	2349.32	,
-	2637.02}; 
+2637.02};
 
-static float get_frequency(float32_t frequency)
+static inline float get_frequency(float32_t frequency)
 {
 	uint32_t lo = 0; // 12; // lowest at C0
 	uint32_t hi = 51; // 127;
@@ -175,8 +88,8 @@ static float get_frequency(float32_t frequency)
 	while (lo < hi)
 	{
 		mid = (hi + lo) >> 1;
-		d1 = abs(key_C[mid] - frequency);
-		d2 = abs(key_C[mid+1] - frequency);
+		d1 = Abs(key_C[mid] - frequency);
+		d2 = Abs(key_C[mid+1] - frequency);
 		if (d2 <= d1)
 		{
 			lo = mid+1;
@@ -188,6 +101,54 @@ static float get_frequency(float32_t frequency)
 	}
 	return key_C[hi];
 }
+
+static float  get_average_power (float  *buffer)
+{
+	uint32_t i;
+	float  p = 0.0;
+	for ( i = 0; i < (WIN_SIZE); i++)
+	{
+		p = p + buffer[i]*buffer[i];
+	}
+	return p ;
+}
+
+
+static inline float atan2_approximation(float y, float x)
+{
+	float y_abs = Abs(y); 
+	float x_abs = Abs(x); 
+
+	float a = min(x_abs, y_abs) / max(x_abs, y_abs); 
+	float s = a * a; 
+	float r = ((-0.0464964749f * s + 0.15931422f) * s - 0.327622764f) * s * a + a; 
+	if (y_abs > x_abs) 
+		r =  M_PI_2 - r; 
+	if (x < 0)
+		r = M_PI - r; 
+	if (y < 0)
+		r = -r; 
+		
+	return r; 
+}
+
+static const float lp_filter_10000[] = {0.0607, 0.2266, 0.3323, 0.2266, 0.0607}; 
+static const uint32_t lp_filter_10000_length = 5;
+
+// defines for circular filtered buffer 
+COMPILER_ALIGNED(WIN_SIZE) static float  x_in[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer2[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
+
+volatile float inputPitch; 
+
+COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output[2*STEP_SIZE];
+COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output_filt[2*STEP_SIZE];
+
+volatile float pitch_shift; 
+
+COMPILER_ALIGNED(FRAME_SIZE_2) static float _phas[FRAME_SIZE_2];
+COMPILER_ALIGNED(FRAME_SIZE_2) static float _norm[FRAME_SIZE_2];
 
 int main(void)
 {
@@ -225,7 +186,7 @@ int main(void)
 	{
 		if (dataReceived)
 		{	
-			// store lp-filtered values into last quarter of buffer 
+			// store process buffer values into last quarter of input buffer 
 			// TODO: going to have to end up changing DMA buffers again to do pitch detections every 1024 samples 
 			arm_copy_f32((float  *)processBuffer, &x_in[WIN_SIZE-STEP_SIZE], STEP_SIZE); 
 			
@@ -243,8 +204,6 @@ int main(void)
 						
 			// compute magnitude and phase 
 			arm_cmplx_mag_f32(yin_instance->samples_fft->data, mags_and_phases->norm, WIN_SIZE >> 1); 
-			arm_scale_f32(mags_and_phases->norm, 2.0, mags_and_phases->norm, mags_and_phases->length); 
-				
 			for (j = 0, i = 0; i < WIN_SIZE; i+=2, j++)
 			{
 				mags_and_phases->phas[j] = atan2_approximation(yin_instance->samples_fft->data[i+1], yin_instance->samples_fft->data[i]); 
@@ -252,7 +211,7 @@ int main(void)
 			
 			// compute pitch -- requires prior fft in yin_instance -- corrupts samples_fft->data 
 		    inputPitch = yin_get_pitch(yin_instance, workingVec2, &fftInstance);
-			//inputPitch = 440.0; 
+
 			// debug frequency detection
 			sprintf(str, "%f", inputPitch);
 			printf("Freq: %s\n\r", str);
@@ -268,26 +227,20 @@ int main(void)
 		    pitch_shift_do(&harmonized_output[lp_filter_10000_length], pitch_shift, mags_and_phases, &fftInstance);
 			
 			// lp - filter 10k cut off 
-			apply_lp_filter(&harmonized_output[0], harmonized_output_filt, STEP_SIZE); 
+			arm_conv_f32(&harmonized_output[0], STEP_SIZE+lp_filter_10000_length, (float *)lp_filter_10000, lp_filter_10000_length, harmonized_output_filt); 
 			
 			// shift last filter length harmonized values for filter memory 
 			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_10000_length);
 			
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
-			int processIdx = 0; 
-			for(i = 0; i < IO_BUF_SIZE-4; i+=4)
+			int processIdx = lp_filter_10000_length; 
+			for(i = 0; i < IO_BUF_SIZE; i+=4)
 			{
-				outBuffer[i] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx] * (float)INT16_MAX); 
+				outBuffer[i] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx++] * (float)INT16_MAX); 
 				outBuffer[i+1] = outBuffer[i]; 
-				// interpolate from next point 
-				outBuffer[i+2] = (uint16_t)(int16_t)((harmonized_output_filt[processIdx] + harmonized_output_filt[processIdx+1]) / 2.0 * (float)INT16_MAX); //outBuffer[i]; 
-				outBuffer[i+3] = outBuffer[i+2]; 
-				processIdx++; 
+				outBuffer[i+2] = outBuffer[i]; 
+				outBuffer[i+3] = outBuffer[i];
 			}
-			outBuffer[IO_BUF_SIZE-4] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx] * (float)INT16_MAX);
-			outBuffer[IO_BUF_SIZE-3] = outBuffer[IO_BUF_SIZE-4];
-			outBuffer[IO_BUF_SIZE-2] = outBuffer[IO_BUF_SIZE-4];
-			outBuffer[IO_BUF_SIZE-1] = outBuffer[IO_BUF_SIZE-4];
 			
 			// shift input back one quarter 
 			arm_copy_f32(&x_in[STEP_SIZE], &x_in[0], WIN_SIZE-STEP_SIZE);

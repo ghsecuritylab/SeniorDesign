@@ -17,7 +17,7 @@ static const float OneOverPi = 0.318309886f;
 static const float Overlap_x_OneOverTwoPi = (float)NUM_OF_OVERLAPS * 0.15915494309f;
 static const float TwoPi_d_Overlap =  2.0f * M_PI / (float)NUM_OF_OVERLAPS;
 
-static const float ifft_scale = 2.0 / (float)NUM_OF_OVERLAPS; 
+static const float ifft_scale = 4.0 / (float)NUM_OF_OVERLAPS; // 4.0 = 2 (only using half the spectrum) * 2 (removed scaling from original fft) 
 
 static const float freqPerBin = (float)FFT_SAMPLE_RATE/(float)FFT_FRAME_SIZE;
 static const float oneOverFreqPerBin = (float)FFT_FRAME_SIZE / (float)FFT_SAMPLE_RATE; 
@@ -81,17 +81,6 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 		/* map delta phase into +/- Pi interval */
 		tmp = princarg(tmp); 
 
-		// raz code //
-		/*
-		int32_t qpd = (int32_t)(tmp*OneOverPi);
-		uint32_t signMap = (uint32_t)qpd >> 31; 
-		signMap ^= 1; 
-		qpd += (int32_t)signMap; 
-		qpd >>= 1; 
-		tmp -= (float)qpd * TwoPi; 
-		// raz code //
-		*/ 
-
 		// get deviation from bin frequency from the +/- Pi interval
 		tmp = Overlap_x_OneOverTwoPi*tmp;
 		
@@ -100,12 +89,11 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 		
 		/* store true frequency in analysis arrays */
 		gAnaFreq[k] = tmp; 
-	    //gAnaFreq[k] = (expct * (float)k ) + tmp; //raz code 
 	}
 	
 	/* ***************** PROCESSING ******************* */
-	arm_fill_f32(0.0, gSynFreq, WIN_SIZE); 
-	arm_fill_f32(0.0, gSynMagn, WIN_SIZE); 
+	arm_fill_f32(0.0, gSynFreq, FRAME_SIZE_2); 
+	arm_fill_f32(0.0, gSynMagn, FRAME_SIZE_2); 
 	for (k = 0; k < FRAME_SIZE_2; k++) 
 	{
 		index = k*shift_amount;
