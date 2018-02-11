@@ -8,6 +8,8 @@ COMPILER_ALIGNED(WIN_SIZE>>1) static float _sqdiff[WIN_SIZE>>1];
 COMPILER_ALIGNED(WIN_SIZE) static float _kernel[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float _samples_fft[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float _kernel_fft[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static float _rt_of_tau[WIN_SIZE];
+
 
 static float fvec_quadratic_peak_pos (const fvec_t * x, uint32_t pos) {
 	float s0, s1, s2; uint32_t x0, x2;
@@ -55,6 +57,11 @@ yin_t * yin_init (void)
 	o->samples_fft->data = _samples_fft;
 	o->samples_fft->length = sizeof(_samples_fft)/sizeof(_samples_fft[0]);
 	for(i = 0; i < o->samples_fft->length; i++) o->samples_fft->data[i] = 0.0;
+	
+	o->rt_of_tau = (fvec_t*)calloc(sizeof(fvec_t), 1);
+	o->rt_of_tau->data = _samples_fft;
+	o->rt_of_tau->length = sizeof(_rt_of_tau)/sizeof(_rt_of_tau[0]);
+	for(i = 0; i < o->rt_of_tau->length; i++) o->rt_of_tau->data[i] = 0.0;
 	
 	o->kernel_fft = (fvec_t*)calloc(sizeof(fvec_t), 1);
 	o->kernel_fft->data = _kernel_fft;
@@ -109,7 +116,6 @@ float yin_get_pitch (yin_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftI
   // https://stackoverflow.com/questions/3949324/calculate-autocorrelation-using-fft-in-matlab
   {
     fvec_t *compmul = o->tmpdata;
-    fvec_t *rt_of_tau = o->samples_fft;
 	
     // build kernel, take a copy of first half of samples, other half are zeros. need to fill them since fft changes the values >:( 
     kernel_ptr.data = o->kernel->data + 1;
@@ -128,11 +134,11 @@ float yin_get_pitch (yin_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftI
 	arm_cmplx_mult_cmplx_f32(o->kernel_fft->data, o->samples_fft->data, compmul->data, compmul->length >> 1); 
 
     // compute inverse fft
-	arm_rfft_fast_f32(fftInstance, compmul->data, rt_of_tau->data, 1); 
+	arm_rfft_fast_f32(fftInstance, compmul->data, o->rt_of_tau->data, 1); 
 
     // compute square difference r_t(tau) = sqdiff - 2 * r_t_tau[W-1:-1]
-	arm_scale_f32(&rt_of_tau->data[W], 2.0, &rt_of_tau->data[W], W);
-	arm_sub_f32(o->sqdiff->data, &rt_of_tau->data[W], o->yin->data, o->sqdiff->length); 
+	arm_scale_f32(&o->rt_of_tau->data[W], 2.0, &o->rt_of_tau->data[W], W);
+	arm_sub_f32(o->sqdiff->data, &o->rt_of_tau->data[W], o->yin->data, o->sqdiff->length); 
   }
 
 	// now compute the cumulative mean normalized difference function and look for first minimum

@@ -72,6 +72,7 @@ typedef struct
 	fvec_t *kernel;
 	fvec_t *samples_fft;
 	fvec_t *kernel_fft;
+	fvec_t *rt_of_tau;
 }yin_t;
 
 

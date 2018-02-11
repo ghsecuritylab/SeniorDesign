@@ -137,8 +137,8 @@ static const uint32_t lp_filter_10000_length = 5;
 
 // defines for circular filtered buffer 
 COMPILER_ALIGNED(WIN_SIZE) static float  x_in[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer2[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
+COMPILER_ALIGNED(WIN_SIZE) static float inWindowBuffer[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static float inWindowBufferCopy[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
 
 volatile float inputPitch; 
 
@@ -168,13 +168,13 @@ int main(void)
 	mags_and_phases->norm = _norm; 
 	mags_and_phases->phas = _phas; 
 	
-	fvec_t *workingVec = (fvec_t*)calloc(sizeof(fvec_t), 1);
-	workingVec->length = WIN_SIZE;
-	workingVec->data = workingBuffer; 
+	fvec_t *inputVec = (fvec_t*)calloc(sizeof(fvec_t), 1);
+	inputVec->length = WIN_SIZE;
+	inputVec->data = inWindowBuffer; 
 	
-	fvec_t *workingVec2 = (fvec_t*)calloc(sizeof(fvec_t), 1);
-	workingVec2->length = WIN_SIZE;
-	workingVec2->data = workingBuffer2;
+	fvec_t *inputVecCopy = (fvec_t*)calloc(sizeof(fvec_t), 1);
+	inputVecCopy->length = WIN_SIZE;
+	inputVecCopy->data = inWindowBufferCopy;
 	
 	printf("Starting Program\n\n\n\r"); 
 	char str[20]; 
@@ -193,14 +193,14 @@ int main(void)
 			// can use arm function! arm_power_f32 
 			//power = get_average_power((float  *)&x[PROCESS_BUF_SIZE]);
 										
-			// apply hanning window 
-			arm_mult_f32(x_in, (float32_t *)hanning, workingVec->data, WIN_SIZE); 
+			// apply hanning window -- can't do in-place since we would be double-windowing 
+			arm_mult_f32(x_in, (float32_t *)hanning, inputVec->data, WIN_SIZE); 
 			
 			// save input since fft changes it 
-			arm_copy_f32(workingVec->data, workingVec2->data, workingVec->length); 
+			arm_copy_f32(inputVec->data, inputVecCopy->data, inputVec->length); 
 							
 			// take fft of the windowed signal
-			arm_rfft_fast_f32(&fftInstance, workingVec->data, yin_instance->samples_fft->data, 0);
+			arm_rfft_fast_f32(&fftInstance, inputVec->data, yin_instance->samples_fft->data, 0);
 						
 			// compute magnitude and phase 
 			arm_cmplx_mag_f32(yin_instance->samples_fft->data, mags_and_phases->norm, WIN_SIZE >> 1); 
@@ -209,8 +209,8 @@ int main(void)
 				mags_and_phases->phas[j] = atan2_approximation(yin_instance->samples_fft->data[i+1], yin_instance->samples_fft->data[i]); 
 			}
 			
-			// compute pitch -- requires prior fft in yin_instance -- corrupts samples_fft->data 
-		    inputPitch = yin_get_pitch(yin_instance, workingVec2, &fftInstance);
+			// compute pitch -- requires prior calculation of samples_fft in yin_instance 
+		    inputPitch = yin_get_pitch(yin_instance, inputVecCopy, &fftInstance);
 
 			// debug frequency detection
 			sprintf(str, "%f", inputPitch);
