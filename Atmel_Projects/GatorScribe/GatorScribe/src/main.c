@@ -36,9 +36,7 @@ static float  get_average_power (float  *buffer)
 	return p ;
 }
 
-const float poly_term_1 = -0.0464964749f; 
-const float poly_term_2 = 0.15931422f; 
-const float poly_term_3 = 0.327622764f; 
+
 static inline float atan2_approximation(float y, float x)
 {
 	float y_abs = y; 
@@ -49,7 +47,7 @@ static inline float atan2_approximation(float y, float x)
 
 	float a = min(x_abs, y_abs) / max(x_abs, y_abs); 
 	float s = a * a; 
-	float r = ((poly_term_1 * s + poly_term_2) * s - poly_term_3) * s * a + a; 
+	float r = ((-0.0464964749f * s + 0.15931422f) * s - 0.327622764f) * s * a + a; 
 	if (y_abs > x_abs) 
 		r =  M_PI_2 - r; 
 	if (x < 0)
@@ -86,24 +84,22 @@ static inline void apply_lp_filter(float  *src, float  *dest, uint32_t sig_lengt
 			dest[k] += src[j-i]*lp_filter_10000[i];
 		}
 	}
-	
-	//arm_copy_f32(src, dest, sig_length); 
 }
 
 // defines for circular filtered buffer 
-COMPILER_ALIGNED(WIN_SIZE) static float  x_filt[WIN_SIZE]; 
+COMPILER_ALIGNED(WIN_SIZE) static float  x_in[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float workingBuffer2[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
 
-volatile float  inputPitch; 
+volatile float inputPitch; 
 
-COMPILER_ALIGNED(STEP_SIZE) static volatile float harmonized_output[2*STEP_SIZE];
-COMPILER_ALIGNED(STEP_SIZE) static volatile float harmonized_output_filt[STEP_SIZE];
+COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output[2*STEP_SIZE];
+COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output_filt[STEP_SIZE];
 
 volatile float pitch_shift; 
 
-COMPILER_ALIGNED(FRAME_SIZE_2) static volatile float _phas[FRAME_SIZE_2];
-COMPILER_ALIGNED(FRAME_SIZE_2) static volatile float _norm[FRAME_SIZE_2];
+COMPILER_ALIGNED(FRAME_SIZE_2) static float _phas[FRAME_SIZE_2];
+COMPILER_ALIGNED(FRAME_SIZE_2) static float _norm[FRAME_SIZE_2];
 
 static const float frequencies[128] = {
 	8.176,8.662,9.177,9.723,10.301,10.913,11.562,12.250,12.978,13.750,14.568,15.434,16.352,17.324,18.354,19.445,20.602,21.827,23.125,24.500,
@@ -202,7 +198,7 @@ int main(void)
 	configure_console();
 	yin_t *yin_instance = yin_init();
 	PSOLA_init();
-	gfx_draw_filled_rect(0, 0, gfx_get_width(), gfx_get_height(), GFX_COLOR_BLACK);
+	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
 	
 	uint32_t i,j;
 	float  power;
@@ -231,14 +227,13 @@ int main(void)
 		{	
 			// store lp-filtered values into last quarter of buffer 
 			// TODO: going to have to end up changing DMA buffers again to do pitch detections every 1024 samples 
-			//apply_lp_filter((float  *)processBuffer, &x_filt[WIN_SIZE-STEP_SIZE], STEP_SIZE);
-			arm_copy_f32((float  *)processBuffer, &x_filt[WIN_SIZE-STEP_SIZE], STEP_SIZE); 
+			arm_copy_f32((float  *)processBuffer, &x_in[WIN_SIZE-STEP_SIZE], STEP_SIZE); 
 			
 			// can use arm function! arm_power_f32 
 			//power = get_average_power((float  *)&x[PROCESS_BUF_SIZE]);
 										
 			// apply hanning window 
-			arm_mult_f32(x_filt, (float32_t *)hanning, workingVec->data, WIN_SIZE); 
+			arm_mult_f32(x_in, (float32_t *)hanning, workingVec->data, WIN_SIZE); 
 			
 			// save input since fft changes it 
 			arm_copy_f32(workingVec->data, workingVec2->data, workingVec->length); 
@@ -261,19 +256,22 @@ int main(void)
 			// debug frequency detection
 			sprintf(str, "%f", inputPitch);
 			printf("Freq: %s\n\r", str);
-							
-			float  desiredPitch = get_frequency(inputPitch); 
-			pitch_shift = 1.0 - (inputPitch - desiredPitch)/desiredPitch;
-			//pitch_shift = 1.5; 
-		    pitch_shift_do(&harmonized_output[STEP_SIZE], pitch_shift, mags_and_phases, &fftInstance);
 			
-			// can probably use circular buffer here if filtering needed 
-			apply_lp_filter(&harmonized_output[STEP_SIZE - lp_filter_10000_length], harmonized_output_filt, STEP_SIZE); 
-			
-			for (i = 0; i < STEP_SIZE; i++)
+			if (inputPitch > 100)
 			{
-				harmonized_output[i] = harmonized_output[i + STEP_SIZE]; 
+				float  desiredPitch = get_frequency(inputPitch);
+				pitch_shift = 1.0 - (inputPitch - desiredPitch)/desiredPitch;
 			}
+			else 
+				pitch_shift = 1.0; 
+
+		    pitch_shift_do(&harmonized_output[lp_filter_10000_length], pitch_shift, mags_and_phases, &fftInstance);
+			
+			// lp - filter 10k cut off 
+			apply_lp_filter(&harmonized_output[0], harmonized_output_filt, STEP_SIZE); 
+			
+			// shift last filter length harmonized values for filter memory 
+			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_10000_length);
 			
 			// TODO: interpolate 
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
@@ -287,9 +285,7 @@ int main(void)
 			}
 			
 			// shift input back one quarter 
-			//arm_copy_f32(&x_filt[STEP_SIZE], &x_filt[0], WIN_SIZE-STEP_SIZE); 
-			for (i = 0; i < WIN_SIZE-STEP_SIZE; i++)
-				x_filt[i] = x_filt[i + STEP_SIZE]; 
+			arm_copy_f32(&x_in[STEP_SIZE], &x_in[0], WIN_SIZE-STEP_SIZE);
 			
 			dataReceived = false; 
 		}

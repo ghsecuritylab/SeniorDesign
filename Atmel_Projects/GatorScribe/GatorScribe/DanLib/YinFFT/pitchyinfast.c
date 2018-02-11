@@ -1,34 +1,4 @@
-/*
-  Copyright (C) 2003-2017 Paul Brossier <piem@aubio.org>
-
-  This file is part of aubio.
-
-  aubio is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-
-  aubio is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with aubio.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
-
-/* This algorithm was developed by A. de Cheveigné and H. Kawahara and
- * published in:
- *
- * de Cheveigné, A., Kawahara, H. (2002) "YIN, a fundamental frequency
- * estimator for speech and music", J. Acoust. Soc. Am. 111, 1917-1930.
- *
- * see http://recherche.ircam.fr/equipes/pcm/pub/people/cheveign.html
- */
-
 #include <asf.h>
-
 #include "pitchyinfast.h"
 #include "DMA_Audio.h"
 
@@ -198,7 +168,7 @@ float yin_get_pitch (yin_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftI
 		if ((o->yin->data[period] < o->tol) && (o->yin->data[period] < o->yin->data[period + 1]))
 		{
 			o->peak_pos = (uint32_t)period;
-			return YIN_FFT_SAMPLING_RATE / fvec_quadratic_peak_pos (o->yin, o->peak_pos);
+			return (float)YIN_FFT_SAMPLING_RATE / fvec_quadratic_peak_pos (o->yin, o->peak_pos);
 		}
 	}
 	
@@ -208,7 +178,7 @@ float yin_get_pitch (yin_t * o, fvec_t * input, arm_rfft_fast_instance_f32 *fftI
 	if (tmp_f < 1)
 		return 0; 
 	else 
-		return YIN_FFT_SAMPLING_RATE / tmp_f; 
+		return (float)YIN_FFT_SAMPLING_RATE / tmp_f; 
 }
 
 float yin_get_confidence (yin_t * o) 

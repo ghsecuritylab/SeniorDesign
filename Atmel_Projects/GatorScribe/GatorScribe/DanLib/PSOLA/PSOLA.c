@@ -21,22 +21,19 @@ static const float ifft_scale = 2.0 / (float)NUM_OF_OVERLAPS;
 
 static const float freqPerBin = (float)FFT_SAMPLE_RATE/(float)FFT_FRAME_SIZE;
 static const float oneOverFreqPerBin = (float)FFT_FRAME_SIZE / (float)FFT_SAMPLE_RATE; 
-static const float expct = 2.0f * M_PI / (float)NUM_OF_OVERLAPS;// expected phase shift
+static const float expct = 2.0f * M_PI / (float)NUM_OF_OVERLAPS;
 
 
-static float prevAnaPhase[WIN_SIZE/2+1];
-
-static float gSumPhase[WIN_SIZE/2+1];
+COMPILER_ALIGNED(FRAME_SIZE_2) static float prevAnaPhase[FRAME_SIZE_2];
+COMPILER_ALIGNED(FRAME_SIZE_2) static float gSumPhase[FRAME_SIZE_2];
 COMPILER_ALIGNED(2*WIN_SIZE) float gFFTworksp[2*WIN_SIZE];
 COMPILER_ALIGNED(2*WIN_SIZE) static float gOutputAccum[2*WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float gAnaFreq[WIN_SIZE];
-COMPILER_ALIGNED(WIN_SIZE) static float gAnaMagn[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float gSynFreq[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float gSynMagn[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float scaled_hanning[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float ifft_real_values[WIN_SIZE];
-
-static float omega[FRAME_SIZE_2 + 1]; 
+COMPILER_ALIGNED(FRAME_SIZE_2) static float omega[FRAME_SIZE_2]; 
 
 void PSOLA_init(void)
 {
@@ -44,14 +41,8 @@ void PSOLA_init(void)
 	for (i = 0; i < WIN_SIZE; i++)
 	{
 		gAnaFreq[i] = 0.0;
-		gAnaMagn[i] = 0.0;  
 		gSynFreq[i] = 0.0; 
 		gSynMagn[i] = 0.0; 
-	}
-	for (i = 0; i < WIN_SIZE/2+1; i++)
-	{
-		prevAnaPhase[i] = 0.0; 
-		gSumPhase[i] = 0.0; 
 	}
 	for (i = 0; i < 2*WIN_SIZE; i++)
 	{
@@ -59,13 +50,15 @@ void PSOLA_init(void)
 		gOutputAccum[i] = 0.0; 
 	}
 	arm_scale_f32((float *)hanning, ifft_scale, scaled_hanning, WIN_SIZE); 
-	for(i = 0; i <= FRAME_SIZE_2; i++)
+	for(i = 0; i < FRAME_SIZE_2; i++)
 	{
 		omega[i] = (float)i * expct; 
+		prevAnaPhase[i] = 0.0;
+		gSumPhase[i] = 0.0;
 	}
 }
 
-static float princarg(float inPhase)
+static inline float princarg(float inPhase)
 {
 	return (inPhase - (float)(round(inPhase*OneOverTwoPi)) * TwoPi); 
 }
@@ -74,9 +67,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 {
 	float tmp; 
 	uint32_t k, index;
-	int32_t qpd; 
 	
-	int32_t temp_a; 
 	/* ***************** ANALYSIS ******************* */
 	/* this is the analysis step */
 	for (k = 0; k < FRAME_SIZE_2; k++) {
@@ -92,7 +83,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 
 		// raz code //
 		/*
-		qpd = (int32_t)(tmp*OneOverPi);
+		int32_t qpd = (int32_t)(tmp*OneOverPi);
 		uint32_t signMap = (uint32_t)qpd >> 31; 
 		signMap ^= 1; 
 		qpd += (int32_t)signMap; 
@@ -107,9 +98,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 		// compute the k-th partials' true frequency 
 		tmp = ((float)k + tmp)*freqPerBin; 
 		
-		
-		/* store magnitude and true frequency in analysis arrays */
-		gAnaMagn[k] = mags_and_phases->norm[k];
+		/* store true frequency in analysis arrays */
 		gAnaFreq[k] = tmp; 
 	    //gAnaFreq[k] = (expct * (float)k ) + tmp; //raz code 
 	}
@@ -121,7 +110,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 	{
 		index = k*shift_amount;
 		if (index <= FRAME_SIZE_2) {
-			gSynMagn[index] += gAnaMagn[k]; // can just use mags_and_phases->norm[k];
+			gSynMagn[index] += mags_and_phases->norm[k];
 			gSynFreq[index] = gAnaFreq[k] * shift_amount;
 		}
 	}
@@ -163,7 +152,5 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 	arm_copy_f32(gOutputAccum, outData, STEP_SIZE); 
 	
 	/* shift accumulator */
-	//arm_copy_f32(&gOutputAccum[STEP_SIZE], gOutputAccum, WIN_SIZE-STEP_SIZE);
-	for(k = 0; k < WIN_SIZE; k++)
-		gOutputAccum[k] = gOutputAccum[k + STEP_SIZE]; 
+	arm_copy_f32(&gOutputAccum[STEP_SIZE], gOutputAccum, WIN_SIZE);
 }
