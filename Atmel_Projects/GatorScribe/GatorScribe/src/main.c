@@ -259,7 +259,7 @@ int main(void)
 			
 			if (inputPitch > 100)
 			{
-				float  desiredPitch = get_frequency(inputPitch);
+				float desiredPitch = get_frequency(inputPitch);
 				pitch_shift = 1.0 - (inputPitch - desiredPitch)/desiredPitch;
 			}
 			else 
@@ -273,16 +273,21 @@ int main(void)
 			// shift last filter length harmonized values for filter memory 
 			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_10000_length);
 			
-			// TODO: interpolate 
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
 			int processIdx = 0; 
-			for(i = 0; i < IO_BUF_SIZE; i+=4)
+			for(i = 0; i < IO_BUF_SIZE-4; i+=4)
 			{
-				outBuffer[i] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx++] * INT16_MAX); // sound in / sound out
+				outBuffer[i] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx] * (float)INT16_MAX); 
 				outBuffer[i+1] = outBuffer[i]; 
-				outBuffer[i+2] = outBuffer[i]; 
-				outBuffer[i+3] = outBuffer[i]; 
+				// interpolate from next point 
+				outBuffer[i+2] = (uint16_t)(int16_t)((harmonized_output_filt[processIdx] + harmonized_output_filt[processIdx+1]) / 2.0 * (float)INT16_MAX); //outBuffer[i]; 
+				outBuffer[i+3] = outBuffer[i+2]; 
+				processIdx++; 
 			}
+			outBuffer[IO_BUF_SIZE-4] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx] * (float)INT16_MAX);
+			outBuffer[IO_BUF_SIZE-3] = outBuffer[IO_BUF_SIZE-4];
+			outBuffer[IO_BUF_SIZE-2] = outBuffer[IO_BUF_SIZE-4];
+			outBuffer[IO_BUF_SIZE-1] = outBuffer[IO_BUF_SIZE-4];
 			
 			// shift input back one quarter 
 			arm_copy_f32(&x_in[STEP_SIZE], &x_in[0], WIN_SIZE-STEP_SIZE);
