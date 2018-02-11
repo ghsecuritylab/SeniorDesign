@@ -2,6 +2,8 @@
 #include "DanLib.h"
 #include "arm_math.h"
 
+extern const float hanning[1024];
+
 /**
  * \brief Configure the console UART.
  *
@@ -135,10 +137,9 @@ static inline float atan2_approximation(float y, float x)
 static const float lp_filter_10000[] = {0.0607, 0.2266, 0.3323, 0.2266, 0.0607}; 
 static const uint32_t lp_filter_10000_length = 5;
 
-// defines for circular filtered buffer 
 COMPILER_ALIGNED(WIN_SIZE) static float  x_in[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float inWindowBuffer[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static float inWindowBufferCopy[WIN_SIZE]; // needed since the fft corrupts the input ughhhh 
+COMPILER_ALIGNED(WIN_SIZE) static float inWindowBufferCopy[WIN_SIZE]; // needed since the fft corrupts the input  
 
 volatile float inputPitch; 
 
@@ -147,8 +148,8 @@ COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output_filt[2*STEP_SIZE];
 
 volatile float pitch_shift; 
 
-COMPILER_ALIGNED(FRAME_SIZE_2) static float _phas[FRAME_SIZE_2];
-COMPILER_ALIGNED(FRAME_SIZE_2) static float _norm[FRAME_SIZE_2];
+COMPILER_ALIGNED(WIN_SIZE_D2) static float _phas[WIN_SIZE_D2];
+COMPILER_ALIGNED(WIN_SIZE_D2) static float _norm[WIN_SIZE_D2];
 
 int main(void)
 {
@@ -164,7 +165,7 @@ int main(void)
 	uint32_t i,j;
 	float  power;
 	cvec_t *mags_and_phases = (cvec_t*)calloc(sizeof(cvec_t), 1); 
-	mags_and_phases->length = FRAME_SIZE_2; 
+	mags_and_phases->length = WIN_SIZE_D2; 
 	mags_and_phases->norm = _norm; 
 	mags_and_phases->phas = _phas; 
 	

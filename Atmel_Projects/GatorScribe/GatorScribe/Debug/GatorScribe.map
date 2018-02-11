@@ -3456,6 +3456,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 DanLib/PSOLA/PSOLA.o
  .debug_macro   0x00000000       0x7d DanLib/PSOLA/PSOLA.o
  .debug_macro   0x00000000      0x1e1 DanLib/PSOLA/PSOLA.o
+ .debug_macro   0x00000000       0x2e DanLib/PSOLA/PSOLA.o
  .debug_macro   0x00000000       0x12 DanLib/PSOLA/PSOLA.o
  .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
  .debug_macro   0x00000000       0xd6 DanLib/PSOLA/PSOLA.o
@@ -4160,7 +4161,6 @@ Discarded input sections
  .debug_macro   0x00000000       0x12 DanLib/YinFFT/pitchyinfast.o
  .debug_macro   0x00000000       0x16 DanLib/YinFFT/pitchyinfast.o
  .debug_macro   0x00000000       0xd6 DanLib/YinFFT/pitchyinfast.o
- .debug_macro   0x00000000       0x34 DanLib/YinFFT/pitchyinfast.o
  .group         0x00000000        0x8 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .group         0x00000000        0x8 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .group         0x00000000        0x8 src/ASF/common/components/touch/mxt/mxt_device_1.o
@@ -14380,7 +14380,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_ranges  0x00003e28       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
  .debug_ranges  0x00003e38       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
 
-.debug_macro    0x00000000    0x2a470
+.debug_macro    0x00000000    0x2a449
  .debug_macro   0x00000000      0x8cd DanLib/Audio/DMA/DMA_Audio.o
  .debug_macro   0x000008cd      0x8e6 DanLib/Audio/DMA/DMA_Audio.o
  .debug_macro   0x000011b3      0x16d DanLib/Audio/DMA/DMA_Audio.o
@@ -14573,60 +14573,60 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_macro   0x0001dec2       0x1c DanLib/LCDLib/LCDLib.o
  .debug_macro   0x0001dede      0x8a5 DanLib/LCDLib/touch/touch.o
  .debug_macro   0x0001e783       0xd9 DanLib/LCDLib/touch/touch.o
- .debug_macro   0x0001e85c      0x8f9 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x0001f155       0x1c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x0001f171       0x34 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x0001f1a5      0x860 DanLib/YinFFT/hanning.o
- .debug_macro   0x0001fa05      0x8d9 DanLib/YinFFT/pitchyinfast.o
- .debug_macro   0x000202de      0x761 src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_macro   0x00020a3f       0x46 src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_macro   0x00020a85       0x10 src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_macro   0x00020a95      0x67b src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_macro   0x00021110       0x22 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_macro   0x00021132      0x66b src/ASF/common/utils/stdio/read.o
- .debug_macro   0x0002179d      0x66b src/ASF/common/utils/stdio/write.o
- .debug_macro   0x00021e08      0x725 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_macro   0x0002252d      0x6ee src/ASF/sam/components/display/ili9488/ili9488.o
- .debug_macro   0x00022c1b      0x691 src/ASF/sam/drivers/ebi/smc/smc.o
- .debug_macro   0x000232ac      0x699 src/ASF/sam/drivers/ssc/ssc.o
- .debug_macro   0x00023945       0x10 src/ASF/sam/drivers/ssc/ssc.o
- .debug_macro   0x00023955       0x4c src/ASF/sam/drivers/ssc/ssc.o
- .debug_macro   0x000239a1      0x69f src/ASF/sam/drivers/twihs/twihs.o
- .debug_macro   0x00024040      0x67b src/ASF/sam/drivers/uart/uart.o
- .debug_macro   0x000246bb       0x16 src/ASF/sam/drivers/uart/uart.o
- .debug_macro   0x000246d1      0x6b1 src/ASF/sam/drivers/usart/usart.o
- .debug_macro   0x00024d82       0x34 src/ASF/sam/drivers/usart/usart.o
- .debug_macro   0x00024db6      0x686 src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_macro   0x0002543c      0x1a7 src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_macro   0x000255e3      0x6e7 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_macro   0x00025cca      0x2c0 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_macro   0x00025f8a      0x66b src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_macro   0x000265f5      0x72d src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_macro   0x00026d22       0x2e src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_macro   0x00026d50       0x82 src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_macro   0x00026dd2      0x67b src/ASF/sam/drivers/mpu/mpu.o
- .debug_macro   0x0002744d      0x1c8 src/ASF/sam/drivers/mpu/mpu.o
- .debug_macro   0x00027615      0x681 src/ASF/sam/drivers/pio/pio.o
- .debug_macro   0x00027c96       0x8e src/ASF/sam/drivers/pio/pio.o
- .debug_macro   0x00027d24      0x68c src/ASF/sam/drivers/pio/pio_handler.o
- .debug_macro   0x000283b0      0x681 src/ASF/sam/drivers/pmc/pmc.o
- .debug_macro   0x00028a31       0x6a src/ASF/sam/drivers/pmc/pmc.o
- .debug_macro   0x00028a9b      0x67a src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_macro   0x00029115       0x10 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_macro   0x00029125      0x469 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
- .debug_macro   0x0002958e      0x1d6 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00029764       0x97 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x000297fb       0xf6 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x000298f1       0x4c src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0002993d       0x16 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00029953       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00029963       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00029973       0x35 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x000299a8      0x122 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00029aca      0x984 src/main.o
- .debug_macro   0x0002a44e       0x22 src/main.o
+ .debug_macro   0x0001e85c      0x8de DanLib/PSOLA/PSOLA.o
+ .debug_macro   0x0001f13a       0x16 DanLib/PSOLA/PSOLA.o
+ .debug_macro   0x0001f150      0x860 DanLib/YinFFT/hanning.o
+ .debug_macro   0x0001f9b0      0x8d9 DanLib/YinFFT/pitchyinfast.o
+ .debug_macro   0x00020289       0x34 DanLib/YinFFT/pitchyinfast.o
+ .debug_macro   0x000202bd      0x761 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_macro   0x00020a1e       0x46 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_macro   0x00020a64       0x10 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_macro   0x00020a74      0x67b src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_macro   0x000210ef       0x22 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_macro   0x00021111      0x66b src/ASF/common/utils/stdio/read.o
+ .debug_macro   0x0002177c      0x66b src/ASF/common/utils/stdio/write.o
+ .debug_macro   0x00021de7      0x725 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_macro   0x0002250c      0x6ee src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_macro   0x00022bfa      0x691 src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_macro   0x0002328b      0x699 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_macro   0x00023924       0x10 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_macro   0x00023934       0x4c src/ASF/sam/drivers/ssc/ssc.o
+ .debug_macro   0x00023980      0x69f src/ASF/sam/drivers/twihs/twihs.o
+ .debug_macro   0x0002401f      0x67b src/ASF/sam/drivers/uart/uart.o
+ .debug_macro   0x0002469a       0x16 src/ASF/sam/drivers/uart/uart.o
+ .debug_macro   0x000246b0      0x6b1 src/ASF/sam/drivers/usart/usart.o
+ .debug_macro   0x00024d61       0x34 src/ASF/sam/drivers/usart/usart.o
+ .debug_macro   0x00024d95      0x686 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_macro   0x0002541b      0x1a7 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_macro   0x000255c2      0x6e7 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_macro   0x00025ca9      0x2c0 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_macro   0x00025f69      0x66b src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_macro   0x000265d4      0x72d src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_macro   0x00026d01       0x2e src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_macro   0x00026d2f       0x82 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_macro   0x00026db1      0x67b src/ASF/sam/drivers/mpu/mpu.o
+ .debug_macro   0x0002742c      0x1c8 src/ASF/sam/drivers/mpu/mpu.o
+ .debug_macro   0x000275f4      0x681 src/ASF/sam/drivers/pio/pio.o
+ .debug_macro   0x00027c75       0x8e src/ASF/sam/drivers/pio/pio.o
+ .debug_macro   0x00027d03      0x68c src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_macro   0x0002838f      0x681 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_macro   0x00028a10       0x6a src/ASF/sam/drivers/pmc/pmc.o
+ .debug_macro   0x00028a7a      0x67a src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_macro   0x000290f4       0x10 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_macro   0x00029104      0x469 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_macro   0x0002956d      0x1d6 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00029743       0x97 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x000297da       0xf6 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x000298d0       0x4c src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0002991c       0x16 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00029932       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00029942       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00029952       0x35 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00029987      0x122 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00029aa9      0x984 src/main.o
+ .debug_macro   0x0002a42d       0x1c src/main.o
 
-.debug_line     0x00000000    0x1fa7a
+.debug_line     0x00000000    0x1fa49
  .debug_line    0x00000000     0x1190 DanLib/Audio/DMA/DMA_Audio.o
  .debug_line    0x00001190     0x1069 DanLib/Audio/audio.o
  .debug_line    0x000021f9     0x1072 DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -14634,52 +14634,52 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_line    0x000041ac      0xc1f DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_line    0x00004dcb     0x1084 DanLib/LCDLib/LCDLib.o
  .debug_line    0x00005e4f     0x1103 DanLib/LCDLib/touch/touch.o
- .debug_line    0x00006f52     0x11a1 DanLib/PSOLA/PSOLA.o
- .debug_line    0x000080f3      0xfbf DanLib/YinFFT/hanning.o
- .debug_line    0x000090b2     0x1263 DanLib/YinFFT/pitchyinfast.o
- .debug_line    0x0000a315     0x1014 src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_line    0x0000b329      0x9ff src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_line    0x0000bd28      0x9fb src/ASF/common/utils/stdio/read.o
- .debug_line    0x0000c723      0x9f5 src/ASF/common/utils/stdio/write.o
- .debug_line    0x0000d118      0xc44 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_line    0x0000dd5c     0x1ac8 src/ASF/sam/components/display/ili9488/ili9488.o
- .debug_line    0x0000f824      0xabb src/ASF/sam/drivers/ebi/smc/smc.o
- .debug_line    0x000102df      0xd10 src/ASF/sam/drivers/ssc/ssc.o
- .debug_line    0x00010fef      0xd68 src/ASF/sam/drivers/twihs/twihs.o
- .debug_line    0x00011d57      0xb96 src/ASF/sam/drivers/uart/uart.o
- .debug_line    0x000128ed     0x1410 src/ASF/sam/drivers/usart/usart.o
- .debug_line    0x00013cfd      0xa3d src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_line    0x0001473a      0xb85 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_line    0x000152bf      0xa1a src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_line    0x00015cd9      0xd2e src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_line    0x00016a07      0xa9e src/ASF/sam/drivers/mpu/mpu.o
- .debug_line    0x000174a5     0x10bf src/ASF/sam/drivers/pio/pio.o
- .debug_line    0x00018564      0xc3d src/ASF/sam/drivers/pio/pio_handler.o
- .debug_line    0x000191a1     0x111b src/ASF/sam/drivers/pmc/pmc.o
- .debug_line    0x0001a2bc      0xa9e src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_line    0x0001ad5a      0x81b src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
- .debug_line    0x0001b575      0x417 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_line    0x0001b98c     0x141d src/main.o
- .debug_line    0x0001cda9      0x186 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_line    0x0001cf2f      0x191 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_line    0x0001d0c0      0x19e ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_line    0x0001d25e      0x1e2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
- .debug_line    0x0001d440      0x32c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
- .debug_line    0x0001d76c      0x7b7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
- .debug_line    0x0001df23      0x3fc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
- .debug_line    0x0001e31f      0x1fe ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mult_cmplx_f32.o)
- .debug_line    0x0001e51d      0x24f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
- .debug_line    0x0001e76c      0x1a6 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_f32.o)
- .debug_line    0x0001e912      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
- .debug_line    0x0001eab3      0x1a7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sub_f32.o)
- .debug_line    0x0001ec5a      0x1a2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_line    0x0001edfc      0x1b1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
- .debug_line    0x0001efad      0x1a5 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
- .debug_line    0x0001f152      0x165 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
- .debug_line    0x0001f2b7       0x98 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
- .debug_line    0x0001f34f      0x72b ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
+ .debug_line    0x00006f52     0x1170 DanLib/PSOLA/PSOLA.o
+ .debug_line    0x000080c2      0xfbf DanLib/YinFFT/hanning.o
+ .debug_line    0x00009081     0x1263 DanLib/YinFFT/pitchyinfast.o
+ .debug_line    0x0000a2e4     0x1014 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_line    0x0000b2f8      0x9ff src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_line    0x0000bcf7      0x9fb src/ASF/common/utils/stdio/read.o
+ .debug_line    0x0000c6f2      0x9f5 src/ASF/common/utils/stdio/write.o
+ .debug_line    0x0000d0e7      0xc44 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_line    0x0000dd2b     0x1ac8 src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_line    0x0000f7f3      0xabb src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_line    0x000102ae      0xd10 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_line    0x00010fbe      0xd68 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_line    0x00011d26      0xb96 src/ASF/sam/drivers/uart/uart.o
+ .debug_line    0x000128bc     0x1410 src/ASF/sam/drivers/usart/usart.o
+ .debug_line    0x00013ccc      0xa3d src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_line    0x00014709      0xb85 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_line    0x0001528e      0xa1a src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_line    0x00015ca8      0xd2e src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_line    0x000169d6      0xa9e src/ASF/sam/drivers/mpu/mpu.o
+ .debug_line    0x00017474     0x10bf src/ASF/sam/drivers/pio/pio.o
+ .debug_line    0x00018533      0xc3d src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_line    0x00019170     0x111b src/ASF/sam/drivers/pmc/pmc.o
+ .debug_line    0x0001a28b      0xa9e src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_line    0x0001ad29      0x81b src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_line    0x0001b544      0x417 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_line    0x0001b95b     0x141d src/main.o
+ .debug_line    0x0001cd78      0x186 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_line    0x0001cefe      0x191 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_line    0x0001d08f      0x19e ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_line    0x0001d22d      0x1e2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
+ .debug_line    0x0001d40f      0x32c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
+ .debug_line    0x0001d73b      0x7b7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+ .debug_line    0x0001def2      0x3fc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
+ .debug_line    0x0001e2ee      0x1fe ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mult_cmplx_f32.o)
+ .debug_line    0x0001e4ec      0x24f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
+ .debug_line    0x0001e73b      0x1a6 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_f32.o)
+ .debug_line    0x0001e8e1      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_line    0x0001ea82      0x1a7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sub_f32.o)
+ .debug_line    0x0001ec29      0x1a2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_line    0x0001edcb      0x1b1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
+ .debug_line    0x0001ef7c      0x1a5 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
+ .debug_line    0x0001f121      0x165 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_line    0x0001f286       0x98 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
+ .debug_line    0x0001f31e      0x72b ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
 
-.debug_str      0x00000000    0x9e8bd
+.debug_str      0x00000000    0x9e888
  .debug_str     0x00000000    0x9250c DanLib/Audio/DMA/DMA_Audio.o
                               0x92cd5 (size before relaxing)
  .debug_str     0x0009250c      0x142 DanLib/Audio/audio.o
@@ -14694,91 +14694,91 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
                               0x96c52 (size before relaxing)
  .debug_str     0x0009880e      0x68f DanLib/LCDLib/touch/touch.o
                               0x92f59 (size before relaxing)
- .debug_str     0x00098e9d      0x307 DanLib/PSOLA/PSOLA.o
-                              0x926b7 (size before relaxing)
- .debug_str     0x000991a4       0x1b DanLib/YinFFT/hanning.o
+ .debug_str     0x00098e9d      0x2a6 DanLib/PSOLA/PSOLA.o
+                              0x92656 (size before relaxing)
+ .debug_str     0x00099143       0x1b DanLib/YinFFT/hanning.o
                               0x9141b (size before relaxing)
- .debug_str     0x000991bf      0x119 DanLib/YinFFT/pitchyinfast.o
-                              0x925ec (size before relaxing)
- .debug_str     0x000992d8      0x469 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_str     0x0009915e      0x145 DanLib/YinFFT/pitchyinfast.o
+                              0x925e6 (size before relaxing)
+ .debug_str     0x000992a3      0x469 src/ASF/common/components/touch/mxt/mxt_device_1.o
                               0x878b2 (size before relaxing)
- .debug_str     0x00099741       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_str     0x0009970c       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
                               0x81d87 (size before relaxing)
- .debug_str     0x00099776       0x2c src/ASF/common/utils/stdio/read.o
+ .debug_str     0x00099741       0x2c src/ASF/common/utils/stdio/read.o
                               0x81c00 (size before relaxing)
- .debug_str     0x000997a2       0x26 src/ASF/common/utils/stdio/write.o
+ .debug_str     0x0009976d       0x26 src/ASF/common/utils/stdio/write.o
                               0x81c01 (size before relaxing)
- .debug_str     0x000997c8       0x69 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_str     0x00099793       0x69 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
                               0x8de86 (size before relaxing)
- .debug_str     0x00099831      0x57f src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_str     0x000997fc      0x57f src/ASF/sam/components/display/ili9488/ili9488.o
                               0x881d8 (size before relaxing)
- .debug_str     0x00099db0       0xcf src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_str     0x00099d7b       0xcf src/ASF/sam/drivers/ebi/smc/smc.o
                               0x85cbd (size before relaxing)
- .debug_str     0x00099e7f      0x33e src/ASF/sam/drivers/ssc/ssc.o
+ .debug_str     0x00099e4a      0x33e src/ASF/sam/drivers/ssc/ssc.o
                               0x82277 (size before relaxing)
- .debug_str     0x0009a1bd      0x380 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_str     0x0009a188      0x380 src/ASF/sam/drivers/twihs/twihs.o
                               0x8220b (size before relaxing)
- .debug_str     0x0009a53d      0x296 src/ASF/sam/drivers/uart/uart.o
+ .debug_str     0x0009a508      0x296 src/ASF/sam/drivers/uart/uart.o
                               0x81f07 (size before relaxing)
- .debug_str     0x0009a7d3      0xa8f src/ASF/sam/drivers/usart/usart.o
+ .debug_str     0x0009a79e      0xa8f src/ASF/sam/drivers/usart/usart.o
                               0x8279f (size before relaxing)
- .debug_str     0x0009b262      0x171 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_str     0x0009b22d      0x171 src/ASF/sam/drivers/xdmac/xdmac.o
                               0x8274d (size before relaxing)
- .debug_str     0x0009b3d3      0x3f1 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_str     0x0009b39e      0x3f1 src/ASF/common/services/clock/samv71/sysclk.o
                               0x86a88 (size before relaxing)
- .debug_str     0x0009b7c4       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_str     0x0009b78f       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                               0x81c57 (size before relaxing)
- .debug_str     0x0009b858      0x5c9 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_str     0x0009b823      0x5c9 src/ASF/sam/boards/samv71_xplained_ultra/init.o
                               0x88318 (size before relaxing)
- .debug_str     0x0009be21      0x132 src/ASF/sam/drivers/mpu/mpu.o
+ .debug_str     0x0009bdec      0x132 src/ASF/sam/drivers/mpu/mpu.o
                               0x8299d (size before relaxing)
- .debug_str     0x0009bf53      0x547 src/ASF/sam/drivers/pio/pio.o
+ .debug_str     0x0009bf1e      0x547 src/ASF/sam/drivers/pio/pio.o
                               0x827ad (size before relaxing)
- .debug_str     0x0009c49a      0x111 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_str     0x0009c465      0x111 src/ASF/sam/drivers/pio/pio_handler.o
                               0x828d8 (size before relaxing)
- .debug_str     0x0009c5ab      0x65a src/ASF/sam/drivers/pmc/pmc.o
+ .debug_str     0x0009c576      0x65a src/ASF/sam/drivers/pmc/pmc.o
                               0x82911 (size before relaxing)
- .debug_str     0x0009cc05      0x61c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_str     0x0009cbd0      0x61c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
                               0x82443 (size before relaxing)
- .debug_str     0x0009d221      0x137 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_str     0x0009d1ec      0x137 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
                               0x72530 (size before relaxing)
- .debug_str     0x0009d358      0x768 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x0009d323      0x768 src/ASF/sam/utils/syscalls/gcc/syscalls.o
                                0x74d4 (size before relaxing)
- .debug_str     0x0009dac0      0x265 src/main.o
-                              0x98487 (size before relaxing)
- .debug_str     0x0009dd25      0x15d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_str     0x0009da8b      0x265 src/main.o
+                              0x98460 (size before relaxing)
+ .debug_str     0x0009dcf0      0x15d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
                                 0x239 (size before relaxing)
- .debug_str     0x0009de82       0x23 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_str     0x0009de4d       0x23 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
                                 0x238 (size before relaxing)
- .debug_str     0x0009dea5       0x4d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_str     0x0009de70       0x4d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
                                 0x262 (size before relaxing)
- .debug_str     0x0009def2      0x2a7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
+ .debug_str     0x0009debd      0x2a7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
                                 0x52a (size before relaxing)
- .debug_str     0x0009e199       0x6a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
+ .debug_str     0x0009e164       0x6a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
                                 0x307 (size before relaxing)
- .debug_str     0x0009e203      0x104 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+ .debug_str     0x0009e1ce      0x104 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
                                 0x372 (size before relaxing)
- .debug_str     0x0009e307       0x8c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
+ .debug_str     0x0009e2d2       0x8c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
                                 0x2a4 (size before relaxing)
- .debug_str     0x0009e393       0x43 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mult_cmplx_f32.o)
+ .debug_str     0x0009e35e       0x43 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mult_cmplx_f32.o)
                                 0x270 (size before relaxing)
- .debug_str     0x0009e3d6       0x4d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
+ .debug_str     0x0009e3a1       0x4d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
                                 0x306 (size before relaxing)
- .debug_str     0x0009e423       0x44 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_f32.o)
+ .debug_str     0x0009e3ee       0x44 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_f32.o)
                                 0x255 (size before relaxing)
- .debug_str     0x0009e467       0x2a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_str     0x0009e432       0x2a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
                                 0x255 (size before relaxing)
- .debug_str     0x0009e491       0x4c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sub_f32.o)
+ .debug_str     0x0009e45c       0x4c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sub_f32.o)
                                 0x267 (size before relaxing)
- .debug_str     0x0009e4dd       0x26 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_str     0x0009e4a8       0x26 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
                                 0x242 (size before relaxing)
- .debug_str     0x0009e503       0x39 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
+ .debug_str     0x0009e4ce       0x39 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
                                 0x27d (size before relaxing)
- .debug_str     0x0009e53c       0x24 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
+ .debug_str     0x0009e507       0x24 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
                                 0x267 (size before relaxing)
- .debug_str     0x0009e560      0x31a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_str     0x0009e52b      0x31a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
                                 0x717 (size before relaxing)
- .debug_str     0x0009e87a       0x43 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
+ .debug_str     0x0009e845       0x43 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
                                 0x269 (size before relaxing)
 
 .debug_frame    0x00000000     0x4250

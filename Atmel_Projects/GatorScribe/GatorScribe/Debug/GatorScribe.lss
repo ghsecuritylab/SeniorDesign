@@ -29,13 +29,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_ranges 00003e48  00000000  00000000  0008f8b8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  0002a470  00000000  00000000  00093700  2**0
+ 13 .debug_macro  0002a449  00000000  00000000  00093700  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   0001fa7a  00000000  00000000  000bdb70  2**0
+ 14 .debug_line   0001fa49  00000000  00000000  000bdb49  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    0009e8bd  00000000  00000000  000dd5ea  2**0
+ 15 .debug_str    0009e888  00000000  00000000  000dd592  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_frame  00004250  00000000  00000000  0017bea8  2**2
+ 16 .debug_frame  00004250  00000000  00000000  0017be1c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1593,7 +1593,7 @@ static inline void sysclk_enable_peripheral_clock(uint32_t ul_id)
 004009d0 <PSOLA_init>:
 COMPILER_ALIGNED(WIN_SIZE) static float scaled_hanning[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float ifft_real_values[WIN_SIZE];
-COMPILER_ALIGNED(FRAME_SIZE_2) static float omega[FRAME_SIZE_2]; 
+COMPILER_ALIGNED(WIN_SIZE_D2) static float omega[WIN_SIZE_D2]; 
 
 void PSOLA_init(void)
 {
@@ -1632,22 +1632,22 @@ void PSOLA_init(void)
   400a12:	4817      	ldr	r0, [pc, #92]	; (400a70 <PSOLA_init+0xa0>)
   400a14:	47a8      	blx	r5
   400a16:	4a17      	ldr	r2, [pc, #92]	; (400a74 <PSOLA_init+0xa4>)
-	for(i = 0; i < FRAME_SIZE_2; i++)
+	for(i = 0; i < WIN_SIZE_D2; i++)
   400a18:	2300      	movs	r3, #0
 	{
 		omega[i] = (float)i * expct; 
   400a1a:	ed9f 7a17 	vldr	s14, [pc, #92]	; 400a78 <PSOLA_init+0xa8>
   400a1e:	ee07 3a90 	vmov	s15, r3
-	for(i = 0; i < FRAME_SIZE_2; i++)
+	for(i = 0; i < WIN_SIZE_D2; i++)
   400a22:	3301      	adds	r3, #1
 		omega[i] = (float)i * expct; 
   400a24:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-	for(i = 0; i < FRAME_SIZE_2; i++)
+	for(i = 0; i < WIN_SIZE_D2; i++)
   400a28:	f5b3 7f00 	cmp.w	r3, #512	; 0x200
 		omega[i] = (float)i * expct; 
   400a2c:	ee67 7a87 	vmul.f32	s15, s15, s14
   400a30:	ece2 7a01 	vstmia	r2!, {s15}
-	for(i = 0; i < FRAME_SIZE_2; i++)
+	for(i = 0; i < WIN_SIZE_D2; i++)
   400a34:	d1f3      	bne.n	400a1e <PSOLA_init+0x4e>
   400a36:	f44f 6200 	mov.w	r2, #2048	; 0x800
   400a3a:	2100      	movs	r1, #0
@@ -1693,7 +1693,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 	
 	/* ***************** ANALYSIS ******************* */
 	/* this is the analysis step */
-	for (k = 0; k < FRAME_SIZE_2; k++) {
+	for (k = 0; k < WIN_SIZE_D2; k++) {
   400a8e:	2400      	movs	r4, #0
 {
   400a90:	46ba      	mov	sl, r7
@@ -1742,11 +1742,11 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
   400aee:	eea7 8aca 	vfms.f32	s16, s15, s20
 		tmp = ((float)k + tmp)*freqPerBin; 
   400af2:	ee07 4a90 	vmov	s15, r4
-	for (k = 0; k < FRAME_SIZE_2; k++) {
+	for (k = 0; k < WIN_SIZE_D2; k++) {
   400af6:	3401      	adds	r4, #1
 		tmp = ((float)k + tmp)*freqPerBin; 
   400af8:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-	for (k = 0; k < FRAME_SIZE_2; k++) {
+	for (k = 0; k < WIN_SIZE_D2; k++) {
   400afc:	f5b4 7f00 	cmp.w	r4, #512	; 0x200
 		tmp = ((float)k + tmp)*freqPerBin; 
   400b00:	eee8 7a29 	vfma.f32	s15, s16, s19
@@ -1755,24 +1755,24 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 		/* store true frequency in analysis arrays */
 		gAnaFreq[k] = tmp; 
   400b08:	ece9 7a01 	vstmia	r9!, {s15}
-	for (k = 0; k < FRAME_SIZE_2; k++) {
+	for (k = 0; k < WIN_SIZE_D2; k++) {
   400b0c:	d1d4      	bne.n	400ab8 <pitch_shift_do+0x34>
 	}
 	
 	/* ***************** PROCESSING ******************* */
-	arm_fill_f32(0.0, gSynFreq, FRAME_SIZE_2); 
+	arm_fill_f32(0.0, gSynFreq, WIN_SIZE_D2); 
   400b0e:	4622      	mov	r2, r4
   400b10:	4d53      	ldr	r5, [pc, #332]	; (400c60 <pitch_shift_do+0x1dc>)
   400b12:	4954      	ldr	r1, [pc, #336]	; (400c64 <pitch_shift_do+0x1e0>)
   400b14:	2000      	movs	r0, #0
   400b16:	47a8      	blx	r5
-	arm_fill_f32(0.0, gSynMagn, FRAME_SIZE_2); 
+	arm_fill_f32(0.0, gSynMagn, WIN_SIZE_D2); 
   400b18:	4622      	mov	r2, r4
   400b1a:	4953      	ldr	r1, [pc, #332]	; (400c68 <pitch_shift_do+0x1e4>)
   400b1c:	2000      	movs	r0, #0
   400b1e:	47a8      	blx	r5
   400b20:	4c50      	ldr	r4, [pc, #320]	; (400c64 <pitch_shift_do+0x1e0>)
-	for (k = 0; k < FRAME_SIZE_2; k++) 
+	for (k = 0; k < WIN_SIZE_D2; k++) 
   400b22:	2200      	movs	r2, #0
   400b24:	4d50      	ldr	r5, [pc, #320]	; (400c68 <pitch_shift_do+0x1e4>)
 	{
@@ -1782,16 +1782,16 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
   400b2e:	ee67 7aa8 	vmul.f32	s15, s15, s17
   400b32:	eefc 7ae7 	vcvt.u32.f32	s15, s15
   400b36:	ee17 3a90 	vmov	r3, s15
-		if (index <= FRAME_SIZE_2) {
+		if (index <= WIN_SIZE_D2) {
 			gSynMagn[index] += mags_and_phases->norm[k];
   400b3a:	0099      	lsls	r1, r3, #2
-		if (index <= FRAME_SIZE_2) {
+		if (index <= WIN_SIZE_D2) {
   400b3c:	f5b3 7f00 	cmp.w	r3, #512	; 0x200
 			gSynMagn[index] += mags_and_phases->norm[k];
   400b40:	eb05 0301 	add.w	r3, r5, r1
 			gSynFreq[index] = gAnaFreq[k] * shift_amount;
   400b44:	4421      	add	r1, r4
-		if (index <= FRAME_SIZE_2) {
+		if (index <= WIN_SIZE_D2) {
   400b46:	d811      	bhi.n	400b6c <pitch_shift_do+0xe8>
 			gSynMagn[index] += mags_and_phases->norm[k];
   400b48:	f8d8 0004 	ldr.w	r0, [r8, #4]
@@ -1809,7 +1809,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
   400b64:	edc1 6a00 	vstr	s13, [r1]
 			gSynMagn[index] += mags_and_phases->norm[k];
   400b68:	edc3 7a00 	vstr	s15, [r3]
-	for (k = 0; k < FRAME_SIZE_2; k++) 
+	for (k = 0; k < WIN_SIZE_D2; k++) 
   400b6c:	3201      	adds	r2, #1
   400b6e:	3604      	adds	r6, #4
   400b70:	f5b2 7f00 	cmp.w	r2, #512	; 0x200
@@ -1849,7 +1849,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 		// get real and imag part and re-interleave 
 		gFFTworksp[k<<1] = gSynMagn[k]*arm_cos_f32(gSumPhase[k]);
   400ba6:	ed96 8a00 	vldr	s16, [r6]
-	for (k = 0; k < FRAME_SIZE_2; k++) 
+	for (k = 0; k < WIN_SIZE_D2; k++) 
   400baa:	f10a 0a01 	add.w	sl, sl, #1
 		gSumPhase[k] += tmp;
   400bae:	ee77 7a27 	vadd.f32	s15, s14, s15
@@ -1877,12 +1877,12 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 		gFFTworksp[(k<<1)+1] = gSynMagn[k]*arm_sin_f32(gSumPhase[k]);
   400bdc:	4798      	blx	r3
   400bde:	ee07 0a90 	vmov	s15, r0
-	for (k = 0; k < FRAME_SIZE_2; k++) 
+	for (k = 0; k < WIN_SIZE_D2; k++) 
   400be2:	f5ba 7f00 	cmp.w	sl, #512	; 0x200
 		gFFTworksp[(k<<1)+1] = gSynMagn[k]*arm_sin_f32(gSumPhase[k]);
   400be6:	ee68 7a27 	vmul.f32	s15, s16, s15
   400bea:	ed44 7a01 	vstr	s15, [r4, #-4]
-	for (k = 0; k < FRAME_SIZE_2; k++) 
+	for (k = 0; k < WIN_SIZE_D2; k++) 
   400bee:	d1cf      	bne.n	400b90 <pitch_shift_do+0x10c>
 	}
 
@@ -1957,7 +1957,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
   400c9c:	00404c1d 	.word	0x00404c1d
 
 00400ca0 <fvec_quadratic_peak_pos>:
-
+COMPILER_ALIGNED(WIN_SIZE) static float _rt_of_tau[WIN_SIZE];
 
 static float fvec_quadratic_peak_pos (const fvec_t * x, uint32_t pos) {
 	float s0, s1, s2; uint32_t x0, x2;
@@ -8526,8 +8526,8 @@ extern int _lseek(int file, int ptr, int dir)
 
 00403318 <main>:
 
-COMPILER_ALIGNED(FRAME_SIZE_2) static float _phas[FRAME_SIZE_2];
-COMPILER_ALIGNED(FRAME_SIZE_2) static float _norm[FRAME_SIZE_2];
+COMPILER_ALIGNED(WIN_SIZE_D2) static float _phas[WIN_SIZE_D2];
+COMPILER_ALIGNED(WIN_SIZE_D2) static float _norm[WIN_SIZE_D2];
 
 int main(void)
 {
@@ -8537,7 +8537,7 @@ int main(void)
 	usart_settings.stop_bits= opt->stopbits;
   40331e:	2500      	movs	r5, #0
   403320:	4faa      	ldr	r7, [pc, #680]	; (4035cc <main+0x2b4>)
-	mags_and_phases->length = FRAME_SIZE_2; 
+	mags_and_phases->length = WIN_SIZE_D2; 
 	mags_and_phases->norm = _norm; 
 	mags_and_phases->phas = _phas; 
 	
@@ -8631,7 +8631,7 @@ static inline void stdio_serial_init(volatile void *usart, const usart_serial_op
 	cvec_t *mags_and_phases = (cvec_t*)calloc(sizeof(cvec_t), 1); 
   4033a2:	4d96      	ldr	r5, [pc, #600]	; (4035fc <main+0x2e4>)
   4033a4:	6858      	ldr	r0, [r3, #4]
-	mags_and_phases->length = FRAME_SIZE_2; 
+	mags_and_phases->length = WIN_SIZE_D2; 
   4033a6:	f44f 7700 	mov.w	r7, #512	; 0x200
   4033aa:	47b0      	blx	r6
 	yin_t *yin_instance = yin_init();
@@ -8671,7 +8671,7 @@ static inline void stdio_serial_init(volatile void *usart, const usart_serial_op
   4033dc:	2008      	movs	r0, #8
 	mags_and_phases->norm = _norm; 
   4033de:	f8cb 2004 	str.w	r2, [fp, #4]
-	mags_and_phases->length = FRAME_SIZE_2; 
+	mags_and_phases->length = WIN_SIZE_D2; 
   4033e2:	f8cb 7000 	str.w	r7, [fp]
 	mags_and_phases->phas = _phas; 
   4033e6:	f8cb 3008 	str.w	r3, [fp, #8]

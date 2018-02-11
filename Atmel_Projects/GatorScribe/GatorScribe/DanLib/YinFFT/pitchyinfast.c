@@ -1,6 +1,7 @@
 #include <asf.h>
 #include "pitchyinfast.h"
-#include "DMA_Audio.h"
+
+extern const float hanning[1024];
 
 COMPILER_ALIGNED(WIN_SIZE>>1) static float _yin[WIN_SIZE>>1]; 
 COMPILER_ALIGNED(WIN_SIZE) static float _tmpdata[WIN_SIZE];
@@ -9,7 +10,6 @@ COMPILER_ALIGNED(WIN_SIZE) static float _kernel[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float _samples_fft[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float _kernel_fft[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float _rt_of_tau[WIN_SIZE];
-
 
 static float fvec_quadratic_peak_pos (const fvec_t * x, uint32_t pos) {
 	float s0, s1, s2; uint32_t x0, x2;

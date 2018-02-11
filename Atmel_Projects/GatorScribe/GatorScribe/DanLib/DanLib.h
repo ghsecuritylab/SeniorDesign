@@ -14,8 +14,5 @@
 #include "pitchyinfast.h"
 #include "PSOLA.h"
 
-typedef float float32_t;
-
-
 
 #endif /* DANLIB_H_ */

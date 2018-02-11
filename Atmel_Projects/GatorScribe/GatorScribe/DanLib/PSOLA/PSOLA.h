@@ -10,19 +10,19 @@
 #define PSOLA_H_
 
 #include "asf.h"
-#include "pitchyinfast.h"
+#include "DMA_Audio.h"
+#include "arm_math.h"
 
-#define FFT_SAMPLE_RATE 24000 //YIN_FFT_SAMPLING_RATE
+
+#define FFT_SAMPLE_RATE 24000
 #define STEP_SIZE (WIN_SIZE/NUM_OF_OVERLAPS)
-#define FFT_FRAME_SIZE (WIN_SIZE)
-#define FRAME_SIZE_2 (FFT_FRAME_SIZE>>1)
+#define WIN_SIZE_D2 (WIN_SIZE>>1)
 
 typedef struct {
 	uint32_t length;  /**< length of buffer = (requested length)/2 + 1 */
 	float *norm;   /**< norm array of size ::cvec_t.length */
 	float *phas;   /**< phase array of size ::cvec_t.length */
 } cvec_t;
-
 
 
 void PSOLA_init(void);
