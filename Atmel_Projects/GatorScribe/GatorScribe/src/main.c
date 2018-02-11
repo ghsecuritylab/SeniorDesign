@@ -105,7 +105,7 @@ volatile float pitch_shift;
 COMPILER_ALIGNED(FRAME_SIZE_2) static volatile float _phas[FRAME_SIZE_2];
 COMPILER_ALIGNED(FRAME_SIZE_2) static volatile float _norm[FRAME_SIZE_2];
 
-static const float32_t frequencies[128] = {
+static const float frequencies[128] = {
 	8.176,8.662,9.177,9.723,10.301,10.913,11.562,12.250,12.978,13.750,14.568,15.434,16.352,17.324,18.354,19.445,20.602,21.827,23.125,24.500,
 	25.957,27.500,29.135,30.868,32.703,34.648,36.708,38.891,41.203,43.654,46.249,48.999,51.913,55.000,58.270,61.735,65.406,69.296,73.416,
 	77.782,82.407,87.307,92.499,97.999,103.826,110.000,116.541,123.471,130.813,138.591,146.832,155.563,164.814,174.614,184.997,195.998,
@@ -116,18 +116,71 @@ static const float32_t frequencies[128] = {
 	7458.620,7902.133,8372.018,8869.844,9397.273,9956.063,10548.080,11175.300,11839.820,12543.850
 };
 
+static const float key_C[] = {16.35	,
+	18.35	,
+	20.60	,
+	21.83	,
+	24.50	,
+	27.50	,
+	30.87	,
+	32.70	,
+	36.71	,
+	41.20	,
+	43.65	,
+	49.00	,
+	55.00	,
+	61.74	,
+	65.41	,
+	73.42	,
+	82.41	,
+	87.31	,
+	98.00	,
+	110.00	,
+	123.47	,
+	130.81	,
+	146.83	,
+	164.81	,
+	174.61	,
+	196.00	,
+	220.00	,
+	246.94	,
+	261.63	,
+	293.66	,
+	329.63	,
+	349.23	,
+	392.00	,
+	440.00	,
+	493.88	,
+	523.25	,
+	587.33	,
+	659.25	,
+	698.46	,
+	783.99	,
+	880.00	,
+	987.77	,
+	1046.50	,
+	1174.66	,
+	1318.51	,
+	1396.91	,
+	1567.98	,
+	1760.00	,
+	1975.53	,
+	2093.00	,
+	2349.32	,
+	2637.02}; 
+
 static float get_frequency(float32_t frequency)
 {
-	uint32_t lo = 12; // lowest at C0
-	uint32_t hi = 127;
+	uint32_t lo = 0; // 12; // lowest at C0
+	uint32_t hi = 51; // 127;
 	uint32_t mid;
 	uint32_t d1;
 	uint32_t d2;
 	while (lo < hi)
 	{
 		mid = (hi + lo) >> 1;
-		d1 = abs(frequencies[mid] - frequency);
-		d2 = abs(frequencies[mid+1] - frequency);
+		d1 = abs(key_C[mid] - frequency);
+		d2 = abs(key_C[mid+1] - frequency);
 		if (d2 <= d1)
 		{
 			lo = mid+1;
@@ -137,7 +190,7 @@ static float get_frequency(float32_t frequency)
 			hi = mid;
 		}
 	}
-	return frequencies[hi];
+	return key_C[hi];
 }
 
 int main(void)
