@@ -219,7 +219,7 @@ int main(void)
 			if (inputPitch > 100)
 			{
 				float desiredPitch = get_frequency(inputPitch);
-				pitch_shift = 1.0 - (inputPitch - desiredPitch)/desiredPitch;
+				pitch_shift = 2.0 - inputPitch/desiredPitch;
 			}
 			else 
 				pitch_shift = 1.0; 
