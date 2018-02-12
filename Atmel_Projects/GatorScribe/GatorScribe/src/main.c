@@ -208,13 +208,22 @@ int main(void)
 {
 	sysclk_init();
 	board_init();
+	SCB_DisableICache(); 
 	lcd_init(); 
+	SCB_EnableICache();
 	audio_init();
 	configure_console();
 	yin_t *yin_instance = yin_init();
 	PSOLA_init();
+	 
+	SCB_DisableICache(); 
 	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
-	
+	SCB_EnableICache(); 
+	for(volatile int i = 0; i < 1000; i++); 
+	SCB_DisableICache(); 
+	gfx_draw_filled_rect(200, 100, 20, 20, GFX_COLOR_YELLOW);
+	SCB_EnableICache(); 
+
 	uint32_t i,j;
 	float  power;
 	cvec_t *mags_and_phases = (cvec_t*)calloc(sizeof(cvec_t), 1); 
@@ -286,7 +295,7 @@ int main(void)
 				pitch_shift2 = 1.0; 
 			}
 			
-		    pitch_shift_do(pitch_shift1, mags_and_phases);
+		   // pitch_shift_do(pitch_shift1, mags_and_phases);
 			pitch_shift_do(pitch_shift2, mags_and_phases); 
 			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance); 
 			

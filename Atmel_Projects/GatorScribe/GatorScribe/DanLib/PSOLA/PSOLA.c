@@ -97,7 +97,7 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 		index = k*shift_amount;
 		if (index <= WIN_SIZE_D2) {
 			gSynMagn[index] += mags_and_phases->norm[k];
-			gSynFreq[index] = 0.0; //gAnaFreq[k] * shift_amount;
+			gSynFreq[index] = 0.0; //(gAnaFreq[k] * shift_amount);
 		}
 	}
 	
