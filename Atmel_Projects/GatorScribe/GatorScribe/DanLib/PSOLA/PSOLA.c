@@ -62,7 +62,7 @@ static inline float princarg(float inPhase)
 	return (inPhase - (float)(round(inPhase*OneOverTwoPi)) * TwoPi); 
 }
 
-void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance)
+void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 {
 	float tmp; 
 	uint32_t k, index;
@@ -72,8 +72,7 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 	for (k = 0; k < WIN_SIZE_D2; k++) {
 		/* compute phase difference */
 		tmp = mags_and_phases->phas[k] - prevAnaPhase[k]; 
-		prevAnaPhase[k] = mags_and_phases->phas[k]; 
-
+			
 		/* subtract expected phase difference */
 		tmp -= omega[k]; 
 		
@@ -92,13 +91,13 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 	
 	/* ***************** PROCESSING ******************* */
 	arm_fill_f32(0.0, gSynFreq, WIN_SIZE_D2); 
-	arm_fill_f32(0.0, gSynMagn, WIN_SIZE_D2); 
+	//arm_fill_f32(0.0, gSynMagn, WIN_SIZE_D2); 
 	for (k = 0; k < WIN_SIZE_D2; k++) 
 	{
 		index = k*shift_amount;
 		if (index <= WIN_SIZE_D2) {
 			gSynMagn[index] += mags_and_phases->norm[k];
-			gSynFreq[index] = gAnaFreq[k] * shift_amount;
+			gSynFreq[index] = 0.0; //gAnaFreq[k] * shift_amount;
 		}
 	}
 	
@@ -123,21 +122,33 @@ void pitch_shift_do(float * outData, float shift_amount, cvec_t *mags_and_phases
 
 		// accumulate delta phase to get bin phase 
 		gSumPhase[k] += tmp;
+	}
+}
 
-		// get real and imag part and re-interleave 
+
+void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance)
+{
+	uint32_t k; 
+	for (k = 0; k < WIN_SIZE_D2; k++)
+	{
+		prevAnaPhase[k] = mags_and_phases->phas[k]; 
+		// get real and imag part and re-interleave
 		gFFTworksp[k<<1] = gSynMagn[k]*arm_cos_f32(gSumPhase[k]);
 		gFFTworksp[(k<<1)+1] = gSynMagn[k]*arm_sin_f32(gSumPhase[k]);
 	}
+		
+	/* do inverse transform */
+	arm_rfft_fast_f32(fftInstance, gFFTworksp, ifft_real_values, 1);
 
-	/* do inverse transform */	
-	arm_rfft_fast_f32(fftInstance, gFFTworksp, ifft_real_values, 1); 
-
-	arm_mult_f32(scaled_hanning, ifft_real_values, ifft_real_values, WIN_SIZE); 
-	arm_add_f32(gOutputAccum, ifft_real_values, gOutputAccum, WIN_SIZE); 
-	
-	// output 
-	arm_copy_f32(gOutputAccum, outData, STEP_SIZE); 
-	
+	arm_mult_f32(scaled_hanning, ifft_real_values, ifft_real_values, WIN_SIZE);
+	arm_add_f32(gOutputAccum, ifft_real_values, gOutputAccum, WIN_SIZE);
+		
+	// output
+	arm_copy_f32(gOutputAccum, outData, STEP_SIZE);
+		
 	/* shift accumulator */
 	arm_copy_f32(&gOutputAccum[STEP_SIZE], gOutputAccum, WIN_SIZE);
+	
+	/* zero out synthesis mags */ 
+	arm_fill_f32(0.0, gSynMagn, WIN_SIZE_D2); 
 }

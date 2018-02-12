@@ -1,6 +1,7 @@
 #include "asf.h"
 #include "DanLib.h"
 #include "arm_math.h"
+#include <math.h>
 
 extern const float hanning[1024];
 
@@ -26,6 +27,17 @@ static void configure_console(void)
 	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
 	stdio_serial_init(CONF_UART, &uart_serial_options);
 }
+
+static const float32_t midi_note_frequencies[128] = {
+	8.176,8.662,9.177,9.723,10.301,10.913,11.562,12.250,12.978,13.750,14.568,15.434,16.352,17.324,18.354,19.445,20.602,21.827,23.125,24.500,
+	25.957,27.500,29.135,30.868,32.703,34.648,36.708,38.891,41.203,43.654,46.249,48.999,51.913,55.000,58.270,61.735,65.406,69.296,73.416,
+	77.782,82.407,87.307,92.499,97.999,103.826,110.000,116.541,123.471,130.813,138.591,146.832,155.563,164.814,174.614,184.997,195.998,
+	207.652,220.000,233.082,246.942,261.626,277.183,293.665,311.127,329.628,349.228,369.994,391.995,415.305,440.000,466.164,493.883,
+	523.251,554.365,587.330,622.254,659.255,698.456,739.989,783.991,830.609,880.000,932.328,987.767,1046.502,1108.731,1174.659,1244.508,
+	1318.510,1396.913,1479.978,1567.982,1661.219,1760.000,1864.655,1975.533,2093.005,2217.461,2349.318,2489.016,2637.020,2793.826,2959.955,
+	3135.963,3322.438,3520.000,3729.310,3951.066,4186.009,4434.922,4698.636,4978.032,5274.041,5587.652,5919.911,6271.927,6644.875,7040.000,
+	7458.620,7902.133,8372.018,8869.844,9397.273,9956.063,10548.080,11175.300,11839.820,12543.850
+};
 
 static const float key_C[] = {16.35	,
 	18.35	,
@@ -80,10 +92,10 @@ static const float key_C[] = {16.35	,
 	2349.32	,
 2637.02};
 
-static inline float get_frequency(float32_t frequency)
+static inline float get_frequency_from_key_C(float32_t frequency)
 {
-	uint32_t lo = 0; // 12; // lowest at C0
-	uint32_t hi = 51; // 127;
+	uint32_t lo = 0;
+	uint32_t hi = 51; 
 	uint32_t mid;
 	uint32_t d1;
 	uint32_t d2;
@@ -104,6 +116,29 @@ static inline float get_frequency(float32_t frequency)
 	return key_C[hi];
 }
 
+static inline float get_frequency_from_all(float32_t frequency)
+{
+	uint32_t lo = 12; // lowest at C0
+	uint32_t hi = 127;
+	uint32_t mid;
+	uint32_t d1;
+	uint32_t d2;
+	while (lo < hi)
+	{
+		mid = (hi + lo) >> 1;
+		d1 = Abs(midi_note_frequencies[mid] - frequency);
+		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
+		if (d2 <= d1)
+		{
+			lo = mid+1;
+		}
+		else
+		{
+			hi = mid;
+		}
+	}
+	return midi_note_frequencies[hi];
+}
 static float  get_average_power (float  *buffer)
 {
 	uint32_t i;
@@ -113,6 +148,21 @@ static float  get_average_power (float  *buffer)
 		p = p + buffer[i]*buffer[i];
 	}
 	return p ;
+}
+
+static inline float powerf(float base, int32_t exponent)
+{
+	float result = 1.0; 
+	uint32_t exp_abs = Abs(exponent); 
+	while (exp_abs)
+	{
+		result *= base; 
+		exp_abs--; 
+	}
+	if (exponent < 0)
+		return 1/result; 
+	else 
+		return result; 
 }
 
 static inline float atan2_approximation(float y, float x)
@@ -140,12 +190,16 @@ COMPILER_ALIGNED(WIN_SIZE) static float  x_in[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float inWindowBuffer[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float inWindowBufferCopy[WIN_SIZE]; // needed since the fft corrupts the input  
 
-volatile float inputPitch; 
 
 COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output[2*STEP_SIZE];
 COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output_filt[2*STEP_SIZE];
 
-volatile float pitch_shift; 
+volatile float inputPitch;
+volatile float pitch_shift1; 
+volatile float pitch_shift2;
+volatile float auto_tuned_pitch;
+volatile float pitch_up_5;
+volatile float pitch_up_3;
 
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _phas[WIN_SIZE_D2];
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _norm[WIN_SIZE_D2];
@@ -178,6 +232,7 @@ int main(void)
 	
 	printf("Starting Program\n\n\n\r"); 
 	char str[20]; 
+
 	
 	arm_rfft_fast_instance_f32 fftInstance;
 	arm_rfft_fast_init_f32(&fftInstance, WIN_SIZE);
@@ -218,13 +273,22 @@ int main(void)
 			
 			if (inputPitch > 100)
 			{
-				float desiredPitch = get_frequency(inputPitch);
-				pitch_shift = 2.0 - inputPitch/desiredPitch;
+				auto_tuned_pitch = get_frequency_from_all(inputPitch);
+				//pitch_shift1 = 1 - (inputPitch-auto_tuned_pitch)/inputPitch; // auto-tune 
+				pitch_up_5 = auto_tuned_pitch*powerf(1.059463094359, -4); 
+				pitch_shift1 = 1 - (inputPitch-pitch_up_5)/inputPitch;
+				pitch_up_3 = auto_tuned_pitch*powerf(1.059463094359, 7); 		
+				pitch_shift2 = 1 - (inputPitch-pitch_up_3)/inputPitch;
 			}
 			else 
-				pitch_shift = 1.0; 
-
-		    pitch_shift_do(&harmonized_output[lp_filter_11k_length], pitch_shift, mags_and_phases, &fftInstance);
+			{
+				pitch_shift1 = 1.0; 
+				pitch_shift2 = 1.0; 
+			}
+			
+		    pitch_shift_do(pitch_shift1, mags_and_phases);
+			pitch_shift_do(pitch_shift2, mags_and_phases); 
+			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance); 
 			
 			// lp - filter 10k cut off 
 			arm_conv_f32(&harmonized_output[0], STEP_SIZE+lp_filter_11k_length, (float *)lp_filter_11k, lp_filter_11k_length, harmonized_output_filt); 
@@ -233,13 +297,19 @@ int main(void)
 			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_11k_length);
 			
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
-			int processIdx = lp_filter_11k_length; 
+			uint32_t processIdx = lp_filter_11k_length; 
+			uint32_t originalIdx = 0; 
+			float mix_output; 
 			for(i = 0; i < IO_BUF_SIZE; i+=4)
 			{
-				outBuffer[i] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx++] * (float)INT16_MAX); 
+				mix_output = (processBuffer[originalIdx] + harmonized_output_filt[processIdx]);//  / 2.0; // not dividing by two just to increase volume :) 
+				outBuffer[i] = (uint16_t)(int16_t)(mix_output * (float)INT16_MAX); 
+				//outBuffer[i] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx] * (float)INT16_MAX); 
 				outBuffer[i+1] = outBuffer[i]; 
 				outBuffer[i+2] = outBuffer[i]; 
 				outBuffer[i+3] = outBuffer[i];
+				processIdx++; 
+				originalIdx++;
 			}
 			
 			// shift input back one quarter 

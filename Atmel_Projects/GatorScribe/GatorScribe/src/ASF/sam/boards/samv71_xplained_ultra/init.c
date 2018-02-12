@@ -391,7 +391,6 @@ void board_init(void)
 */
 
 #ifdef CONF_BOARD_ENABLE_I_CACHE
-	SCB_DisableICache(); 
 	SCB_EnableICache(); 
 #endif 
 
