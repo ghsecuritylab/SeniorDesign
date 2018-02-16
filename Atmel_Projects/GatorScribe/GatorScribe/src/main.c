@@ -284,19 +284,15 @@ int main(void)
 	
 	arm_rfft_fast_instance_f32 fftInstance;
 	arm_rfft_fast_init_f32(&fftInstance, WIN_SIZE);
-	
-	dywapitchtracker pitchtracker;
-	dywapitch_inittracking(&pitchtracker);
 			
 	while(1)
 	{
 		if (dataReceived)
 		{	
 			// store process buffer values into last quarter of input buffer 
-			// TODO: going to have to end up changing DMA buffers again to do pitch detections every 1024 samples 
 			arm_copy_f32((float  *)processBuffer, &x_in[WIN_SIZE-STEP_SIZE], STEP_SIZE); 
 			
-			// can use arm function! arm_power_f32 
+			// can use arm function! arm_power_f32 -- to do for another day 
 			//power = get_average_power((float  *)&x[PROCESS_BUF_SIZE]);
 										
 			// apply hanning window -- can't do in-place since we would be double-windowing 
@@ -324,7 +320,7 @@ int main(void)
 				
 			// compute pitch -- requires prior calculation of samples_fft in yin_instance 
 		    //inputPitch = yin_get_pitch(yin_instance, inputVecCopy, &fftInstance);
-			inputPitch = dywapitch_computepitch(&pitchtracker, inputVecCopy->data); 
+			inputPitch = computeWaveletPitch(inputVecCopy->data); 
 			// debug frequency detection
 			sprintf(str, "%f", inputPitch);
 			printf("Freq: %s\n\r", str);
@@ -353,19 +349,17 @@ int main(void)
 				
 				pitch_diff = auto_tuned_pitch*powerf(1.059463094359, 7);
 				pitch_shift3 = 1.0f - (inputPitch-pitch_diff)/inputPitch;
+				
+				pitch_shift_do(pitch_shift1, mags_and_phases);
+				pitch_shift_do(pitch_shift2, mags_and_phases);
+				pitch_shift_do(pitch_shift3, mags_and_phases);
 			}
 			else
 			{
-				// todo" just dont add to mixed buffer 
-				pitch_shift1 = 1.0;
-				pitch_shift2 = 1.0;
-				pitch_shift3 = 1.0;
+				pitch_shift_do(1.0, mags_and_phases);
 			}
-			pitch_shift_do(pitch_shift1, mags_and_phases);
-			pitch_shift_do(pitch_shift2, mags_and_phases);
-			pitch_shift_do(pitch_shift3, mags_and_phases);
+
 #endif 
-			
 			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance); 
 			
 			// lp - filter 10k cut off 

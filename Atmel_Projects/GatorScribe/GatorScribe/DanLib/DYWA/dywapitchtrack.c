@@ -1,39 +1,8 @@
-/* dywapitchtrack.c
- 
- Dynamic Wavelet Algorithm Pitch Tracking library
- Released under the MIT open source licence
-  
- Copyright (c) 2010 Antoine Schmitt
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
-*/
-
 #include "dywapitchtrack.h"
 #include <math.h>
 #include "arm_math.h"
 #include <stdlib.h>
 #include <string.h> // for memset
-
-
-//**********************
-//       Utils
-//**********************
 
 #ifndef DBL_MAX
 #define DBL_MAX 1.79769e+308
@@ -79,22 +48,13 @@ static int32_t _2power(int32_t i) {
 	return res;
 }
 
-//******************************
-// the Wavelet algorithm itself
-//******************************
-
-int32_t dywapitch_neededsamplecount(int32_t minFreq) {
-	int32_t nbSam = 3*DYW_SAMPLING_RATE/minFreq; // 1017. for 130 Hz
-	nbSam = _ceil_power2(nbSam); // 1024
-	return nbSam;
-}
 
 COMPILER_ALIGNED(WIN_SIZE) static float sam[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static int32_t distances[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static int32_t mins[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static int32_t maxs[WIN_SIZE];
 
-static float _dywapitch_computeWaveletPitch(float * samples) 
+float computeWaveletPitch(float * samples) 
 {
 	float pitchF = 0.0;
 	int32_t i, j;
@@ -112,19 +72,15 @@ static float _dywapitch_computeWaveletPitch(float * samples)
 	
 	float ampltitudeThreshold;  
 	float theDC = 0.0;
+	uint32_t temp_idx; 
+	float maxValue;
+	float minValue; 
 	
 	{ // compute ampltitudeThreshold and theDC
 		//first compute the DC and maxAMplitude
-		float maxValue = -DBL_MAX;
-		float minValue = DBL_MAX;
-		for (i = 0; i < WIN_SIZE;i++) 
-		{
-			si = sam[i];
-			theDC = theDC + si;
-			if (si > maxValue) maxValue = si;
-			if (si < minValue) minValue = si;
-		}
-		theDC = theDC/WIN_SIZE;
+		arm_mean_f32(sam, WIN_SIZE, &theDC); 
+		arm_max_f32(sam, WIN_SIZE, &maxValue, &temp_idx); 
+		arm_min_f32(sam, WIN_SIZE, &minValue, &temp_idx); 
 		maxValue = maxValue - theDC;
 		minValue = minValue - theDC;
 		float amplitudeMax = (maxValue > -minValue ? maxValue : -minValue);
@@ -297,123 +253,17 @@ static float _dywapitch_computeWaveletPitch(float * samples)
 		{
 			return pitchF;
 		}
-		for (i = 0; i < curSamNb/2; i++) 
+		
+		uint32_t sub_idx;
+		for (uint32_t idx = 0; idx < (uint32_t)curSamNb/2; idx++)
 		{
-			sam[i] = (sam[2*i] + sam[2*i + 1])/2.;
+			sub_idx = idx << 1;
+			sam[idx] = (sam[sub_idx] + sam[sub_idx + 1]) * 0.5;
 		}
 		curSamNb /= 2;
 	}
 	
 	return pitchF;
 }
-
-// ***********************************
-// the dynamic postprocess
-// ***********************************
-
-/***
-It states: 
- - a pitch cannot change much all of a sudden (20%) (impossible humanly,
- so if such a situation happens, consider that it is a mistake and drop it. 
- - a pitch cannot float or be divided by 2 all of a sudden : it is an
- algorithm side-effect : divide it or float it by 2. 
- - a lonely voiced pitch cannot happen, nor can a sudden drop in the middle
- of a voiced segment. Smooth the plot. 
-***/
-
-static inline float _dywapitch_dynamicprocess(dywapitchtracker *pitchtracker, float pitch) {
-	
-	// equivalence
-	if (pitch == 0.0) pitch = -1.0;
-	
-	//
-	float estimatedPitch = -1;
-	float acceptedError = 0.2f;
-	int32_t maxConfidence = 5;
-	
-	if (pitch != -1) {
-		// I have a pitch here
-		
-		if (pitchtracker->_prevPitch == -1) {
-			// no previous
-			estimatedPitch = pitch;
-			pitchtracker->_prevPitch = pitch;
-			pitchtracker->_pitchConfidence = 1;
-			
-		} else if (abs(pitchtracker->_prevPitch - pitch)/pitch < acceptedError) {
-			// similar : remember and increment pitch
-			pitchtracker->_prevPitch = pitch;
-			estimatedPitch = pitch;
-			pitchtracker->_pitchConfidence = min(maxConfidence, pitchtracker->_pitchConfidence + 1); // maximum 3
-			
-		} else if ((pitchtracker->_pitchConfidence >= maxConfidence-2) && abs(pitchtracker->_prevPitch - 2.*pitch)/(2.*pitch) < acceptedError) {
-			// close to half the last pitch, which is trusted
-			estimatedPitch = 2.*pitch;
-			pitchtracker->_prevPitch = estimatedPitch;
-			
-		} else if ((pitchtracker->_pitchConfidence >= maxConfidence-2) && abs(pitchtracker->_prevPitch - 0.5*pitch)/(0.5*pitch) < acceptedError) {
-			// close to twice the last pitch, which is trusted
-			estimatedPitch = 0.5*pitch;
-			pitchtracker->_prevPitch = estimatedPitch;
-			
-		} else {
-			// nothing like this : very different value
-			if (pitchtracker->_pitchConfidence >= 1) {
-				// previous trusted : keep previous
-				estimatedPitch = pitchtracker->_prevPitch;
-				pitchtracker->_pitchConfidence = max(0, pitchtracker->_pitchConfidence - 1);
-			} else {
-				// previous not trusted : take current
-				estimatedPitch = pitch;
-				pitchtracker->_prevPitch = pitch;
-				pitchtracker->_pitchConfidence = 1;
-			}
-		}
-		
-	} else {
-		// no pitch now
-		if (pitchtracker->_prevPitch != -1) {
-			// was pitch before
-			if (pitchtracker->_pitchConfidence >= 1) {
-				// continue previous
-				estimatedPitch = pitchtracker->_prevPitch;
-				pitchtracker->_pitchConfidence = max(0, pitchtracker->_pitchConfidence - 1);
-			} else {
-				pitchtracker->_prevPitch = -1;
-				estimatedPitch = -1.;
-				pitchtracker->_pitchConfidence = 0;
-			}
-		}
-	}
-	
-	// put "_pitchConfidence="&pitchtracker->_pitchConfidence
-	if (pitchtracker->_pitchConfidence >= 1) {
-		// ok
-		pitch = estimatedPitch;
-	} else {
-		pitch = -1;
-	}
-	
-	// equivalence
-	if (pitch == -1) pitch = 0.0;
-	
-	return pitch;
-}
-
-
-// ************************************
-// the API main entry point32_ts
-// ************************************
-
-void dywapitch_inittracking(dywapitchtracker *pitchtracker) {
-	pitchtracker->_prevPitch = -1.;
-	pitchtracker->_pitchConfidence = -1;
-}
-
-float dywapitch_computepitch(dywapitchtracker *pitchtracker, float * samples) {
-	float raw_pitch = _dywapitch_computeWaveletPitch(samples);
-	return _dywapitch_dynamicprocess(pitchtracker, raw_pitch);
-}
-
 
 
