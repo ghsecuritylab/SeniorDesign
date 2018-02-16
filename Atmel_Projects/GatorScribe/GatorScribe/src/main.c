@@ -197,9 +197,9 @@ COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output_filt[2*STEP_SIZE];
 volatile float inputPitch;
 volatile float pitch_shift1; 
 volatile float pitch_shift2;
+volatile float pitch_shift3;
 volatile float auto_tuned_pitch;
-volatile float pitch_up_5;
-volatile float pitch_up_3;
+volatile float pitch_diff;
 
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _phas[WIN_SIZE_D2];
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _norm[WIN_SIZE_D2];
@@ -284,6 +284,9 @@ int main(void)
 	
 	arm_rfft_fast_instance_f32 fftInstance;
 	arm_rfft_fast_init_f32(&fftInstance, WIN_SIZE);
+	
+	dywapitchtracker pitchtracker;
+	dywapitch_inittracking(&pitchtracker);
 			
 	while(1)
 	{
@@ -312,9 +315,7 @@ int main(void)
 				mags_and_phases->phas[j] = atan2_approximation(yin_instance->samples_fft->data[i+1], yin_instance->samples_fft->data[i]); 
 			}
 			
-			
 			// compute envelope 
-			
 			arm_max_f32(mags_and_phases->norm, mags_and_phases->length, &max_fft_norm, &tmp); 
 			arm_conv_f32(mags_and_phases->norm, mags_and_phases->length, (float *)envelope_filter, envelope_filter_length, temp_envelope); 
 			arm_max_f32(&temp_envelope[envelope_filter_length>>1], mags_and_phases->length, &max_fft_filt_norm, &tmp);
@@ -322,8 +323,8 @@ int main(void)
 			arm_scale_f32(&temp_envelope[envelope_filter_length>>1], envelop_scale, mags_and_phases->env, mags_and_phases->length); 				
 				
 			// compute pitch -- requires prior calculation of samples_fft in yin_instance 
-		    inputPitch = yin_get_pitch(yin_instance, inputVecCopy, &fftInstance);
-		
+		    //inputPitch = yin_get_pitch(yin_instance, inputVecCopy, &fftInstance);
+			inputPitch = dywapitch_computepitch(&pitchtracker, inputVecCopy->data); 
 			// debug frequency detection
 			sprintf(str, "%f", inputPitch);
 			printf("Freq: %s\n\r", str);
@@ -343,18 +344,26 @@ int main(void)
 			if (inputPitch > 100)
 			{
 				auto_tuned_pitch = get_frequency_from_all(inputPitch);
-				pitch_up_5 = auto_tuned_pitch*powerf(1.059463094359, -4);
-				pitch_shift1 = 1 - (inputPitch-pitch_up_5)/inputPitch;
-				pitch_up_3 = auto_tuned_pitch*powerf(1.059463094359, 7);
-				pitch_shift2 = 1 - (inputPitch-pitch_up_3)/inputPitch;
+				
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359, -5);
+				pitch_shift1 = 1.0f - (inputPitch-pitch_diff)/inputPitch;
+				
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359, -8);
+				pitch_shift2 = 1.0f - (inputPitch-pitch_diff)/inputPitch;
+				
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359, 7);
+				pitch_shift3 = 1.0f - (inputPitch-pitch_diff)/inputPitch;
 			}
 			else
 			{
+				// todo" just dont add to mixed buffer 
 				pitch_shift1 = 1.0;
 				pitch_shift2 = 1.0;
+				pitch_shift3 = 1.0;
 			}
 			pitch_shift_do(pitch_shift1, mags_and_phases);
-			//pitch_shift_do(pitch_shift2, mags_and_phases);
+			pitch_shift_do(pitch_shift2, mags_and_phases);
+			pitch_shift_do(pitch_shift3, mags_and_phases);
 #endif 
 			
 			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance); 
@@ -368,10 +377,11 @@ int main(void)
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
 #ifdef AUTOTUNE
 			uint32_t processIdx = lp_filter_11k_length; 
-#endif 
+#else
 			uint32_t idx = 0; 
 			arm_add_f32(processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE); 
 			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, STEP_SIZE); 
+#endif 
 			for(i = 0; i < IO_BUF_SIZE; i+=4)
 			{
 #ifdef AUTOTUNE

@@ -8,6 +8,8 @@ DanLib\Audio\audio.c
 
 DanLib\Audio\WM8904_Driver\WM8904_Driver.c
 
+DanLib\DYWA\dywapitchtrack.c
+
 DanLib\LCDLib\gfx\gfx_generic.c
 
 DanLib\LCDLib\gfx\gfx_ili9488_90_00028_a0.c

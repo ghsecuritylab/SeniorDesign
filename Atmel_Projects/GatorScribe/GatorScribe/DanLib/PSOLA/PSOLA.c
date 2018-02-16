@@ -110,9 +110,9 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 			gSynMagn[index] += mags_and_phases->norm[k] ;
 			gSynFreq[index] = gAnaFreq[k];
 #else 
-			gSynMagn[index] += mags_and_phases->norm[k] / mags_and_phases->env[k] * mags_and_phases->env[index]; 
+			gSynMagn[index] += mags_and_phases->norm[k] / mags_and_phases->env[k] * mags_and_phases->env[index]; // + Abs(mags_and_phases->env[k] - mags_and_phases->env[index])/Max(mags_and_phases->env[k],mags_and_phases->env[index]); 
 			//gSynMagn[index] += mags_and_phases->norm[k] ;
-			gSynFreq[index] = gAnaFreq[k]; // (gAnaFreq[k] * shift_amount);// 0.0; //rand() % (FFT_SAMPLE_RATE - 10) + 10.0; //0.0;
+			gSynFreq[index] = gAnaFreq[k]; //rand() % (FFT_SAMPLE_RATE - 10) + 10.0; //0.0;
 #endif 
 		}
 	}
@@ -153,13 +153,13 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	envelop_scale2 = max_fft_norm2 / max_fft_filt_norm2;
 	for (i = 0; i < mags_and_phases->length; i++)
 		envelope_shift[i] = temp_envelope[i + envelope_filter_length/2] * envelop_scale2;
-		*/ 	
+		*/
 	float sin_value, cos_value; 
 	arm_copy_f32(mags_and_phases->phas, prevAnaPhase, WIN_SIZE_D2); 
 	for (k = 0; k < WIN_SIZE_D2; k++)
 	{		
 		//if (gSynFreq[k] > 0)
-	//	gSynMagn[k] = gSynMagn[k] * (mags_and_phases->env[k] / envelope_shift[k]);// + Abs(mags_and_phases->env[k] - envelope_shift[k])/Max(mags_and_phases->env[k],envelope_shift[k]) ); 
+		//gSynMagn[k] = gSynMagn[k] * (mags_and_phases->env[k] / envelope_shift[k]);// + Abs(mags_and_phases->env[k] - envelope_shift[k])/Max(mags_and_phases->env[k],envelope_shift[k]) ); 
 		 
 		// get real and imag part and re-interleave
 		idx = k << 1; 

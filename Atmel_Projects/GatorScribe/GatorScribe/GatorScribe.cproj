@@ -444,6 +444,7 @@
       <Value>../src/ASF/sam/drivers/rtt</Value>
       <Value>../DanLib/YinFFT</Value>
       <Value>../DanLib/PSOLA</Value>
+      <Value>../DanLib/DYWA</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize most (-O3)</armgcc.compiler.optimization.level>
@@ -538,6 +539,7 @@
     <Folder Include="DanLib\" />
     <Folder Include="DanLib\Audio\DMA\" />
     <Folder Include="DanLib\Audio\WM8904_Driver\" />
+    <Folder Include="DanLib\DYWA\" />
     <Folder Include="DanLib\LCDLib\" />
     <Folder Include="DanLib\LCDLib\gfx\" />
     <Folder Include="DanLib\LCDLib\touch\" />
@@ -641,6 +643,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\DanLib.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\DYWA\dywapitchtrack.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\DYWA\dywapitchtrack.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\LCDLib\gfx\gfx.h">
