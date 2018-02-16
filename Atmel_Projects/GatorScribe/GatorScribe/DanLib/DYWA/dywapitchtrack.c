@@ -74,18 +74,21 @@ float computeWaveletPitch(float * samples)
 	float maximaThresholdRatio = 0.75;
 	
 	float ampltitudeThreshold;  
-	float theDC = 0.0;
+	
 	uint32_t temp_idx; 
 	float maxValue;
 	float minValue; 
 	
 	{ // compute ampltitudeThreshold and theDC
-		//first compute the DC and maxAMplitude
-		arm_mean_f32(sam, WIN_SIZE, &theDC); 
+		//first compute the DC and maxAMplitude - neglecting mean ... not toally necessary
 		arm_max_f32(sam, WIN_SIZE, &maxValue, &temp_idx); 
 		arm_min_f32(sam, WIN_SIZE, &minValue, &temp_idx); 
+		/*
+		float theDC = 0.0;
+		arm_mean_f32(sam, WIN_SIZE, &theDC); 
 		maxValue = maxValue - theDC;
 		minValue = minValue - theDC;
+		*/
 		float amplitudeMax = (maxValue > -minValue ? maxValue : -minValue);
 		
 		ampltitudeThreshold = amplitudeMax*maximaThresholdRatio;		
@@ -114,8 +117,8 @@ float computeWaveletPitch(float * samples)
 		int32_t findMin = 0;
 		for (i = 1; i < curSamNb; i++) 
 		{
-			si = sam[i] - theDC;
-			si1 = sam[i-1] - theDC;
+			si = sam[i]; // - theDC;
+			si1 = sam[i-1]; // - theDC;
 			
 			if (si1 <= 0 && si > 0) {findMax = 1; findMin = 0; }
 			if (si1 >= 0 && si < 0) {findMin = 1; findMax = 0; }
@@ -173,7 +176,7 @@ float computeWaveletPitch(float * samples)
 				if (i+j < nbMins) 
 				{
 					d = Abs(mins[i] - mins[i+j]);
-					distances[d] = distances[d] + 1;
+					distances[d]++; 
 				}
 			}
 		}
@@ -184,7 +187,7 @@ float computeWaveletPitch(float * samples)
 				if (i+j < nbMaxs) 
 				{
 					d = Abs(maxs[i] - maxs[i+j]);
-					distances[d] = distances[d] + 1;
+					distances[d]++; 
 				}
 			}
 		}
