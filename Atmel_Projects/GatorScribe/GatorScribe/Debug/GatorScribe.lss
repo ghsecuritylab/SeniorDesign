@@ -31,11 +31,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  13 .debug_macro  0002a428  00000000  00000000  000948e8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   0001fa77  00000000  00000000  000bed10  2**0
+ 14 .debug_line   0001fa83  00000000  00000000  000bed10  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    0009eab8  00000000  00000000  000de787  2**0
+ 15 .debug_str    0009eac2  00000000  00000000  000de793  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_frame  00004214  00000000  00000000  0017d240  2**2
+ 16 .debug_frame  00004214  00000000  00000000  0017d258  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2356,37 +2356,37 @@ static inline void sysclk_enable_peripheral_clock(uint32_t ul_id)
   40104c:	00401785 	.word	0x00401785
   401050:	00061a80 	.word	0x00061a80
 
-00401054 <PSOLA_init>:
+00401054 <Vocoder_init>:
 COMPILER_ALIGNED(WIN_SIZE) static float gSynMagn[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float scaled_hanning[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float ifft_real_values[WIN_SIZE];
 
-void PSOLA_init(void)
+void Vocoder_init(void)
 {
   401054:	b570      	push	{r4, r5, r6, lr}
   401056:	f44f 5580 	mov.w	r5, #4096	; 0x1000
-  40105a:	4c16      	ldr	r4, [pc, #88]	; (4010b4 <PSOLA_init+0x60>)
+  40105a:	4c16      	ldr	r4, [pc, #88]	; (4010b4 <Vocoder_init+0x60>)
   40105c:	2100      	movs	r1, #0
-  40105e:	4816      	ldr	r0, [pc, #88]	; (4010b8 <PSOLA_init+0x64>)
+  40105e:	4816      	ldr	r0, [pc, #88]	; (4010b8 <Vocoder_init+0x64>)
   401060:	462a      	mov	r2, r5
   401062:	f44f 5600 	mov.w	r6, #8192	; 0x2000
   401066:	47a0      	blx	r4
   401068:	462a      	mov	r2, r5
   40106a:	2100      	movs	r1, #0
-  40106c:	4813      	ldr	r0, [pc, #76]	; (4010bc <PSOLA_init+0x68>)
+  40106c:	4813      	ldr	r0, [pc, #76]	; (4010bc <Vocoder_init+0x68>)
   40106e:	47a0      	blx	r4
   401070:	462a      	mov	r2, r5
   401072:	2100      	movs	r1, #0
-  401074:	4812      	ldr	r0, [pc, #72]	; (4010c0 <PSOLA_init+0x6c>)
+  401074:	4812      	ldr	r0, [pc, #72]	; (4010c0 <Vocoder_init+0x6c>)
   401076:	47a0      	blx	r4
   401078:	4632      	mov	r2, r6
   40107a:	2100      	movs	r1, #0
-  40107c:	4811      	ldr	r0, [pc, #68]	; (4010c4 <PSOLA_init+0x70>)
+  40107c:	4811      	ldr	r0, [pc, #68]	; (4010c4 <Vocoder_init+0x70>)
   40107e:	47a0      	blx	r4
   401080:	f44f 6500 	mov.w	r5, #2048	; 0x800
   401084:	4632      	mov	r2, r6
   401086:	2100      	movs	r1, #0
-  401088:	480f      	ldr	r0, [pc, #60]	; (4010c8 <PSOLA_init+0x74>)
+  401088:	480f      	ldr	r0, [pc, #60]	; (4010c8 <Vocoder_init+0x74>)
   40108a:	47a0      	blx	r4
 	for (i = 0; i < 2*WIN_SIZE; i++)
 	{
@@ -2394,20 +2394,20 @@ void PSOLA_init(void)
 		gOutputAccum[i] = 0.0; 
 	}
 	arm_scale_f32((float *)hanning, ifft_scale, scaled_hanning, WIN_SIZE); 
-  40108c:	4e0f      	ldr	r6, [pc, #60]	; (4010cc <PSOLA_init+0x78>)
+  40108c:	4e0f      	ldr	r6, [pc, #60]	; (4010cc <Vocoder_init+0x78>)
   40108e:	f44f 6380 	mov.w	r3, #1024	; 0x400
-  401092:	4a0f      	ldr	r2, [pc, #60]	; (4010d0 <PSOLA_init+0x7c>)
+  401092:	4a0f      	ldr	r2, [pc, #60]	; (4010d0 <Vocoder_init+0x7c>)
   401094:	f04f 517e 	mov.w	r1, #1065353216	; 0x3f800000
-  401098:	480e      	ldr	r0, [pc, #56]	; (4010d4 <PSOLA_init+0x80>)
+  401098:	480e      	ldr	r0, [pc, #56]	; (4010d4 <Vocoder_init+0x80>)
   40109a:	47b0      	blx	r6
   40109c:	462a      	mov	r2, r5
   40109e:	2100      	movs	r1, #0
-  4010a0:	480d      	ldr	r0, [pc, #52]	; (4010d8 <PSOLA_init+0x84>)
+  4010a0:	480d      	ldr	r0, [pc, #52]	; (4010d8 <Vocoder_init+0x84>)
   4010a2:	47a0      	blx	r4
   4010a4:	462a      	mov	r2, r5
   4010a6:	4623      	mov	r3, r4
   4010a8:	2100      	movs	r1, #0
-  4010aa:	480c      	ldr	r0, [pc, #48]	; (4010dc <PSOLA_init+0x88>)
+  4010aa:	480c      	ldr	r0, [pc, #48]	; (4010dc <Vocoder_init+0x88>)
 	for(i = 0; i < WIN_SIZE_D2; i++)
 	{
 		prevAnaPhase[i] = 0.0;
@@ -8597,7 +8597,7 @@ static inline void stdio_serial_init(volatile void *usart, const usart_serial_op
   403474:	6858      	ldr	r0, [r3, #4]
   403476:	47a8      	blx	r5
 	configure_console();
-	PSOLA_init();
+	Vocoder_init();
   403478:	4b9d      	ldr	r3, [pc, #628]	; (4036f0 <main+0x338>)
   40347a:	4798      	blx	r3
   __ASM volatile ("dsb");

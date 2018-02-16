@@ -1,11 +1,11 @@
 /*
- * PSOLA.c
+ * Vocoder.c
  *
  * Created: 1/29/2018 5:06:45 PM
  *  Author: Daniel Gonzalez
  */ 
 
-#include "PSOLA.h"
+#include "vocoder.h"
 #include <stdlib.h>
 
 extern const float hanning[1024];
@@ -34,7 +34,7 @@ COMPILER_ALIGNED(WIN_SIZE) static float gSynMagn[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float scaled_hanning[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float ifft_real_values[WIN_SIZE];
 
-void PSOLA_init(void)
+void Vocoder_init(void)
 {
 	uint32_t i; 
 	for (i = 0; i < WIN_SIZE; i++)

@@ -442,8 +442,8 @@
       <Value>../DanLib/Audio/WM8904_Driver</Value>
       <Value>../DanLib/Audio</Value>
       <Value>../src/ASF/sam/drivers/rtt</Value>
-      <Value>../DanLib/PSOLA</Value>
       <Value>../DanLib/DYWA</Value>
+      <Value>../DanLib/Vocoder</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize most (-O3)</armgcc.compiler.optimization.level>
@@ -543,7 +543,7 @@
     <Folder Include="DanLib\LCDLib\gfx\" />
     <Folder Include="DanLib\LCDLib\touch\" />
     <Folder Include="DanLib\Audio" />
-    <Folder Include="DanLib\PSOLA" />
+    <Folder Include="DanLib\Vocoder" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -688,13 +688,13 @@
     <Compile Include="DanLib\LCDLib\touch\touch.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\PSOLA\hanning.c">
+    <Compile Include="DanLib\Vocoder\hanning.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\PSOLA\PSOLA.c">
+    <Compile Include="DanLib\Vocoder\vocoder.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\PSOLA\PSOLA.h">
+    <Compile Include="DanLib\Vocoder\vocoder.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.c">

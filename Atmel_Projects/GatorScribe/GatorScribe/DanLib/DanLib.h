@@ -11,7 +11,7 @@
 
 #include "audio.h"
 #include "LCDLib.h"
-#include "PSOLA.h"
+#include "vocoder.h"
 #include "DYWA/dywapitchtrack.h"
 
 #endif /* DANLIB_H_ */

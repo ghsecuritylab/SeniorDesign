@@ -1,13 +1,13 @@
 /*
- * PSOLA.h
+ * Vocoder.h
  *
  * Created: 1/29/2018 5:06:57 PM
  *  Author: Daniel Gonzalez
  */ 
 
 
-#ifndef PSOLA_H_
-#define PSOLA_H_
+#ifndef VOCODER_H_
+#define VOCODER_H_
 
 #include "asf.h"
 #include "DMA_Audio.h"
@@ -30,8 +30,8 @@ typedef struct {
 } fvec_t;
 
 
-void PSOLA_init(void);
+void Vocoder_init(void);
 void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases);
 void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance); 
 
-#endif /* PSOLA_H_ */
+#endif /* VOCODER_H_ */

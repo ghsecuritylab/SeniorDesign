@@ -237,7 +237,7 @@ int main(void)
 	SCB_EnableICache();
 	audio_init();
 	configure_console();
-	PSOLA_init();
+	Vocoder_init();
 	 
 	SCB_DisableICache(); 
 	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);

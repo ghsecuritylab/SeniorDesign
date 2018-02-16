@@ -22,9 +22,9 @@ DanLib\LCDLib\LCDLib.c
 
 DanLib\LCDLib\touch\touch.c
 
-DanLib\PSOLA\hanning.c
+DanLib\Vocoder\hanning.c
 
-DanLib\PSOLA\PSOLA.c
+DanLib\Vocoder\vocoder.c
 
 src\ASF\common\components\touch\mxt\mxt_device_1.c
 

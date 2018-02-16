@@ -1,5 +1,5 @@
-DanLib/PSOLA/PSOLA.d DanLib/PSOLA/PSOLA.o: ../DanLib/PSOLA/PSOLA.c \
- ../DanLib/PSOLA/PSOLA.h ../src/asf.h ../src/ASF/sam/utils/compiler.h \
+DanLib/Vocoder/hanning.d DanLib/Vocoder/hanning.o: \
+ ../DanLib/Vocoder/hanning.c ../src/asf.h ../src/ASF/sam/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h \
  ../src/ASF/sam/utils/preprocessor/preprocessor.h \
@@ -177,16 +177,7 @@ DanLib/PSOLA/PSOLA.d DanLib/PSOLA/PSOLA.o: ../DanLib/PSOLA/PSOLA.c \
  ../src/config/conf_wm8904.h ../src/ASF/sam/drivers/xdmac/xdmac.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/Audio/DMA/DMA_Audio.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
- ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
- ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h
-
-../DanLib/PSOLA/PSOLA.h:
+ ../src/ASF/sam/drivers/rtt/rtt.h
 
 ../src/asf.h:
 
@@ -565,19 +556,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam/drivers/pio/pio_handler.h:
 
 ../src/ASF/sam/drivers/rtt/rtt.h:
-
-../DanLib/Audio/DMA/DMA_Audio.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
-
-../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
-
-../src/ASF/thirdparty/CMSIS/Include/core_cm7.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:

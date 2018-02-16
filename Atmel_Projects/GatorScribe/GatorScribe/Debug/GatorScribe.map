@@ -1,7 +1,7 @@
 Archive member included to satisfy reference by file (symbol)
 
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
-                              DanLib/PSOLA/PSOLA.o (arm_fill_f32)
+                              DanLib/Vocoder/vocoder.o (arm_fill_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
                               DanLib/DYWA/dywapitchtrack.o (arm_copy_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
@@ -13,11 +13,11 @@ Archive member included to satisfy reference by file (symbol)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
                               DanLib/DYWA/dywapitchtrack.o (arm_max_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
-                              DanLib/PSOLA/PSOLA.o (arm_sin_cos_f32)
+                              DanLib/Vocoder/vocoder.o (arm_sin_cos_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
                               src/main.o (arm_rfft_fast_init_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
-                              DanLib/PSOLA/PSOLA.o (arm_rfft_fast_f32)
+                              DanLib/Vocoder/vocoder.o (arm_rfft_fast_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
                               ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o) (arm_cfft_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
@@ -25,11 +25,11 @@ Archive member included to satisfy reference by file (symbol)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
                               src/main.o (arm_cmplx_mag_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
-                              DanLib/PSOLA/PSOLA.o (arm_scale_f32)
+                              DanLib/Vocoder/vocoder.o (arm_scale_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
-                              DanLib/PSOLA/PSOLA.o (arm_mult_f32)
+                              DanLib/Vocoder/vocoder.o (arm_mult_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
-                              DanLib/PSOLA/PSOLA.o (arm_add_f32)
+                              DanLib/Vocoder/vocoder.o (arm_add_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
                               ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o) (sinTable_f32)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
@@ -37,7 +37,7 @@ Archive member included to satisfy reference by file (symbol)
 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
                               ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o) (arm_radix8_butterfly_f32)
 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-s_round.o)
-                              DanLib/PSOLA/PSOLA.o (round)
+                              DanLib/Vocoder/vocoder.o (round)
 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-wf_sqrt.o)
                               ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o) (sqrtf)
 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-ef_sqrt.o)
@@ -53,7 +53,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../l
 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_cmpdf2.o)
                               DanLib/DYWA/dywapitchtrack.o (__aeabi_dcmplt)
 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_truncdfsf2.o)
-                              DanLib/PSOLA/PSOLA.o (__aeabi_d2f)
+                              DanLib/Vocoder/vocoder.o (__aeabi_d2f)
 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-calloc.o)
                               src/main.o (calloc)
 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-callocr.o)
@@ -211,7 +211,7 @@ inPingBuffer        0x800             DanLib/Audio/DMA/DMA_Audio.o
 __lock___dd_hash_mutex
                     0x1               c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
 __lock___tz_mutex   0x1               c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
-gFFTworksp          0x2000            DanLib/PSOLA/PSOLA.o
+gFFTworksp          0x2000            DanLib/Vocoder/vocoder.o
 __lock___sfp_recursive_mutex
                     0x1               c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
 
@@ -3458,707 +3458,707 @@ Discarded input sections
  .debug_macro   0x00000000       0x1c DanLib/LCDLib/touch/touch.o
  .debug_macro   0x00000000       0xff DanLib/LCDLib/touch/touch.o
  .debug_macro   0x00000000       0x1c DanLib/LCDLib/touch/touch.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/hanning.o
- .text          0x00000000        0x0 DanLib/PSOLA/hanning.o
- .data          0x00000000        0x0 DanLib/PSOLA/hanning.o
- .bss           0x00000000        0x0 DanLib/PSOLA/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/hanning.o
+ .text          0x00000000        0x0 DanLib/Vocoder/hanning.o
+ .data          0x00000000        0x0 DanLib/Vocoder/hanning.o
+ .bss           0x00000000        0x0 DanLib/Vocoder/hanning.o
  .bss.cpu_irq_critical_section_counter
-                0x00000000        0x4 DanLib/PSOLA/hanning.o
+                0x00000000        0x4 DanLib/Vocoder/hanning.o
  .bss.cpu_irq_prev_interrupt_state
-                0x00000000        0x1 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x8e6 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x16d DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x64b DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x76 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x6e4 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x22 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x87 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x51 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xef DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x1df DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4a DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x3b DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x2d DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x26 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0xf9a DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x175 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x257 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0xa0f DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x1b9 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x336 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x15b DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000     0x1851 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x68d DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x31e DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x4d4 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x27c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000     0x1332 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x28e DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000     0x278d DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000     0x102b DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0xe01 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x3b1 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xa0 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x76 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x409 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x64 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x284 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x1d0 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x248 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x524 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x63c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x6b8 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x468 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x207 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x866 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000     0x1547 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x40 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x76 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0xdaf DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x82 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x76 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x135 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x135 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x135 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x313 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xb2 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xb2 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xb2 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x11d DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x11d DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x2cd DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xb8 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x5e DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x40 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xa0 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x494 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x135 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x313 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xb8 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x76 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x2e DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x9b1 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x88 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x58 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xa6 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xe2 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x2e DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x1b5 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x1b5 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x1b5 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x1b5 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x1b5 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x2e DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x22 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x52 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x329 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000     0x1037 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x10e DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x58 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x35 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x9c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x35 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x353 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x58 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x1f DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x43 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x20 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x187 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x52 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x40 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x40 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xd7 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x18b DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x22 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x29 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x75 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x3f DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x3ca DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x3a DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x2c6 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0xc8e DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x70 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x64 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x5f DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0xac DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x28 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x23 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x428 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x94 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x40 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x88 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x1ce DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x34 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x52 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x3a DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x28 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000     0x16e2 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000      0x1ad DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/hanning.o
- .debug_macro   0x00000000       0x7d DanLib/PSOLA/hanning.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .group         0x00000000        0x8 DanLib/PSOLA/PSOLA.o
- .text          0x00000000        0x0 DanLib/PSOLA/PSOLA.o
- .data          0x00000000        0x0 DanLib/PSOLA/PSOLA.o
- .bss           0x00000000        0x0 DanLib/PSOLA/PSOLA.o
+                0x00000000        0x1 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x8e6 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x16d DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x64b DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x76 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x6e4 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x22 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x87 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x51 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xef DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x1df DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4a DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x3b DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x2d DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x26 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0xf9a DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x175 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x257 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0xa0f DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x1b9 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x336 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x15b DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000     0x1851 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x68d DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x31e DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x4d4 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x27c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000     0x1332 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x28e DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000     0x278d DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000     0x102b DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0xe01 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x3b1 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xa0 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x76 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x409 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x64 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x284 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x1d0 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x248 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x524 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x63c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x6b8 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x468 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x207 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x866 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000     0x1547 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x40 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x76 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0xdaf DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x82 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x76 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x135 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x135 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x135 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x313 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xb2 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xb2 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xb2 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x11d DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x11d DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x2cd DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xb8 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x5e DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x40 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xa0 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x494 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x135 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x313 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xb8 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x76 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x2e DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x9b1 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x88 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x58 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xa6 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xe2 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x2e DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x1b5 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x1b5 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x1b5 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x1b5 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x1b5 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x2e DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x22 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x52 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x329 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000     0x1037 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x10e DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x58 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x35 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x9c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x35 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x353 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x58 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x1f DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x43 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x20 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x187 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x52 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x40 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x40 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xd7 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x18b DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x22 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x29 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x75 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x3f DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x3ca DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x3a DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x2c6 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0xc8e DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x70 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x64 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x5f DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0xac DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x28 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x23 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x428 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x94 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x40 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x88 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x1ce DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x34 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x52 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x3a DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x28 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000     0x16e2 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000      0x1ad DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/hanning.o
+ .debug_macro   0x00000000       0x7d DanLib/Vocoder/hanning.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .group         0x00000000        0x8 DanLib/Vocoder/vocoder.o
+ .text          0x00000000        0x0 DanLib/Vocoder/vocoder.o
+ .data          0x00000000        0x0 DanLib/Vocoder/vocoder.o
+ .bss           0x00000000        0x0 DanLib/Vocoder/vocoder.o
  .bss.cpu_irq_critical_section_counter
-                0x00000000        0x4 DanLib/PSOLA/PSOLA.o
+                0x00000000        0x4 DanLib/Vocoder/vocoder.o
  .bss.cpu_irq_prev_interrupt_state
-                0x00000000        0x1 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x8e6 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x16d DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x64b DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x76 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x6e4 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x22 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x87 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x51 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xef DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1df DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4a DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x3b DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x2d DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x26 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0xf9a DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x175 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x257 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0xa0f DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1b9 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x336 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x15b DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000     0x1851 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x68d DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x31e DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x4d4 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x27c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000     0x1332 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x28e DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000     0x278d DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000     0x102b DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0xe01 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x3b1 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xa0 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x76 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x409 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x64 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x284 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1d0 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x248 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x524 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x63c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x6b8 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x468 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x207 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x866 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000     0x1547 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x40 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x76 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0xdaf DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x82 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x76 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x135 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x135 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x135 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x313 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xb2 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xb2 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xb2 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x11d DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x11d DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x2cd DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xb8 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x5e DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x40 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xa0 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x494 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x135 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x313 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xb8 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x76 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x2e DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x9b1 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x6a DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x88 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x58 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xa6 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xe2 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x2e DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1b5 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1b5 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1b5 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1b5 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1b5 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x2e DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x22 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x52 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x329 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000     0x1037 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x10e DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x58 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x35 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x9c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x35 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x353 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x58 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x1f DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x43 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x20 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x187 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x52 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x40 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x40 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xd7 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x18b DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x22 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x29 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x75 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x3f DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x3ca DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x3a DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x2c6 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0xc8e DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x70 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x64 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x5f DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xac DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x28 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x23 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x428 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x94 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x40 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x88 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1ce DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x34 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x52 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x1c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x3a DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x28 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x4c DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000     0x16e2 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1ad DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x10 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x7d DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000      0x1e1 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x2e DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x12 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0x16 DanLib/PSOLA/PSOLA.o
- .debug_macro   0x00000000       0xd6 DanLib/PSOLA/PSOLA.o
+                0x00000000        0x1 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x8e6 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x16d DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x64b DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x76 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x6e4 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x22 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x87 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x51 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xef DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1df DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4a DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x3b DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x2d DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x26 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0xf9a DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x175 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x257 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0xa0f DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1b9 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x336 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x15b DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000     0x1851 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x68d DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x31e DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x4d4 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x27c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000     0x1332 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x28e DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000     0x278d DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000     0x102b DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0xe01 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x3b1 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xa0 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x76 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x409 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x64 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x284 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1d0 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x248 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x524 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x63c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x6b8 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x468 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x207 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x866 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000     0x1547 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x40 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x76 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0xdaf DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x82 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x76 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x135 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x135 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x135 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x313 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xb2 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xb2 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xb2 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x11d DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x11d DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x2cd DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xb8 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x5e DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x40 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xa0 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x494 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x135 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x313 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xb8 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x76 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x2e DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x9b1 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x6a DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x88 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x58 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xa6 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xe2 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x2e DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1b5 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1b5 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1b5 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1b5 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1b5 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x2e DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x22 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x52 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x329 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000     0x1037 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x10e DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x58 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x35 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x9c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x35 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x353 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x58 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x1f DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x43 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x20 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x187 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x52 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x40 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x40 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xd7 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x18b DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x22 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x29 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x75 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x3f DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x3ca DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x3a DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x2c6 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0xc8e DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x70 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x64 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x5f DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xac DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x28 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x23 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x428 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x94 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x40 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x88 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1ce DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x34 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x52 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x1c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x3a DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x28 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x4c DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000     0x16e2 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1ad DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x10 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x7d DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000      0x1e1 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x2e DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x12 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0x16 DanLib/Vocoder/vocoder.o
+ .debug_macro   0x00000000       0xd6 DanLib/Vocoder/vocoder.o
  .group         0x00000000        0x8 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .group         0x00000000        0x8 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .group         0x00000000        0x8 src/ASF/common/components/touch/mxt/mxt_device_1.o
@@ -12646,8 +12646,8 @@ LOAD DanLib/LCDLib/gfx/gfx_text.o
 LOAD DanLib/LCDLib/gfx/sysfont.o
 LOAD DanLib/LCDLib/LCDLib.o
 LOAD DanLib/LCDLib/touch/touch.o
-LOAD DanLib/PSOLA/hanning.o
-LOAD DanLib/PSOLA/PSOLA.o
+LOAD DanLib/Vocoder/hanning.o
+LOAD DanLib/Vocoder/vocoder.o
 LOAD src/ASF/common/components/touch/mxt/mxt_device_1.o
 LOAD src/ASF/common/services/delay/sam/cycle_counter.o
 LOAD src/ASF/common/services/serial/usart_serial.o
@@ -12731,14 +12731,14 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
  .text.mxt_init
                 0x00400eac      0x1a8 DanLib/LCDLib/touch/touch.o
                 0x00400eac                mxt_init
- .text.PSOLA_init
-                0x00401054       0x8c DanLib/PSOLA/PSOLA.o
-                0x00401054                PSOLA_init
+ .text.Vocoder_init
+                0x00401054       0x8c DanLib/Vocoder/vocoder.o
+                0x00401054                Vocoder_init
  .text.pitch_shift_do
-                0x004010e0      0x184 DanLib/PSOLA/PSOLA.o
+                0x004010e0      0x184 DanLib/Vocoder/vocoder.o
                 0x004010e0                pitch_shift_do
  .text.get_harmonized_output
-                0x00401264       0xd4 DanLib/PSOLA/PSOLA.o
+                0x00401264       0xd4 DanLib/Vocoder/vocoder.o
                 0x00401264                get_harmonized_output
  .text.mxt_init_device
                 0x00401338      0x404 src/ASF/common/components/touch/mxt/mxt_device_1.o
@@ -13372,7 +13372,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
  .rodata        0x0040bf78       0x5d DanLib/LCDLib/touch/touch.o
  *fill*         0x0040bfd5       0x2b 
  .rodata.hanning
-                0x0040c000     0x1000 DanLib/PSOLA/hanning.o
+                0x0040c000     0x1000 DanLib/Vocoder/hanning.o
                 0x0040c000                hanning
  .rodata.CSWTCH.7
                 0x0040d000        0xc src/ASF/sam/drivers/pmc/pmc.o
@@ -13654,19 +13654,19 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
  .bss.sam       0x20404400     0x1000 DanLib/DYWA/dywapitchtrack.o
  .bss.device    0x20405400       0x20 DanLib/LCDLib/touch/touch.o
  *fill*         0x20405420      0x3e0 
- .bss.gAnaFreq  0x20405800     0x1000 DanLib/PSOLA/PSOLA.o
+ .bss.gAnaFreq  0x20405800     0x1000 DanLib/Vocoder/vocoder.o
  .bss.gOutputAccum
-                0x20406800     0x2000 DanLib/PSOLA/PSOLA.o
+                0x20406800     0x2000 DanLib/Vocoder/vocoder.o
  .bss.gSumPhase
-                0x20408800      0x800 DanLib/PSOLA/PSOLA.o
- .bss.gSynFreq  0x20409000     0x1000 DanLib/PSOLA/PSOLA.o
- .bss.gSynMagn  0x2040a000     0x1000 DanLib/PSOLA/PSOLA.o
+                0x20408800      0x800 DanLib/Vocoder/vocoder.o
+ .bss.gSynFreq  0x20409000     0x1000 DanLib/Vocoder/vocoder.o
+ .bss.gSynMagn  0x2040a000     0x1000 DanLib/Vocoder/vocoder.o
  .bss.ifft_real_values
-                0x2040b000     0x1000 DanLib/PSOLA/PSOLA.o
+                0x2040b000     0x1000 DanLib/Vocoder/vocoder.o
  .bss.prevAnaPhase
-                0x2040c000      0x800 DanLib/PSOLA/PSOLA.o
+                0x2040c000      0x800 DanLib/Vocoder/vocoder.o
  .bss.scaled_hanning
-                0x2040c800     0x1000 DanLib/PSOLA/PSOLA.o
+                0x2040c800     0x1000 DanLib/Vocoder/vocoder.o
  .bss.g_ul_pixel_cache
                 0x2040d800      0x280 src/ASF/sam/components/display/ili9488/ili9488.o
  .bss.limit_end_x
@@ -13732,7 +13732,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x20418c08                gfx_max_y
                 0x20418c0a                gfx_height
  *fill*         0x20418c0c      0x3f4 
- COMMON         0x20419000     0x2000 DanLib/PSOLA/PSOLA.o
+ COMMON         0x20419000     0x2000 DanLib/Vocoder/vocoder.o
                 0x20419000                gFFTworksp
  COMMON         0x2041b000        0x4 src/ASF/common/utils/stdio/read.o
                 0x2041b000                ptr_get
@@ -13800,9 +13800,9 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .ARM.attributes
                 0x000001b9       0x33 DanLib/LCDLib/touch/touch.o
  .ARM.attributes
-                0x000001ec       0x33 DanLib/PSOLA/hanning.o
+                0x000001ec       0x33 DanLib/Vocoder/hanning.o
  .ARM.attributes
-                0x0000021f       0x33 DanLib/PSOLA/PSOLA.o
+                0x0000021f       0x33 DanLib/Vocoder/vocoder.o
  .ARM.attributes
                 0x00000252       0x33 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .ARM.attributes
@@ -14032,8 +14032,8 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .comment       0x00000059       0x5a DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .comment       0x00000059       0x5a DanLib/LCDLib/LCDLib.o
  .comment       0x00000059       0x5a DanLib/LCDLib/touch/touch.o
- .comment       0x00000059       0x5a DanLib/PSOLA/hanning.o
- .comment       0x00000059       0x5a DanLib/PSOLA/PSOLA.o
+ .comment       0x00000059       0x5a DanLib/Vocoder/hanning.o
+ .comment       0x00000059       0x5a DanLib/Vocoder/vocoder.o
  .comment       0x00000059       0x5a src/ASF/common/components/touch/mxt/mxt_device_1.o
  .comment       0x00000059       0x5a src/ASF/common/services/delay/sam/cycle_counter.o
  .comment       0x00000059       0x5a src/ASF/common/utils/stdio/read.o
@@ -14085,8 +14085,8 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_info    0x00006e04     0x1487 DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_info    0x0000828b      0xc05 DanLib/LCDLib/LCDLib.o
  .debug_info    0x00008e90     0x1cec DanLib/LCDLib/touch/touch.o
- .debug_info    0x0000ab7c      0xaaa DanLib/PSOLA/hanning.o
- .debug_info    0x0000b626     0x11e6 DanLib/PSOLA/PSOLA.o
+ .debug_info    0x0000ab7c      0xaaa DanLib/Vocoder/hanning.o
+ .debug_info    0x0000b626     0x11e6 DanLib/Vocoder/vocoder.o
  .debug_info    0x0000c80c     0x25ba src/ASF/common/components/touch/mxt/mxt_device_1.o
  .debug_info    0x0000edc6      0xa45 src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_info    0x0000f80b      0xac9 src/ASF/common/utils/stdio/read.o
@@ -14138,8 +14138,8 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_abbrev  0x00000f9d      0x32b DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_abbrev  0x000012c8      0x1f0 DanLib/LCDLib/LCDLib.o
  .debug_abbrev  0x000014b8      0x334 DanLib/LCDLib/touch/touch.o
- .debug_abbrev  0x000017ec      0x1a5 DanLib/PSOLA/hanning.o
- .debug_abbrev  0x00001991      0x315 DanLib/PSOLA/PSOLA.o
+ .debug_abbrev  0x000017ec      0x1a5 DanLib/Vocoder/hanning.o
+ .debug_abbrev  0x00001991      0x315 DanLib/Vocoder/vocoder.o
  .debug_abbrev  0x00001ca6      0x434 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .debug_abbrev  0x000020da      0x1b3 src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_abbrev  0x0000228d      0x1fe src/ASF/common/utils/stdio/read.o
@@ -14191,7 +14191,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_loc     0x000031ae      0x317 DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_loc     0x000034c5       0x2c DanLib/LCDLib/LCDLib.o
  .debug_loc     0x000034f1      0x132 DanLib/LCDLib/touch/touch.o
- .debug_loc     0x00003623      0x27b DanLib/PSOLA/PSOLA.o
+ .debug_loc     0x00003623      0x27b DanLib/Vocoder/vocoder.o
  .debug_loc     0x0000389e     0x12bf src/ASF/common/components/touch/mxt/mxt_device_1.o
  .debug_loc     0x00004b5d       0xd6 src/ASF/common/utils/stdio/read.o
  .debug_loc     0x00004c33      0x13a src/ASF/common/utils/stdio/write.o
@@ -14248,9 +14248,9 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_aranges
                 0x00000180       0x30 DanLib/LCDLib/touch/touch.o
  .debug_aranges
-                0x000001b0       0x18 DanLib/PSOLA/hanning.o
+                0x000001b0       0x18 DanLib/Vocoder/hanning.o
  .debug_aranges
-                0x000001c8       0x30 DanLib/PSOLA/PSOLA.o
+                0x000001c8       0x30 DanLib/Vocoder/vocoder.o
  .debug_aranges
                 0x000001f8       0x90 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .debug_aranges
@@ -14343,7 +14343,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_ranges  0x000003d8       0x98 DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_ranges  0x00000470       0x10 DanLib/LCDLib/LCDLib.o
  .debug_ranges  0x00000480       0xa0 DanLib/LCDLib/touch/touch.o
- .debug_ranges  0x00000520       0x40 DanLib/PSOLA/PSOLA.o
+ .debug_ranges  0x00000520       0x40 DanLib/Vocoder/vocoder.o
  .debug_ranges  0x00000560      0x468 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .debug_ranges  0x000009c8       0x10 src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_ranges  0x000009d8       0x10 src/ASF/common/utils/stdio/read.o
@@ -14579,9 +14579,9 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_macro   0x0001e7b5       0x1c DanLib/LCDLib/LCDLib.o
  .debug_macro   0x0001e7d1      0x8a5 DanLib/LCDLib/touch/touch.o
  .debug_macro   0x0001f076       0xd9 DanLib/LCDLib/touch/touch.o
- .debug_macro   0x0001f14f      0x860 DanLib/PSOLA/hanning.o
- .debug_macro   0x0001f9af      0x8de DanLib/PSOLA/PSOLA.o
- .debug_macro   0x0002028d       0x16 DanLib/PSOLA/PSOLA.o
+ .debug_macro   0x0001f14f      0x860 DanLib/Vocoder/hanning.o
+ .debug_macro   0x0001f9af      0x8de DanLib/Vocoder/vocoder.o
+ .debug_macro   0x0002028d       0x16 DanLib/Vocoder/vocoder.o
  .debug_macro   0x000202a3      0x761 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .debug_macro   0x00020a04       0x46 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .debug_macro   0x00020a4a       0x10 src/ASF/common/components/touch/mxt/mxt_device_1.o
@@ -14630,7 +14630,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_macro   0x00029a8f      0x983 src/main.o
  .debug_macro   0x0002a412       0x16 src/main.o
 
-.debug_line     0x00000000    0x1fa77
+.debug_line     0x00000000    0x1fa83
  .debug_line    0x00000000     0x1190 DanLib/Audio/DMA/DMA_Audio.o
  .debug_line    0x00001190     0x1069 DanLib/Audio/audio.o
  .debug_line    0x000021f9     0x1072 DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -14639,51 +14639,51 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_line    0x0000537b      0xc1f DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_line    0x00005f9a     0x1084 DanLib/LCDLib/LCDLib.o
  .debug_line    0x0000701e     0x1103 DanLib/LCDLib/touch/touch.o
- .debug_line    0x00008121      0xfbe DanLib/PSOLA/hanning.o
- .debug_line    0x000090df     0x116a DanLib/PSOLA/PSOLA.o
- .debug_line    0x0000a249     0x1014 src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_line    0x0000b25d      0x9ff src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_line    0x0000bc5c      0x9fb src/ASF/common/utils/stdio/read.o
- .debug_line    0x0000c657      0x9f5 src/ASF/common/utils/stdio/write.o
- .debug_line    0x0000d04c      0xc44 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_line    0x0000dc90     0x1ac8 src/ASF/sam/components/display/ili9488/ili9488.o
- .debug_line    0x0000f758      0xabb src/ASF/sam/drivers/ebi/smc/smc.o
- .debug_line    0x00010213      0xd10 src/ASF/sam/drivers/ssc/ssc.o
- .debug_line    0x00010f23      0xd68 src/ASF/sam/drivers/twihs/twihs.o
- .debug_line    0x00011c8b      0xb96 src/ASF/sam/drivers/uart/uart.o
- .debug_line    0x00012821     0x1410 src/ASF/sam/drivers/usart/usart.o
- .debug_line    0x00013c31      0xa3d src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_line    0x0001466e      0xb85 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_line    0x000151f3      0xa1a src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_line    0x00015c0d      0xd2e src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_line    0x0001693b      0xa9e src/ASF/sam/drivers/mpu/mpu.o
- .debug_line    0x000173d9     0x10bf src/ASF/sam/drivers/pio/pio.o
- .debug_line    0x00018498      0xc3d src/ASF/sam/drivers/pio/pio_handler.o
- .debug_line    0x000190d5     0x111b src/ASF/sam/drivers/pmc/pmc.o
- .debug_line    0x0001a1f0      0xa9e src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_line    0x0001ac8e      0x81b src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
- .debug_line    0x0001b4a9      0x417 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_line    0x0001b8c0     0x14dd src/main.o
- .debug_line    0x0001cd9d      0x186 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_line    0x0001cf23      0x191 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_line    0x0001d0b4      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
- .debug_line    0x0001d255      0x19e ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_line    0x0001d3f3      0x19d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mean_f32.o)
- .debug_line    0x0001d590      0x1a0 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_line    0x0001d730      0x217 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
- .debug_line    0x0001d947      0x1e2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
- .debug_line    0x0001db29      0x32c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
- .debug_line    0x0001de55      0x7b7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
- .debug_line    0x0001e60c      0x3fc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
- .debug_line    0x0001ea08      0x24f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
- .debug_line    0x0001ec57      0x1a2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_line    0x0001edf9      0x1b1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
- .debug_line    0x0001efaa      0x1a5 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
- .debug_line    0x0001f14f      0x165 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
- .debug_line    0x0001f2b4       0x98 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
- .debug_line    0x0001f34c      0x72b ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
+ .debug_line    0x00008121      0xfc0 DanLib/Vocoder/hanning.o
+ .debug_line    0x000090e1     0x1170 DanLib/Vocoder/vocoder.o
+ .debug_line    0x0000a251     0x1014 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_line    0x0000b265      0x9ff src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_line    0x0000bc64      0x9fb src/ASF/common/utils/stdio/read.o
+ .debug_line    0x0000c65f      0x9f5 src/ASF/common/utils/stdio/write.o
+ .debug_line    0x0000d054      0xc44 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_line    0x0000dc98     0x1ac8 src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_line    0x0000f760      0xabb src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_line    0x0001021b      0xd10 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_line    0x00010f2b      0xd68 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_line    0x00011c93      0xb96 src/ASF/sam/drivers/uart/uart.o
+ .debug_line    0x00012829     0x1410 src/ASF/sam/drivers/usart/usart.o
+ .debug_line    0x00013c39      0xa3d src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_line    0x00014676      0xb85 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_line    0x000151fb      0xa1a src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_line    0x00015c15      0xd2e src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_line    0x00016943      0xa9e src/ASF/sam/drivers/mpu/mpu.o
+ .debug_line    0x000173e1     0x10bf src/ASF/sam/drivers/pio/pio.o
+ .debug_line    0x000184a0      0xc3d src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_line    0x000190dd     0x111b src/ASF/sam/drivers/pmc/pmc.o
+ .debug_line    0x0001a1f8      0xa9e src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_line    0x0001ac96      0x81b src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_line    0x0001b4b1      0x417 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_line    0x0001b8c8     0x14e1 src/main.o
+ .debug_line    0x0001cda9      0x186 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_line    0x0001cf2f      0x191 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_line    0x0001d0c0      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_line    0x0001d261      0x19e ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_line    0x0001d3ff      0x19d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mean_f32.o)
+ .debug_line    0x0001d59c      0x1a0 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_line    0x0001d73c      0x217 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
+ .debug_line    0x0001d953      0x1e2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
+ .debug_line    0x0001db35      0x32c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
+ .debug_line    0x0001de61      0x7b7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+ .debug_line    0x0001e618      0x3fc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
+ .debug_line    0x0001ea14      0x24f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
+ .debug_line    0x0001ec63      0x1a2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_line    0x0001ee05      0x1b1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
+ .debug_line    0x0001efb6      0x1a5 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
+ .debug_line    0x0001f15b      0x165 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_line    0x0001f2c0       0x98 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
+ .debug_line    0x0001f358      0x72b ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
 
-.debug_str      0x00000000    0x9eab8
+.debug_str      0x00000000    0x9eac2
  .debug_str     0x00000000    0x9251f DanLib/Audio/DMA/DMA_Audio.o
                               0x92ce8 (size before relaxing)
  .debug_str     0x0009251f      0x142 DanLib/Audio/audio.o
@@ -14700,89 +14700,89 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
                               0x96c52 (size before relaxing)
  .debug_str     0x00098a39      0x698 DanLib/LCDLib/touch/touch.o
                               0x92f59 (size before relaxing)
- .debug_str     0x000990d1       0x1a DanLib/PSOLA/hanning.o
-                              0x9141a (size before relaxing)
- .debug_str     0x000990eb      0x2bc DanLib/PSOLA/PSOLA.o
-                              0x92673 (size before relaxing)
- .debug_str     0x000993a7      0x469 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_str     0x000990d1       0x1c DanLib/Vocoder/hanning.o
+                              0x9141c (size before relaxing)
+ .debug_str     0x000990ed      0x2c4 DanLib/Vocoder/vocoder.o
+                              0x9267b (size before relaxing)
+ .debug_str     0x000993b1      0x469 src/ASF/common/components/touch/mxt/mxt_device_1.o
                               0x878b2 (size before relaxing)
- .debug_str     0x00099810       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_str     0x0009981a       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
                               0x81d87 (size before relaxing)
- .debug_str     0x00099845       0x2c src/ASF/common/utils/stdio/read.o
+ .debug_str     0x0009984f       0x2c src/ASF/common/utils/stdio/read.o
                               0x81c00 (size before relaxing)
- .debug_str     0x00099871       0x26 src/ASF/common/utils/stdio/write.o
+ .debug_str     0x0009987b       0x26 src/ASF/common/utils/stdio/write.o
                               0x81c01 (size before relaxing)
- .debug_str     0x00099897       0x69 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_str     0x000998a1       0x69 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
                               0x8de86 (size before relaxing)
- .debug_str     0x00099900      0x57f src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_str     0x0009990a      0x57f src/ASF/sam/components/display/ili9488/ili9488.o
                               0x881d8 (size before relaxing)
- .debug_str     0x00099e7f       0xcf src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_str     0x00099e89       0xcf src/ASF/sam/drivers/ebi/smc/smc.o
                               0x85cbd (size before relaxing)
- .debug_str     0x00099f4e      0x33e src/ASF/sam/drivers/ssc/ssc.o
+ .debug_str     0x00099f58      0x33e src/ASF/sam/drivers/ssc/ssc.o
                               0x82277 (size before relaxing)
- .debug_str     0x0009a28c      0x380 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_str     0x0009a296      0x380 src/ASF/sam/drivers/twihs/twihs.o
                               0x8220b (size before relaxing)
- .debug_str     0x0009a60c      0x296 src/ASF/sam/drivers/uart/uart.o
+ .debug_str     0x0009a616      0x296 src/ASF/sam/drivers/uart/uart.o
                               0x81f07 (size before relaxing)
- .debug_str     0x0009a8a2      0xa8f src/ASF/sam/drivers/usart/usart.o
+ .debug_str     0x0009a8ac      0xa8f src/ASF/sam/drivers/usart/usart.o
                               0x8279f (size before relaxing)
- .debug_str     0x0009b331      0x171 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_str     0x0009b33b      0x171 src/ASF/sam/drivers/xdmac/xdmac.o
                               0x8274d (size before relaxing)
- .debug_str     0x0009b4a2      0x3f1 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_str     0x0009b4ac      0x3f1 src/ASF/common/services/clock/samv71/sysclk.o
                               0x86a88 (size before relaxing)
- .debug_str     0x0009b893       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_str     0x0009b89d       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                               0x81c57 (size before relaxing)
- .debug_str     0x0009b927      0x5c9 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_str     0x0009b931      0x5c9 src/ASF/sam/boards/samv71_xplained_ultra/init.o
                               0x88318 (size before relaxing)
- .debug_str     0x0009bef0      0x132 src/ASF/sam/drivers/mpu/mpu.o
+ .debug_str     0x0009befa      0x132 src/ASF/sam/drivers/mpu/mpu.o
                               0x8299d (size before relaxing)
- .debug_str     0x0009c022      0x547 src/ASF/sam/drivers/pio/pio.o
+ .debug_str     0x0009c02c      0x547 src/ASF/sam/drivers/pio/pio.o
                               0x827ad (size before relaxing)
- .debug_str     0x0009c569      0x111 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_str     0x0009c573      0x111 src/ASF/sam/drivers/pio/pio_handler.o
                               0x828d8 (size before relaxing)
- .debug_str     0x0009c67a      0x65a src/ASF/sam/drivers/pmc/pmc.o
+ .debug_str     0x0009c684      0x65a src/ASF/sam/drivers/pmc/pmc.o
                               0x82911 (size before relaxing)
- .debug_str     0x0009ccd4      0x61c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_str     0x0009ccde      0x61c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
                               0x82443 (size before relaxing)
- .debug_str     0x0009d2f0      0x137 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_str     0x0009d2fa      0x137 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
                               0x72530 (size before relaxing)
- .debug_str     0x0009d427      0x768 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x0009d431      0x768 src/ASF/sam/utils/syscalls/gcc/syscalls.o
                                0x74d4 (size before relaxing)
- .debug_str     0x0009db8f      0x372 src/main.o
-                              0x986e6 (size before relaxing)
- .debug_str     0x0009df01      0x15d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_str     0x0009db99      0x372 src/main.o
+                              0x986ea (size before relaxing)
+ .debug_str     0x0009df0b      0x15d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
                                 0x239 (size before relaxing)
- .debug_str     0x0009e05e       0x23 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_str     0x0009e068       0x23 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
                                 0x238 (size before relaxing)
- .debug_str     0x0009e081       0x2f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_str     0x0009e08b       0x2f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
                                 0x240 (size before relaxing)
- .debug_str     0x0009e0b0       0x45 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_str     0x0009e0ba       0x45 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
                                 0x262 (size before relaxing)
- .debug_str     0x0009e0f5       0x26 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mean_f32.o)
+ .debug_str     0x0009e0ff       0x26 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mean_f32.o)
                                 0x23e (size before relaxing)
- .debug_str     0x0009e11b       0x35 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_str     0x0009e125       0x35 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
                                 0x262 (size before relaxing)
- .debug_str     0x0009e150       0x67 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
+ .debug_str     0x0009e15a       0x67 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
                                 0x27b (size before relaxing)
- .debug_str     0x0009e1b7      0x2a7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
+ .debug_str     0x0009e1c1      0x2a7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
                                 0x52a (size before relaxing)
- .debug_str     0x0009e45e       0x6a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
+ .debug_str     0x0009e468       0x6a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
                                 0x307 (size before relaxing)
- .debug_str     0x0009e4c8      0x104 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+ .debug_str     0x0009e4d2      0x104 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
                                 0x372 (size before relaxing)
- .debug_str     0x0009e5cc       0x8c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
+ .debug_str     0x0009e5d6       0x8c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
                                 0x2a4 (size before relaxing)
- .debug_str     0x0009e658       0x58 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
+ .debug_str     0x0009e662       0x58 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
                                 0x306 (size before relaxing)
- .debug_str     0x0009e6b0       0x26 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_str     0x0009e6ba       0x26 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
                                 0x242 (size before relaxing)
- .debug_str     0x0009e6d6       0x61 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
+ .debug_str     0x0009e6e0       0x61 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
                                 0x27d (size before relaxing)
- .debug_str     0x0009e737       0x24 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
+ .debug_str     0x0009e741       0x24 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
                                 0x267 (size before relaxing)
- .debug_str     0x0009e75b      0x31a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_str     0x0009e765      0x31a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
                                 0x717 (size before relaxing)
- .debug_str     0x0009ea75       0x43 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
+ .debug_str     0x0009ea7f       0x43 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
                                 0x269 (size before relaxing)
 
 .debug_frame    0x00000000     0x4214
@@ -14794,7 +14794,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_frame   0x0000041c       0xd8 DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_frame   0x000004f4       0x2c DanLib/LCDLib/LCDLib.o
  .debug_frame   0x00000520       0x74 DanLib/LCDLib/touch/touch.o
- .debug_frame   0x00000594       0xb8 DanLib/PSOLA/PSOLA.o
+ .debug_frame   0x00000594       0xb8 DanLib/Vocoder/vocoder.o
  .debug_frame   0x0000064c      0x224 src/ASF/common/components/touch/mxt/mxt_device_1.o
  .debug_frame   0x00000870       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_frame   0x00000890       0x30 src/ASF/common/utils/stdio/read.o
@@ -14924,8 +14924,6 @@ PIOC_Handler                                      src/ASF/sam/drivers/pio/pio_ha
 PIOD_Handler                                      src/ASF/sam/drivers/pio/pio_handler.o
 PIOE_Handler                                      src/ASF/sam/drivers/pio/pio_handler.o
 PMC_Handler                                       src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
-PSOLA_init                                        DanLib/PSOLA/PSOLA.o
-                                                  src/main.o
 PWM0_Handler                                      src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
 PWM1_Handler                                      src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
 PendSV_Handler                                    src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
@@ -14972,6 +14970,8 @@ USART1_Handler                                    src/ASF/sam/utils/cmsis/samv71
 USART2_Handler                                    src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
 USBHS_Handler                                     src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
 UsageFault_Handler                                src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+Vocoder_init                                      DanLib/Vocoder/vocoder.o
+                                                  src/main.o
 WDT_Handler                                       src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
 XDMAC_Handler                                     DanLib/Audio/DMA/DMA_Audio.o
 _Balloc                                           c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mprec.o)
@@ -14987,7 +14987,7 @@ __aeabi_cdrcmple                                  c:/program files (x86)/atmel/s
 __aeabi_d2f                                       c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_truncdfsf2.o)
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-wf_sqrt.o)
                                                   src/main.o
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
 __aeabi_d2iz                                      c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_fixdfsi.o)
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-dtoa.o)
 __aeabi_dadd                                      c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_addsubdf3.o)
@@ -15022,7 +15022,7 @@ __aeabi_dsub                                      c:/program files (x86)/atmel/s
 __aeabi_f2d                                       c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_addsubdf3.o)
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-wf_sqrt.o)
                                                   src/main.o
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
                                                   DanLib/DYWA/dywapitchtrack.o
 __aeabi_i2d                                       c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_addsubdf3.o)
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-dtoa.o)
@@ -15414,7 +15414,7 @@ armRecipTableQ15                                  ../src/ASF/thirdparty/CMSIS/Li
 armRecipTableQ31                                  ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
 arm_add_f32                                       ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
                                                   src/main.o
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
 arm_bitreversal_16                                ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
 arm_bitreversal_32                                ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
                                                   ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
@@ -15428,10 +15428,10 @@ arm_conv_f32                                      ../src/ASF/thirdparty/CMSIS/Li
                                                   src/main.o
 arm_copy_f32                                      ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
                                                   src/main.o
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
                                                   DanLib/DYWA/dywapitchtrack.o
 arm_fill_f32                                      ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
 arm_max_f32                                       ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
                                                   src/main.o
                                                   DanLib/DYWA/dywapitchtrack.o
@@ -15441,21 +15441,21 @@ arm_min_f32                                       ../src/ASF/thirdparty/CMSIS/Li
                                                   DanLib/DYWA/dywapitchtrack.o
 arm_mult_f32                                      ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
                                                   src/main.o
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
 arm_power_f32                                     ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
                                                   DanLib/DYWA/dywapitchtrack.o
 arm_radix8_butterfly_f32                          ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
                                                   ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
 arm_rfft_fast_f32                                 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
                                                   src/main.o
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
 arm_rfft_fast_init_f32                            ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
                                                   src/main.o
 arm_scale_f32                                     ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
                                                   src/main.o
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
 arm_sin_cos_f32                                   ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
 atexit                                            c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-atexit.o)
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__call_atexit.o)
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp/crt0.o
@@ -15497,12 +15497,12 @@ fputwc                                            c:/program files (x86)/atmel/s
 free                                              c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-malloc.o)
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__call_atexit.o)
                                                   src/ASF/common/components/touch/mxt/mxt_device_1.o
-gFFTworksp                                        DanLib/PSOLA/PSOLA.o
+gFFTworksp                                        DanLib/Vocoder/vocoder.o
 g_interrupt_enabled                               src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                                                   src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
                                                   src/ASF/sam/drivers/pmc/sleep.o
                                                   src/ASF/sam/drivers/mpu/mpu.o
-get_harmonized_output                             DanLib/PSOLA/PSOLA.o
+get_harmonized_output                             DanLib/Vocoder/vocoder.o
                                                   src/main.o
 gfont                                             src/ASF/sam/components/display/ili9488/ili9488.o
 gfx_draw_char                                     DanLib/LCDLib/gfx/gfx_text.o
@@ -15552,9 +15552,9 @@ gfx_set_clipping                                  DanLib/LCDLib/gfx/gfx_generic.
                                                   DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
 gfx_width                                         DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
                                                   DanLib/LCDLib/gfx/gfx_generic.o
-hanning                                           DanLib/PSOLA/hanning.o
+hanning                                           DanLib/Vocoder/hanning.o
                                                   src/main.o
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
 hardware_init_hook                                c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp/crt0.o
 ili9488_copy_pixels_from_screen                   src/ASF/sam/components/display/ili9488/ili9488.o
                                                   DanLib/LCDLib/gfx/gfx_generic.o
@@ -15642,7 +15642,7 @@ memset                                            c:/program files (x86)/atmel/s
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-callocr.o)
                                                   ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
                                                   src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
                                                   DanLib/DYWA/dywapitchtrack.o
                                                   DanLib/Audio/DMA/DMA_Audio.o
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp/crt0.o
@@ -15757,7 +15757,7 @@ pio_set_writeprotect                              src/ASF/sam/drivers/pio/pio.o
 pio_sync_output_write                             src/ASF/sam/drivers/pio/pio.o
 pio_toggle_pin                                    src/ASF/sam/drivers/pio/pio.o
 pio_toggle_pin_group                              src/ASF/sam/drivers/pio/pio.o
-pitch_shift_do                                    DanLib/PSOLA/PSOLA.o
+pitch_shift_do                                    DanLib/Vocoder/vocoder.o
                                                   src/main.o
 pmc_clr_fast_startup_input                        src/ASF/sam/drivers/pmc/pmc.o
 pmc_disable_all_pck                               src/ASF/sam/drivers/pmc/pmc.o
@@ -15870,7 +15870,7 @@ ptr_get                                           src/ASF/common/utils/stdio/rea
 ptr_put                                           src/ASF/common/utils/stdio/write.o
                                                   src/main.o
 round                                             c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-s_round.o)
-                                                  DanLib/PSOLA/PSOLA.o
+                                                  DanLib/Vocoder/vocoder.o
 rtt_disable                                       src/ASF/sam/drivers/rtt/rtt.o
 rtt_disable_interrupt                             src/ASF/sam/drivers/rtt/rtt.o
 rtt_enable                                        src/ASF/sam/drivers/rtt/rtt.o
