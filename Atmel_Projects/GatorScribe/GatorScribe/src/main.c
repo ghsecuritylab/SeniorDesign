@@ -160,7 +160,7 @@ static inline float powerf(float base, int32_t exponent)
 		exp_abs--; 
 	}
 	if (exponent < 0)
-		return 1/result; 
+		return 1.0/result; 
 	else 
 		return result; 
 }
@@ -203,6 +203,36 @@ volatile float pitch_up_3;
 
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _phas[WIN_SIZE_D2];
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _norm[WIN_SIZE_D2];
+COMPILER_ALIGNED(WIN_SIZE) static float _envelope[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static float temp_envelope[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[STEP_SIZE];
+
+float envelope_filter[] = {0.0013530601,
+	0.0029673511,
+	0.0058125495,
+	0.0099546928,
+	0.015469050,
+	0.022262389,
+	0.030047299,
+	0.038348131,
+	0.046538413,
+	0.053915478,
+	0.059787087,
+	0.063570723,
+	0.064878047,
+	0.063570723,
+	0.059787087,
+	0.053915478,
+	0.046538413,
+	0.038348131,
+	0.030047299,
+	0.022262389,
+	0.015469050,
+	0.0099546928,
+	0.0058125495,
+	0.0029673511,
+	0.0013530601}; 
+uint32_t envelope_filter_length = 25; 
 
 int main(void)
 {
@@ -218,10 +248,15 @@ int main(void)
 	 
 	SCB_DisableICache(); 
 	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
-	SCB_EnableICache(); 
-	for(volatile int i = 0; i < 1000; i++); 
-	SCB_DisableICache(); 
 	gfx_draw_filled_rect(200, 100, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(80, 180, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(100, 200, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(120, 220, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(140, 220, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(160, 220, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(180, 220, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(200, 200, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
 	SCB_EnableICache(); 
 
 	uint32_t i,j;
@@ -230,6 +265,7 @@ int main(void)
 	mags_and_phases->length = WIN_SIZE_D2; 
 	mags_and_phases->norm = _norm; 
 	mags_and_phases->phas = _phas; 
+	mags_and_phases->env = _envelope; 
 	
 	fvec_t *inputVec = (fvec_t*)calloc(sizeof(fvec_t), 1);
 	inputVec->length = WIN_SIZE;
@@ -241,7 +277,10 @@ int main(void)
 	
 	printf("Starting Program\n\n\n\r"); 
 	char str[20]; 
-
+	uint32_t tmp; 
+	float max_fft_norm = 1.0;
+	float max_fft_filt_norm = 1.0; 
+	float envelop_scale = 1.0;
 	
 	arm_rfft_fast_instance_f32 fftInstance;
 	arm_rfft_fast_init_f32(&fftInstance, WIN_SIZE);
@@ -273,30 +312,51 @@ int main(void)
 				mags_and_phases->phas[j] = atan2_approximation(yin_instance->samples_fft->data[i+1], yin_instance->samples_fft->data[i]); 
 			}
 			
+			
+			// compute envelope 
+			
+			arm_max_f32(mags_and_phases->norm, mags_and_phases->length, &max_fft_norm, &tmp); 
+			arm_conv_f32(mags_and_phases->norm, mags_and_phases->length, (float *)envelope_filter, envelope_filter_length, temp_envelope); 
+			arm_max_f32(&temp_envelope[envelope_filter_length>>1], mags_and_phases->length, &max_fft_filt_norm, &tmp);
+			envelop_scale = max_fft_norm / max_fft_filt_norm;
+			arm_scale_f32(&temp_envelope[envelope_filter_length>>1], envelop_scale, mags_and_phases->env, mags_and_phases->length); 				
+				
 			// compute pitch -- requires prior calculation of samples_fft in yin_instance 
 		    inputPitch = yin_get_pitch(yin_instance, inputVecCopy, &fftInstance);
-
+		
 			// debug frequency detection
 			sprintf(str, "%f", inputPitch);
 			printf("Freq: %s\n\r", str);
 			
+#ifdef AUTOTUNE
 			if (inputPitch > 100)
 			{
-				auto_tuned_pitch = get_frequency_from_all(inputPitch);
-				//pitch_shift1 = 1 - (inputPitch-auto_tuned_pitch)/inputPitch; // auto-tune 
-				pitch_up_5 = auto_tuned_pitch*powerf(1.059463094359, -4); 
-				pitch_shift1 = 1 - (inputPitch-pitch_up_5)/inputPitch;
-				pitch_up_3 = auto_tuned_pitch*powerf(1.059463094359, 7); 		
-				pitch_shift2 = 1 - (inputPitch-pitch_up_3)/inputPitch;
+				auto_tuned_pitch = get_frequency_from_key_C(inputPitch);
+				pitch_shift1 = 1 - (inputPitch-auto_tuned_pitch)/inputPitch; // auto-tune 
 			}
 			else 
 			{
 				pitch_shift1 = 1.0; 
-				pitch_shift2 = 1.0; 
 			}
+			pitch_shift_do(pitch_shift1, mags_and_phases);
+#else 
+			if (inputPitch > 100)
+			{
+				auto_tuned_pitch = get_frequency_from_all(inputPitch);
+				pitch_up_5 = auto_tuned_pitch*powerf(1.059463094359, -4);
+				pitch_shift1 = 1 - (inputPitch-pitch_up_5)/inputPitch;
+				pitch_up_3 = auto_tuned_pitch*powerf(1.059463094359, 7);
+				pitch_shift2 = 1 - (inputPitch-pitch_up_3)/inputPitch;
+			}
+			else
+			{
+				pitch_shift1 = 1.0;
+				pitch_shift2 = 1.0;
+			}
+			pitch_shift_do(pitch_shift1, mags_and_phases);
+			//pitch_shift_do(pitch_shift2, mags_and_phases);
+#endif 
 			
-		   // pitch_shift_do(pitch_shift1, mags_and_phases);
-			pitch_shift_do(pitch_shift2, mags_and_phases); 
 			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance); 
 			
 			// lp - filter 10k cut off 
@@ -306,19 +366,22 @@ int main(void)
 			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_11k_length);
 			
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
+#ifdef AUTOTUNE
 			uint32_t processIdx = lp_filter_11k_length; 
-			uint32_t originalIdx = 0; 
-			float mix_output; 
+#endif 
+			uint32_t idx = 0; 
+			arm_add_f32(processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE); 
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, STEP_SIZE); 
 			for(i = 0; i < IO_BUF_SIZE; i+=4)
 			{
-				mix_output = (processBuffer[originalIdx] + harmonized_output_filt[processIdx]);//  / 2.0; // not dividing by two just to increase volume :) 
-				outBuffer[i] = (uint16_t)(int16_t)(mix_output * (float)INT16_MAX); 
-				//outBuffer[i] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx] * (float)INT16_MAX); 
+#ifdef AUTOTUNE
+				outBuffer[i] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx++] * (float)INT16_MAX);
+#else
+				outBuffer[i] = (uint16_t)(int16_t)(mixed_buffer[idx++]);  //  / 2.0; // not dividing by two just to increase volume 
+#endif 
 				outBuffer[i+1] = outBuffer[i]; 
 				outBuffer[i+2] = outBuffer[i]; 
 				outBuffer[i+3] = outBuffer[i];
-				processIdx++; 
-				originalIdx++;
 			}
 			
 			// shift input back one quarter 

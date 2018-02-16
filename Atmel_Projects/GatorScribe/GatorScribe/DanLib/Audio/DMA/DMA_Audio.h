@@ -11,6 +11,8 @@
 
 #include <math.h>
 
+//#define AUTOTUNE
+
 /********************************** Defines Start **********************************/
 /** XDMA channels used */
 #define XDMA_CH_SSC_RX    0

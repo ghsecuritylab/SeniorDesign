@@ -39,6 +39,8 @@ volatile bool dataReceived = false;
 
 /*********************************** Extern Variables End ***********************************/
 
+static const float One_over_max_int16 = 1.0 / (float)INT16_MAX; 
+
 /******************************* XDMAC Interrupt Handler Start *******************************/ 
 void XDMAC_Handler(void)
 {
@@ -64,7 +66,7 @@ void XDMAC_Handler(void)
 		// Fill process buffer - only left channel decimated by 1
 		for(int i = 0; i < IO_BUF_SIZE; i+=4)
 		{
-			processBuffer[processIdx++] = ((float )(int16_t)inBuffer[i]) / (float)INT16_MAX; 
+			processBuffer[processIdx++] = ((float )(int16_t)inBuffer[i]) * One_over_max_int16; 
 		}
 		dataReceived = true; // can check for out of time here 
     }
