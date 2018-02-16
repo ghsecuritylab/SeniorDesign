@@ -6,7 +6,6 @@
  */ 
 
 #include "PSOLA.h"
-#include <time.h>
 #include <stdlib.h>
 
 extern const float hanning[1024];
@@ -34,16 +33,9 @@ COMPILER_ALIGNED(WIN_SIZE) static float gSynFreq[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float gSynMagn[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float scaled_hanning[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float ifft_real_values[WIN_SIZE];
-COMPILER_ALIGNED(WIN_SIZE_D2) static float omega[WIN_SIZE_D2]; 
-COMPILER_ALIGNED(WIN_SIZE) static float envelope_shift[WIN_SIZE];
-COMPILER_ALIGNED(WIN_SIZE_D2) static float syn_idx_array[WIN_SIZE_D2];
-COMPILER_ALIGNED(WIN_SIZE_D2) static float idx_numbers[WIN_SIZE_D2];
-
 
 void PSOLA_init(void)
 {
-	srand(4783746); // randomize seed
-	rand(); 
 	uint32_t i; 
 	for (i = 0; i < WIN_SIZE; i++)
 	{
@@ -59,10 +51,8 @@ void PSOLA_init(void)
 	arm_scale_f32((float *)hanning, ifft_scale, scaled_hanning, WIN_SIZE); 
 	for(i = 0; i < WIN_SIZE_D2; i++)
 	{
-		omega[i] = (float)i * expct; 
 		prevAnaPhase[i] = 0.0;
 		gSumPhase[i] = 0.0;
-		idx_numbers[i] = (float)i; 
 	}
 }
 
@@ -74,7 +64,7 @@ static inline float princarg(float inPhase)
 void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 {
 	float tmp; 
-	uint32_t k, index;
+	uint32_t k, target;
 	/* ***************** ANALYSIS ******************* */
 	/* this is the analysis step */
 	for (k = 0; k < WIN_SIZE_D2; k++) {
@@ -82,7 +72,7 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 		tmp = mags_and_phases->phas[k] - prevAnaPhase[k]; 
 			
 		/* subtract expected phase difference */
-		tmp -= omega[k]; 
+		tmp -= (float)k * expct; 
 		
 		/* map delta phase into +/- Pi interval */
 		tmp = princarg(tmp); 
@@ -91,28 +81,27 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 		tmp = Overlap_x_OneOverTwoPi*tmp;
 		
 		// compute the k-th partials' true frequency 
-		tmp = ((float)k + tmp)*freqPerBin; 
+		tmp = ((float)k + tmp)*freqPerBin;
 		
 		/* store true frequency in analysis arrays */
 		gAnaFreq[k] = tmp; 
 	}
-	arm_scale_f32(gAnaFreq, shift_amount, gAnaFreq, WIN_SIZE_D2); 
-
+	
 	/* ***************** PROCESSING ******************* */
 	arm_fill_f32(0.0, gSynFreq, WIN_SIZE_D2); 
-	arm_scale_f32(idx_numbers, shift_amount, (float *)syn_idx_array, WIN_SIZE_D2); 
+	arm_scale_f32(gAnaFreq, shift_amount, gAnaFreq, WIN_SIZE_D2);
 	for (k = 0; k < WIN_SIZE_D2; k++) 
 	{
-		index = (uint32_t)syn_idx_array[k]; 
-		if (index <= WIN_SIZE_D2) {
-
+		target = (float)k * shift_amount; 
+		if (target <= WIN_SIZE_D2) 
+		{
 #ifdef AUTOTUNE
-			gSynMagn[index] += mags_and_phases->norm[k] ;
-			gSynFreq[index] = gAnaFreq[k];
+			gSynMagn[target] += mags_and_phases->norm[k] ;
+			gSynFreq[target] = gAnaFreq[k];
 #else 
-			gSynMagn[index] += mags_and_phases->norm[k] / mags_and_phases->env[k] * mags_and_phases->env[index]; // + Abs(mags_and_phases->env[k] - mags_and_phases->env[index])/Max(mags_and_phases->env[k],mags_and_phases->env[index]); 
+			gSynMagn[target] += mags_and_phases->norm[k] / mags_and_phases->env[k] * mags_and_phases->env[target];
 			//gSynMagn[index] += mags_and_phases->norm[k] ;
-			gSynFreq[index] = gAnaFreq[k]; //rand() % (FFT_SAMPLE_RATE - 10) + 10.0; //0.0;
+			gSynFreq[target] = gAnaFreq[k];
 #endif 
 		}
 	}
@@ -121,11 +110,8 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 	/* this is the synthesis step */
 	for (k = 0; k < WIN_SIZE_D2; k++) 
 	{
-		// get true frequency from synthesis arrays 
-		tmp = gSynFreq[k];
-
-		// subtract bin mid frequency 
-		tmp -= (float)k*freqPerBin;
+		// subtract bin mid frequency from true frequency from synthesis arrays 
+		tmp = gSynFreq[k] - (float)k * freqPerBin;
 
 		// get bin deviation from freq deviation 
 		tmp *= oneOverFreqPerBin;
@@ -134,38 +120,25 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 		tmp = TwoPi_d_Overlap*tmp;
 
 		// add the overlap phase advance back in 
-		tmp += omega[k]; 
+		tmp += (float)k * expct; 
 
 		// accumulate delta phase to get bin phase 
 		gSumPhase[k] += tmp;
 	}
 }
 
-
 void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance)
 {
-	uint32_t k, idx; 
+	uint32_t k; 
 	
-	/*
-	arm_max_f32(gSynMagn, WIN_SIZE_D2, &max_fft_norm2, &tmp);
-	arm_conv_f32(gSynMagn, WIN_SIZE_D2, (float *)envelope_filter, envelope_filter_length, temp_envelope);
-	arm_max_f32(&temp_envelope[envelope_filter_length/2], mags_and_phases->length, &max_fft_filt_norm2, &tmp);
-	envelop_scale2 = max_fft_norm2 / max_fft_filt_norm2;
-	for (i = 0; i < mags_and_phases->length; i++)
-		envelope_shift[i] = temp_envelope[i + envelope_filter_length/2] * envelop_scale2;
-		*/
 	float sin_value, cos_value; 
 	arm_copy_f32(mags_and_phases->phas, prevAnaPhase, WIN_SIZE_D2); 
 	for (k = 0; k < WIN_SIZE_D2; k++)
 	{		
-		//if (gSynFreq[k] > 0)
-		//gSynMagn[k] = gSynMagn[k] * (mags_and_phases->env[k] / envelope_shift[k]);// + Abs(mags_and_phases->env[k] - envelope_shift[k])/Max(mags_and_phases->env[k],envelope_shift[k]) ); 
-		 
 		// get real and imag part and re-interleave
-		idx = k << 1; 
 		arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
-		gFFTworksp[idx] = gSynMagn[k]*cos_value;
-		gFFTworksp[idx+1] = gSynMagn[k]*sin_value; 
+		gFFTworksp[2*k] = gSynMagn[k]*cos_value;
+		gFFTworksp[2*k+1] = gSynMagn[k]*sin_value; 
 	}
 		
 	/* do inverse transform */

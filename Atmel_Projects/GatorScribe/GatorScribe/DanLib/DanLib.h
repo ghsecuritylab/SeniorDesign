@@ -11,7 +11,6 @@
 
 #include "audio.h"
 #include "LCDLib.h"
-#include "pitchyinfast.h"
 #include "PSOLA.h"
 #include "DYWA/dywapitchtrack.h"
 

@@ -59,6 +59,9 @@ float computeWaveletPitch(float * samples)
 	float pitchF = 0.0;
 	int32_t i, j;
 	float si, si1;
+	float power; 
+	arm_power_f32(samples, WIN_SIZE>>2, &power); 
+	if (power < POWER_THRESHOLD) return pitchF; 
 	
 	arm_copy_f32(samples, sam, WIN_SIZE); 
 	int32_t curSamNb = WIN_SIZE;
@@ -254,11 +257,9 @@ float computeWaveletPitch(float * samples)
 			return pitchF;
 		}
 		
-		uint32_t sub_idx;
-		for (uint32_t idx = 0; idx < (uint32_t)curSamNb/2; idx++)
+		for (i = 0; i < curSamNb/2; i++)
 		{
-			sub_idx = idx << 1;
-			sam[idx] = (sam[sub_idx] + sam[sub_idx + 1]) * 0.5;
+			sam[i] = (sam[2*i] + sam[2*i + 1]) * 0.5;
 		}
 		curSamNb /= 2;
 	}

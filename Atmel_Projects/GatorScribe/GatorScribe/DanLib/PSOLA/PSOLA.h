@@ -24,6 +24,11 @@ typedef struct {
 	float *env; 
 } cvec_t;
 
+typedef struct {
+	uint32_t length;  /**< length of buffer */
+	float *data;   /**< data vector of length ::fvec_t.length */
+} fvec_t;
+
 
 void PSOLA_init(void);
 void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases);

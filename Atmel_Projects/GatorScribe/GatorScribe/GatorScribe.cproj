@@ -442,7 +442,6 @@
       <Value>../DanLib/Audio/WM8904_Driver</Value>
       <Value>../DanLib/Audio</Value>
       <Value>../src/ASF/sam/drivers/rtt</Value>
-      <Value>../DanLib/YinFFT</Value>
       <Value>../DanLib/PSOLA</Value>
       <Value>../DanLib/DYWA</Value>
     </ListValues>
@@ -545,7 +544,6 @@
     <Folder Include="DanLib\LCDLib\touch\" />
     <Folder Include="DanLib\Audio" />
     <Folder Include="DanLib\PSOLA" />
-    <Folder Include="DanLib\YinFFT\" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -690,19 +688,13 @@
     <Compile Include="DanLib\LCDLib\touch\touch.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="DanLib\PSOLA\hanning.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="DanLib\PSOLA\PSOLA.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\PSOLA\PSOLA.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\hanning.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\pitchyinfast.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\YinFFT\pitchyinfast.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.c">
