@@ -32,6 +32,11 @@ COMPILER_ALIGNED(WIN_SIZE) static float gSynMagn[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float scaled_hanning[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float ifft_real_values[WIN_SIZE];
 
+/* Spectral envelope */ 
+COMPILER_ALIGNED(WIN_SIZE) static float shift_envelope[WIN_SIZE];
+extern float envelope_filter[];
+extern uint32_t envelope_filter_length;
+
 void Vocoder_init(void)
 {
 	uint32_t i; 
@@ -124,9 +129,6 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 	}
 }
 
-COMPILER_ALIGNED(WIN_SIZE) static float shift_envelope[WIN_SIZE];
-extern float envelope_filter[]; 
-extern uint32_t envelope_filter_length; 
 void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance)
 {
 	uint32_t k; 
@@ -140,6 +142,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
 	for (k = 0; k < WIN_SIZE_D2; k++)
 	{		
+		// scale by synth envelope 
 		gSynMagn[k] /= shift_env[k]; //Abs(mags_and_phases->env[k] - shift_env[k]) / shift_env[k];  //Abs(2.0f*mags_and_phases->env[k] - shift_env[k]) / shift_env[k]; 
 		
 		// get real and imag part and re-interleave
