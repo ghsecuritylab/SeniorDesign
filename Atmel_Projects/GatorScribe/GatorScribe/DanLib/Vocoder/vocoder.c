@@ -10,14 +10,12 @@
 
 extern const float hanning[1024];
 
-static const float Pi = M_PI; 
 static const float OneOverTwoPi = 0.15915494309f; 
 static const float TwoPi = 2.0f * M_PI;
-static const float OneOverPi = 0.318309886f; 
 static const float Overlap_x_OneOverTwoPi = (float)NUM_OF_OVERLAPS * 0.15915494309f;
 static const float TwoPi_d_Overlap =  2.0f * M_PI / (float)NUM_OF_OVERLAPS;
 
-static const float ifft_scale = 4.0 / (float)NUM_OF_OVERLAPS; // 4.0 = 2 (only using half the spectrum) * 2 (removed scaling from original fft) 
+static const float ifft_scale = 4.0f / (float)NUM_OF_OVERLAPS; // 4.0 = 2 (only using half the spectrum) * 2 (removed scaling from original fft) 
 
 static const float freqPerBin = (float)FFT_SAMPLE_RATE/(float)WIN_SIZE;
 static const float oneOverFreqPerBin = (float)WIN_SIZE / (float)FFT_SAMPLE_RATE; 
@@ -39,20 +37,20 @@ void Vocoder_init(void)
 	uint32_t i; 
 	for (i = 0; i < WIN_SIZE; i++)
 	{
-		gAnaFreq[i] = 0.0;
-		gSynFreq[i] = 0.0; 
-		gSynMagn[i] = 0.0; 
+		gAnaFreq[i] = 0.0f;
+		gSynFreq[i] = 0.0f; 
+		gSynMagn[i] = 0.0f; 
 	}
 	for (i = 0; i < 2*WIN_SIZE; i++)
 	{
-		gFFTworksp[i] = 0.0; 
-		gOutputAccum[i] = 0.0; 
+		gFFTworksp[i] = 0.0f; 
+		gOutputAccum[i] = 0.0f; 
 	}
 	arm_scale_f32((float *)hanning, ifft_scale, scaled_hanning, WIN_SIZE); 
 	for(i = 0; i < WIN_SIZE_D2; i++)
 	{
-		prevAnaPhase[i] = 0.0;
-		gSumPhase[i] = 0.0;
+		prevAnaPhase[i] = 0.0f;
+		gSumPhase[i] = 0.0f;
 	}
 }
 
@@ -88,7 +86,7 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 	}
 	
 	/* ***************** PROCESSING ******************* */
-	arm_fill_f32(0.0, gSynFreq, WIN_SIZE_D2); 
+	arm_fill_f32(0.0f, gSynFreq, WIN_SIZE_D2); 
 	arm_scale_f32(gAnaFreq, shift_amount, gAnaFreq, WIN_SIZE_D2);
 	for (k = 0; k < WIN_SIZE_D2; k++) 
 	{
@@ -99,8 +97,7 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 			gSynMagn[target] += mags_and_phases->norm[k] ;
 			gSynFreq[target] = gAnaFreq[k];
 #else 
-			gSynMagn[target] += mags_and_phases->norm[k] / mags_and_phases->env[k] * mags_and_phases->env[target];
-			//gSynMagn[index] += mags_and_phases->norm[k] ;
+			gSynMagn[target] += mags_and_phases->norm[k]; // / mags_and_phases->env[k] * mags_and_phases->env[target];
 			gSynFreq[target] = gAnaFreq[k];
 #endif 
 		}
@@ -127,14 +124,24 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 	}
 }
 
+COMPILER_ALIGNED(WIN_SIZE) static float shift_envelope[WIN_SIZE];
+extern float envelope_filter[]; 
+extern uint32_t envelope_filter_length; 
 void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance)
 {
 	uint32_t k; 
 	
+	// calculate shift envelope 
+	arm_conv_f32(gSynMagn, WIN_SIZE_D2, (float *)envelope_filter, envelope_filter_length, shift_envelope);
+	float *shift_env = &shift_envelope[envelope_filter_length>>1]; 
 	float sin_value, cos_value; 
-	arm_copy_f32(mags_and_phases->phas, prevAnaPhase, WIN_SIZE_D2); 
+	
+	arm_scale_f32(gSynMagn, 2.5f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
+	arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
 	for (k = 0; k < WIN_SIZE_D2; k++)
 	{		
+		gSynMagn[k] /= shift_env[k]; //Abs(mags_and_phases->env[k] - shift_env[k]) / shift_env[k];  //Abs(2.0f*mags_and_phases->env[k] - shift_env[k]) / shift_env[k]; 
+		
 		// get real and imag part and re-interleave
 		arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
 		gFFTworksp[2*k] = gSynMagn[k]*cos_value;
@@ -154,5 +161,8 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	arm_copy_f32(&gOutputAccum[STEP_SIZE], gOutputAccum, WIN_SIZE);
 	
 	/* zero out synthesis mags */ 
-	arm_fill_f32(0.0, gSynMagn, WIN_SIZE_D2); 
+	arm_fill_f32(0.0f, gSynMagn, WIN_SIZE_D2); 
+	
+	/* Save previous phases */ 
+	arm_copy_f32(mags_and_phases->phas, prevAnaPhase, WIN_SIZE_D2);
 }

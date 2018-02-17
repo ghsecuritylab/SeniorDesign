@@ -21,7 +21,8 @@ typedef struct {
 	uint32_t length;  /**< length of buffer = (requested length)/2 + 1 */
 	float *norm;   /**< norm array of size ::cvec_t.length */
 	float *phas;   /**< phase array of size ::cvec_t.length */
-	float *env; 
+	float *env;		// pointer to envelope starting at filterlength>>1 to correct for FIR phase change 
+	float *unshiftedEnv; // pointer to beginning of envelope buffer 
 } cvec_t;
 
 typedef struct {

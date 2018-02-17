@@ -56,7 +56,7 @@ COMPILER_ALIGNED(WIN_SIZE) static int32_t maxs[WIN_SIZE];
 
 float computeWaveletPitch(float * samples) 
 {
-	float pitchF = 0.0;
+	float pitchF = 0.0f;
 	int32_t i, j;
 	float si, si1;
 	float power; 
@@ -69,9 +69,9 @@ float computeWaveletPitch(float * samples)
 	
 	// algorithm parameters
 	int32_t maxFLWTlevels = 6;
-	float maxF = 3000.;
+	float maxF = 3000.0f;
 	int32_t differenceLevelsN = 3;
-	float maximaThresholdRatio = 0.75;
+	float maximaThresholdRatio = 0.75f;
 	
 	float ampltitudeThreshold;  
 	
@@ -80,7 +80,7 @@ float computeWaveletPitch(float * samples)
 	float minValue; 
 	
 	{ // compute ampltitudeThreshold and theDC
-		//first compute the DC and maxAMplitude - neglecting mean ... not toally necessary
+		//first compute the DC and maxAMplitude - neglecting mean ... not totally necessary
 		arm_max_f32(sam, WIN_SIZE, &maxValue, &temp_idx); 
 		arm_min_f32(sam, WIN_SIZE, &minValue, &temp_idx); 
 		/*
@@ -96,7 +96,7 @@ float computeWaveletPitch(float * samples)
 	
 	// levels, start without downsampling..
 	int32_t curLevel = 0;
-	float curModeDistance = -1.;
+	float curModeDistance = -1.0f;
 	int32_t delta;
 	
 	while(1) 
@@ -109,7 +109,7 @@ float computeWaveletPitch(float * samples)
 		// compute the first maximums and minumums after zero-crossing
 		// store if greater than the min threshold
 		// and if at a greater distance than delta
-		float dv, previousDV = -1000;
+		float dv, previousDV = -1000.0f;
 		nbMins = nbMaxs = 0;   
 		int32_t lastMinIndex = -1000000;
 		int32_t lastmaxIndex = -1000000;
@@ -126,9 +126,9 @@ float computeWaveletPitch(float * samples)
 			// min or max ?
 			dv = si - si1;
 			
-			if (previousDV > -1000) 
+			if (previousDV > -1000.0f) 
 			{
-				if (findMin && previousDV < 0 && dv >= 0) 
+				if (findMin && previousDV < 0.0f && dv >= 0.0f) 
 				{ 
 					// minimum
 					if (Abs(si1) >= ampltitudeThreshold) 
@@ -142,7 +142,7 @@ float computeWaveletPitch(float * samples)
 					} 
 				}
 				
-				if (findMax && previousDV > 0 && dv <= 0) 
+				if (findMax && previousDV > 0.0f && dv <= 0.0f) 
 				{
 					// maximum
 					if (Abs(si1) >= ampltitudeThreshold) 
@@ -216,8 +216,8 @@ float computeWaveletPitch(float * samples)
 		}
 		
 		// averaging
-		float distAvg = 0.0;
-		float nbDists = 0;
+		float distAvg = 0.0f;
+		float nbDists = 0.0f;
 		for (j = -delta ; j <= delta ; j++) 
 		{
 			if (bestDistance+j >=0 && bestDistance+j < WIN_SIZE) 
@@ -233,7 +233,7 @@ float computeWaveletPitch(float * samples)
 		distAvg /= nbDists;
 		
 		// continue the levels ?
-		if (curModeDistance > -1.) 
+		if (curModeDistance > -1.0f) 
 		{
 			float similarity = Abs(distAvg*2 - curModeDistance);
 			if (similarity <= 2*delta) 
@@ -262,7 +262,7 @@ float computeWaveletPitch(float * samples)
 		
 		for (i = 0; i < curSamNb/2; i++)
 		{
-			sam[i] = (sam[2*i] + sam[2*i + 1]) * 0.5;
+			sam[i] = (sam[2*i] + sam[2*i + 1]) * 0.5f;
 		}
 		curSamNb /= 2;
 	}

@@ -198,7 +198,6 @@ COMPILER_ALIGNED(WIN_SIZE) static float _samples_fft[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _phas[WIN_SIZE_D2];
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _norm[WIN_SIZE_D2];
 COMPILER_ALIGNED(WIN_SIZE) static float _envelope[WIN_SIZE];
-COMPILER_ALIGNED(WIN_SIZE) static float temp_envelope[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[STEP_SIZE];
 
 float envelope_filter[] = {0.0013530601,
@@ -257,7 +256,8 @@ int main(void)
 	mags_and_phases->length = WIN_SIZE_D2; 
 	mags_and_phases->norm = _norm; 
 	mags_and_phases->phas = _phas; 
-	mags_and_phases->env = _envelope; 
+	mags_and_phases->env = &_envelope[envelope_filter_length>>1]; 
+	mags_and_phases->unshiftedEnv = _envelope; 
 	
 	fvec_t *inputVec = (fvec_t*)calloc(sizeof(fvec_t), 1);
 	inputVec->length = WIN_SIZE;
@@ -273,11 +273,7 @@ int main(void)
 	
 	printf("Starting Program\n\n\n\r"); 
 	char str[20]; 
-	uint32_t tmp; 
-	float max_fft_norm = 1.0;
-	float max_fft_filt_norm = 1.0; 
-	float envelop_scale = 1.0;
-	
+
 	arm_rfft_fast_instance_f32 fftInstance;
 	arm_rfft_fast_init_f32(&fftInstance, WIN_SIZE);
 	
@@ -314,15 +310,12 @@ int main(void)
 			}
 			
 			// compute envelope 
-			arm_max_f32(mags_and_phases->norm, mags_and_phases->length, &max_fft_norm, &tmp); 
-			arm_conv_f32(mags_and_phases->norm, mags_and_phases->length, (float *)envelope_filter, envelope_filter_length, temp_envelope); 
-			arm_max_f32(&temp_envelope[envelope_filter_length>>1], mags_and_phases->length, &max_fft_filt_norm, &tmp);
-			envelop_scale = max_fft_norm / max_fft_filt_norm;
-			arm_scale_f32(&temp_envelope[envelope_filter_length>>1], envelop_scale, mags_and_phases->env, mags_and_phases->length); 				
+			arm_conv_f32(mags_and_phases->norm, mags_and_phases->length, (float *)envelope_filter, envelope_filter_length, mags_and_phases->unshiftedEnv); 			
 				
-			// compute pitch -- requires prior calculation of samples_fft in yin_instance 
+			// compute pitch 
 			inputPitch = computeWaveletPitch(inputVecCopy->data); 
-			oneOverInputPitch = 1.0 / inputPitch; 
+			oneOverInputPitch = 1.0f / inputPitch; 
+			
 			// debug frequency detection
 			sprintf(str, "%f", inputPitch);
 			printf("Freq: %s\n\r", str);
@@ -331,11 +324,11 @@ int main(void)
 			if (inputPitch > 100)
 			{
 				auto_tuned_pitch = get_frequency_from_key_C(inputPitch);
-				pitch_shift1 = 1 - (inputPitch-auto_tuned_pitch)*oneOverInputPitch; // auto-tune 
+				pitch_shift1 = 1.0f - (inputPitch-auto_tuned_pitch)*oneOverInputPitch; // auto-tune 
 			}
 			else 
 			{
-				pitch_shift1 = 1.0; 
+				pitch_shift1 = 1.0f; 
 			}
 			pitch_shift_do(pitch_shift1, mags_and_phases);
 #else 
@@ -343,16 +336,16 @@ int main(void)
 			{
 				auto_tuned_pitch = get_frequency_from_all(inputPitch);
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359, -5);
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, -5);
 				pitch_shift1 = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359, -8);
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, -8);
 				pitch_shift2 = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359, 7);
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, 7);
 				pitch_shift3 = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359, 4);
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, 4);
 				pitch_shift4 = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				
 				pitch_shift_do(pitch_shift1, mags_and_phases);
@@ -362,7 +355,7 @@ int main(void)
 			}
 			else
 			{
-				pitch_shift_do(1.0, mags_and_phases);
+				pitch_shift_do(1.0f, mags_and_phases);
 			}
 
 #endif 

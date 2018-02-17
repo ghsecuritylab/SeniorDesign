@@ -39,7 +39,7 @@ volatile bool dataReceived = false;
 
 /*********************************** Extern Variables End ***********************************/
 
-static const float One_over_max_int16 = 1.0 / (float)INT16_MAX; 
+static const float One_over_max_int16 = 1.0f / (float)INT16_MAX; 
 
 /******************************* XDMAC Interrupt Handler Start *******************************/ 
 void XDMAC_Handler(void)
