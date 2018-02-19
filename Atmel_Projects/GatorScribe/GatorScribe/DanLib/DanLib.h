@@ -33,4 +33,6 @@ enum harmonies
 	OCTAVE_UP = 12
 };
 
+#define HALF_STEP 1.059463094359f
+
 #endif /* DANLIB_H_ */

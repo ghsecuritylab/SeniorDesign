@@ -51,12 +51,14 @@ void Vocoder_init(void)
 		gFFTworksp[i] = 0.0f; 
 		gOutputAccum[i] = 0.0f; 
 	}
-	arm_scale_f32((float *)hanning, ifft_scale, scaled_hanning, WIN_SIZE); 
 	for(i = 0; i < WIN_SIZE_D2; i++)
 	{
 		prevAnaPhase[i] = 0.0f;
 		gSumPhase[i] = 0.0f;
 	}
+	
+	/* Create ifft hanning window with appropriate scaling factor */ 
+	arm_scale_f32((float *)hanning, ifft_scale, scaled_hanning, WIN_SIZE);
 }
 
 static inline float princarg(float inPhase)
@@ -136,7 +138,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	
 	if (harmonize_flag)
 	{
-		// calculate shift envelope
+		/* calculate shift envelope */ 
 		arm_conv_f32(gSynMagn, WIN_SIZE_D2, (float *)envelope_filter, envelope_filter_length, shift_envelope);
 		float *shift_env = &shift_envelope[envelope_filter_length>>1];
 			
@@ -144,10 +146,10 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 		arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
 		for (k = 0; k < WIN_SIZE_D2; k++)
 		{
-			// scale by synth envelope
+			/* scale by synth envelope - adding small term to avoid dividing by zero */ 
 			gSynMagn[k] /= (shift_env[k] + 0.000001f); //Abs(mags_and_phases->env[k] - shift_env[k]) / shift_env[k];  //Abs(2.0f*mags_and_phases->env[k] - shift_env[k]) / shift_env[k];
 				
-			// get real and imag part and re-interleave
+			/* Get real and imag part and interleave */ 
 			arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
 			gFFTworksp[2*k] = gSynMagn[k]*cos_value;
 			gFFTworksp[2*k+1] = gSynMagn[k]*sin_value;
@@ -158,7 +160,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 		arm_scale_f32(gSynMagn, 5.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
 		for (k = 0; k < WIN_SIZE_D2; k++)
 		{	
-			// get real and imag part and re-interleave
+			/* Get real and imag part and interleave */ 
 			arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
 			gFFTworksp[2*k] = gSynMagn[k]*cos_value;
 			gFFTworksp[2*k+1] = gSynMagn[k]*sin_value;
@@ -172,7 +174,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	arm_mult_f32(scaled_hanning, ifft_real_values, ifft_real_values, WIN_SIZE);
 	arm_add_f32(gOutputAccum, ifft_real_values, gOutputAccum, WIN_SIZE);
 		
-	// output
+	/* Copy data to output buffer */ 
 	arm_copy_f32(gOutputAccum, outData, STEP_SIZE);
 		
 	/* shift accumulator */

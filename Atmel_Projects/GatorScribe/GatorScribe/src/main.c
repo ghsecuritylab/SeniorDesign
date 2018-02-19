@@ -19,7 +19,6 @@ void vApplicationIdleHook( void );
 void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName );
 void vApplicationTickHook( void );
 
-
 extern const float hanning[1024];
 
 /**
@@ -156,6 +155,7 @@ static inline float get_frequency_from_all(float32_t frequency)
 	}
 	return midi_note_frequencies[hi];
 }
+
 static float  get_average_power (float  *buffer, uint32_t size)
 {
 	uint32_t i;
@@ -200,13 +200,13 @@ static inline float atan2_approximation(float y, float x)
 	return r; 
 }
 
+/*************** Application code buffers and consts start ***************/
 static const float lp_filter_11k[] = {0.1155  ,  0.3406  ,  0.3406 ,   0.1155}; 
 static const uint32_t lp_filter_11k_length = 4;
 
 COMPILER_ALIGNED(WIN_SIZE) static float  x_in[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float inWindowBuffer[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float inWindowBufferCopy[WIN_SIZE]; // needed since the fft corrupts the input  
-
 
 COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output[2*STEP_SIZE];
 COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output_filt[2*STEP_SIZE];
@@ -217,6 +217,7 @@ COMPILER_ALIGNED(WIN_SIZE_D2) static float _norm[WIN_SIZE_D2];
 COMPILER_ALIGNED(WIN_SIZE) static float _envelope[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[STEP_SIZE];
 
+// might want to move envelope filter to its own .c file once you create a folder for application code 
 float envelope_filter[] = {0.0013530601,
 	0.0029673511,
 	0.0058125495,
@@ -243,6 +244,7 @@ float envelope_filter[] = {0.0013530601,
 	0.0029673511,
 	0.0013530601}; 
 uint32_t envelope_filter_length = 25; 
+/*************** Application code buffers and consts end ***************/
 
 int main(void)
 {
@@ -267,7 +269,11 @@ int main(void)
 	gfx_draw_filled_rect(200, 200, 20, 20, GFX_COLOR_YELLOW);
 	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
 	SCB_EnableICache(); 
+	
+	// for serial debug 
+	char str[20]; 
 
+	/*************** Application code variables start ***************/
 	uint32_t i,j;
 	cvec_t *mags_and_phases = (cvec_t*)calloc(sizeof(cvec_t), 1); 
 	mags_and_phases->length = WIN_SIZE_D2; 
@@ -288,19 +294,17 @@ int main(void)
 	fft_samples->length = WIN_SIZE;
 	fft_samples->data = _samples_fft;
 	
-	printf("Starting Program\n\n\n\r"); 
-	char str[20]; 
-
 	arm_rfft_fast_instance_f32 fftInstance;
 	arm_rfft_fast_init_f32(&fftInstance, WIN_SIZE);
 	
 	float inputPitch;
 	float pitch_shift;
-
 	float auto_tuned_pitch;
 	float pitch_diff;
 	float oneOverInputPitch; 
-	bool harmonize_flag = false; 
+	bool harmonize_flag = false;
+	/*************** Application code variables end ***************/
+
 	while(1)
 	{
 		if (dataReceived)
@@ -339,43 +343,43 @@ int main(void)
 			if (inputPitch > 50)
 			{
 				auto_tuned_pitch = get_frequency_from_key_C(inputPitch);
-				pitch_shift1 = 1.0f - (inputPitch-auto_tuned_pitch)*oneOverInputPitch; // auto-tune 
+				pitch_shift = 1.0f - (inputPitch-auto_tuned_pitch)*oneOverInputPitch; // auto-tune 
 			}
 			else 
 			{
-				pitch_shift1 = 1.0f; 
+				pitch_shift = 1.0f; 
 			}
-			pitch_shift_do(pitch_shift1, mags_and_phases);
+			pitch_shift_do(pitch_shift, mags_and_phases);
 #else 
 			if (inputPitch > 50)
 			{
 				auto_tuned_pitch = get_frequency_from_all(inputPitch);
 			
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, MAJOR_3RD_BELOW);
+				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, MAJOR_3RD_BELOW);
 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				pitch_shift_do(pitch_shift, mags_and_phases);
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, PERFECT_5TH_BELOW);
+				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, PERFECT_5TH_BELOW);
 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				pitch_shift_do(pitch_shift, mags_and_phases);
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, MAJOR_3RD_ABOVE);
+				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, MAJOR_3RD_ABOVE);
 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				pitch_shift_do(pitch_shift, mags_and_phases);
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, PERFECT_5TH_ABOVE);
+				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, PERFECT_5TH_ABOVE);
 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				pitch_shift_do(pitch_shift, mags_and_phases);
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, ROOT);
+				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, ROOT);
 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				pitch_shift_do(pitch_shift, mags_and_phases);
 
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, OCTAVE_DOWN);
+				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, OCTAVE_DOWN);
 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				pitch_shift_do(pitch_shift, mags_and_phases);
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, OCTAVE_UP);
+				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, OCTAVE_UP);
 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				pitch_shift_do(pitch_shift, mags_and_phases);
 				
@@ -389,10 +393,10 @@ int main(void)
 #endif 
 			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance, harmonize_flag);
 							
-			// lp - filter 10k cut off
+			/* low-pass filter with 11k cut off */ 
 			arm_conv_f32(&harmonized_output[0], STEP_SIZE+lp_filter_11k_length, (float *)lp_filter_11k, lp_filter_11k_length, harmonized_output_filt);
 							
-			// shift last filter length harmonized values for filter memory
+			/* shift last filter length harmonized values for filter memory */ 
 			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_11k_length);
 			
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
@@ -415,7 +419,7 @@ int main(void)
 				outBuffer[i+3] = outBuffer[i];
 			}
 			
-			// shift input back one quarter 
+			/* shift input back one quarter */ 
 			arm_copy_f32(&x_in[STEP_SIZE], &x_in[0], WIN_SIZE-STEP_SIZE);
 			dataReceived = false; 
 		}
