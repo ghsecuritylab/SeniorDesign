@@ -33,6 +33,5 @@ typedef struct {
 
 void Vocoder_init(void);
 void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases);
-void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance); 
-
+void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance, bool harmonize_flag ); 
 #endif /* VOCODER_H_ */

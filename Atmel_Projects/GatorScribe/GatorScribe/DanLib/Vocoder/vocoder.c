@@ -129,28 +129,42 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 	}
 }
 
-void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance)
+void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fast_instance_f32 *fftInstance, bool harmonize_flag )
 {
 	uint32_t k; 
+	float sin_value, cos_value;
 	
-	// calculate shift envelope 
-	arm_conv_f32(gSynMagn, WIN_SIZE_D2, (float *)envelope_filter, envelope_filter_length, shift_envelope);
-	float *shift_env = &shift_envelope[envelope_filter_length>>1]; 
-	float sin_value, cos_value; 
-	
-	arm_scale_f32(gSynMagn, 5.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
-	arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
-	for (k = 0; k < WIN_SIZE_D2; k++)
-	{		
-		// scale by synth envelope 
-		gSynMagn[k] /= shift_env[k]; //Abs(mags_and_phases->env[k] - shift_env[k]) / shift_env[k];  //Abs(2.0f*mags_and_phases->env[k] - shift_env[k]) / shift_env[k]; 
-		
-		// get real and imag part and re-interleave
-		arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
-		gFFTworksp[2*k] = gSynMagn[k]*cos_value;
-		gFFTworksp[2*k+1] = gSynMagn[k]*sin_value; 
+	if (harmonize_flag)
+	{
+		// calculate shift envelope
+		arm_conv_f32(gSynMagn, WIN_SIZE_D2, (float *)envelope_filter, envelope_filter_length, shift_envelope);
+		float *shift_env = &shift_envelope[envelope_filter_length>>1];
+			
+		arm_scale_f32(gSynMagn, 5.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
+		arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
+		for (k = 0; k < WIN_SIZE_D2; k++)
+		{
+			// scale by synth envelope
+			gSynMagn[k] /= shift_env[k]; //Abs(mags_and_phases->env[k] - shift_env[k]) / shift_env[k];  //Abs(2.0f*mags_and_phases->env[k] - shift_env[k]) / shift_env[k];
+				
+			// get real and imag part and re-interleave
+			arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
+			gFFTworksp[2*k] = gSynMagn[k]*cos_value;
+			gFFTworksp[2*k+1] = gSynMagn[k]*sin_value;
+		}
 	}
-		
+	else 
+	{
+		arm_scale_f32(gSynMagn, 5.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
+		for (k = 0; k < WIN_SIZE_D2; k++)
+		{	
+			// get real and imag part and re-interleave
+			arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
+			gFFTworksp[2*k] = gSynMagn[k]*cos_value;
+			gFFTworksp[2*k+1] = gSynMagn[k]*sin_value;
+		}
+	}
+
 	/* do inverse transform */
 	arm_rfft_fast_f32(fftInstance, gFFTworksp, ifft_real_values, 1);
 
