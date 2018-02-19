@@ -289,12 +289,11 @@ int main(void)
 	float auto_tuned_pitch;
 	float pitch_diff;
 	float oneOverInputPitch; 
-	bool harmonize_flag; 
+	bool harmonize_flag = false; 
 	while(1)
 	{
 		if (dataReceived)
 		{	
-			harmonize_flag = false; 
 			// store process buffer values into last quarter of input buffer 
 			arm_copy_f32((float  *)processBuffer, &x_in[WIN_SIZE-STEP_SIZE], STEP_SIZE); 
 										
@@ -326,7 +325,7 @@ int main(void)
 			//printf("Freq: %s\n\r", str);
 			
 #ifdef AUTOTUNE
-			if (inputPitch > 100)
+			if (inputPitch > 50)
 			{
 				auto_tuned_pitch = get_frequency_from_key_C(inputPitch);
 				pitch_shift1 = 1.0f - (inputPitch-auto_tuned_pitch)*oneOverInputPitch; // auto-tune 
@@ -337,7 +336,7 @@ int main(void)
 			}
 			pitch_shift_do(pitch_shift1, mags_and_phases);
 #else 
-			if (inputPitch > 1)
+			if (inputPitch > 50)
 			{
 				auto_tuned_pitch = get_frequency_from_all(inputPitch);
 				
@@ -374,8 +373,8 @@ int main(void)
 			else
 			{
 				pitch_shift_do(1.0f, mags_and_phases); 
+				harmonize_flag = false; 
 			}
-
 #endif 
 			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance, harmonize_flag);
 							
@@ -391,7 +390,7 @@ int main(void)
 #else
 			uint32_t idx = 0; 
 			arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE); 
-			arm_scale_f32(mixed_buffer, 0.5f*(float)INT16_MAX, mixed_buffer, STEP_SIZE); 
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, STEP_SIZE); // should technically multiply by 0.5 here 
 #endif 
 			for(i = 0; i < IO_BUF_SIZE; i+=4)
 			{

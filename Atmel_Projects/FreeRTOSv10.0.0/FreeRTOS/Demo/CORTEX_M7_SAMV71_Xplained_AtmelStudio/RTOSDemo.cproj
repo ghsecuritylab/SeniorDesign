@@ -60,8 +60,8 @@
         <JlinkConfigFile>C:\E\Dev\FreeRTOS\WorkingCopy\FreeRTOS\Demo\CORTEX_M7_SAMV71_Xplained_AtmelStudio\jlink.config</JlinkConfigFile>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.samice</ToolType>
-      <ToolNumber>20126404</ToolNumber>
-      <ToolName>SAM-ICE</ToolName>
+      <ToolNumber>59101789</ToolNumber>
+      <ToolName>J-Link</ToolName>
     </com_atmel_avrdbg_tool_samice>
     <PercepioTrace>
       <TargetOS>FreeRTOSv8</TargetOS>
@@ -119,9 +119,6 @@
     </PercepioTrace>
     <ResetRule>0</ResetRule>
     <EraseKey />
-    <avrtoolserialnumber>20126404</avrtoolserialnumber>
-    <avrdeviceexpectedsignature>0xA1220E00</avrdeviceexpectedsignature>
-    <avrtoolinterfaceclock>4000000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
