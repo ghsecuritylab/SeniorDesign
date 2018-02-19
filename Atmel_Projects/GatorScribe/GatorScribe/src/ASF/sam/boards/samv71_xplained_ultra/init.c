@@ -271,6 +271,7 @@ static void _setup_memory_region( void )
  *	START_Addr:-  0x70000000UL
  *	END_Addr:-    0x7FFFFFFFUL
  */
+/*
 	dw_region_base_addr =
 		SDRAM_START_ADDRESS |
 		MPU_REGION_VALID |
@@ -283,12 +284,13 @@ static void _setup_memory_region( void )
 		MPU_REGION_ENABLE;
 
 	mpu_set_region( dw_region_base_addr, dw_region_attr);
-
+*/
 /**
  *	QSPI memory region --- Strongly ordered
  *	START_Addr:-  0x80000000UL
  *	END_Addr:-    0x9FFFFFFFUL
  */
+/*
 	dw_region_base_addr =
 		QSPI_START_ADDRESS |
 		MPU_REGION_VALID |
@@ -301,13 +303,14 @@ static void _setup_memory_region( void )
 		MPU_REGION_ENABLE;
 
 	mpu_set_region( dw_region_base_addr, dw_region_attr);
-
+*/ 
 
 /**
  *	USB RAM Memory region --- Device
  *	START_Addr:-  0xA0100000UL
  *	END_Addr:-    0xA01FFFFFUL
  */
+/*
 	dw_region_base_addr =
 		USBHSRAM_START_ADDRESS |
 		MPU_REGION_VALID |
@@ -322,6 +325,7 @@ static void _setup_memory_region( void )
 
 	mpu_set_region( dw_region_base_addr, dw_region_attr);
 
+*/ 
 
 	/* Enable the memory management fault , Bus Fault, Usage Fault exception */
 	SCB->SHCSR |= (SCB_SHCSR_MEMFAULTENA_Msk | SCB_SHCSR_BUSFAULTENA_Msk

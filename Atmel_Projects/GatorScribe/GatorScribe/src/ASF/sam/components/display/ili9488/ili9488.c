@@ -630,7 +630,7 @@ void ili9488_set_window(uint16_t x, uint16_t y, uint16_t width, uint16_t height 
 uint32_t ili9488_init(struct ili9488_opt_t *p_opt)
 {
 	ili9488_color_t param;
-	uint32_t chipid;
+	 
 #ifdef ILI9488_EBIMODE
 	/* Enable peripheral clock */
 	pmc_enable_periph_clk(ID_SMC);
@@ -678,10 +678,12 @@ uint32_t ili9488_init(struct ili9488_opt_t *p_opt)
 	ili9488_delay(200);
 
 	/** read chipid */
-	chipid = ili9488_read_chipid();
+	/* // removed for our board 
+	uint32_t chipid = ili9488_read_chipid();
 	if (chipid != ILI9488_DEVICE_CODE) {
 		return 1;
 	}
+	*/ 
 
 	/** make it tRGB and reverse the column order */
 	param = 0x48;

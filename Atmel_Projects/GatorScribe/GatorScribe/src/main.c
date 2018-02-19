@@ -282,6 +282,10 @@ int main(void)
 	float pitch_shift2;
 	float pitch_shift3;
 	float pitch_shift4;
+	float pitch_shift5;
+	float pitch_shift6;
+	float pitch_shift7;
+
 	float auto_tuned_pitch;
 	float pitch_diff;
 	float oneOverInputPitch; 
@@ -317,8 +321,8 @@ int main(void)
 			oneOverInputPitch = 1.0f / inputPitch; 
 			
 			// debug frequency detection
-			sprintf(str, "%f", inputPitch);
-			printf("Freq: %s\n\r", str);
+			//sprintf(str, "%f", inputPitch);
+			//printf("Freq: %s\n\r", str);
 			
 #ifdef AUTOTUNE
 			if (inputPitch > 100)
@@ -336,10 +340,10 @@ int main(void)
 			{
 				auto_tuned_pitch = get_frequency_from_all(inputPitch);
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, -5);
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, -8);
 				pitch_shift1 = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				
-				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, -8);
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, -12);
 				pitch_shift2 = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				
 				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, 7);
@@ -348,10 +352,23 @@ int main(void)
 				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, 4);
 				pitch_shift4 = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 				
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, 12);
+				pitch_shift5 = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
+				
+				pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, 5);
+				pitch_shift6 = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
+				
+				//pitch_diff = auto_tuned_pitch*powerf(1.059463094359f, -8);
+				//pitch_shift7= 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
+				
 				pitch_shift_do(pitch_shift1, mags_and_phases);
 				pitch_shift_do(pitch_shift2, mags_and_phases);
 				pitch_shift_do(pitch_shift3, mags_and_phases);
 				pitch_shift_do(pitch_shift4, mags_and_phases);
+				pitch_shift_do(pitch_shift5, mags_and_phases);
+				pitch_shift_do(pitch_shift6, mags_and_phases);
+				//pitch_shift_do(pitch_shift7, mags_and_phases);
+
 			}
 			else
 			{

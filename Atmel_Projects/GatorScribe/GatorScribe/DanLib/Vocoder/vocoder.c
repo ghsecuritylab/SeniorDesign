@@ -138,7 +138,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	float *shift_env = &shift_envelope[envelope_filter_length>>1]; 
 	float sin_value, cos_value; 
 	
-	arm_scale_f32(gSynMagn, 2.5f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
+	arm_scale_f32(gSynMagn, 5.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
 	arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
 	for (k = 0; k < WIN_SIZE_D2; k++)
 	{		
