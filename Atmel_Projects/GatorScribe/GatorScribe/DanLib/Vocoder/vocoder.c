@@ -140,12 +140,12 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 		arm_conv_f32(gSynMagn, WIN_SIZE_D2, (float *)envelope_filter, envelope_filter_length, shift_envelope);
 		float *shift_env = &shift_envelope[envelope_filter_length>>1];
 			
-		arm_scale_f32(gSynMagn, 4.5f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
+		arm_scale_f32(gSynMagn, 5.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
 		arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
 		for (k = 0; k < WIN_SIZE_D2; k++)
 		{
 			// scale by synth envelope
-			gSynMagn[k] /= shift_env[k]; //Abs(mags_and_phases->env[k] - shift_env[k]) / shift_env[k];  //Abs(2.0f*mags_and_phases->env[k] - shift_env[k]) / shift_env[k];
+			gSynMagn[k] /= (shift_env[k] + 0.000001f); //Abs(mags_and_phases->env[k] - shift_env[k]) / shift_env[k];  //Abs(2.0f*mags_and_phases->env[k] - shift_env[k]) / shift_env[k];
 				
 			// get real and imag part and re-interleave
 			arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
@@ -168,6 +168,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	/* do inverse transform */
 	arm_rfft_fast_f32(fftInstance, gFFTworksp, ifft_real_values, 1);
 
+	/* Window and overlap & add */ 
 	arm_mult_f32(scaled_hanning, ifft_real_values, ifft_real_values, WIN_SIZE);
 	arm_add_f32(gOutputAccum, ifft_real_values, gOutputAccum, WIN_SIZE);
 		
