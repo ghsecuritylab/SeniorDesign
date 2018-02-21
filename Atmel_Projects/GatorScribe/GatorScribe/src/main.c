@@ -407,11 +407,11 @@ int main(void)
 			}
 			pitch_shift_do(pitch_shift, mags_and_phases);
 #else 
-			if (inputPitch > 50.0f && harmony_list_read[0] > 1.0f)
+			if (inputPitch > 0.0f && harmony_list_read[0] > 1.0f)
 			{
 				auto_tuned_pitch = get_frequency_from_all(inputPitch);
 				
-// 				
+				
 				i = 0; 
 				while(harmony_list_read[i] > 1.0f)
 				{

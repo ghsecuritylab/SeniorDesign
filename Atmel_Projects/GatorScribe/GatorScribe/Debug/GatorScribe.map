@@ -18033,128 +18033,128 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x00404ed0       0x80 src/main.o
                 0x00404ed0                USART1_Handler
  .text.startup.main
-                0x00404f50      0x6a0 src/main.o
+                0x00404f50      0x68c src/main.o
                 0x00404f50                main
  .text.vApplicationStackOverflowHook
-                0x004055f0       0x18 src/main.o
-                0x004055f0                vApplicationStackOverflowHook
+                0x004055dc       0x18 src/main.o
+                0x004055dc                vApplicationStackOverflowHook
  .text.vApplicationTickHook
-                0x00405608       0x30 src/main.o
-                0x00405608                vApplicationTickHook
+                0x004055f4       0x30 src/main.o
+                0x004055f4                vApplicationTickHook
  .text.arm_fill_f32
-                0x00405638       0x30 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
-                0x00405638                arm_fill_f32
+                0x00405624       0x30 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+                0x00405624                arm_fill_f32
  .text.arm_copy_f32
-                0x00405668       0x54 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
-                0x00405668                arm_copy_f32
+                0x00405654       0x54 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+                0x00405654                arm_copy_f32
  .text.arm_min_f32
-                0x004056bc       0xdc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
-                0x004056bc                arm_min_f32
+                0x004056a8       0xdc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+                0x004056a8                arm_min_f32
  .text.arm_max_f32
-                0x00405798       0xdc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
-                0x00405798                arm_max_f32
+                0x00405784       0xdc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+                0x00405784                arm_max_f32
  .text.arm_sin_cos_f32
-                0x00405874      0x124 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
-                0x00405874                arm_sin_cos_f32
+                0x00405860      0x124 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
+                0x00405860                arm_sin_cos_f32
  .text.arm_rfft_fast_init_f32
-                0x00405998      0x108 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
-                0x00405998                arm_rfft_fast_init_f32
+                0x00405984      0x108 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
+                0x00405984                arm_rfft_fast_init_f32
  .text.arm_rfft_fast_f32
-                0x00405aa0      0x18c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
-                0x00405aa0                arm_rfft_fast_f32
+                0x00405a8c      0x18c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
+                0x00405a8c                arm_rfft_fast_f32
  .text.arm_cfft_radix8by2_f32
-                0x00405c2c      0x1c4 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
-                0x00405c2c                arm_cfft_radix8by2_f32
+                0x00405c18      0x1c4 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+                0x00405c18                arm_cfft_radix8by2_f32
  .text.arm_cfft_radix8by4_f32
-                0x00405df0      0x4f8 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
-                0x00405df0                arm_cfft_radix8by4_f32
+                0x00405ddc      0x4f8 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+                0x00405ddc                arm_cfft_radix8by4_f32
  .text.arm_cfft_f32
-                0x004062e8      0x100 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
-                0x004062e8                arm_cfft_f32
+                0x004062d4      0x100 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+                0x004062d4                arm_cfft_f32
  .text.arm_conv_f32
-                0x004063e8      0x4d4 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
-                0x004063e8                arm_conv_f32
+                0x004063d4      0x4d4 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
+                0x004063d4                arm_conv_f32
  .text.arm_cmplx_mag_f32
-                0x004068bc      0x1ec ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
-                0x004068bc                arm_cmplx_mag_f32
+                0x004068a8      0x1ec ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
+                0x004068a8                arm_cmplx_mag_f32
  .text.arm_scale_f32
-                0x00406aa8       0x6c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
-                0x00406aa8                arm_scale_f32
+                0x00406a94       0x6c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+                0x00406a94                arm_scale_f32
  .text.arm_mult_f32
-                0x00406b14       0x90 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
-                0x00406b14                arm_mult_f32
+                0x00406b00       0x90 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
+                0x00406b00                arm_mult_f32
  .text.arm_add_f32
-                0x00406ba4       0x90 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
-                0x00406ba4                arm_add_f32
- .text          0x00406c34       0xc4 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
-                0x00406c34                arm_bitreversal_32
-                0x00406ca0                arm_bitreversal_16
+                0x00406b90       0x90 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
+                0x00406b90                arm_add_f32
+ .text          0x00406c20       0xc4 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
+                0x00406c20                arm_bitreversal_32
+                0x00406c8c                arm_bitreversal_16
  .text.arm_radix8_butterfly_f32
-                0x00406cf8      0x67c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
-                0x00406cf8                arm_radix8_butterfly_f32
- .text.round    0x00407374       0x98 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-s_round.o)
-                0x00407374                round
- .text.sqrtf    0x0040740c       0xa8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-wf_sqrt.o)
-                0x0040740c                sqrtf
+                0x00406ce4      0x67c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
+                0x00406ce4                arm_radix8_butterfly_f32
+ .text.round    0x00407360       0x98 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-s_round.o)
+                0x00407360                round
+ .text.sqrtf    0x004073f8       0xa8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-wf_sqrt.o)
+                0x004073f8                sqrtf
  .text.__ieee754_sqrtf
-                0x004074b4       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-ef_sqrt.o)
-                0x004074b4                __ieee754_sqrtf
- .text.matherr  0x004074c4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-s_matherr.o)
-                0x004074c4                matherr
- .text          0x004074c8      0x370 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_addsubdf3.o)
-                0x004074c8                __aeabi_drsub
-                0x004074d0                __aeabi_dsub
-                0x004074d0                __subdf3
-                0x004074d4                __aeabi_dadd
-                0x004074d4                __adddf3
-                0x0040774c                __floatunsidf
-                0x0040774c                __aeabi_ui2d
-                0x0040776c                __floatsidf
-                0x0040776c                __aeabi_i2d
-                0x00407790                __aeabi_f2d
-                0x00407790                __extendsfdf2
-                0x004077cc                __floatundidf
-                0x004077cc                __aeabi_ul2d
-                0x004077dc                __floatdidf
-                0x004077dc                __aeabi_l2d
- .text          0x00407838      0x424 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_muldivdf3.o)
-                0x00407838                __aeabi_dmul
-                0x00407838                __muldf3
-                0x00407a8c                __divdf3
-                0x00407a8c                __aeabi_ddiv
- .text          0x00407c5c       0xa0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_truncdfsf2.o)
-                0x00407c5c                __truncdfsf2
-                0x00407c5c                __aeabi_d2f
- .text.calloc   0x00407cfc       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-calloc.o)
-                0x00407cfc                calloc
+                0x004074a0       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-ef_sqrt.o)
+                0x004074a0                __ieee754_sqrtf
+ .text.matherr  0x004074b0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libm.a(lib_a-s_matherr.o)
+                0x004074b0                matherr
+ .text          0x004074b4      0x370 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_addsubdf3.o)
+                0x004074b4                __aeabi_drsub
+                0x004074bc                __aeabi_dsub
+                0x004074bc                __subdf3
+                0x004074c0                __aeabi_dadd
+                0x004074c0                __adddf3
+                0x00407738                __floatunsidf
+                0x00407738                __aeabi_ui2d
+                0x00407758                __floatsidf
+                0x00407758                __aeabi_i2d
+                0x0040777c                __aeabi_f2d
+                0x0040777c                __extendsfdf2
+                0x004077b8                __floatundidf
+                0x004077b8                __aeabi_ul2d
+                0x004077c8                __floatdidf
+                0x004077c8                __aeabi_l2d
+ .text          0x00407824      0x424 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_muldivdf3.o)
+                0x00407824                __aeabi_dmul
+                0x00407824                __muldf3
+                0x00407a78                __divdf3
+                0x00407a78                __aeabi_ddiv
+ .text          0x00407c48       0xa0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_arm_truncdfsf2.o)
+                0x00407c48                __truncdfsf2
+                0x00407c48                __aeabi_d2f
+ .text.calloc   0x00407ce8       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-calloc.o)
+                0x00407ce8                calloc
  .text._calloc_r
-                0x00407d0c       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-callocr.o)
-                0x00407d0c                _calloc_r
- .text.__errno  0x00407d6c        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-errno.o)
-                0x00407d6c                __errno
+                0x00407cf8       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-callocr.o)
+                0x00407cf8                _calloc_r
+ .text.__errno  0x00407d58        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-errno.o)
+                0x00407d58                __errno
  .text.__libc_init_array
-                0x00407d78       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-init.o)
-                0x00407d78                __libc_init_array
- .text.iprintf  0x00407dc8       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-iprintf.o)
-                0x00407dc8                iprintf
- .text.malloc   0x00407df0       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-malloc.o)
-                0x00407df0                malloc
+                0x00407d64       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-init.o)
+                0x00407d64                __libc_init_array
+ .text.iprintf  0x00407db4       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-iprintf.o)
+                0x00407db4                iprintf
+ .text.malloc   0x00407ddc       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-malloc.o)
+                0x00407ddc                malloc
  .text._malloc_r
-                0x00407e00      0x560 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mallocr.o)
-                0x00407e00                _malloc_r
- .text          0x00408360      0x134 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memcpy.o)
-                0x00408360                memcpy
- .text.memset   0x00408494       0x9c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memset.o)
-                0x00408494                memset
+                0x00407dec      0x560 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mallocr.o)
+                0x00407dec                _malloc_r
+ .text          0x0040834c      0x134 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memcpy.o)
+                0x0040834c                memcpy
+ .text.memset   0x00408480       0x9c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memset.o)
+                0x00408480                memset
  .text.__malloc_lock
-                0x00408530        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mlock.o)
-                0x00408530                __malloc_lock
+                0x0040851c        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mlock.o)
+                0x0040851c                __malloc_lock
  .text.__malloc_unlock
-                0x0040853c        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mlock.o)
-                0x0040853c                __malloc_unlock
- .text._sbrk_r  0x00408548       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-sbrkr.o)
-                0x00408548                _sbrk_r
- *fill*         0x0040856c       0x14 
+                0x00408528        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mlock.o)
+                0x00408528                __malloc_unlock
+ .text._sbrk_r  0x00408534       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-sbrkr.o)
+                0x00408534                _sbrk_r
+ *fill*         0x00408558       0x28 
  .text          0x00408580       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-strlen.o)
                 0x00408580                strlen
  .text.__sprint_r.part.0
@@ -19091,7 +19091,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .comment       0x000000b4       0x5c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
  .comment       0x000000b4       0x5c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
 
-.debug_info     0x00000000    0x45433
+.debug_info     0x00000000    0x45434
  .debug_info    0x00000000     0x1c18 DanLib/Audio/DMA/DMA_Audio.o
  .debug_info    0x00001c18     0x1085 DanLib/Audio/audio.o
  .debug_info    0x00002c9d     0x132f DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -19134,23 +19134,23 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_info    0x0003aed8      0xe48 src/FreeRTOS/Tasks/QueueOverwrite.o
  .debug_info    0x0003bd20     0x1cfe src/FreeRTOS/Tasks/TaskNotify.o
  .debug_info    0x0003da1e     0x1dce src/FreeRTOS/Tasks/TimerDemo.o
- .debug_info    0x0003f7ec     0x2a28 src/main.o
- .debug_info    0x00042214      0x140 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_info    0x00042354      0x14a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_info    0x0004249e      0x166 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_info    0x00042604      0x166 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_info    0x0004276a      0x1f6 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
- .debug_info    0x00042960      0x4c3 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
- .debug_info    0x00042e23      0x728 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
- .debug_info    0x0004354b      0x6b2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
- .debug_info    0x00043bfd      0x2b5 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
- .debug_info    0x00043eb2      0x296 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
- .debug_info    0x00044148      0x159 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_info    0x000442a1      0x1c9 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
- .debug_info    0x0004446a      0x195 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
- .debug_info    0x000445ff      0x99d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
- .debug_info    0x00044f9c       0x96 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
- .debug_info    0x00045032      0x401 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
+ .debug_info    0x0003f7ec     0x2a29 src/main.o
+ .debug_info    0x00042215      0x140 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_info    0x00042355      0x14a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_info    0x0004249f      0x166 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_info    0x00042605      0x166 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_info    0x0004276b      0x1f6 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
+ .debug_info    0x00042961      0x4c3 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
+ .debug_info    0x00042e24      0x728 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
+ .debug_info    0x0004354c      0x6b2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+ .debug_info    0x00043bfe      0x2b5 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
+ .debug_info    0x00043eb3      0x296 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
+ .debug_info    0x00044149      0x159 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_info    0x000442a2      0x1c9 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
+ .debug_info    0x0004446b      0x195 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
+ .debug_info    0x00044600      0x99d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_info    0x00044f9d       0x96 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
+ .debug_info    0x00045033      0x401 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
 
 .debug_abbrev   0x00000000     0x95ae
  .debug_abbrev  0x00000000      0x350 DanLib/Audio/DMA/DMA_Audio.o
@@ -19213,7 +19213,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_abbrev  0x000094f2       0x14 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
  .debug_abbrev  0x00009506       0xa8 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
 
-.debug_loc      0x00000000    0x1e695
+.debug_loc      0x00000000    0x1e700
  .debug_loc     0x00000000      0x27a DanLib/Audio/DMA/DMA_Audio.o
  .debug_loc     0x0000027a       0x78 DanLib/Audio/audio.o
  .debug_loc     0x000002f2       0x8f DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -19253,21 +19253,21 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_loc     0x000185dc      0x16c src/FreeRTOS/Tasks/QueueOverwrite.o
  .debug_loc     0x00018748      0x40c src/FreeRTOS/Tasks/TaskNotify.o
  .debug_loc     0x00018b54      0x985 src/FreeRTOS/Tasks/TimerDemo.o
- .debug_loc     0x000194d9      0x483 src/main.o
- .debug_loc     0x0001995c      0x10a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_loc     0x00019a66      0x18c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_loc     0x00019bf2      0x1af ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_loc     0x00019da1      0x1af ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_loc     0x00019f50      0x341 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
- .debug_loc     0x0001a291      0x183 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
- .debug_loc     0x0001a414      0xd3b ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
- .debug_loc     0x0001b14f      0xf78 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
- .debug_loc     0x0001c0c7      0xf53 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
- .debug_loc     0x0001d01a      0x753 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
- .debug_loc     0x0001d76d      0x1f2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_loc     0x0001d95f      0x272 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
- .debug_loc     0x0001dbd1      0x228 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
- .debug_loc     0x0001ddf9      0x89c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
+ .debug_loc     0x000194d9      0x4ee src/main.o
+ .debug_loc     0x000199c7      0x10a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_loc     0x00019ad1      0x18c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_loc     0x00019c5d      0x1af ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_loc     0x00019e0c      0x1af ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_loc     0x00019fbb      0x341 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
+ .debug_loc     0x0001a2fc      0x183 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
+ .debug_loc     0x0001a47f      0xd3b ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
+ .debug_loc     0x0001b1ba      0xf78 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+ .debug_loc     0x0001c132      0xf53 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
+ .debug_loc     0x0001d085      0x753 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
+ .debug_loc     0x0001d7d8      0x1f2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_loc     0x0001d9ca      0x272 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
+ .debug_loc     0x0001dc3c      0x228 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
+ .debug_loc     0x0001de64      0x89c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
 
 .debug_aranges  0x00000000     0x17a8
  .debug_aranges
@@ -19389,7 +19389,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_aranges
                 0x00001788       0x20 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
 
-.debug_ranges   0x00000000     0x5210
+.debug_ranges   0x00000000     0x5218
  .debug_ranges  0x00000000       0xe0 DanLib/Audio/DMA/DMA_Audio.o
  .debug_ranges  0x000000e0       0x28 DanLib/Audio/audio.o
  .debug_ranges  0x00000108       0x18 DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -19431,21 +19431,21 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_ranges  0x00004d48       0x28 src/FreeRTOS/Tasks/QueueOverwrite.o
  .debug_ranges  0x00004d70       0xa8 src/FreeRTOS/Tasks/TaskNotify.o
  .debug_ranges  0x00004e18      0x108 src/FreeRTOS/Tasks/TimerDemo.o
- .debug_ranges  0x00004f20      0x128 src/main.o
- .debug_ranges  0x00005048       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_ranges  0x00005058       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_ranges  0x00005068       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_ranges  0x00005078       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_ranges  0x00005088       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
- .debug_ranges  0x00005098       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
- .debug_ranges  0x000050a8       0x20 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
- .debug_ranges  0x000050c8       0x20 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
- .debug_ranges  0x000050e8       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
- .debug_ranges  0x000050f8       0xd8 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
- .debug_ranges  0x000051d0       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_ranges  0x000051e0       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
- .debug_ranges  0x000051f0       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
- .debug_ranges  0x00005200       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
+ .debug_ranges  0x00004f20      0x130 src/main.o
+ .debug_ranges  0x00005050       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_ranges  0x00005060       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_ranges  0x00005070       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_ranges  0x00005080       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_ranges  0x00005090       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
+ .debug_ranges  0x000050a0       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
+ .debug_ranges  0x000050b0       0x20 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
+ .debug_ranges  0x000050d0       0x20 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+ .debug_ranges  0x000050f0       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
+ .debug_ranges  0x00005100       0xd8 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
+ .debug_ranges  0x000051d8       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_ranges  0x000051e8       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
+ .debug_ranges  0x000051f8       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
+ .debug_ranges  0x00005208       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
 
 .debug_macro    0x00000000    0x2f4d1
  .debug_macro   0x00000000      0x8cd DanLib/Audio/DMA/DMA_Audio.o
@@ -19711,7 +19711,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_macro   0x0002f38b       0x16 src/main.o
  .debug_macro   0x0002f3a1      0x130 src/main.o
 
-.debug_line     0x00000000    0x29926
+.debug_line     0x00000000    0x2991c
  .debug_line    0x00000000     0x1190 DanLib/Audio/DMA/DMA_Audio.o
  .debug_line    0x00001190     0x1069 DanLib/Audio/audio.o
  .debug_line    0x000021f9     0x1072 DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -19754,23 +19754,23 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_line    0x00022d88      0xc1f src/FreeRTOS/Tasks/QueueOverwrite.o
  .debug_line    0x000239a7      0xf4c src/FreeRTOS/Tasks/TaskNotify.o
  .debug_line    0x000248f3     0x1094 src/FreeRTOS/Tasks/TimerDemo.o
- .debug_line    0x00025987     0x1603 src/main.o
- .debug_line    0x00026f8a      0x186 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_line    0x00027110      0x191 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_line    0x000272a1      0x19e ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_line    0x0002743f      0x1a0 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_line    0x000275df      0x217 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
- .debug_line    0x000277f6      0x1e2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
- .debug_line    0x000279d8      0x32c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
- .debug_line    0x00027d04      0x7b7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
- .debug_line    0x000284bb      0x3fc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
- .debug_line    0x000288b7      0x24f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
- .debug_line    0x00028b06      0x1a2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_line    0x00028ca8      0x1b1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
- .debug_line    0x00028e59      0x1a5 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
- .debug_line    0x00028ffe      0x165 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
- .debug_line    0x00029163       0x98 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
- .debug_line    0x000291fb      0x72b ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
+ .debug_line    0x00025987     0x15f9 src/main.o
+ .debug_line    0x00026f80      0x186 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_line    0x00027106      0x191 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_line    0x00027297      0x19e ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_line    0x00027435      0x1a0 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_line    0x000275d5      0x217 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_sin_cos_f32.o)
+ .debug_line    0x000277ec      0x1e2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_init_f32.o)
+ .debug_line    0x000279ce      0x32c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_rfft_fast_f32.o)
+ .debug_line    0x00027cfa      0x7b7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_f32.o)
+ .debug_line    0x000284b1      0x3fc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_conv_f32.o)
+ .debug_line    0x000288ad      0x24f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cmplx_mag_f32.o)
+ .debug_line    0x00028afc      0x1a2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_line    0x00028c9e      0x1b1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_mult_f32.o)
+ .debug_line    0x00028e4f      0x1a5 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_add_f32.o)
+ .debug_line    0x00028ff4      0x165 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_line    0x00029159       0x98 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_bitreversal2.o)
+ .debug_line    0x000291f1      0x72b ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cfft_radix8_f32.o)
 
 .debug_str      0x00000000    0xa7f8f
  .debug_str     0x00000000    0x9250c DanLib/Audio/DMA/DMA_Audio.o
