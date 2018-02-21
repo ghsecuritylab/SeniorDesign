@@ -138,11 +138,11 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	
 	if (harmonize_flag)
 	{
-		/* calculate shift envelope */ 
+		/* calculate shift envelope -- todo: try different filter cutoffs */ 
 		arm_conv_f32(gSynMagn, WIN_SIZE_D2, (float *)envelope_filter, envelope_filter_length, shift_envelope);
 		float *shift_env = &shift_envelope[envelope_filter_length>>1];
 			
-		arm_scale_f32(gSynMagn, 5.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
+		arm_scale_f32(gSynMagn, 4.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
 		arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
 		for (k = 0; k < WIN_SIZE_D2; k++)
 		{
@@ -157,7 +157,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	}
 	else 
 	{
-		arm_scale_f32(gSynMagn, 5.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
+		arm_scale_f32(gSynMagn, 4.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
 		for (k = 0; k < WIN_SIZE_D2; k++)
 		{	
 			/* Get real and imag part and interleave */ 
@@ -175,7 +175,10 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	arm_add_f32(gOutputAccum, ifft_real_values, gOutputAccum, WIN_SIZE);
 		
 	/* Copy data to output buffer */ 
-	arm_copy_f32(gOutputAccum, outData, STEP_SIZE);
+	if(harmonize_flag)
+		arm_copy_f32(gOutputAccum, outData, STEP_SIZE);
+	//else 
+		//arm_fill_f32(0.0f, outData, STEP_SIZE); 
 		
 	/* shift accumulator */
 	arm_copy_f32(&gOutputAccum[STEP_SIZE], gOutputAccum, WIN_SIZE);

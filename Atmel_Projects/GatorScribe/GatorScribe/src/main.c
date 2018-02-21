@@ -244,8 +244,44 @@ float envelope_filter[] = {0.0013530601,
 	0.0029673511,
 	0.0013530601}; 
 uint32_t envelope_filter_length = 25; 
+
 /*************** Application code buffers and consts end ***************/
 
+#define USART_SERIAL                 USART1
+#define USART_SERIAL_ID              ID_USART1  
+#define USART_SERIAL_ISR_HANDLER     USART1_Handler
+#define USART_SERIAL_BAUDRATE        115200
+#define USART_SERIAL_CHAR_LENGTH     US_MR_CHRL_8_BIT
+#define USART_SERIAL_PARITY          US_MR_PAR_NO
+#define USART_SERIAL_STOP_BIT        US_MR_NBSTOP_1_BIT
+
+volatile float harmony_list_a[11]; 
+volatile float harmony_list_b[11];
+volatile float *harmony_list_read = harmony_list_a; 
+volatile float *harmony_list_fill = harmony_list_b; 
+volatile uint32_t harmony_idx = 0;  
+void USART_SERIAL_ISR_HANDLER(void)
+{
+	uint32_t dw_status = usart_get_status(USART_SERIAL);
+	if (dw_status & US_CSR_RXRDY) {
+		uint32_t received_byte;
+		usart_read(USART_SERIAL, &received_byte);
+		//usart_write(USART_SERIAL, received_byte);
+		if (received_byte != 0 && harmony_idx < 10)
+		{
+			harmony_list_fill[harmony_idx] = midi_note_frequencies[received_byte]; 
+			harmony_idx++;
+		}
+		else 
+		{
+			harmony_list_fill[harmony_idx] = 0.0f; 
+			float *temp = harmony_list_read; 
+			harmony_list_read = harmony_list_fill; 
+			harmony_list_fill = temp; 
+			harmony_idx = 0; 
+		}
+	}
+}
 int main(void)
 {
 	sysclk_init();
@@ -254,7 +290,7 @@ int main(void)
 	lcd_init(); 
 	SCB_EnableICache();
 	audio_init();
-	configure_console();
+	//configure_console();
 	Vocoder_init();
 	 
 	SCB_DisableICache(); 
@@ -270,9 +306,24 @@ int main(void)
 	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
 	SCB_EnableICache(); 
 	
+	usart_serial_options_t usart_console_settings = {
+		USART_SERIAL_BAUDRATE,
+		USART_SERIAL_CHAR_LENGTH,
+		USART_SERIAL_PARITY,
+		USART_SERIAL_STOP_BIT
+	};
+	usart_serial_init(USART_SERIAL, &usart_console_settings);
+	usart_enable_tx(USART_SERIAL);
+	usart_enable_rx(USART_SERIAL);
+	
+	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY); 
+	NVIC_SetPriority(USART1_IRQn, 2); 
+	NVIC_ClearPendingIRQ(USART1_IRQn);
+	NVIC_EnableIRQ(USART1_IRQn);
+	
 	// for serial debug 
-	char str[20]; 
-
+	char *str = "hello"; //(char *)calloc(20, sizeof(char)); 
+	
 	/*************** Application code variables start ***************/
 	uint32_t i,j;
 	cvec_t *mags_and_phases = (cvec_t*)calloc(sizeof(cvec_t), 1); 
@@ -303,6 +354,10 @@ int main(void)
 	float pitch_diff;
 	float oneOverInputPitch; 
 	bool harmonize_flag = false;
+	for (i = 0; i < 11; i++)
+	{
+		harmony_list_a[i] = 0.0f; harmony_list_b[i] = 0.0f; 
+	}
 	/*************** Application code variables end ***************/
 
 	while(1)
@@ -333,7 +388,8 @@ int main(void)
 				
 			// compute pitch 
 			inputPitch = computeWaveletPitch(inputVecCopy->data); 
-			oneOverInputPitch = 1.0f / inputPitch; 
+			if (inputPitch > 0.0f)
+				oneOverInputPitch = 1.0f / inputPitch; 
 			
 			// debug frequency detection
 			//sprintf(str, "%f", inputPitch);
@@ -351,37 +407,48 @@ int main(void)
 			}
 			pitch_shift_do(pitch_shift, mags_and_phases);
 #else 
-			if (inputPitch > 50)
+			if (inputPitch > 50.0f && harmony_list_read[0] > 1.0f)
 			{
 				auto_tuned_pitch = get_frequency_from_all(inputPitch);
-			
-				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, MAJOR_3RD_BELOW);
-				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-				pitch_shift_do(pitch_shift, mags_and_phases);
 				
-				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, PERFECT_5TH_BELOW);
-				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-				pitch_shift_do(pitch_shift, mags_and_phases);
+// 				
+				i = 0; 
+				while(harmony_list_read[i] > 1.0f)
+				{
+					pitch_shift = 1.0f - (inputPitch-harmony_list_read[i++])*oneOverInputPitch;
+					pitch_shift_do(pitch_shift, mags_and_phases);
+				}
 				
-				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, MAJOR_3RD_ABOVE);
-				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-				pitch_shift_do(pitch_shift, mags_and_phases);
 				
-				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, PERFECT_5TH_ABOVE);
-				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-				pitch_shift_do(pitch_shift, mags_and_phases);
-				
-				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, ROOT);
-				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-				pitch_shift_do(pitch_shift, mags_and_phases);
-
-				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, OCTAVE_DOWN);
-				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-				pitch_shift_do(pitch_shift, mags_and_phases);
-				
-				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, OCTAVE_UP);
-				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-				pitch_shift_do(pitch_shift, mags_and_phases);
+		
+// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, MAJOR_3RD_ABOVE);
+// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
+// 				pitch_shift_do(pitch_shift, mags_and_phases);
+// 				
+// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, PERFECT_5TH_ABOVE);
+// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
+// 				pitch_shift_do(pitch_shift, mags_and_phases);
+// 				
+// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, MAJOR_3RD_BELOW);
+// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
+// 				pitch_shift_do(pitch_shift, mags_and_phases);
+// 				
+// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, PERFECT_5TH_BELOW);
+// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
+// 				pitch_shift_do(pitch_shift, mags_and_phases);
+// 				
+// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, ROOT);
+// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
+// 				pitch_shift_do(pitch_shift, mags_and_phases);
+// 
+// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, OCTAVE_DOWN);
+// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
+// 				pitch_shift_do(pitch_shift, mags_and_phases);
+// 				
+// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, OCTAVE_UP);
+// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
+// 				pitch_shift_do(pitch_shift, mags_and_phases);
+				 
 				
 				harmonize_flag = true; 
 			}
@@ -404,7 +471,11 @@ int main(void)
 			uint32_t processIdx = lp_filter_11k_length; 
 #else
 			uint32_t idx = 0; 
-			arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE); 
+			if(harmonize_flag)
+				arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
+			else
+				arm_scale_f32((float *)processBuffer, 2.0f, mixed_buffer, STEP_SIZE);  
+				
 			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, STEP_SIZE); // should technically multiply by 0.5 here 
 #endif 
 			for(i = 0; i < IO_BUF_SIZE; i+=4)
