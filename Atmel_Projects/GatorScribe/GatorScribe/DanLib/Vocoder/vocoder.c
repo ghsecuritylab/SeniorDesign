@@ -104,7 +104,7 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 			gSynMagn[target] += mags_and_phases->norm[k] ;
 			gSynFreq[target] = gAnaFreq[k];
 #else 
-			gSynMagn[target] += mags_and_phases->norm[k]; // / mags_and_phases->env[k] * mags_and_phases->env[target];
+			gSynMagn[target] += mags_and_phases->norm[k] / mags_and_phases->env[k] * mags_and_phases->env[target];
 			gSynFreq[target] = gAnaFreq[k];
 #endif 
 		}
@@ -139,15 +139,15 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	if (harmonize_flag)
 	{
 		/* calculate shift envelope -- todo: try different filter cutoffs */ 
-		arm_conv_f32(gSynMagn, WIN_SIZE_D2, (float *)envelope_filter, envelope_filter_length, shift_envelope);
+		//arm_conv_f32(gSynMagn, WIN_SIZE_D2, (float *)envelope_filter, envelope_filter_length, shift_envelope);
 		float *shift_env = &shift_envelope[envelope_filter_length>>1];
 			
-		arm_scale_f32(gSynMagn, 4.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
-		arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
+		//arm_scale_f32(gSynMagn, 4.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
+		//arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
 		for (k = 0; k < WIN_SIZE_D2; k++)
 		{
 			/* scale by synth envelope - adding small term to avoid dividing by zero */ 
-			gSynMagn[k] /= (shift_env[k] + 0.000001f); //Abs(mags_and_phases->env[k] - shift_env[k]) / shift_env[k];  //Abs(2.0f*mags_and_phases->env[k] - shift_env[k]) / shift_env[k];
+			//gSynMagn[k] /= (shift_env[k] + 0.000001f); //Abs(mags_and_phases->env[k] - shift_env[k]) / shift_env[k];  //Abs(2.0f*mags_and_phases->env[k] - shift_env[k]) / shift_env[k];
 				
 			/* Get real and imag part and interleave */ 
 			arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
@@ -157,7 +157,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	}
 	else 
 	{
-		arm_scale_f32(gSynMagn, 4.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
+		//arm_scale_f32(gSynMagn, 4.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
 		for (k = 0; k < WIN_SIZE_D2; k++)
 		{	
 			/* Get real and imag part and interleave */ 
@@ -169,6 +169,8 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 
 	/* do inverse transform */
 	arm_rfft_fast_f32(fftInstance, gFFTworksp, ifft_real_values, 1);
+	
+	//arm_scale_f32(ifft_real_values, 2.0f, ifft_real_values, WIN_SIZE); 
 
 	/* Window and overlap & add */ 
 	arm_mult_f32(scaled_hanning, ifft_real_values, ifft_real_values, WIN_SIZE);

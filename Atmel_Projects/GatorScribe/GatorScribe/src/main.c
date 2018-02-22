@@ -217,34 +217,8 @@ COMPILER_ALIGNED(WIN_SIZE_D2) static float _norm[WIN_SIZE_D2];
 COMPILER_ALIGNED(WIN_SIZE) static float _envelope[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[STEP_SIZE];
 
-// might want to move envelope filter to its own .c file once you create a folder for application code 
-float envelope_filter[] = {0.0013530601,
-	0.0029673511,
-	0.0058125495,
-	0.0099546928,
-	0.015469050,
-	0.022262389,
-	0.030047299,
-	0.038348131,
-	0.046538413,
-	0.053915478,
-	0.059787087,
-	0.063570723,
-	0.064878047,
-	0.063570723,
-	0.059787087,
-	0.053915478,
-	0.046538413,
-	0.038348131,
-	0.030047299,
-	0.022262389,
-	0.015469050,
-	0.0099546928,
-	0.0058125495,
-	0.0029673511,
-	0.0013530601}; 
-uint32_t envelope_filter_length = 25; 
-
+float envelope_filter[] = {0.0038  ,  0.0151 ,   0.0376 ,   0.0707,    0.1074,    0.1366  ,  0.1478  ,  0.1366 ,   0.1074  ,  0.0707  ,  0.0376  ,  0.0151  ,  0.0038}; 
+uint32_t envelope_filter_length = 13;
 /*************** Application code buffers and consts end ***************/
 
 #define USART_SERIAL                 USART1
@@ -387,7 +361,9 @@ int main(void)
 			arm_conv_f32(mags_and_phases->norm, mags_and_phases->length, (float *)envelope_filter, envelope_filter_length, mags_and_phases->unshiftedEnv); 			
 				
 			// compute pitch 
+			float tempPitch = inputPitch; 
 			inputPitch = computeWaveletPitch(inputVecCopy->data); 
+			if (inputPitch < 50.0f) inputPitch = tempPitch; 
 			if (inputPitch > 0.0f)
 				oneOverInputPitch = 1.0f / inputPitch; 
 			
@@ -396,7 +372,7 @@ int main(void)
 			//printf("Freq: %s\n\r", str);
 			
 #ifdef AUTOTUNE
-			if (inputPitch > 50)
+			if (inputPitch > 0.0f)
 			{
 				auto_tuned_pitch = get_frequency_from_key_C(inputPitch);
 				pitch_shift = 1.0f - (inputPitch-auto_tuned_pitch)*oneOverInputPitch; // auto-tune 
@@ -437,9 +413,10 @@ int main(void)
 // 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 // 				pitch_shift_do(pitch_shift, mags_and_phases);
 // 				
+// auto tune 
 // 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, ROOT);
 // 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-// 				pitch_shift_do(pitch_shift, mags_and_phases);
+// 				pitch_shift_do(1.0f, mags_and_phases);
 // 
 // 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, OCTAVE_DOWN);
 // 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
@@ -473,6 +450,7 @@ int main(void)
 			uint32_t idx = 0; 
 			if(harmonize_flag)
 				arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
+				//arm_copy_f32(&harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
 			else
 				arm_scale_f32((float *)processBuffer, 2.0f, mixed_buffer, STEP_SIZE);  
 				

@@ -8,6 +8,12 @@
 #define DBL_MAX 1.79769e+308
 #endif
 
+static dywapitchtracker pitchtracker = {-1.0f, -1};
+COMPILER_ALIGNED(WIN_SIZE) static float sam[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static int32_t distances[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static int32_t mins[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static int32_t maxs[WIN_SIZE];
+
 // returns 1 if power of 2
 static inline int32_t _power2p(int32_t value) {
 	if (value == 0) return 1;
@@ -42,19 +48,121 @@ static inline int32_t _floor_power2(int32_t value) {
 }
 
 // 2 power
-static int32_t _2power(int32_t i) {
+static inline int32_t _2power(int32_t i) {
 	int32_t res = 1, j;
 	for (j = 0; j < i; j++) res <<= 1;
 	return res;
 }
 
+/***
+It states: 
+ - a pitch cannot change much all of a sudden (20%) (impossible humanly,
+ so if such a situation happens, consider that it is a mistake and drop it. 
+ - a pitch cannot double or be divided by 2 all of a sudden : it is an
+ algorithm side-effect : divide it or double it by 2. 
+ - a lonely voiced pitch cannot happen, nor can a sudden drop in the middle
+ of a voiced segment. Smooth the plot. 
+***/
+static inline float _dywapitch_dynamicprocess(float pitch) 
+{
+	
+	// equivalence
+	if (pitch < 1.0f) pitch = -1.0f;
+	
+	//
+	float estimatedPitch = -1.0f;
+	float acceptedError = 0.2f;
+	int maxConfidence = 5;
+	
+	if (pitch > -1.0) {
+		// I have a pitch here
+		
+		if (pitchtracker._prevPitch < 0.0f) 
+		{
+			// no previous
+			estimatedPitch = pitch;
+			pitchtracker._prevPitch = pitch;
+			pitchtracker._pitchConfidence = 1;
+			
+		} 
+		else if (abs(pitchtracker._prevPitch - pitch)/pitch < acceptedError) 
+		{
+			// similar : remember and increment pitch
+			pitchtracker._prevPitch = pitch;
+			estimatedPitch = pitch;
+			pitchtracker._pitchConfidence = Min(maxConfidence, pitchtracker._pitchConfidence + 1); // maximum 3
+			
+		} 
+		else if ((pitchtracker._pitchConfidence >= maxConfidence-2) && Abs(pitchtracker._prevPitch - 2.0f*pitch)/(2.0f*pitch) < acceptedError) 
+		{
+			// close to half the last pitch, which is trusted
+			estimatedPitch = 2.0f*pitch;
+			pitchtracker._prevPitch = estimatedPitch;
+			
+		} 
+		else if ((pitchtracker._pitchConfidence >= maxConfidence-2) && Abs(pitchtracker._prevPitch - 0.5f*pitch)/(0.5f*pitch) < acceptedError) 
+		{
+			// close to twice the last pitch, which is trusted
+			estimatedPitch = 0.5f*pitch;
+			pitchtracker._prevPitch = estimatedPitch;
+			
+		} 
+		else 
+		{
+			// nothing like this : very different value
+			if (pitchtracker._pitchConfidence >= 1) 
+			{
+				// previous trusted : keep previous
+				estimatedPitch = pitchtracker._prevPitch;
+				pitchtracker._pitchConfidence = max(0, pitchtracker._pitchConfidence - 1);
+			} 
+			else 
+			{
+				// previous not trusted : take current
+				estimatedPitch = pitch;
+				pitchtracker._prevPitch = pitch;
+				pitchtracker._pitchConfidence = 1;
+			}
+		}
+		
+	} 
+	else 
+	{
+		// no pitch now
+		if (pitchtracker._prevPitch > -1.0f) 
+		{
+			// was pitch before
+			if (pitchtracker._pitchConfidence >= 1) 
+			{
+				// continue previous
+				estimatedPitch = pitchtracker._prevPitch;
+				pitchtracker._pitchConfidence = Max(0, pitchtracker._pitchConfidence - 1);
+			} 
+			else 
+			{
+				pitchtracker._prevPitch = -1.0f;
+				estimatedPitch = -1.0f;
+				pitchtracker._pitchConfidence = 0;
+			}
+		}
+	}
+	
+	if (pitchtracker._pitchConfidence >= 1) 
+	{
+		pitch = estimatedPitch;
+	} 
+	else 
+	{
+		pitch = -1.0f;
+	}
+	
+	// equivalence
+	if (pitch < -1.0f) pitch = 0.0f;
+	
+	return pitch;
+}
 
-COMPILER_ALIGNED(WIN_SIZE) static float sam[WIN_SIZE];
-COMPILER_ALIGNED(WIN_SIZE) static int32_t distances[WIN_SIZE];
-COMPILER_ALIGNED(WIN_SIZE) static int32_t mins[WIN_SIZE];
-COMPILER_ALIGNED(WIN_SIZE) static int32_t maxs[WIN_SIZE];
-
-float computeWaveletPitch(float * samples) 
+static inline float get_raw_pitch(float * samples) 
 {
 	float pitchF = 0.0f;
 	int32_t i, j;
@@ -270,4 +378,7 @@ float computeWaveletPitch(float * samples)
 	return pitchF;
 }
 
-
+float computeWaveletPitch(float * samples)
+{
+	return _dywapitch_dynamicprocess(get_raw_pitch(samples)); 
+}
