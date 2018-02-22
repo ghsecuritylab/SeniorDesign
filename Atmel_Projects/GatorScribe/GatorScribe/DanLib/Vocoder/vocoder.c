@@ -98,7 +98,8 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 	for (k = 0; k < WIN_SIZE_D2; k++) 
 	{
 		target = (float)k * shift_amount; 
-		if (target <= WIN_SIZE_D2) 
+		//if (target <= WIN_SIZE_D2) 
+		if (target <= 200 && target > 2) 
 		{
 #ifdef AUTOTUNE
 			gSynMagn[target] += mags_and_phases->norm[k] ;
@@ -140,7 +141,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	{
 		/* calculate shift envelope -- todo: try different filter cutoffs */ 
 		//arm_conv_f32(gSynMagn, WIN_SIZE_D2, (float *)envelope_filter, envelope_filter_length, shift_envelope);
-		float *shift_env = &shift_envelope[envelope_filter_length>>1];
+		//float *shift_env = &shift_envelope[envelope_filter_length>>1];
 			
 		//arm_scale_f32(gSynMagn, 4.0f, gSynMagn, WIN_SIZE_D2); // scaling... basically volume of harmonizer... can control this with a knob!!!
 		//arm_mult_f32(gSynMagn, mags_and_phases->env, gSynMagn, WIN_SIZE_D2); // scaling from original envelope
@@ -170,7 +171,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	/* do inverse transform */
 	arm_rfft_fast_f32(fftInstance, gFFTworksp, ifft_real_values, 1);
 	
-	//arm_scale_f32(ifft_real_values, 2.0f, ifft_real_values, WIN_SIZE); 
+	arm_scale_f32(ifft_real_values, 2.0f, ifft_real_values, WIN_SIZE); 
 
 	/* Window and overlap & add */ 
 	arm_mult_f32(scaled_hanning, ifft_real_values, ifft_real_values, WIN_SIZE);

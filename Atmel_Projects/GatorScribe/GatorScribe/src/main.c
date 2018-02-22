@@ -432,7 +432,7 @@ int main(void)
 			else
 			{
 				pitch_shift_do(1.0f, mags_and_phases); 
-				harmonize_flag = false; 
+				harmonize_flag = true; //false; 
 			}
 #endif 
 			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance, harmonize_flag);
