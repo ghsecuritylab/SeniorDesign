@@ -174,7 +174,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	arm_rfft_fast_f32(fftInstance, gFFTworksp, ifft_real_values, 1);
 	
 	/* Window and overlap & add */ 
-	arm_mult_f32(scaled_hanning, ifft_real_values, ifft_real_values, WIN_SIZE);
+	arm_mult_f32(hanning, ifft_real_values, ifft_real_values, WIN_SIZE);
 	arm_add_f32(gOutputAccum, ifft_real_values, gOutputAccum, WIN_SIZE);
 		
 	/* Copy data to output buffer */ 
