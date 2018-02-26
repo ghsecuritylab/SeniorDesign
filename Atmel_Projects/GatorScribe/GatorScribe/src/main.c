@@ -387,12 +387,14 @@ int main(void)
 			{
 				auto_tuned_pitch = get_frequency_from_all(inputPitch);
 				
+				pitch_shift_do(1.0f, mags_and_phases); 
 				
 				i = 0; 
 				while(harmony_list_read[i] > 1.0f)
 				{
 					pitch_shift = 1.0f - (inputPitch-harmony_list_read[i++])*oneOverInputPitch;
-					pitch_shift_do(pitch_shift, mags_and_phases);
+					if (pitch_shift > 0.49f && pitch_shift < 2.01f)
+						pitch_shift_do(pitch_shift, mags_and_phases);
 				}
 				
 				
@@ -438,10 +440,10 @@ int main(void)
 			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance, harmonize_flag);
 							
 			/* low-pass filter with 11k cut off */ 
-			arm_conv_f32(&harmonized_output[0], STEP_SIZE+lp_filter_11k_length, (float *)lp_filter_11k, lp_filter_11k_length, harmonized_output_filt);
+			//arm_conv_f32(&harmonized_output[0], STEP_SIZE+lp_filter_11k_length, (float *)lp_filter_11k, lp_filter_11k_length, harmonized_output_filt);
 							
 			/* shift last filter length harmonized values for filter memory */ 
-			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_11k_length);
+			//arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_11k_length);
 			
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
 #ifdef AUTOTUNE
@@ -449,8 +451,8 @@ int main(void)
 #else
 			uint32_t idx = 0; 
 			if(harmonize_flag)
-				arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
-				//arm_copy_f32(&harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
+				//arm_add_f32((float *)processBuffer, &harmonized_output[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
+				arm_copy_f32(&harmonized_output[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
 			else
 				arm_scale_f32((float *)processBuffer, 2.0f, mixed_buffer, STEP_SIZE);  
 				

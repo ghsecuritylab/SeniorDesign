@@ -13,7 +13,7 @@
 #include "DMA_Audio.h"
 #include "arm_math.h"
 
-#define FFT_SAMPLE_RATE 24000
+#define FFT_SAMPLE_RATE 23250 //24000
 #define STEP_SIZE (WIN_SIZE/NUM_OF_OVERLAPS)
 #define WIN_SIZE_D2 (WIN_SIZE>>1)
 
