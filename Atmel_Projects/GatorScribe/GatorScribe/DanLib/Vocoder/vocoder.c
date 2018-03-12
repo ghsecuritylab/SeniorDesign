@@ -105,7 +105,7 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
 			gSynMagn[target] += mags_and_phases->norm[k] ;
 			gSynFreq[target] = gAnaFreq[k];
 #else 
-			gSynMagn[target] += mags_and_phases->norm[k] * mags_and_phases->env[target] / mags_and_phases->env[k];
+			gSynMagn[target] += mags_and_phases->norm[k];// * mags_and_phases->env[target] / mags_and_phases->env[k];
 			gSynFreq[target] = gAnaFreq[k];
 #endif 
 		}
@@ -152,7 +152,8 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 				
 			/* Get real and imag part and interleave */ 
 			gSumPhase[k] = princarg(gSumPhase[k]); 
-			arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
+			//arm_sin_cos_f32(gSumPhase[k], &sin_value, &cos_value);
+			arm_sin_cos_f32(mags_and_phases->phas[k], &sin_value, &cos_value);
 			gFFTworksp[2*k] = gSynMagn[k]*cos_value;
 			gFFTworksp[2*k+1] = gSynMagn[k]*sin_value;
 		}
@@ -173,9 +174,11 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	/* do inverse transform */
 	arm_rfft_fast_f32(fftInstance, gFFTworksp, ifft_real_values, 1);
 	
+	arm_scale_f32(ifft_real_values, 4.0f, ifft_real_values, WIN_SIZE); 
 	/* Window and overlap & add */ 
-	arm_mult_f32(hanning, ifft_real_values, ifft_real_values, WIN_SIZE);
+	arm_mult_f32(scaled_hanning, ifft_real_values, ifft_real_values, WIN_SIZE);
 	arm_add_f32(gOutputAccum, ifft_real_values, gOutputAccum, WIN_SIZE);
+	
 		
 	/* Copy data to output buffer */ 
 	if(harmonize_flag)

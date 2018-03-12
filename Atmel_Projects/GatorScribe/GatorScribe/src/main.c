@@ -451,7 +451,7 @@ int main(void)
 #else
 			uint32_t idx = 0; 
 			if(harmonize_flag)
-				//arm_add_f32((float *)processBuffer, &harmonized_output[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
+				//arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
 				arm_copy_f32(&harmonized_output[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
 			else
 				arm_scale_f32((float *)processBuffer, 2.0f, mixed_buffer, STEP_SIZE);  
