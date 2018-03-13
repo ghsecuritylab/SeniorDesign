@@ -1,5 +1,5 @@
-src/main.d src/main.o: ../src/main.c ../src/asf.h \
- ../src/ASF/sam/utils/compiler.h \
+DanLib/Vocoder/psola.d DanLib/Vocoder/psola.o: ../DanLib/Vocoder/psola.c \
+ ../DanLib/Vocoder/psola.h ../src/asf.h ../src/ASF/sam/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h \
  ../src/ASF/sam/utils/preprocessor/preprocessor.h \
@@ -177,39 +177,16 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/config/conf_wm8904.h ../src/ASF/sam/drivers/xdmac/xdmac.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/DanLib.h \
- ../DanLib/Audio/audio.h ../DanLib/Audio/DMA/DMA_Audio.h \
+ ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/Audio/DMA/DMA_Audio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
- ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h ../DanLib/LCDLib/LCDLib.h \
- ../DanLib/LCDLib/gfx/gfx.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
- ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
- ../DanLib/LCDLib/gfx/gfx_generic.h ../DanLib/LCDLib/gfx/sysfont.h \
- ../src/config/conf_sysfont.h ../DanLib/LCDLib/gfx/gfx.h \
- ../DanLib/LCDLib/gfx/gfx_text.h ../DanLib/LCDLib/touch/touch.h \
- ../src/asf.h ../DanLib/LCDLib/gfx/gfx.h ../DanLib/Vocoder/vocoder.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../DanLib/DYWA/dywapitchtrack.h ../DanLib/Vocoder/psola.h \
- ../src/FreeRTOS/Source/include/FreeRTOS.h ../src/config/FreeRTOSConfig.h \
- ../src/FreeRTOS/Source/include/projdefs.h \
- ../src/FreeRTOS/Source/include/portable.h \
- ../src/FreeRTOS/Source/include/deprecated_definitions.h \
- ../src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h \
- ../src/FreeRTOS/Source/include/mpu_wrappers.h \
- ../src/FreeRTOS/Source/include/task.h \
- ../src/FreeRTOS/Source/include/list.h \
- ../src/FreeRTOS/Source/include/semphr.h \
- ../src/FreeRTOS/Source/include/queue.h \
- ../src/FreeRTOS/Common/include/TimerDemo.h \
- ../src/FreeRTOS/Common/include/QueueOverwrite.h \
- ../src/FreeRTOS/Common/include/EventGroupsDemo.h \
- ../src/FreeRTOS/Common/include/IntSemTest.h \
- ../src/FreeRTOS/Common/include/TaskNotify.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h
+
+../DanLib/Vocoder/psola.h:
 
 ../src/asf.h:
 
@@ -589,43 +566,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam/drivers/rtt/rtt.h:
 
-../DanLib/DanLib.h:
-
-../DanLib/Audio/audio.h:
-
 ../DanLib/Audio/DMA/DMA_Audio.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
-
-../DanLib/Audio/WM8904_Driver/WM8904_Driver.h:
-
-../DanLib/LCDLib/LCDLib.h:
-
-../DanLib/LCDLib/gfx/gfx.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h:
-
-../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h:
-
-../DanLib/LCDLib/gfx/gfx_generic.h:
-
-../DanLib/LCDLib/gfx/sysfont.h:
-
-../src/config/conf_sysfont.h:
-
-../DanLib/LCDLib/gfx/gfx.h:
-
-../DanLib/LCDLib/gfx/gfx_text.h:
-
-../DanLib/LCDLib/touch/touch.h:
-
-../src/asf.h:
-
-../DanLib/LCDLib/gfx/gfx.h:
-
-../DanLib/Vocoder/vocoder.h:
 
 ../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
 
@@ -636,39 +581,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
-
-../DanLib/DYWA/dywapitchtrack.h:
-
-../DanLib/Vocoder/psola.h:
-
-../src/FreeRTOS/Source/include/FreeRTOS.h:
-
-../src/config/FreeRTOSConfig.h:
-
-../src/FreeRTOS/Source/include/projdefs.h:
-
-../src/FreeRTOS/Source/include/portable.h:
-
-../src/FreeRTOS/Source/include/deprecated_definitions.h:
-
-../src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h:
-
-../src/FreeRTOS/Source/include/mpu_wrappers.h:
-
-../src/FreeRTOS/Source/include/task.h:
-
-../src/FreeRTOS/Source/include/list.h:
-
-../src/FreeRTOS/Source/include/semphr.h:
-
-../src/FreeRTOS/Source/include/queue.h:
-
-../src/FreeRTOS/Common/include/TimerDemo.h:
-
-../src/FreeRTOS/Common/include/QueueOverwrite.h:
-
-../src/FreeRTOS/Common/include/EventGroupsDemo.h:
-
-../src/FreeRTOS/Common/include/IntSemTest.h:
-
-../src/FreeRTOS/Common/include/TaskNotify.h:

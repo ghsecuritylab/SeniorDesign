@@ -703,6 +703,12 @@
     <Compile Include="DanLib\Vocoder\hanning.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="DanLib\Vocoder\psola.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DanLib\Vocoder\psola.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="DanLib\Vocoder\vocoder.c">
       <SubType>compile</SubType>
     </Compile>

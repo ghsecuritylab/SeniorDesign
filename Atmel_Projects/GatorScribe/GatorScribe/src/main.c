@@ -215,7 +215,7 @@ COMPILER_ALIGNED(WIN_SIZE) static float _samples_fft[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _phas[WIN_SIZE_D2];
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _norm[WIN_SIZE_D2];
 COMPILER_ALIGNED(WIN_SIZE) static float _envelope[WIN_SIZE];
-COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[STEP_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
 
 float envelope_filter[] = {0.0038  ,  0.0151 ,   0.0376 ,   0.0707,    0.1074,    0.1366  ,  0.1478  ,  0.1366 ,   0.1074  ,  0.0707  ,  0.0376  ,  0.0151  ,  0.0038}; 
 uint32_t envelope_filter_length = 13;
@@ -265,7 +265,8 @@ int main(void)
 	SCB_EnableICache();
 	audio_init();
 	//configure_console();
-	Vocoder_init();
+	//Vocoder_init();
+	PSOLA_init(WIN_SIZE); 
 	 
 	SCB_DisableICache(); 
 	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
@@ -327,7 +328,6 @@ int main(void)
 	float auto_tuned_pitch;
 	float pitch_diff;
 	float oneOverInputPitch; 
-	bool harmonize_flag = false;
 	for (i = 0; i < 11; i++)
 	{
 		harmony_list_a[i] = 0.0f; harmony_list_b[i] = 0.0f; 
@@ -339,134 +339,33 @@ int main(void)
 		if (dataReceived)
 		{	
 			// store process buffer values into last quarter of input buffer 
-			arm_copy_f32((float  *)processBuffer, &x_in[WIN_SIZE-STEP_SIZE], STEP_SIZE); 
-										
-			// apply hanning window -- can't do in-place since we would be double-windowing 
-			arm_mult_f32(x_in, (float *)hanning, inputVec->data, WIN_SIZE); 
-			
-			// save input since fft changes it 
-			arm_copy_f32(inputVec->data, inputVecCopy->data, inputVec->length); 
-							
-			// take fft of the windowed signal
-			arm_rfft_fast_f32(&fftInstance, inputVec->data, fft_samples->data, 0);
-						
-			// compute magnitude and phase 
-			arm_cmplx_mag_f32(fft_samples->data, mags_and_phases->norm, WIN_SIZE >> 1); 
-			for (j = 0, i = 0; i < WIN_SIZE; i+=2, j++)
+			//arm_copy_f32((float  *)processBuffer, &x_in[WIN_SIZE-STEP_SIZE], STEP_SIZE); 
+								
+			float inputPitch = computeWaveletPitch((float  *)processBuffer); 		
+			if (inputPitch > 50.0f)
 			{
-				mags_and_phases->phas[j] = atan2_approximation(fft_samples->data[i+1], fft_samples->data[i]); 
-			}
-			
-			// compute envelope 
-			arm_conv_f32(mags_and_phases->norm, mags_and_phases->length, (float *)envelope_filter, envelope_filter_length, mags_and_phases->unshiftedEnv); 			
-				
-			// compute pitch 
-			float tempPitch = inputPitch; 
-			inputPitch = computeWaveletPitch(inputVecCopy->data); 
-			if (inputPitch < 50.0f) inputPitch = tempPitch; 
-			if (inputPitch > 0.0f)
-				oneOverInputPitch = 1.0f / inputPitch; 
-			
-			// debug frequency detection
-			//sprintf(str, "%f", inputPitch);
-			//printf("Freq: %s\n\r", str);
-			
-#ifdef AUTOTUNE
-			if (inputPitch > 0.0f)
-			{
-				auto_tuned_pitch = get_frequency_from_key_C(inputPitch);
-				pitch_shift = 1.0f - (inputPitch-auto_tuned_pitch)*oneOverInputPitch; // auto-tune 
+				pitchCorrect((float  *)processBuffer, mixed_buffer, PSOLA_SAMPLE_RATE, inputPitch, 440.0f); 
+				//arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
+				//arm_copy_f32(&harmonized_output_filt[lp_filter_11k_length], mixed_buffer, WIN_SIZE); 
 			}
 			else 
 			{
-				pitch_shift = 1.0f; 
+				arm_copy_f32((float *)processBuffer, mixed_buffer, WIN_SIZE);
 			}
-			pitch_shift_do(pitch_shift, mags_and_phases);
-#else 
-			if (inputPitch > 0.0f && harmony_list_read[0] > 1.0f)
-			{
-				auto_tuned_pitch = get_frequency_from_all(inputPitch);
-				
-				pitch_shift_do(1.0f, mags_and_phases); 
-				
-				i = 0; 
-				while(harmony_list_read[i] > 1.0f)
-				{
-					pitch_shift = 1.0f - (inputPitch-harmony_list_read[i++])*oneOverInputPitch;
-					if (pitch_shift > 0.49f && pitch_shift < 2.01f)
-						pitch_shift_do(pitch_shift, mags_and_phases);
-				}
-				
-				
-		
-// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, MAJOR_3RD_ABOVE);
-// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-// 				pitch_shift_do(pitch_shift, mags_and_phases);
-// 				
-// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, PERFECT_5TH_ABOVE);
-// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-// 				pitch_shift_do(pitch_shift, mags_and_phases);
-// 				
-// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, MAJOR_3RD_BELOW);
-// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-// 				pitch_shift_do(pitch_shift, mags_and_phases);
-// 				
-// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, PERFECT_5TH_BELOW);
-// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-// 				pitch_shift_do(pitch_shift, mags_and_phases);
-				
-// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, ROOT);
-// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-// 				pitch_shift_do(1.0f, mags_and_phases);
-
-// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, OCTAVE_DOWN);
-// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-// 				pitch_shift_do(pitch_shift, mags_and_phases);
-// 				
-// 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, OCTAVE_UP);
-// 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
-// 				pitch_shift_do(pitch_shift, mags_and_phases);
-				 
-			}
-			else
-			{
-				pitch_shift_do(1.0f, mags_and_phases); 
-			}
-#endif 
-			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance);
-							
-			/* low-pass filter with 11k cut off */ 
-			arm_conv_f32(&harmonized_output[0], STEP_SIZE+lp_filter_11k_length, (float *)lp_filter_11k, lp_filter_11k_length, harmonized_output_filt);
-							
-			/* shift last filter length harmonized values for filter memory */ 
-			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_11k_length);
 			
-			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
-#ifdef AUTOTUNE
-			uint32_t processIdx = lp_filter_11k_length; 
-#else
-			uint32_t idx = 0; 
-	
-			// get output 
-			arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
-			//arm_copy_f32(&harmonized_output[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); // should technically multiply by 0.5 here 
 
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, STEP_SIZE); // should technically multiply by 0.5 here 
-#endif 
+			uint32_t idx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=4)
 			{
-#ifdef AUTOTUNE
-				outBuffer[i] = (uint16_t)(int16_t)(harmonized_output_filt[processIdx++] * INT16_MAX);
-#else
 				outBuffer[i] = (uint16_t)(int16_t)(mixed_buffer[idx++]);  
-#endif 
 				outBuffer[i+1] = outBuffer[i]; 
 				outBuffer[i+2] = outBuffer[i]; 
 				outBuffer[i+3] = outBuffer[i];
 			}
 			
 			/* shift input back one quarter */ 
-			arm_copy_f32(&x_in[STEP_SIZE], &x_in[0], WIN_SIZE-STEP_SIZE);
+			// arm_copy_f32(&x_in[STEP_SIZE], &x_in[0], WIN_SIZE-STEP_SIZE);
 			dataReceived = false; 
 		}
 	}

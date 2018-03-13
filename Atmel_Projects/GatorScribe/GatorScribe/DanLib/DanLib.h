@@ -13,6 +13,7 @@
 #include "LCDLib.h"
 #include "vocoder.h"
 #include "DYWA/dywapitchtrack.h"
+#include "psola.h"
 
 enum harmonies 
 {
