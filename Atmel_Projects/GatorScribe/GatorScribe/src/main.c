@@ -208,8 +208,8 @@ COMPILER_ALIGNED(WIN_SIZE) static float  x_in[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float inWindowBuffer[WIN_SIZE]; 
 COMPILER_ALIGNED(WIN_SIZE) static float inWindowBufferCopy[WIN_SIZE]; // needed since the fft corrupts the input  
 
-COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output[2*STEP_SIZE];
-COMPILER_ALIGNED(STEP_SIZE) static float harmonized_output_filt[2*STEP_SIZE];
+COMPILER_ALIGNED(2*STEP_SIZE) static volatile float harmonized_output[2*STEP_SIZE];
+COMPILER_ALIGNED(2*STEP_SIZE) static float harmonized_output_filt[2*STEP_SIZE];
 
 COMPILER_ALIGNED(WIN_SIZE) static float _samples_fft[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE_D2) static float _phas[WIN_SIZE_D2];
@@ -414,12 +414,11 @@ int main(void)
 // 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, PERFECT_5TH_BELOW);
 // 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 // 				pitch_shift_do(pitch_shift, mags_and_phases);
-// 				
-// auto tune 
+				
 // 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, ROOT);
 // 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 // 				pitch_shift_do(1.0f, mags_and_phases);
-// 
+
 // 				pitch_diff = auto_tuned_pitch*powerf(HALF_STEP, OCTAVE_DOWN);
 // 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 // 				pitch_shift_do(pitch_shift, mags_and_phases);
@@ -428,34 +427,30 @@ int main(void)
 // 				pitch_shift = 1.0f - (inputPitch-pitch_diff)*oneOverInputPitch;
 // 				pitch_shift_do(pitch_shift, mags_and_phases);
 				 
-				
-				harmonize_flag = true; 
 			}
 			else
 			{
 				pitch_shift_do(1.0f, mags_and_phases); 
-				harmonize_flag = true; //false; 
 			}
 #endif 
-			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance, harmonize_flag);
+			get_harmonized_output(&harmonized_output[lp_filter_11k_length], mags_and_phases, &fftInstance);
 							
 			/* low-pass filter with 11k cut off */ 
-			//arm_conv_f32(&harmonized_output[0], STEP_SIZE+lp_filter_11k_length, (float *)lp_filter_11k, lp_filter_11k_length, harmonized_output_filt);
+			arm_conv_f32(&harmonized_output[0], STEP_SIZE+lp_filter_11k_length, (float *)lp_filter_11k, lp_filter_11k_length, harmonized_output_filt);
 							
 			/* shift last filter length harmonized values for filter memory */ 
-			//arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_11k_length);
+			arm_copy_f32(&harmonized_output[STEP_SIZE], &harmonized_output[0], lp_filter_11k_length);
 			
 			// TODO: keep in mind you have the 48KHz information from the inBuffer that you can use for the original voice 
 #ifdef AUTOTUNE
 			uint32_t processIdx = lp_filter_11k_length; 
 #else
 			uint32_t idx = 0; 
-			if(harmonize_flag)
-				//arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
-				arm_copy_f32(&harmonized_output[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
-			else
-				arm_scale_f32((float *)processBuffer, 2.0f, mixed_buffer, STEP_SIZE);  
-				
+	
+			// get output 
+			arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
+			//arm_copy_f32(&harmonized_output[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
+
 			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, STEP_SIZE); // should technically multiply by 0.5 here 
 #endif 
 			for(i = 0; i < IO_BUF_SIZE; i+=4)
