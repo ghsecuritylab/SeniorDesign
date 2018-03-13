@@ -2520,7 +2520,6 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
   4011b2:	ee09 0a10 	vmov	s18, r0
 		/* compute phase difference */
 		tmp = mags_and_phases->phas[k] - prevAnaPhase[k]; 
-		//prevAnaPhase[k] = mags_and_phases->phas[k]; 
 			
 		/* subtract expected phase difference */
 		tmp -= (float)k * expct; 
@@ -2670,7 +2669,6 @@ void pitch_shift_do(float shift_amount, cvec_t *mags_and_phases)
   4012ae:	ece2 7a01 	vstmia	r2!, {s15}
 	for (k = 0; k < WIN_SIZE_D2; k++) 
   4012b2:	d1eb      	bne.n	40128c <pitch_shift_do+0xf8>
-		//mags_and_phases->phas[k] = gSumPhase[k]; 
 	}
 }
   4012b4:	ecbd 8b08 	vpop	{d8-d11}
@@ -2867,6 +2865,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
   401416:	4b19      	ldr	r3, [pc, #100]	; (40147c <get_harmonized_output+0x180>)
   401418:	4798      	blx	r3
 	
+	/* Save previous phases */ 
 	arm_copy_f32(mags_and_phases->phas, prevAnaPhase, WIN_SIZE_D2); 	
   40141a:	9b04      	ldr	r3, [sp, #16]
   40141c:	f44f 7200 	mov.w	r2, #512	; 0x200
