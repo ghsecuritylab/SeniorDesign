@@ -211,10 +211,6 @@ COMPILER_ALIGNED(WIN_SIZE) static float inWindowBufferCopy[WIN_SIZE]; // needed 
 COMPILER_ALIGNED(2*STEP_SIZE) static volatile float harmonized_output[2*STEP_SIZE];
 COMPILER_ALIGNED(2*STEP_SIZE) static float harmonized_output_filt[2*STEP_SIZE];
 
-COMPILER_ALIGNED(WIN_SIZE) static float _samples_fft[WIN_SIZE];
-COMPILER_ALIGNED(WIN_SIZE_D2) static float _phas[WIN_SIZE_D2];
-COMPILER_ALIGNED(WIN_SIZE_D2) static float _norm[WIN_SIZE_D2];
-COMPILER_ALIGNED(WIN_SIZE) static float _envelope[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
 
 float envelope_filter[] = {0.0038  ,  0.0151 ,   0.0376 ,   0.0707,    0.1074,    0.1366  ,  0.1478  ,  0.1366 ,   0.1074  ,  0.0707  ,  0.0376  ,  0.0151  ,  0.0038}; 
@@ -256,6 +252,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 		}
 	}
 }
+volatile float inputPitch; 
 int main(void)
 {
 	sysclk_init();
@@ -266,7 +263,7 @@ int main(void)
 	audio_init();
 	//configure_console();
 	//Vocoder_init();
-	PSOLA_init(WIN_SIZE); 
+	PSOLA_init(); 
 	 
 	SCB_DisableICache(); 
 	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
@@ -281,53 +278,30 @@ int main(void)
 	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
 	SCB_EnableICache(); 
 	
-	usart_serial_options_t usart_console_settings = {
-		USART_SERIAL_BAUDRATE,
-		USART_SERIAL_CHAR_LENGTH,
-		USART_SERIAL_PARITY,
-		USART_SERIAL_STOP_BIT
-	};
-	usart_serial_init(USART_SERIAL, &usart_console_settings);
-	usart_enable_tx(USART_SERIAL);
-	usart_enable_rx(USART_SERIAL);
-	
-	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY); 
-	NVIC_SetPriority(USART1_IRQn, 2); 
-	NVIC_ClearPendingIRQ(USART1_IRQn);
-	NVIC_EnableIRQ(USART1_IRQn);
+// 	usart_serial_options_t usart_console_settings = {
+// 		USART_SERIAL_BAUDRATE,
+// 		USART_SERIAL_CHAR_LENGTH,
+// 		USART_SERIAL_PARITY,
+// 		USART_SERIAL_STOP_BIT
+// 	};
+// 	usart_serial_init(USART_SERIAL, &usart_console_settings);
+// 	usart_enable_tx(USART_SERIAL);
+// 	usart_enable_rx(USART_SERIAL);
+// 	
+// 	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY); 
+// 	NVIC_SetPriority(USART1_IRQn, 2); 
+// 	NVIC_ClearPendingIRQ(USART1_IRQn);
+// 	NVIC_EnableIRQ(USART1_IRQn);
 	
 	// for serial debug 
-	char *str = "hello"; //(char *)calloc(20, sizeof(char)); 
+	//char *str = (char *)calloc(20, sizeof(char)); 
 	
 	/*************** Application code variables start ***************/
 	uint32_t i,j;
-	cvec_t *mags_and_phases = (cvec_t*)calloc(sizeof(cvec_t), 1); 
-	mags_and_phases->length = WIN_SIZE_D2; 
-	mags_and_phases->norm = _norm; 
-	mags_and_phases->phas = _phas; 
-	mags_and_phases->env = &_envelope[envelope_filter_length>>1]; 
-	mags_and_phases->unshiftedEnv = _envelope; 
-	
-	fvec_t *inputVec = (fvec_t*)calloc(sizeof(fvec_t), 1);
-	inputVec->length = WIN_SIZE;
-	inputVec->data = inWindowBuffer; 
-	
-	fvec_t *inputVecCopy = (fvec_t*)calloc(sizeof(fvec_t), 1);
-	inputVecCopy->length = WIN_SIZE;
-	inputVecCopy->data = inWindowBufferCopy;
-	
-	fvec_t *fft_samples = (fvec_t*)calloc(sizeof(fvec_t), 1);
-	fft_samples->length = WIN_SIZE;
-	fft_samples->data = _samples_fft;
-	
-	arm_rfft_fast_instance_f32 fftInstance;
-	arm_rfft_fast_init_f32(&fftInstance, WIN_SIZE);
 	
 	float inputPitch;
 	float pitch_shift;
-	float auto_tuned_pitch;
-	float pitch_diff;
-	float oneOverInputPitch; 
+
 	for (i = 0; i < 11; i++)
 	{
 		harmony_list_a[i] = 0.0f; harmony_list_b[i] = 0.0f; 
@@ -338,34 +312,23 @@ int main(void)
 	{
 		if (dataReceived)
 		{	
-			// store process buffer values into last quarter of input buffer 
-			//arm_copy_f32((float  *)processBuffer, &x_in[WIN_SIZE-STEP_SIZE], STEP_SIZE); 
 								
-			float inputPitch = computeWaveletPitch((float  *)processBuffer); 		
-			if (inputPitch > 50.0f)
-			{
-				pitchCorrect((float  *)processBuffer, mixed_buffer, PSOLA_SAMPLE_RATE, inputPitch, 440.0f); 
-				//arm_add_f32((float *)processBuffer, &harmonized_output_filt[lp_filter_11k_length], mixed_buffer, STEP_SIZE);
-				//arm_copy_f32(&harmonized_output_filt[lp_filter_11k_length], mixed_buffer, WIN_SIZE); 
-			}
-			else 
-			{
-				arm_copy_f32((float *)processBuffer, mixed_buffer, WIN_SIZE);
-			}
+		    inputPitch = computeWaveletPitch((float  *)processBuffer); 	
+// 			sprintf(str, "%f", inputPitch);
+// 			printf("Freq: %s\n\r", str);
+
+
+			pitchCorrect((float  *)processBuffer, mixed_buffer, inputPitch, 2.0f); 
 			
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); // should technically multiply by 0.5 here 
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); 
 
 			uint32_t idx = 0; 
-			for(i = 0; i < IO_BUF_SIZE; i+=4)
+			for(i = 0; i < IO_BUF_SIZE; i+=2)
 			{
 				outBuffer[i] = (uint16_t)(int16_t)(mixed_buffer[idx++]);  
 				outBuffer[i+1] = outBuffer[i]; 
-				outBuffer[i+2] = outBuffer[i]; 
-				outBuffer[i+3] = outBuffer[i];
 			}
-			
-			/* shift input back one quarter */ 
-			// arm_copy_f32(&x_in[STEP_SIZE], &x_in[0], WIN_SIZE-STEP_SIZE);
+
 			dataReceived = false; 
 		}
 	}

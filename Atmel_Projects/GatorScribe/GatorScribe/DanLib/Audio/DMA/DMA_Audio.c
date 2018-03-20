@@ -23,8 +23,8 @@ COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t inPongBuffer[IO_BUF_SIZE];
 COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t outPingBuffer[IO_BUF_SIZE];
 COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t outPongBuffer[IO_BUF_SIZE];
 
-COMPILER_ALIGNED(NEW_DATA_SIZE) float  processPingBuffer[NEW_DATA_SIZE];	
-COMPILER_ALIGNED(NEW_DATA_SIZE) float  processPongBuffer[NEW_DATA_SIZE];
+COMPILER_ALIGNED(IO_BUF_SIZE_PER_CHANNEL) float  processPingBuffer[IO_BUF_SIZE_PER_CHANNEL];	
+COMPILER_ALIGNED(IO_BUF_SIZE_PER_CHANNEL) float  processPongBuffer[IO_BUF_SIZE_PER_CHANNEL];
 
 // in and process buffers are synchronized 
 volatile float  *processBuffer = processPingBuffer;
@@ -39,8 +39,7 @@ volatile bool dataReceived = false;
 
 /*********************************** Extern Variables End ***********************************/
 
-static const float One_over_max_int16 = 1.0f / (float)INT16_MAX; 
-
+#define One_over_max_int16 0.0000305185f 
 /******************************* XDMAC Interrupt Handler Start *******************************/ 
 void XDMAC_Handler(void)
 {
@@ -64,7 +63,7 @@ void XDMAC_Handler(void)
 		
 		int processIdx = 0;
 		// Fill process buffer - only left channel decimated by 1
-		for(int i = 0; i < IO_BUF_SIZE; i+=4)
+		for(int i = 0; i < IO_BUF_SIZE; i+=2)
 		{
 			processBuffer[processIdx++] = ((float )(int16_t)inBuffer[i]) * One_over_max_int16; 
 		}

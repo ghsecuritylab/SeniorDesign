@@ -8,87 +8,155 @@
 #include "psola.h"
 #include <stdlib.h>
 
-uint32_t _bufferLen;
-float *_workingBuffer;
-float *_storageBuffer;
-float *_window; 
-float window_buffer[2048];
 
-static void hanning_win(float32_t *window, int length)
+#define RING_BUFFER_SIZE 8192 
+#define RING_BUFFER_SIZE_D2 (RING_BUFFER_SIZE >> 1) 
+#define RING_BUFFER_MASK (RING_BUFFER_SIZE-1)
+
+#define PI_F 3.14159265358f 
+
+/************************ Static variables *********************/ 
+static float input_ring_buffer[RING_BUFFER_SIZE];
+static float output_ring_buffer[RING_BUFFER_SIZE];
+
+static uint32_t readPos; 
+static uint32_t inPtr; 
+static uint32_t outPtr;
+static uint32_t samplesLeftInPeriod; 
+static int32_t inputPeriodLength; 
+
+/************************ Static variables *********************/
+
+void PSOLA_init(void)
 {
-	for (int i = 0; i < length-1; i++) {
-		window[i] = 0.5f * (1.0f - cosf(2.0f*PI*i/(length-1)));
-	}
+	arm_fill_f32(0.0F, input_ring_buffer, RING_BUFFER_SIZE); 
+	arm_fill_f32(0.0F, output_ring_buffer, RING_BUFFER_SIZE);
+	
+	readPos = RING_BUFFER_SIZE - WIN_SIZE; 
+	inPtr = 0; 
+	outPtr = 0; 
+	samplesLeftInPeriod = 0; 
+	inputPeriodLength = 100; 
 }
 
-void PSOLA_init(uint32_t bufferLen)
+void pitchCorrect(float* input, float *output, float inputPitch, float shift_amount) 
 {
-	if (bufferLen < 1) {
-		_bufferLen = DEFAULT_BUFFER_SIZE;
-		} else {
-		_bufferLen = bufferLen;
-	}
-	// allow for twice the room to deal with the case when the end of the buffer may not be sufficient
-	_workingBuffer = malloc(2*bufferLen*sizeof(float));
-	// allow for twice the room so we can move new data into this buffer
-	_storageBuffer = malloc(2*bufferLen*sizeof(float)); ;
-	// allocates maximum size for window to avoid reinitialization cost
-	_window = window_buffer; // malloc(bufferLen*sizeof(float));
-}
-
-void pitchCorrect(float* input, float *output, int Fs, float inputPitch, float desiredPitch) {
-	// Move things into the storage buffer
-	for (uint32_t i = 0; i < _bufferLen; i++) 
+	
+	uint32_t size = WIN_SIZE; 
+	uint32_t curInSample = 0; 
+	uint32_t curOutSample = 0; 
+	uint32_t outLag;
+	uint32_t inHalfAway;  
+	float window_value; 
+	float correctedPitchScale; 
+	float correctedPitchIn; 
+	
+	
+	// Do error checking
+	if (inputPitch < 50.0f) 
 	{
-		//slide the past data into the front
-		_storageBuffer[i] = _storageBuffer[i + _bufferLen];
-		//load up next set of data
-		_storageBuffer[i + _bufferLen] = input[i];
+		correctedPitchIn = 50.0f; 
+		correctedPitchScale = 1.0f;
 	}
-	// Percent change of frequency
-	float32_t scalingFactor = 1.0f; // 1.0f + (inputPitch - desiredPitch)/desiredPitch;
-	// PSOLA constants
-	uint32_t analysisShift = ceil(Fs/inputPitch);
-	uint32_t analysisShiftHalfed = round(analysisShift/2);
-	int32_t synthesisShift = round(analysisShift*scalingFactor);
-	uint32_t analysisIndex = 0;
-	uint32_t synthesisIndex = 0;
-	int32_t analysisBlockStart;
-	uint32_t analysisBlockEnd;
-	uint32_t synthesisBlockEnd;
-	uint32_t analysisLimit = _bufferLen - analysisShift - 1;
-	// Window declaration
-	int winLength = analysisShift + analysisShiftHalfed + 1;
-	int windowIndex;
-	//bartlett(_window,winLength);
-	hanning_win(_window, winLength);
-	// PSOLA Algorithm
-	while (analysisIndex < analysisLimit) {
-		// Analysis blocks are two pitch periods long
-		analysisBlockStart = (int32_t)analysisIndex - (int32_t)analysisShiftHalfed;
-		if (analysisBlockStart < 0) {
-			analysisBlockStart = 0;
-		}
-		analysisBlockEnd = analysisBlockStart + analysisShift + analysisShiftHalfed;
-		if (analysisBlockEnd > _bufferLen - 1) {
-			analysisBlockEnd = _bufferLen - 1;
-		}
-		// Overlap and add
-		synthesisBlockEnd = synthesisIndex + analysisBlockEnd - analysisBlockStart;
-		uint32_t inputIndex = analysisBlockStart;
-		windowIndex = 0;
-		for (uint32_t j = synthesisIndex; j <= synthesisBlockEnd; j++) {
-			_workingBuffer[j] += input[inputIndex]*_window[windowIndex];
-			inputIndex++;
-			windowIndex++;
-		}
-		// Update pointers
-		analysisIndex += analysisShift;
-		synthesisIndex += synthesisShift;
+	else 
+	{
+		correctedPitchIn = inputPitch; 
+		correctedPitchScale = shift_amount;
 	}
-
-	arm_copy_f32(_workingBuffer, output, WIN_SIZE); 
-	arm_fill_f32(0.0f, _workingBuffer, _bufferLen); 
+	
+	inputPeriodLength = (uint32_t)((float)PSOLA_SAMPLE_RATE / correctedPitchIn);
+		
+	float periodRatio = 1.0f / correctedPitchScale; 
+	
+	while(size > 0)
+	{
+		
+		input_ring_buffer[(inPtr+1024) & RING_BUFFER_MASK] = input[curInSample]; 
+		
+		if (samplesLeftInPeriod == 0)
+		{
+			outLag = 1; 
+			
+			inHalfAway = (inPtr + RING_BUFFER_SIZE_D2) & RING_BUFFER_MASK;
+                
+            if (inHalfAway < RING_BUFFER_SIZE_D2) 
+			{
+                /* The zero element of the input buffer lies
+                    in (inptr, inHalfAway] */
+                if (outPtr < inHalfAway || outPtr > inPtr) {
+                    // The current input element lags current
+                    // synthesis pitch marker.
+                    outLag = 0;
+                }
+            } 
+			else 
+			{
+                /* The zero element of the input buffer lies
+                    in (inHalfAway, inptr] */
+                if (outPtr > inPtr && outPtr < inHalfAway) {
+                    // The current input element lags current
+                    // synthesis pitch marker.
+                    outLag = 0;
+                }
+            }
+			
+			while(outLag == 1)
+			{
+				// set outPtr about the sample at which we OLA 
+				outPtr = (uint32_t) (outPtr + inputPeriodLength * periodRatio) & RING_BUFFER_MASK; 
+				
+				// OLA 
+				for (int32_t olaIdx = -inputPeriodLength; olaIdx <= inputPeriodLength; ++olaIdx)
+				{
+					window_value = (1.0f + arm_cos_f32(PI_F * olaIdx / inputPeriodLength)) * 0.5f; 
+					output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] += 
+						window_value * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr) & RING_BUFFER_MASK]; 
+				}
+				
+				outLag = 1; // shouldnt be needed but who knows 
+				if (inHalfAway < RING_BUFFER_SIZE_D2) 
+				{
+					/* The zero element of the input buffer lies
+						in (inptr, inHalfAway] */
+					if (outPtr < inHalfAway || outPtr > inPtr) {
+						// The current input element lags current
+						// synthesis pitch marker.
+						outLag = 0;
+					}
+				} 
+				else 
+				{
+					/* The zero element of the input buffer lies
+						in (inHalfAway, inptr] */
+					if (outPtr > inPtr && outPtr < inHalfAway) {
+						// The current input element lags current
+						// synthesis pitch marker.
+						outLag = 0;
+					}
+				}		
+			}
+			
+			// assume uniform frequency within window 
+			samplesLeftInPeriod = inputPeriodLength;
+		}
+		
+		--samplesLeftInPeriod; 
+		
+		// after processing 
+		output[curOutSample] = output_ring_buffer[readPos];
+		
+		// delete and inc/wrap output ring buffer index 
+		output_ring_buffer[readPos] = 0.0f; 
+		readPos = (readPos+1) & RING_BUFFER_MASK; 
+		
+		// inc/wrap input ring buffer index 
+		inPtr = (inPtr+1) & RING_BUFFER_MASK; 
+		
+		curOutSample++; 
+		curInSample++; 
+		size--; 
+	}
+	
 }
 
 

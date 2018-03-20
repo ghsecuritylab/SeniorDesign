@@ -4,7 +4,8 @@
 #include "asf.h"
 #include "DMA_Audio.h"
 
-#define DYW_SAMPLING_RATE 23250
+/*#define DYW_SAMPLING_RATE 23250*/
+#define DYW_SAMPLING_RATE 46500 
 #define POWER_THRESHOLD 0.000001f
 
 // structure to hold tracking data
