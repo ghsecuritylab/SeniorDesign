@@ -158,7 +158,7 @@ void get_harmonized_output(float * outData, cvec_t *mags_and_phases, arm_rfft_fa
 	/* do inverse transform */
 	arm_rfft_fast_f32(fftInstance, gFFTworksp, ifft_real_values, 1);
 	
-	arm_scale_f32(ifft_real_values, 4.0f, ifft_real_values, WIN_SIZE); 
+	arm_scale_f32(ifft_real_values, 5.0f, ifft_real_values, WIN_SIZE); 
 	/* Window and overlap & add */ 
 	arm_mult_f32(scaled_hanning, ifft_real_values, ifft_real_values, WIN_SIZE);
  	arm_add_f32(gOutputAccum, ifft_real_values, gOutputAccum, WIN_SIZE);

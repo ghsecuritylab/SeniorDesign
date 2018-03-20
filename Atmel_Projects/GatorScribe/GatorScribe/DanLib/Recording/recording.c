@@ -37,13 +37,6 @@ static time_signature_identifier_t time_sig = 0;
 
 /**************************** Private Variables End *********************************/
 
-void touch_interrupt_handler(uint32_t x, uint32_t y)
-{
-	touch_t touched_point;
-	touch_handler(&touched_point);
-	recording = false; 
-}
-
 /**************************** Private Functions Start *********************************/
 
 /**
@@ -93,6 +86,15 @@ static void configure_lcd_interrupt(void)
 	pio_enable_interrupt(PIOD, PIO_PD28);
 }
 /**************************** Private Functions End *********************************/
+
+/**************************** Touch Handler Start *********************************/
+void touch_interrupt_handler(uint32_t x, uint32_t y)
+{
+    touch_t touched_point;
+    touch_handler(&touched_point);
+    recording = false;
+}
+/**************************** Touch Handler End *********************************/
 
 /**************************** RTT Interrupt Handler Start *********************************/
 
