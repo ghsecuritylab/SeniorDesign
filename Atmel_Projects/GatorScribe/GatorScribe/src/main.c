@@ -234,7 +234,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 		else 
 		{
 			harmony_list_fill[harmony_idx] = 0.0f; 
-			float *temp = harmony_list_read; 
+			float *temp = (float *)harmony_list_read; 
 			harmony_list_read = harmony_list_fill; 
 			harmony_list_fill = temp; 
 			harmony_idx = 0; 
@@ -267,26 +267,26 @@ int main(void)
 	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
 	SCB_EnableICache(); 
 	
-// 	usart_serial_options_t usart_console_settings = {
-// 		USART_SERIAL_BAUDRATE,
-// 		USART_SERIAL_CHAR_LENGTH,
-// 		USART_SERIAL_PARITY,
-// 		USART_SERIAL_STOP_BIT
-// 	};
-// 	usart_serial_init(USART_SERIAL, &usart_console_settings);
-// 	usart_enable_tx(USART_SERIAL);
-// 	usart_enable_rx(USART_SERIAL);
-// 	
-// 	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY); 
-// 	NVIC_SetPriority(USART1_IRQn, 2); 
-// 	NVIC_ClearPendingIRQ(USART1_IRQn);
-// 	NVIC_EnableIRQ(USART1_IRQn);
+	usart_serial_options_t usart_console_settings = {
+		USART_SERIAL_BAUDRATE,
+		USART_SERIAL_CHAR_LENGTH,
+		USART_SERIAL_PARITY,
+		USART_SERIAL_STOP_BIT
+	};
+	usart_serial_init(USART_SERIAL, &usart_console_settings);
+	usart_enable_tx(USART_SERIAL);
+	usart_enable_rx(USART_SERIAL);
+	
+	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY); 
+	NVIC_SetPriority(USART1_IRQn, 2); 
+	NVIC_ClearPendingIRQ(USART1_IRQn);
+	NVIC_EnableIRQ(USART1_IRQn);
 	
 	// for serial debug 
 	//char *str = (char *)calloc(20, sizeof(char)); 
 	
 	/*************** Application code variables start ***************/
-	uint32_t i,j;
+	uint32_t i;
 	
 	float inputPitch; 
 
@@ -296,20 +296,50 @@ int main(void)
 	}
 	/*************** Application code variables end ***************/
 
-	float closest_note; 
+	float oneOverInputPitch, pitch_shift; 
+	float harmony_shifts[11]; arm_fill_f32(0.0f, harmony_shifts, 11); 
 	while(1)
 	{
 		if (dataReceived)
 		{	
 		    inputPitch = computeWaveletPitch((float  *)processBuffer); 
-			
+				
 			//closest_note = get_frequency_from_all(inputPitch);
-			// create pitch shift array here 
-		
-			pitchCorrect((float  *)processBuffer, mixed_buffer, inputPitch, 1.0f); 
+
+			if (inputPitch > 40.0f)
+			{
+				oneOverInputPitch = 1.0f / inputPitch;
+				i = 0;
+				while(harmony_list_read[i] > 1.0f && i < 11)
+				{
+					pitch_shift = 1.0f - (inputPitch-harmony_list_read[i])*oneOverInputPitch;
+					//if (pitch_shift > 0.49f && pitch_shift < 2.01f)
+					//{
+						harmony_shifts[i] = pitch_shift; 
+					//}
+					i++; 
+				}
+				if (i == 0)
+				{
+					harmony_shifts[0] = 1.0f; 
+					harmony_shifts[1] = -1.0f; 
+				}
+				else 
+				{
+					harmony_shifts[i] = -1.0f; 
+				}
+			} 
+			else 
+			{
+				inputPitch = 40.0f; 
+				harmony_shifts[0] = 1.0f; // forces no pitch shift ... might need to revisit if this is a good idea 
+				harmony_shifts[1] = -1.0f; 	
+			}
 			
-			//arm_add_f32((float *)processBuffer, mixed_buffer, mixed_buffer, WIN_SIZE); 
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX , mixed_buffer, WIN_SIZE); 
+			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
+			
+			arm_add_f32((float *)processBuffer, mixed_buffer, mixed_buffer, WIN_SIZE); 
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f , mixed_buffer, WIN_SIZE); 
 
 			uint32_t idx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=2)
