@@ -38,7 +38,7 @@ if(ser.isOpen()):
 
                     msg = ser.read().decode('ascii')
                     
-                x.tofile('my_song.mid')
+                x.tofile('my_song.mid') # simply name of file 
                 
     except Exception: 
         print("Error")
