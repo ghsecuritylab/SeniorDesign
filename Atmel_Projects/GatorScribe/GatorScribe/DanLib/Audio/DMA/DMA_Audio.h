@@ -17,7 +17,7 @@
 #define XDMA_CH_SSC_TX    1
 
 /** Micro-block w-length for single transfer  */
-#define IO_BUF_SIZE          1024	// 1024 in total, 512 left & 512 right 
+#define IO_BUF_SIZE          2048	// 1024 in total, 512 left & 512 right 
 #define IO_BUF_SIZE_PER_CHANNEL (IO_BUF_SIZE >> 1) 
 
 #define WIN_SIZE IO_BUF_SIZE_PER_CHANNEL // ((IO_BUF_SIZE_PER_CHANNEL*NUM_OF_OVERLAPS) >> 1) // decimated by 2, length 1024

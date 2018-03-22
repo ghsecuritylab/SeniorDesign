@@ -27,7 +27,7 @@ static int32_t inputPeriodLength;
 static float currentPitch; 
 static float currentShifts[11]; 
 static uint32_t prev_num_shifts; 
-static float window[10*WIN_SIZE]; // sufficiently large window function 
+static float window[10*WIN_SIZE]; // sufficiently large window array  
 /************************ Static variables *********************/
 
 void PSOLA_init(void)
