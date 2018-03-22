@@ -24,7 +24,6 @@
 
 #define NUM_OF_OVERLAPS 4
 #define WIN_SIZE IO_BUF_SIZE_PER_CHANNEL // ((IO_BUF_SIZE_PER_CHANNEL*NUM_OF_OVERLAPS) >> 1) // decimated by 2, length 1024
-//#define NEW_DATA_SIZE ((IO_BUF_SIZE >> 1)>>1)  // one channel, decimated 
 /********************************** Defines End **********************************/
 
 /********************************** Externs Start **********************************/

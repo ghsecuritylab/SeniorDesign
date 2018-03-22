@@ -201,20 +201,9 @@ static inline float atan2_approximation(float y, float x)
 }
 
 /*************** Application code buffers and consts start ***************/
-static const float lp_filter_11k[] = {0.1155  ,  0.3406  ,  0.3406 ,   0.1155}; 
-static const uint32_t lp_filter_11k_length = 4;
-
-COMPILER_ALIGNED(WIN_SIZE) static float  x_in[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static float inWindowBuffer[WIN_SIZE]; 
-COMPILER_ALIGNED(WIN_SIZE) static float inWindowBufferCopy[WIN_SIZE]; // needed since the fft corrupts the input  
-
-COMPILER_ALIGNED(2*STEP_SIZE) static volatile float harmonized_output[2*STEP_SIZE];
-COMPILER_ALIGNED(2*STEP_SIZE) static float harmonized_output_filt[2*STEP_SIZE];
 
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
 
-float envelope_filter[] = {0.0038  ,  0.0151 ,   0.0376 ,   0.0707,    0.1074,    0.1366  ,  0.1478  ,  0.1366 ,   0.1074  ,  0.0707  ,  0.0376  ,  0.0151  ,  0.0038}; 
-uint32_t envelope_filter_length = 13;
 /*************** Application code buffers and consts end ***************/
 
 #define USART_SERIAL                 USART1
@@ -252,7 +241,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 		}
 	}
 }
-volatile float inputPitch; 
+
 int main(void)
 {
 	sysclk_init();
@@ -299,8 +288,7 @@ int main(void)
 	/*************** Application code variables start ***************/
 	uint32_t i,j;
 	
-	float inputPitch;
-	float pitch_shift;
+	float inputPitch; 
 
 	for (i = 0; i < 11; i++)
 	{
@@ -308,19 +296,20 @@ int main(void)
 	}
 	/*************** Application code variables end ***************/
 
+	float closest_note; 
 	while(1)
 	{
 		if (dataReceived)
 		{	
-								
-		    inputPitch = computeWaveletPitch((float  *)processBuffer); 	
-// 			sprintf(str, "%f", inputPitch);
-// 			printf("Freq: %s\n\r", str);
-
-
-			pitchCorrect((float  *)processBuffer, mixed_buffer, inputPitch, 2.0f); 
+		    inputPitch = computeWaveletPitch((float  *)processBuffer); 
 			
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); 
+			//closest_note = get_frequency_from_all(inputPitch);
+			// create pitch shift array here 
+		
+			pitchCorrect((float  *)processBuffer, mixed_buffer, inputPitch, 1.0f); 
+			
+			//arm_add_f32((float *)processBuffer, mixed_buffer, mixed_buffer, WIN_SIZE); 
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX , mixed_buffer, WIN_SIZE); 
 
 			uint32_t idx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=2)
@@ -328,7 +317,7 @@ int main(void)
 				outBuffer[i] = (uint16_t)(int16_t)(mixed_buffer[idx++]);  
 				outBuffer[i+1] = outBuffer[i]; 
 			}
-
+			
 			dataReceived = false; 
 		}
 	}

@@ -13,7 +13,7 @@
 #include "DMA_Audio.h"
 #include "arm_math.h"
 
-#define PSOLA_SAMPLE_RATE 46500 //23250 
+#define PSOLA_SAMPLE_RATE 46500 //46500 // 46500 // 46900 // 46500 //23250 
 
 #define DEFAULT_BUFFER_SIZE 1024 
 #define STEP_SIZE (WIN_SIZE/NUM_OF_OVERLAPS)

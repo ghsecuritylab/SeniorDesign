@@ -26,8 +26,6 @@ DanLib\Vocoder\hanning.c
 
 DanLib\Vocoder\psola.c
 
-DanLib\Vocoder\vocoder.c
-
 src\ASF\common\components\touch\mxt\mxt_device_1.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c

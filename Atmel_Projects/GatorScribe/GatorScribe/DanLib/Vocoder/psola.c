@@ -24,7 +24,8 @@ static uint32_t inPtr;
 static uint32_t outPtr;
 static uint32_t samplesLeftInPeriod; 
 static int32_t inputPeriodLength; 
-
+static float currentPitch; 
+static float currentShift; 
 /************************ Static variables *********************/
 
 void PSOLA_init(void)
@@ -37,6 +38,8 @@ void PSOLA_init(void)
 	outPtr = 0; 
 	samplesLeftInPeriod = 0; 
 	inputPeriodLength = 100; 
+	currentPitch = 20.0f; 
+	currentShift = 1.0f; 
 }
 
 void pitchCorrect(float* input, float *output, float inputPitch, float shift_amount) 
@@ -51,27 +54,23 @@ void pitchCorrect(float* input, float *output, float inputPitch, float shift_amo
 	float correctedPitchScale; 
 	float correctedPitchIn; 
 	
-	
 	// Do error checking
-	if (inputPitch < 50.0f) 
+	if (currentPitch < 40.0f) 
 	{
-		correctedPitchIn = 50.0f; 
+		correctedPitchIn = 40.0f; 
 		correctedPitchScale = 1.0f;
 	}
 	else 
 	{
-		correctedPitchIn = inputPitch; 
-		correctedPitchScale = shift_amount;
+		correctedPitchIn = currentPitch; 
+		correctedPitchScale = currentShift;
 	}
-	
-	inputPeriodLength = (uint32_t)((float)PSOLA_SAMPLE_RATE / correctedPitchIn);
-		
+
+	float inputPeriodLengthRecip = 1.0f / inputPeriodLength; 
 	float periodRatio = 1.0f / correctedPitchScale; 
-	
 	while(size > 0)
 	{
-		
-		input_ring_buffer[(inPtr+1024) & RING_BUFFER_MASK] = input[curInSample]; 
+		input_ring_buffer[(inPtr+WIN_SIZE) & RING_BUFFER_MASK] = input[curInSample]; 
 		
 		if (samplesLeftInPeriod == 0)
 		{
@@ -103,17 +102,16 @@ void pitchCorrect(float* input, float *output, float inputPitch, float shift_amo
 			while(outLag == 1)
 			{
 				// set outPtr about the sample at which we OLA 
-				outPtr = (uint32_t) (outPtr + inputPeriodLength * periodRatio) & RING_BUFFER_MASK; 
+				outPtr = (outPtr + (uint32_t)((float)inputPeriodLength * periodRatio)) & RING_BUFFER_MASK; 
 				
 				// OLA 
-				for (int32_t olaIdx = -inputPeriodLength; olaIdx <= inputPeriodLength; ++olaIdx)
+				for (int32_t olaIdx = -inputPeriodLength; olaIdx < inputPeriodLength; olaIdx++)
 				{
-					window_value = (1.0f + arm_cos_f32(PI_F * olaIdx / inputPeriodLength)) * 0.5f; 
+					window_value = (1.0f + arm_cos_f32(PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f; 
 					output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] += 
 						window_value * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr) & RING_BUFFER_MASK]; 
 				}
 				
-				outLag = 1; // shouldnt be needed but who knows 
 				if (inHalfAway < RING_BUFFER_SIZE_D2) 
 				{
 					/* The zero element of the input buffer lies
@@ -156,7 +154,9 @@ void pitchCorrect(float* input, float *output, float inputPitch, float shift_amo
 		curInSample++; 
 		size--; 
 	}
-	
+	inputPeriodLength = (uint32_t)((float)PSOLA_SAMPLE_RATE / correctedPitchIn);
+	currentPitch = inputPitch; 
+	currentShift = shift_amount; 
 }
 
 

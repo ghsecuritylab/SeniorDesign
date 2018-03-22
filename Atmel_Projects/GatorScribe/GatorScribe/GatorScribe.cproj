@@ -709,12 +709,6 @@
     <Compile Include="DanLib\Vocoder\psola.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\Vocoder\vocoder.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Vocoder\vocoder.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.c">
       <SubType>compile</SubType>
     </Compile>
