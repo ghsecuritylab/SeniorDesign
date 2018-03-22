@@ -297,7 +297,8 @@ int main(void)
 	/*************** Application code variables end ***************/
 
 	float oneOverInputPitch, pitch_shift; 
-	float harmony_shifts[11]; arm_fill_f32(0.0f, harmony_shifts, 11); 
+	float harmony_shifts[MAX_NUM_SHIFTS+1]; arm_fill_f32(NO_SHIFT, harmony_shifts, MAX_NUM_SHIFTS); 
+	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS; 
 	while(1)
 	{
 		if (dataReceived)
@@ -306,38 +307,36 @@ int main(void)
 				
 			//closest_note = get_frequency_from_all(inputPitch);
 
-			if (inputPitch > 40.0f)
+			if (inputPitch > MINIMUM_PITCH)
 			{
 				oneOverInputPitch = 1.0f / inputPitch;
 				i = 0;
-				while(harmony_list_read[i] > 1.0f && i < 11)
+				while(harmony_list_read[i] > 1.0f && i < MAX_NUM_SHIFTS)
 				{
 					pitch_shift = 1.0f - (inputPitch-harmony_list_read[i])*oneOverInputPitch;
-					//if (pitch_shift > 0.49f && pitch_shift < 2.01f)
-					//{
-						harmony_shifts[i] = pitch_shift; 
-					//}
+					harmony_shifts[i] = pitch_shift; 
 					i++; 
 				}
 				if (i == 0)
 				{
-					harmony_shifts[0] = 1.0f; 
-					harmony_shifts[1] = -1.0f; 
+					harmony_shifts[0] = NO_SHIFT; 
+					harmony_shifts[1] = END_OF_SHIFTS; 
 				}
 				else 
 				{
-					harmony_shifts[i] = -1.0f; 
+					harmony_shifts[i] = END_OF_SHIFTS; 
 				}
 			} 
 			else 
 			{
-				inputPitch = 40.0f; 
-				harmony_shifts[0] = 1.0f; // forces no pitch shift ... might need to revisit if this is a good idea 
-				harmony_shifts[1] = -1.0f; 	
+				inputPitch = MINIMUM_PITCH; 
+				harmony_shifts[0] = NO_SHIFT; // forces no pitch shift ... might need to revisit if this is a good idea 
+				harmony_shifts[1] = END_OF_SHIFTS; 	
 			}
 			
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
 			
+			arm_scale_f32(mixed_buffer, 0.92f, mixed_buffer, WIN_SIZE); 
 			arm_add_f32((float *)processBuffer, mixed_buffer, mixed_buffer, WIN_SIZE); 
 			arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f , mixed_buffer, WIN_SIZE); 
 

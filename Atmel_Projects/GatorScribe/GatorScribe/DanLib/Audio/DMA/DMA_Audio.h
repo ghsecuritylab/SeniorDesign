@@ -11,19 +11,18 @@
 
 #include <math.h>
 
-// #define AUTOTUNE
-
 /********************************** Defines Start **********************************/
 /** XDMA channels used */
 #define XDMA_CH_SSC_RX    0
 #define XDMA_CH_SSC_TX    1
 
 /** Micro-block w-length for single transfer  */
-#define IO_BUF_SIZE          2048	// 1024 in total, 512 left & 512 right 
+#define IO_BUF_SIZE          1024	// 1024 in total, 512 left & 512 right 
 #define IO_BUF_SIZE_PER_CHANNEL (IO_BUF_SIZE >> 1) 
 
-#define NUM_OF_OVERLAPS 4
 #define WIN_SIZE IO_BUF_SIZE_PER_CHANNEL // ((IO_BUF_SIZE_PER_CHANNEL*NUM_OF_OVERLAPS) >> 1) // decimated by 2, length 1024
+#define WIN_SIZE_D2 (WIN_SIZE>>1)
+
 /********************************** Defines End **********************************/
 
 /********************************** Externs Start **********************************/

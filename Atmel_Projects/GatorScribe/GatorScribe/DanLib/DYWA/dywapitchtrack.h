@@ -5,7 +5,7 @@
 #include "DMA_Audio.h"
 
 /*#define DYW_SAMPLING_RATE 23250*/
-#define DYW_SAMPLING_RATE 46500 
+#define DYW_SAMPLING_RATE 46550 
 #define POWER_THRESHOLD 0.000001f
 
 // structure to hold tracking data
@@ -15,7 +15,7 @@ typedef struct _dywapitchtracker {
 } dywapitchtracker;
 
 
-// return 0.0 if no pitch was found (sound too low, noise, etc..)
+// return -1.0 if no pitch was found (sound too low, noise, etc..)
 float computeWaveletPitch(float * samples); 
 
 #endif
