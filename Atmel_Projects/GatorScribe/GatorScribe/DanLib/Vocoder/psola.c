@@ -25,7 +25,7 @@ static uint32_t outPtr;
 static uint32_t samplesLeftInPeriod; 
 static int32_t inputPeriodLength; 
 static float currentPitch; 
-static float currentShifts[11]; 
+static float currentShifts[MAX_NUM_SHIFTS+1]; 
 static uint32_t prev_num_shifts; 
 static float window[10*WIN_SIZE]; // sufficiently large window array  
 /************************ Static variables *********************/
@@ -44,7 +44,7 @@ void PSOLA_init(void)
 	currentPitch = MINIMUM_PITCH; 
 	currentShifts[0] = 1.0f; 
 	currentShifts[1] = -1.0f; 
-	currentShifts[10] = -1.0f; // should never change 
+	currentShifts[MAX_NUM_SHIFTS] = -1.0f; // should never change 
 	prev_num_shifts = 1; 
 }
 
@@ -76,7 +76,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	}
 	
 	// for each pitch shift 
-	while(currentShifts[pitch_idx] > 0.0f && pitch_idx < 10)
+	while(currentShifts[pitch_idx] > 0.0f && pitch_idx < MAX_NUM_SHIFTS)
 	{
 		periodRatio = 1.0f / currentShifts[pitch_idx++]; 
 		samplesLeftInPeriod = saved_samplesLeftInPeriod; 

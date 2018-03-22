@@ -298,8 +298,6 @@ int main(void)
 	
 	
 	float oneOverInputPitch, pitch_shift;
-	bool prev_harmonize_option = false;
-	bool new_harmonize_option = false;
 	float harmony_shifts[MAX_NUM_SHIFTS+1]; arm_fill_f32(NO_SHIFT, harmony_shifts, MAX_NUM_SHIFTS);
 	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS;
 	
@@ -314,7 +312,7 @@ int main(void)
 				
 			//closest_note = get_frequency_from_all(inputPitch);
 
-			if (inputPitch > MINIMUM_PITCH)
+			if (inputPitch > MINIMUM_PITCH && harmony_list_read[0] > 1.0f)
 			{
 				oneOverInputPitch = 1.0f / inputPitch;
 				i = 0;
@@ -324,20 +322,11 @@ int main(void)
 					harmony_shifts[i] = pitch_shift; 
 					i++; 
 				}
-				if (i == 0)
-				{
-					harmony_shifts[0] = NO_SHIFT; 
-					harmony_shifts[1] = END_OF_SHIFTS; 
-				}
-				else 
-				{
-					harmony_shifts[i] = END_OF_SHIFTS; 
-				}
-				new_harmonize_option = true; 
+
+				harmony_shifts[i] = END_OF_SHIFTS; 
 			} 
 			else 
 			{
-				new_harmonize_option = false; 
 				inputPitch = MINIMUM_PITCH; 
 				harmony_shifts[0] = NO_SHIFT; // forces no pitch shift ... might need to revisit if this is a good idea 
 				harmony_shifts[1] = END_OF_SHIFTS; 	
@@ -346,22 +335,19 @@ int main(void)
 			// return pitch shifted data from previous samples block  
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
 			
-			if (prev_harmonize_option)
-			{
-				arm_scale_f32(mixed_buffer, 0.95f, mixed_buffer, WIN_SIZE);
-				arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
-				//arm_add_f32((float *)processBuffer, mixed_buffer, mixed_buffer, WIN_SIZE);
-				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f , mixed_buffer, WIN_SIZE);
-			}
-			else 
-			{
-				arm_scale_f32(prev_input, (float)INT16_MAX, mixed_buffer, WIN_SIZE); 
-				//arm_scale_f32((float *)processBuffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); 
-			}
-			prev_harmonize_option = new_harmonize_option; 
+			// mix output and harmonies 
+			arm_scale_f32(mixed_buffer, 0.95f, mixed_buffer, WIN_SIZE);
+			
+			// add previous input to harmonies 
+			arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
+			
+			// scale 
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f , mixed_buffer, WIN_SIZE);
+
+			// save current audio 
 			arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE); 
 			
-
+			// audio out 
 			uint32_t idx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=2)
 			{
