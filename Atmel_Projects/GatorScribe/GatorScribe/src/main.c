@@ -205,7 +205,6 @@ static inline float atan2_approximation(float y, float x)
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float prev_input[WIN_SIZE];
 
-
 /*************** Application code buffers and consts end ***************/
 
 #define USART_SERIAL                 USART1
@@ -300,7 +299,7 @@ int main(void)
 	float oneOverInputPitch, pitch_shift;
 	float harmony_shifts[MAX_NUM_SHIFTS+1]; arm_fill_f32(NO_SHIFT, harmony_shifts, MAX_NUM_SHIFTS);
 	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS;
-	
+	harmony_shifts[0] = NO_SHIFT;
 	arm_fill_f32(0.0f, prev_input, WIN_SIZE); 
 	/*************** Application code variables end ***************/
 
@@ -315,10 +314,10 @@ int main(void)
 			if (inputPitch > MINIMUM_PITCH && harmony_list_read[0] > 1.0f)
 			{
 				oneOverInputPitch = 1.0f / inputPitch;
-				i = 0;
-				while(harmony_list_read[i] > 1.0f && i < MAX_NUM_SHIFTS)
+				i = 1;
+				while(harmony_list_read[i-1] > 1.0f && i < MAX_NUM_SHIFTS)
 				{
-					pitch_shift = 1.0f - (inputPitch-harmony_list_read[i])*oneOverInputPitch;
+					pitch_shift = 1.0f - (inputPitch-harmony_list_read[i-1])*oneOverInputPitch;
 					harmony_shifts[i] = pitch_shift; 
 					i++; 
 				}
@@ -328,7 +327,7 @@ int main(void)
 			else 
 			{
 				inputPitch = MINIMUM_PITCH; 
-				harmony_shifts[0] = NO_SHIFT; // forces no pitch shift ... might need to revisit if this is a good idea 
+				//harmony_shifts[0] = NO_SHIFT; // forces no pitch shift ... might need to revisit if this is a good idea 
 				harmony_shifts[1] = END_OF_SHIFTS; 	
 			}
 			

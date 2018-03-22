@@ -700,9 +700,6 @@
     <Compile Include="DanLib\LCDLib\touch\touch.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\Vocoder\hanning.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="DanLib\Vocoder\psola.c">
       <SubType>compile</SubType>
     </Compile>

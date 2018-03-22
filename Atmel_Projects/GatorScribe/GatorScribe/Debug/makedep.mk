@@ -22,8 +22,6 @@ DanLib\LCDLib\LCDLib.c
 
 DanLib\LCDLib\touch\touch.c
 
-DanLib\Vocoder\hanning.c
-
 DanLib\Vocoder\psola.c
 
 src\ASF\common\components\touch\mxt\mxt_device_1.c

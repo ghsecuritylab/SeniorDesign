@@ -138,7 +138,6 @@ C_SRCS +=  \
 ../DanLib/LCDLib/gfx/sysfont.c \
 ../DanLib/LCDLib/LCDLib.c \
 ../DanLib/LCDLib/touch/touch.c \
-../DanLib/Vocoder/hanning.c \
 ../DanLib/Vocoder/psola.c \
 ../src/ASF/common/components/touch/mxt/mxt_device_1.c \
 ../src/ASF/common/services/delay/sam/cycle_counter.c \
@@ -199,7 +198,6 @@ DanLib/LCDLib/gfx/gfx_text.o \
 DanLib/LCDLib/gfx/sysfont.o \
 DanLib/LCDLib/LCDLib.o \
 DanLib/LCDLib/touch/touch.o \
-DanLib/Vocoder/hanning.o \
 DanLib/Vocoder/psola.o \
 src/ASF/common/components/touch/mxt/mxt_device_1.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
@@ -253,7 +251,6 @@ DanLib/LCDLib/gfx/gfx_text.o \
 DanLib/LCDLib/gfx/sysfont.o \
 DanLib/LCDLib/LCDLib.o \
 DanLib/LCDLib/touch/touch.o \
-DanLib/Vocoder/hanning.o \
 DanLib/Vocoder/psola.o \
 src/ASF/common/components/touch/mxt/mxt_device_1.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
@@ -307,7 +304,6 @@ DanLib/LCDLib/gfx/gfx_text.d \
 DanLib/LCDLib/gfx/sysfont.d \
 DanLib/LCDLib/LCDLib.d \
 DanLib/LCDLib/touch/touch.d \
-DanLib/Vocoder/hanning.d \
 DanLib/Vocoder/psola.d \
 src/ASF/common/components/touch/mxt/mxt_device_1.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
@@ -361,7 +357,6 @@ DanLib/LCDLib/gfx/gfx_text.d \
 DanLib/LCDLib/gfx/sysfont.d \
 DanLib/LCDLib/LCDLib.d \
 DanLib/LCDLib/touch/touch.d \
-DanLib/Vocoder/hanning.d \
 DanLib/Vocoder/psola.d \
 src/ASF/common/components/touch/mxt/mxt_device_1.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
@@ -419,8 +414,6 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
-
-
 
 
 

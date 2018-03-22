@@ -18,7 +18,7 @@
 #define MINIMUM_PITCH 40.0f
 #define NO_SHIFT 1.0f 
 #define END_OF_SHIFTS -1.0f
-#define MAX_NUM_SHIFTS 10 
+#define MAX_NUM_SHIFTS 11
 
 void PSOLA_init(void); 
 void create_harmonies(float* input, float *output, float inputPitch, float *pitch_shifts_in); 
