@@ -225,15 +225,15 @@ void USART_SERIAL_ISR_HANDLER(void)
 	if (dw_status & US_CSR_RXRDY) {
 		uint32_t received_byte;
 		usart_read(USART_SERIAL, &received_byte);
-		//usart_write(USART_SERIAL, received_byte);
-		if (received_byte != 0 && harmony_idx < 10)
+		//usart_write(USART_SERIAL, received_byte); // for debug 
+		if (received_byte != 0 && harmony_idx < MAX_NUM_SHIFTS)
 		{
 			harmony_list_fill[harmony_idx] = midi_note_frequencies[received_byte]; 
 			harmony_idx++;
 		}
 		else 
 		{
-			harmony_list_fill[harmony_idx] = 0.0f; 
+			harmony_list_fill[harmony_idx] = END_OF_SHIFTS; 
 			float *temp = (float *)harmony_list_read; 
 			harmony_list_read = harmony_list_fill; 
 			harmony_list_fill = temp; 
@@ -251,7 +251,6 @@ int main(void)
 	SCB_EnableICache();
 	audio_init();
 	//configure_console();
-	//Vocoder_init();
 	PSOLA_init(); 
 	 
 	SCB_DisableICache(); 
@@ -336,7 +335,7 @@ int main(void)
 			
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
 			
-			arm_scale_f32(mixed_buffer, 0.92f, mixed_buffer, WIN_SIZE); 
+			arm_scale_f32(mixed_buffer, 0.95f, mixed_buffer, WIN_SIZE); 
 			arm_add_f32((float *)processBuffer, mixed_buffer, mixed_buffer, WIN_SIZE); 
 			arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f , mixed_buffer, WIN_SIZE); 
 

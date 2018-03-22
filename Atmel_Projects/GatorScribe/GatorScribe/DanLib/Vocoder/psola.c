@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 
-#define RING_BUFFER_SIZE 8192 
+#define RING_BUFFER_SIZE 16384 
 #define RING_BUFFER_SIZE_D2 (RING_BUFFER_SIZE >> 1) 
 #define RING_BUFFER_MASK (RING_BUFFER_SIZE-1)
 
