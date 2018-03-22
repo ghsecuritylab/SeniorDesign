@@ -203,6 +203,8 @@ static inline float atan2_approximation(float y, float x)
 /*************** Application code buffers and consts start ***************/
 
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static float prev_input[WIN_SIZE];
+
 
 /*************** Application code buffers and consts end ***************/
 
@@ -293,16 +295,22 @@ int main(void)
 	{
 		harmony_list_a[i] = 0.0f; harmony_list_b[i] = 0.0f; 
 	}
+	
+	
+	float oneOverInputPitch, pitch_shift;
+	bool prev_harmonize_option = false;
+	bool new_harmonize_option = false;
+	float harmony_shifts[MAX_NUM_SHIFTS+1]; arm_fill_f32(NO_SHIFT, harmony_shifts, MAX_NUM_SHIFTS);
+	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS;
+	
+	arm_fill_f32(0.0f, prev_input, WIN_SIZE); 
 	/*************** Application code variables end ***************/
 
-	float oneOverInputPitch, pitch_shift; 
-	float harmony_shifts[MAX_NUM_SHIFTS+1]; arm_fill_f32(NO_SHIFT, harmony_shifts, MAX_NUM_SHIFTS); 
-	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS; 
 	while(1)
 	{
 		if (dataReceived)
 		{	
-		    inputPitch = computeWaveletPitch((float  *)processBuffer); 
+		    inputPitch = computeWaveletPitch((float  *)processBuffer);
 				
 			//closest_note = get_frequency_from_all(inputPitch);
 
@@ -325,19 +333,34 @@ int main(void)
 				{
 					harmony_shifts[i] = END_OF_SHIFTS; 
 				}
+				new_harmonize_option = true; 
 			} 
 			else 
 			{
+				new_harmonize_option = false; 
 				inputPitch = MINIMUM_PITCH; 
 				harmony_shifts[0] = NO_SHIFT; // forces no pitch shift ... might need to revisit if this is a good idea 
 				harmony_shifts[1] = END_OF_SHIFTS; 	
 			}
 			
+			// return pitch shifted data from previous samples block  
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
 			
-			arm_scale_f32(mixed_buffer, 0.95f, mixed_buffer, WIN_SIZE); 
-			arm_add_f32((float *)processBuffer, mixed_buffer, mixed_buffer, WIN_SIZE); 
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f , mixed_buffer, WIN_SIZE); 
+			if (prev_harmonize_option)
+			{
+				arm_scale_f32(mixed_buffer, 0.95f, mixed_buffer, WIN_SIZE);
+				arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
+				//arm_add_f32((float *)processBuffer, mixed_buffer, mixed_buffer, WIN_SIZE);
+				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f , mixed_buffer, WIN_SIZE);
+			}
+			else 
+			{
+				arm_scale_f32(prev_input, (float)INT16_MAX, mixed_buffer, WIN_SIZE); 
+				//arm_scale_f32((float *)processBuffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); 
+			}
+			prev_harmonize_option = new_harmonize_option; 
+			arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE); 
+			
 
 			uint32_t idx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=2)

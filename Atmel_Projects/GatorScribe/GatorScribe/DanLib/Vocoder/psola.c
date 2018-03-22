@@ -69,7 +69,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	float periodRatio;
 	float inputPeriodLengthRecip = 1.0f / inputPeriodLength;
 	
-	// create window function
+	// pre-compute window function
 	for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
 	{
 		window[w] = (1.0f + arm_cos_f32(PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;
