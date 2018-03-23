@@ -308,7 +308,7 @@ int main(void)
 	{
 		if (dataReceived)
 		{	
-		    inputPitch = computeWaveletPitch((float  *)processBuffer);
+			inputPitch = computeWaveletPitch((float  *)processBuffer);
 				
 			//closest_note = get_frequency_from_all(inputPitch);
 
@@ -319,7 +319,7 @@ int main(void)
 				num_of_shifts = 1; 
 				while(harmony_list_read[i-1] > 1.0f && i < MAX_NUM_SHIFTS)
 				{
-					if (Abs(harmony_list_read[i-1] - inputPitch) > 9.0f)
+					if (Abs(harmony_list_read[i-1] - inputPitch) > 10.0f)
 					{
 						pitch_shift = 1.0f - (inputPitch-harmony_list_read[i-1])*oneOverInputPitch;
 						harmony_shifts[num_of_shifts++] = pitch_shift;
@@ -341,13 +341,13 @@ int main(void)
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
 			
 			// mix output and harmonies 
-			arm_scale_f32(mixed_buffer, 0.95f, mixed_buffer, WIN_SIZE);
+			//arm_scale_f32(mixed_buffer, 0.95f, mixed_buffer, WIN_SIZE);
 			
 			// add previous input to harmonies -- getting some echo because of this. need to think more 
-			arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
+			//arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
 			
 			// scale 
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f , mixed_buffer, WIN_SIZE);
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX , mixed_buffer, WIN_SIZE);
 
 			// save current audio 
 			arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE); 

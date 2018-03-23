@@ -25,7 +25,6 @@ static uint32_t outPtr;
 static uint32_t samplesLeftInPeriod; 
 static int32_t inputPeriodLength; 
 static float currentPitch; 
-static float currentShifts[MAX_NUM_SHIFTS+1]; 
 static uint32_t prev_num_shifts; 
 static float window[10*WIN_SIZE]; // sufficiently large window array  
 /************************ Static variables *********************/
@@ -36,15 +35,12 @@ void PSOLA_init(void)
 	arm_fill_f32(0.0f, output_ring_buffer, RING_BUFFER_SIZE);
 	arm_fill_f32(0.0f, window, 10*WIN_SIZE); 
 	
-	readPos = RING_BUFFER_SIZE - WIN_SIZE; 
+	readPos = RING_BUFFER_SIZE - WIN_SIZE; // + WEIRD_OFFSET; 
 	inPtr = 0; 
 	outPtr = 0; 
 	samplesLeftInPeriod = 0; 
-	inputPeriodLength = 100; 
+	inputPeriodLength = PSOLA_SAMPLE_RATE / MINIMUM_PITCH; 
 	currentPitch = MINIMUM_PITCH; 
-	currentShifts[0] = 1.0f; 
-	currentShifts[1] = -1.0f; 
-	currentShifts[MAX_NUM_SHIFTS] = -1.0f; // should never change 
 	prev_num_shifts = 1; 
 }
 
@@ -75,11 +71,11 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	{
 		window[w] = (1.0f + arm_cos_f32(PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;
 	}
-	
+		
 	// for each pitch shift 
-	while(currentShifts[pitch_idx] > 0.0f && pitch_idx < MAX_NUM_SHIFTS)
+	while(pitch_shifts_in[pitch_idx] > 0.0f && pitch_idx < MAX_NUM_SHIFTS)
 	{
-		periodRatio = 1.0f / currentShifts[pitch_idx++]; 
+		periodRatio = 1.0f / pitch_shifts_in[pitch_idx++]; 
 		samplesLeftInPeriod = saved_samplesLeftInPeriod; 
 		inPtr = saved_inPtr; 
 		outPtr = saved_outPtr; 
@@ -155,7 +151,8 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 			// inc/wrap input ring buffer index 
 			inPtr = (inPtr+1) & RING_BUFFER_MASK; 		
 		}
-		cum_samplesLeftInPeriod += samplesLeftInPeriod; 
+		if (samplesLeftInPeriod > cum_samplesLeftInPeriod || pitch_idx == 1)
+			cum_samplesLeftInPeriod = samplesLeftInPeriod; 
 	}
 	
 	for(i = 0; i < WIN_SIZE; i++)
@@ -171,12 +168,13 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	//prev_num_shifts = pitch_idx; 
 	
 	// variables for next harmonization  
-	if ((pitch_idx-1) > 0)
-		samplesLeftInPeriod = cum_samplesLeftInPeriod / (pitch_idx-1); // average the number of samples left in period 
+	//if ((pitch_idx-1) > 0)
+		//samplesLeftInPeriod = cum_samplesLeftInPeriod / (pitch_idx-1); // average the number of samples left in period 
 	
-	inputPeriodLength = (uint32_t)((float)PSOLA_SAMPLE_RATE / currentPitch);
 	currentPitch = inputPitch; 
-	arm_copy_f32(pitch_shifts_in, currentShifts, MAX_NUM_SHIFTS); 
+	inputPeriodLength = (uint32_t)(PSOLA_SAMPLE_RATE / currentPitch);
+	
+	
 }
 
 
