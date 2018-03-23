@@ -2679,7 +2679,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
   401290:	d32d      	bcc.n	4012ee <create_harmonies+0x17e>
   401292:	45f4      	cmp	ip, lr
   401294:	d82b      	bhi.n	4012ee <create_harmonies+0x17e>
-  401296:	f20a 288a 	addw	r8, sl, #650	; 0x28a
+  401296:	f20a 18d1 	addw	r8, sl, #465	; 0x1d1
 				}
 
 				while(outLag == 1)
