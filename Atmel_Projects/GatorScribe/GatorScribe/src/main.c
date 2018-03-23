@@ -242,7 +242,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 		}
 	}
 }
-
+volatile float inputPitch; 
 int main(void)
 {
 	sysclk_init();
@@ -288,7 +288,7 @@ int main(void)
 	/*************** Application code variables start ***************/
 	uint32_t i;
 	
-	float inputPitch; 
+	//float inputPitch; 
 
 	for (i = 0; i < 11; i++)
 	{
@@ -302,7 +302,7 @@ int main(void)
 	harmony_shifts[0] = NO_SHIFT;
 	arm_fill_f32(0.0f, prev_input, WIN_SIZE); 
 	/*************** Application code variables end ***************/
-
+	
 	while(1)
 	{
 		if (dataReceived)
@@ -311,7 +311,7 @@ int main(void)
 				
 			//closest_note = get_frequency_from_all(inputPitch);
 
-			if (inputPitch > MINIMUM_PITCH && harmony_list_read[0] > 1.0f)
+			if (inputPitch > MINIMUM_PITCH)
 			{
 				oneOverInputPitch = 1.0f / inputPitch;
 				i = 1;
@@ -327,6 +327,7 @@ int main(void)
 			else 
 			{
 				inputPitch = MINIMUM_PITCH; 
+				// first shift should already be 1.0f 
 				//harmony_shifts[0] = NO_SHIFT; // forces no pitch shift ... might need to revisit if this is a good idea 
 				harmony_shifts[1] = END_OF_SHIFTS; 	
 			}
@@ -337,7 +338,7 @@ int main(void)
 			// mix output and harmonies 
 			arm_scale_f32(mixed_buffer, 0.95f, mixed_buffer, WIN_SIZE);
 			
-			// add previous input to harmonies 
+			// add previous input to harmonies -- getting some echo because of this. need to think more 
 			arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
 			
 			// scale 

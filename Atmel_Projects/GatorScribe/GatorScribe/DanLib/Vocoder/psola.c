@@ -110,7 +110,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 						outLag = 0;
 					}
 				}
-			
+
 				while(outLag == 1)
 				{
 					// set outPtr about the sample at which we OLA 
@@ -120,7 +120,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 					for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
 					{
 						output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] += 
-							window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr) & RING_BUFFER_MASK]; 
+							window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK]; 
 					}
 				
 					if (inHalfAway < RING_BUFFER_SIZE_D2) 
