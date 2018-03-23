@@ -67,6 +67,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	uint32_t outLag;
 	uint32_t inHalfAway;
 	float periodRatio;
+	float cum_samplesLeftInPeriod = 0;
 	float inputPeriodLengthRecip = 1.0f / inputPeriodLength;
 	
 	// pre-compute window function
@@ -154,6 +155,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 			// inc/wrap input ring buffer index 
 			inPtr = (inPtr+1) & RING_BUFFER_MASK; 		
 		}
+		cum_samplesLeftInPeriod += samplesLeftInPeriod; 
 	}
 	
 	for(i = 0; i < WIN_SIZE; i++)
@@ -169,6 +171,9 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	//prev_num_shifts = pitch_idx; 
 	
 	// variables for next harmonization  
+	if ((pitch_idx-1) > 0)
+		samplesLeftInPeriod = cum_samplesLeftInPeriod / (pitch_idx-1); // average the number of samples left in period 
+	
 	inputPeriodLength = (uint32_t)((float)PSOLA_SAMPLE_RATE / currentPitch);
 	currentPitch = inputPitch; 
 	arm_copy_f32(pitch_shifts_in, currentShifts, MAX_NUM_SHIFTS); 
