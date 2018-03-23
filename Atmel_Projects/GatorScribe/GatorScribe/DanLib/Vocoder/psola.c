@@ -14,6 +14,7 @@
 #define RING_BUFFER_MASK (RING_BUFFER_SIZE-1)
 
 #define PI_F 3.14159265358f 
+#define TWO_PI_F 6.28318530f
 
 /************************ Static variables *********************/ 
 static float input_ring_buffer[RING_BUFFER_SIZE];
@@ -45,10 +46,11 @@ void PSOLA_init(void)
 }
 
 // assumes valid pitch shifts 
-void create_harmonies(float* input, float *output, float inputPitch, float *pitch_shifts_in) 
+void create_harmonies(float* input, float *output, float inputPitch, float *pitch_shifts_in)
 {
 	uint32_t i, w; 
 	int32_t olaIdx; 
+	
 	uint32_t saved_inPtr = inPtr; 
 	uint32_t saved_outPtr = outPtr; 
 	uint32_t saved_samplesLeftInPeriod = samplesLeftInPeriod; 
@@ -67,9 +69,14 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	float inputPeriodLengthRecip = 1.0f / inputPeriodLength;
 	
 	// pre-compute window function
-	for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
+// 	for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
+// 	{
+// 		window[w] = (1.0f + arm_cos_f32(PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;
+// 	}
+	
+	for (olaIdx = 0, w = 0; olaIdx < 2*inputPeriodLength; olaIdx++, w++)
 	{
-		window[w] = (1.0f + arm_cos_f32(PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;
+		window[w] = (1.0f - arm_cos_f32(TWO_PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;
 	}
 		
 	// for each pitch shift 
@@ -116,10 +123,10 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 					// OLA 
 					for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
 					{
-						output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] += 
-							window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK]; 
+						output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
+							window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
 					}
-				
+					
 					if (inHalfAway < RING_BUFFER_SIZE_D2) 
 					{
 						/* The zero element of the input buffer lies
@@ -173,6 +180,8 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	
 	currentPitch = inputPitch; 
 	inputPeriodLength = (uint32_t)(PSOLA_SAMPLE_RATE / currentPitch);
+	
+
 	
 	
 }

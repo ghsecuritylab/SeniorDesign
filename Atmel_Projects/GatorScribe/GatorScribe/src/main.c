@@ -302,21 +302,22 @@ int main(void)
 	harmony_shifts[0] = NO_SHIFT;
 	arm_fill_f32(0.0f, prev_input, WIN_SIZE); 
 	uint32_t num_of_shifts = 0; 
+	bool need_root = false; // used for transients when no key is played 
 	/*************** Application code variables end ***************/
 	
 	while(1)
 	{
 		if (dataReceived)
 		{	
+			dataReceived = false; 
 			inputPitch = computeWaveletPitch((float  *)processBuffer);
-				
 			//closest_note = get_frequency_from_all(inputPitch);
 
+			num_of_shifts = 1; 
 			if (inputPitch > MINIMUM_PITCH)
 			{
 				oneOverInputPitch = 1.0f / inputPitch;
 				i = 1;
-				num_of_shifts = 1; 
 				while(harmony_list_read[i-1] > 1.0f && i < MAX_NUM_SHIFTS)
 				{
 					if (Abs(harmony_list_read[i-1] - inputPitch) > 10.0f)
@@ -326,8 +327,8 @@ int main(void)
 					}
 					i++; 
 				}
-
 				harmony_shifts[num_of_shifts] = END_OF_SHIFTS; 
+				need_root = false; 
 			} 
 			else 
 			{
@@ -335,20 +336,27 @@ int main(void)
 				// first shift should already be 1.0f 
 				//harmony_shifts[0] = NO_SHIFT; // forces no pitch shift ... might need to revisit if this is a good idea 
 				harmony_shifts[1] = END_OF_SHIFTS; 	
+				num_of_shifts = 1; 
+				if (need_root == false)
+					need_root = true; 
 			}
 			
 			// return pitch shifted data from previous samples block  
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
 			
-			// mix output and harmonies 
-			//arm_scale_f32(mixed_buffer, 0.95f, mixed_buffer, WIN_SIZE);
-			
 			// add previous input to harmonies -- getting some echo because of this. need to think more 
-			//arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
+			if (num_of_shifts > 1 || need_root)
+			{
+				arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
+				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f, mixed_buffer, WIN_SIZE);
+			}
+			else 
+			{
+				arm_scale_f32(mixed_buffer, 0.5f, mixed_buffer, WIN_SIZE);
+				arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
+				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.75f, mixed_buffer, WIN_SIZE);
+			}
 			
-			// scale 
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX , mixed_buffer, WIN_SIZE);
-
 			// save current audio 
 			arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE); 
 			
@@ -360,7 +368,15 @@ int main(void)
 				outBuffer[i+1] = outBuffer[i]; 
 			}
 			
-			dataReceived = false; 
+			if (dataReceived)
+			{
+				while(1)
+				{
+					// taking too long 
+				}
+			}
+			else 
+				dataReceived = false; 
 		}
 	}
 }
