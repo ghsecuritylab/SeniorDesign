@@ -76,7 +76,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	
 	for (olaIdx = 0, w = 0; olaIdx < 2*inputPeriodLength; olaIdx++, w++)
 	{
-		window[w] = (1.0f - arm_cos_f32(TWO_PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;
+		window[w] = (1.0f - arm_cos_f32(PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;
 	}
 		
 	// for each pitch shift 

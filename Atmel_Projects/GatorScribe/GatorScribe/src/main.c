@@ -205,6 +205,13 @@ static inline float atan2_approximation(float y, float x)
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float prev_input[WIN_SIZE];
 
+
+// for reverb 
+// #define OUT_CIRC_BUF_SIZE 16384
+// #define OUT_CIRC_MASK (OUT_CIRC_BUF_SIZE-1)
+// COMPILER_ALIGNED(OUT_CIRC_BUF_SIZE) static float output_circ_buffer[OUT_CIRC_BUF_SIZE];
+
+
 /*************** Application code buffers and consts end ***************/
 
 #define USART_SERIAL                 USART1
@@ -303,6 +310,7 @@ int main(void)
 	arm_fill_f32(0.0f, prev_input, WIN_SIZE); 
 	uint32_t num_of_shifts = 0; 
 	bool need_root = false; // used for transients when no key is played 
+	uint32_t circ_buf_idx = 0; 
 	/*************** Application code variables end ***************/
 	
 	while(1)
@@ -344,19 +352,34 @@ int main(void)
 			// return pitch shifted data from previous samples block  
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
 			
-			// add previous input to harmonies -- getting some echo because of this. need to think more 
-			if (num_of_shifts > 1 || need_root)
-			{
-				arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
-				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f, mixed_buffer, WIN_SIZE);
-			}
-			else 
-			{
-				arm_scale_f32(mixed_buffer, 0.5f, mixed_buffer, WIN_SIZE);
-				arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
-				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.75f, mixed_buffer, WIN_SIZE);
-			}
+			//not sure why this reverb doesnt work 
+// 			for (i = 0; i < WIN_SIZE; i++)
+// 			{
+// 				output_circ_buffer[(i+circ_buf_idx++) & OUT_CIRC_MASK] = mixed_buffer[i];
+// 			}
+// 			
+// 			uint32_t curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE - (uint32_t)4000;
+// 			float alpha = 0.5f;
+// 			for (i = 0; i < WIN_SIZE; i++)
+// 			{
+// 				mixed_buffer[i] = (1.0f - alpha) * mixed_buffer[i] + alpha * output_circ_buffer[curr_idx++ & OUT_CIRC_MASK]; 
+// 			}
 			
+// 			// add previous input to harmonies 
+// 			if (num_of_shifts > 1 || need_root)
+// 			{
+// 				arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
+// 				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f, mixed_buffer, WIN_SIZE);
+// 			}
+// 			else 
+// 			{
+// 				arm_scale_f32(mixed_buffer, 0.5f, mixed_buffer, WIN_SIZE);
+// 				arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
+// 				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.75f, mixed_buffer, WIN_SIZE);
+// 			}
+			
+	
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE);
 			// save current audio 
 			arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE); 
 			
