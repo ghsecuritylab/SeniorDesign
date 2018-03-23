@@ -301,6 +301,7 @@ int main(void)
 	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS;
 	harmony_shifts[0] = NO_SHIFT;
 	arm_fill_f32(0.0f, prev_input, WIN_SIZE); 
+	uint32_t num_of_shifts = 0; 
 	/*************** Application code variables end ***************/
 	
 	while(1)
@@ -315,14 +316,18 @@ int main(void)
 			{
 				oneOverInputPitch = 1.0f / inputPitch;
 				i = 1;
+				num_of_shifts = 1; 
 				while(harmony_list_read[i-1] > 1.0f && i < MAX_NUM_SHIFTS)
 				{
-					pitch_shift = 1.0f - (inputPitch-harmony_list_read[i-1])*oneOverInputPitch;
-					harmony_shifts[i] = pitch_shift; 
+					if (Abs(harmony_list_read[i-1] - inputPitch) > 9.0f)
+					{
+						pitch_shift = 1.0f - (inputPitch-harmony_list_read[i-1])*oneOverInputPitch;
+						harmony_shifts[num_of_shifts++] = pitch_shift;
+					}
 					i++; 
 				}
 
-				harmony_shifts[i] = END_OF_SHIFTS; 
+				harmony_shifts[num_of_shifts] = END_OF_SHIFTS; 
 			} 
 			else 
 			{
