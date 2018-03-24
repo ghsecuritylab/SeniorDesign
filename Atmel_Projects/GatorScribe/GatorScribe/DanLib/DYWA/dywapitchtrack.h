@@ -6,7 +6,6 @@
 
 /*#define DYW_SAMPLING_RATE 23250*/
 #define DYW_SAMPLING_RATE 46503.0f 
-#define POWER_THRESHOLD 0.000001f
 
 // structure to hold tracking data
 typedef struct _dywapitchtracker {

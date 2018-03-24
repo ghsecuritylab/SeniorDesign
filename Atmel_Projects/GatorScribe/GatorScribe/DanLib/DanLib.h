@@ -35,5 +35,7 @@ enum harmonies
 };
 
 #define HALF_STEP 1.059463094359f
+#define POWER_THRESHOLD 0.000001f
+
 
 #endif /* DANLIB_H_ */

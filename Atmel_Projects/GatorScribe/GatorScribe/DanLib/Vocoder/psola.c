@@ -14,7 +14,6 @@
 #define RING_BUFFER_MASK (RING_BUFFER_SIZE-1)
 
 #define PI_F 3.14159265358f 
-#define TWO_PI_F 6.28318530f
 
 /************************ Static variables *********************/ 
 static float input_ring_buffer[RING_BUFFER_SIZE];
@@ -68,12 +67,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	float cum_samplesLeftInPeriod = 0;
 	float inputPeriodLengthRecip = 1.0f / inputPeriodLength;
 	
-	// pre-compute window function
-// 	for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
-// 	{
-// 		window[w] = (1.0f + arm_cos_f32(PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;
-// 	}
-	
+	// pre-compute window function	
 	for (olaIdx = 0, w = 0; olaIdx < 2*inputPeriodLength; olaIdx++, w++)
 	{
 		window[w] = (1.0f - arm_cos_f32(PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;

@@ -303,7 +303,7 @@ int main(void)
 	}
 	
 	
-	float oneOverInputPitch, pitch_shift;
+	float oneOverInputPitch, pitch_shift, power;
 	float harmony_shifts[MAX_NUM_SHIFTS+1]; arm_fill_f32(NO_SHIFT, harmony_shifts, MAX_NUM_SHIFTS);
 	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS;
 	harmony_shifts[0] = NO_SHIFT;
@@ -319,10 +319,14 @@ int main(void)
 		{	
 			dataReceived = false; 
 			inputPitch = computeWaveletPitch((float  *)processBuffer);
-			//closest_note = get_frequency_from_all(inputPitch);
+			float closest_note = get_frequency_from_all(inputPitch);
+			pitch_shift = 1.0f - (inputPitch-closest_note)*oneOverInputPitch;
+			harmony_shifts[0] = pitch_shift;
 
-			num_of_shifts = 1; 
-			if (inputPitch > MINIMUM_PITCH)
+			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
+		
+			num_of_shifts = 1;  
+			if (inputPitch > MINIMUM_PITCH && power > POWER_THRESHOLD)
 			{
 				oneOverInputPitch = 1.0f / inputPitch;
 				i = 1;
@@ -341,8 +345,7 @@ int main(void)
 			else 
 			{
 				inputPitch = MINIMUM_PITCH; 
-				// first shift should already be 1.0f 
-				//harmony_shifts[0] = NO_SHIFT; // forces no pitch shift ... might need to revisit if this is a good idea 
+				// only do autotune 
 				harmony_shifts[1] = END_OF_SHIFTS; 	
 				num_of_shifts = 1; 
 				if (need_root == false)

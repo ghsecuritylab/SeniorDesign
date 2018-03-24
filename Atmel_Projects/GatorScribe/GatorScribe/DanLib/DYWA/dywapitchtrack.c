@@ -168,8 +168,6 @@ static inline float get_raw_pitch(float * samples)
 	int32_t i, j;
 	float si, si1;
 	float power; 
-	//arm_power_f32(samples, WIN_SIZE>>2, &power); 
-	//if (power < POWER_THRESHOLD) return pitchF; 
 	
 	arm_copy_f32(samples, sam, WIN_SIZE); 
 	int32_t curSamNb = WIN_SIZE;
