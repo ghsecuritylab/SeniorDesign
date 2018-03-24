@@ -205,7 +205,6 @@ static inline float atan2_approximation(float y, float x)
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float prev_input[WIN_SIZE];
 
-
 // for reverb 
 #define OUT_CIRC_BUF_SIZE 16384
 #define OUT_CIRC_MASK (OUT_CIRC_BUF_SIZE-1)
@@ -249,7 +248,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 		}
 	}
 }
-volatile float inputPitch; 
+
 int main(void)
 {
 	sysclk_init();
@@ -295,13 +294,12 @@ int main(void)
 	/*************** Application code variables start ***************/
 	uint32_t i;
 	
-	//float inputPitch; 
+	float inputPitch; 
 
 	for (i = 0; i < 11; i++)
 	{
 		harmony_list_a[i] = 0.0f; harmony_list_b[i] = 0.0f; 
 	}
-	
 	
 	float oneOverInputPitch, pitch_shift, power;
 	float harmony_shifts[MAX_NUM_SHIFTS+1]; arm_fill_f32(NO_SHIFT, harmony_shifts, MAX_NUM_SHIFTS);
@@ -318,24 +316,30 @@ int main(void)
 		if (dataReceived)
 		{	
 			dataReceived = false; 
+			
+			// Get pitch 
 			inputPitch = computeWaveletPitch((float  *)processBuffer);
+			
+			// Auto tune 
 			float closest_note = get_frequency_from_all(inputPitch);
 			pitch_shift = 1.0f - (inputPitch-closest_note)*oneOverInputPitch;
 			harmony_shifts[0] = pitch_shift;
+			num_of_shifts = 1;  
 
+			// calc. power 
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
 		
-			num_of_shifts = 1;  
+			// determine whether you should add any harmonies 
 			if (inputPitch > MINIMUM_PITCH && power > POWER_THRESHOLD)
 			{
 				oneOverInputPitch = 1.0f / inputPitch;
 				i = 1;
 				while(harmony_list_read[i-1] > 1.0f && i < MAX_NUM_SHIFTS)
 				{
-					if (Abs(harmony_list_read[i-1] - inputPitch) > 10.0f)
+					if (Abs(harmony_list_read[i-1] - inputPitch) > 10.0f) // don't harmonies input pitch twice 
 					{
 						pitch_shift = 1.0f - (inputPitch-harmony_list_read[i-1])*oneOverInputPitch;
-						if (pitch_shift > 0.1f && pitch_shift < 6.0f)
+						if (pitch_shift > 0.1f && pitch_shift < 6.0f) // range check 
 							harmony_shifts[num_of_shifts++] = pitch_shift;
 					}
 					i++; 
@@ -356,7 +360,7 @@ int main(void)
 			// return pitch shifted data from previous samples block  
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
 			
-			// put data into circ bufer 
+			// put data into circ.  buffer 
 			for (i = 0; i < WIN_SIZE; i++)
 			{
 				output_circ_buffer[circ_buf_idx++ & OUT_CIRC_MASK] = mixed_buffer[i];
@@ -388,7 +392,7 @@ int main(void)
 // 				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.75f, mixed_buffer, WIN_SIZE);
 // 			}
 			
-	
+			// scale output 
 			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE);
 			// save current audio 
 			//arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE); 
@@ -401,11 +405,12 @@ int main(void)
 				outBuffer[i+1] = outBuffer[i]; 
 			}
 			
+			// check if we're too slow 
 			if (dataReceived)
 			{
 				while(1)
 				{
-					// taking too long 
+					// taking too long ... never 
 				}
 			}
 			else 
