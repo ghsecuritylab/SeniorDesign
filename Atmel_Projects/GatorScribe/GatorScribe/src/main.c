@@ -207,9 +207,9 @@ COMPILER_ALIGNED(WIN_SIZE) static float prev_input[WIN_SIZE];
 
 
 // for reverb 
-// #define OUT_CIRC_BUF_SIZE 16384
-// #define OUT_CIRC_MASK (OUT_CIRC_BUF_SIZE-1)
-// COMPILER_ALIGNED(OUT_CIRC_BUF_SIZE) static float output_circ_buffer[OUT_CIRC_BUF_SIZE];
+#define OUT_CIRC_BUF_SIZE 16384
+#define OUT_CIRC_MASK (OUT_CIRC_BUF_SIZE-1)
+COMPILER_ALIGNED(OUT_CIRC_BUF_SIZE) static float output_circ_buffer[OUT_CIRC_BUF_SIZE];
 
 
 /*************** Application code buffers and consts end ***************/
@@ -335,7 +335,8 @@ int main(void)
 					if (Abs(harmony_list_read[i-1] - inputPitch) > 10.0f)
 					{
 						pitch_shift = 1.0f - (inputPitch-harmony_list_read[i-1])*oneOverInputPitch;
-						harmony_shifts[num_of_shifts++] = pitch_shift;
+						if (pitch_shift > 0.1f && pitch_shift < 6.0f)
+							harmony_shifts[num_of_shifts++] = pitch_shift;
 					}
 					i++; 
 				}
@@ -355,18 +356,24 @@ int main(void)
 			// return pitch shifted data from previous samples block  
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
 			
-			//not sure why this reverb doesnt work 
-// 			for (i = 0; i < WIN_SIZE; i++)
-// 			{
-// 				output_circ_buffer[(i+circ_buf_idx++) & OUT_CIRC_MASK] = mixed_buffer[i];
-// 			}
+			// put data into circ bufer 
+			for (i = 0; i < WIN_SIZE; i++)
+			{
+				output_circ_buffer[circ_buf_idx++ & OUT_CIRC_MASK] = mixed_buffer[i];
+			}
+			
+			// only add reverb when we have harmonies 
+			if (num_of_shifts > 0) // ought to be 1 but whateves... sounds nice with some verb 
+			{
+				uint32_t delay = 2500; 
+				uint32_t curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE - delay;
+				float alpha = 0.5f;
+				for (i = 0; i < WIN_SIZE; i++)
+				{
+					mixed_buffer[i] = (1.0f - alpha) * mixed_buffer[i] + alpha * output_circ_buffer[curr_idx++ & OUT_CIRC_MASK];
+				}
+			}
 // 			
-// 			uint32_t curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE - (uint32_t)4000;
-// 			float alpha = 0.5f;
-// 			for (i = 0; i < WIN_SIZE; i++)
-// 			{
-// 				mixed_buffer[i] = (1.0f - alpha) * mixed_buffer[i] + alpha * output_circ_buffer[curr_idx++ & OUT_CIRC_MASK]; 
-// 			}
 			
 // 			// add previous input to harmonies 
 // 			if (num_of_shifts > 1 || need_root)
@@ -384,7 +391,7 @@ int main(void)
 	
 			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE);
 			// save current audio 
-			arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE); 
+			//arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE); 
 			
 			// audio out 
 			uint32_t idx = 0; 
