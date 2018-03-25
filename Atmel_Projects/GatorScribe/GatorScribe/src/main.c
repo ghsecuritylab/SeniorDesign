@@ -378,8 +378,8 @@ int main(void)
 			uint32_t curr_idx; 
 			if (num_of_shifts > 0) // ought to be 1 but whateves... sounds nice with some verb 
 			{
-				uint32_t delay = 1700; 
-				float g = 0.7f; 
+				uint32_t delay = 2100; 
+				float g = 0.5f; 
 				curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 				for (i = 0; i < WIN_SIZE; i++)
 				{
