@@ -25,7 +25,6 @@ static uint32_t outPtr;
 static uint32_t samplesLeftInPeriod; 
 static int32_t inputPeriodLength; 
 static float currentPitch; 
-static uint32_t prev_num_shifts; 
 static float window[10*WIN_SIZE]; // sufficiently large window array  
 /************************ Static variables *********************/
 
@@ -41,7 +40,6 @@ void PSOLA_init(void)
 	samplesLeftInPeriod = 0; 
 	inputPeriodLength = PSOLA_SAMPLE_RATE / MINIMUM_PITCH; 
 	currentPitch = MINIMUM_PITCH; 
-	prev_num_shifts = 1; 
 }
 
 // assumes valid pitch shifts 
@@ -164,9 +162,8 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	}
 	
 	// no need to average 
-	//if (prev_num_shifts < 1) prev_num_shifts = 1; // just in case 
-	//arm_scale_f32(output, 1.0f / (float)prev_num_shifts, output, WIN_SIZE); 
-	//prev_num_shifts = pitch_idx; 
+	//if (pitch_idx < 1) pitch_idx = 1; // just in case 
+	//arm_scale_f32(output, 1.0f / (float)pitch_idx, output, WIN_SIZE); 
 	
 	// variables for next harmonization  
 	//if ((pitch_idx-1) > 0)
