@@ -206,7 +206,7 @@ COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
 COMPILER_ALIGNED(WIN_SIZE) static float prev_input[WIN_SIZE];
 
 // for reverb 
-#define CIRC_BUF_SIZE 16384
+#define CIRC_BUF_SIZE 8192
 #define CIRC_MASK (CIRC_BUF_SIZE-1)
 COMPILER_ALIGNED(CIRC_BUF_SIZE) static float input_circ_buffer[CIRC_BUF_SIZE];
 COMPILER_ALIGNED(CIRC_BUF_SIZE) static float output_circ_buffer[CIRC_BUF_SIZE];
