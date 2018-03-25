@@ -303,12 +303,12 @@ int main(void)
 	}
 	
 	float oneOverInputPitch, pitch_shift, power;
-	float harmony_shifts[MAX_NUM_SHIFTS+1]; arm_fill_f32(NO_SHIFT, harmony_shifts, MAX_NUM_SHIFTS);
-	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS;
+	float harmony_shifts[MAX_NUM_SHIFTS+1];
 	harmony_shifts[0] = NO_SHIFT;
+	harmony_shifts[1] = END_OF_SHIFTS; 
+	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS; // should never change 
 	arm_fill_f32(0.0f, prev_input, WIN_SIZE); 
 	uint32_t num_of_shifts = 0; 
-	bool need_root = false; // used for transients when no key is played 
 	uint32_t circ_buf_idx = 0; 
 	/*************** Application code variables end ***************/
 	
@@ -346,7 +346,6 @@ int main(void)
 					i++; 
 				}
 				harmony_shifts[num_of_shifts] = END_OF_SHIFTS; 
-				need_root = false; 
 			} 
 			else 
 			{
@@ -354,19 +353,21 @@ int main(void)
 				// only do autotune 
 				harmony_shifts[1] = END_OF_SHIFTS; 	
 				num_of_shifts = 1; 
-				if (need_root == false)
-					need_root = true; 
 			}
 			
 			// return pitch shifted data from previous samples block  
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts); 
 			
+			// trying volume normalization 
 // 			float harmony_max, desired_max;
 // 			uint32_t tmp;
 // 			arm_max_f32(mixed_buffer, WIN_SIZE, &harmony_max, &tmp);
 // 			arm_max_f32(prev_input, WIN_SIZE, &desired_max, &tmp);
 // 			float scale = desired_max / harmony_max; 
 // 			arm_scale_f32(mixed_buffer, scale, mixed_buffer, WIN_SIZE); 
+
+			// save current audio
+			// arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE);
 			
 			// put data into circ.  buffer 
 			for (i = 0; i < WIN_SIZE; i++)
@@ -412,9 +413,6 @@ int main(void)
 			// scale output 
 			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE);
 			
-			// save current audio 
-			arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE); 
-			
 			// audio out 
 			uint32_t idx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=2)
@@ -426,10 +424,10 @@ int main(void)
 			// check if we're too slow 
 			if (dataReceived)
 			{
-				while(1)
-				{
-					// taking too long ... never 
-				}
+// 				while(1)
+// 				{
+// 					// taking too long ... never 
+// 				}
 			}
 			else 
 				dataReceived = false; 

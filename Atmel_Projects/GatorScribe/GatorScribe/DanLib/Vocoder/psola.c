@@ -113,11 +113,23 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 					outPtr = (outPtr + (uint32_t)((float)inputPeriodLength * periodRatio)) & RING_BUFFER_MASK; 
 				
 					// OLA 
-					for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
+					if (pitch_idx == 1)
 					{
-						output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
+						for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
+						{
+							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
 							window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+						}
 					}
+					else
+					{
+						for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
+						{
+							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
+							0.92f * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+						}
+					}
+	
 					
 					if (inHalfAway < RING_BUFFER_SIZE_D2) 
 					{
