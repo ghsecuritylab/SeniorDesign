@@ -23,6 +23,6 @@
 #define WEIRD_OFFSET 0 //581 // keep playing with this number. 
 
 void PSOLA_init(void); 
-void create_harmonies(float* input, float *output, float inputPitch, float *pitch_shifts_in); 
+void create_harmonies(float* input, float *output, float inputPitch, float *pitch_shifts_in, float volume); 
 
 #endif /* PSOLA_H_ */

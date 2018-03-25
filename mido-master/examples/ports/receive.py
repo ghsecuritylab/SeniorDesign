@@ -21,6 +21,11 @@ try:
 except: 
     print("Error")
     exit() 
+    
+note_on = 144 
+note_off = 128 
+volume = 176 
+harmony_ch = 77 
 
 try:
     with mido.open_input('Oxygen 49') as port:
@@ -30,21 +35,26 @@ try:
             if (message.bytes()[0] == 144): 
                 # add note to array to send 
                 notes.append(message.bytes()[1])
+                for k in range(len(notes)):
+                    ser.write([notes[k]])
+                ser.write([0]) # null terminated 
                 
             elif (message.bytes()[0] == 128): 
                 # remove note from array to send 
                 notes.remove(message.bytes()[1])
-            
-            #msg = ser.read().decode('ascii')
+                for k in range(len(notes)):
+                    ser.write([notes[k]])
+                ser.write([0]) # null terminated 
+            elif (message.bytes()[0] == volume and message.bytes()[1] == harmony_ch):
+                ser.write([255])
+                ser.write([message.bytes()[2]])
+                
 
             
-            for k in range(len(notes)):
-                temp = notes[k]
-                ser.write([temp])
-          
-            ser.write([0])
+           
             
-            print(notes)
+            #print(notes)
+            print(message.bytes())
 
             sys.stdout.flush()
 except KeyboardInterrupt:
