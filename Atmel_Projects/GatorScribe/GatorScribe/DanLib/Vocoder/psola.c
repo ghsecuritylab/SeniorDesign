@@ -45,7 +45,7 @@ void PSOLA_init(void)
 		saved_samplesLeftInPeriod[i] = 0; 
 	}
 		
-	current_num_shifts = 1; 
+	current_num_shifts = 1; // always doing root 
 	
 	readPos = RING_BUFFER_SIZE - WIN_SIZE; // + WEIRD_OFFSET; 
 	inPtr = 0; 
@@ -73,7 +73,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	uint32_t inHalfAway;
 	float periodRatio;
 	float inputPeriodLengthRecip = 1.0f / inputPeriodLength;
-	float samplesLeftInPeriod; 
+	uint32_t samplesLeftInPeriod = 0; 
 	
 	// pre-compute window function	
 	for (olaIdx = 0, w = 0; olaIdx < 2*inputPeriodLength; olaIdx++, w++)
@@ -90,8 +90,8 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 		if (pitch_idx > current_num_shifts - 1)
 		{
 			// find closest harmony for the onset of a new harmony 
-			float min = Abs(pitch_shifts_in[pitch_idx] - prev_pitch_shifts[0]); 
 			float tmp; 
+			float min = Abs(pitch_shifts_in[pitch_idx] - prev_pitch_shifts[0]); 
 			outPtr = outPtrList[0]; 
 			for (i = 1; i < current_num_shifts; i++)
 			{
