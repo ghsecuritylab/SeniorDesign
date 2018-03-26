@@ -227,8 +227,10 @@ volatile float harmony_list_b[11];
 volatile float *harmony_list_read = harmony_list_a; 
 volatile float *harmony_list_fill = harmony_list_b; 
 volatile uint32_t harmony_idx = 0;  
-volatile bool waiting_for_volume = false; 
-volatile float volume = 0.8f; 
+volatile bool waiting_for_harm_volume = false; 
+volatile bool waiting_for_master_volume = false;
+volatile float harm_volume = 0.8f; 
+volatile float master_volume = 1.0f;
 void USART_SERIAL_ISR_HANDLER(void)
 {
 	uint32_t dw_status = usart_get_status(USART_SERIAL);
@@ -237,14 +239,23 @@ void USART_SERIAL_ISR_HANDLER(void)
 		usart_read(USART_SERIAL, &received_byte);
 		//usart_write(USART_SERIAL, received_byte); // for debug 
 		
-		if (waiting_for_volume)
+		if (waiting_for_harm_volume)
 		{
-			volume = (float)received_byte / 127.0f; 
-			waiting_for_volume = false; 
+			harm_volume = (float)received_byte / 127.0f; 
+			waiting_for_harm_volume = false; 
+		}
+		else if (waiting_for_master_volume)
+		{
+			master_volume = (float)received_byte / 127.0f;
+			waiting_for_master_volume = false;
 		}
 		else if (received_byte == 255) 
 		{
-			waiting_for_volume = true; 
+			waiting_for_harm_volume = true; 
+		}
+		else if (received_byte == 254)
+		{
+			waiting_for_master_volume = true;
 		}
 		else if (received_byte != 0 && harmony_idx < MAX_NUM_SHIFTS)
 		{
@@ -314,7 +325,8 @@ int main(void)
 		harmony_list_a[i] = 0.0f; harmony_list_b[i] = 0.0f; 
 	}
 	
-	float oneOverInputPitch, pitch_shift, power;
+	float oneOverInputPitch = 1.0f;
+	float pitch_shift, power;
 	float harmony_shifts[MAX_NUM_SHIFTS+1];
 	harmony_shifts[0] = NO_SHIFT;
 	harmony_shifts[1] = END_OF_SHIFTS; 
@@ -368,7 +380,7 @@ int main(void)
 			}
 			
 			// return pitch shifted data from previous samples block  
-			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts, (float)volume); 
+			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts, (float)harm_volume); 
 			
 			// trying volume normalization 
 // 			float harmony_max, desired_max;
@@ -423,7 +435,7 @@ int main(void)
 // 			}
 			
 			// scale output 
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE);
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX * master_volume, mixed_buffer, WIN_SIZE);
 			
 			// audio out 
 			uint32_t idx = 0; 

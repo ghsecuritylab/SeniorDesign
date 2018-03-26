@@ -26,6 +26,7 @@ note_on = 144
 note_off = 128 
 volume = 176 
 harmony_ch = 77 
+master_ch = 76 
 
 try:
     with mido.open_input('Oxygen 49') as port:
@@ -47,6 +48,9 @@ try:
                 ser.write([0]) # null terminated 
             elif (message.bytes()[0] == volume and message.bytes()[1] == harmony_ch):
                 ser.write([255])
+                ser.write([message.bytes()[2]])
+            elif (message.bytes()[0] == volume and message.bytes()[1] == master_ch):
+                ser.write([254])
                 ser.write([message.bytes()[2]])
                 
 

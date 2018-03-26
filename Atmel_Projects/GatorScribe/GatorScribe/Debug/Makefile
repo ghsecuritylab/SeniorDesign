@@ -56,8 +56,6 @@ SUBDIRS :=  \
 ../src/ASF/common/services/delay/sam/ \
 ../src/ASF/common/services/gpio/ \
 ../src/ASF/common/services/gpio/sam_gpio/ \
-../src/ASF/common/services/ioport/ \
-../src/ASF/common/services/ioport/sam/ \
 ../src/ASF/common/services/serial/ \
 ../src/ASF/common/services/serial/sam_uart/ \
 ../src/ASF/common/services/twi/ \
