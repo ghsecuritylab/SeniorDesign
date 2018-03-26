@@ -12973,7 +12973,7 @@ void vTimerPeriodicISRTests( void )
 
 00405180 <USART1_Handler>:
 volatile bool waiting_for_master_volume = false;
-volatile float harm_volume = 0.8f; 
+volatile float harm_volume = 1.0f; 
 volatile float master_volume = 1.0f;
 volatile bool autotune = true; 
 void USART_SERIAL_ISR_HANDLER(void)
@@ -19794,7 +19794,7 @@ void portable_delay_cycles(unsigned long n)
 20400040:	0001 0000                                   ....
 
 20400044 <harm_volume>:
-20400044:	cccd 3f4c                                   ..L?
+20400044:	0000 3f80                                   ...?
 
 20400048 <harmony_list_fill>:
 20400048:	fc18 2043                                   ..C 

@@ -229,7 +229,7 @@ volatile float *harmony_list_fill = harmony_list_b;
 volatile uint32_t harmony_idx = 0;  
 volatile bool waiting_for_harm_volume = false; 
 volatile bool waiting_for_master_volume = false;
-volatile float harm_volume = 0.8f; 
+volatile float harm_volume = 1.0f; 
 volatile float master_volume = 1.0f;
 volatile bool autotune = true; 
 void USART_SERIAL_ISR_HANDLER(void)
