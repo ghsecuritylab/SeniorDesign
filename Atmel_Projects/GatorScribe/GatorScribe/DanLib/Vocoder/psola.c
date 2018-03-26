@@ -21,10 +21,12 @@ static float output_ring_buffer[RING_BUFFER_SIZE];
 
 static uint32_t readPos; 
 static uint32_t inPtr; 
-static uint32_t outPtr;
+static uint32_t outPtrList[MAX_NUM_SHIFTS];
+static uint32_t current_num_shifts; 
 static uint32_t samplesLeftInPeriod; 
 static int32_t inputPeriodLength; 
 static float currentPitch; 
+static float prev_pitch_shifts[MAX_NUM_SHIFTS]; 
 static float window[10*WIN_SIZE]; // sufficiently large window array  
 /************************ Static variables *********************/
 
@@ -33,10 +35,17 @@ void PSOLA_init(void)
 	arm_fill_f32(0.0f, input_ring_buffer, RING_BUFFER_SIZE); 
 	arm_fill_f32(0.0f, output_ring_buffer, RING_BUFFER_SIZE);
 	arm_fill_f32(0.0f, window, 10*WIN_SIZE); 
+	arm_fill_f32(1.0f, prev_pitch_shifts, MAX_NUM_SHIFTS); 
+	prev_pitch_shifts[0] = 1.0f; 
+	prev_pitch_shifts[1] = -1.0f; 
+	
+	for(uint32_t i = 0; i < MAX_NUM_SHIFTS; i++)
+		outPtrList[i] = 0; 
+		
+	current_num_shifts = 1; 
 	
 	readPos = RING_BUFFER_SIZE - WIN_SIZE; // + WEIRD_OFFSET; 
 	inPtr = 0; 
-	outPtr = 0; 
 	samplesLeftInPeriod = 0; 
 	inputPeriodLength = PSOLA_SAMPLE_RATE / MINIMUM_PITCH; 
 	currentPitch = MINIMUM_PITCH; 
@@ -49,7 +58,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	int32_t olaIdx; 
 	
 	uint32_t saved_inPtr = inPtr; 
-	uint32_t saved_outPtr = outPtr; 
+	uint32_t outPtr; 
 	uint32_t saved_samplesLeftInPeriod = samplesLeftInPeriod; 
 	uint32_t pitch_idx = 0; 
 	
@@ -78,7 +87,26 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 		periodRatio = 1.0f / pitch_shifts_in[pitch_idx]; 
 		samplesLeftInPeriod = saved_samplesLeftInPeriod; 
 		inPtr = saved_inPtr; 
-		outPtr = saved_outPtr; 
+		
+		if (pitch_idx > current_num_shifts - 1)
+		{
+			// find closest harmony for the onset of a new harmony 
+			float min = Abs(pitch_shifts_in[pitch_idx] - prev_pitch_shifts[0]); 
+			float tmp; 
+			outPtr = outPtrList[0]; 
+			for (i = 1; i < current_num_shifts; i++)
+			{
+				tmp = Abs(pitch_shifts_in[pitch_idx] - prev_pitch_shifts[i]);
+				if (tmp < min)
+				{
+					outPtr = outPtrList[i]; 
+					min = tmp; 
+				}
+			}
+		}
+		else 
+			outPtr = outPtrList[pitch_idx]; 
+		
 		for (i = 0; i < WIN_SIZE; i++)
 		{		
 			if (samplesLeftInPeriod == 0)
@@ -166,8 +194,8 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 		if (pitch_idx == 0)
 		{
 			next_samplesLeftInPeriod = samplesLeftInPeriod; 
-			next_outPtr = outPtr; 
 		}
+		outPtrList[pitch_idx] = outPtr; 
 		pitch_idx++;  
 	}
 	
@@ -189,7 +217,8 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	currentPitch = inputPitch; 
 	inputPeriodLength = (uint32_t)(PSOLA_SAMPLE_RATE / currentPitch);
 	samplesLeftInPeriod = next_samplesLeftInPeriod; 
-	outPtr = next_outPtr;
+	current_num_shifts = pitch_idx; 
+	arm_copy_f32(pitch_shifts_in, prev_pitch_shifts, MAX_NUM_SHIFTS); 
 }
 
 

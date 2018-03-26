@@ -17195,7 +17195,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x2045fffc                __ram_end__ = ((ORIGIN (ram) + LENGTH (ram)) - 0x4)
                 0x00000200                HEAP_SIZE = DEFINED (HEAP_SIZE)?HEAP_SIZE:0x200
 
-.text           0x00400000     0x934c
+.text           0x00400000     0x958c
                 0x00400000                . = ALIGN (0x4)
                 0x00400000                _sfixed = .
  *(.vectors .vectors.*)
@@ -17237,729 +17237,729 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x00400f70      0x1a8 DanLib/LCDLib/touch/touch.o
                 0x00400f70                mxt_init
  .text.PSOLA_init
-                0x00401118       0x68 DanLib/Vocoder/psola.o
+                0x00401118       0x9c DanLib/Vocoder/psola.o
                 0x00401118                PSOLA_init
  .text.create_harmonies
-                0x00401180      0x2a8 DanLib/Vocoder/psola.o
-                0x00401180                create_harmonies
+                0x004011b4      0x4c4 DanLib/Vocoder/psola.o
+                0x004011b4                create_harmonies
  .text.mxt_init_device
-                0x00401428      0x404 src/ASF/common/components/touch/mxt/mxt_device_1.o
-                0x00401428                mxt_init_device
+                0x00401678      0x404 src/ASF/common/components/touch/mxt/mxt_device_1.o
+                0x00401678                mxt_init_device
  .text.mxt_get_object_address
-                0x0040182c       0x48 src/ASF/common/components/touch/mxt/mxt_device_1.o
-                0x0040182c                mxt_get_object_address
+                0x00401a7c       0x48 src/ASF/common/components/touch/mxt/mxt_device_1.o
+                0x00401a7c                mxt_get_object_address
  .text.mxt_write_config_object
-                0x00401874       0x7c src/ASF/common/components/touch/mxt/mxt_device_1.o
-                0x00401874                mxt_write_config_object
+                0x00401ac4       0x7c src/ASF/common/components/touch/mxt/mxt_device_1.o
+                0x00401ac4                mxt_write_config_object
  .text.mxt_write_config_reg
-                0x004018f0       0x48 src/ASF/common/components/touch/mxt/mxt_device_1.o
-                0x004018f0                mxt_write_config_reg
+                0x00401b40       0x48 src/ASF/common/components/touch/mxt/mxt_device_1.o
+                0x00401b40                mxt_write_config_reg
  .text.mxt_read_message
-                0x00401938       0x7c src/ASF/common/components/touch/mxt/mxt_device_1.o
-                0x00401938                mxt_read_message
- .text._read    0x004019b4       0x3c src/ASF/common/utils/stdio/read.o
-                0x004019b4                _read
- .text._write   0x004019f0       0x54 src/ASF/common/utils/stdio/write.o
-                0x004019f0                _write
+                0x00401b88       0x7c src/ASF/common/components/touch/mxt/mxt_device_1.o
+                0x00401b88                mxt_read_message
+ .text._read    0x00401c04       0x3c src/ASF/common/utils/stdio/read.o
+                0x00401c04                _read
+ .text._write   0x00401c40       0x54 src/ASF/common/utils/stdio/write.o
+                0x00401c40                _write
  .text.wm8904_write_register
-                0x00401a44       0x3c src/ASF/sam/components/audio/codec/wm8904/wm8904.o
-                0x00401a44                wm8904_write_register
+                0x00401c94       0x3c src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+                0x00401c94                wm8904_write_register
  .text.wm8904_read_register
-                0x00401a80       0x3c src/ASF/sam/components/audio/codec/wm8904/wm8904.o
-                0x00401a80                wm8904_read_register
+                0x00401cd0       0x3c src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+                0x00401cd0                wm8904_read_register
  .text.wm8904_twi_init
-                0x00401abc       0x78 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
-                0x00401abc                wm8904_twi_init
+                0x00401d0c       0x78 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+                0x00401d0c                wm8904_twi_init
  .text.ili9488_set_window
-                0x00401b34       0xbc src/ASF/sam/components/display/ili9488/ili9488.o
-                0x00401b34                ili9488_set_window
+                0x00401d84       0xbc src/ASF/sam/components/display/ili9488/ili9488.o
+                0x00401d84                ili9488_set_window
  .text.ili9488_display_on
-                0x00401bf0       0x20 src/ASF/sam/components/display/ili9488/ili9488.o
-                0x00401bf0                ili9488_display_on
+                0x00401e40       0x20 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x00401e40                ili9488_display_on
  .text.ili9488_set_cursor_position
-                0x00401c10       0x98 src/ASF/sam/components/display/ili9488/ili9488.o
-                0x00401c10                ili9488_set_cursor_position
+                0x00401e60       0x98 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x00401e60                ili9488_set_cursor_position
  .text.ili9488_init
-                0x00401ca8      0x144 src/ASF/sam/components/display/ili9488/ili9488.o
-                0x00401ca8                ili9488_init
+                0x00401ef8      0x144 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x00401ef8                ili9488_init
  .text.ili9488_write_brightness
-                0x00401dec       0x34 src/ASF/sam/components/display/ili9488/ili9488.o
-                0x00401dec                ili9488_write_brightness
+                0x0040203c       0x34 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x0040203c                ili9488_write_brightness
  .text.ili9488_set_limits
-                0x00401e20       0x28 src/ASF/sam/components/display/ili9488/ili9488.o
-                0x00401e20                ili9488_set_limits
+                0x00402070       0x28 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x00402070                ili9488_set_limits
  .text.ili9488_set_orientation
-                0x00401e48       0x58 src/ASF/sam/components/display/ili9488/ili9488.o
-                0x00401e48                ili9488_set_orientation
+                0x00402098       0x58 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x00402098                ili9488_set_orientation
  .text.ili9488_duplicate_pixel
-                0x00401ea0       0x78 src/ASF/sam/components/display/ili9488/ili9488.o
-                0x00401ea0                ili9488_duplicate_pixel
+                0x004020f0       0x78 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x004020f0                ili9488_duplicate_pixel
  .text.smc_set_setup_timing
-                0x00401f18        0x8 src/ASF/sam/drivers/ebi/smc/smc.o
-                0x00401f18                smc_set_setup_timing
+                0x00402168        0x8 src/ASF/sam/drivers/ebi/smc/smc.o
+                0x00402168                smc_set_setup_timing
  .text.smc_set_pulse_timing
-                0x00401f20        0x8 src/ASF/sam/drivers/ebi/smc/smc.o
-                0x00401f20                smc_set_pulse_timing
+                0x00402170        0x8 src/ASF/sam/drivers/ebi/smc/smc.o
+                0x00402170                smc_set_pulse_timing
  .text.smc_set_cycle_timing
-                0x00401f28        0x8 src/ASF/sam/drivers/ebi/smc/smc.o
-                0x00401f28                smc_set_cycle_timing
+                0x00402178        0x8 src/ASF/sam/drivers/ebi/smc/smc.o
+                0x00402178                smc_set_cycle_timing
  .text.smc_set_mode
-                0x00401f30        0x8 src/ASF/sam/drivers/ebi/smc/smc.o
-                0x00401f30                smc_set_mode
+                0x00402180        0x8 src/ASF/sam/drivers/ebi/smc/smc.o
+                0x00402180                smc_set_mode
  .text.ssc_reset
-                0x00401f38       0x14 src/ASF/sam/drivers/ssc/ssc.o
-                0x00401f38                ssc_reset
+                0x00402188       0x14 src/ASF/sam/drivers/ssc/ssc.o
+                0x00402188                ssc_reset
  .text.ssc_enable_rx
-                0x00401f4c        0x8 src/ASF/sam/drivers/ssc/ssc.o
-                0x00401f4c                ssc_enable_rx
+                0x0040219c        0x8 src/ASF/sam/drivers/ssc/ssc.o
+                0x0040219c                ssc_enable_rx
  .text.ssc_disable_rx
-                0x00401f54        0x8 src/ASF/sam/drivers/ssc/ssc.o
-                0x00401f54                ssc_disable_rx
+                0x004021a4        0x8 src/ASF/sam/drivers/ssc/ssc.o
+                0x004021a4                ssc_disable_rx
  .text.ssc_enable_tx
-                0x00401f5c        0x8 src/ASF/sam/drivers/ssc/ssc.o
-                0x00401f5c                ssc_enable_tx
+                0x004021ac        0x8 src/ASF/sam/drivers/ssc/ssc.o
+                0x004021ac                ssc_enable_tx
  .text.ssc_disable_tx
-                0x00401f64        0x8 src/ASF/sam/drivers/ssc/ssc.o
-                0x00401f64                ssc_disable_tx
+                0x004021b4        0x8 src/ASF/sam/drivers/ssc/ssc.o
+                0x004021b4                ssc_disable_tx
  .text.ssc_set_receiver
-                0x00401f6c       0x74 src/ASF/sam/drivers/ssc/ssc.o
-                0x00401f6c                ssc_set_receiver
+                0x004021bc       0x74 src/ASF/sam/drivers/ssc/ssc.o
+                0x004021bc                ssc_set_receiver
  .text.ssc_set_transmitter
-                0x00401fe0       0x74 src/ASF/sam/drivers/ssc/ssc.o
-                0x00401fe0                ssc_set_transmitter
+                0x00402230       0x74 src/ASF/sam/drivers/ssc/ssc.o
+                0x00402230                ssc_set_transmitter
  .text.ssc_disable_interrupt
-                0x00402054        0x4 src/ASF/sam/drivers/ssc/ssc.o
-                0x00402054                ssc_disable_interrupt
+                0x004022a4        0x4 src/ASF/sam/drivers/ssc/ssc.o
+                0x004022a4                ssc_disable_interrupt
  .text.twihs_master_init
-                0x00402058       0xe0 src/ASF/sam/drivers/twihs/twihs.o
-                0x00402058                twihs_master_init
+                0x004022a8       0xe0 src/ASF/sam/drivers/twihs/twihs.o
+                0x004022a8                twihs_master_init
  .text.twihs_master_read
-                0x00402138       0xb4 src/ASF/sam/drivers/twihs/twihs.o
-                0x00402138                twihs_master_read
+                0x00402388       0xb4 src/ASF/sam/drivers/twihs/twihs.o
+                0x00402388                twihs_master_read
  .text.twihs_master_write
-                0x004021ec       0x84 src/ASF/sam/drivers/twihs/twihs.o
-                0x004021ec                twihs_master_write
+                0x0040243c       0x84 src/ASF/sam/drivers/twihs/twihs.o
+                0x0040243c                twihs_master_write
  .text.usart_init_rs232
-                0x00402270       0xa0 src/ASF/sam/drivers/usart/usart.o
-                0x00402270                usart_init_rs232
+                0x004024c0       0xa0 src/ASF/sam/drivers/usart/usart.o
+                0x004024c0                usart_init_rs232
  .text.usart_enable_tx
-                0x00402310        0x8 src/ASF/sam/drivers/usart/usart.o
-                0x00402310                usart_enable_tx
+                0x00402560        0x8 src/ASF/sam/drivers/usart/usart.o
+                0x00402560                usart_enable_tx
  .text.usart_enable_rx
-                0x00402318        0x8 src/ASF/sam/drivers/usart/usart.o
-                0x00402318                usart_enable_rx
+                0x00402568        0x8 src/ASF/sam/drivers/usart/usart.o
+                0x00402568                usart_enable_rx
  .text.usart_enable_interrupt
-                0x00402320        0x4 src/ASF/sam/drivers/usart/usart.o
-                0x00402320                usart_enable_interrupt
+                0x00402570        0x4 src/ASF/sam/drivers/usart/usart.o
+                0x00402570                usart_enable_interrupt
  .text.usart_get_status
-                0x00402324        0x4 src/ASF/sam/drivers/usart/usart.o
-                0x00402324                usart_get_status
+                0x00402574        0x4 src/ASF/sam/drivers/usart/usart.o
+                0x00402574                usart_get_status
  .text.usart_read
-                0x00402328       0x18 src/ASF/sam/drivers/usart/usart.o
-                0x00402328                usart_read
+                0x00402578       0x18 src/ASF/sam/drivers/usart/usart.o
+                0x00402578                usart_read
  .text.xdmac_configure_transfer
-                0x00402340       0x3c src/ASF/sam/drivers/xdmac/xdmac.o
-                0x00402340                xdmac_configure_transfer
+                0x00402590       0x3c src/ASF/sam/drivers/xdmac/xdmac.o
+                0x00402590                xdmac_configure_transfer
  .text.sysclk_init
-                0x0040237c       0x70 src/ASF/common/services/clock/samv71/sysclk.o
-                0x0040237c                sysclk_init
+                0x004025cc       0x70 src/ASF/common/services/clock/samv71/sysclk.o
+                0x004025cc                sysclk_init
  .text.board_init
-                0x004023ec      0x314 src/ASF/sam/boards/samv71_xplained_ultra/init.o
-                0x004023ec                board_init
+                0x0040263c      0x314 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+                0x0040263c                board_init
  .text.mpu_enable
-                0x00402700        0xc src/ASF/sam/drivers/mpu/mpu.o
-                0x00402700                mpu_enable
+                0x00402950        0xc src/ASF/sam/drivers/mpu/mpu.o
+                0x00402950                mpu_enable
  .text.mpu_set_region
-                0x0040270c        0xc src/ASF/sam/drivers/mpu/mpu.o
-                0x0040270c                mpu_set_region
+                0x0040295c        0xc src/ASF/sam/drivers/mpu/mpu.o
+                0x0040295c                mpu_set_region
  .text.mpu_cal_mpu_region_size
-                0x00402718       0x24 src/ASF/sam/drivers/mpu/mpu.o
-                0x00402718                mpu_cal_mpu_region_size
- .text.pio_set  0x0040273c        0x4 src/ASF/sam/drivers/pio/pio.o
-                0x0040273c                pio_set
+                0x00402968       0x24 src/ASF/sam/drivers/mpu/mpu.o
+                0x00402968                mpu_cal_mpu_region_size
+ .text.pio_set  0x0040298c        0x4 src/ASF/sam/drivers/pio/pio.o
+                0x0040298c                pio_set
  .text.pio_clear
-                0x00402740        0x4 src/ASF/sam/drivers/pio/pio.o
-                0x00402740                pio_clear
+                0x00402990        0x4 src/ASF/sam/drivers/pio/pio.o
+                0x00402990                pio_clear
  .text.pio_configure
-                0x00402744      0x12c src/ASF/sam/drivers/pio/pio.o
-                0x00402744                pio_configure
+                0x00402994      0x12c src/ASF/sam/drivers/pio/pio.o
+                0x00402994                pio_configure
  .text.pio_get_interrupt_status
-                0x00402870        0x4 src/ASF/sam/drivers/pio/pio.o
-                0x00402870                pio_get_interrupt_status
+                0x00402ac0        0x4 src/ASF/sam/drivers/pio/pio.o
+                0x00402ac0                pio_get_interrupt_status
  .text.pio_get_interrupt_mask
-                0x00402874        0x4 src/ASF/sam/drivers/pio/pio.o
-                0x00402874                pio_get_interrupt_mask
+                0x00402ac4        0x4 src/ASF/sam/drivers/pio/pio.o
+                0x00402ac4                pio_get_interrupt_mask
  .text.pio_configure_pin
-                0x00402878      0x154 src/ASF/sam/drivers/pio/pio.o
-                0x00402878                pio_configure_pin
+                0x00402ac8      0x154 src/ASF/sam/drivers/pio/pio.o
+                0x00402ac8                pio_configure_pin
  .text.PIOA_Handler
-                0x004029cc       0xcc src/ASF/sam/drivers/pio/pio_handler.o
-                0x004029cc                PIOA_Handler
+                0x00402c1c       0xcc src/ASF/sam/drivers/pio/pio_handler.o
+                0x00402c1c                PIOA_Handler
  .text.PIOB_Handler
-                0x00402a98       0xcc src/ASF/sam/drivers/pio/pio_handler.o
-                0x00402a98                PIOB_Handler
+                0x00402ce8       0xcc src/ASF/sam/drivers/pio/pio_handler.o
+                0x00402ce8                PIOB_Handler
  .text.PIOC_Handler
-                0x00402b64       0xcc src/ASF/sam/drivers/pio/pio_handler.o
-                0x00402b64                PIOC_Handler
+                0x00402db4       0xcc src/ASF/sam/drivers/pio/pio_handler.o
+                0x00402db4                PIOC_Handler
  .text.PIOD_Handler
-                0x00402c30       0xcc src/ASF/sam/drivers/pio/pio_handler.o
-                0x00402c30                PIOD_Handler
+                0x00402e80       0xcc src/ASF/sam/drivers/pio/pio_handler.o
+                0x00402e80                PIOD_Handler
  .text.PIOE_Handler
-                0x00402cfc       0xcc src/ASF/sam/drivers/pio/pio_handler.o
-                0x00402cfc                PIOE_Handler
+                0x00402f4c       0xcc src/ASF/sam/drivers/pio/pio_handler.o
+                0x00402f4c                PIOE_Handler
  .text.pmc_mck_set_division
-                0x00402dc8       0x30 src/ASF/sam/drivers/pmc/pmc.o
-                0x00402dc8                pmc_mck_set_division
+                0x00403018       0x30 src/ASF/sam/drivers/pmc/pmc.o
+                0x00403018                pmc_mck_set_division
  .text.pmc_switch_mck_to_pllack
-                0x00402df8       0x54 src/ASF/sam/drivers/pmc/pmc.o
-                0x00402df8                pmc_switch_mck_to_pllack
+                0x00403048       0x54 src/ASF/sam/drivers/pmc/pmc.o
+                0x00403048                pmc_switch_mck_to_pllack
  .text.pmc_switch_mainck_to_xtal
-                0x00402e4c       0x54 src/ASF/sam/drivers/pmc/pmc.o
-                0x00402e4c                pmc_switch_mainck_to_xtal
+                0x0040309c       0x54 src/ASF/sam/drivers/pmc/pmc.o
+                0x0040309c                pmc_switch_mainck_to_xtal
  .text.pmc_osc_is_ready_mainck
-                0x00402ea0       0x10 src/ASF/sam/drivers/pmc/pmc.o
-                0x00402ea0                pmc_osc_is_ready_mainck
+                0x004030f0       0x10 src/ASF/sam/drivers/pmc/pmc.o
+                0x004030f0                pmc_osc_is_ready_mainck
  .text.pmc_disable_pllack
-                0x00402eb0       0x10 src/ASF/sam/drivers/pmc/pmc.o
-                0x00402eb0                pmc_disable_pllack
+                0x00403100       0x10 src/ASF/sam/drivers/pmc/pmc.o
+                0x00403100                pmc_disable_pllack
  .text.pmc_is_locked_pllack
-                0x00402ec0       0x10 src/ASF/sam/drivers/pmc/pmc.o
-                0x00402ec0                pmc_is_locked_pllack
+                0x00403110       0x10 src/ASF/sam/drivers/pmc/pmc.o
+                0x00403110                pmc_is_locked_pllack
  .text.pmc_enable_periph_clk
-                0x00402ed0       0x48 src/ASF/sam/drivers/pmc/pmc.o
-                0x00402ed0                pmc_enable_periph_clk
+                0x00403120       0x48 src/ASF/sam/drivers/pmc/pmc.o
+                0x00403120                pmc_enable_periph_clk
  .text.pmc_pck_set_prescaler
-                0x00402f18       0x34 src/ASF/sam/drivers/pmc/pmc.o
-                0x00402f18                pmc_pck_set_prescaler
+                0x00403168       0x34 src/ASF/sam/drivers/pmc/pmc.o
+                0x00403168                pmc_pck_set_prescaler
  .text.pmc_pck_set_source
-                0x00402f4c       0x34 src/ASF/sam/drivers/pmc/pmc.o
-                0x00402f4c                pmc_pck_set_source
+                0x0040319c       0x34 src/ASF/sam/drivers/pmc/pmc.o
+                0x0040319c                pmc_pck_set_source
  .text.pmc_enable_pck
-                0x00402f80       0x14 src/ASF/sam/drivers/pmc/pmc.o
-                0x00402f80                pmc_enable_pck
+                0x004031d0       0x14 src/ASF/sam/drivers/pmc/pmc.o
+                0x004031d0                pmc_enable_pck
  .text.Dummy_Handler
-                0x00402f94        0x4 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
-                0x00402f94                DACC_Handler
-                0x00402f94                DebugMon_Handler
-                0x00402f94                UART3_Handler
-                0x00402f94                UART2_Handler
-                0x00402f94                TRNG_Handler
-                0x00402f94                TC2_Handler
-                0x00402f94                AFEC1_Handler
-                0x00402f94                NMI_Handler
-                0x00402f94                TC7_Handler
-                0x00402f94                QSPI_Handler
-                0x00402f94                ISI_Handler
-                0x00402f94                TC9_Handler
-                0x00402f94                RSWDT_Handler
-                0x00402f94                MCAN1_Handler
-                0x00402f94                USART0_Handler
-                0x00402f94                RTT_Handler
-                0x00402f94                USBHS_Handler
-                0x00402f94                RTC_Handler
-                0x00402f94                UsageFault_Handler
-                0x00402f94                TC6_Handler
-                0x00402f94                WDT_Handler
-                0x00402f94                TC4_Handler
-                0x00402f94                TC1_Handler
-                0x00402f94                HSMCI_Handler
-                0x00402f94                UART1_Handler
-                0x00402f94                TC3_Handler
-                0x00402f94                Dummy_Handler
-                0x00402f94                TWIHS1_Handler
-                0x00402f94                UART4_Handler
-                0x00402f94                PWM1_Handler
-                0x00402f94                PWM0_Handler
-                0x00402f94                AFEC0_Handler
-                0x00402f94                SSC_Handler
-                0x00402f94                TC11_Handler
-                0x00402f94                ACC_Handler
-                0x00402f94                PMC_Handler
-                0x00402f94                GMAC_Handler
-                0x00402f94                MemManage_Handler
-                0x00402f94                SUPC_Handler
-                0x00402f94                TC8_Handler
-                0x00402f94                EFC_Handler
-                0x00402f94                USART2_Handler
-                0x00402f94                SDRAMC_Handler
-                0x00402f94                SPI1_Handler
-                0x00402f94                MCAN0_Handler
-                0x00402f94                TC10_Handler
-                0x00402f94                TWIHS2_Handler
-                0x00402f94                MLB_Handler
-                0x00402f94                UART0_Handler
-                0x00402f94                BusFault_Handler
-                0x00402f94                RSTC_Handler
-                0x00402f94                TC0_Handler
-                0x00402f94                TC5_Handler
-                0x00402f94                ICM_Handler
-                0x00402f94                AES_Handler
-                0x00402f94                TWIHS0_Handler
-                0x00402f94                SPI0_Handler
+                0x004031e4        0x4 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+                0x004031e4                DACC_Handler
+                0x004031e4                DebugMon_Handler
+                0x004031e4                UART3_Handler
+                0x004031e4                UART2_Handler
+                0x004031e4                TRNG_Handler
+                0x004031e4                TC2_Handler
+                0x004031e4                AFEC1_Handler
+                0x004031e4                NMI_Handler
+                0x004031e4                TC7_Handler
+                0x004031e4                QSPI_Handler
+                0x004031e4                ISI_Handler
+                0x004031e4                TC9_Handler
+                0x004031e4                RSWDT_Handler
+                0x004031e4                MCAN1_Handler
+                0x004031e4                USART0_Handler
+                0x004031e4                RTT_Handler
+                0x004031e4                USBHS_Handler
+                0x004031e4                RTC_Handler
+                0x004031e4                UsageFault_Handler
+                0x004031e4                TC6_Handler
+                0x004031e4                WDT_Handler
+                0x004031e4                TC4_Handler
+                0x004031e4                TC1_Handler
+                0x004031e4                HSMCI_Handler
+                0x004031e4                UART1_Handler
+                0x004031e4                TC3_Handler
+                0x004031e4                Dummy_Handler
+                0x004031e4                TWIHS1_Handler
+                0x004031e4                UART4_Handler
+                0x004031e4                PWM1_Handler
+                0x004031e4                PWM0_Handler
+                0x004031e4                AFEC0_Handler
+                0x004031e4                SSC_Handler
+                0x004031e4                TC11_Handler
+                0x004031e4                ACC_Handler
+                0x004031e4                PMC_Handler
+                0x004031e4                GMAC_Handler
+                0x004031e4                MemManage_Handler
+                0x004031e4                SUPC_Handler
+                0x004031e4                TC8_Handler
+                0x004031e4                EFC_Handler
+                0x004031e4                USART2_Handler
+                0x004031e4                SDRAMC_Handler
+                0x004031e4                SPI1_Handler
+                0x004031e4                MCAN0_Handler
+                0x004031e4                TC10_Handler
+                0x004031e4                TWIHS2_Handler
+                0x004031e4                MLB_Handler
+                0x004031e4                UART0_Handler
+                0x004031e4                BusFault_Handler
+                0x004031e4                RSTC_Handler
+                0x004031e4                TC0_Handler
+                0x004031e4                TC5_Handler
+                0x004031e4                ICM_Handler
+                0x004031e4                AES_Handler
+                0x004031e4                TWIHS0_Handler
+                0x004031e4                SPI0_Handler
  .text.Dummy_Handler2
-                0x00402f98        0x4 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
-                0x00402f98                Dummy_Handler2
-                0x00402f98                HardFault_Handler
+                0x004031e8        0x4 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+                0x004031e8                Dummy_Handler2
+                0x004031e8                HardFault_Handler
  .text.Reset_Handler
-                0x00402f9c       0xb8 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
-                0x00402f9c                Reset_Handler
+                0x004031ec       0xb8 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+                0x004031ec                Reset_Handler
  .text.SystemCoreClockUpdate
-                0x00403054       0xe8 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
-                0x00403054                SystemCoreClockUpdate
+                0x004032a4       0xe8 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+                0x004032a4                SystemCoreClockUpdate
  .text.system_init_flash
-                0x0040313c       0x8c src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
-                0x0040313c                system_init_flash
- .text._sbrk    0x004031c8       0x44 src/ASF/sam/utils/syscalls/gcc/syscalls.o
-                0x004031c8                _sbrk
- .text._close   0x0040320c        0x8 src/ASF/sam/utils/syscalls/gcc/syscalls.o
-                0x0040320c                _close
- .text._fstat   0x00403214        0xc src/ASF/sam/utils/syscalls/gcc/syscalls.o
-                0x00403214                _fstat
- .text._isatty  0x00403220        0x4 src/ASF/sam/utils/syscalls/gcc/syscalls.o
-                0x00403220                _isatty
- .text._lseek   0x00403224        0x4 src/ASF/sam/utils/syscalls/gcc/syscalls.o
-                0x00403224                _lseek
+                0x0040338c       0x8c src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+                0x0040338c                system_init_flash
+ .text._sbrk    0x00403418       0x44 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+                0x00403418                _sbrk
+ .text._close   0x0040345c        0x8 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+                0x0040345c                _close
+ .text._fstat   0x00403464        0xc src/ASF/sam/utils/syscalls/gcc/syscalls.o
+                0x00403464                _fstat
+ .text._isatty  0x00403470        0x4 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+                0x00403470                _isatty
+ .text._lseek   0x00403474        0x4 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+                0x00403474                _lseek
  .text.unlikely.xEventGroupSetBits.part.0
-                0x00403228       0x68 src/FreeRTOS/Source/event_groups.o
+                0x00403478       0x68 src/FreeRTOS/Source/event_groups.o
  .text.vEventGroupClearBitsCallback
-                0x00403290       0x58 src/FreeRTOS/Source/event_groups.o
-                0x00403290                vEventGroupClearBitsCallback
+                0x004034e0       0x58 src/FreeRTOS/Source/event_groups.o
+                0x004034e0                vEventGroupClearBitsCallback
  .text.vEventGroupSetBitsCallback
-                0x004032e8       0x3c src/FreeRTOS/Source/event_groups.o
-                0x004032e8                vEventGroupSetBitsCallback
+                0x00403538       0x3c src/FreeRTOS/Source/event_groups.o
+                0x00403538                vEventGroupSetBitsCallback
  .text.xEventGroupClearBitsFromISR
-                0x00403324       0x1c src/FreeRTOS/Source/event_groups.o
-                0x00403324                xEventGroupClearBitsFromISR
+                0x00403574       0x1c src/FreeRTOS/Source/event_groups.o
+                0x00403574                xEventGroupClearBitsFromISR
  .text.xEventGroupGetBitsFromISR
-                0x00403340       0x20 src/FreeRTOS/Source/event_groups.o
-                0x00403340                xEventGroupGetBitsFromISR
+                0x00403590       0x20 src/FreeRTOS/Source/event_groups.o
+                0x00403590                xEventGroupGetBitsFromISR
  .text.xEventGroupSetBitsFromISR
-                0x00403360       0x1c src/FreeRTOS/Source/event_groups.o
-                0x00403360                xEventGroupSetBitsFromISR
+                0x004035b0       0x1c src/FreeRTOS/Source/event_groups.o
+                0x004035b0                xEventGroupSetBitsFromISR
  .text.vListInsertEnd
-                0x0040337c       0x18 src/FreeRTOS/Source/list.o
-                0x0040337c                vListInsertEnd
+                0x004035cc       0x18 src/FreeRTOS/Source/list.o
+                0x004035cc                vListInsertEnd
  .text.vListInsert
-                0x00403394       0x34 src/FreeRTOS/Source/list.o
-                0x00403394                vListInsert
+                0x004035e4       0x34 src/FreeRTOS/Source/list.o
+                0x004035e4                vListInsert
  .text.uxListRemove
-                0x004033c8       0x28 src/FreeRTOS/Source/list.o
-                0x004033c8                uxListRemove
+                0x00403618       0x28 src/FreeRTOS/Source/list.o
+                0x00403618                uxListRemove
  .text.SVC_Handler
-                0x004033f0       0x24 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
-                0x004033f0                SVC_Handler
+                0x00403640       0x24 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+                0x00403640                SVC_Handler
  .text.vPortEnterCritical
-                0x00403414       0x4c src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
-                0x00403414                vPortEnterCritical
+                0x00403664       0x4c src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+                0x00403664                vPortEnterCritical
  .text.vPortExitCritical
-                0x00403460       0x2c src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
-                0x00403460                vPortExitCritical
- *fill*         0x0040348c        0x4 
+                0x004036b0       0x2c src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+                0x004036b0                vPortExitCritical
+ *fill*         0x004036dc        0x4 
  .text.PendSV_Handler
-                0x00403490       0x64 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
-                0x00403490                PendSV_Handler
+                0x004036e0       0x64 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+                0x004036e0                PendSV_Handler
  .text.SysTick_Handler
-                0x004034f4       0x34 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
-                0x004034f4                SysTick_Handler
+                0x00403744       0x34 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+                0x00403744                SysTick_Handler
  .text.vPortValidateInterruptPriority
-                0x00403528       0x64 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
-                0x00403528                vPortValidateInterruptPriority
+                0x00403778       0x64 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+                0x00403778                vPortValidateInterruptPriority
  .text.unlikely.prvCopyDataToQueue
-                0x0040358c       0x74 src/FreeRTOS/Source/queue.o
+                0x004037dc       0x74 src/FreeRTOS/Source/queue.o
  .text.unlikely.prvCopyDataFromQueue
-                0x00403600       0x2c src/FreeRTOS/Source/queue.o
+                0x00403850       0x2c src/FreeRTOS/Source/queue.o
  .text.xQueueGenericReset.part.1
-                0x0040362c       0x18 src/FreeRTOS/Source/queue.o
+                0x0040387c       0x18 src/FreeRTOS/Source/queue.o
  .text.prvNotifyQueueSetContainer
-                0x00403644       0x84 src/FreeRTOS/Source/queue.o
+                0x00403894       0x84 src/FreeRTOS/Source/queue.o
  .text.unlikely.xQueueReceiveFromISR.part.2
-                0x004036c8       0x84 src/FreeRTOS/Source/queue.o
+                0x00403918       0x84 src/FreeRTOS/Source/queue.o
  .text.prvUnlockQueue
-                0x0040374c      0x100 src/FreeRTOS/Source/queue.o
+                0x0040399c      0x100 src/FreeRTOS/Source/queue.o
  .text.xQueueGenericSend
-                0x0040384c      0x1e8 src/FreeRTOS/Source/queue.o
-                0x0040384c                xQueueGenericSend
+                0x00403a9c      0x1e8 src/FreeRTOS/Source/queue.o
+                0x00403a9c                xQueueGenericSend
  .text.xQueueGenericSendFromISR
-                0x00403a34      0x104 src/FreeRTOS/Source/queue.o
-                0x00403a34                xQueueGenericSendFromISR
+                0x00403c84      0x104 src/FreeRTOS/Source/queue.o
+                0x00403c84                xQueueGenericSendFromISR
  .text.xQueueGiveFromISR
-                0x00403b38       0xdc src/FreeRTOS/Source/queue.o
-                0x00403b38                xQueueGiveFromISR
+                0x00403d88       0xdc src/FreeRTOS/Source/queue.o
+                0x00403d88                xQueueGiveFromISR
  .text.xQueueReceiveFromISR
-                0x00403c14       0x40 src/FreeRTOS/Source/queue.o
-                0x00403c14                xQueueReceiveFromISR
+                0x00403e64       0x40 src/FreeRTOS/Source/queue.o
+                0x00403e64                xQueueReceiveFromISR
  .text.xQueuePeekFromISR
-                0x00403c54       0x94 src/FreeRTOS/Source/queue.o
-                0x00403c54                xQueuePeekFromISR
+                0x00403ea4       0x94 src/FreeRTOS/Source/queue.o
+                0x00403ea4                xQueuePeekFromISR
  .text.vTaskSuspendAll
-                0x00403ce8       0x10 src/FreeRTOS/Source/tasks.o
-                0x00403ce8                vTaskSuspendAll
+                0x00403f38       0x10 src/FreeRTOS/Source/tasks.o
+                0x00403f38                vTaskSuspendAll
  .text.xTaskGetTickCountFromISR
-                0x00403cf8       0x14 src/FreeRTOS/Source/tasks.o
-                0x00403cf8                xTaskGetTickCountFromISR
+                0x00403f48       0x14 src/FreeRTOS/Source/tasks.o
+                0x00403f48                xTaskGetTickCountFromISR
  .text.xTaskIncrementTick
-                0x00403d0c      0x17c src/FreeRTOS/Source/tasks.o
-                0x00403d0c                xTaskIncrementTick
+                0x00403f5c      0x17c src/FreeRTOS/Source/tasks.o
+                0x00403f5c                xTaskIncrementTick
  .text.xTaskResumeAll
-                0x00403e88      0x13c src/FreeRTOS/Source/tasks.o
-                0x00403e88                xTaskResumeAll
+                0x004040d8      0x13c src/FreeRTOS/Source/tasks.o
+                0x004040d8                xTaskResumeAll
  .text.vTaskSwitchContext
-                0x00403fc4       0xb0 src/FreeRTOS/Source/tasks.o
-                0x00403fc4                vTaskSwitchContext
+                0x00404214       0xb0 src/FreeRTOS/Source/tasks.o
+                0x00404214                vTaskSwitchContext
  .text.vTaskPlaceOnEventList
-                0x00404074       0xb8 src/FreeRTOS/Source/tasks.o
-                0x00404074                vTaskPlaceOnEventList
+                0x004042c4       0xb8 src/FreeRTOS/Source/tasks.o
+                0x004042c4                vTaskPlaceOnEventList
  .text.xTaskRemoveFromEventList
-                0x0040412c       0x94 src/FreeRTOS/Source/tasks.o
-                0x0040412c                xTaskRemoveFromEventList
+                0x0040437c       0x94 src/FreeRTOS/Source/tasks.o
+                0x0040437c                xTaskRemoveFromEventList
  .text.vTaskRemoveFromUnorderedEventList
-                0x004041c0       0x98 src/FreeRTOS/Source/tasks.o
-                0x004041c0                vTaskRemoveFromUnorderedEventList
+                0x00404410       0x98 src/FreeRTOS/Source/tasks.o
+                0x00404410                vTaskRemoveFromUnorderedEventList
  .text.vTaskInternalSetTimeOutState
-                0x00404258       0x18 src/FreeRTOS/Source/tasks.o
-                0x00404258                vTaskInternalSetTimeOutState
+                0x004044a8       0x18 src/FreeRTOS/Source/tasks.o
+                0x004044a8                vTaskInternalSetTimeOutState
  .text.xTaskCheckForTimeOut
-                0x00404270       0xa4 src/FreeRTOS/Source/tasks.o
-                0x00404270                xTaskCheckForTimeOut
+                0x004044c0       0xa4 src/FreeRTOS/Source/tasks.o
+                0x004044c0                xTaskCheckForTimeOut
  .text.vTaskMissedYield
-                0x00404314        0xc src/FreeRTOS/Source/tasks.o
-                0x00404314                vTaskMissedYield
+                0x00404564        0xc src/FreeRTOS/Source/tasks.o
+                0x00404564                vTaskMissedYield
  .text.xTaskGetSchedulerState
-                0x00404320       0x20 src/FreeRTOS/Source/tasks.o
-                0x00404320                xTaskGetSchedulerState
+                0x00404570       0x20 src/FreeRTOS/Source/tasks.o
+                0x00404570                xTaskGetSchedulerState
  .text.xTaskPriorityDisinherit
-                0x00404340       0xc8 src/FreeRTOS/Source/tasks.o
-                0x00404340                xTaskPriorityDisinherit
+                0x00404590       0xc8 src/FreeRTOS/Source/tasks.o
+                0x00404590                xTaskPriorityDisinherit
  .text.xTaskGenericNotifyFromISR
-                0x00404408      0x13c src/FreeRTOS/Source/tasks.o
-                0x00404408                xTaskGenericNotifyFromISR
+                0x00404658      0x13c src/FreeRTOS/Source/tasks.o
+                0x00404658                xTaskGenericNotifyFromISR
  .text.vTaskNotifyGiveFromISR
-                0x00404544      0x100 src/FreeRTOS/Source/tasks.o
-                0x00404544                vTaskNotifyGiveFromISR
+                0x00404794      0x100 src/FreeRTOS/Source/tasks.o
+                0x00404794                vTaskNotifyGiveFromISR
  .text.xTimerGenericCommand
-                0x00404644       0x78 src/FreeRTOS/Source/timers.o
-                0x00404644                xTimerGenericCommand
+                0x00404894       0x78 src/FreeRTOS/Source/timers.o
+                0x00404894                xTimerGenericCommand
  .text.xTimerPendFunctionCallFromISR
-                0x004046bc       0x2c src/FreeRTOS/Source/timers.o
-                0x004046bc                xTimerPendFunctionCallFromISR
+                0x0040490c       0x2c src/FreeRTOS/Source/timers.o
+                0x0040490c                xTimerPendFunctionCallFromISR
  .text.vPeriodicEventGroupsProcessing
-                0x004046e8       0x98 src/FreeRTOS/Tasks/EventGroupsDemo.o
-                0x004046e8                vPeriodicEventGroupsProcessing
+                0x00404938       0x98 src/FreeRTOS/Tasks/EventGroupsDemo.o
+                0x00404938                vPeriodicEventGroupsProcessing
  .text.vInterruptSemaphorePeriodicTest
-                0x00404780       0x94 src/FreeRTOS/Tasks/IntSemTest.o
-                0x00404780                vInterruptSemaphorePeriodicTest
+                0x004049d0       0x94 src/FreeRTOS/Tasks/IntSemTest.o
+                0x004049d0                vInterruptSemaphorePeriodicTest
  .text.vQueueOverwritePeriodicISRDemo
-                0x00404814       0xa0 src/FreeRTOS/Tasks/QueueOverwrite.o
-                0x00404814                vQueueOverwritePeriodicISRDemo
+                0x00404a64       0xa0 src/FreeRTOS/Tasks/QueueOverwrite.o
+                0x00404a64                vQueueOverwritePeriodicISRDemo
  .text.xNotifyTaskFromISR
-                0x004048b4       0xb0 src/FreeRTOS/Tasks/TaskNotify.o
-                0x004048b4                xNotifyTaskFromISR
+                0x00404b04       0xb0 src/FreeRTOS/Tasks/TaskNotify.o
+                0x00404b04                xNotifyTaskFromISR
  .text.vTimerPeriodicISRTests
-                0x00404964      0x5ec src/FreeRTOS/Tasks/TimerDemo.o
-                0x00404964                vTimerPeriodicISRTests
+                0x00404bb4      0x5ec src/FreeRTOS/Tasks/TimerDemo.o
+                0x00404bb4                vTimerPeriodicISRTests
  .text.USART1_Handler
-                0x00404f50       0xbc src/main.o
-                0x00404f50                USART1_Handler
+                0x004051a0       0xbc src/main.o
+                0x004051a0                USART1_Handler
  .text.startup.main
-                0x0040500c      0x528 src/main.o
-                0x0040500c                main
+                0x0040525c      0x528 src/main.o
+                0x0040525c                main
  .text.vApplicationStackOverflowHook
-                0x00405534       0x18 src/main.o
-                0x00405534                vApplicationStackOverflowHook
+                0x00405784       0x18 src/main.o
+                0x00405784                vApplicationStackOverflowHook
  .text.vApplicationTickHook
-                0x0040554c       0x30 src/main.o
-                0x0040554c                vApplicationTickHook
+                0x0040579c       0x30 src/main.o
+                0x0040579c                vApplicationTickHook
  .text.arm_fill_f32
-                0x0040557c       0x30 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
-                0x0040557c                arm_fill_f32
+                0x004057cc       0x30 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+                0x004057cc                arm_fill_f32
  .text.arm_copy_f32
-                0x004055ac       0x54 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
-                0x004055ac                arm_copy_f32
+                0x004057fc       0x54 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+                0x004057fc                arm_copy_f32
  .text.arm_power_f32
-                0x00405600       0x6c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
-                0x00405600                arm_power_f32
+                0x00405850       0x6c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+                0x00405850                arm_power_f32
  .text.arm_min_f32
-                0x0040566c       0xdc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
-                0x0040566c                arm_min_f32
+                0x004058bc       0xdc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+                0x004058bc                arm_min_f32
  .text.arm_max_f32
-                0x00405748       0xdc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
-                0x00405748                arm_max_f32
+                0x00405998       0xdc ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+                0x00405998                arm_max_f32
  .text.arm_cos_f32
-                0x00405824       0x88 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
-                0x00405824                arm_cos_f32
+                0x00405a74       0x88 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+                0x00405a74                arm_cos_f32
  .text.arm_scale_f32
-                0x004058ac       0x6c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
-                0x004058ac                arm_scale_f32
+                0x00405afc       0x6c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+                0x00405afc                arm_scale_f32
  .text.__libc_init_array
-                0x00405918       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-init.o)
-                0x00405918                __libc_init_array
- .text.iprintf  0x00405968       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-iprintf.o)
-                0x00405968                iprintf
- .text.malloc   0x00405990       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-malloc.o)
-                0x00405990                malloc
+                0x00405b68       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-init.o)
+                0x00405b68                __libc_init_array
+ .text.iprintf  0x00405bb8       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-iprintf.o)
+                0x00405bb8                iprintf
+ .text.malloc   0x00405be0       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-malloc.o)
+                0x00405be0                malloc
  .text._malloc_r
-                0x004059a0      0x560 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mallocr.o)
-                0x004059a0                _malloc_r
- .text          0x00405f00      0x134 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memcpy.o)
-                0x00405f00                memcpy
- .text.memset   0x00406034       0x9c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memset.o)
-                0x00406034                memset
+                0x00405bf0      0x560 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mallocr.o)
+                0x00405bf0                _malloc_r
+ .text          0x00406150      0x134 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memcpy.o)
+                0x00406150                memcpy
+ .text.memset   0x00406284       0x9c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memset.o)
+                0x00406284                memset
  .text.__malloc_lock
-                0x004060d0        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mlock.o)
-                0x004060d0                __malloc_lock
+                0x00406320        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mlock.o)
+                0x00406320                __malloc_lock
  .text.__malloc_unlock
-                0x004060dc        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mlock.o)
-                0x004060dc                __malloc_unlock
- .text._sbrk_r  0x004060e8       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-sbrkr.o)
-                0x004060e8                _sbrk_r
- *fill*         0x0040610c       0x34 
- .text          0x00406140       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-strlen.o)
-                0x00406140                strlen
+                0x0040632c        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mlock.o)
+                0x0040632c                __malloc_unlock
+ .text._sbrk_r  0x00406338       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-sbrkr.o)
+                0x00406338                _sbrk_r
+ *fill*         0x0040635c       0x24 
+ .text          0x00406380       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-strlen.o)
+                0x00406380                strlen
  .text.__sprint_r.part.0
-                0x0040621c       0x80 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
+                0x0040645c       0x80 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
  .text._vfiprintf_r
-                0x0040629c      0xc90 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
-                0x0040629c                _vfiprintf_r
+                0x004064dc      0xc90 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
+                0x004064dc                _vfiprintf_r
  .text.__sbprintf
-                0x00406f2c       0x84 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
+                0x0040716c       0x84 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
  .text.__swsetup_r
-                0x00406fb0       0xc8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wsetup.o)
-                0x00406fb0                __swsetup_r
+                0x004071f0       0xc8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wsetup.o)
+                0x004071f0                __swsetup_r
  .text.startup.register_fini
-                0x00407078       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__call_atexit.o)
- .text.atexit   0x0040708c        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-atexit.o)
-                0x0040708c                atexit
+                0x004072b8       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__call_atexit.o)
+ .text.atexit   0x004072cc        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-atexit.o)
+                0x004072cc                atexit
  .text.__sflush_r
-                0x00407098      0x140 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fflush.o)
-                0x00407098                __sflush_r
+                0x004072d8      0x140 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fflush.o)
+                0x004072d8                __sflush_r
  .text._fflush_r
-                0x004071d8       0x54 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fflush.o)
-                0x004071d8                _fflush_r
+                0x00407418       0x54 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fflush.o)
+                0x00407418                _fflush_r
  .text._cleanup_r
-                0x0040722c        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
-                0x0040722c                _cleanup_r
+                0x0040746c        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
+                0x0040746c                _cleanup_r
  .text.std.isra.0
-                0x00407238       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
- .text.__sinit  0x00407288       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
-                0x00407288                __sinit
+                0x00407478       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
+ .text.__sinit  0x004074c8       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
+                0x004074c8                __sinit
  .text.__sfp_lock_acquire
-                0x004072e0        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
-                0x004072e0                __sfp_lock_acquire
+                0x00407520        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
+                0x00407520                __sfp_lock_acquire
  .text.__sfp_lock_release
-                0x004072ec        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
-                0x004072ec                __sfp_lock_release
+                0x0040752c        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
+                0x0040752c                __sfp_lock_release
  .text.__libc_fini_array
-                0x004072f8       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fini.o)
-                0x004072f8                __libc_fini_array
+                0x00407538       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fini.o)
+                0x00407538                __libc_fini_array
  .text.__fputwc
-                0x0040732c       0xa0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fputwc.o)
-                0x0040732c                __fputwc
+                0x0040756c       0xa0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fputwc.o)
+                0x0040756c                __fputwc
  .text._fputwc_r
-                0x004073cc       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fputwc.o)
-                0x004073cc                _fputwc_r
+                0x0040760c       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fputwc.o)
+                0x0040760c                _fputwc_r
  .text._malloc_trim_r
-                0x00407434       0xa0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-freer.o)
-                0x00407434                _malloc_trim_r
- .text._free_r  0x004074d4      0x1cc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-freer.o)
-                0x004074d4                _free_r
+                0x00407674       0xa0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-freer.o)
+                0x00407674                _malloc_trim_r
+ .text._free_r  0x00407714      0x1cc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-freer.o)
+                0x00407714                _free_r
  .text.__sfvwrite_r
-                0x004076a0      0x2f0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fvwrite.o)
-                0x004076a0                __sfvwrite_r
+                0x004078e0      0x2f0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fvwrite.o)
+                0x004078e0                __sfvwrite_r
  .text._fwalk_reent
-                0x00407990       0x54 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fwalk.o)
-                0x00407990                _fwalk_reent
+                0x00407bd0       0x54 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fwalk.o)
+                0x00407bd0                _fwalk_reent
  .text.__locale_mb_cur_max
-                0x004079e4       0x1c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-locale.o)
-                0x004079e4                __locale_mb_cur_max
+                0x00407c24       0x1c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-locale.o)
+                0x00407c24                __locale_mb_cur_max
  .text.__retarget_lock_init_recursive
-                0x00407a00        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
-                0x00407a00                __retarget_lock_init_recursive
+                0x00407c40        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
+                0x00407c40                __retarget_lock_init_recursive
  .text.__retarget_lock_close_recursive
-                0x00407a04        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
-                0x00407a04                __retarget_lock_close_recursive
+                0x00407c44        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
+                0x00407c44                __retarget_lock_close_recursive
  .text.__retarget_lock_acquire_recursive
-                0x00407a08        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
-                0x00407a08                __retarget_lock_acquire_recursive
+                0x00407c48        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
+                0x00407c48                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x00407a0c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
-                0x00407a0c                __retarget_lock_release_recursive
+                0x00407c4c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
+                0x00407c4c                __retarget_lock_release_recursive
  .text.__swhatbuf_r
-                0x00407a10       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-makebuf.o)
-                0x00407a10                __swhatbuf_r
+                0x00407c50       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-makebuf.o)
+                0x00407c50                __swhatbuf_r
  .text.__smakebuf_r
-                0x00407a6c       0x94 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-makebuf.o)
-                0x00407a6c                __smakebuf_r
+                0x00407cac       0x94 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-makebuf.o)
+                0x00407cac                __smakebuf_r
  .text.__ascii_mbtowc
-                0x00407b00       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mbtowc_r.o)
-                0x00407b00                __ascii_mbtowc
- *fill*         0x00407b2c        0x4 
- .text          0x00407b30       0xa0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memchr.o)
-                0x00407b30                memchr
- .text.memmove  0x00407bd0       0xc8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memmove.o)
-                0x00407bd0                memmove
+                0x00407d40       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mbtowc_r.o)
+                0x00407d40                __ascii_mbtowc
+ *fill*         0x00407d6c        0x4 
+ .text          0x00407d70       0xa0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memchr.o)
+                0x00407d70                memchr
+ .text.memmove  0x00407e10       0xc8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memmove.o)
+                0x00407e10                memmove
  .text._realloc_r
-                0x00407c98      0x34c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-reallocr.o)
-                0x00407c98                _realloc_r
- .text.__sread  0x00407fe4       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-stdio.o)
-                0x00407fe4                __sread
+                0x00407ed8      0x34c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-reallocr.o)
+                0x00407ed8                _realloc_r
+ .text.__sread  0x00408224       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-stdio.o)
+                0x00408224                __sread
  .text.__swrite
-                0x00408008       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-stdio.o)
-                0x00408008                __swrite
- .text.__sseek  0x00408044       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-stdio.o)
-                0x00408044                __sseek
+                0x00408248       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-stdio.o)
+                0x00408248                __swrite
+ .text.__sseek  0x00408284       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-stdio.o)
+                0x00408284                __sseek
  .text.__sclose
-                0x00408064        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-stdio.o)
-                0x00408064                __sclose
+                0x004082a4        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-stdio.o)
+                0x004082a4                __sclose
  .text.__swbuf_r
-                0x0040806c       0xb0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wbuf.o)
-                0x0040806c                __swbuf_r
+                0x004082ac       0xb0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wbuf.o)
+                0x004082ac                __swbuf_r
  .text._wcrtomb_r
-                0x0040811c       0x54 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wcrtomb.o)
-                0x0040811c                _wcrtomb_r
+                0x0040835c       0x54 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wcrtomb.o)
+                0x0040835c                _wcrtomb_r
  .text.__ascii_wctomb
-                0x00408170       0x1c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wctomb_r.o)
-                0x00408170                __ascii_wctomb
+                0x004083b0       0x1c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wctomb_r.o)
+                0x004083b0                __ascii_wctomb
  .text._write_r
-                0x0040818c       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-writer.o)
-                0x0040818c                _write_r
+                0x004083cc       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-writer.o)
+                0x004083cc                _write_r
  .text.__register_exitproc
-                0x004081b8       0xc4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__atexit.o)
-                0x004081b8                __register_exitproc
+                0x004083f8       0xc4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__atexit.o)
+                0x004083f8                __register_exitproc
  .text._close_r
-                0x0040827c       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-closer.o)
-                0x0040827c                _close_r
+                0x004084bc       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-closer.o)
+                0x004084bc                _close_r
  .text._fclose_r
-                0x004082a0       0xc4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fclose.o)
-                0x004082a0                _fclose_r
+                0x004084e0       0xc4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fclose.o)
+                0x004084e0                _fclose_r
  .text._fstat_r
-                0x00408364       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fstatr.o)
-                0x00408364                _fstat_r
+                0x004085a4       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fstatr.o)
+                0x004085a4                _fstat_r
  .text._isatty_r
-                0x0040838c       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-isattyr.o)
-                0x0040838c                _isatty_r
+                0x004085cc       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-isattyr.o)
+                0x004085cc                _isatty_r
  .text._lseek_r
-                0x004083b0       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lseekr.o)
-                0x004083b0                _lseek_r
- .text._read_r  0x004083dc       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-readr.o)
-                0x004083dc                _read_r
- .text          0x00408408       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_aeabi_uldivmod.o)
-                0x00408408                __aeabi_uldivmod
- .text          0x00408438      0x2dc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_udivmoddi4.o)
-                0x00408438                __udivmoddi4
- .text          0x00408714        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_dvmd_tls.o)
-                0x00408714                __aeabi_idiv0
-                0x00408714                __aeabi_ldiv0
+                0x004085f0       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lseekr.o)
+                0x004085f0                _lseek_r
+ .text._read_r  0x0040861c       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-readr.o)
+                0x0040861c                _read_r
+ .text          0x00408648       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_aeabi_uldivmod.o)
+                0x00408648                __aeabi_uldivmod
+ .text          0x00408678      0x2dc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_udivmoddi4.o)
+                0x00408678                __udivmoddi4
+ .text          0x00408954        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_dvmd_tls.o)
+                0x00408954                __aeabi_idiv0
+                0x00408954                __aeabi_ldiv0
  *(.glue_7t)
- .glue_7t       0x00408718        0x0 linker stubs
+ .glue_7t       0x00408958        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x00408718        0x0 linker stubs
+ .glue_7        0x00408958        0x0 linker stubs
  *(.rodata .rodata* .gnu.linkonce.r.*)
  .rodata.audio_init.str1.4
-                0x00408718       0x23 DanLib/Audio/audio.o
- *fill*         0x0040873b        0x1 
+                0x00408958       0x23 DanLib/Audio/audio.o
+ *fill*         0x0040897b        0x1 
  .rodata.configure_codec.str1.4
-                0x0040873c       0x14 DanLib/Audio/WM8904_Driver/WM8904_Driver.o
- .rodata        0x00408750       0x5d DanLib/LCDLib/touch/touch.o
- *fill*         0x004087ad        0x3 
+                0x0040897c       0x14 DanLib/Audio/WM8904_Driver/WM8904_Driver.o
+ .rodata        0x00408990       0x5d DanLib/LCDLib/touch/touch.o
+ *fill*         0x004089ed        0x3 
  .rodata.CSWTCH.7
-                0x004087b0        0xc src/ASF/sam/drivers/pmc/pmc.o
+                0x004089f0        0xc src/ASF/sam/drivers/pmc/pmc.o
  .rodata.midi_note_frequencies
-                0x004087bc      0x200 src/main.o
+                0x004089fc      0x200 src/main.o
  .rodata.sinTable_f32
-                0x004089bc      0x804 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
-                0x004089bc                sinTable_f32
+                0x00408bfc      0x804 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+                0x00408bfc                sinTable_f32
  .rodata._global_impure_ptr
-                0x004091c0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-impure.o)
-                0x004091c0                _global_impure_ptr
+                0x00409400        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-impure.o)
+                0x00409400                _global_impure_ptr
  .rodata._vfiprintf_r.str1.4
-                0x004091c4       0x2f c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
- *fill*         0x004091f3        0x1 
+                0x00409404       0x2f c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
+ *fill*         0x00409433        0x1 
  .rodata.blanks.8340
-                0x004091f4       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
+                0x00409434       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
  .rodata.zeroes.8341
-                0x00409204       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
+                0x00409444       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
  .rodata._setlocale_r.str1.4
-                0x00409214        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-locale.o)
+                0x00409454        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-locale.o)
                                   0xd (size before relaxing)
- *fill*         0x0040921e        0x2 
+ *fill*         0x0040945e        0x2 
  .rodata.str1.4
-                0x00409220        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-locale.o)
+                0x00409460        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-locale.o)
                                   0x2 (size before relaxing)
  .rodata._ctype_
-                0x00409224      0x101 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-ctype_.o)
-                0x00409224                _ctype_
+                0x00409464      0x101 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-ctype_.o)
+                0x00409464                _ctype_
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00409328                . = ALIGN (0x4)
- *fill*         0x00409325        0x3 
+                0x00409568                . = ALIGN (0x4)
+ *fill*         0x00409565        0x3 
  *(.init)
- .init          0x00409328        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crti.o
-                0x00409328                _init
- .init          0x0040932c        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtn.o
-                0x00409334                . = ALIGN (0x4)
-                0x00409334                __preinit_array_start = .
+ .init          0x00409568        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crti.o
+                0x00409568                _init
+ .init          0x0040956c        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtn.o
+                0x00409574                . = ALIGN (0x4)
+                0x00409574                __preinit_array_start = .
  *(.preinit_array)
-                0x00409334                __preinit_array_end = .
-                0x00409334                . = ALIGN (0x4)
-                0x00409334                __init_array_start = .
+                0x00409574                __preinit_array_end = .
+                0x00409574                . = ALIGN (0x4)
+                0x00409574                __init_array_start = .
  *(SORT(.init_array.*))
  .init_array.00000
-                0x00409334        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__call_atexit.o)
+                0x00409574        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__call_atexit.o)
  *(.init_array)
- .init_array    0x00409338        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
-                0x0040933c                __init_array_end = .
-                0x0040933c                . = ALIGN (0x4)
+ .init_array    0x00409578        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
+                0x0040957c                __init_array_end = .
+                0x0040957c                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x0040933c                . = ALIGN (0x4)
+                0x0040957c                . = ALIGN (0x4)
  *(.fini)
- .fini          0x0040933c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crti.o
-                0x0040933c                _fini
- .fini          0x00409340        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtn.o
-                0x00409348                . = ALIGN (0x4)
-                0x00409348                __fini_array_start = .
+ .fini          0x0040957c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crti.o
+                0x0040957c                _fini
+ .fini          0x00409580        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtn.o
+                0x00409588                . = ALIGN (0x4)
+                0x00409588                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x00409348        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
+ .fini_array    0x00409588        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
  *(SORT(.fini_array.*))
-                0x0040934c                __fini_array_end = .
+                0x0040958c                __fini_array_end = .
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x0040934c                . = ALIGN (0x4)
-                0x0040934c                _efixed = .
+                0x0040958c                . = ALIGN (0x4)
+                0x0040958c                _efixed = .
                 [!provide]                PROVIDE (__exidx_start, .)
 
-.vfp11_veneer   0x0040934c        0x0
- .vfp11_veneer  0x0040934c        0x0 linker stubs
+.vfp11_veneer   0x0040958c        0x0
+ .vfp11_veneer  0x0040958c        0x0 linker stubs
 
-.v4_bx          0x0040934c        0x0
- .v4_bx         0x0040934c        0x0 linker stubs
+.v4_bx          0x0040958c        0x0
+ .v4_bx         0x0040958c        0x0 linker stubs
 
-.iplt           0x0040934c        0x0
- .iplt          0x0040934c        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
+.iplt           0x0040958c        0x0
+ .iplt          0x0040958c        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
 
-.ARM.exidx      0x0040934c        0x8
+.ARM.exidx      0x0040958c        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x0040934c        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x0040958c        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_udivmoddi4.o)
                 [!provide]                PROVIDE (__exidx_end, .)
 
-.eh_frame       0x00409354        0x0
- .eh_frame      0x00409354        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
+.eh_frame       0x00409594        0x0
+ .eh_frame      0x00409594        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
 
-.rel.dyn        0x00409354        0x0
- .rel.iplt      0x00409354        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
+.rel.dyn        0x00409594        0x0
+ .rel.iplt      0x00409594        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
 
-.jcr            0x00409354        0x0
- .jcr           0x00409354        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
+.jcr            0x00409594        0x0
+ .jcr           0x00409594        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
 
-.igot.plt       0x00409354        0x0
- .igot.plt      0x00409354        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
-                0x00409354                . = ALIGN (0x4)
-                0x00409354                _etext = .
+.igot.plt       0x00409594        0x0
+ .igot.plt      0x00409594        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp/crtbegin.o
+                0x00409594                . = ALIGN (0x4)
+                0x00409594                _etext = .
 
-.relocate       0x20400000      0x9f8 load address 0x00409354
+.relocate       0x20400000      0x9f8 load address 0x00409594
                 0x20400000                . = ALIGN (0x4)
                 0x20400000                _srelocate = .
  *(.ramfunc .ramfunc.*)
@@ -18051,118 +18051,123 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
  .bss.mins      0x20403200      0x800 DanLib/DYWA/dywapitchtrack.o
  .bss.sam       0x20403a00      0x800 DanLib/DYWA/dywapitchtrack.o
  .bss.device    0x20404200       0x20 DanLib/LCDLib/touch/touch.o
- .bss.inPtr     0x20404220        0x4 DanLib/Vocoder/psola.o
+ .bss.current_num_shifts
+                0x20404220        0x4 DanLib/Vocoder/psola.o
+ .bss.inPtr     0x20404224        0x4 DanLib/Vocoder/psola.o
  .bss.inputPeriodLength
-                0x20404224        0x4 DanLib/Vocoder/psola.o
+                0x20404228        0x4 DanLib/Vocoder/psola.o
  .bss.input_ring_buffer
-                0x20404228    0x10000 DanLib/Vocoder/psola.o
- .bss.outPtr    0x20414228        0x4 DanLib/Vocoder/psola.o
+                0x2040422c    0x10000 DanLib/Vocoder/psola.o
+ .bss.outPtrList
+                0x2041422c       0x2c DanLib/Vocoder/psola.o
  .bss.output_ring_buffer
-                0x2041422c    0x10000 DanLib/Vocoder/psola.o
- .bss.readPos   0x2042422c        0x4 DanLib/Vocoder/psola.o
+                0x20414258    0x10000 DanLib/Vocoder/psola.o
+ .bss.prev_pitch_shifts
+                0x20424258       0x2c DanLib/Vocoder/psola.o
+ .bss.readPos   0x20424284        0x4 DanLib/Vocoder/psola.o
  .bss.samplesLeftInPeriod
-                0x20424230        0x4 DanLib/Vocoder/psola.o
- .bss.window    0x20424234     0x5000 DanLib/Vocoder/psola.o
+                0x20424288        0x4 DanLib/Vocoder/psola.o
+ .bss.window    0x2042428c     0x5000 DanLib/Vocoder/psola.o
  .bss.g_ul_pixel_cache
-                0x20429234      0x280 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x2042928c      0x280 src/ASF/sam/components/display/ili9488/ili9488.o
  .bss.limit_end_x
-                0x204294b4        0x2 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x2042950c        0x2 src/ASF/sam/components/display/ili9488/ili9488.o
  .bss.limit_end_y
-                0x204294b6        0x2 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x2042950e        0x2 src/ASF/sam/components/display/ili9488/ili9488.o
  .bss.limit_start_x
-                0x204294b8        0x2 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x20429510        0x2 src/ASF/sam/components/display/ili9488/ili9488.o
  .bss.limit_start_y
-                0x204294ba        0x2 src/ASF/sam/components/display/ili9488/ili9488.o
+                0x20429512        0x2 src/ASF/sam/components/display/ili9488/ili9488.o
  .bss.ul_reg_val.9348
-                0x204294bc        0x4 src/ASF/sam/drivers/usart/usart.o
+                0x20429514        0x4 src/ASF/sam/drivers/usart/usart.o
  .bss.gs_interrupt_sources
-                0x204294c0       0x70 src/ASF/sam/drivers/pio/pio_handler.o
+                0x20429518       0x70 src/ASF/sam/drivers/pio/pio_handler.o
  .bss.heap.6420
-                0x20429530        0x4 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+                0x20429588        0x4 src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .bss.ucMaxSysCallPriority
-                0x20429534        0x1 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
- *fill*         0x20429535        0x3 
+                0x2042958c        0x1 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+ *fill*         0x2042958d        0x3 
  .bss.ulMaxPRIGROUPValue
-                0x20429538        0x4 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+                0x20429590        0x4 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
  .bss.pxCurrentTCB
-                0x2042953c        0x4 src/FreeRTOS/Source/tasks.o
-                0x2042953c                pxCurrentTCB
+                0x20429594        0x4 src/FreeRTOS/Source/tasks.o
+                0x20429594                pxCurrentTCB
  .bss.pxDelayedTaskList
-                0x20429540        0x4 src/FreeRTOS/Source/tasks.o
+                0x20429598        0x4 src/FreeRTOS/Source/tasks.o
  .bss.pxOverflowDelayedTaskList
-                0x20429544        0x4 src/FreeRTOS/Source/tasks.o
+                0x2042959c        0x4 src/FreeRTOS/Source/tasks.o
  .bss.pxReadyTasksLists
-                0x20429548       0x64 src/FreeRTOS/Source/tasks.o
+                0x204295a0       0x64 src/FreeRTOS/Source/tasks.o
  .bss.uxCurrentNumberOfTasks
-                0x204295ac        0x4 src/FreeRTOS/Source/tasks.o
+                0x20429604        0x4 src/FreeRTOS/Source/tasks.o
  .bss.uxPendedTicks
-                0x204295b0        0x4 src/FreeRTOS/Source/tasks.o
+                0x20429608        0x4 src/FreeRTOS/Source/tasks.o
  .bss.uxSchedulerSuspended
-                0x204295b4        0x4 src/FreeRTOS/Source/tasks.o
+                0x2042960c        0x4 src/FreeRTOS/Source/tasks.o
  .bss.uxTopReadyPriority
-                0x204295b8        0x4 src/FreeRTOS/Source/tasks.o
+                0x20429610        0x4 src/FreeRTOS/Source/tasks.o
  .bss.xNextTaskUnblockTime
-                0x204295bc        0x4 src/FreeRTOS/Source/tasks.o
+                0x20429614        0x4 src/FreeRTOS/Source/tasks.o
  .bss.xNumOfOverflows
-                0x204295c0        0x4 src/FreeRTOS/Source/tasks.o
+                0x20429618        0x4 src/FreeRTOS/Source/tasks.o
  .bss.xPendingReadyList
-                0x204295c4       0x14 src/FreeRTOS/Source/tasks.o
+                0x2042961c       0x14 src/FreeRTOS/Source/tasks.o
  .bss.xSchedulerRunning
-                0x204295d8        0x4 src/FreeRTOS/Source/tasks.o
+                0x20429630        0x4 src/FreeRTOS/Source/tasks.o
  .bss.xSuspendedTaskList
-                0x204295dc       0x14 src/FreeRTOS/Source/tasks.o
+                0x20429634       0x14 src/FreeRTOS/Source/tasks.o
  .bss.xTickCount
-                0x204295f0        0x4 src/FreeRTOS/Source/tasks.o
+                0x20429648        0x4 src/FreeRTOS/Source/tasks.o
  .bss.xYieldPending
-                0x204295f4        0x4 src/FreeRTOS/Source/tasks.o
+                0x2042964c        0x4 src/FreeRTOS/Source/tasks.o
  .bss.xTimerQueue
-                0x204295f8        0x4 src/FreeRTOS/Source/timers.o
+                0x20429650        0x4 src/FreeRTOS/Source/timers.o
  .bss.ulISRCycles
-                0x204295fc        0x4 src/FreeRTOS/Tasks/EventGroupsDemo.o
+                0x20429654        0x4 src/FreeRTOS/Tasks/EventGroupsDemo.o
  .bss.xCallCount.9582
-                0x20429600        0x4 src/FreeRTOS/Tasks/EventGroupsDemo.o
+                0x20429658        0x4 src/FreeRTOS/Tasks/EventGroupsDemo.o
  .bss.xISREventGroup
-                0x20429604        0x4 src/FreeRTOS/Tasks/EventGroupsDemo.o
+                0x2042965c        0x4 src/FreeRTOS/Tasks/EventGroupsDemo.o
  .bss.xISRTestError.9583
-                0x20429608        0x4 src/FreeRTOS/Tasks/EventGroupsDemo.o
+                0x20429660        0x4 src/FreeRTOS/Tasks/EventGroupsDemo.o
  .bss.xISRCountingSemaphore
-                0x2042960c        0x4 src/FreeRTOS/Tasks/IntSemTest.o
+                0x20429664        0x4 src/FreeRTOS/Tasks/IntSemTest.o
  .bss.xISRMutex
-                0x20429610        0x4 src/FreeRTOS/Tasks/IntSemTest.o
+                0x20429668        0x4 src/FreeRTOS/Tasks/IntSemTest.o
  .bss.xLastGiveTime.9586
-                0x20429614        0x4 src/FreeRTOS/Tasks/IntSemTest.o
+                0x2042966c        0x4 src/FreeRTOS/Tasks/IntSemTest.o
  .bss.xOkToGiveCountingSemaphore
-                0x20429618        0x4 src/FreeRTOS/Tasks/IntSemTest.o
+                0x20429670        0x4 src/FreeRTOS/Tasks/IntSemTest.o
  .bss.xOkToGiveMutex
-                0x2042961c        0x4 src/FreeRTOS/Tasks/IntSemTest.o
+                0x20429674        0x4 src/FreeRTOS/Tasks/IntSemTest.o
  .bss.ulCallCount.9557
-                0x20429620        0x4 src/FreeRTOS/Tasks/QueueOverwrite.o
+                0x20429678        0x4 src/FreeRTOS/Tasks/QueueOverwrite.o
  .bss.xISRQueue
-                0x20429624        0x4 src/FreeRTOS/Tasks/QueueOverwrite.o
+                0x2042967c        0x4 src/FreeRTOS/Tasks/QueueOverwrite.o
  .bss.ulTimerNotificationsSent
-                0x20429628        0x4 src/FreeRTOS/Tasks/TaskNotify.o
+                0x20429680        0x4 src/FreeRTOS/Tasks/TaskNotify.o
  .bss.xAPIToUse.9563
-                0x2042962c        0x4 src/FreeRTOS/Tasks/TaskNotify.o
+                0x20429684        0x4 src/FreeRTOS/Tasks/TaskNotify.o
  .bss.xCallCount.9562
-                0x20429630        0x4 src/FreeRTOS/Tasks/TaskNotify.o
+                0x20429688        0x4 src/FreeRTOS/Tasks/TaskNotify.o
  .bss.xTaskToNotify
-                0x20429634        0x4 src/FreeRTOS/Tasks/TaskNotify.o
- .bss.xTimer    0x20429638        0x4 src/FreeRTOS/Tasks/TaskNotify.o
+                0x2042968c        0x4 src/FreeRTOS/Tasks/TaskNotify.o
+ .bss.xTimer    0x20429690        0x4 src/FreeRTOS/Tasks/TaskNotify.o
  .bss.ucISRAutoReloadTimerCounter
-                0x2042963c        0x1 src/FreeRTOS/Tasks/TimerDemo.o
+                0x20429694        0x1 src/FreeRTOS/Tasks/TimerDemo.o
  .bss.ucISROneShotTimerCounter
-                0x2042963d        0x1 src/FreeRTOS/Tasks/TimerDemo.o
- *fill*         0x2042963e        0x2 
+                0x20429695        0x1 src/FreeRTOS/Tasks/TimerDemo.o
+ *fill*         0x20429696        0x2 
  .bss.xBasePeriod
-                0x20429640        0x4 src/FreeRTOS/Tasks/TimerDemo.o
+                0x20429698        0x4 src/FreeRTOS/Tasks/TimerDemo.o
  .bss.xISRAutoReloadTimer
-                0x20429644        0x4 src/FreeRTOS/Tasks/TimerDemo.o
+                0x2042969c        0x4 src/FreeRTOS/Tasks/TimerDemo.o
  .bss.xISROneShotTimer
-                0x20429648        0x4 src/FreeRTOS/Tasks/TimerDemo.o
+                0x204296a0        0x4 src/FreeRTOS/Tasks/TimerDemo.o
  .bss.harmony_idx
-                0x2042964c        0x4 src/main.o
-                0x2042964c                harmony_idx
- *fill*         0x20429650      0x9b0 
+                0x204296a4        0x4 src/main.o
+                0x204296a4                harmony_idx
+ *fill*         0x204296a8      0x958 
  .bss.input_circ_buffer
                 0x2042a000     0x8000 src/main.o
  .bss.mixed_buffer
@@ -18502,7 +18507,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .comment       0x000000b4       0x5c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
  .comment       0x000000b4       0x5c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
 
-.debug_info     0x00000000    0x420e2
+.debug_info     0x00000000    0x421d5
  .debug_info    0x00000000     0x1c03 DanLib/Audio/DMA/DMA_Audio.o
  .debug_info    0x00001c03     0x1085 DanLib/Audio/audio.o
  .debug_info    0x00002c88     0x132f DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -18511,50 +18516,50 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_info    0x00006f39     0x1487 DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_info    0x000083c0      0xc05 DanLib/LCDLib/LCDLib.o
  .debug_info    0x00008fc5     0x1cec DanLib/LCDLib/touch/touch.o
- .debug_info    0x0000acb1      0xdd3 DanLib/Vocoder/psola.o
- .debug_info    0x0000ba84     0x25ba src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_info    0x0000e03e      0xa45 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_info    0x0000ea83      0xac9 src/ASF/common/utils/stdio/read.o
- .debug_info    0x0000f54c      0xac6 src/ASF/common/utils/stdio/write.o
- .debug_info    0x00010012     0x105f src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_info    0x00011071     0x4b25 src/ASF/sam/components/display/ili9488/ili9488.o
- .debug_info    0x00015b96      0xcee src/ASF/sam/drivers/ebi/smc/smc.o
- .debug_info    0x00016884     0x1536 src/ASF/sam/drivers/ssc/ssc.o
- .debug_info    0x00017dba     0x1717 src/ASF/sam/drivers/twihs/twihs.o
- .debug_info    0x000194d1     0x2bea src/ASF/sam/drivers/usart/usart.o
- .debug_info    0x0001c0bb     0x10a0 src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_info    0x0001d15b     0x1292 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_info    0x0001e3ed      0xb02 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_info    0x0001eeef     0x2451 src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_info    0x00021340      0xe1f src/ASF/sam/drivers/mpu/mpu.o
- .debug_info    0x0002215f     0x2454 src/ASF/sam/drivers/pio/pio.o
- .debug_info    0x000245b3     0x1d68 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_info    0x0002631b     0x1e62 src/ASF/sam/drivers/pmc/pmc.o
- .debug_info    0x0002817d     0x15a6 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_info    0x00029723      0x55b src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
- .debug_info    0x00029c7e      0xdb1 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_info    0x0002aa2f     0x185a src/FreeRTOS/Source/event_groups.o
- .debug_info    0x0002c289      0xc5c src/FreeRTOS/Source/list.o
- .debug_info    0x0002cee5      0xece src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
- .debug_info    0x0002ddb3     0x3565 src/FreeRTOS/Source/queue.o
- .debug_info    0x00031318     0x409e src/FreeRTOS/Source/tasks.o
- .debug_info    0x000353b6     0x200f src/FreeRTOS/Source/timers.o
- .debug_info    0x000373c5     0x1921 src/FreeRTOS/Tasks/EventGroupsDemo.o
- .debug_info    0x00038ce6     0x135a src/FreeRTOS/Tasks/IntSemTest.o
- .debug_info    0x0003a040      0xe48 src/FreeRTOS/Tasks/QueueOverwrite.o
- .debug_info    0x0003ae88     0x1cfe src/FreeRTOS/Tasks/TaskNotify.o
- .debug_info    0x0003cb86     0x1dce src/FreeRTOS/Tasks/TimerDemo.o
- .debug_info    0x0003e954     0x248f src/main.o
- .debug_info    0x00040de3      0x140 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_info    0x00040f23      0x14a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_info    0x0004106d      0x129 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
- .debug_info    0x00041196      0x166 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_info    0x000412fc      0x166 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_info    0x00041462      0x18a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
- .debug_info    0x000415ec      0x159 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_info    0x00041745      0x99d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_info    0x0000acb1      0xec6 DanLib/Vocoder/psola.o
+ .debug_info    0x0000bb77     0x25ba src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_info    0x0000e131      0xa45 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_info    0x0000eb76      0xac9 src/ASF/common/utils/stdio/read.o
+ .debug_info    0x0000f63f      0xac6 src/ASF/common/utils/stdio/write.o
+ .debug_info    0x00010105     0x105f src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_info    0x00011164     0x4b25 src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_info    0x00015c89      0xcee src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_info    0x00016977     0x1536 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_info    0x00017ead     0x1717 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_info    0x000195c4     0x2bea src/ASF/sam/drivers/usart/usart.o
+ .debug_info    0x0001c1ae     0x10a0 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_info    0x0001d24e     0x1292 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_info    0x0001e4e0      0xb02 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_info    0x0001efe2     0x2451 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_info    0x00021433      0xe1f src/ASF/sam/drivers/mpu/mpu.o
+ .debug_info    0x00022252     0x2454 src/ASF/sam/drivers/pio/pio.o
+ .debug_info    0x000246a6     0x1d68 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_info    0x0002640e     0x1e62 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_info    0x00028270     0x15a6 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_info    0x00029816      0x55b src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_info    0x00029d71      0xdb1 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_info    0x0002ab22     0x185a src/FreeRTOS/Source/event_groups.o
+ .debug_info    0x0002c37c      0xc5c src/FreeRTOS/Source/list.o
+ .debug_info    0x0002cfd8      0xece src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+ .debug_info    0x0002dea6     0x3565 src/FreeRTOS/Source/queue.o
+ .debug_info    0x0003140b     0x409e src/FreeRTOS/Source/tasks.o
+ .debug_info    0x000354a9     0x200f src/FreeRTOS/Source/timers.o
+ .debug_info    0x000374b8     0x1921 src/FreeRTOS/Tasks/EventGroupsDemo.o
+ .debug_info    0x00038dd9     0x135a src/FreeRTOS/Tasks/IntSemTest.o
+ .debug_info    0x0003a133      0xe48 src/FreeRTOS/Tasks/QueueOverwrite.o
+ .debug_info    0x0003af7b     0x1cfe src/FreeRTOS/Tasks/TaskNotify.o
+ .debug_info    0x0003cc79     0x1dce src/FreeRTOS/Tasks/TimerDemo.o
+ .debug_info    0x0003ea47     0x248f src/main.o
+ .debug_info    0x00040ed6      0x140 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_info    0x00041016      0x14a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_info    0x00041160      0x129 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_info    0x00041289      0x166 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_info    0x000413ef      0x166 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_info    0x00041555      0x18a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_info    0x000416df      0x159 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_info    0x00041838      0x99d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
 
-.debug_abbrev   0x00000000     0x8bfd
+.debug_abbrev   0x00000000     0x8c45
  .debug_abbrev  0x00000000      0x34c DanLib/Audio/DMA/DMA_Audio.o
  .debug_abbrev  0x0000034c      0x284 DanLib/Audio/audio.o
  .debug_abbrev  0x000005d0      0x268 DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -18563,50 +18568,50 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_abbrev  0x00000fae      0x32b DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_abbrev  0x000012d9      0x1f0 DanLib/LCDLib/LCDLib.o
  .debug_abbrev  0x000014c9      0x334 DanLib/LCDLib/touch/touch.o
- .debug_abbrev  0x000017fd      0x247 DanLib/Vocoder/psola.o
- .debug_abbrev  0x00001a44      0x434 src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_abbrev  0x00001e78      0x1b3 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_abbrev  0x0000202b      0x1fe src/ASF/common/utils/stdio/read.o
- .debug_abbrev  0x00002229      0x1e9 src/ASF/common/utils/stdio/write.o
- .debug_abbrev  0x00002412      0x2cc src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_abbrev  0x000026de      0x491 src/ASF/sam/components/display/ili9488/ili9488.o
- .debug_abbrev  0x00002b6f      0x205 src/ASF/sam/drivers/ebi/smc/smc.o
- .debug_abbrev  0x00002d74      0x326 src/ASF/sam/drivers/ssc/ssc.o
- .debug_abbrev  0x0000309a      0x42d src/ASF/sam/drivers/twihs/twihs.o
- .debug_abbrev  0x000034c7      0x3c7 src/ASF/sam/drivers/usart/usart.o
- .debug_abbrev  0x0000388e      0x23a src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_abbrev  0x00003ac8      0x346 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_abbrev  0x00003e0e      0x22c src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_abbrev  0x0000403a      0x3a1 src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_abbrev  0x000043db      0x335 src/ASF/sam/drivers/mpu/mpu.o
- .debug_abbrev  0x00004710      0x41d src/ASF/sam/drivers/pio/pio.o
- .debug_abbrev  0x00004b2d      0x406 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_abbrev  0x00004f33      0x3d3 src/ASF/sam/drivers/pmc/pmc.o
- .debug_abbrev  0x00005306      0x314 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_abbrev  0x0000561a      0x102 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
- .debug_abbrev  0x0000571c      0x264 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_abbrev  0x00005980      0x414 src/FreeRTOS/Source/event_groups.o
- .debug_abbrev  0x00005d94      0x221 src/FreeRTOS/Source/list.o
- .debug_abbrev  0x00005fb5      0x372 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
- .debug_abbrev  0x00006327      0x4d0 src/FreeRTOS/Source/queue.o
- .debug_abbrev  0x000067f7      0x52f src/FreeRTOS/Source/tasks.o
- .debug_abbrev  0x00006d26      0x465 src/FreeRTOS/Source/timers.o
- .debug_abbrev  0x0000718b      0x3a9 src/FreeRTOS/Tasks/EventGroupsDemo.o
- .debug_abbrev  0x00007534      0x32f src/FreeRTOS/Tasks/IntSemTest.o
- .debug_abbrev  0x00007863      0x28b src/FreeRTOS/Tasks/QueueOverwrite.o
- .debug_abbrev  0x00007aee      0x370 src/FreeRTOS/Tasks/TaskNotify.o
- .debug_abbrev  0x00007e5e      0x3ed src/FreeRTOS/Tasks/TimerDemo.o
- .debug_abbrev  0x0000824b      0x485 src/main.o
- .debug_abbrev  0x000086d0       0xa3 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_abbrev  0x00008773       0x94 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_abbrev  0x00008807       0xa3 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
- .debug_abbrev  0x000088aa       0xb2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_abbrev  0x0000895c       0xb2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_abbrev  0x00008a0e       0xd7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
- .debug_abbrev  0x00008ae5       0x94 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_abbrev  0x00008b79       0x84 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_abbrev  0x000017fd      0x28f DanLib/Vocoder/psola.o
+ .debug_abbrev  0x00001a8c      0x434 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_abbrev  0x00001ec0      0x1b3 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_abbrev  0x00002073      0x1fe src/ASF/common/utils/stdio/read.o
+ .debug_abbrev  0x00002271      0x1e9 src/ASF/common/utils/stdio/write.o
+ .debug_abbrev  0x0000245a      0x2cc src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_abbrev  0x00002726      0x491 src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_abbrev  0x00002bb7      0x205 src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_abbrev  0x00002dbc      0x326 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_abbrev  0x000030e2      0x42d src/ASF/sam/drivers/twihs/twihs.o
+ .debug_abbrev  0x0000350f      0x3c7 src/ASF/sam/drivers/usart/usart.o
+ .debug_abbrev  0x000038d6      0x23a src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_abbrev  0x00003b10      0x346 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_abbrev  0x00003e56      0x22c src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_abbrev  0x00004082      0x3a1 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_abbrev  0x00004423      0x335 src/ASF/sam/drivers/mpu/mpu.o
+ .debug_abbrev  0x00004758      0x41d src/ASF/sam/drivers/pio/pio.o
+ .debug_abbrev  0x00004b75      0x406 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_abbrev  0x00004f7b      0x3d3 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_abbrev  0x0000534e      0x314 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_abbrev  0x00005662      0x102 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_abbrev  0x00005764      0x264 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_abbrev  0x000059c8      0x414 src/FreeRTOS/Source/event_groups.o
+ .debug_abbrev  0x00005ddc      0x221 src/FreeRTOS/Source/list.o
+ .debug_abbrev  0x00005ffd      0x372 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+ .debug_abbrev  0x0000636f      0x4d0 src/FreeRTOS/Source/queue.o
+ .debug_abbrev  0x0000683f      0x52f src/FreeRTOS/Source/tasks.o
+ .debug_abbrev  0x00006d6e      0x465 src/FreeRTOS/Source/timers.o
+ .debug_abbrev  0x000071d3      0x3a9 src/FreeRTOS/Tasks/EventGroupsDemo.o
+ .debug_abbrev  0x0000757c      0x32f src/FreeRTOS/Tasks/IntSemTest.o
+ .debug_abbrev  0x000078ab      0x28b src/FreeRTOS/Tasks/QueueOverwrite.o
+ .debug_abbrev  0x00007b36      0x370 src/FreeRTOS/Tasks/TaskNotify.o
+ .debug_abbrev  0x00007ea6      0x3ed src/FreeRTOS/Tasks/TimerDemo.o
+ .debug_abbrev  0x00008293      0x485 src/main.o
+ .debug_abbrev  0x00008718       0xa3 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_abbrev  0x000087bb       0x94 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_abbrev  0x0000884f       0xa3 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_abbrev  0x000088f2       0xb2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_abbrev  0x000089a4       0xb2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_abbrev  0x00008a56       0xd7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_abbrev  0x00008b2d       0x94 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_abbrev  0x00008bc1       0x84 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
 
-.debug_loc      0x00000000    0x1a82e
+.debug_loc      0x00000000    0x1ab57
  .debug_loc     0x00000000      0x25b DanLib/Audio/DMA/DMA_Audio.o
  .debug_loc     0x0000025b       0x78 DanLib/Audio/audio.o
  .debug_loc     0x000002d3       0x8f DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -18615,45 +18620,45 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_loc     0x00003428      0x317 DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_loc     0x0000373f       0x2c DanLib/LCDLib/LCDLib.o
  .debug_loc     0x0000376b      0x132 DanLib/LCDLib/touch/touch.o
- .debug_loc     0x0000389d      0x3f0 DanLib/Vocoder/psola.o
- .debug_loc     0x00003c8d     0x12bf src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_loc     0x00004f4c       0xd6 src/ASF/common/utils/stdio/read.o
- .debug_loc     0x00005022      0x13a src/ASF/common/utils/stdio/write.o
- .debug_loc     0x0000515c      0x1c7 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_loc     0x00005323     0x3e43 src/ASF/sam/components/display/ili9488/ili9488.o
- .debug_loc     0x00009166       0xe7 src/ASF/sam/drivers/ebi/smc/smc.o
- .debug_loc     0x0000924d      0x6f7 src/ASF/sam/drivers/ssc/ssc.o
- .debug_loc     0x00009944     0x1034 src/ASF/sam/drivers/twihs/twihs.o
- .debug_loc     0x0000a978     0x1b10 src/ASF/sam/drivers/usart/usart.o
- .debug_loc     0x0000c488      0x272 src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_loc     0x0000c6fa      0x1c1 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_loc     0x0000c8bb       0x2c src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_loc     0x0000c8e7      0x3eb src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_loc     0x0000ccd2      0x173 src/ASF/sam/drivers/mpu/mpu.o
- .debug_loc     0x0000ce45     0x1962 src/ASF/sam/drivers/pio/pio.o
- .debug_loc     0x0000e7a7      0x829 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_loc     0x0000efd0      0xd54 src/ASF/sam/drivers/pmc/pmc.o
- .debug_loc     0x0000fd24       0x2c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_loc     0x0000fd50      0x148 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_loc     0x0000fe98      0xc94 src/FreeRTOS/Source/event_groups.o
- .debug_loc     0x00010b2c       0xb3 src/FreeRTOS/Source/list.o
- .debug_loc     0x00010bdf      0x1a0 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
- .debug_loc     0x00010d7f     0x2828 src/FreeRTOS/Source/queue.o
- .debug_loc     0x000135a7     0x3c15 src/FreeRTOS/Source/tasks.o
- .debug_loc     0x000171bc     0x109a src/FreeRTOS/Source/timers.o
- .debug_loc     0x00018256      0x4fa src/FreeRTOS/Tasks/EventGroupsDemo.o
- .debug_loc     0x00018750      0x1cb src/FreeRTOS/Tasks/IntSemTest.o
- .debug_loc     0x0001891b      0x16c src/FreeRTOS/Tasks/QueueOverwrite.o
- .debug_loc     0x00018a87      0x40c src/FreeRTOS/Tasks/TaskNotify.o
- .debug_loc     0x00018e93      0x985 src/FreeRTOS/Tasks/TimerDemo.o
- .debug_loc     0x00019818      0x58a src/main.o
- .debug_loc     0x00019da2      0x10a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_loc     0x00019eac      0x18c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_loc     0x0001a038      0x1df ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
- .debug_loc     0x0001a217      0x1af ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_loc     0x0001a3c6      0x1af ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_loc     0x0001a575       0xc7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
- .debug_loc     0x0001a63c      0x1f2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_loc     0x0000389d      0x6f6 DanLib/Vocoder/psola.o
+ .debug_loc     0x00003f93     0x12bf src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_loc     0x00005252       0xd6 src/ASF/common/utils/stdio/read.o
+ .debug_loc     0x00005328      0x13a src/ASF/common/utils/stdio/write.o
+ .debug_loc     0x00005462      0x1c7 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_loc     0x00005629     0x3e43 src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_loc     0x0000946c       0xe7 src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_loc     0x00009553      0x6f7 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_loc     0x00009c4a     0x1034 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_loc     0x0000ac7e     0x1b10 src/ASF/sam/drivers/usart/usart.o
+ .debug_loc     0x0000c78e      0x272 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_loc     0x0000ca00      0x1c1 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_loc     0x0000cbc1       0x2c src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_loc     0x0000cbed      0x3eb src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_loc     0x0000cfd8      0x173 src/ASF/sam/drivers/mpu/mpu.o
+ .debug_loc     0x0000d14b     0x1962 src/ASF/sam/drivers/pio/pio.o
+ .debug_loc     0x0000eaad      0x829 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_loc     0x0000f2d6      0xd54 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_loc     0x0001002a       0x2c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_loc     0x00010056      0x148 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_loc     0x0001019e      0xc94 src/FreeRTOS/Source/event_groups.o
+ .debug_loc     0x00010e32       0xb3 src/FreeRTOS/Source/list.o
+ .debug_loc     0x00010ee5      0x1a0 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+ .debug_loc     0x00011085     0x2828 src/FreeRTOS/Source/queue.o
+ .debug_loc     0x000138ad     0x3c15 src/FreeRTOS/Source/tasks.o
+ .debug_loc     0x000174c2     0x109a src/FreeRTOS/Source/timers.o
+ .debug_loc     0x0001855c      0x4fa src/FreeRTOS/Tasks/EventGroupsDemo.o
+ .debug_loc     0x00018a56      0x1cb src/FreeRTOS/Tasks/IntSemTest.o
+ .debug_loc     0x00018c21      0x16c src/FreeRTOS/Tasks/QueueOverwrite.o
+ .debug_loc     0x00018d8d      0x40c src/FreeRTOS/Tasks/TaskNotify.o
+ .debug_loc     0x00019199      0x985 src/FreeRTOS/Tasks/TimerDemo.o
+ .debug_loc     0x00019b1e      0x5ad src/main.o
+ .debug_loc     0x0001a0cb      0x10a ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_loc     0x0001a1d5      0x18c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_loc     0x0001a361      0x1df ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_loc     0x0001a540      0x1af ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_loc     0x0001a6ef      0x1af ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_loc     0x0001a89e       0xc7 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_loc     0x0001a965      0x1f2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
 
 .debug_aranges  0x00000000     0x1668
  .debug_aranges
@@ -18757,7 +18762,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_aranges
                 0x00001650       0x18 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
 
-.debug_ranges   0x00000000     0x50f8
+.debug_ranges   0x00000000     0x5120
  .debug_ranges  0x00000000       0xd8 DanLib/Audio/DMA/DMA_Audio.o
  .debug_ranges  0x000000d8       0x28 DanLib/Audio/audio.o
  .debug_ranges  0x00000100       0x18 DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -18766,47 +18771,47 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_ranges  0x00000450       0x98 DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_ranges  0x000004e8       0x10 DanLib/LCDLib/LCDLib.o
  .debug_ranges  0x000004f8       0xa0 DanLib/LCDLib/touch/touch.o
- .debug_ranges  0x00000598       0x18 DanLib/Vocoder/psola.o
- .debug_ranges  0x000005b0      0x468 src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_ranges  0x00000a18       0x10 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_ranges  0x00000a28       0x10 src/ASF/common/utils/stdio/read.o
- .debug_ranges  0x00000a38       0x10 src/ASF/common/utils/stdio/write.o
- .debug_ranges  0x00000a48       0x60 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_ranges  0x00000aa8     0x15d8 src/ASF/sam/components/display/ili9488/ili9488.o
- .debug_ranges  0x00002080       0x40 src/ASF/sam/drivers/ebi/smc/smc.o
- .debug_ranges  0x000020c0      0x110 src/ASF/sam/drivers/ssc/ssc.o
- .debug_ranges  0x000021d0      0x218 src/ASF/sam/drivers/twihs/twihs.o
- .debug_ranges  0x000023e8      0xb00 src/ASF/sam/drivers/usart/usart.o
- .debug_ranges  0x00002ee8       0x28 src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_ranges  0x00002f10       0x30 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_ranges  0x00002f40       0x18 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_ranges  0x00002f58       0xc8 src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_ranges  0x00003020       0x38 src/ASF/sam/drivers/mpu/mpu.o
- .debug_ranges  0x00003058      0x5f0 src/ASF/sam/drivers/pio/pio.o
- .debug_ranges  0x00003648      0x100 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_ranges  0x00003748      0x2a8 src/ASF/sam/drivers/pmc/pmc.o
- .debug_ranges  0x000039f0       0x38 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_ranges  0x00003a28       0x20 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
- .debug_ranges  0x00003a48       0x50 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_ranges  0x00003a98       0xe0 src/FreeRTOS/Source/event_groups.o
- .debug_ranges  0x00003b78       0x30 src/FreeRTOS/Source/list.o
- .debug_ranges  0x00003ba8       0x98 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
- .debug_ranges  0x00003c40      0x4a0 src/FreeRTOS/Source/queue.o
- .debug_ranges  0x000040e0      0x9e8 src/FreeRTOS/Source/tasks.o
- .debug_ranges  0x00004ac8      0x1f8 src/FreeRTOS/Source/timers.o
- .debug_ranges  0x00004cc0       0xb0 src/FreeRTOS/Tasks/EventGroupsDemo.o
- .debug_ranges  0x00004d70       0x38 src/FreeRTOS/Tasks/IntSemTest.o
- .debug_ranges  0x00004da8       0x28 src/FreeRTOS/Tasks/QueueOverwrite.o
- .debug_ranges  0x00004dd0       0xa8 src/FreeRTOS/Tasks/TaskNotify.o
- .debug_ranges  0x00004e78      0x108 src/FreeRTOS/Tasks/TimerDemo.o
- .debug_ranges  0x00004f80      0x108 src/main.o
- .debug_ranges  0x00005088       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_ranges  0x00005098       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_ranges  0x000050a8       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
- .debug_ranges  0x000050b8       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_ranges  0x000050c8       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_ranges  0x000050d8       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
- .debug_ranges  0x000050e8       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_ranges  0x00000598       0x40 DanLib/Vocoder/psola.o
+ .debug_ranges  0x000005d8      0x468 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_ranges  0x00000a40       0x10 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_ranges  0x00000a50       0x10 src/ASF/common/utils/stdio/read.o
+ .debug_ranges  0x00000a60       0x10 src/ASF/common/utils/stdio/write.o
+ .debug_ranges  0x00000a70       0x60 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_ranges  0x00000ad0     0x15d8 src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_ranges  0x000020a8       0x40 src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_ranges  0x000020e8      0x110 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_ranges  0x000021f8      0x218 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_ranges  0x00002410      0xb00 src/ASF/sam/drivers/usart/usart.o
+ .debug_ranges  0x00002f10       0x28 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_ranges  0x00002f38       0x30 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_ranges  0x00002f68       0x18 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_ranges  0x00002f80       0xc8 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_ranges  0x00003048       0x38 src/ASF/sam/drivers/mpu/mpu.o
+ .debug_ranges  0x00003080      0x5f0 src/ASF/sam/drivers/pio/pio.o
+ .debug_ranges  0x00003670      0x100 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_ranges  0x00003770      0x2a8 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_ranges  0x00003a18       0x38 src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_ranges  0x00003a50       0x20 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_ranges  0x00003a70       0x50 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_ranges  0x00003ac0       0xe0 src/FreeRTOS/Source/event_groups.o
+ .debug_ranges  0x00003ba0       0x30 src/FreeRTOS/Source/list.o
+ .debug_ranges  0x00003bd0       0x98 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+ .debug_ranges  0x00003c68      0x4a0 src/FreeRTOS/Source/queue.o
+ .debug_ranges  0x00004108      0x9e8 src/FreeRTOS/Source/tasks.o
+ .debug_ranges  0x00004af0      0x1f8 src/FreeRTOS/Source/timers.o
+ .debug_ranges  0x00004ce8       0xb0 src/FreeRTOS/Tasks/EventGroupsDemo.o
+ .debug_ranges  0x00004d98       0x38 src/FreeRTOS/Tasks/IntSemTest.o
+ .debug_ranges  0x00004dd0       0x28 src/FreeRTOS/Tasks/QueueOverwrite.o
+ .debug_ranges  0x00004df8       0xa8 src/FreeRTOS/Tasks/TaskNotify.o
+ .debug_ranges  0x00004ea0      0x108 src/FreeRTOS/Tasks/TimerDemo.o
+ .debug_ranges  0x00004fa8      0x108 src/main.o
+ .debug_ranges  0x000050b0       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_ranges  0x000050c0       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_ranges  0x000050d0       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_ranges  0x000050e0       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_ranges  0x000050f0       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_ranges  0x00005100       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_ranges  0x00005110       0x10 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
 
 .debug_macro    0x00000000    0x2ecef
  .debug_macro   0x00000000      0x8d3 DanLib/Audio/DMA/DMA_Audio.o
@@ -19073,7 +19078,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_macro   0x0002ebaf       0x10 src/main.o
  .debug_macro   0x0002ebbf      0x130 src/main.o
 
-.debug_line     0x00000000    0x26bca
+.debug_line     0x00000000    0x26c4f
  .debug_line    0x00000000     0x1186 DanLib/Audio/DMA/DMA_Audio.o
  .debug_line    0x00001186     0x1069 DanLib/Audio/audio.o
  .debug_line    0x000021ef     0x1072 DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -19082,50 +19087,50 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_line    0x00005367      0xc1f DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_line    0x00005f86     0x1084 DanLib/LCDLib/LCDLib.o
  .debug_line    0x0000700a     0x1103 DanLib/LCDLib/touch/touch.o
- .debug_line    0x0000810d     0x11b3 DanLib/Vocoder/psola.o
- .debug_line    0x000092c0     0x1014 src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_line    0x0000a2d4      0x9ff src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_line    0x0000acd3      0x9fb src/ASF/common/utils/stdio/read.o
- .debug_line    0x0000b6ce      0x9f5 src/ASF/common/utils/stdio/write.o
- .debug_line    0x0000c0c3      0xc44 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_line    0x0000cd07     0x1a70 src/ASF/sam/components/display/ili9488/ili9488.o
- .debug_line    0x0000e777      0xabb src/ASF/sam/drivers/ebi/smc/smc.o
- .debug_line    0x0000f232      0xd10 src/ASF/sam/drivers/ssc/ssc.o
- .debug_line    0x0000ff42      0xd68 src/ASF/sam/drivers/twihs/twihs.o
- .debug_line    0x00010caa     0x1410 src/ASF/sam/drivers/usart/usart.o
- .debug_line    0x000120ba      0xa3d src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_line    0x00012af7      0xb85 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_line    0x0001367c      0xa1a src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_line    0x00014096      0xd1c src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_line    0x00014db2      0xa9e src/ASF/sam/drivers/mpu/mpu.o
- .debug_line    0x00015850     0x10bf src/ASF/sam/drivers/pio/pio.o
- .debug_line    0x0001690f      0xc3d src/ASF/sam/drivers/pio/pio_handler.o
- .debug_line    0x0001754c     0x111b src/ASF/sam/drivers/pmc/pmc.o
- .debug_line    0x00018667      0xa9e src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_line    0x00019105      0x81b src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
- .debug_line    0x00019920      0x417 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_line    0x00019d37      0xdb2 src/FreeRTOS/Source/event_groups.o
- .debug_line    0x0001aae9      0xb9f src/FreeRTOS/Source/list.o
- .debug_line    0x0001b688      0xcda src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
- .debug_line    0x0001c362     0x1573 src/FreeRTOS/Source/queue.o
- .debug_line    0x0001d8d5     0x1b6b src/FreeRTOS/Source/tasks.o
- .debug_line    0x0001f440      0xe82 src/FreeRTOS/Source/timers.o
- .debug_line    0x000202c2      0xe11 src/FreeRTOS/Tasks/EventGroupsDemo.o
- .debug_line    0x000210d3      0xcc6 src/FreeRTOS/Tasks/IntSemTest.o
- .debug_line    0x00021d99      0xc1f src/FreeRTOS/Tasks/QueueOverwrite.o
- .debug_line    0x000229b8      0xf4c src/FreeRTOS/Tasks/TaskNotify.o
- .debug_line    0x00023904     0x1094 src/FreeRTOS/Tasks/TimerDemo.o
- .debug_line    0x00024998     0x1594 src/main.o
- .debug_line    0x00025f2c      0x186 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_line    0x000260b2      0x191 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_line    0x00026243      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
- .debug_line    0x000263e4      0x19e ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_line    0x00026582      0x1a0 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_line    0x00026722      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
- .debug_line    0x000268c3      0x1a2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_line    0x00026a65      0x165 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_line    0x0000810d     0x1237 DanLib/Vocoder/psola.o
+ .debug_line    0x00009344     0x1014 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_line    0x0000a358      0x9ff src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_line    0x0000ad57      0x9fb src/ASF/common/utils/stdio/read.o
+ .debug_line    0x0000b752      0x9f5 src/ASF/common/utils/stdio/write.o
+ .debug_line    0x0000c147      0xc44 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_line    0x0000cd8b     0x1a70 src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_line    0x0000e7fb      0xabb src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_line    0x0000f2b6      0xd10 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_line    0x0000ffc6      0xd68 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_line    0x00010d2e     0x1410 src/ASF/sam/drivers/usart/usart.o
+ .debug_line    0x0001213e      0xa3d src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_line    0x00012b7b      0xb85 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_line    0x00013700      0xa1a src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_line    0x0001411a      0xd1c src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_line    0x00014e36      0xa9e src/ASF/sam/drivers/mpu/mpu.o
+ .debug_line    0x000158d4     0x10bf src/ASF/sam/drivers/pio/pio.o
+ .debug_line    0x00016993      0xc3d src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_line    0x000175d0     0x111b src/ASF/sam/drivers/pmc/pmc.o
+ .debug_line    0x000186eb      0xa9e src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_line    0x00019189      0x81b src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_line    0x000199a4      0x417 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_line    0x00019dbb      0xdb2 src/FreeRTOS/Source/event_groups.o
+ .debug_line    0x0001ab6d      0xb9f src/FreeRTOS/Source/list.o
+ .debug_line    0x0001b70c      0xcda src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+ .debug_line    0x0001c3e6     0x1573 src/FreeRTOS/Source/queue.o
+ .debug_line    0x0001d959     0x1b6b src/FreeRTOS/Source/tasks.o
+ .debug_line    0x0001f4c4      0xe82 src/FreeRTOS/Source/timers.o
+ .debug_line    0x00020346      0xe11 src/FreeRTOS/Tasks/EventGroupsDemo.o
+ .debug_line    0x00021157      0xcc6 src/FreeRTOS/Tasks/IntSemTest.o
+ .debug_line    0x00021e1d      0xc1f src/FreeRTOS/Tasks/QueueOverwrite.o
+ .debug_line    0x00022a3c      0xf4c src/FreeRTOS/Tasks/TaskNotify.o
+ .debug_line    0x00023988     0x1094 src/FreeRTOS/Tasks/TimerDemo.o
+ .debug_line    0x00024a1c     0x1595 src/main.o
+ .debug_line    0x00025fb1      0x186 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_line    0x00026137      0x191 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_line    0x000262c8      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_line    0x00026469      0x19e ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_line    0x00026607      0x1a0 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_line    0x000267a7      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_line    0x00026948      0x1a2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_line    0x00026aea      0x165 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
 
-.debug_str      0x00000000    0xa7b45
+.debug_str      0x00000000    0xa7b68
  .debug_str     0x00000000    0x924e3 DanLib/Audio/DMA/DMA_Audio.o
                               0x92cbf (size before relaxing)
  .debug_str     0x000924e3      0x142 DanLib/Audio/audio.o
@@ -19142,92 +19147,92 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
                               0x96c52 (size before relaxing)
  .debug_str     0x00098a4e      0x698 DanLib/LCDLib/touch/touch.o
                               0x92f59 (size before relaxing)
- .debug_str     0x000990e6      0x26a DanLib/Vocoder/psola.o
-                              0x925e8 (size before relaxing)
- .debug_str     0x00099350      0x469 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_str     0x000990e6      0x28d DanLib/Vocoder/psola.o
+                              0x9261f (size before relaxing)
+ .debug_str     0x00099373      0x469 src/ASF/common/components/touch/mxt/mxt_device_1.o
                               0x878b2 (size before relaxing)
- .debug_str     0x000997b9       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_str     0x000997dc       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
                               0x81d87 (size before relaxing)
- .debug_str     0x000997ee       0x2c src/ASF/common/utils/stdio/read.o
+ .debug_str     0x00099811       0x2c src/ASF/common/utils/stdio/read.o
                               0x81c00 (size before relaxing)
- .debug_str     0x0009981a       0x26 src/ASF/common/utils/stdio/write.o
+ .debug_str     0x0009983d       0x26 src/ASF/common/utils/stdio/write.o
                               0x81c01 (size before relaxing)
- .debug_str     0x00099840       0x69 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_str     0x00099863       0x69 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
                               0x8de86 (size before relaxing)
- .debug_str     0x000998a9      0x53f src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_str     0x000998cc      0x53f src/ASF/sam/components/display/ili9488/ili9488.o
                               0x88191 (size before relaxing)
- .debug_str     0x00099de8       0xcf src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_str     0x00099e0b       0xcf src/ASF/sam/drivers/ebi/smc/smc.o
                               0x85cbd (size before relaxing)
- .debug_str     0x00099eb7      0x33e src/ASF/sam/drivers/ssc/ssc.o
+ .debug_str     0x00099eda      0x33e src/ASF/sam/drivers/ssc/ssc.o
                               0x82277 (size before relaxing)
- .debug_str     0x0009a1f5      0x380 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_str     0x0009a218      0x380 src/ASF/sam/drivers/twihs/twihs.o
                               0x8220b (size before relaxing)
- .debug_str     0x0009a575      0xa9b src/ASF/sam/drivers/usart/usart.o
+ .debug_str     0x0009a598      0xa9b src/ASF/sam/drivers/usart/usart.o
                               0x8279f (size before relaxing)
- .debug_str     0x0009b010      0x171 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_str     0x0009b033      0x171 src/ASF/sam/drivers/xdmac/xdmac.o
                               0x8274d (size before relaxing)
- .debug_str     0x0009b181      0x3f1 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_str     0x0009b1a4      0x3f1 src/ASF/common/services/clock/samv71/sysclk.o
                               0x86a88 (size before relaxing)
- .debug_str     0x0009b572       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_str     0x0009b595       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                               0x81c57 (size before relaxing)
- .debug_str     0x0009b606      0x5c9 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_str     0x0009b629      0x5c9 src/ASF/sam/boards/samv71_xplained_ultra/init.o
                               0x88318 (size before relaxing)
- .debug_str     0x0009bbcf      0x132 src/ASF/sam/drivers/mpu/mpu.o
+ .debug_str     0x0009bbf2      0x132 src/ASF/sam/drivers/mpu/mpu.o
                               0x8299d (size before relaxing)
- .debug_str     0x0009bd01      0x547 src/ASF/sam/drivers/pio/pio.o
+ .debug_str     0x0009bd24      0x547 src/ASF/sam/drivers/pio/pio.o
                               0x827ad (size before relaxing)
- .debug_str     0x0009c248      0x111 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_str     0x0009c26b      0x111 src/ASF/sam/drivers/pio/pio_handler.o
                               0x828d8 (size before relaxing)
- .debug_str     0x0009c359      0x65a src/ASF/sam/drivers/pmc/pmc.o
+ .debug_str     0x0009c37c      0x65a src/ASF/sam/drivers/pmc/pmc.o
                               0x82911 (size before relaxing)
- .debug_str     0x0009c9b3      0x61c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_str     0x0009c9d6      0x61c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
                               0x82443 (size before relaxing)
- .debug_str     0x0009cfcf      0x137 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_str     0x0009cff2      0x137 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
                               0x72530 (size before relaxing)
- .debug_str     0x0009d106      0x768 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x0009d129      0x768 src/ASF/sam/utils/syscalls/gcc/syscalls.o
                                0x74d4 (size before relaxing)
- .debug_str     0x0009d86e     0x488c src/FreeRTOS/Source/event_groups.o
+ .debug_str     0x0009d891     0x488c src/FreeRTOS/Source/event_groups.o
                               0x8a407 (size before relaxing)
- .debug_str     0x000a20fa       0x9b src/FreeRTOS/Source/list.o
+ .debug_str     0x000a211d       0x9b src/FreeRTOS/Source/list.o
                               0x89154 (size before relaxing)
- .debug_str     0x000a2195      0x795 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+ .debug_str     0x000a21b8      0x795 src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
                               0x89e0f (size before relaxing)
- .debug_str     0x000a292a     0x10b0 src/FreeRTOS/Source/queue.o
+ .debug_str     0x000a294d     0x10b0 src/FreeRTOS/Source/queue.o
                               0x8a985 (size before relaxing)
- .debug_str     0x000a39da     0x1435 src/FreeRTOS/Source/tasks.o
+ .debug_str     0x000a39fd     0x1435 src/FreeRTOS/Source/tasks.o
                               0x8b779 (size before relaxing)
- .debug_str     0x000a4e0f      0x4f9 src/FreeRTOS/Source/timers.o
+ .debug_str     0x000a4e32      0x4f9 src/FreeRTOS/Source/timers.o
                               0x8acd3 (size before relaxing)
- .debug_str     0x000a5308      0x576 src/FreeRTOS/Tasks/EventGroupsDemo.o
+ .debug_str     0x000a532b      0x576 src/FreeRTOS/Tasks/EventGroupsDemo.o
                               0x8a50e (size before relaxing)
- .debug_str     0x000a587e      0x9ef src/FreeRTOS/Tasks/IntSemTest.o
+ .debug_str     0x000a58a1      0x9ef src/FreeRTOS/Tasks/IntSemTest.o
                               0x8a8ba (size before relaxing)
- .debug_str     0x000a626d      0x131 src/FreeRTOS/Tasks/QueueOverwrite.o
+ .debug_str     0x000a6290      0x131 src/FreeRTOS/Tasks/QueueOverwrite.o
                               0x89f28 (size before relaxing)
- .debug_str     0x000a639e      0x678 src/FreeRTOS/Tasks/TaskNotify.o
+ .debug_str     0x000a63c1      0x678 src/FreeRTOS/Tasks/TaskNotify.o
                               0x8a6a5 (size before relaxing)
- .debug_str     0x000a6a16      0x4cb src/FreeRTOS/Tasks/TimerDemo.o
+ .debug_str     0x000a6a39      0x4cb src/FreeRTOS/Tasks/TimerDemo.o
                               0x8a3b6 (size before relaxing)
- .debug_str     0x000a6ee1      0x4d2 src/main.o
+ .debug_str     0x000a6f04      0x4d2 src/main.o
                               0x9d3ee (size before relaxing)
- .debug_str     0x000a73b3      0x15d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_str     0x000a73d6      0x15d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
                                 0x239 (size before relaxing)
- .debug_str     0x000a7510       0x23 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_str     0x000a7533       0x23 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
                                 0x238 (size before relaxing)
- .debug_str     0x000a7533       0x2f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_str     0x000a7556       0x2f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
                                 0x240 (size before relaxing)
- .debug_str     0x000a7562       0x45 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_str     0x000a7585       0x45 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
                                 0x262 (size before relaxing)
- .debug_str     0x000a75a7       0x35 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_str     0x000a75ca       0x35 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
                                 0x262 (size before relaxing)
- .debug_str     0x000a75dc       0x44 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_str     0x000a75ff       0x44 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
                                 0x255 (size before relaxing)
- .debug_str     0x000a7620       0x2c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_str     0x000a7643       0x2c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
                                 0x242 (size before relaxing)
- .debug_str     0x000a764c      0x4f9 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_str     0x000a766f      0x4f9 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
                                 0x717 (size before relaxing)
 
-.debug_frame    0x00000000     0x4a98
+.debug_frame    0x00000000     0x4aa8
  .debug_frame   0x00000000       0x58 DanLib/Audio/DMA/DMA_Audio.o
  .debug_frame   0x00000058       0x28 DanLib/Audio/audio.o
  .debug_frame   0x00000080       0x5c DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -19236,86 +19241,86 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_frame   0x00000434       0xd8 DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.o
  .debug_frame   0x0000050c       0x2c DanLib/LCDLib/LCDLib.o
  .debug_frame   0x00000538       0x74 DanLib/LCDLib/touch/touch.o
- .debug_frame   0x000005ac       0x84 DanLib/Vocoder/psola.o
- .debug_frame   0x00000630      0x224 src/ASF/common/components/touch/mxt/mxt_device_1.o
- .debug_frame   0x00000854       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_frame   0x00000874       0x30 src/ASF/common/utils/stdio/read.o
- .debug_frame   0x000008a4       0x38 src/ASF/common/utils/stdio/write.o
- .debug_frame   0x000008dc       0x74 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
- .debug_frame   0x00000950      0x440 src/ASF/sam/components/display/ili9488/ili9488.o
- .debug_frame   0x00000d90       0x80 src/ASF/sam/drivers/ebi/smc/smc.o
- .debug_frame   0x00000e10      0x288 src/ASF/sam/drivers/ssc/ssc.o
- .debug_frame   0x00001098      0x274 src/ASF/sam/drivers/twihs/twihs.o
- .debug_frame   0x0000130c      0x61c src/ASF/sam/drivers/usart/usart.o
- .debug_frame   0x00001928       0x20 src/ASF/sam/drivers/xdmac/xdmac.o
- .debug_frame   0x00001948       0xb0 src/ASF/common/services/clock/samv71/sysclk.o
- .debug_frame   0x000019f8       0x3c src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_frame   0x00001a34       0x40 src/ASF/sam/boards/samv71_xplained_ultra/init.o
- .debug_frame   0x00001a74       0x80 src/ASF/sam/drivers/mpu/mpu.o
- .debug_frame   0x00001af4      0x40c src/ASF/sam/drivers/pio/pio.o
- .debug_frame   0x00001f00      0x178 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_frame   0x00002078      0x54c src/ASF/sam/drivers/pmc/pmc.o
- .debug_frame   0x000025c4       0x4c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
- .debug_frame   0x00002610       0x40 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
- .debug_frame   0x00002650       0xac src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_frame   0x000026fc      0x184 src/FreeRTOS/Source/event_groups.o
- .debug_frame   0x00002880       0x70 src/FreeRTOS/Source/list.o
- .debug_frame   0x000028f0      0x11c src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
- .debug_frame   0x00002a0c      0x4c0 src/FreeRTOS/Source/queue.o
- .debug_frame   0x00002ecc      0x6b8 src/FreeRTOS/Source/tasks.o
- .debug_frame   0x00003584      0x1f8 src/FreeRTOS/Source/timers.o
- .debug_frame   0x0000377c       0xec src/FreeRTOS/Tasks/EventGroupsDemo.o
- .debug_frame   0x00003868       0xdc src/FreeRTOS/Tasks/IntSemTest.o
- .debug_frame   0x00003944       0x8c src/FreeRTOS/Tasks/QueueOverwrite.o
- .debug_frame   0x000039d0       0xe4 src/FreeRTOS/Tasks/TaskNotify.o
- .debug_frame   0x00003ab4      0x104 src/FreeRTOS/Tasks/TimerDemo.o
- .debug_frame   0x00003bb8       0xe8 src/main.o
- .debug_frame   0x00003ca0       0x28 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_frame   0x00003cc8       0x30 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_frame   0x00003cf8       0x28 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
- .debug_frame   0x00003d20       0x30 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_frame   0x00003d50       0x30 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_frame   0x00003d80       0x20 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
- .debug_frame   0x00003da0       0x2c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_frame   0x00003dcc       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-init.o)
- .debug_frame   0x00003df8       0x74 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-iprintf.o)
- .debug_frame   0x00003e6c       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-malloc.o)
- .debug_frame   0x00003e9c       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mallocr.o)
- .debug_frame   0x00003ef4       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memset.o)
- .debug_frame   0x00003f28       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mlock.o)
- .debug_frame   0x00003f58       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-sbrkr.o)
- .debug_frame   0x00003f84       0xd8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
- .debug_frame   0x0000405c       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wsetup.o)
- .debug_frame   0x00004088       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x000040e4       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-atexit.o)
- .debug_frame   0x00004104       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fflush.o)
- .debug_frame   0x00004160      0x148 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
- .debug_frame   0x000042a8       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fini.o)
- .debug_frame   0x000042dc       0x94 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fputwc.o)
- .debug_frame   0x00004370       0x74 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-freer.o)
- .debug_frame   0x000043e4       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fvwrite.o)
- .debug_frame   0x0000444c       0x54 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fwalk.o)
- .debug_frame   0x000044a0       0x6c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-locale.o)
- .debug_frame   0x0000450c       0xb0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
- .debug_frame   0x000045bc       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-makebuf.o)
- .debug_frame   0x00004624       0x4c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mbtowc_r.o)
- .debug_frame   0x00004670       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memmove.o)
- .debug_frame   0x000046a0       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-reallocr.o)
- .debug_frame   0x00004708       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-reent.o)
- .debug_frame   0x00004760       0x88 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-stdio.o)
- .debug_frame   0x000047e8       0x40 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wbuf.o)
- .debug_frame   0x00004828       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wcrtomb.o)
- .debug_frame   0x00004884       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wctomb_r.o)
- .debug_frame   0x000048c0       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-writer.o)
- .debug_frame   0x000048ec       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__atexit.o)
- .debug_frame   0x00004920       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-closer.o)
- .debug_frame   0x0000494c       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fclose.o)
- .debug_frame   0x00004988       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fstatr.o)
- .debug_frame   0x000049b4       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-isattyr.o)
- .debug_frame   0x000049e0       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lseekr.o)
- .debug_frame   0x00004a0c       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-readr.o)
- .debug_frame   0x00004a38       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x00004a64       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x000005ac       0x90 DanLib/Vocoder/psola.o
+ .debug_frame   0x0000063c      0x224 src/ASF/common/components/touch/mxt/mxt_device_1.o
+ .debug_frame   0x00000860       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_frame   0x00000880       0x30 src/ASF/common/utils/stdio/read.o
+ .debug_frame   0x000008b0       0x38 src/ASF/common/utils/stdio/write.o
+ .debug_frame   0x000008e8       0x74 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_frame   0x0000095c      0x440 src/ASF/sam/components/display/ili9488/ili9488.o
+ .debug_frame   0x00000d9c       0x80 src/ASF/sam/drivers/ebi/smc/smc.o
+ .debug_frame   0x00000e1c      0x288 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_frame   0x000010a4      0x274 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_frame   0x00001318      0x61c src/ASF/sam/drivers/usart/usart.o
+ .debug_frame   0x00001934       0x20 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_frame   0x00001954       0xb0 src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_frame   0x00001a04       0x3c src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_frame   0x00001a40       0x40 src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_frame   0x00001a80       0x80 src/ASF/sam/drivers/mpu/mpu.o
+ .debug_frame   0x00001b00      0x40c src/ASF/sam/drivers/pio/pio.o
+ .debug_frame   0x00001f0c      0x178 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_frame   0x00002084      0x54c src/ASF/sam/drivers/pmc/pmc.o
+ .debug_frame   0x000025d0       0x4c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_frame   0x0000261c       0x40 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_frame   0x0000265c       0xac src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_frame   0x00002708      0x184 src/FreeRTOS/Source/event_groups.o
+ .debug_frame   0x0000288c       0x70 src/FreeRTOS/Source/list.o
+ .debug_frame   0x000028fc      0x11c src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.o
+ .debug_frame   0x00002a18      0x4c0 src/FreeRTOS/Source/queue.o
+ .debug_frame   0x00002ed8      0x6b8 src/FreeRTOS/Source/tasks.o
+ .debug_frame   0x00003590      0x1f8 src/FreeRTOS/Source/timers.o
+ .debug_frame   0x00003788       0xec src/FreeRTOS/Tasks/EventGroupsDemo.o
+ .debug_frame   0x00003874       0xdc src/FreeRTOS/Tasks/IntSemTest.o
+ .debug_frame   0x00003950       0x8c src/FreeRTOS/Tasks/QueueOverwrite.o
+ .debug_frame   0x000039dc       0xe4 src/FreeRTOS/Tasks/TaskNotify.o
+ .debug_frame   0x00003ac0      0x104 src/FreeRTOS/Tasks/TimerDemo.o
+ .debug_frame   0x00003bc4       0xec src/main.o
+ .debug_frame   0x00003cb0       0x28 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_frame   0x00003cd8       0x30 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_frame   0x00003d08       0x28 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_frame   0x00003d30       0x30 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_frame   0x00003d60       0x30 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_frame   0x00003d90       0x20 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_frame   0x00003db0       0x2c ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_frame   0x00003ddc       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-init.o)
+ .debug_frame   0x00003e08       0x74 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-iprintf.o)
+ .debug_frame   0x00003e7c       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-malloc.o)
+ .debug_frame   0x00003eac       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mallocr.o)
+ .debug_frame   0x00003f04       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memset.o)
+ .debug_frame   0x00003f38       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mlock.o)
+ .debug_frame   0x00003f68       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x00003f94       0xd8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-vfiprintf.o)
+ .debug_frame   0x0000406c       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wsetup.o)
+ .debug_frame   0x00004098       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x000040f4       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-atexit.o)
+ .debug_frame   0x00004114       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fflush.o)
+ .debug_frame   0x00004170      0x148 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-findfp.o)
+ .debug_frame   0x000042b8       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fini.o)
+ .debug_frame   0x000042ec       0x94 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fputwc.o)
+ .debug_frame   0x00004380       0x74 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-freer.o)
+ .debug_frame   0x000043f4       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fvwrite.o)
+ .debug_frame   0x0000445c       0x54 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fwalk.o)
+ .debug_frame   0x000044b0       0x6c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-locale.o)
+ .debug_frame   0x0000451c       0xb0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lock.o)
+ .debug_frame   0x000045cc       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-makebuf.o)
+ .debug_frame   0x00004634       0x4c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-mbtowc_r.o)
+ .debug_frame   0x00004680       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-memmove.o)
+ .debug_frame   0x000046b0       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-reallocr.o)
+ .debug_frame   0x00004718       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-reent.o)
+ .debug_frame   0x00004770       0x88 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-stdio.o)
+ .debug_frame   0x000047f8       0x40 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wbuf.o)
+ .debug_frame   0x00004838       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wcrtomb.o)
+ .debug_frame   0x00004894       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-wctomb_r.o)
+ .debug_frame   0x000048d0       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-writer.o)
+ .debug_frame   0x000048fc       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-__atexit.o)
+ .debug_frame   0x00004930       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-closer.o)
+ .debug_frame   0x0000495c       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fclose.o)
+ .debug_frame   0x00004998       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-fstatr.o)
+ .debug_frame   0x000049c4       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-isattyr.o)
+ .debug_frame   0x000049f0       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-lseekr.o)
+ .debug_frame   0x00004a1c       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp\libc.a(lib_a-readr.o)
+ .debug_frame   0x00004a48       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x00004a74       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv5-sp/softfp\libgcc.a(_udivmoddi4.o)
 
 Cross Reference Table
 
@@ -19802,6 +19807,7 @@ armBitRevTable                                    ../src/ASF/thirdparty/CMSIS/Li
 armRecipTableQ15                                  ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
 armRecipTableQ31                                  ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
 arm_copy_f32                                      ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+                                                  DanLib/Vocoder/psola.o
                                                   DanLib/DYWA/dywapitchtrack.o
 arm_cos_f32                                       ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
                                                   DanLib/Vocoder/psola.o
@@ -20002,6 +20008,7 @@ memset                                            c:/program files (x86)/atmel/s
                                                   src/FreeRTOS/Source/tasks.o
                                                   src/FreeRTOS/Source/stream_buffer.o
                                                   src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+                                                  DanLib/Vocoder/psola.o
                                                   DanLib/DYWA/dywapitchtrack.o
                                                   DanLib/Audio/DMA/DMA_Audio.o
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv5-sp/softfp/crt0.o

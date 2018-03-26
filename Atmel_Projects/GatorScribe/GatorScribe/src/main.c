@@ -346,12 +346,12 @@ int main(void)
 			if (inputPitch > MINIMUM_PITCH && power > POWER_THRESHOLD)
 			{
 				oneOverInputPitch = 1.0f / inputPitch;
-				i = 1;
-				while(harmony_list_read[i-1] > 1.0f && i < MAX_NUM_SHIFTS)
+				i = 0;
+				while(harmony_list_read[i] > 1.0f && i < MAX_NUM_SHIFTS-1)
 				{
-					if (Abs(harmony_list_read[i-1] - inputPitch) > 10.0f) // don't harmonies input pitch twice 
+					if (Abs(harmony_list_read[i] - closest_note) > 1.0f) // don't harmonies input pitch twice 
 					{
-						pitch_shift = 1.0f - (inputPitch-harmony_list_read[i-1])*oneOverInputPitch;
+						pitch_shift = 1.0f - (inputPitch-harmony_list_read[i])*oneOverInputPitch;
 						if (pitch_shift > 0.1f && pitch_shift < 6.0f) // range check 
 							harmony_shifts[num_of_shifts++] = pitch_shift;
 					}
@@ -391,8 +391,8 @@ int main(void)
 			uint32_t curr_idx; 
 			if (num_of_shifts > 0) // ought to be 1 but whateves... sounds nice with some verb 
 			{
-				uint32_t delay = 1200; 
-				float g = 0.7f; 
+				uint32_t delay = 900; 
+				float g = 0.55f; 
 				curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 				for (i = 0; i < WIN_SIZE; i++)
 				{

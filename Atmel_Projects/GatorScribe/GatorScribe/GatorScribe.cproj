@@ -721,9 +721,6 @@
     <Compile Include="src\ASF\common\services\delay\sam\cycle_counter.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\ASF\common\services\serial\sam_uart\uart_serial.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\ASF\common\services\serial\serial.h">
       <SubType>compile</SubType>
     </Compile>
