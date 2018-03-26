@@ -231,6 +231,7 @@ volatile bool waiting_for_harm_volume = false;
 volatile bool waiting_for_master_volume = false;
 volatile float harm_volume = 0.8f; 
 volatile float master_volume = 1.0f;
+volatile bool autotune = true; 
 void USART_SERIAL_ISR_HANDLER(void)
 {
 	uint32_t dw_status = usart_get_status(USART_SERIAL);
@@ -256,6 +257,10 @@ void USART_SERIAL_ISR_HANDLER(void)
 		else if (received_byte == 254)
 		{
 			waiting_for_master_volume = true;
+		}
+		else if (received_byte == 253)
+		{
+			autotune = !autotune; 
 		}
 		else if (received_byte != 0 && harmony_idx < MAX_NUM_SHIFTS)
 		{
@@ -347,8 +352,15 @@ int main(void)
 			
 			// Auto tune 
 			float closest_note = get_frequency_from_all(inputPitch);
-			pitch_shift = 1.0f - (inputPitch-closest_note)*oneOverInputPitch;
-			harmony_shifts[0] = pitch_shift;
+			if (autotune)
+			{
+				pitch_shift = 1.0f - (inputPitch-closest_note)*oneOverInputPitch;
+				harmony_shifts[0] = pitch_shift;
+			}
+			else 
+			{
+				harmony_shifts[0] = 1.0f; 
+			}
 			num_of_shifts = 1;  
 
 			// calc. power 
