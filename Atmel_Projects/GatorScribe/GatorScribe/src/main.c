@@ -222,8 +222,8 @@ COMPILER_ALIGNED(CIRC_BUF_SIZE) static float output_circ_buffer[CIRC_BUF_SIZE];
 #define USART_SERIAL_PARITY          US_MR_PAR_NO
 #define USART_SERIAL_STOP_BIT        US_MR_NBSTOP_1_BIT
 
-volatile float harmony_list_a[11]; 
-volatile float harmony_list_b[11];
+volatile float harmony_list_a[MAX_NUM_SHIFTS]; 
+volatile float harmony_list_b[MAX_NUM_SHIFTS];
 volatile float *harmony_list_read = harmony_list_a; 
 volatile float *harmony_list_fill = harmony_list_b; 
 volatile uint32_t harmony_idx = 0;  
