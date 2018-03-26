@@ -435,7 +435,7 @@ int main(void)
 // 			}
 			
 			// scale output 
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX * master_volume, mixed_buffer, WIN_SIZE);
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX * master_volume * 0.4, mixed_buffer, WIN_SIZE);
 			
 			// audio out 
 			uint32_t idx = 0; 
