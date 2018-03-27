@@ -132,7 +132,7 @@ static inline float get_frequency_from_key_C(float32_t frequency)
 	return key_C[hi];
 }
 
-static inline float get_frequency_from_all(float32_t frequency)
+static inline void get_frequency_from_all(float32_t frequency, float *closest_note, uint32_t *closest_note_idx)
 {
 	uint32_t lo = 12; // lowest at C0
 	uint32_t hi = 127;
@@ -153,7 +153,8 @@ static inline float get_frequency_from_all(float32_t frequency)
 			hi = mid;
 		}
 	}
-	return midi_note_frequencies[hi];
+	*closest_note = midi_note_frequencies[hi];
+	*closest_note_idx = hi; 
 }
 
 static float  get_average_power (float  *buffer, uint32_t size)
@@ -222,15 +223,17 @@ COMPILER_ALIGNED(CIRC_BUF_SIZE) static float output_circ_buffer[CIRC_BUF_SIZE];
 #define USART_SERIAL_PARITY          US_MR_PAR_NO
 #define USART_SERIAL_STOP_BIT        US_MR_NBSTOP_1_BIT
 
-volatile float harmony_list_a[MAX_NUM_SHIFTS]; 
-volatile float harmony_list_b[MAX_NUM_SHIFTS];
-volatile float *harmony_list_read = harmony_list_a; 
-volatile float *harmony_list_fill = harmony_list_b; 
+volatile harmony_t harmony_list_a[MAX_NUM_SHIFTS]; 
+volatile harmony_t harmony_list_b[MAX_NUM_SHIFTS];
+volatile harmony_t *harmony_list_read = harmony_list_a; 
+volatile harmony_t *harmony_list_fill = harmony_list_b; 
 volatile uint32_t harmony_idx = 0;  
 volatile bool waiting_for_harm_volume = false; 
 volatile bool waiting_for_master_volume = false;
+volatile bool waiting_for_pitch_bend = false;
 volatile float harm_volume = 1.0f; 
 volatile float master_volume = 1.0f;
+volatile uint32_t pitch_bend = NO_PITCH_BEND;
 volatile bool autotune = true; 
 void USART_SERIAL_ISR_HANDLER(void)
 {
@@ -250,6 +253,11 @@ void USART_SERIAL_ISR_HANDLER(void)
 			master_volume = (float)received_byte / 127.0f;
 			waiting_for_master_volume = false;
 		}
+		else if (waiting_for_pitch_bend)
+		{
+			pitch_bend = received_byte;
+			waiting_for_pitch_bend = false;
+		}
 		else if (received_byte == 255) 
 		{
 			waiting_for_harm_volume = true; 
@@ -260,21 +268,45 @@ void USART_SERIAL_ISR_HANDLER(void)
 		}
 		else if (received_byte == 253)
 		{
+			waiting_for_pitch_bend = true;
+		}
+		else if (received_byte == 252)
+		{
 			autotune = !autotune; 
 		}
 		else if (received_byte != 0 && harmony_idx < MAX_NUM_SHIFTS)
 		{
-			harmony_list_fill[harmony_idx] = midi_note_frequencies[received_byte]; 
+			harmony_list_fill[harmony_idx].freq = midi_note_frequencies[received_byte]; 
+			harmony_list_fill[harmony_idx].idx = received_byte; 
 			harmony_idx++;
 		}
 		else 
 		{
-			harmony_list_fill[harmony_idx] = END_OF_SHIFTS; 
-			float *temp = (float *)harmony_list_read; 
+			harmony_list_fill[harmony_idx].freq = END_OF_SHIFTS; 
+			harmony_list_fill[harmony_idx].idx = 0; // dont care 
+			harmony_t *temp = (harmony_t *)harmony_list_read; 
 			harmony_list_read = harmony_list_fill;		
 			harmony_list_fill = temp; 
 			harmony_idx = 0; 
 		}
+	}
+}
+volatile float bend_difference; 
+volatile uint32_t temp_pitch_idx; 
+volatile float temp_pitch; 
+static inline void bend_pitch(float *pitch, uint32_t pitch_idx, uint32_t bend)
+{
+	temp_pitch_idx = pitch_idx; 
+	temp_pitch = *pitch; 
+	if (pitch_bend > 64)
+	{
+		bend_difference = midi_note_frequencies[pitch_idx+2] - midi_note_frequencies[pitch_idx];
+		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
+	}
+	else //if (pitch_bend < 64)
+	{
+		bend_difference = midi_note_frequencies[pitch_idx] - midi_note_frequencies[pitch_idx-2];
+		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
 	}
 }
 
@@ -327,7 +359,8 @@ int main(void)
 
 	for (i = 0; i < 11; i++)
 	{
-		harmony_list_a[i] = 0.0f; harmony_list_b[i] = 0.0f; 
+		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
+		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
 	}
 	
 	float oneOverInputPitch = 1.0f;
@@ -339,6 +372,9 @@ int main(void)
 	arm_fill_f32(0.0f, prev_input, WIN_SIZE); 
 	uint32_t num_of_shifts = 0; 
 	uint32_t circ_buf_idx = 0; 
+	float closest_note = 0; 
+	float desired_pitch; 
+	uint32_t in_pitch_idx = 0; 
 	/*************** Application code variables end ***************/
 	
 	while(1)
@@ -351,18 +387,22 @@ int main(void)
 			inputPitch = computeWaveletPitch((float  *)processBuffer);
 			
 			// Auto tune 
-			float closest_note = get_frequency_from_all(inputPitch);
+			get_frequency_from_all(inputPitch, &closest_note, &in_pitch_idx);
+			desired_pitch = closest_note; 
+			if (pitch_bend != 64)
+				bend_pitch(&desired_pitch, in_pitch_idx, (uint32_t)pitch_bend);
 			if (autotune)
 			{
-				pitch_shift = 1.0f - (inputPitch-closest_note)*oneOverInputPitch;
-				harmony_shifts[0] = pitch_shift;
+				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				harmony_shifts[0] = pitch_shift ;
 			}
 			else 
 			{
 				harmony_shifts[0] = 1.0f; 
 			}
+			
 			num_of_shifts = 1;  
-
+				
 			// calc. power 
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
 		
@@ -371,11 +411,16 @@ int main(void)
 			{
 				oneOverInputPitch = 1.0f / inputPitch;
 				i = 0;
-				while(harmony_list_read[i] > 1.0f && i < MAX_NUM_SHIFTS-1)
+				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
 				{
-					if (Abs(harmony_list_read[i] - closest_note) > 1.0f) // don't harmonies input pitch twice 
+					if (Abs(harmony_list_read[i].freq - closest_note) > 1.0f) // don't harmonies input pitch twice 
 					{
-						pitch_shift = 1.0f - (inputPitch-harmony_list_read[i])*oneOverInputPitch;
+						desired_pitch = harmony_list_read[i].freq; 
+						if (pitch_bend != 64)
+							bend_pitch(&desired_pitch, harmony_list_read[i].idx, pitch_bend);
+							
+						pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+						
 						if (pitch_shift > 0.1f && pitch_shift < 6.0f) // range check 
 							harmony_shifts[num_of_shifts++] = pitch_shift;
 					}

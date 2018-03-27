@@ -15,10 +15,11 @@
 
 #define PSOLA_SAMPLE_RATE 46503.0f 
 
-#define MINIMUM_PITCH 80.0f
+#define MINIMUM_PITCH 80.0f // might want to decrease this if you can 
 #define NO_SHIFT 1.0f 
 #define END_OF_SHIFTS -1.0f
 #define MAX_NUM_SHIFTS 11 // always doing root (1.0 shift) 
+#define NO_PITCH_BEND 64
 
 #define WEIRD_OFFSET 0 //581 // keep playing with this number. 
 

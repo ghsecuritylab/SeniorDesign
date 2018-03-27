@@ -15,6 +15,12 @@
 #include "DYWA/dywapitchtrack.h"
 #include "psola.h"
 
+typedef struct harmony 
+{
+	float freq; 
+	uint32_t idx; 
+}harmony_t;
+
 enum harmonies 
 {
 	OCTAVE_DOWN = -12, 
@@ -36,6 +42,6 @@ enum harmonies
 
 #define HALF_STEP 1.059463094359f
 #define POWER_THRESHOLD 0.000001f
-
+#define ONE_OVER_64 0.015625000F
 
 #endif /* DANLIB_H_ */

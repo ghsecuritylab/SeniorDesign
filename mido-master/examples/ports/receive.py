@@ -28,6 +28,7 @@ volume = 176
 harmony_ch = 77 
 master_ch = 76 
 autotune_button = 82 
+pitch_bend = 224 
 
 try:
     with mido.open_input('Oxygen 49') as port:
@@ -53,9 +54,12 @@ try:
             elif (message.bytes()[0] == volume and message.bytes()[1] == master_ch):
                 ser.write([254])
                 ser.write([message.bytes()[2]])
-            elif (message.bytes()[1] == autotune_button):
+            elif (message.bytes()[0] == pitch_bend):
                 ser.write([253])
-                
+                ser.write([message.bytes()[2]])
+            elif (message.bytes()[1] == autotune_button):
+                ser.write([252])
+            
 
             
            
