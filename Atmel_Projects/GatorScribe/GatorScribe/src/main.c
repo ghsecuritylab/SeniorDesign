@@ -291,13 +291,10 @@ void USART_SERIAL_ISR_HANDLER(void)
 		}
 	}
 }
-volatile float bend_difference; 
-volatile uint32_t temp_pitch_idx; 
-volatile float temp_pitch; 
+
 static inline void bend_pitch(float *pitch, uint32_t pitch_idx, uint32_t bend)
 {
-	temp_pitch_idx = pitch_idx; 
-	temp_pitch = *pitch; 
+	float bend_difference; 
 	if (pitch_bend > 64)
 	{
 		bend_difference = midi_note_frequencies[pitch_idx+2] - midi_note_frequencies[pitch_idx];
@@ -385,22 +382,23 @@ int main(void)
 			
 			// Get pitch 
 			inputPitch = computeWaveletPitch((float  *)processBuffer);
+			if (inputPitch < MINIMUM_PITCH) 
+				inputPitch = MINIMUM_PITCH; 
+			oneOverInputPitch = 1.0f / inputPitch;
 			
 			// Auto tune 
 			get_frequency_from_all(inputPitch, &closest_note, &in_pitch_idx);
-			desired_pitch = closest_note; 
-			if (pitch_bend != 64)
-				bend_pitch(&desired_pitch, in_pitch_idx, (uint32_t)pitch_bend);
-			if (autotune)
-			{
-				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-				harmony_shifts[0] = pitch_shift ;
-			}
-			else 
-			{
-				harmony_shifts[0] = 1.0f; 
-			}
 			
+			if (autotune)
+				desired_pitch = closest_note;
+			else 
+				desired_pitch = inputPitch;
+				
+			if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
+				bend_pitch(&desired_pitch, in_pitch_idx, (uint32_t)pitch_bend);
+				
+			pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+			harmony_shifts[0] = pitch_shift ;
 			num_of_shifts = 1;  
 				
 			// calc. power 
@@ -409,7 +407,6 @@ int main(void)
 			// determine whether you should add any harmonies 
 			if (inputPitch > MINIMUM_PITCH && power > POWER_THRESHOLD)
 			{
-				oneOverInputPitch = 1.0f / inputPitch;
 				i = 0;
 				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
 				{
@@ -417,7 +414,7 @@ int main(void)
 					{
 						desired_pitch = harmony_list_read[i].freq; 
 						if (pitch_bend != 64)
-							bend_pitch(&desired_pitch, harmony_list_read[i].idx, pitch_bend);
+							bend_pitch(&desired_pitch, harmony_list_read[i].idx, (uint32_t)pitch_bend);
 							
 						pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
 						
@@ -430,7 +427,6 @@ int main(void)
 			} 
 			else 
 			{
-				inputPitch = MINIMUM_PITCH; 
 				// only do autotune 
 				harmony_shifts[1] = END_OF_SHIFTS; 	
 				num_of_shifts = 1; 
