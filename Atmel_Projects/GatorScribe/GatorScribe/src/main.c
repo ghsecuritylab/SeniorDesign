@@ -157,17 +157,6 @@ static inline void get_frequency_from_all(float32_t frequency, float *closest_no
 	*closest_note_idx = hi; 
 }
 
-static float  get_average_power (float  *buffer, uint32_t size)
-{
-	uint32_t i;
-	float  p = 0.0;
-	for ( i = 0; i < size; i++)
-	{
-		p = p + buffer[i]*buffer[i];
-	}
-	return p;
-}
-
 static inline float powerf(float base, int32_t exponent)
 {
 	float result = 1.0; 
