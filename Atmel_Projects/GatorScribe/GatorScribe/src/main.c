@@ -294,6 +294,9 @@ void USART_SERIAL_ISR_HANDLER(void)
 
 static inline void bend_pitch(float *pitch, uint32_t pitch_idx, uint32_t bend)
 {
+	if (pitch_idx < 0 || pitch_idx > 127 || bend < 0 || bend > 127)
+		return; 
+	
 	float bend_difference; 
 	if (pitch_bend > 64)
 	{
