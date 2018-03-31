@@ -335,9 +335,9 @@ int main(void)
 			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{
-				wet_circ_buffer[curr_idx & CIRC_MASK] = 0.33f*dry_circ_buffer[(curr_idx - 1500)  & CIRC_MASK] + 
-														0.33f*wet_circ_buffer[(curr_idx - 1800)  & CIRC_MASK] +
-														0.33f*wet_circ_buffer[(curr_idx - 2100)  & CIRC_MASK]; 
+				wet_circ_buffer[curr_idx & CIRC_MASK] = 0.40f*dry_circ_buffer[(curr_idx - 1000)  & CIRC_MASK] + 
+														0.45f*wet_circ_buffer[(curr_idx - 1800)  & CIRC_MASK] +
+														0.15f*wet_circ_buffer[(curr_idx - 8000)  & CIRC_MASK];  
 			}
 		
 			// mix verb and delay 
