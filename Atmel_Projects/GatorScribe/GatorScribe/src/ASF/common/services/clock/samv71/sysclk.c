@@ -226,6 +226,7 @@ void sysclk_init(void)
 		pmc_switch_mck_to_mainck(CONFIG_SYSCLK_PRES);
 	}
 
+// going here 
 #ifdef CONFIG_PLL0_SOURCE
 	else if (CONFIG_SYSCLK_SOURCE == SYSCLK_SRC_PLLACK) {
 		pll_enable_source(CONFIG_PLL0_SOURCE);

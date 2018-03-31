@@ -53,10 +53,12 @@
 //#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_SLCK_BYPASS
 //#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_MAINCK_4M_RC
 //#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_MAINCK_8M_RC
-//#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_MAINCK_12M_RC
+//#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_MAINCK_12M_RC 
 //#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_MAINCK_XTAL
 //#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_MAINCK_BYPASS
-#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_PLLACK
+
+#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_PLLACK 
+
 //#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_UPLLCK
 
 // ===== Processor Clock (HCLK) Prescaler Options   (Fhclk = Fsys / (SYSCLK_PRES))
@@ -74,7 +76,7 @@
 
 // ===== PLL0 (A) Options   (Fpll = (Fclk * PLL_mul) / PLL_div)
 // Use mul and div effective values here.
-#define CONFIG_PLL0_SOURCE          PLL_SRC_MAINCK_XTAL
+#define CONFIG_PLL0_SOURCE          PLL_SRC_MAINCK_12M_RC //PLL_SRC_MAINCK_XTAL // changed this 
 #define CONFIG_PLL0_MUL             25
 #define CONFIG_PLL0_DIV             1
 

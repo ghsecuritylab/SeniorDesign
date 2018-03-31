@@ -3,24 +3,6 @@
 #include "arm_math.h"
 #include <math.h>
 
-/* Scheduler include files. */
-#include "FreeRTOS.h"
-#include "task.h"
-#include "semphr.h"
-
-/* Standard demo includes. */
-#include "TimerDemo.h"
-#include "QueueOverwrite.h"
-#include "EventGroupsDemo.h"
-#include "IntSemTest.h"
-#include "TaskNotify.h"
-void vApplicationMallocFailedHook( void );
-void vApplicationIdleHook( void );
-void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName );
-void vApplicationTickHook( void );
-
-extern const float hanning[1024];
-
 /**
  * \brief Configure the console UART.
  *
@@ -55,83 +37,6 @@ static const float32_t midi_note_frequencies[128] = {
 	7458.620,7902.133,8372.018,8869.844,9397.273,9956.063,10548.080,11175.300,11839.820,12543.850
 };
 
-static const float key_C[] = {16.35	,
-	18.35	,
-	20.60	,
-	21.83	,
-	24.50	,
-	27.50	,
-	30.87	,
-	32.70	,
-	36.71	,
-	41.20	,
-	43.65	,
-	49.00	,
-	55.00	,
-	61.74	,
-	65.41	,
-	73.42	,
-	82.41	,
-	87.31	,
-	98.00	,
-	110.00	,
-	123.47	,
-	130.81	,
-	146.83	,
-	164.81	,
-	174.61	,
-	196.00	,
-	220.00	,
-	246.94	,
-	261.63	,
-	293.66	,
-	329.63	,
-	349.23	,
-	392.00	,
-	440.00	,
-	493.88	,
-	523.25	,
-	587.33	,
-	659.25	,
-	698.46	,
-	783.99	,
-	880.00	,
-	987.77	,
-	1046.50	,
-	1174.66	,
-	1318.51	,
-	1396.91	,
-	1567.98	,
-	1760.00	,
-	1975.53	,
-	2093.00	,
-	2349.32	,
-2637.02};
-
-static inline float get_frequency_from_key_C(float32_t frequency)
-{
-	uint32_t lo = 0;
-	uint32_t hi = 51; 
-	uint32_t mid;
-	uint32_t d1;
-	uint32_t d2;
-	while (lo < hi)
-	{
-		mid = (hi + lo) >> 1;
-		d1 = Abs(key_C[mid] - frequency);
-		d2 = Abs(key_C[mid+1] - frequency);
-		if (d2 <= d1)
-		{
-			lo = mid+1;
-		}
-		else
-		{
-			hi = mid;
-		}
-	}
-	return key_C[hi];
-}
-
 static inline void get_frequency_from_all(float32_t frequency, float *closest_note, uint32_t *closest_note_idx)
 {
 	uint32_t lo = 12; // lowest at C0
@@ -157,39 +62,6 @@ static inline void get_frequency_from_all(float32_t frequency, float *closest_no
 	*closest_note_idx = hi; 
 }
 
-static inline float powerf(float base, int32_t exponent)
-{
-	float result = 1.0; 
-	uint32_t exp_abs = Abs(exponent); 
-	while (exp_abs)
-	{
-		result *= base; 
-		exp_abs--; 
-	}
-	if (exponent < 0)
-		return 1.0/result; 
-	else 
-		return result; 
-}
-
-static inline float atan2_approximation(float y, float x)
-{
-	float y_abs = Abs(y); 
-	float x_abs = Abs(x); 
-
-	float a = min(x_abs, y_abs) / max(x_abs, y_abs); 
-	float s = a * a; 
-	float r = ((-0.0464964749f * s + 0.15931422f) * s - 0.327622764f) * s * a + a; 
-	if (y_abs > x_abs) 
-		r =  M_PI_2 - r; 
-	if (x < 0)
-		r = M_PI - r; 
-	if (y < 0)
-		r = -r; 
-		
-	return r; 
-}
-
 /*************** Application code buffers and consts start ***************/
 
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
@@ -198,12 +70,12 @@ COMPILER_ALIGNED(WIN_SIZE) static float prev_input[WIN_SIZE];
 // for reverb 
 #define CIRC_BUF_SIZE 8192
 #define CIRC_MASK (CIRC_BUF_SIZE-1)
-COMPILER_ALIGNED(CIRC_BUF_SIZE) static float input_circ_buffer[CIRC_BUF_SIZE];
-COMPILER_ALIGNED(CIRC_BUF_SIZE) static float output_circ_buffer[CIRC_BUF_SIZE];
-
-
+COMPILER_ALIGNED(CIRC_BUF_SIZE) static float dry_circ_buffer[CIRC_BUF_SIZE];
+COMPILER_ALIGNED(CIRC_BUF_SIZE) static float wet_circ_buffer[CIRC_BUF_SIZE];
 /*************** Application code buffers and consts end ***************/
 
+
+/*************** UART Communication Start ***************/
 #define USART_SERIAL                 USART1
 #define USART_SERIAL_ID              ID_USART1  
 #define USART_SERIAL_ISR_HANDLER     USART1_Handler
@@ -220,8 +92,10 @@ volatile uint32_t harmony_idx = 0;
 volatile bool waiting_for_harm_volume = false; 
 volatile bool waiting_for_master_volume = false;
 volatile bool waiting_for_pitch_bend = false;
+volatile bool waiting_for_reverb_volume = false;
 volatile float harm_volume = 1.0f; 
 volatile float master_volume = 1.0f;
+volatile float reverb_volume = 0.8f; 
 volatile uint32_t pitch_bend = NO_PITCH_BEND;
 volatile bool autotune = true; 
 void USART_SERIAL_ISR_HANDLER(void)
@@ -247,19 +121,28 @@ void USART_SERIAL_ISR_HANDLER(void)
 			pitch_bend = received_byte;
 			waiting_for_pitch_bend = false;
 		}
-		else if (received_byte == 255) 
+		else if (waiting_for_reverb_volume)
+		{
+			reverb_volume = (float)received_byte / 127.0f;;
+			waiting_for_reverb_volume = false;
+		}
+		else if (received_byte == HARMONY_VOLUME_FLAG) 
 		{
 			waiting_for_harm_volume = true; 
 		}
-		else if (received_byte == 254)
+		else if (received_byte == MASTER_VOLUME_FLAG)
 		{
 			waiting_for_master_volume = true;
 		}
-		else if (received_byte == 253)
+		else if (received_byte == PITCH_BEND_FLAG)
 		{
 			waiting_for_pitch_bend = true;
 		}
-		else if (received_byte == 252)
+		else if (received_byte == REVERB_VOLUME_FLAG)
+		{
+			waiting_for_reverb_volume = true;
+		}
+		else if (received_byte == AUTOTUNE_FLAG)
 		{
 			autotune = !autotune; 
 		}
@@ -280,7 +163,16 @@ void USART_SERIAL_ISR_HANDLER(void)
 		}
 	}
 }
+/*************** UART Communication End ***************/
 
+
+/* 
+	Returns bent pitch in *pitch 
+	Bend ranges from 0 - 127: 
+		0 = -2 semitones 
+		127 = +2 semitones 
+		64 = +0 semitones 
+*/ 
 static inline void bend_pitch(float *pitch, uint32_t pitch_idx, uint32_t bend)
 {
 	if (pitch_idx < 0 || pitch_idx > 127 || bend < 0 || bend > 127)
@@ -299,29 +191,34 @@ static inline void bend_pitch(float *pitch, uint32_t pitch_idx, uint32_t bend)
 	}
 }
 
+// uncomment to communicate to pc console over uart for debug 
+//#define USING_CONSOLE
+
 int main(void)
 {
 	sysclk_init();
 	board_init();
-	SCB_DisableICache(); 
-	lcd_init(); 
-	SCB_EnableICache();
+ 	SCB_DisableICache(); 
+// 	lcd_init(); 
+ 	SCB_EnableICache();
 	audio_init();
-	//configure_console();
+#ifdef USING_CONSOLE
+	configure_console();
+#endif 
 	PSOLA_init(); 
 	 
-	SCB_DisableICache(); 
-	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(200, 100, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(80, 180, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(100, 200, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(120, 220, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(140, 220, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(160, 220, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(180, 220, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(200, 200, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
-	SCB_EnableICache(); 
+// 	SCB_DisableICache(); 
+// 	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(200, 100, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(80, 180, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(100, 200, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(120, 220, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(140, 220, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(160, 220, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(180, 220, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(200, 200, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
+// 	SCB_EnableICache(); 
 	
 	usart_serial_options_t usart_console_settings = {
 		USART_SERIAL_BAUDRATE,
@@ -372,13 +269,13 @@ int main(void)
 		{	
 			dataReceived = false; 
 			
-			// Get pitch 
+			// get pitch 
 			inputPitch = computeWaveletPitch((float  *)processBuffer);
 			if (inputPitch < MINIMUM_PITCH) 
 				inputPitch = MINIMUM_PITCH; 
 			oneOverInputPitch = 1.0f / inputPitch;
 			
-			// Auto tune 
+			// auto tune 
 			get_frequency_from_all(inputPitch, &closest_note, &in_pitch_idx);
 			
 			if (autotune)
@@ -393,7 +290,7 @@ int main(void)
 			harmony_shifts[0] = pitch_shift ;
 			num_of_shifts = 1;  
 				
-			// calc. power 
+			// calculate power 
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
 		
 			// determine whether you should add any harmonies 
@@ -427,62 +324,34 @@ int main(void)
 			// return pitch shifted data from previous samples block  
 			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts, (float)harm_volume); 
 			
-			// trying volume normalization 
-// 			float harmony_max, desired_max;
-// 			uint32_t tmp;
-// 			arm_max_f32(mixed_buffer, WIN_SIZE, &harmony_max, &tmp);
-// 			arm_max_f32(prev_input, WIN_SIZE, &desired_max, &tmp);
-// 			float scale = desired_max / harmony_max; 
-// 			arm_scale_f32(mixed_buffer, scale, mixed_buffer, WIN_SIZE); 
-
-			// save current audio
-			// arm_copy_f32((float *)processBuffer, prev_input, WIN_SIZE);
-			
-			// put data into circ.  buffer 
+			// save dry audio 
 			for (i = 0; i < WIN_SIZE; i++)
 			{
-				input_circ_buffer[circ_buf_idx++ & CIRC_MASK] = mixed_buffer[i];
+				dry_circ_buffer[circ_buf_idx++ & CIRC_MASK] = mixed_buffer[i];
 			}
 			
-			// only add reverb when we have harmonies 
+			// verb and delay, save wet audio 
 			uint32_t curr_idx; 
-			if (num_of_shifts > 0) // ought to be 1 but whateves... sounds nice with some verb 
+			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
+			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{
-				uint32_t delay = 900; 
-				float g = 0.55f; 
-				curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
-				for (i = 0; i < WIN_SIZE; i++)
-				{
-					mixed_buffer[i] = -g * mixed_buffer[i] + input_circ_buffer[(curr_idx - delay)  & CIRC_MASK] + g * output_circ_buffer[(curr_idx-delay)  & CIRC_MASK];
-					curr_idx++; 
-				}
+				wet_circ_buffer[curr_idx & CIRC_MASK] = 0.33f*dry_circ_buffer[(curr_idx - 1500)  & CIRC_MASK] + 
+														0.33f*wet_circ_buffer[(curr_idx - 1800)  & CIRC_MASK] +
+														0.33f*wet_circ_buffer[(curr_idx - 2100)  & CIRC_MASK]; 
 			}
-			
-			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE; 
-			for (i = 0; i < WIN_SIZE; i++)
+		
+			// mix verb and delay 
+			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
+			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{
-				output_circ_buffer[curr_idx++ & CIRC_MASK] = mixed_buffer[i]; 
+				mixed_buffer[i] = dry_circ_buffer[curr_idx & CIRC_MASK] + reverb_volume*wet_circ_buffer[curr_idx & CIRC_MASK];
 			}
-			
-// 			
-			
-// 			// add previous input to harmonies 
-// 			if (num_of_shifts > 1 || need_root)
-// 			{
-// 				arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
-// 				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.5f, mixed_buffer, WIN_SIZE);
-// 			}
-// 			else 
-// 			{
-// 				arm_scale_f32(mixed_buffer, 0.5f, mixed_buffer, WIN_SIZE);
-// 				arm_add_f32(prev_input, mixed_buffer, mixed_buffer, WIN_SIZE);
-// 				arm_scale_f32(mixed_buffer, (float)INT16_MAX * 0.75f, mixed_buffer, WIN_SIZE);
-// 			}
-			
+
 			// scale output 
 			arm_scale_f32(mixed_buffer, (float)INT16_MAX * master_volume * 0.4, mixed_buffer, WIN_SIZE);
+// 			arm_scale_f32(processBuffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); // sound in / sound out 
 			
-			// audio out 
+			// Sound out 
 			uint32_t idx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=2)
 			{
@@ -503,81 +372,3 @@ int main(void)
 		}
 	}
 }
-
-void vApplicationMallocFailedHook( void )
-{
-	/* Called if a call to pvPortMalloc() fails because there is insufficient
-	free memory available in the FreeRTOS heap.  pvPortMalloc() is called
-	internally by FreeRTOS API functions that create tasks, queues, software
-	timers, and semaphores.  The size of the FreeRTOS heap is set by the
-	configTOTAL_HEAP_SIZE configuration constant in FreeRTOSConfig.h. */
-
-	/* Force an assert. */
-	configASSERT( ( volatile void * ) NULL );
-}
-/*-----------------------------------------------------------*/
-
-void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
-{
-	( void ) pcTaskName;
-	( void ) pxTask;
-
-	/* Run time stack overflow checking is performed if
-	configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2.  This hook
-	function is called if a stack overflow is detected. */
-
-	/* Force an assert. */
-	configASSERT( ( volatile void * ) NULL );
-}
-/*-----------------------------------------------------------*/
-
-void vApplicationIdleHook( void )
-{
-volatile size_t xFreeHeapSpace;
-
-	/* This is just a trivial example of an idle hook.  It is called on each
-	cycle of the idle task.  It must *NOT* attempt to block.  In this case the
-	idle task just queries the amount of FreeRTOS heap that remains.  See the
-	memory management section on the http://www.FreeRTOS.org web site for memory
-	management options.  If there is a lot of heap memory free then the
-	configTOTAL_HEAP_SIZE value in FreeRTOSConfig.h can be reduced to free up
-	RAM. */
-	xFreeHeapSpace = xPortGetFreeHeapSize();
-
-	/* Remove compiler warning about xFreeHeapSpace being set but never used. */
-	( void ) xFreeHeapSpace;
-}
-/*-----------------------------------------------------------*/
-
-void vApplicationTickHook( void )
-{
-	#if mainCREATE_SIMPLE_BLINKY_DEMO_ONLY == 0
-	{
-		/* The full demo includes a software timer demo/test that requires
-		prodding periodically from the tick interrupt. */
-		vTimerPeriodicISRTests();
-
-		/* Call the periodic queue overwrite from ISR demo. */
-		vQueueOverwritePeriodicISRDemo();
-
-		/* Call the periodic event group from ISR demo. */
-		vPeriodicEventGroupsProcessing();
-
-		/* Call the code that uses a mutex from an ISR. */
-		vInterruptSemaphorePeriodicTest();
-
-		/* Call the code that 'gives' a task notification from an ISR. */
-		xNotifyTaskFromISR();
-	}
-	#endif
-}
-/*-----------------------------------------------------------*/
-
-/* Just to keep the linker happy. */
-int __write( int x );
-int __write( int x )
-{
-	return x;
-}
-
-

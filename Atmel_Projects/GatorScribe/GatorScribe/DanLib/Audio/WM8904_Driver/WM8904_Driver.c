@@ -76,8 +76,8 @@ void configure_codec(void)
 	wm8904_write_register(WM8904_SW_RESET_AND_ID, 0xFFFF);
 	data = wm8904_read_register(WM8904_SW_RESET_AND_ID);
 	if(data != 0x8904) {
-		printf("WM8904 not found!\n\r");
-		while(1);
+		//printf("WM8904 not found!\n\r");
+		//while(1);
 	}
 
 	wm8904_write_register(WM8904_BIAS_CONTROL_0, WM8904_ISEL_HP_BIAS);	

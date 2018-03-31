@@ -11,6 +11,7 @@
 
 #include "DMA_Audio.h"
 #include "WM8904_Driver.h"
+#include "ASF/sam/utils/cmsis/samv71/include/component/supc.h"
 
 void audio_init(void)
 {
@@ -31,7 +32,7 @@ void audio_init(void)
 	/* Configure XDMA */
 	configure_xdma();
 		
-	/* Enable the DAC master clock */
+	/* Enable the DAC master clock (MCLK) */
 	pmc_pck_set_prescaler(PMC_PCK_2, PMC_MCKR_PRES_CLK_1);
 	pmc_pck_set_source(PMC_PCK_2, PMC_MCKR_CSS_SLOW_CLK);
 	pmc_enable_pck(PMC_PCK_2);

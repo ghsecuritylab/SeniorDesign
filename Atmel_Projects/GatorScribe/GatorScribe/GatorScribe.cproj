@@ -244,6 +244,7 @@
           <SwdClock>4000000</SwdClock>
         </InterfaceProperties>
         <InterfaceName>SWD</InterfaceName>
+        <JlinkConfigFile>C:\Users\Daniel Gonzalez\Dropbox (UFL)\Spring2018\Senior_Design\SeniorDesignRepo\Atmel_Projects\GatorScribe\GatorScribe\jlink.config</JlinkConfigFile>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.samice</ToolType>
       <ToolNumber>20126404</ToolNumber>
@@ -618,15 +619,6 @@
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\" />
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\GCC\" />
     <Folder Include="src\config\" />
-    <Folder Include="src\FreeRTOS\" />
-    <Folder Include="src\FreeRTOS\Tasks" />
-    <Folder Include="src\FreeRTOS\Source\" />
-    <Folder Include="src\FreeRTOS\Source\include\" />
-    <Folder Include="src\FreeRTOS\Source\portable\" />
-    <Folder Include="src\FreeRTOS\Source\portable\GCC\" />
-    <Folder Include="src\FreeRTOS\Source\portable\GCC\ARM_CM7\" />
-    <Folder Include="src\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\" />
-    <Folder Include="src\FreeRTOS\Source\portable\MemMang\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DanLib\Audio\DMA\clicks.h">
@@ -1319,102 +1311,6 @@
     <Compile Include="src\config\FreeRTOSConfig.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\FreeRTOS\Source\croutine.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\event_groups.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\croutine.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\deprecated_definitions.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\event_groups.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\FreeRTOS.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\list.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\message_buffer.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\mpu_prototypes.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\mpu_wrappers.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\portable.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\projdefs.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\queue.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\semphr.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\StackMacros.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\stack_macros.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\stream_buffer.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\task.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\include\timers.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\list.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\port.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\portmacro.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\portable\MemMang\heap_4.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\queue.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\stream_buffer.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\tasks.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Source\timers.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Tasks\EventGroupsDemo.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Tasks\IntSemTest.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Tasks\QueueOverwrite.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Tasks\TaskNotify.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\FreeRTOS\Tasks\TimerDemo.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1428,15 +1324,6 @@
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\thirdparty\CMSIS\README.txt">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\FreeRTOS\Source\include\stdint.readme">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\FreeRTOS\Source\portable\GCC\ARM_CM7\ReadMe.txt">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\FreeRTOS\Source\readme.txt">
       <SubType>compile</SubType>
     </None>
   </ItemGroup>

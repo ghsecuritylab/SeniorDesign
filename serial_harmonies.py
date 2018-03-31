@@ -6,17 +6,36 @@ from __future__ import print_function
 import sys
 import mido
 import serial 
+import os 
 
 notes = list([ ])
 
-ser = serial.Serial(port='/dev/tty.usbmodem1442', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=2)
-
+if (os.path.exists("/dev/tty.usbmodem1462")):
+    ser = serial.Serial(port='/dev/tty.usbmodem1462', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=2)
+elif (os.path.exists("/dev/tty.usbmodem1442")): 
+    ser = serial.Serial(port='/dev/tty.usbmodem1442', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=2)
+elif (os.path.exists("/dev/tty.usbserial-A904RDA3")): 
+    ser = serial.Serial(port='/dev/tty.usbserial-A904RDA3', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=2)
+else: 
+    print("No board connected")
+    exit() 
+    
+    
 try:    
     ser.isOpen()
     print("Serial port is open")
 except: 
     print("Error")
     exit() 
+    
+note_on = 144 
+note_off = 128 
+volume = 176 
+harmony_ch = 77 
+master_ch = 76 
+reverb_vol_ch = 75
+autotune_button = 82 
+pitch_bend = 224 
 
 try:
     with mido.open_input('Oxygen 49') as port:
@@ -26,21 +45,33 @@ try:
             if (message.bytes()[0] == 144): 
                 # add note to array to send 
                 notes.append(message.bytes()[1])
+                for k in range(len(notes)):
+                    ser.write([notes[k]])
+                ser.write([0]) # null terminated 
                 
             elif (message.bytes()[0] == 128): 
                 # remove note from array to send 
                 notes.remove(message.bytes()[1])
+                for k in range(len(notes)):
+                    ser.write([notes[k]])
+                ser.write([0]) # null terminated 
+            elif (message.bytes()[0] == volume and message.bytes()[1] == harmony_ch):
+                ser.write([255])
+                ser.write([message.bytes()[2]])
+            elif (message.bytes()[0] == volume and message.bytes()[1] == master_ch):
+                ser.write([254])
+                ser.write([message.bytes()[2]])
+            elif (message.bytes()[0] == volume and message.bytes()[1] == reverb_vol_ch):
+                ser.write([251])
+                ser.write([message.bytes()[2]])
+            elif (message.bytes()[0] == pitch_bend):
+                ser.write([253])
+                ser.write([message.bytes()[2]])
+            elif (message.bytes()[1] == autotune_button):
+                ser.write([252])
             
-            #msg = ser.read().decode('ascii')
-
-            
-            for k in range(len(notes)):
-                temp = notes[k]
-                ser.write([temp])
-          
-            ser.write([0])
-            
-            print(notes)
+            #print(notes)
+            print(message.bytes())
 
             sys.stdout.flush()
 except KeyboardInterrupt:

@@ -12,9 +12,15 @@ notes = list([ ])
 
 if (os.path.exists("/dev/tty.usbmodem1462")):
     ser = serial.Serial(port='/dev/tty.usbmodem1462', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=2)
-else: 
+elif (os.path.exists("/dev/tty.usbmodem1442")): 
     ser = serial.Serial(port='/dev/tty.usbmodem1442', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=2)
-
+elif (os.path.exists("/dev/tty.usbserial-A904RDA3")): 
+    ser = serial.Serial(port='/dev/tty.usbserial-A904RDA3', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=2)
+else: 
+    print("No board connected")
+    exit() 
+    
+    
 try:    
     ser.isOpen()
     print("Serial port is open")
@@ -59,10 +65,6 @@ try:
                 ser.write([message.bytes()[2]])
             elif (message.bytes()[1] == autotune_button):
                 ser.write([252])
-            
-
-            
-           
             
             #print(notes)
             print(message.bytes())

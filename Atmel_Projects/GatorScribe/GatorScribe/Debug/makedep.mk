@@ -74,33 +74,5 @@ src\ASF\sam\utils\cmsis\samv71\source\templates\system_samv71.c
 
 src\ASF\sam\utils\syscalls\gcc\syscalls.c
 
-src\FreeRTOS\Source\croutine.c
-
-src\FreeRTOS\Source\event_groups.c
-
-src\FreeRTOS\Source\list.c
-
-src\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\port.c
-
-src\FreeRTOS\Source\portable\MemMang\heap_4.c
-
-src\FreeRTOS\Source\queue.c
-
-src\FreeRTOS\Source\stream_buffer.c
-
-src\FreeRTOS\Source\tasks.c
-
-src\FreeRTOS\Source\timers.c
-
-src\FreeRTOS\Tasks\EventGroupsDemo.c
-
-src\FreeRTOS\Tasks\IntSemTest.c
-
-src\FreeRTOS\Tasks\QueueOverwrite.c
-
-src\FreeRTOS\Tasks\TaskNotify.c
-
-src\FreeRTOS\Tasks\TimerDemo.c
-
 src\main.c
 

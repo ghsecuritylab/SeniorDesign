@@ -18,7 +18,7 @@
 typedef struct harmony 
 {
 	float freq; 
-	uint32_t idx; 
+	uint32_t idx; // index of frequency... also midi note 
 }harmony_t;
 
 enum harmonies 
@@ -43,5 +43,12 @@ enum harmonies
 #define HALF_STEP 1.059463094359f
 #define POWER_THRESHOLD 0.000001f
 #define ONE_OVER_64 0.015625000F
+
+#define HARMONY_VOLUME_FLAG 255 
+#define MASTER_VOLUME_FLAG 254
+#define PITCH_BEND_FLAG 253
+#define AUTOTUNE_FLAG 252 
+#define REVERB_VOLUME_FLAG 251 
+
 
 #endif /* DANLIB_H_ */

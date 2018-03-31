@@ -194,22 +194,7 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../DanLib/DYWA/dywapitchtrack.h ../DanLib/Vocoder/psola.h \
- ../src/FreeRTOS/Source/include/FreeRTOS.h ../src/config/FreeRTOSConfig.h \
- ../src/FreeRTOS/Source/include/projdefs.h \
- ../src/FreeRTOS/Source/include/portable.h \
- ../src/FreeRTOS/Source/include/deprecated_definitions.h \
- ../src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h \
- ../src/FreeRTOS/Source/include/mpu_wrappers.h \
- ../src/FreeRTOS/Source/include/task.h \
- ../src/FreeRTOS/Source/include/list.h \
- ../src/FreeRTOS/Source/include/semphr.h \
- ../src/FreeRTOS/Source/include/queue.h \
- ../src/FreeRTOS/Common/include/TimerDemo.h \
- ../src/FreeRTOS/Common/include/QueueOverwrite.h \
- ../src/FreeRTOS/Common/include/EventGroupsDemo.h \
- ../src/FreeRTOS/Common/include/IntSemTest.h \
- ../src/FreeRTOS/Common/include/TaskNotify.h
+ ../DanLib/DYWA/dywapitchtrack.h ../DanLib/Vocoder/psola.h
 
 ../src/asf.h:
 
@@ -640,35 +625,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../DanLib/DYWA/dywapitchtrack.h:
 
 ../DanLib/Vocoder/psola.h:
-
-../src/FreeRTOS/Source/include/FreeRTOS.h:
-
-../src/config/FreeRTOSConfig.h:
-
-../src/FreeRTOS/Source/include/projdefs.h:
-
-../src/FreeRTOS/Source/include/portable.h:
-
-../src/FreeRTOS/Source/include/deprecated_definitions.h:
-
-../src/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h:
-
-../src/FreeRTOS/Source/include/mpu_wrappers.h:
-
-../src/FreeRTOS/Source/include/task.h:
-
-../src/FreeRTOS/Source/include/list.h:
-
-../src/FreeRTOS/Source/include/semphr.h:
-
-../src/FreeRTOS/Source/include/queue.h:
-
-../src/FreeRTOS/Common/include/TimerDemo.h:
-
-../src/FreeRTOS/Common/include/QueueOverwrite.h:
-
-../src/FreeRTOS/Common/include/EventGroupsDemo.h:
-
-../src/FreeRTOS/Common/include/IntSemTest.h:
-
-../src/FreeRTOS/Common/include/TaskNotify.h:

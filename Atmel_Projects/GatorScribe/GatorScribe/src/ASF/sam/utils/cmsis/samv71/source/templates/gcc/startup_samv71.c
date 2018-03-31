@@ -324,7 +324,7 @@ void Reset_Handler(void)
         SCB->VTOR = ((uint32_t) pSrc & SCB_VTOR_TBLOFF_Msk);
 
 #if __FPU_USED
-	fpu_enable();
+		fpu_enable();
 #endif
 
         /* Initialize the C library */

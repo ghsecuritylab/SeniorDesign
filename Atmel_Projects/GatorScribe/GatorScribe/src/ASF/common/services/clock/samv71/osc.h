@@ -144,7 +144,7 @@ static inline void osc_enable(uint32_t ul_id)
 		break;
 
 
-	case OSC_MAINCK_XTAL:
+	case OSC_MAINCK_XTAL:// HERE 
 		pmc_switch_mainck_to_xtal(PMC_OSC_XTAL,
 			pmc_us_to_moscxtst(BOARD_OSC_STARTUP_US,
 				OSC_SLCK_32K_RC_HZ));
