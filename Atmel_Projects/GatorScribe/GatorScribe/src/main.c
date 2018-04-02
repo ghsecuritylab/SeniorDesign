@@ -261,6 +261,7 @@ int main(void)
 	float closest_note = 0; 
 	float desired_pitch; 
 	uint32_t in_pitch_idx = 0; 
+	uint32_t sin_cnt = 0; 
 	/*************** Application code variables end ***************/
 	
 	while(1)
@@ -333,17 +334,25 @@ int main(void)
 			// verb and delay, save wet audio 
 			uint32_t curr_idx; 
 			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
+			
+// 			uint32_t delay = (0.014f + 0.010f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * 10.0f / 48000.0f)) * 48000.0f;
+// 			if (sin_cnt == 4800)
+// 			sin_cnt = 0;
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{
-				wet_circ_buffer[curr_idx & CIRC_MASK] = 0.40f*dry_circ_buffer[(curr_idx - 1000)  & CIRC_MASK] + 
-														0.45f*wet_circ_buffer[(curr_idx - 1800)  & CIRC_MASK] +
-														0.15f*wet_circ_buffer[(curr_idx - 8000)  & CIRC_MASK];  
+				wet_circ_buffer[curr_idx & CIRC_MASK] = 0.50f*dry_circ_buffer[(curr_idx - 1000)  & CIRC_MASK] + 
+														0.38f*dry_circ_buffer[(curr_idx - 2000)  & CIRC_MASK] +
+														0.12f*wet_circ_buffer[(curr_idx - 8000)  & CIRC_MASK];  
+				
+// 				wet_circ_buffer[curr_idx & CIRC_MASK] = dry_circ_buffer[(curr_idx-delay) & CIRC_MASK]; 
+				 
 			}
 		
 			// mix verb and delay 
 			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{
+// 				mixed_buffer[i] = (1.0f - reverb_volume)*dry_circ_buffer[curr_idx & CIRC_MASK] + reverb_volume*wet_circ_buffer[curr_idx & CIRC_MASK];
 				mixed_buffer[i] = dry_circ_buffer[curr_idx & CIRC_MASK] + reverb_volume*wet_circ_buffer[curr_idx & CIRC_MASK];
 			}
 

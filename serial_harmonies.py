@@ -30,11 +30,11 @@ except:
     
 note_on = 144 
 note_off = 128 
-volume = 176 
-harmony_ch = 77 
-master_ch = 76 
-reverb_vol_ch = 75
-autotune_button = 82 
+volume = 191 
+harmony_ch = 40 
+master_ch = 39 
+reverb_vol_ch = 38
+autotune_button = 56 
 pitch_bend = 224 
 
 try:
@@ -67,7 +67,7 @@ try:
             elif (message.bytes()[0] == pitch_bend):
                 ser.write([253])
                 ser.write([message.bytes()[2]])
-            elif (message.bytes()[1] == autotune_button):
+            elif (message.bytes()[1] == autotune_button and message.bytes()[2] == 127):
                 ser.write([252])
             
             #print(notes)
