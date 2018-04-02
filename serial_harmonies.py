@@ -34,6 +34,8 @@ volume = 191
 harmony_ch = 40 
 master_ch = 39 
 reverb_vol_ch = 38
+chorus_vol_ch = 37
+chorus_speed_ch = 36
 autotune_button = 56 
 pitch_bend = 224 
 

@@ -89,14 +89,18 @@ volatile harmony_t harmony_list_b[MAX_NUM_SHIFTS];
 volatile harmony_t *harmony_list_read = harmony_list_a; 
 volatile harmony_t *harmony_list_fill = harmony_list_b; 
 volatile uint32_t harmony_idx = 0;  
-volatile bool waiting_for_harm_volume = false; 
+volatile bool waiting_for_harm_volume = false;
+volatile float harm_volume = 1.0f;
+ 
 volatile bool waiting_for_master_volume = false;
-volatile bool waiting_for_pitch_bend = false;
-volatile bool waiting_for_reverb_volume = false;
-volatile float harm_volume = 1.0f; 
 volatile float master_volume = 1.0f;
-volatile float reverb_volume = 0.8f; 
+
+volatile bool waiting_for_pitch_bend = false;
 volatile uint32_t pitch_bend = NO_PITCH_BEND;
+
+volatile bool waiting_for_reverb_volume = false;
+volatile float reverb_volume = 0.8f; 
+
 volatile bool autotune = true; 
 void USART_SERIAL_ISR_HANDLER(void)
 {
@@ -335,29 +339,23 @@ int main(void)
 			uint32_t curr_idx; 
 			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 			
-// 			uint32_t delay = (0.014f + 0.010f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * 10.0f / 48000.0f)) * 48000.0f;
-// 			if (sin_cnt == 4800)
-// 			sin_cnt = 0;
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{
-				wet_circ_buffer[curr_idx & CIRC_MASK] = 0.50f*dry_circ_buffer[(curr_idx - 1000)  & CIRC_MASK] + 
+				wet_circ_buffer[curr_idx & CIRC_MASK] = reverb_volume * 
+														(0.50f*dry_circ_buffer[(curr_idx - 1000)  & CIRC_MASK] + 
 														0.38f*dry_circ_buffer[(curr_idx - 2000)  & CIRC_MASK] +
-														0.12f*wet_circ_buffer[(curr_idx - 8000)  & CIRC_MASK];  
-				
-// 				wet_circ_buffer[curr_idx & CIRC_MASK] = dry_circ_buffer[(curr_idx-delay) & CIRC_MASK]; 
-				 
+														0.12f*wet_circ_buffer[(curr_idx - 8000)  & CIRC_MASK]);  
 			}
 		
 			// mix verb and delay 
 			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{
-// 				mixed_buffer[i] = (1.0f - reverb_volume)*dry_circ_buffer[curr_idx & CIRC_MASK] + reverb_volume*wet_circ_buffer[curr_idx & CIRC_MASK];
-				mixed_buffer[i] = dry_circ_buffer[curr_idx & CIRC_MASK] + reverb_volume*wet_circ_buffer[curr_idx & CIRC_MASK];
+				mixed_buffer[i] = dry_circ_buffer[curr_idx & CIRC_MASK] + wet_circ_buffer[curr_idx & CIRC_MASK];
 			}
 
 			// scale output 
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX * master_volume * 0.4, mixed_buffer, WIN_SIZE);
+			arm_scale_f32(mixed_buffer, (float)INT16_MAX * master_volume * 0.5, mixed_buffer, WIN_SIZE);
 // 			arm_scale_f32(processBuffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); // sound in / sound out 
 			
 			// Sound out 
