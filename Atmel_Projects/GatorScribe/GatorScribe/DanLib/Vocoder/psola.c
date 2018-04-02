@@ -9,15 +9,15 @@
 #include <stdlib.h>
 
 
-#define RING_BUFFER_SIZE 16384 
+#define RING_BUFFER_SIZE 4096
 #define RING_BUFFER_SIZE_D2 (RING_BUFFER_SIZE >> 1) 
 #define RING_BUFFER_MASK (RING_BUFFER_SIZE-1)
 
 #define PI_F 3.14159265358f 
 
 /************************ Static variables *********************/ 
-static float input_ring_buffer[RING_BUFFER_SIZE];
-static float output_ring_buffer[RING_BUFFER_SIZE];
+COMPILER_ALIGNED(RING_BUFFER_SIZE) static float input_ring_buffer[RING_BUFFER_SIZE];
+COMPILER_ALIGNED(RING_BUFFER_SIZE) static float output_ring_buffer[RING_BUFFER_SIZE];
 
 static uint32_t readPos; 
 static uint32_t inPtr; 

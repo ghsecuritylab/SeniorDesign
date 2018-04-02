@@ -63,17 +63,14 @@ static inline void get_frequency_from_all(float32_t frequency, float *closest_no
 }
 
 /*************** Application code buffers and consts start ***************/
-
 COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
-COMPILER_ALIGNED(WIN_SIZE) static float prev_input[WIN_SIZE];
 
 // for reverb 
-#define CIRC_BUF_SIZE 8192
+#define CIRC_BUF_SIZE 16384
 #define CIRC_MASK (CIRC_BUF_SIZE-1)
 COMPILER_ALIGNED(CIRC_BUF_SIZE) static float dry_circ_buffer[CIRC_BUF_SIZE];
 COMPILER_ALIGNED(CIRC_BUF_SIZE) static float wet_circ_buffer[CIRC_BUF_SIZE];
 /*************** Application code buffers and consts end ***************/
-
 
 /*************** UART Communication Start ***************/
 #define USART_SERIAL                 USART1
@@ -100,6 +97,15 @@ volatile uint32_t pitch_bend = NO_PITCH_BEND;
 
 volatile bool waiting_for_reverb_volume = false;
 volatile float reverb_volume = 0.8f; 
+
+volatile bool waiting_for_delay_volume = false;
+volatile float delay_volume = 0.1f;
+
+volatile bool waiting_for_delay_speed = false;
+volatile uint32_t delay_speed = 8000;
+
+volatile bool waiting_for_chorus_volume = false;
+volatile float chorus_volume = 0.8f;
 
 volatile bool autotune = true; 
 void USART_SERIAL_ISR_HANDLER(void)
@@ -130,6 +136,23 @@ void USART_SERIAL_ISR_HANDLER(void)
 			reverb_volume = (float)received_byte / 127.0f;;
 			waiting_for_reverb_volume = false;
 		}
+		else if (waiting_for_delay_volume)
+		{
+			delay_volume = 0.7f * (float)received_byte / 127.0f;
+			waiting_for_delay_volume = false;
+		}
+		else if (waiting_for_delay_speed)
+		{
+			// first value = longest delay
+			// first val - second val = shortest delay 
+			delay_speed = 16200 - 10000 * (float)received_byte / 127.0f;
+			waiting_for_delay_speed = false;
+		}
+		else if (waiting_for_chorus_volume)
+		{
+			chorus_volume = (float)received_byte / 127.0f;;
+			waiting_for_chorus_volume = false;
+		}
 		else if (received_byte == HARMONY_VOLUME_FLAG) 
 		{
 			waiting_for_harm_volume = true; 
@@ -145,6 +168,18 @@ void USART_SERIAL_ISR_HANDLER(void)
 		else if (received_byte == REVERB_VOLUME_FLAG)
 		{
 			waiting_for_reverb_volume = true;
+		}
+		else if (received_byte == DELAY_VOLUME_FLAG)
+		{
+			waiting_for_delay_volume = true;
+		}
+		else if (received_byte == DELAY_SPEED_FLAG)
+		{
+			waiting_for_delay_speed = true;
+		}
+		else if (received_byte == CHORUS_VOLUME_FLAG)
+		{
+			waiting_for_chorus_volume = true;
 		}
 		else if (received_byte == AUTOTUNE_FLAG)
 		{
@@ -197,6 +232,7 @@ static inline void bend_pitch(float *pitch, uint32_t pitch_idx, uint32_t bend)
 
 // uncomment to communicate to pc console over uart for debug 
 //#define USING_CONSOLE
+volatile uint32_t delay; 
 
 int main(void)
 {
@@ -259,13 +295,13 @@ int main(void)
 	harmony_shifts[0] = NO_SHIFT;
 	harmony_shifts[1] = END_OF_SHIFTS; 
 	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS; // should never change 
-	arm_fill_f32(0.0f, prev_input, WIN_SIZE); 
 	uint32_t num_of_shifts = 0; 
 	uint32_t circ_buf_idx = 0; 
 	float closest_note = 0; 
 	float desired_pitch; 
 	uint32_t in_pitch_idx = 0; 
 	uint32_t sin_cnt = 0; 
+	uint32_t chorus_delay; 
 	/*************** Application code variables end ***************/
 	
 	while(1)
@@ -339,15 +375,33 @@ int main(void)
 			uint32_t curr_idx; 
 			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 			
+			// chorus params 
+			float n_freq = 0.7f / PSOLA_SAMPLE_RATE; 
+			uint32_t num_samples_in_period = 1 / n_freq; 
+			
+			// wet audio 
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
-			{
-				wet_circ_buffer[curr_idx & CIRC_MASK] = reverb_volume * 
-														(0.50f*dry_circ_buffer[(curr_idx - 1000)  & CIRC_MASK] + 
-														0.38f*dry_circ_buffer[(curr_idx - 2000)  & CIRC_MASK] +
-														0.12f*wet_circ_buffer[(curr_idx - 8000)  & CIRC_MASK]);  
+			{										
+				// reverb
+				wet_circ_buffer[curr_idx & CIRC_MASK] = reverb_volume *
+															(0.40f*dry_circ_buffer[(curr_idx - 1000)  & CIRC_MASK] +
+															0.45f*wet_circ_buffer[(curr_idx - 1700)  & CIRC_MASK]); 
+											
+				// delay
+				wet_circ_buffer[curr_idx & CIRC_MASK] += delay_volume * wet_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];			
+													
+				// chorus 				
+				chorus_delay = (0.014f + 0.01f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
+				if (sin_cnt == num_samples_in_period)
+					sin_cnt = 0;
+				wet_circ_buffer[curr_idx & CIRC_MASK] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
+ 									 dry_circ_buffer[(curr_idx - 200 - chorus_delay)  & CIRC_MASK] +
+									 dry_circ_buffer[(curr_idx - 400 - chorus_delay)  & CIRC_MASK] +
+									 dry_circ_buffer[(curr_idx - 600 - chorus_delay)  & CIRC_MASK] +
+									 dry_circ_buffer[(curr_idx - 800 - chorus_delay)  & CIRC_MASK]));	
 			}
 		
-			// mix verb and delay 
+			// mix wet and dry 
 			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{

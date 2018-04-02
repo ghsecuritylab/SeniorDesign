@@ -49,6 +49,10 @@ enum harmonies
 #define PITCH_BEND_FLAG 253
 #define AUTOTUNE_FLAG 252 
 #define REVERB_VOLUME_FLAG 251 
+#define CHORUS_VOLUME_FLAG 250
+#define DELAY_VOLUME_FLAG 249
+#define DELAY_SPEED_FLAG 248
+
 
 
 
