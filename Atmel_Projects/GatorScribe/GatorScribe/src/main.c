@@ -391,7 +391,7 @@ int main(void)
 				wet_circ_buffer[curr_idx & CIRC_MASK] += delay_volume * wet_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];			
 													
 				// chorus 				
-				chorus_delay = (0.014f + 0.01f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
+				chorus_delay = (0.014f + 0.009f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
 				if (sin_cnt == num_samples_in_period)
 					sin_cnt = 0;
 				wet_circ_buffer[curr_idx & CIRC_MASK] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
