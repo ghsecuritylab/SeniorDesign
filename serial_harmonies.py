@@ -31,6 +31,7 @@ except:
 note_on = 144 
 note_off = 128 
 volume = 191 
+dry_ch = 41
 harmony_ch = 40 
 master_ch = 39 
 reverb_vol_ch = 38
@@ -75,6 +76,9 @@ try:
                 ser.write([message.bytes()[2]])
             elif (message.bytes()[0] == volume and message.bytes()[1] == delay_speed_ch):
                 ser.write([248])
+                ser.write([message.bytes()[2]])
+            elif (message.bytes()[0] == volume and message.bytes()[1] == dry_ch):
+                ser.write([247])
                 ser.write([message.bytes()[2]])
             elif (message.bytes()[0] == pitch_bend):
                 ser.write([253])

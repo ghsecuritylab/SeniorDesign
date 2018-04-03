@@ -86,8 +86,12 @@ volatile harmony_t harmony_list_b[MAX_NUM_SHIFTS];
 volatile harmony_t *harmony_list_read = harmony_list_a; 
 volatile harmony_t *harmony_list_fill = harmony_list_b; 
 volatile uint32_t harmony_idx = 0;  
+
 volatile bool waiting_for_harm_volume = false;
 volatile float harm_volume = 1.0f;
+
+volatile bool waiting_for_dry_volume = false;
+volatile float dry_volume = 1.0f;
  
 volatile bool waiting_for_master_volume = false;
 volatile float master_volume = 1.0f;
@@ -126,6 +130,11 @@ void USART_SERIAL_ISR_HANDLER(void)
 			master_volume = (float)received_byte / 127.0f;
 			waiting_for_master_volume = false;
 		}
+		else if (waiting_for_dry_volume)
+		{
+			dry_volume = (float)received_byte / 127.0f;
+			waiting_for_dry_volume = false;
+		}
 		else if (waiting_for_pitch_bend)
 		{
 			pitch_bend = received_byte;
@@ -156,6 +165,10 @@ void USART_SERIAL_ISR_HANDLER(void)
 		else if (received_byte == HARMONY_VOLUME_FLAG) 
 		{
 			waiting_for_harm_volume = true; 
+		}
+		else if (received_byte == DRY_VOLUME_FLAG)
+		{
+			waiting_for_dry_volume = true;
 		}
 		else if (received_byte == MASTER_VOLUME_FLAG)
 		{
@@ -363,7 +376,7 @@ int main(void)
 			}
 			
 			// return pitch shifted data from previous samples block  
-			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts, (float)harm_volume); 
+			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts, (float)harm_volume, (float)dry_volume); 
 			
 			// save dry audio 
 			for (i = 0; i < WIN_SIZE; i++)
@@ -381,24 +394,27 @@ int main(void)
 			
 			// wet audio 
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
-			{										
-				// reverb
-				wet_circ_buffer[curr_idx & CIRC_MASK] = reverb_volume *
-															(0.40f*dry_circ_buffer[(curr_idx - 1000)  & CIRC_MASK] +
-															0.45f*wet_circ_buffer[(curr_idx - 1700)  & CIRC_MASK]); 
-											
-				// delay
-				wet_circ_buffer[curr_idx & CIRC_MASK] += delay_volume * wet_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];			
-													
-				// chorus 				
+			{						
+				
+				// chorus
 				chorus_delay = (0.014f + 0.009f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
 				if (sin_cnt == num_samples_in_period)
 					sin_cnt = 0;
-				wet_circ_buffer[curr_idx & CIRC_MASK] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
- 									 dry_circ_buffer[(curr_idx - 200 - chorus_delay)  & CIRC_MASK] +
-									 dry_circ_buffer[(curr_idx - 400 - chorus_delay)  & CIRC_MASK] +
-									 dry_circ_buffer[(curr_idx - 600 - chorus_delay)  & CIRC_MASK] +
-									 dry_circ_buffer[(curr_idx - 800 - chorus_delay)  & CIRC_MASK]));	
+				wet_circ_buffer[curr_idx & CIRC_MASK] = chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
+				dry_circ_buffer[(curr_idx - 200 - chorus_delay)  & CIRC_MASK] +
+				dry_circ_buffer[(curr_idx - 400 - chorus_delay)  & CIRC_MASK] +
+				dry_circ_buffer[(curr_idx - 600 - chorus_delay)  & CIRC_MASK] +
+				dry_circ_buffer[(curr_idx - 800 - chorus_delay)  & CIRC_MASK]));				
+											
+				// delay
+				wet_circ_buffer[curr_idx & CIRC_MASK] += delay_volume * wet_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
+				
+				// reverb
+				wet_circ_buffer[curr_idx & CIRC_MASK] += reverb_volume *
+														(0.40f*dry_circ_buffer[(curr_idx - 1000)  & CIRC_MASK] +
+														0.45f*wet_circ_buffer[(curr_idx - 1700)  & CIRC_MASK]);		
+													
+				
 			}
 		
 			// mix wet and dry 
@@ -410,7 +426,7 @@ int main(void)
 
 			// scale output 
 			arm_scale_f32(mixed_buffer, (float)INT16_MAX * master_volume * 0.5, mixed_buffer, WIN_SIZE);
-// 			arm_scale_f32(processBuffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); // sound in / sound out 
+ 			//arm_scale_f32(processBuffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); // sound in / sound out 
 			
 			// Sound out 
 			uint32_t idx = 0; 
