@@ -70,6 +70,8 @@ COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
 #define CIRC_MASK (CIRC_BUF_SIZE-1)
 COMPILER_ALIGNED(CIRC_BUF_SIZE) static float dry_circ_buffer[CIRC_BUF_SIZE];
 COMPILER_ALIGNED(CIRC_BUF_SIZE) static float wet_circ_buffer[CIRC_BUF_SIZE];
+COMPILER_ALIGNED(CIRC_BUF_SIZE) static float delay_circ_buffer[CIRC_BUF_SIZE];
+
 /*************** Application code buffers and consts end ***************/
 
 /*************** UART Communication Start ***************/
@@ -107,6 +109,9 @@ volatile float delay_volume = 0.1f;
 
 volatile bool waiting_for_delay_speed = false;
 volatile uint32_t delay_speed = 8000;
+
+volatile bool waiting_for_delay_feedback = false;
+volatile float delay_feedback = 0.5f;
 
 volatile bool waiting_for_chorus_volume = false;
 volatile float chorus_volume = 0.8f;
@@ -154,8 +159,13 @@ void USART_SERIAL_ISR_HANDLER(void)
 		{
 			// first value = longest delay
 			// first val - second val = shortest delay 
-			delay_speed = 16200 - 10000 * (float)received_byte / 127.0f;
+			delay_speed = 16200 - 14000 * (float)received_byte / 127.0f;
 			waiting_for_delay_speed = false;
+		}
+		else if (waiting_for_delay_feedback)
+		{
+			delay_feedback = (float)received_byte / 127.0f;
+			waiting_for_delay_feedback = false;
 		}
 		else if (waiting_for_chorus_volume)
 		{
@@ -189,6 +199,10 @@ void USART_SERIAL_ISR_HANDLER(void)
 		else if (received_byte == DELAY_SPEED_FLAG)
 		{
 			waiting_for_delay_speed = true;
+		}
+		else if (received_byte == DELAY_FEEDBACK_FLAG)
+		{
+			waiting_for_delay_feedback = true;
 		}
 		else if (received_byte == CHORUS_VOLUME_FLAG)
 		{
@@ -315,6 +329,10 @@ int main(void)
 	uint32_t in_pitch_idx = 0; 
 	uint32_t sin_cnt = 0; 
 	uint32_t chorus_delay; 
+	uint32_t wet_idx = 0; 
+	arm_fill_f32(0.0f, wet_circ_buffer, CIRC_BUF_SIZE); 
+	arm_fill_f32(0.0f, dry_circ_buffer, CIRC_BUF_SIZE);
+	arm_fill_f32(0.0f, delay_circ_buffer, CIRC_BUF_SIZE);
 	/*************** Application code variables end ***************/
 	
 	while(1)
@@ -384,44 +402,42 @@ int main(void)
 				dry_circ_buffer[circ_buf_idx++ & CIRC_MASK] = mixed_buffer[i];
 			}
 			
-			// verb and delay, save wet audio 
-			uint32_t curr_idx; 
-			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
-			
+
+			// wet audio 
+			uint32_t curr_dry_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
+			uint32_t curr_wet_idx = wet_idx; 
 			// chorus params 
 			float n_freq = 0.7f / PSOLA_SAMPLE_RATE; 
 			uint32_t num_samples_in_period = 1 / n_freq; 
-			
-			// wet audio 
-			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
-			{						
-				
+			for (i = 0; i < WIN_SIZE; i++, curr_wet_idx++, curr_dry_idx++)
+			{				
+				wet_circ_buffer[curr_wet_idx & CIRC_MASK] = mixed_buffer[i]; 						
 				// chorus
 				chorus_delay = (0.014f + 0.009f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
 				if (sin_cnt == num_samples_in_period)
 					sin_cnt = 0;
-				wet_circ_buffer[curr_idx & CIRC_MASK] = chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-				dry_circ_buffer[(curr_idx - 200 - chorus_delay)  & CIRC_MASK] +
-				dry_circ_buffer[(curr_idx - 400 - chorus_delay)  & CIRC_MASK] +
-				dry_circ_buffer[(curr_idx - 600 - chorus_delay)  & CIRC_MASK] +
-				dry_circ_buffer[(curr_idx - 800 - chorus_delay)  & CIRC_MASK]));				
-											
+				wet_circ_buffer[curr_wet_idx & CIRC_MASK] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_dry_idx - chorus_delay)  & CIRC_MASK] +
+														dry_circ_buffer[(curr_dry_idx - 199 - chorus_delay)  & CIRC_MASK] +
+														dry_circ_buffer[(curr_dry_idx - 401 - chorus_delay)  & CIRC_MASK] +
+														dry_circ_buffer[(curr_dry_idx - 601 - chorus_delay)  & CIRC_MASK] +
+														dry_circ_buffer[(curr_dry_idx - 809 - chorus_delay)  & CIRC_MASK]));			
+	
 				// delay
-				wet_circ_buffer[curr_idx & CIRC_MASK] += delay_volume * wet_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
+				delay_circ_buffer[curr_dry_idx & CIRC_MASK] = mixed_buffer[i] + delay_feedback * delay_circ_buffer[(curr_wet_idx - delay_speed)  & CIRC_MASK];	
+				wet_circ_buffer[curr_wet_idx & CIRC_MASK] += delay_volume * delay_circ_buffer[curr_dry_idx & CIRC_MASK];
+				
 				
 				// reverb
-				wet_circ_buffer[curr_idx & CIRC_MASK] += reverb_volume *
-														(0.40f*dry_circ_buffer[(curr_idx - 1000)  & CIRC_MASK] +
-														0.45f*wet_circ_buffer[(curr_idx - 1700)  & CIRC_MASK]);		
-													
-				
+				wet_circ_buffer[curr_wet_idx & CIRC_MASK] += reverb_volume *  
+						(dry_circ_buffer[(curr_dry_idx - 1001)  & CIRC_MASK] +
+						dry_circ_buffer[(curr_dry_idx - 601)  & CIRC_MASK] + 
+						dry_circ_buffer[(curr_dry_idx - 809)  & CIRC_MASK] ); 
 			}
 		
 			// mix wet and dry 
-			curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
-			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
+			for (i = 0; i < WIN_SIZE; i++, wet_idx++)
 			{
-				mixed_buffer[i] = dry_circ_buffer[curr_idx & CIRC_MASK] + wet_circ_buffer[curr_idx & CIRC_MASK];
+				 mixed_buffer[i] = wet_circ_buffer[wet_idx & CIRC_MASK];
 			}
 
 			// scale output 
