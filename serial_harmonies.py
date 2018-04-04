@@ -36,9 +36,9 @@ harmony_ch = 40
 master_ch = 39 
 reverb_vol_ch = 38
 chorus_vol_ch = 37
-delay_vol_ch = 34
+delay_vol_ch = 36
 delay_speed_ch = 35
-delay_feedback_ch = 36
+delay_feedback_ch = 34
 autotune_button = 56 
 pitch_bend = 224 
 
