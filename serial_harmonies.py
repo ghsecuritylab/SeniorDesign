@@ -30,16 +30,16 @@ except:
     
 note_on = 144 
 note_off = 128 
-volume = 191 
-dry_ch = 41
-harmony_ch = 40 
-master_ch = 39 
-reverb_vol_ch = 38
-chorus_vol_ch = 37
-chorus_speed_ch = 36 
-delay_vol_ch = 35
-delay_speed_ch = 34
-delay_feedback_ch = 33
+volume = 176 
+dry_ch = 7
+harmony_ch = 84 
+master_ch = 5 
+reverb_vol_ch = 72
+chorus_vol_ch = 73
+chorus_speed_ch = 93 
+delay_feedback_ch = 91
+delay_speed_ch = 71
+delay_vol_ch = 74
 autotune_button = 56 
 pitch_bend = 224 
 
