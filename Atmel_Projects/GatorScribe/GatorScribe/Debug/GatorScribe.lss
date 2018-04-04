@@ -29,13 +29,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_ranges 00001f28  00000000  00000000  000505e3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  00025dab  00000000  00000000  0005250b  2**0
+ 13 .debug_macro  00025d51  00000000  00000000  0005250b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   00014ced  00000000  00000000  000782b6  2**0
+ 14 .debug_line   00014ce0  00000000  00000000  0007825c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    0009d361  00000000  00000000  0008cfa3  2**0
+ 15 .debug_str    0009d300  00000000  00000000  0008cf3c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_frame  00002d40  00000000  00000000  0012a304  2**2
+ 16 .debug_frame  00002d40  00000000  00000000  0012a23c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -7015,7 +7015,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
 			
 			// Add audio effects 
 			uint32_t curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
-			// chorus params -- could make speed a param 
+			// chorus params 
 			float n_freq = chorus_speed / PSOLA_SAMPLE_RATE; 
 			uint32_t num_samples_in_period = 1 / n_freq; 
   402b4c:	eddf 8a74 	vldr	s17, [pc, #464]	; 402d20 <main+0x31c>
@@ -7030,11 +7030,11 @@ __STATIC_INLINE void SCB_DisableICache(void)
 			dataReceived = false; 
   402b5e:	4a71      	ldr	r2, [pc, #452]	; (402d24 <main+0x320>)
   402b60:	2300      	movs	r3, #0
-			inputPitch = computeWaveletPitch((float  *)processBuffer);
+			inputPitch = computeWaveletPitch(processBuffer);
   402b62:	4871      	ldr	r0, [pc, #452]	; (402d28 <main+0x324>)
 			dataReceived = false; 
   402b64:	7013      	strb	r3, [r2, #0]
-			inputPitch = computeWaveletPitch((float  *)processBuffer);
+			inputPitch = computeWaveletPitch(processBuffer);
   402b66:	4b71      	ldr	r3, [pc, #452]	; (402d2c <main+0x328>)
   402b68:	4798      	blx	r3
 			oneOverInputPitch = 1.0f / inputPitch;
@@ -7168,22 +7168,22 @@ __STATIC_INLINE void SCB_DisableICache(void)
   402c5e:	eee7 7a06 	vfma.f32	s15, s14, s12
 				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
   402c62:	eeb7 aa00 	vmov.f32	s20, #112	; 0x3f800000  1.0
-			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
+			arm_power_f32(processBuffer, WIN_SIZE>>2, &power);
   402c66:	aa09      	add	r2, sp, #36	; 0x24
 				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
   402c68:	ee77 7ac8 	vsub.f32	s15, s15, s16
-			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
+			arm_power_f32(processBuffer, WIN_SIZE>>2, &power);
   402c6c:	f44f 7180 	mov.w	r1, #256	; 0x100
   402c70:	482d      	ldr	r0, [pc, #180]	; (402d28 <main+0x324>)
 				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
   402c72:	eeb0 7a4a 	vmov.f32	s14, s20
-			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
+			arm_power_f32(processBuffer, WIN_SIZE>>2, &power);
   402c76:	4b35      	ldr	r3, [pc, #212]	; (402d4c <main+0x348>)
 				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
   402c78:	eea9 7aa7 	vfma.f32	s14, s19, s15
 				harmony_shifts[0] = pitch_shift ;
   402c7c:	ed8d 7a0a 	vstr	s14, [sp, #40]	; 0x28
-			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
+			arm_power_f32(processBuffer, WIN_SIZE>>2, &power);
   402c80:	4798      	blx	r3
 			if (inputPitch > MINIMUM_PITCH && power > POWER_THRESHOLD)
   402c82:	eeb4 8aea 	vcmpe.f32	s16, s21
@@ -7205,7 +7205,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   402cb6:	eeb1 6a04 	vmov.f32	s12, #20	; 0x40a00000  5.0
 				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
   402cba:	2001      	movs	r0, #1
-					if (Abs(harmony_list_read[i].freq - closest_note) > 1.0f) // don't harmonies input pitch twice 
+					if (Abs(harmony_list_read[i].freq - closest_note) > 1.0f) // don't harmonize input pitch twice 
   402cbc:	eeb0 7a4a 	vmov.f32	s14, s20
 				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
   402cc0:	2200      	movs	r2, #0
@@ -7294,7 +7294,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   402dbe:	eef4 7ac7 	vcmpe.f32	s15, s14
   402dc2:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
   402dc6:	f340 8186 	ble.w	4030d6 <main+0x6d2>
-					if (Abs(harmony_list_read[i].freq - closest_note) > 1.0f) // don't harmonies input pitch twice 
+					if (Abs(harmony_list_read[i].freq - closest_note) > 1.0f) // don't harmonize input pitch twice 
   402dca:	edd3 7a00 	vldr	s15, [r3]
   402dce:	ee77 7ac9 	vsub.f32	s15, s15, s18
   402dd2:	eef5 7ac0 	vcmpe.f32	s15, #0.0
@@ -7374,7 +7374,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
 				harmony_shifts[1] = END_OF_SHIFTS; 	
   402e68:	4baa      	ldr	r3, [pc, #680]	; (403114 <main+0x710>)
   402e6a:	930b      	str	r3, [sp, #44]	; 0x2c
-			create_harmonies((float  *)processBuffer, out_buffer, inputPitch, harmony_shifts, (float)harm_volume, (float)dry_volume); 
+			create_harmonies(processBuffer, out_buffer, inputPitch, harmony_shifts, (float)harm_volume, (float)dry_volume); 
   402e6c:	4baa      	ldr	r3, [pc, #680]	; (403118 <main+0x714>)
   402e6e:	4aab      	ldr	r2, [pc, #684]	; (40311c <main+0x718>)
   402e70:	6819      	ldr	r1, [r3, #0]
@@ -7698,7 +7698,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   4030c8:	2b00      	cmp	r3, #0
   4030ca:	f47f ad44 	bne.w	402b56 <main+0x152>
 // 				{
-// 					// taking too long ... never 
+// 					// taking too long ... uncomment for debug 
 // 				}
 			}
 			else 

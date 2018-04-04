@@ -188,13 +188,12 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../DanLib/LCDLib/gfx/gfx_generic.h ../DanLib/LCDLib/gfx/sysfont.h \
  ../src/config/conf_sysfont.h ../DanLib/LCDLib/gfx/gfx.h \
  ../DanLib/LCDLib/gfx/gfx_text.h ../DanLib/LCDLib/touch/touch.h \
- ../src/asf.h ../DanLib/LCDLib/gfx/gfx.h ../DanLib/Vocoder/vocoder.h \
- ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
+ ../src/asf.h ../DanLib/LCDLib/gfx/gfx.h ../DanLib/DYWA/dywapitchtrack.h \
+ ../DanLib/Vocoder/psola.h ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../DanLib/DYWA/dywapitchtrack.h ../DanLib/Vocoder/psola.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h
 
 ../src/asf.h:
 
@@ -610,7 +609,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/LCDLib/gfx/gfx.h:
 
-../DanLib/Vocoder/vocoder.h:
+../DanLib/DYWA/dywapitchtrack.h:
+
+../DanLib/Vocoder/psola.h:
 
 ../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
 
@@ -621,7 +622,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
-
-../DanLib/DYWA/dywapitchtrack.h:
-
-../DanLib/Vocoder/psola.h:

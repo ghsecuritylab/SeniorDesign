@@ -353,7 +353,7 @@ int main(void)
 			dataReceived = false; 
 			
 			// get pitch 
-			inputPitch = computeWaveletPitch((float  *)processBuffer);
+			inputPitch = computeWaveletPitch(processBuffer);
 			if (inputPitch < MINIMUM_PITCH) 
 				inputPitch = MINIMUM_PITCH; 
 			oneOverInputPitch = 1.0f / inputPitch;
@@ -376,7 +376,7 @@ int main(void)
 			}
 				
 			// calculate power 
-			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
+			arm_power_f32(processBuffer, WIN_SIZE>>2, &power);
 		
 			// determine whether you should add any harmonies 
 			if (inputPitch > MINIMUM_PITCH && power > POWER_THRESHOLD)
@@ -384,7 +384,7 @@ int main(void)
 				i = 0;
 				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
 				{
-					if (Abs(harmony_list_read[i].freq - closest_note) > 1.0f) // don't harmonies input pitch twice 
+					if (Abs(harmony_list_read[i].freq - closest_note) > 1.0f) // don't harmonize input pitch twice 
 					{
 						desired_pitch = harmony_list_read[i].freq; 
 						if (pitch_bend != 64)
@@ -407,7 +407,7 @@ int main(void)
 			}
 			
 			// return pitch shifted data from previous samples block  
-			create_harmonies((float  *)processBuffer, out_buffer, inputPitch, harmony_shifts, (float)harm_volume, (float)dry_volume); 
+			create_harmonies(processBuffer, out_buffer, inputPitch, harmony_shifts, (float)harm_volume, (float)dry_volume); 
 			
 			// save dry audio 
 			for (i = 0; i < WIN_SIZE; i++)
@@ -417,7 +417,7 @@ int main(void)
 			
 			// Add audio effects 
 			uint32_t curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
-			// chorus params -- could make speed a param 
+			// chorus params 
 			float n_freq = chorus_speed / PSOLA_SAMPLE_RATE; 
 			uint32_t num_samples_in_period = 1 / n_freq; 
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
@@ -462,7 +462,7 @@ int main(void)
 			{
 // 				while(1)
 // 				{
-// 					// taking too long ... never 
+// 					// taking too long ... uncomment for debug 
 // 				}
 			}
 			else 
