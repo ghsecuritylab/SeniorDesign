@@ -54,6 +54,7 @@ enum harmonies
 #define DELAY_SPEED_FLAG 248
 #define DRY_VOLUME_FLAG 247
 #define DELAY_FEEDBACK_FLAG 249
+#define CHORUS_SPEED_FLAG 245 
 
 
 

@@ -36,9 +36,10 @@ harmony_ch = 40
 master_ch = 39 
 reverb_vol_ch = 38
 chorus_vol_ch = 37
-delay_vol_ch = 36
-delay_speed_ch = 35
-delay_feedback_ch = 34
+chorus_speed_ch = 36 
+delay_vol_ch = 35
+delay_speed_ch = 34
+delay_feedback_ch = 33
 autotune_button = 56 
 pitch_bend = 224 
 
@@ -83,6 +84,9 @@ try:
                 ser.write([message.bytes()[2]])
             elif (message.bytes()[0] == volume and message.bytes()[1] == delay_feedback_ch):
                 ser.write([246])
+                ser.write([message.bytes()[2]])
+            elif (message.bytes()[0] == volume and message.bytes()[1] == chorus_speed_ch):
+                ser.write([245])
                 ser.write([message.bytes()[2]])
             elif (message.bytes()[0] == pitch_bend):
                 ser.write([253])

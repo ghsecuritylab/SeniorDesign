@@ -116,6 +116,9 @@ volatile float delay_feedback = 0.0f;
 volatile bool waiting_for_chorus_volume = false;
 volatile float chorus_volume = 0.0f;
 
+volatile bool waiting_for_chorus_speed = false;
+volatile float chorus_speed = 0.5f;
+
 volatile bool autotune = true; 
 void USART_SERIAL_ISR_HANDLER(void)
 {
@@ -172,6 +175,11 @@ void USART_SERIAL_ISR_HANDLER(void)
 			chorus_volume = (float)received_byte / 127.0f;;
 			waiting_for_chorus_volume = false;
 		}
+		else if (waiting_for_chorus_speed)
+		{
+			chorus_speed = 0.4f + 5.0f*(float)received_byte / 127.0f;;
+			waiting_for_chorus_speed = false;
+		}
 		else if (received_byte == HARMONY_VOLUME_FLAG) 
 		{
 			waiting_for_harm_volume = true; 
@@ -207,6 +215,10 @@ void USART_SERIAL_ISR_HANDLER(void)
 		else if (received_byte == CHORUS_VOLUME_FLAG)
 		{
 			waiting_for_chorus_volume = true;
+		}
+		else if (received_byte == CHORUS_SPEED_FLAG)
+		{
+			waiting_for_chorus_speed = true;
 		}
 		else if (received_byte == AUTOTUNE_FLAG)
 		{
@@ -406,15 +418,15 @@ int main(void)
 			// wet audio 
 			uint32_t curr_dry_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 			uint32_t curr_wet_idx = wet_idx; 
-			// chorus params 
-			float n_freq = 0.7f / PSOLA_SAMPLE_RATE; 
+			// chorus params -- could make speed a param 
+			float n_freq = chorus_speed / PSOLA_SAMPLE_RATE; 
 			uint32_t num_samples_in_period = 1 / n_freq; 
 			float val; 
 			for (i = 0; i < WIN_SIZE; i++, curr_wet_idx++, curr_dry_idx++)
 			{				
-				wet_circ_buffer[i] = mixed_buffer[i]; 						
+				wet_circ_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * mixed_buffer[i]; 						
 				// chorus
-				chorus_delay = (0.02f + 0.015f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
+				chorus_delay = (0.01f + 0.003f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
 				if (sin_cnt == num_samples_in_period)
 					sin_cnt = 0;
 				wet_circ_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_dry_idx - chorus_delay)  & CIRC_MASK] +
@@ -428,7 +440,7 @@ int main(void)
 				wet_circ_buffer[i] += delay_volume * delay_circ_buffer[curr_dry_idx & CIRC_MASK];
 				
 				// reverb
-				wet_circ_buffer[i] += reverb_volume * 0.5f *
+				wet_circ_buffer[i] += reverb_volume * 0.33f *
 						(dry_circ_buffer[(curr_dry_idx - 2001)  & CIRC_MASK] +
 						dry_circ_buffer[(curr_dry_idx - 1503)  & CIRC_MASK] + 
 						dry_circ_buffer[(curr_dry_idx - 1203)  & CIRC_MASK] ); 
