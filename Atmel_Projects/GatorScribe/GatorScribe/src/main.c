@@ -109,7 +109,7 @@ volatile bool waiting_for_delay_speed = false;
 volatile uint32_t delay_speed = 10000;
 
 volatile bool waiting_for_delay_feedback = false;
-volatile float delay_feedback = 0.0f;
+volatile float delay_feedback = 0.2f;
 
 volatile bool waiting_for_chorus_volume = false;
 volatile float chorus_volume = 0.0f;
@@ -138,7 +138,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 		}
 		else if (waiting_for_dry_volume)
 		{
-			dry_volume = (float)received_byte / 127.0f;
+			dry_volume = 0.1f + 0.9f*(float)received_byte / 127.0f;
 			waiting_for_dry_volume = false;
 		}
 		else if (waiting_for_pitch_bend)
@@ -441,7 +441,7 @@ int main(void)
 			}
 	
 			// scale output 
-			arm_scale_f32(out_buffer, (float)INT16_MAX * master_volume * 0.6f, out_buffer, WIN_SIZE);
+			arm_scale_f32(out_buffer, (float)INT16_MAX * master_volume, out_buffer, WIN_SIZE);
  			//arm_scale_f32(processBuffer, (float)INT16_MAX, out_buffer, WIN_SIZE); // sound in / sound out 
 			
 			// Sound out 

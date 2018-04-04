@@ -68,6 +68,8 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	{
 		input_ring_buffer[(starting_input_ptr++) & RING_BUFFER_MASK] = input[i]; 
 	}
+	
+//	float scale = 1.0f / current_num_shifts; 
 		
 	uint32_t outLag;
 	uint32_t inHalfAway;
@@ -75,10 +77,14 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	float inputPeriodLengthRecip = 1.0f / inputPeriodLength;
 	uint32_t samplesLeftInPeriod = 0; 
 	
+	float scale = 1.0f;  
+	if (current_num_shifts > 1) 
+		scale = 1.0f / log((float)(current_num_shifts+1)); 
+	
 	// pre-compute window function	
 	for (olaIdx = 0, w = 0; olaIdx < 2*inputPeriodLength; olaIdx++, w++)
 	{
-		window[w] = (1.0f - arm_cos_f32(PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;
+		window[w] = scale * (1.0f - arm_cos_f32(PI_F * (float)olaIdx * inputPeriodLengthRecip)) * 0.5f;
 	}
 		
 	// for each pitch shift 
@@ -208,9 +214,8 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	}
 	
 	// averaging -- not used currently 
-// 	float scale = 1.0f; 
-// 	if (current_num_shifts > 1) scale = 2.0f / (float)current_num_shifts ; // just in case 
-// 	arm_scale_f32(output, scale, output, WIN_SIZE); 
+	//if (pitch_idx > 1) //  scale = 2.0f / (float)current_num_shifts ; // just in case 
+	//arm_scale_f32(output, 2.0f, output, WIN_SIZE); 
 	
 	currentPitch = inputPitch; 
 	inputPeriodLength = (uint32_t)(PSOLA_SAMPLE_RATE / currentPitch);
