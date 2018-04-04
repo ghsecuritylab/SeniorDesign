@@ -68,9 +68,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	{
 		input_ring_buffer[(starting_input_ptr++) & RING_BUFFER_MASK] = input[i]; 
 	}
-	
-//	float scale = 1.0f / current_num_shifts; 
-		
+			
 	uint32_t outLag;
 	uint32_t inHalfAway;
 	float periodRatio;

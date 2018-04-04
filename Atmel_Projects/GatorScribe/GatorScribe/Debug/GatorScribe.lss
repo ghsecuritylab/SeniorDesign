@@ -31,9 +31,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  13 .debug_macro  00025dab  00000000  00000000  00052519  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   00014d1a  00000000  00000000  000782c4  2**0
+ 14 .debug_line   00014d18  00000000  00000000  000782c4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    0009d376  00000000  00000000  0008cfde  2**0
+ 15 .debug_str    0009d376  00000000  00000000  0008cfdc  2**0
                   CONTENTS, READONLY, DEBUGGING
  16 .debug_frame  00002d40  00000000  00000000  0012a354  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -1175,9 +1175,9 @@ float computeWaveletPitch(float * samples)
   400828:	e01a      	b.n	400860 <computeWaveletPitch+0x290>
   40082a:	bf00      	nop
   40082c:	20407400 	.word	0x20407400
-  400830:	00403219 	.word	0x00403219
-  400834:	004033b5 	.word	0x004033b5
-  400838:	004032d9 	.word	0x004032d9
+  400830:	0040321d 	.word	0x0040321d
+  400834:	004033b9 	.word	0x004033b9
+  400838:	004032dd 	.word	0x004032dd
   40083c:	41780419 	.word	0x41780419
   400840:	c47a0000 	.word	0xc47a0000
   400844:	20406400 	.word	0x20406400
@@ -1816,7 +1816,7 @@ void PSOLA_init(void)
 	inputPeriodLength = PSOLA_SAMPLE_RATE / MINIMUM_PITCH; 
   400d70:	601a      	str	r2, [r3, #0]
   400d72:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
-  400d74:	004031e9 	.word	0x004031e9
+  400d74:	004031ed 	.word	0x004031ed
   400d78:	20409000 	.word	0x20409000
   400d7c:	20412000 	.word	0x20412000
   400d80:	2040e000 	.word	0x2040e000
@@ -1879,8 +1879,8 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
   400de4:	6015      	str	r5, [r2, #0]
 	for (i = 0; i < WIN_SIZE; i++)
   400de6:	d1f5      	bne.n	400dd4 <create_harmonies+0x2c>
-//	float scale = 1.0f / current_num_shifts; 
-		
+	}
+			
 	uint32_t outLag;
 	uint32_t inHalfAway;
 	float periodRatio;
@@ -2231,12 +2231,12 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
   40108c:	20408400 	.word	0x20408400
   401090:	00403d49 	.word	0x00403d49
   401094:	00404045 	.word	0x00404045
-  401098:	00403585 	.word	0x00403585
+  401098:	00403589 	.word	0x00403589
   40109c:	3ff00000 	.word	0x3ff00000
   4010a0:	00404351 	.word	0x00404351
   4010a4:	40490fdb 	.word	0x40490fdb
   4010a8:	2041205c 	.word	0x2041205c
-  4010ac:	00403491 	.word	0x00403491
+  4010ac:	00403495 	.word	0x00403495
   4010b0:	20412000 	.word	0x20412000
   4010b4:	20412030 	.word	0x20412030
   4010b8:	2040e000 	.word	0x2040e000
@@ -2537,7 +2537,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
   4012a0:	20408400 	.word	0x20408400
   4012a4:	20408408 	.word	0x20408408
   4012a8:	20412000 	.word	0x20412000
-  4012ac:	00403219 	.word	0x00403219
+  4012ac:	0040321d 	.word	0x0040321d
 
 004012b0 <_read>:
 int __attribute__((weak))
@@ -6051,7 +6051,7 @@ static inline void cpu_irq_restore(irqflags_t flags)
   402530:	20400028 	.word	0x20400028
   402534:	e000ed88 	.word	0xe000ed88
   402538:	004043fd 	.word	0x004043fd
-  40253c:	00402a19 	.word	0x00402a19
+  40253c:	00402a1d 	.word	0x00402a1d
 
 00402540 <SystemCoreClockUpdate>:
 }
@@ -6446,7 +6446,7 @@ void USART_SERIAL_ISR_HANDLER(void)
   40273e:	780b      	ldrb	r3, [r1, #0]
   402740:	f003 04ff 	and.w	r4, r3, #255	; 0xff
   402744:	b1e3      	cbz	r3, 402780 <USART1_Handler+0x6c>
-			master_volume = (float)received_byte / 127.0f;
+			master_volume = 1.2f*(float)received_byte / 127.0f;
   402746:	eddd 7a01 	vldr	s15, [sp, #4]
   40274a:	ed9f 7a92 	vldr	s14, [pc, #584]	; 402994 <USART1_Handler+0x280>
   40274e:	eef8 7a67 	vcvt.f32.u32	s15, s15
@@ -6461,9 +6461,9 @@ void USART_SERIAL_ISR_HANDLER(void)
 			waiting_for_harm_volume = false; 
   402764:	2300      	movs	r3, #0
 			harm_volume = (float)received_byte / 127.0f; 
-  402766:	ed9f 7a8b 	vldr	s14, [pc, #556]	; 402994 <USART1_Handler+0x280>
+  402766:	ed9f 7a8d 	vldr	s14, [pc, #564]	; 40299c <USART1_Handler+0x288>
   40276a:	eef8 7a67 	vcvt.f32.u32	s15, s15
-  40276e:	498b      	ldr	r1, [pc, #556]	; (40299c <USART1_Handler+0x288>)
+  40276e:	498c      	ldr	r1, [pc, #560]	; (4029a0 <USART1_Handler+0x28c>)
   402770:	ee67 7a87 	vmul.f32	s15, s15, s14
   402774:	edc1 7a00 	vstr	s15, [r1]
 			waiting_for_harm_volume = false; 
@@ -6472,74 +6472,74 @@ void USART_SERIAL_ISR_HANDLER(void)
   40277a:	b002      	add	sp, #8
   40277c:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
 		else if (waiting_for_dry_volume)
-  402780:	4887      	ldr	r0, [pc, #540]	; (4029a0 <USART1_Handler+0x28c>)
+  402780:	4888      	ldr	r0, [pc, #544]	; (4029a4 <USART1_Handler+0x290>)
   402782:	7803      	ldrb	r3, [r0, #0]
   402784:	f003 05ff 	and.w	r5, r3, #255	; 0xff
   402788:	b94b      	cbnz	r3, 40279e <USART1_Handler+0x8a>
 		else if (waiting_for_pitch_bend)
-  40278a:	4c86      	ldr	r4, [pc, #536]	; (4029a4 <USART1_Handler+0x290>)
+  40278a:	4c87      	ldr	r4, [pc, #540]	; (4029a8 <USART1_Handler+0x294>)
   40278c:	7823      	ldrb	r3, [r4, #0]
   40278e:	f003 06ff 	and.w	r6, r3, #255	; 0xff
   402792:	b19b      	cbz	r3, 4027bc <USART1_Handler+0xa8>
 			pitch_bend = received_byte;
   402794:	9a01      	ldr	r2, [sp, #4]
-  402796:	4b84      	ldr	r3, [pc, #528]	; (4029a8 <USART1_Handler+0x294>)
+  402796:	4b85      	ldr	r3, [pc, #532]	; (4029ac <USART1_Handler+0x298>)
   402798:	601a      	str	r2, [r3, #0]
 			waiting_for_pitch_bend = false;
   40279a:	7025      	strb	r5, [r4, #0]
   40279c:	e7c2      	b.n	402724 <USART1_Handler+0x10>
 			dry_volume = 0.1f + 0.9f*(float)received_byte / 127.0f;
   40279e:	eddd 7a01 	vldr	s15, [sp, #4]
-  4027a2:	eddf 6a82 	vldr	s13, [pc, #520]	; 4029ac <USART1_Handler+0x298>
+  4027a2:	eddf 6a83 	vldr	s13, [pc, #524]	; 4029b0 <USART1_Handler+0x29c>
   4027a6:	eeb8 7a67 	vcvt.f32.u32	s14, s15
-  4027aa:	eddf 7a81 	vldr	s15, [pc, #516]	; 4029b0 <USART1_Handler+0x29c>
-  4027ae:	4b81      	ldr	r3, [pc, #516]	; (4029b4 <USART1_Handler+0x2a0>)
+  4027aa:	eddf 7a82 	vldr	s15, [pc, #520]	; 4029b4 <USART1_Handler+0x2a0>
+  4027ae:	4b82      	ldr	r3, [pc, #520]	; (4029b8 <USART1_Handler+0x2a4>)
   4027b0:	eee7 7a26 	vfma.f32	s15, s14, s13
   4027b4:	edc3 7a00 	vstr	s15, [r3]
 			waiting_for_dry_volume = false;
   4027b8:	7004      	strb	r4, [r0, #0]
   4027ba:	e7b3      	b.n	402724 <USART1_Handler+0x10>
 		else if (waiting_for_reverb_volume)
-  4027bc:	4d7e      	ldr	r5, [pc, #504]	; (4029b8 <USART1_Handler+0x2a4>)
+  4027bc:	4d7f      	ldr	r5, [pc, #508]	; (4029bc <USART1_Handler+0x2a8>)
   4027be:	782b      	ldrb	r3, [r5, #0]
   4027c0:	f003 07ff 	and.w	r7, r3, #255	; 0xff
   4027c4:	b163      	cbz	r3, 4027e0 <USART1_Handler+0xcc>
 			reverb_volume = (float)received_byte / 127.0f;;
   4027c6:	eddd 7a01 	vldr	s15, [sp, #4]
-  4027ca:	ed9f 7a72 	vldr	s14, [pc, #456]	; 402994 <USART1_Handler+0x280>
+  4027ca:	ed9f 7a74 	vldr	s14, [pc, #464]	; 40299c <USART1_Handler+0x288>
   4027ce:	eef8 7a67 	vcvt.f32.u32	s15, s15
-  4027d2:	4b7a      	ldr	r3, [pc, #488]	; (4029bc <USART1_Handler+0x2a8>)
+  4027d2:	4b7b      	ldr	r3, [pc, #492]	; (4029c0 <USART1_Handler+0x2ac>)
   4027d4:	ee67 7a87 	vmul.f32	s15, s15, s14
   4027d8:	edc3 7a00 	vstr	s15, [r3]
 			waiting_for_reverb_volume = false;
   4027dc:	702e      	strb	r6, [r5, #0]
   4027de:	e7a1      	b.n	402724 <USART1_Handler+0x10>
 		else if (waiting_for_delay_volume)
-  4027e0:	4e77      	ldr	r6, [pc, #476]	; (4029c0 <USART1_Handler+0x2ac>)
+  4027e0:	4e78      	ldr	r6, [pc, #480]	; (4029c4 <USART1_Handler+0x2b0>)
   4027e2:	7833      	ldrb	r3, [r6, #0]
   4027e4:	f003 0eff 	and.w	lr, r3, #255	; 0xff
   4027e8:	b163      	cbz	r3, 402804 <USART1_Handler+0xf0>
 			delay_volume = 0.7f * (float)received_byte / 127.0f;
   4027ea:	eddd 7a01 	vldr	s15, [sp, #4]
-  4027ee:	ed9f 7a75 	vldr	s14, [pc, #468]	; 4029c4 <USART1_Handler+0x2b0>
+  4027ee:	ed9f 7a76 	vldr	s14, [pc, #472]	; 4029c8 <USART1_Handler+0x2b4>
   4027f2:	eef8 7a67 	vcvt.f32.u32	s15, s15
-  4027f6:	4b74      	ldr	r3, [pc, #464]	; (4029c8 <USART1_Handler+0x2b4>)
+  4027f6:	4b75      	ldr	r3, [pc, #468]	; (4029cc <USART1_Handler+0x2b8>)
   4027f8:	ee67 7a87 	vmul.f32	s15, s15, s14
   4027fc:	edc3 7a00 	vstr	s15, [r3]
 			waiting_for_delay_volume = false;
   402800:	7037      	strb	r7, [r6, #0]
   402802:	e78f      	b.n	402724 <USART1_Handler+0x10>
 		else if (waiting_for_delay_speed)
-  402804:	4f71      	ldr	r7, [pc, #452]	; (4029cc <USART1_Handler+0x2b8>)
+  402804:	4f72      	ldr	r7, [pc, #456]	; (4029d0 <USART1_Handler+0x2bc>)
   402806:	783b      	ldrb	r3, [r7, #0]
   402808:	f003 0cff 	and.w	ip, r3, #255	; 0xff
   40280c:	b18b      	cbz	r3, 402832 <USART1_Handler+0x11e>
 			delay_speed = 16200 - 14000 * (float)received_byte / 127.0f;
   40280e:	eddd 7a01 	vldr	s15, [sp, #4]
-  402812:	eddf 6a6f 	vldr	s13, [pc, #444]	; 4029d0 <USART1_Handler+0x2bc>
+  402812:	eddf 6a70 	vldr	s13, [pc, #448]	; 4029d4 <USART1_Handler+0x2c0>
   402816:	eeb8 7a67 	vcvt.f32.u32	s14, s15
-  40281a:	eddf 7a6e 	vldr	s15, [pc, #440]	; 4029d4 <USART1_Handler+0x2c0>
-  40281e:	4b6e      	ldr	r3, [pc, #440]	; (4029d8 <USART1_Handler+0x2c4>)
+  40281a:	eddf 7a6f 	vldr	s15, [pc, #444]	; 4029d8 <USART1_Handler+0x2c4>
+  40281e:	4b6f      	ldr	r3, [pc, #444]	; (4029dc <USART1_Handler+0x2c8>)
   402820:	eee7 7a66 	vfms.f32	s15, s14, s13
   402824:	eefc 7ae7 	vcvt.u32.f32	s15, s15
   402828:	edc3 7a00 	vstr	s15, [r3]
@@ -6547,21 +6547,21 @@ void USART_SERIAL_ISR_HANDLER(void)
   40282c:	f887 e000 	strb.w	lr, [r7]
   402830:	e778      	b.n	402724 <USART1_Handler+0x10>
 		else if (waiting_for_delay_feedback)
-  402832:	f8df e1d8 	ldr.w	lr, [pc, #472]	; 402a0c <USART1_Handler+0x2f8>
+  402832:	f8df e1dc 	ldr.w	lr, [pc, #476]	; 402a10 <USART1_Handler+0x2fc>
   402836:	f89e 3000 	ldrb.w	r3, [lr]
   40283a:	b16b      	cbz	r3, 402858 <USART1_Handler+0x144>
 			delay_feedback = 0.8f * (float)received_byte / 127.0f;
   40283c:	eddd 7a01 	vldr	s15, [sp, #4]
-  402840:	ed9f 7a66 	vldr	s14, [pc, #408]	; 4029dc <USART1_Handler+0x2c8>
+  402840:	ed9f 7a67 	vldr	s14, [pc, #412]	; 4029e0 <USART1_Handler+0x2cc>
   402844:	eef8 7a67 	vcvt.f32.u32	s15, s15
-  402848:	4b65      	ldr	r3, [pc, #404]	; (4029e0 <USART1_Handler+0x2cc>)
+  402848:	4b66      	ldr	r3, [pc, #408]	; (4029e4 <USART1_Handler+0x2d0>)
   40284a:	ee67 7a87 	vmul.f32	s15, s15, s14
   40284e:	edc3 7a00 	vstr	s15, [r3]
 			waiting_for_delay_feedback = false;
   402852:	f88e c000 	strb.w	ip, [lr]
   402856:	e765      	b.n	402724 <USART1_Handler+0x10>
 		else if (waiting_for_chorus_volume)
-  402858:	f8df 81b4 	ldr.w	r8, [pc, #436]	; 402a10 <USART1_Handler+0x2fc>
+  402858:	f8df 81b8 	ldr.w	r8, [pc, #440]	; 402a14 <USART1_Handler+0x300>
   40285c:	f898 3000 	ldrb.w	r3, [r8]
   402860:	b173      	cbz	r3, 402880 <USART1_Handler+0x16c>
 			chorus_volume = (float)received_byte / 127.0f;;
@@ -6569,16 +6569,16 @@ void USART_SERIAL_ISR_HANDLER(void)
 			waiting_for_chorus_volume = false;
   402866:	2300      	movs	r3, #0
 			chorus_volume = (float)received_byte / 127.0f;;
-  402868:	ed9f 7a4a 	vldr	s14, [pc, #296]	; 402994 <USART1_Handler+0x280>
+  402868:	ed9f 7a4c 	vldr	s14, [pc, #304]	; 40299c <USART1_Handler+0x288>
   40286c:	eef8 7a67 	vcvt.f32.u32	s15, s15
-  402870:	4a5c      	ldr	r2, [pc, #368]	; (4029e4 <USART1_Handler+0x2d0>)
+  402870:	4a5d      	ldr	r2, [pc, #372]	; (4029e8 <USART1_Handler+0x2d4>)
   402872:	ee67 7a87 	vmul.f32	s15, s15, s14
   402876:	edc2 7a00 	vstr	s15, [r2]
 			waiting_for_chorus_volume = false;
   40287a:	f888 3000 	strb.w	r3, [r8]
   40287e:	e751      	b.n	402724 <USART1_Handler+0x10>
 		else if (waiting_for_chorus_speed)
-  402880:	f8df c190 	ldr.w	ip, [pc, #400]	; 402a14 <USART1_Handler+0x300>
+  402880:	f8df c194 	ldr.w	ip, [pc, #404]	; 402a18 <USART1_Handler+0x304>
   402884:	f89c 3000 	ldrb.w	r3, [ip]
   402888:	b183      	cbz	r3, 4028ac <USART1_Handler+0x198>
 			chorus_speed = 0.05f + 2.0f*(float)received_byte / 127.0f;;
@@ -6586,10 +6586,10 @@ void USART_SERIAL_ISR_HANDLER(void)
 			waiting_for_chorus_speed = false;
   40288e:	2300      	movs	r3, #0
 			chorus_speed = 0.05f + 2.0f*(float)received_byte / 127.0f;;
-  402890:	eddf 6a55 	vldr	s13, [pc, #340]	; 4029e8 <USART1_Handler+0x2d4>
+  402890:	eddf 6a56 	vldr	s13, [pc, #344]	; 4029ec <USART1_Handler+0x2d8>
   402894:	eeb8 7a67 	vcvt.f32.u32	s14, s15
-  402898:	eddf 7a54 	vldr	s15, [pc, #336]	; 4029ec <USART1_Handler+0x2d8>
-  40289c:	4a54      	ldr	r2, [pc, #336]	; (4029f0 <USART1_Handler+0x2dc>)
+  402898:	eddf 7a55 	vldr	s15, [pc, #340]	; 4029f0 <USART1_Handler+0x2dc>
+  40289c:	4a55      	ldr	r2, [pc, #340]	; (4029f4 <USART1_Handler+0x2e0>)
   40289e:	eee7 7a26 	vfma.f32	s15, s14, s13
   4028a2:	edc2 7a00 	vstr	s15, [r2]
 			waiting_for_chorus_speed = false;
@@ -6630,14 +6630,14 @@ void USART_SERIAL_ISR_HANDLER(void)
   4028d6:	2bfc      	cmp	r3, #252	; 0xfc
   4028d8:	d034      	beq.n	402944 <USART1_Handler+0x230>
 		else if (received_byte != 0 && harmony_idx < MAX_NUM_SHIFTS)
-  4028da:	4a46      	ldr	r2, [pc, #280]	; (4029f4 <USART1_Handler+0x2e0>)
+  4028da:	4a47      	ldr	r2, [pc, #284]	; (4029f8 <USART1_Handler+0x2e4>)
   4028dc:	b1fb      	cbz	r3, 40291e <USART1_Handler+0x20a>
   4028de:	6811      	ldr	r1, [r2, #0]
   4028e0:	290a      	cmp	r1, #10
   4028e2:	d81c      	bhi.n	40291e <USART1_Handler+0x20a>
 			harmony_list_fill[harmony_idx].freq = midi_note_frequencies[received_byte]; 
-  4028e4:	4c44      	ldr	r4, [pc, #272]	; (4029f8 <USART1_Handler+0x2e4>)
-  4028e6:	4845      	ldr	r0, [pc, #276]	; (4029fc <USART1_Handler+0x2e8>)
+  4028e4:	4c45      	ldr	r4, [pc, #276]	; (4029fc <USART1_Handler+0x2e8>)
+  4028e6:	4846      	ldr	r0, [pc, #280]	; (402a00 <USART1_Handler+0x2ec>)
   4028e8:	6815      	ldr	r5, [r2, #0]
   4028ea:	6821      	ldr	r1, [r4, #0]
   4028ec:	eb00 0383 	add.w	r3, r0, r3, lsl #2
@@ -6668,16 +6668,16 @@ void USART_SERIAL_ISR_HANDLER(void)
   40291a:	7003      	strb	r3, [r0, #0]
   40291c:	e702      	b.n	402724 <USART1_Handler+0x10>
 			harmony_list_fill[harmony_idx].freq = END_OF_SHIFTS; 
-  40291e:	4936      	ldr	r1, [pc, #216]	; (4029f8 <USART1_Handler+0x2e4>)
+  40291e:	4937      	ldr	r1, [pc, #220]	; (4029fc <USART1_Handler+0x2e8>)
 			harmony_list_fill[harmony_idx].idx = 0; // dont care 
   402920:	2000      	movs	r0, #0
 			harmony_list_fill[harmony_idx].freq = END_OF_SHIFTS; 
   402922:	6816      	ldr	r6, [r2, #0]
   402924:	680b      	ldr	r3, [r1, #0]
-  402926:	4d36      	ldr	r5, [pc, #216]	; (402a00 <USART1_Handler+0x2ec>)
+  402926:	4d37      	ldr	r5, [pc, #220]	; (402a04 <USART1_Handler+0x2f0>)
   402928:	eb03 03c6 	add.w	r3, r3, r6, lsl #3
 			harmony_t *temp = (harmony_t *)harmony_list_read; 
-  40292c:	4c35      	ldr	r4, [pc, #212]	; (402a04 <USART1_Handler+0x2f0>)
+  40292c:	4c36      	ldr	r4, [pc, #216]	; (402a08 <USART1_Handler+0x2f4>)
 			harmony_list_fill[harmony_idx].freq = END_OF_SHIFTS; 
   40292e:	601d      	str	r5, [r3, #0]
 			harmony_list_fill[harmony_idx].idx = 0; // dont care 
@@ -6698,7 +6698,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 }
   402942:	e6ef      	b.n	402724 <USART1_Handler+0x10>
 			autotune = !autotune; 
-  402944:	4a30      	ldr	r2, [pc, #192]	; (402a08 <USART1_Handler+0x2f4>)
+  402944:	4a31      	ldr	r2, [pc, #196]	; (402a0c <USART1_Handler+0x2f8>)
   402946:	7813      	ldrb	r3, [r2, #0]
   402948:	f083 0301 	eor.w	r3, r3, #1
   40294c:	7013      	strb	r3, [r2, #0]
@@ -6736,1474 +6736,1474 @@ void USART_SERIAL_ISR_HANDLER(void)
   402988:	00401821 	.word	0x00401821
   40298c:	2044540a 	.word	0x2044540a
   402990:	2044540b 	.word	0x2044540b
-  402994:	3c010204 	.word	0x3c010204
+  402994:	3c1acf38 	.word	0x3c1acf38
   402998:	20400050 	.word	0x20400050
-  40299c:	20400044 	.word	0x20400044
-  4029a0:	20445409 	.word	0x20445409
-  4029a4:	2044540c 	.word	0x2044540c
-  4029a8:	20400054 	.word	0x20400054
-  4029ac:	3be836d4 	.word	0x3be836d4
-  4029b0:	3dcccccd 	.word	0x3dcccccd
-  4029b4:	20400040 	.word	0x20400040
-  4029b8:	2044540d 	.word	0x2044540d
-  4029bc:	20445400 	.word	0x20445400
-  4029c0:	20445408 	.word	0x20445408
-  4029c4:	3bb49c6c 	.word	0x3bb49c6c
-  4029c8:	20430000 	.word	0x20430000
-  4029cc:	20445407 	.word	0x20445407
-  4029d0:	42dc78f2 	.word	0x42dc78f2
-  4029d4:	467d2000 	.word	0x467d2000
-  4029d8:	2040003c 	.word	0x2040003c
-  4029dc:	3bce69a0 	.word	0x3bce69a0
-  4029e0:	20400038 	.word	0x20400038
-  4029e4:	2041c0d4 	.word	0x2041c0d4
-  4029e8:	3c810204 	.word	0x3c810204
-  4029ec:	3d4ccccd 	.word	0x3d4ccccd
-  4029f0:	20400034 	.word	0x20400034
-  4029f4:	20444000 	.word	0x20444000
-  4029f8:	20400048 	.word	0x20400048
-  4029fc:	004071f8 	.word	0x004071f8
-  402a00:	bf800000 	.word	0xbf800000
-  402a04:	2040004c 	.word	0x2040004c
-  402a08:	20400030 	.word	0x20400030
-  402a0c:	20445406 	.word	0x20445406
-  402a10:	20445405 	.word	0x20445405
-  402a14:	20445404 	.word	0x20445404
+  40299c:	3c010204 	.word	0x3c010204
+  4029a0:	20400044 	.word	0x20400044
+  4029a4:	20445409 	.word	0x20445409
+  4029a8:	2044540c 	.word	0x2044540c
+  4029ac:	20400054 	.word	0x20400054
+  4029b0:	3be836d4 	.word	0x3be836d4
+  4029b4:	3dcccccd 	.word	0x3dcccccd
+  4029b8:	20400040 	.word	0x20400040
+  4029bc:	2044540d 	.word	0x2044540d
+  4029c0:	20445400 	.word	0x20445400
+  4029c4:	20445408 	.word	0x20445408
+  4029c8:	3bb49c6c 	.word	0x3bb49c6c
+  4029cc:	20430000 	.word	0x20430000
+  4029d0:	20445407 	.word	0x20445407
+  4029d4:	42dc78f2 	.word	0x42dc78f2
+  4029d8:	467d2000 	.word	0x467d2000
+  4029dc:	2040003c 	.word	0x2040003c
+  4029e0:	3bce69a0 	.word	0x3bce69a0
+  4029e4:	20400038 	.word	0x20400038
+  4029e8:	2041c0d4 	.word	0x2041c0d4
+  4029ec:	3c810204 	.word	0x3c810204
+  4029f0:	3d4ccccd 	.word	0x3d4ccccd
+  4029f4:	20400034 	.word	0x20400034
+  4029f8:	20444000 	.word	0x20444000
+  4029fc:	20400048 	.word	0x20400048
+  402a00:	004071f8 	.word	0x004071f8
+  402a04:	bf800000 	.word	0xbf800000
+  402a08:	2040004c 	.word	0x2040004c
+  402a0c:	20400030 	.word	0x20400030
+  402a10:	20445406 	.word	0x20445406
+  402a14:	20445405 	.word	0x20445405
+  402a18:	20445404 	.word	0x20445404
 
-00402a18 <main>:
+00402a1c <main>:
 // uncomment to communicate to pc console over uart for debug 
 //#define USING_CONSOLE
 volatile uint32_t delay; 
 
 int main(void)
 {
-  402a18:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  402a1c:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
 	sysclk_init();
-  402a1c:	4bc1      	ldr	r3, [pc, #772]	; (402d24 <main+0x30c>)
+  402a20:	4bc1      	ldr	r3, [pc, #772]	; (402d28 <main+0x30c>)
 {
-  402a1e:	ed2d 8b06 	vpush	{d8-d10}
-  402a22:	b097      	sub	sp, #92	; 0x5c
+  402a22:	ed2d 8b06 	vpush	{d8-d10}
+  402a26:	b097      	sub	sp, #92	; 0x5c
 	sysclk_init();
-  402a24:	4798      	blx	r3
-	board_init();
-  402a26:	4bc0      	ldr	r3, [pc, #768]	; (402d28 <main+0x310>)
   402a28:	4798      	blx	r3
+	board_init();
+  402a2a:	4bc0      	ldr	r3, [pc, #768]	; (402d2c <main+0x310>)
+  402a2c:	4798      	blx	r3
   __ASM volatile ("dsb");
-  402a2a:	f3bf 8f4f 	dsb	sy
+  402a2e:	f3bf 8f4f 	dsb	sy
   __ASM volatile ("isb");
-  402a2e:	f3bf 8f6f 	isb	sy
+  402a32:	f3bf 8f6f 	isb	sy
 __STATIC_INLINE void SCB_DisableICache(void)
 {
   #if (__ICACHE_PRESENT == 1)
     __DSB();
     __ISB();
     SCB->CCR &= ~SCB_CCR_IC_Msk;            // disable I-Cache
-  402a32:	4bbe      	ldr	r3, [pc, #760]	; (402d2c <main+0x314>)
+  402a36:	4bbe      	ldr	r3, [pc, #760]	; (402d30 <main+0x314>)
     SCB->ICIALLU = 0;                       // invalidate I-Cache
-  402a34:	2500      	movs	r5, #0
+  402a38:	2500      	movs	r5, #0
     SCB->CCR &= ~SCB_CCR_IC_Msk;            // disable I-Cache
-  402a36:	695a      	ldr	r2, [r3, #20]
-  402a38:	f422 3200 	bic.w	r2, r2, #131072	; 0x20000
-  402a3c:	615a      	str	r2, [r3, #20]
+  402a3a:	695a      	ldr	r2, [r3, #20]
+  402a3c:	f422 3200 	bic.w	r2, r2, #131072	; 0x20000
+  402a40:	615a      	str	r2, [r3, #20]
     SCB->ICIALLU = 0;                       // invalidate I-Cache
-  402a3e:	f8c3 5250 	str.w	r5, [r3, #592]	; 0x250
+  402a42:	f8c3 5250 	str.w	r5, [r3, #592]	; 0x250
   __ASM volatile ("dsb");
-  402a42:	f3bf 8f4f 	dsb	sy
+  402a46:	f3bf 8f4f 	dsb	sy
   __ASM volatile ("isb");
-  402a46:	f3bf 8f6f 	isb	sy
+  402a4a:	f3bf 8f6f 	isb	sy
   __ASM volatile ("dsb");
-  402a4a:	f3bf 8f4f 	dsb	sy
+  402a4e:	f3bf 8f4f 	dsb	sy
   __ASM volatile ("isb");
-  402a4e:	f3bf 8f6f 	isb	sy
+  402a52:	f3bf 8f6f 	isb	sy
     SCB->ICIALLU = 0;                       // invalidate I-Cache
-  402a52:	f8c3 5250 	str.w	r5, [r3, #592]	; 0x250
+  402a56:	f8c3 5250 	str.w	r5, [r3, #592]	; 0x250
     SCB->CCR |=  SCB_CCR_IC_Msk;            // enable I-Cache
-  402a56:	695a      	ldr	r2, [r3, #20]
-  402a58:	f442 3200 	orr.w	r2, r2, #131072	; 0x20000
-  402a5c:	615a      	str	r2, [r3, #20]
+  402a5a:	695a      	ldr	r2, [r3, #20]
+  402a5c:	f442 3200 	orr.w	r2, r2, #131072	; 0x20000
+  402a60:	615a      	str	r2, [r3, #20]
   __ASM volatile ("dsb");
-  402a5e:	f3bf 8f4f 	dsb	sy
+  402a62:	f3bf 8f4f 	dsb	sy
   __ASM volatile ("isb");
-  402a62:	f3bf 8f6f 	isb	sy
+  402a66:	f3bf 8f6f 	isb	sy
  	SCB_DisableICache(); 
 // 	lcd_init(); 
  	SCB_EnableICache();
 	audio_init();
-  402a66:	4bb2      	ldr	r3, [pc, #712]	; (402d30 <main+0x318>)
+  402a6a:	4bb2      	ldr	r3, [pc, #712]	; (402d34 <main+0x318>)
 	uart_settings.ul_baudrate = opt->baudrate;
 	uart_settings.ul_mode = opt->paritytype;
 #endif
 
 	sam_usart_opt_t usart_settings;
 	usart_settings.baudrate = opt->baudrate;
-  402a68:	f44f 34e1 	mov.w	r4, #115200	; 0x1c200
-  402a6c:	4798      	blx	r3
+  402a6c:	f44f 34e1 	mov.w	r4, #115200	; 0x1c200
+  402a70:	4798      	blx	r3
 #ifdef USING_CONSOLE
 	configure_console();
 #endif 
 	PSOLA_init(); 
-  402a6e:	4bb1      	ldr	r3, [pc, #708]	; (402d34 <main+0x31c>)
-  402a70:	4798      	blx	r3
+  402a72:	4bb1      	ldr	r3, [pc, #708]	; (402d38 <main+0x31c>)
+  402a74:	4798      	blx	r3
 	usart_settings.char_length = opt->charlength;
-  402a72:	21c0      	movs	r1, #192	; 0xc0
+  402a76:	21c0      	movs	r1, #192	; 0xc0
 	usart_settings.parity_type = opt->paritytype;
-  402a74:	f44f 6200 	mov.w	r2, #2048	; 0x800
-  402a78:	4baf      	ldr	r3, [pc, #700]	; (402d38 <main+0x320>)
-  402a7a:	200e      	movs	r0, #14
+  402a78:	f44f 6200 	mov.w	r2, #2048	; 0x800
+  402a7c:	4baf      	ldr	r3, [pc, #700]	; (402d3c <main+0x320>)
+  402a7e:	200e      	movs	r0, #14
 	usart_settings.baudrate = opt->baudrate;
-  402a7c:	940a      	str	r4, [sp, #40]	; 0x28
+  402a80:	940a      	str	r4, [sp, #40]	; 0x28
 	usart_settings.char_length = opt->charlength;
-  402a7e:	910b      	str	r1, [sp, #44]	; 0x2c
-  402a80:	f06f 0401 	mvn.w	r4, #1
+  402a82:	910b      	str	r1, [sp, #44]	; 0x2c
+  402a84:	f06f 0401 	mvn.w	r4, #1
 	usart_settings.parity_type = opt->paritytype;
-  402a84:	920c      	str	r2, [sp, #48]	; 0x30
+  402a88:	920c      	str	r2, [sp, #48]	; 0x30
 	}
 	
 	float oneOverInputPitch = 1.0f;
 	float pitch_shift, power;
 	float harmony_shifts[MAX_NUM_SHIFTS+1];
 	harmony_shifts[0] = NO_SHIFT;
-  402a86:	f04f 5b7e 	mov.w	fp, #1065353216	; 0x3f800000
+  402a8a:	f04f 5b7e 	mov.w	fp, #1065353216	; 0x3f800000
 	usart_settings.stop_bits= opt->stopbits;
-  402a8a:	950d      	str	r5, [sp, #52]	; 0x34
-  402a8c:	4627      	mov	r7, r4
+  402a8e:	950d      	str	r5, [sp, #52]	; 0x34
+  402a90:	4627      	mov	r7, r4
 	usart_settings.channel_mode= US_MR_CHMODE_NORMAL;
-  402a8e:	950e      	str	r5, [sp, #56]	; 0x38
-  402a90:	4798      	blx	r3
+  402a92:	950e      	str	r5, [sp, #56]	; 0x38
+  402a94:	4798      	blx	r3
 		flexcom_set_opmode(FLEXCOM1, FLEXCOM_USART);
 #else
 		sysclk_enable_peripheral_clock(ID_USART1);
 #endif
 		/* Configure USART */
 		usart_init_rs232(p_usart, &usart_settings,
-  402a92:	4aaa      	ldr	r2, [pc, #680]	; (402d3c <main+0x324>)
-  402a94:	a90a      	add	r1, sp, #40	; 0x28
-  402a96:	4baa      	ldr	r3, [pc, #680]	; (402d40 <main+0x328>)
+  402a96:	4aaa      	ldr	r2, [pc, #680]	; (402d40 <main+0x324>)
+  402a98:	a90a      	add	r1, sp, #40	; 0x28
+  402a9a:	4baa      	ldr	r3, [pc, #680]	; (402d44 <main+0x328>)
 	uint32_t num_of_shifts = 0; 
 	uint32_t circ_buf_idx = 0; 
 	float closest_note = 0; 
 	float desired_pitch; 
 	uint32_t in_pitch_idx = 0; 
 	uint32_t sin_cnt = 0; 
-  402a98:	46a8      	mov	r8, r5
-  402a9a:	48aa      	ldr	r0, [pc, #680]	; (402d44 <main+0x32c>)
-  402a9c:	4798      	blx	r3
+  402a9c:	46a8      	mov	r8, r5
+  402a9e:	48aa      	ldr	r0, [pc, #680]	; (402d48 <main+0x32c>)
+  402aa0:	4798      	blx	r3
 		/* Configure USART */
 		usart_init_rs232(p_usart, &usart_settings,
 				sysclk_get_peripheral_bus_hz(p_usart));
 #endif
 		/* Enable the receiver and transmitter. */
 		usart_enable_tx(p_usart);
-  402a9e:	4eaa      	ldr	r6, [pc, #680]	; (402d48 <main+0x330>)
-  402aa0:	48a8      	ldr	r0, [pc, #672]	; (402d44 <main+0x32c>)
-  402aa2:	47b0      	blx	r6
+  402aa2:	4eaa      	ldr	r6, [pc, #680]	; (402d4c <main+0x330>)
+  402aa4:	48a8      	ldr	r0, [pc, #672]	; (402d48 <main+0x32c>)
+  402aa6:	47b0      	blx	r6
 		usart_enable_rx(p_usart);
-  402aa4:	4ca9      	ldr	r4, [pc, #676]	; (402d4c <main+0x334>)
-  402aa6:	48a7      	ldr	r0, [pc, #668]	; (402d44 <main+0x32c>)
-  402aa8:	47a0      	blx	r4
+  402aa8:	4ca9      	ldr	r4, [pc, #676]	; (402d50 <main+0x334>)
+  402aaa:	48a7      	ldr	r0, [pc, #668]	; (402d48 <main+0x32c>)
+  402aac:	47a0      	blx	r4
 	usart_enable_tx(USART_SERIAL);
-  402aaa:	48a6      	ldr	r0, [pc, #664]	; (402d44 <main+0x32c>)
-  402aac:	47b0      	blx	r6
+  402aae:	48a6      	ldr	r0, [pc, #664]	; (402d48 <main+0x32c>)
+  402ab0:	47b0      	blx	r6
 	usart_enable_rx(USART_SERIAL);
-  402aae:	48a5      	ldr	r0, [pc, #660]	; (402d44 <main+0x32c>)
-  402ab0:	47a0      	blx	r4
-  402ab2:	463c      	mov	r4, r7
-  402ab4:	4fa6      	ldr	r7, [pc, #664]	; (402d50 <main+0x338>)
+  402ab2:	48a5      	ldr	r0, [pc, #660]	; (402d48 <main+0x32c>)
+  402ab4:	47a0      	blx	r4
+  402ab6:	463c      	mov	r4, r7
+  402ab8:	4fa6      	ldr	r7, [pc, #664]	; (402d54 <main+0x338>)
 	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY); 
-  402ab6:	2101      	movs	r1, #1
-  402ab8:	48a2      	ldr	r0, [pc, #648]	; (402d44 <main+0x32c>)
+  402aba:	2101      	movs	r1, #1
+  402abc:	48a2      	ldr	r0, [pc, #648]	; (402d48 <main+0x32c>)
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402aba:	2600      	movs	r6, #0
+  402abe:	2600      	movs	r6, #0
 	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY); 
-  402abc:	4ba5      	ldr	r3, [pc, #660]	; (402d54 <main+0x33c>)
-  402abe:	1be4      	subs	r4, r4, r7
-  402ac0:	4798      	blx	r3
+  402ac0:	4ba5      	ldr	r3, [pc, #660]	; (402d58 <main+0x33c>)
+  402ac2:	1be4      	subs	r4, r4, r7
+  402ac4:	4798      	blx	r3
     NVIC->IP[(uint32_t)(IRQn)]            = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff); } /* set Priority for device specific Interrupts  */
-  402ac2:	f04f 0740 	mov.w	r7, #64	; 0x40
-  402ac6:	f8df c2e0 	ldr.w	ip, [pc, #736]	; 402da8 <main+0x390>
+  402ac6:	f04f 0740 	mov.w	r7, #64	; 0x40
+  402aca:	f8df c2e0 	ldr.w	ip, [pc, #736]	; 402dac <main+0x390>
 	uint32_t chorus_delay; 
 	arm_fill_f32(0.0f, dry_circ_buffer, CIRC_BUF_SIZE);
-  402aca:	f44f 4280 	mov.w	r2, #16384	; 0x4000
+  402ace:	f44f 4280 	mov.w	r2, #16384	; 0x4000
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402ace:	f8df e2dc 	ldr.w	lr, [pc, #732]	; 402dac <main+0x394>
+  402ad2:	f8df e2dc 	ldr.w	lr, [pc, #732]	; 402db0 <main+0x394>
 	arm_fill_f32(0.0f, dry_circ_buffer, CIRC_BUF_SIZE);
-  402ad2:	4630      	mov	r0, r6
+  402ad6:	4630      	mov	r0, r6
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402ad4:	4ba0      	ldr	r3, [pc, #640]	; (402d58 <main+0x340>)
-  402ad6:	9407      	str	r4, [sp, #28]
+  402ad8:	4ba0      	ldr	r3, [pc, #640]	; (402d5c <main+0x340>)
+  402ada:	9407      	str	r4, [sp, #28]
 	harmony_shifts[1] = END_OF_SHIFTS; 
-  402ad8:	f8df a2d4 	ldr.w	sl, [pc, #724]	; 402db0 <main+0x398>
-  402adc:	f88c 730e 	strb.w	r7, [ip, #782]	; 0x30e
+  402adc:	f8df a2d4 	ldr.w	sl, [pc, #724]	; 402db4 <main+0x398>
+  402ae0:	f88c 730e 	strb.w	r7, [ip, #782]	; 0x30e
   NVIC->ICPR[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F)); /* Clear pending interrupt */
-  402ae0:	4617      	mov	r7, r2
+  402ae4:	4617      	mov	r7, r2
 	arm_fill_f32(0.0f, dry_circ_buffer, CIRC_BUF_SIZE);
-  402ae2:	499e      	ldr	r1, [pc, #632]	; (402d5c <main+0x344>)
-  402ae4:	f8cc 2180 	str.w	r2, [ip, #384]	; 0x180
+  402ae6:	499e      	ldr	r1, [pc, #632]	; (402d60 <main+0x344>)
+  402ae8:	f8cc 2180 	str.w	r2, [ip, #384]	; 0x180
   NVIC->ISER[(uint32_t)((int32_t)IRQn) >> 5] = (uint32_t)(1 << ((uint32_t)((int32_t)IRQn) & (uint32_t)0x1F)); /* enable interrupt */
-  402ae8:	f8cc 2000 	str.w	r2, [ip]
-  402aec:	460c      	mov	r4, r1
+  402aec:	f8cc 2000 	str.w	r2, [ip]
+  402af0:	460c      	mov	r4, r1
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402aee:	f8ce 6000 	str.w	r6, [lr]
-  402af2:	601e      	str	r6, [r3, #0]
+  402af2:	f8ce 6000 	str.w	r6, [lr]
+  402af6:	601e      	str	r6, [r3, #0]
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402af4:	f8ce 5004 	str.w	r5, [lr, #4]
-  402af8:	605d      	str	r5, [r3, #4]
+  402af8:	f8ce 5004 	str.w	r5, [lr, #4]
+  402afc:	605d      	str	r5, [r3, #4]
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402afa:	f8ce 6008 	str.w	r6, [lr, #8]
-  402afe:	609e      	str	r6, [r3, #8]
+  402afe:	f8ce 6008 	str.w	r6, [lr, #8]
+  402b02:	609e      	str	r6, [r3, #8]
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402b00:	f8ce 500c 	str.w	r5, [lr, #12]
-  402b04:	60dd      	str	r5, [r3, #12]
+  402b04:	f8ce 500c 	str.w	r5, [lr, #12]
+  402b08:	60dd      	str	r5, [r3, #12]
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402b06:	f8ce 6010 	str.w	r6, [lr, #16]
-  402b0a:	611e      	str	r6, [r3, #16]
+  402b0a:	f8ce 6010 	str.w	r6, [lr, #16]
+  402b0e:	611e      	str	r6, [r3, #16]
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402b0c:	f8ce 5014 	str.w	r5, [lr, #20]
-  402b10:	615d      	str	r5, [r3, #20]
+  402b10:	f8ce 5014 	str.w	r5, [lr, #20]
+  402b14:	615d      	str	r5, [r3, #20]
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402b12:	f8ce 6018 	str.w	r6, [lr, #24]
-  402b16:	619e      	str	r6, [r3, #24]
+  402b16:	f8ce 6018 	str.w	r6, [lr, #24]
+  402b1a:	619e      	str	r6, [r3, #24]
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402b18:	f8ce 501c 	str.w	r5, [lr, #28]
-  402b1c:	61dd      	str	r5, [r3, #28]
+  402b1c:	f8ce 501c 	str.w	r5, [lr, #28]
+  402b20:	61dd      	str	r5, [r3, #28]
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402b1e:	f8ce 6020 	str.w	r6, [lr, #32]
-  402b22:	621e      	str	r6, [r3, #32]
+  402b22:	f8ce 6020 	str.w	r6, [lr, #32]
+  402b26:	621e      	str	r6, [r3, #32]
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402b24:	f8ce 5024 	str.w	r5, [lr, #36]	; 0x24
-  402b28:	625d      	str	r5, [r3, #36]	; 0x24
+  402b28:	f8ce 5024 	str.w	r5, [lr, #36]	; 0x24
+  402b2c:	625d      	str	r5, [r3, #36]	; 0x24
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402b2a:	f8ce 6028 	str.w	r6, [lr, #40]	; 0x28
-  402b2e:	629e      	str	r6, [r3, #40]	; 0x28
+  402b2e:	f8ce 6028 	str.w	r6, [lr, #40]	; 0x28
+  402b32:	629e      	str	r6, [r3, #40]	; 0x28
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402b30:	f8ce 502c 	str.w	r5, [lr, #44]	; 0x2c
-  402b34:	62dd      	str	r5, [r3, #44]	; 0x2c
+  402b34:	f8ce 502c 	str.w	r5, [lr, #44]	; 0x2c
+  402b38:	62dd      	str	r5, [r3, #44]	; 0x2c
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402b36:	f8ce 6030 	str.w	r6, [lr, #48]	; 0x30
-  402b3a:	631e      	str	r6, [r3, #48]	; 0x30
+  402b3a:	f8ce 6030 	str.w	r6, [lr, #48]	; 0x30
+  402b3e:	631e      	str	r6, [r3, #48]	; 0x30
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402b3c:	f8ce 5034 	str.w	r5, [lr, #52]	; 0x34
-  402b40:	635d      	str	r5, [r3, #52]	; 0x34
+  402b40:	f8ce 5034 	str.w	r5, [lr, #52]	; 0x34
+  402b44:	635d      	str	r5, [r3, #52]	; 0x34
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402b42:	f8ce 6038 	str.w	r6, [lr, #56]	; 0x38
-  402b46:	639e      	str	r6, [r3, #56]	; 0x38
+  402b46:	f8ce 6038 	str.w	r6, [lr, #56]	; 0x38
+  402b4a:	639e      	str	r6, [r3, #56]	; 0x38
 	harmony_shifts[0] = NO_SHIFT;
-  402b48:	f8cd b028 	str.w	fp, [sp, #40]	; 0x28
+  402b4c:	f8cd b028 	str.w	fp, [sp, #40]	; 0x28
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402b4c:	f8ce 503c 	str.w	r5, [lr, #60]	; 0x3c
-  402b50:	f8df b260 	ldr.w	fp, [pc, #608]	; 402db4 <main+0x39c>
-  402b54:	63dd      	str	r5, [r3, #60]	; 0x3c
+  402b50:	f8ce 503c 	str.w	r5, [lr, #60]	; 0x3c
+  402b54:	f8df b260 	ldr.w	fp, [pc, #608]	; 402db8 <main+0x39c>
+  402b58:	63dd      	str	r5, [r3, #60]	; 0x3c
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402b56:	f8ce 6040 	str.w	r6, [lr, #64]	; 0x40
-  402b5a:	641e      	str	r6, [r3, #64]	; 0x40
+  402b5a:	f8ce 6040 	str.w	r6, [lr, #64]	; 0x40
+  402b5e:	641e      	str	r6, [r3, #64]	; 0x40
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402b5c:	f8ce 5044 	str.w	r5, [lr, #68]	; 0x44
-  402b60:	645d      	str	r5, [r3, #68]	; 0x44
+  402b60:	f8ce 5044 	str.w	r5, [lr, #68]	; 0x44
+  402b64:	645d      	str	r5, [r3, #68]	; 0x44
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402b62:	f8ce 6048 	str.w	r6, [lr, #72]	; 0x48
-  402b66:	649e      	str	r6, [r3, #72]	; 0x48
+  402b66:	f8ce 6048 	str.w	r6, [lr, #72]	; 0x48
+  402b6a:	649e      	str	r6, [r3, #72]	; 0x48
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402b68:	f8ce 504c 	str.w	r5, [lr, #76]	; 0x4c
-  402b6c:	64dd      	str	r5, [r3, #76]	; 0x4c
+  402b6c:	f8ce 504c 	str.w	r5, [lr, #76]	; 0x4c
+  402b70:	64dd      	str	r5, [r3, #76]	; 0x4c
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-  402b6e:	f8ce 6050 	str.w	r6, [lr, #80]	; 0x50
-  402b72:	651e      	str	r6, [r3, #80]	; 0x50
+  402b72:	f8ce 6050 	str.w	r6, [lr, #80]	; 0x50
+  402b76:	651e      	str	r6, [r3, #80]	; 0x50
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
-  402b74:	f8ce 5054 	str.w	r5, [lr, #84]	; 0x54
-  402b78:	655d      	str	r5, [r3, #84]	; 0x54
+  402b78:	f8ce 5054 	str.w	r5, [lr, #84]	; 0x54
+  402b7c:	655d      	str	r5, [r3, #84]	; 0x54
 	arm_fill_f32(0.0f, dry_circ_buffer, CIRC_BUF_SIZE);
-  402b7a:	4b79      	ldr	r3, [pc, #484]	; (402d60 <main+0x348>)
+  402b7e:	4b79      	ldr	r3, [pc, #484]	; (402d64 <main+0x348>)
 	harmony_shifts[1] = END_OF_SHIFTS; 
-  402b7c:	f8cd a02c 	str.w	sl, [sp, #44]	; 0x2c
+  402b80:	f8cd a02c 	str.w	sl, [sp, #44]	; 0x2c
 	harmony_shifts[MAX_NUM_SHIFTS] = END_OF_SHIFTS; // should never change 
-  402b80:	f8cd a054 	str.w	sl, [sp, #84]	; 0x54
+  402b84:	f8cd a054 	str.w	sl, [sp, #84]	; 0x54
 	arm_fill_f32(0.0f, dry_circ_buffer, CIRC_BUF_SIZE);
-  402b84:	4798      	blx	r3
-  402b86:	eddf aa77 	vldr	s21, [pc, #476]	; 402d64 <main+0x34c>
+  402b88:	4798      	blx	r3
+  402b8a:	eddf aa77 	vldr	s21, [pc, #476]	; 402d68 <main+0x34c>
 	arm_fill_f32(0.0f, delay_circ_buffer, CIRC_BUF_SIZE);
-  402b8a:	463a      	mov	r2, r7
+  402b8e:	463a      	mov	r2, r7
 			
 			// Add audio effects 
 			uint32_t curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 			// chorus params -- could make speed a param 
 			float n_freq = chorus_speed / PSOLA_SAMPLE_RATE; 
 			uint32_t num_samples_in_period = 1 / n_freq; 
-  402b8c:	eddf 8a76 	vldr	s17, [pc, #472]	; 402d68 <main+0x350>
+  402b90:	eddf 8a76 	vldr	s17, [pc, #472]	; 402d6c <main+0x350>
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{				
 				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
-  402b90:	4647      	mov	r7, r8
-  402b92:	f8df a224 	ldr.w	sl, [pc, #548]	; 402db8 <main+0x3a0>
+  402b94:	4647      	mov	r7, r8
+  402b96:	f8df a224 	ldr.w	sl, [pc, #548]	; 402dbc <main+0x3a0>
 	arm_fill_f32(0.0f, delay_circ_buffer, CIRC_BUF_SIZE);
-  402b96:	4630      	mov	r0, r6
-  402b98:	4659      	mov	r1, fp
-  402b9a:	4b71      	ldr	r3, [pc, #452]	; (402d60 <main+0x348>)
-  402b9c:	4798      	blx	r3
+  402b9a:	4630      	mov	r0, r6
+  402b9c:	4659      	mov	r1, fp
+  402b9e:	4b71      	ldr	r3, [pc, #452]	; (402d64 <main+0x348>)
+  402ba0:	4798      	blx	r3
 				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
-  402b9e:	9503      	str	r5, [sp, #12]
+  402ba2:	9503      	str	r5, [sp, #12]
 		if (dataReceived)
-  402ba0:	4b72      	ldr	r3, [pc, #456]	; (402d6c <main+0x354>)
-  402ba2:	781b      	ldrb	r3, [r3, #0]
-  402ba4:	2b00      	cmp	r3, #0
-  402ba6:	d0fb      	beq.n	402ba0 <main+0x188>
+  402ba4:	4b72      	ldr	r3, [pc, #456]	; (402d70 <main+0x354>)
+  402ba6:	781b      	ldrb	r3, [r3, #0]
+  402ba8:	2b00      	cmp	r3, #0
+  402baa:	d0fb      	beq.n	402ba4 <main+0x188>
 			inputPitch = computeWaveletPitch((float  *)processBuffer);
-  402ba8:	4a71      	ldr	r2, [pc, #452]	; (402d70 <main+0x358>)
+  402bac:	4a71      	ldr	r2, [pc, #452]	; (402d74 <main+0x358>)
 			dataReceived = false; 
-  402baa:	2300      	movs	r3, #0
+  402bae:	2300      	movs	r3, #0
 			oneOverInputPitch = 1.0f / inputPitch;
-  402bac:	ed9f 9a71 	vldr	s18, [pc, #452]	; 402d74 <main+0x35c>
+  402bb0:	ed9f 9a71 	vldr	s18, [pc, #452]	; 402d78 <main+0x35c>
 			inputPitch = computeWaveletPitch((float  *)processBuffer);
-  402bb0:	6810      	ldr	r0, [r2, #0]
+  402bb4:	6810      	ldr	r0, [r2, #0]
 			dataReceived = false; 
-  402bb2:	4a6e      	ldr	r2, [pc, #440]	; (402d6c <main+0x354>)
-  402bb4:	7013      	strb	r3, [r2, #0]
+  402bb6:	4a6e      	ldr	r2, [pc, #440]	; (402d70 <main+0x354>)
+  402bb8:	7013      	strb	r3, [r2, #0]
 			inputPitch = computeWaveletPitch((float  *)processBuffer);
-  402bb6:	4b70      	ldr	r3, [pc, #448]	; (402d78 <main+0x360>)
-  402bb8:	4798      	blx	r3
+  402bba:	4b70      	ldr	r3, [pc, #448]	; (402d7c <main+0x360>)
+  402bbc:	4798      	blx	r3
 			oneOverInputPitch = 1.0f / inputPitch;
-  402bba:	eeb7 7a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
-  402bbe:	ee07 0a90 	vmov	s15, r0
+  402bbe:	eeb7 7a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
+  402bc2:	ee07 0a90 	vmov	s15, r0
 	uint32_t lo = 12; // lowest at C0
-  402bc2:	220c      	movs	r2, #12
+  402bc6:	220c      	movs	r2, #12
 	uint32_t hi = 127;
-  402bc4:	207f      	movs	r0, #127	; 0x7f
-  402bc6:	fe87 8aaa 	vmaxnm.f32	s16, s15, s21
+  402bc8:	207f      	movs	r0, #127	; 0x7f
+  402bca:	fe87 8aaa 	vmaxnm.f32	s16, s15, s21
 			oneOverInputPitch = 1.0f / inputPitch;
-  402bca:	eec7 9a08 	vdiv.f32	s19, s14, s16
-  402bce:	eddf 7a6b 	vldr	s15, [pc, #428]	; 402d7c <main+0x364>
+  402bce:	eec7 9a08 	vdiv.f32	s19, s14, s16
+  402bd2:	eddf 7a6b 	vldr	s15, [pc, #428]	; 402d80 <main+0x364>
 		mid = (hi + lo) >> 1;
-  402bd2:	1813      	adds	r3, r2, r0
-  402bd4:	085b      	lsrs	r3, r3, #1
+  402bd6:	1813      	adds	r3, r2, r0
+  402bd8:	085b      	lsrs	r3, r3, #1
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402bd6:	ee77 7ac8 	vsub.f32	s15, s15, s16
+  402bda:	ee77 7ac8 	vsub.f32	s15, s15, s16
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402bda:	ee39 7a48 	vsub.f32	s14, s18, s16
+  402bde:	ee39 7a48 	vsub.f32	s14, s18, s16
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402bde:	1c59      	adds	r1, r3, #1
-  402be0:	eef0 7ae7 	vabs.f32	s15, s15
+  402be2:	1c59      	adds	r1, r3, #1
+  402be4:	eef0 7ae7 	vabs.f32	s15, s15
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402be4:	eeb0 7ac7 	vabs.f32	s14, s14
+  402be8:	eeb0 7ac7 	vabs.f32	s14, s14
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402be8:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+  402bec:	eefc 7ae7 	vcvt.u32.f32	s15, s15
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402bec:	eebc 7ac7 	vcvt.u32.f32	s14, s14
+  402bf0:	eebc 7ac7 	vcvt.u32.f32	s14, s14
 		if (d2 <= d1)
-  402bf0:	ee17 6a90 	vmov	r6, s15
-  402bf4:	ee17 5a10 	vmov	r5, s14
-  402bf8:	42b5      	cmp	r5, r6
-  402bfa:	d21f      	bcs.n	402c3c <main+0x224>
-  402bfc:	e14c      	b.n	402e98 <main+0x480>
+  402bf4:	ee17 6a90 	vmov	r6, s15
+  402bf8:	ee17 5a10 	vmov	r5, s14
+  402bfc:	42b5      	cmp	r5, r6
+  402bfe:	d21f      	bcs.n	402c40 <main+0x224>
+  402c00:	e14c      	b.n	402e9c <main+0x480>
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402bfe:	1c5d      	adds	r5, r3, #1
+  402c02:	1c5d      	adds	r5, r3, #1
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402c00:	4a5f      	ldr	r2, [pc, #380]	; (402d80 <main+0x368>)
+  402c04:	4a5f      	ldr	r2, [pc, #380]	; (402d84 <main+0x368>)
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402c02:	4e5f      	ldr	r6, [pc, #380]	; (402d80 <main+0x368>)
+  402c06:	4e5f      	ldr	r6, [pc, #380]	; (402d84 <main+0x368>)
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402c04:	eb02 0283 	add.w	r2, r2, r3, lsl #2
+  402c08:	eb02 0283 	add.w	r2, r2, r3, lsl #2
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402c08:	eb06 0685 	add.w	r6, r6, r5, lsl #2
+  402c0c:	eb06 0685 	add.w	r6, r6, r5, lsl #2
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402c0c:	ed92 9a00 	vldr	s18, [r2]
+  402c10:	ed92 9a00 	vldr	s18, [r2]
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402c10:	edd6 7a00 	vldr	s15, [r6]
+  402c14:	edd6 7a00 	vldr	s15, [r6]
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402c14:	ee39 7a48 	vsub.f32	s14, s18, s16
+  402c18:	ee39 7a48 	vsub.f32	s14, s18, s16
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402c18:	ee77 7ac8 	vsub.f32	s15, s15, s16
+  402c1c:	ee77 7ac8 	vsub.f32	s15, s15, s16
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402c1c:	eeb0 7ac7 	vabs.f32	s14, s14
+  402c20:	eeb0 7ac7 	vabs.f32	s14, s14
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402c20:	eef0 7ae7 	vabs.f32	s15, s15
+  402c24:	eef0 7ae7 	vabs.f32	s15, s15
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402c24:	eebc 7ac7 	vcvt.u32.f32	s14, s14
+  402c28:	eebc 7ac7 	vcvt.u32.f32	s14, s14
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402c28:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+  402c2c:	eefc 7ae7 	vcvt.u32.f32	s15, s15
 		if (d2 <= d1)
-  402c2c:	ee17 2a10 	vmov	r2, s14
-  402c30:	ee17 6a90 	vmov	r6, s15
-  402c34:	42b2      	cmp	r2, r6
-  402c36:	f0c0 8130 	bcc.w	402e9a <main+0x482>
+  402c30:	ee17 2a10 	vmov	r2, s14
+  402c34:	ee17 6a90 	vmov	r6, s15
+  402c38:	42b2      	cmp	r2, r6
+  402c3a:	f0c0 8130 	bcc.w	402e9e <main+0x482>
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402c3a:	4629      	mov	r1, r5
+  402c3e:	4629      	mov	r1, r5
 		mid = (hi + lo) >> 1;
-  402c3c:	180b      	adds	r3, r1, r0
+  402c40:	180b      	adds	r3, r1, r0
 	while (lo < hi)
-  402c3e:	4281      	cmp	r1, r0
+  402c42:	4281      	cmp	r1, r0
 		mid = (hi + lo) >> 1;
-  402c40:	ea4f 0353 	mov.w	r3, r3, lsr #1
+  402c44:	ea4f 0353 	mov.w	r3, r3, lsr #1
 	while (lo < hi)
-  402c44:	d3db      	bcc.n	402bfe <main+0x1e6>
-  402c46:	4b4e      	ldr	r3, [pc, #312]	; (402d80 <main+0x368>)
-  402c48:	eb03 0380 	add.w	r3, r3, r0, lsl #2
-  402c4c:	ed93 9a00 	vldr	s18, [r3]
+  402c48:	d3db      	bcc.n	402c02 <main+0x1e6>
+  402c4a:	4b4e      	ldr	r3, [pc, #312]	; (402d84 <main+0x368>)
+  402c4c:	eb03 0380 	add.w	r3, r3, r0, lsl #2
+  402c50:	ed93 9a00 	vldr	s18, [r3]
 			if (autotune)
-  402c50:	4b4c      	ldr	r3, [pc, #304]	; (402d84 <main+0x36c>)
-  402c52:	781a      	ldrb	r2, [r3, #0]
+  402c54:	4b4c      	ldr	r3, [pc, #304]	; (402d88 <main+0x36c>)
+  402c56:	781a      	ldrb	r2, [r3, #0]
 			if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
-  402c54:	4b4c      	ldr	r3, [pc, #304]	; (402d88 <main+0x370>)
+  402c58:	4b4c      	ldr	r3, [pc, #304]	; (402d8c <main+0x370>)
 				desired_pitch = closest_note;
-  402c56:	2a00      	cmp	r2, #0
+  402c5a:	2a00      	cmp	r2, #0
 			if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
-  402c58:	681b      	ldr	r3, [r3, #0]
+  402c5c:	681b      	ldr	r3, [r3, #0]
 				desired_pitch = closest_note;
-  402c5a:	bf14      	ite	ne
-  402c5c:	eef0 7a49 	vmovne.f32	s15, s18
-  402c60:	eef0 7a48 	vmoveq.f32	s15, s16
+  402c5e:	bf14      	ite	ne
+  402c60:	eef0 7a49 	vmovne.f32	s15, s18
+  402c64:	eef0 7a48 	vmoveq.f32	s15, s16
 			if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
-  402c64:	2b37      	cmp	r3, #55	; 0x37
-  402c66:	d903      	bls.n	402c70 <main+0x258>
-  402c68:	4b47      	ldr	r3, [pc, #284]	; (402d88 <main+0x370>)
-  402c6a:	681b      	ldr	r3, [r3, #0]
-  402c6c:	2b48      	cmp	r3, #72	; 0x48
-  402c6e:	d91e      	bls.n	402cae <main+0x296>
+  402c68:	2b37      	cmp	r3, #55	; 0x37
+  402c6a:	d903      	bls.n	402c74 <main+0x258>
+  402c6c:	4b47      	ldr	r3, [pc, #284]	; (402d8c <main+0x370>)
+  402c6e:	681b      	ldr	r3, [r3, #0]
+  402c70:	2b48      	cmp	r3, #72	; 0x48
+  402c72:	d91e      	bls.n	402cb2 <main+0x296>
 				bend_pitch(&desired_pitch, in_pitch_idx, (uint32_t)pitch_bend);
-  402c70:	4b45      	ldr	r3, [pc, #276]	; (402d88 <main+0x370>)
-  402c72:	681b      	ldr	r3, [r3, #0]
+  402c74:	4b45      	ldr	r3, [pc, #276]	; (402d8c <main+0x370>)
+  402c76:	681b      	ldr	r3, [r3, #0]
 	if (pitch_idx < 0 || pitch_idx > 127 || bend < 0 || bend > 127)
-  402c74:	2b7f      	cmp	r3, #127	; 0x7f
-  402c76:	d81a      	bhi.n	402cae <main+0x296>
+  402c78:	2b7f      	cmp	r3, #127	; 0x7f
+  402c7a:	d81a      	bhi.n	402cb2 <main+0x296>
 	if (pitch_bend > 64)
-  402c78:	4b43      	ldr	r3, [pc, #268]	; (402d88 <main+0x370>)
-  402c7a:	681b      	ldr	r3, [r3, #0]
-  402c7c:	2b40      	cmp	r3, #64	; 0x40
+  402c7c:	4b43      	ldr	r3, [pc, #268]	; (402d8c <main+0x370>)
+  402c7e:	681b      	ldr	r3, [r3, #0]
+  402c80:	2b40      	cmp	r3, #64	; 0x40
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
-  402c7e:	4b42      	ldr	r3, [pc, #264]	; (402d88 <main+0x370>)
-  402c80:	edd3 6a00 	vldr	s13, [r3]
+  402c82:	4b42      	ldr	r3, [pc, #264]	; (402d8c <main+0x370>)
+  402c84:	edd3 6a00 	vldr	s13, [r3]
 		bend_difference = midi_note_frequencies[pitch_idx+2] - midi_note_frequencies[pitch_idx];
-  402c84:	4b3e      	ldr	r3, [pc, #248]	; (402d80 <main+0x368>)
-  402c86:	eb03 0080 	add.w	r0, r3, r0, lsl #2
+  402c88:	4b3e      	ldr	r3, [pc, #248]	; (402d84 <main+0x368>)
+  402c8a:	eb03 0080 	add.w	r0, r3, r0, lsl #2
 	if (pitch_bend > 64)
-  402c8a:	f200 8258 	bhi.w	40313e <main+0x726>
+  402c8e:	f200 8258 	bhi.w	403142 <main+0x726>
 		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
-  402c8e:	eef8 6a66 	vcvt.f32.u32	s13, s13
-  402c92:	ed9f 6a3e 	vldr	s12, [pc, #248]	; 402d8c <main+0x374>
-  402c96:	ed9f 7a3e 	vldr	s14, [pc, #248]	; 402d90 <main+0x378>
+  402c92:	eef8 6a66 	vcvt.f32.u32	s13, s13
+  402c96:	ed9f 6a3e 	vldr	s12, [pc, #248]	; 402d90 <main+0x374>
+  402c9a:	ed9f 7a3e 	vldr	s14, [pc, #248]	; 402d94 <main+0x378>
 		bend_difference = midi_note_frequencies[pitch_idx] - midi_note_frequencies[pitch_idx-2];
-  402c9a:	ed50 5a02 	vldr	s11, [r0, #-8]
+  402c9e:	ed50 5a02 	vldr	s11, [r0, #-8]
 		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
-  402c9e:	ee76 6ac6 	vsub.f32	s13, s13, s12
+  402ca2:	ee76 6ac6 	vsub.f32	s13, s13, s12
 		bend_difference = midi_note_frequencies[pitch_idx] - midi_note_frequencies[pitch_idx-2];
-  402ca2:	ee39 6a65 	vsub.f32	s12, s18, s11
+  402ca6:	ee39 6a65 	vsub.f32	s12, s18, s11
 		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
-  402ca6:	ee26 7a87 	vmul.f32	s14, s13, s14
-  402caa:	eee7 7a06 	vfma.f32	s15, s14, s12
+  402caa:	ee26 7a87 	vmul.f32	s14, s13, s14
+  402cae:	eee7 7a06 	vfma.f32	s15, s14, s12
 			pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-  402cae:	eeb7 aa00 	vmov.f32	s20, #112	; 0x3f800000  1.0
+  402cb2:	eeb7 aa00 	vmov.f32	s20, #112	; 0x3f800000  1.0
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
-  402cb2:	4b2f      	ldr	r3, [pc, #188]	; (402d70 <main+0x358>)
+  402cb6:	4b2f      	ldr	r3, [pc, #188]	; (402d74 <main+0x358>)
 			pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-  402cb4:	ee77 7ac8 	vsub.f32	s15, s15, s16
+  402cb8:	ee77 7ac8 	vsub.f32	s15, s15, s16
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
-  402cb8:	aa09      	add	r2, sp, #36	; 0x24
-  402cba:	6818      	ldr	r0, [r3, #0]
-  402cbc:	f44f 7180 	mov.w	r1, #256	; 0x100
+  402cbc:	aa09      	add	r2, sp, #36	; 0x24
+  402cbe:	6818      	ldr	r0, [r3, #0]
+  402cc0:	f44f 7180 	mov.w	r1, #256	; 0x100
 			pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-  402cc0:	eeb0 7a4a 	vmov.f32	s14, s20
+  402cc4:	eeb0 7a4a 	vmov.f32	s14, s20
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
-  402cc4:	4b33      	ldr	r3, [pc, #204]	; (402d94 <main+0x37c>)
+  402cc8:	4b33      	ldr	r3, [pc, #204]	; (402d98 <main+0x37c>)
 			pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-  402cc6:	eea9 7aa7 	vfma.f32	s14, s19, s15
+  402cca:	eea9 7aa7 	vfma.f32	s14, s19, s15
 			harmony_shifts[0] = pitch_shift ;
-  402cca:	ed8d 7a0a 	vstr	s14, [sp, #40]	; 0x28
+  402cce:	ed8d 7a0a 	vstr	s14, [sp, #40]	; 0x28
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
-  402cce:	4798      	blx	r3
+  402cd2:	4798      	blx	r3
 			if (inputPitch > MINIMUM_PITCH && power > POWER_THRESHOLD)
-  402cd0:	eeb4 8aea 	vcmpe.f32	s16, s21
-  402cd4:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  402cd8:	f340 80ee 	ble.w	402eb8 <main+0x4a0>
-  402cdc:	eddf 7a2e 	vldr	s15, [pc, #184]	; 402d98 <main+0x380>
-  402ce0:	ed9d 7a09 	vldr	s14, [sp, #36]	; 0x24
-  402ce4:	eeb4 7ae7 	vcmpe.f32	s14, s15
-  402ce8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  402cec:	f340 80e4 	ble.w	402eb8 <main+0x4a0>
+  402cd4:	eeb4 8aea 	vcmpe.f32	s16, s21
+  402cd8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  402cdc:	f340 80ee 	ble.w	402ebc <main+0x4a0>
+  402ce0:	eddf 7a2e 	vldr	s15, [pc, #184]	; 402d9c <main+0x380>
+  402ce4:	ed9d 7a09 	vldr	s14, [sp, #36]	; 0x24
+  402ce8:	eeb4 7ae7 	vcmpe.f32	s14, s15
+  402cec:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  402cf0:	f340 80e4 	ble.w	402ebc <main+0x4a0>
 				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
-  402cf0:	4b2a      	ldr	r3, [pc, #168]	; (402d9c <main+0x384>)
-  402cf2:	681b      	ldr	r3, [r3, #0]
-  402cf4:	edd3 7a00 	vldr	s15, [r3]
-  402cf8:	eef4 7aca 	vcmpe.f32	s15, s20
-  402cfc:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  402d00:	f340 8215 	ble.w	40312e <main+0x716>
+  402cf4:	4b2a      	ldr	r3, [pc, #168]	; (402da0 <main+0x384>)
+  402cf6:	681b      	ldr	r3, [r3, #0]
+  402cf8:	edd3 7a00 	vldr	s15, [r3]
+  402cfc:	eef4 7aca 	vcmpe.f32	s15, s20
+  402d00:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  402d04:	f340 8215 	ble.w	403132 <main+0x716>
 						if (pitch_shift > 0.1f && pitch_shift < 6.0f) // range check 
-  402d04:	eeb1 6a04 	vmov.f32	s12, #20	; 0x40a00000  5.0
+  402d08:	eeb1 6a04 	vmov.f32	s12, #20	; 0x40a00000  5.0
 				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
-  402d08:	2001      	movs	r0, #1
+  402d0c:	2001      	movs	r0, #1
 					if (Abs(harmony_list_read[i].freq - closest_note) > 1.0f) // don't harmonies input pitch twice 
-  402d0a:	eeb0 7a4a 	vmov.f32	s14, s20
+  402d0e:	eeb0 7a4a 	vmov.f32	s14, s20
 				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
-  402d0e:	2200      	movs	r2, #0
+  402d12:	2200      	movs	r2, #0
 						if (pitch_shift > 0.1f && pitch_shift < 6.0f) // range check 
-  402d10:	eddf 6a23 	vldr	s13, [pc, #140]	; 402da0 <main+0x388>
+  402d14:	eddf 6a23 	vldr	s13, [pc, #140]	; 402da4 <main+0x388>
 		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
-  402d14:	eddf 3a1d 	vldr	s7, [pc, #116]	; 402d8c <main+0x374>
-  402d18:	eddf 4a1d 	vldr	s9, [pc, #116]	; 402d90 <main+0x378>
+  402d18:	eddf 3a1d 	vldr	s7, [pc, #116]	; 402d90 <main+0x374>
+  402d1c:	eddf 4a1d 	vldr	s9, [pc, #116]	; 402d94 <main+0x378>
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
-  402d1c:	ed9f 4a21 	vldr	s8, [pc, #132]	; 402da4 <main+0x38c>
-  402d20:	e07b      	b.n	402e1a <main+0x402>
-  402d22:	bf00      	nop
-  402d24:	00401875 	.word	0x00401875
-  402d28:	004018e5 	.word	0x004018e5
-  402d2c:	e000ed00 	.word	0xe000ed00
-  402d30:	00400379 	.word	0x00400379
-  402d34:	00400d09 	.word	0x00400d09
-  402d38:	004023bd 	.word	0x004023bd
-  402d3c:	08f0d180 	.word	0x08f0d180
-  402d40:	00401769 	.word	0x00401769
-  402d44:	40028000 	.word	0x40028000
-  402d48:	00401809 	.word	0x00401809
-  402d4c:	00401811 	.word	0x00401811
-  402d50:	20444400 	.word	0x20444400
-  402d54:	00401819 	.word	0x00401819
-  402d58:	2044b80c 	.word	0x2044b80c
-  402d5c:	20434000 	.word	0x20434000
-  402d60:	004031e9 	.word	0x004031e9
-  402d64:	42c80000 	.word	0x42c80000
-  402d68:	4735a700 	.word	0x4735a700
-  402d6c:	2040401c 	.word	0x2040401c
-  402d70:	2040001c 	.word	0x2040001c
-  402d74:	43dc0000 	.word	0x43dc0000
-  402d78:	004005d1 	.word	0x004005d1
-  402d7c:	43e914fe 	.word	0x43e914fe
-  402d80:	004071f8 	.word	0x004071f8
-  402d84:	20400030 	.word	0x20400030
-  402d88:	20400054 	.word	0x20400054
-  402d8c:	42800000 	.word	0x42800000
-  402d90:	3c800000 	.word	0x3c800000
-  402d94:	0040326d 	.word	0x0040326d
-  402d98:	358637bd 	.word	0x358637bd
-  402d9c:	2040004c 	.word	0x2040004c
-  402da0:	bf666666 	.word	0xbf666666
-  402da4:	427c0000 	.word	0x427c0000
-  402da8:	e000e100 	.word	0xe000e100
-  402dac:	2044b868 	.word	0x2044b868
-  402db0:	bf800000 	.word	0xbf800000
-  402db4:	20420000 	.word	0x20420000
-  402db8:	20400014 	.word	0x20400014
+  402d20:	ed9f 4a21 	vldr	s8, [pc, #132]	; 402da8 <main+0x38c>
+  402d24:	e07b      	b.n	402e1e <main+0x402>
+  402d26:	bf00      	nop
+  402d28:	00401875 	.word	0x00401875
+  402d2c:	004018e5 	.word	0x004018e5
+  402d30:	e000ed00 	.word	0xe000ed00
+  402d34:	00400379 	.word	0x00400379
+  402d38:	00400d09 	.word	0x00400d09
+  402d3c:	004023bd 	.word	0x004023bd
+  402d40:	08f0d180 	.word	0x08f0d180
+  402d44:	00401769 	.word	0x00401769
+  402d48:	40028000 	.word	0x40028000
+  402d4c:	00401809 	.word	0x00401809
+  402d50:	00401811 	.word	0x00401811
+  402d54:	20444400 	.word	0x20444400
+  402d58:	00401819 	.word	0x00401819
+  402d5c:	2044b80c 	.word	0x2044b80c
+  402d60:	20434000 	.word	0x20434000
+  402d64:	004031ed 	.word	0x004031ed
+  402d68:	42c80000 	.word	0x42c80000
+  402d6c:	4735a700 	.word	0x4735a700
+  402d70:	2040401c 	.word	0x2040401c
+  402d74:	2040001c 	.word	0x2040001c
+  402d78:	43dc0000 	.word	0x43dc0000
+  402d7c:	004005d1 	.word	0x004005d1
+  402d80:	43e914fe 	.word	0x43e914fe
+  402d84:	004071f8 	.word	0x004071f8
+  402d88:	20400030 	.word	0x20400030
+  402d8c:	20400054 	.word	0x20400054
+  402d90:	42800000 	.word	0x42800000
+  402d94:	3c800000 	.word	0x3c800000
+  402d98:	00403271 	.word	0x00403271
+  402d9c:	358637bd 	.word	0x358637bd
+  402da0:	2040004c 	.word	0x2040004c
+  402da4:	bf666666 	.word	0xbf666666
+  402da8:	427c0000 	.word	0x427c0000
+  402dac:	e000e100 	.word	0xe000e100
+  402db0:	2044b868 	.word	0x2044b868
+  402db4:	bf800000 	.word	0xbf800000
+  402db8:	20420000 	.word	0x20420000
+  402dbc:	20400014 	.word	0x20400014
 		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
-  402dbc:	ee75 5ae3 	vsub.f32	s11, s11, s7
+  402dc0:	ee75 5ae3 	vsub.f32	s11, s11, s7
 		bend_difference = midi_note_frequencies[pitch_idx] - midi_note_frequencies[pitch_idx-2];
-  402dc0:	ed95 3a00 	vldr	s6, [r5]
-  402dc4:	ed15 5a02 	vldr	s10, [r5, #-8]
+  402dc4:	ed95 3a00 	vldr	s6, [r5]
+  402dc8:	ed15 5a02 	vldr	s10, [r5, #-8]
 		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
-  402dc8:	ee65 5aa4 	vmul.f32	s11, s11, s9
+  402dcc:	ee65 5aa4 	vmul.f32	s11, s11, s9
 		bend_difference = midi_note_frequencies[pitch_idx] - midi_note_frequencies[pitch_idx-2];
-  402dcc:	ee33 5a45 	vsub.f32	s10, s6, s10
+  402dd0:	ee33 5a45 	vsub.f32	s10, s6, s10
 		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
-  402dd0:	eee5 7a85 	vfma.f32	s15, s11, s10
+  402dd4:	eee5 7a85 	vfma.f32	s15, s11, s10
 						pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-  402dd4:	ee77 7ac8 	vsub.f32	s15, s15, s16
-  402dd8:	ee67 7aa9 	vmul.f32	s15, s15, s19
+  402dd8:	ee77 7ac8 	vsub.f32	s15, s15, s16
+  402ddc:	ee67 7aa9 	vmul.f32	s15, s15, s19
 						if (pitch_shift > 0.1f && pitch_shift < 6.0f) // range check 
-  402ddc:	eef4 7a66 	vcmp.f32	s15, s13
-  402de0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  402de4:	dd0c      	ble.n	402e00 <main+0x3e8>
-  402de6:	eef4 7a46 	vcmp.f32	s15, s12
-  402dea:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  402dee:	d507      	bpl.n	402e00 <main+0x3e8>
+  402de0:	eef4 7a66 	vcmp.f32	s15, s13
+  402de4:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  402de8:	dd0c      	ble.n	402e04 <main+0x3e8>
+  402dea:	eef4 7a46 	vcmp.f32	s15, s12
+  402dee:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  402df2:	d507      	bpl.n	402e04 <main+0x3e8>
 							harmony_shifts[num_of_shifts++] = pitch_shift;
-  402df0:	a916      	add	r1, sp, #88	; 0x58
+  402df4:	a916      	add	r1, sp, #88	; 0x58
 						pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-  402df2:	ee77 7a87 	vadd.f32	s15, s15, s14
+  402df6:	ee77 7a87 	vadd.f32	s15, s15, s14
 							harmony_shifts[num_of_shifts++] = pitch_shift;
-  402df6:	eb01 0180 	add.w	r1, r1, r0, lsl #2
-  402dfa:	3001      	adds	r0, #1
-  402dfc:	ed41 7a0c 	vstr	s15, [r1, #-48]	; 0xffffffd0
+  402dfa:	eb01 0180 	add.w	r1, r1, r0, lsl #2
+  402dfe:	3001      	adds	r0, #1
+  402e00:	ed41 7a0c 	vstr	s15, [r1, #-48]	; 0xffffffd0
 					i++; 
-  402e00:	3201      	adds	r2, #1
+  402e04:	3201      	adds	r2, #1
 				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
-  402e02:	3308      	adds	r3, #8
-  402e04:	edd3 7a00 	vldr	s15, [r3]
-  402e08:	2a0a      	cmp	r2, #10
-  402e0a:	f000 8191 	beq.w	403130 <main+0x718>
-  402e0e:	eef4 7ac7 	vcmpe.f32	s15, s14
-  402e12:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  402e16:	f340 818b 	ble.w	403130 <main+0x718>
+  402e06:	3308      	adds	r3, #8
+  402e08:	edd3 7a00 	vldr	s15, [r3]
+  402e0c:	2a0a      	cmp	r2, #10
+  402e0e:	f000 8191 	beq.w	403134 <main+0x718>
+  402e12:	eef4 7ac7 	vcmpe.f32	s15, s14
+  402e16:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  402e1a:	f340 818b 	ble.w	403134 <main+0x718>
 					if (Abs(harmony_list_read[i].freq - closest_note) > 1.0f) // don't harmonies input pitch twice 
-  402e1a:	edd3 7a00 	vldr	s15, [r3]
-  402e1e:	ee77 7ac9 	vsub.f32	s15, s15, s18
-  402e22:	eef5 7ac0 	vcmpe.f32	s15, #0.0
-  402e26:	edd3 7a00 	vldr	s15, [r3]
-  402e2a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  402e2e:	bf4c      	ite	mi
-  402e30:	ee79 7a67 	vsubmi.f32	s15, s18, s15
-  402e34:	ee77 7ac9 	vsubpl.f32	s15, s15, s18
-  402e38:	eef4 7ac7 	vcmpe.f32	s15, s14
-  402e3c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  402e40:	bfcc      	ite	gt
-  402e42:	2101      	movgt	r1, #1
-  402e44:	2100      	movle	r1, #0
-  402e46:	2900      	cmp	r1, #0
-  402e48:	d0da      	beq.n	402e00 <main+0x3e8>
+  402e1e:	edd3 7a00 	vldr	s15, [r3]
+  402e22:	ee77 7ac9 	vsub.f32	s15, s15, s18
+  402e26:	eef5 7ac0 	vcmpe.f32	s15, #0.0
+  402e2a:	edd3 7a00 	vldr	s15, [r3]
+  402e2e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  402e32:	bf4c      	ite	mi
+  402e34:	ee79 7a67 	vsubmi.f32	s15, s18, s15
+  402e38:	ee77 7ac9 	vsubpl.f32	s15, s15, s18
+  402e3c:	eef4 7ac7 	vcmpe.f32	s15, s14
+  402e40:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  402e44:	bfcc      	ite	gt
+  402e46:	2101      	movgt	r1, #1
+  402e48:	2100      	movle	r1, #0
+  402e4a:	2900      	cmp	r1, #0
+  402e4c:	d0da      	beq.n	402e04 <main+0x3e8>
 						if (pitch_bend != 64)
-  402e4a:	49c6      	ldr	r1, [pc, #792]	; (403164 <main+0x74c>)
+  402e4e:	49c6      	ldr	r1, [pc, #792]	; (403168 <main+0x74c>)
 						desired_pitch = harmony_list_read[i].freq; 
-  402e4c:	edd3 7a00 	vldr	s15, [r3]
+  402e50:	edd3 7a00 	vldr	s15, [r3]
 						if (pitch_bend != 64)
-  402e50:	6809      	ldr	r1, [r1, #0]
-  402e52:	2940      	cmp	r1, #64	; 0x40
-  402e54:	d0be      	beq.n	402dd4 <main+0x3bc>
+  402e54:	6809      	ldr	r1, [r1, #0]
+  402e56:	2940      	cmp	r1, #64	; 0x40
+  402e58:	d0be      	beq.n	402dd8 <main+0x3bc>
 							bend_pitch(&desired_pitch, harmony_list_read[i].idx, (uint32_t)pitch_bend);
-  402e56:	6859      	ldr	r1, [r3, #4]
-  402e58:	4dc2      	ldr	r5, [pc, #776]	; (403164 <main+0x74c>)
+  402e5a:	6859      	ldr	r1, [r3, #4]
+  402e5c:	4dc2      	ldr	r5, [pc, #776]	; (403168 <main+0x74c>)
 	if (pitch_idx < 0 || pitch_idx > 127 || bend < 0 || bend > 127)
-  402e5a:	297f      	cmp	r1, #127	; 0x7f
+  402e5e:	297f      	cmp	r1, #127	; 0x7f
 							bend_pitch(&desired_pitch, harmony_list_read[i].idx, (uint32_t)pitch_bend);
-  402e5c:	682d      	ldr	r5, [r5, #0]
+  402e60:	682d      	ldr	r5, [r5, #0]
 	if (pitch_idx < 0 || pitch_idx > 127 || bend < 0 || bend > 127)
-  402e5e:	d8b9      	bhi.n	402dd4 <main+0x3bc>
-  402e60:	2d7f      	cmp	r5, #127	; 0x7f
-  402e62:	d8b7      	bhi.n	402dd4 <main+0x3bc>
+  402e62:	d8b9      	bhi.n	402dd8 <main+0x3bc>
+  402e64:	2d7f      	cmp	r5, #127	; 0x7f
+  402e66:	d8b7      	bhi.n	402dd8 <main+0x3bc>
 	if (pitch_bend > 64)
-  402e64:	4dbf      	ldr	r5, [pc, #764]	; (403164 <main+0x74c>)
-  402e66:	682d      	ldr	r5, [r5, #0]
-  402e68:	2d40      	cmp	r5, #64	; 0x40
+  402e68:	4dbf      	ldr	r5, [pc, #764]	; (403168 <main+0x74c>)
+  402e6a:	682d      	ldr	r5, [r5, #0]
+  402e6c:	2d40      	cmp	r5, #64	; 0x40
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
-  402e6a:	4dbe      	ldr	r5, [pc, #760]	; (403164 <main+0x74c>)
-  402e6c:	edd5 5a00 	vldr	s11, [r5]
+  402e6e:	4dbe      	ldr	r5, [pc, #760]	; (403168 <main+0x74c>)
+  402e70:	edd5 5a00 	vldr	s11, [r5]
 		bend_difference = midi_note_frequencies[pitch_idx+2] - midi_note_frequencies[pitch_idx];
-  402e70:	4dbd      	ldr	r5, [pc, #756]	; (403168 <main+0x750>)
+  402e74:	4dbd      	ldr	r5, [pc, #756]	; (40316c <main+0x750>)
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
-  402e72:	eef8 5a65 	vcvt.f32.u32	s11, s11
+  402e76:	eef8 5a65 	vcvt.f32.u32	s11, s11
 		bend_difference = midi_note_frequencies[pitch_idx+2] - midi_note_frequencies[pitch_idx];
-  402e76:	eb05 0581 	add.w	r5, r5, r1, lsl #2
-  402e7a:	4629      	mov	r1, r5
+  402e7a:	eb05 0581 	add.w	r5, r5, r1, lsl #2
+  402e7e:	4629      	mov	r1, r5
 	if (pitch_bend > 64)
-  402e7c:	d99e      	bls.n	402dbc <main+0x3a4>
+  402e80:	d99e      	bls.n	402dc0 <main+0x3a4>
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
-  402e7e:	ee75 5ac4 	vsub.f32	s11, s11, s8
+  402e82:	ee75 5ac4 	vsub.f32	s11, s11, s8
 		bend_difference = midi_note_frequencies[pitch_idx+2] - midi_note_frequencies[pitch_idx];
-  402e82:	ed95 3a02 	vldr	s6, [r5, #8]
-  402e86:	ed95 5a00 	vldr	s10, [r5]
+  402e86:	ed95 3a02 	vldr	s6, [r5, #8]
+  402e8a:	ed95 5a00 	vldr	s10, [r5]
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
-  402e8a:	ee65 5aa4 	vmul.f32	s11, s11, s9
+  402e8e:	ee65 5aa4 	vmul.f32	s11, s11, s9
 		bend_difference = midi_note_frequencies[pitch_idx+2] - midi_note_frequencies[pitch_idx];
-  402e8e:	ee33 5a45 	vsub.f32	s10, s6, s10
+  402e92:	ee33 5a45 	vsub.f32	s10, s6, s10
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
-  402e92:	eee5 7a85 	vfma.f32	s15, s11, s10
-  402e96:	e79d      	b.n	402dd4 <main+0x3bc>
+  402e96:	eee5 7a85 	vfma.f32	s15, s11, s10
+  402e9a:	e79d      	b.n	402dd8 <main+0x3bc>
 		if (d2 <= d1)
-  402e98:	4611      	mov	r1, r2
+  402e9c:	4611      	mov	r1, r2
 	while (lo < hi)
-  402e9a:	428b      	cmp	r3, r1
-  402e9c:	f240 8160 	bls.w	403160 <main+0x748>
-  402ea0:	185d      	adds	r5, r3, r1
-  402ea2:	4618      	mov	r0, r3
-  402ea4:	460a      	mov	r2, r1
-  402ea6:	49b0      	ldr	r1, [pc, #704]	; (403168 <main+0x750>)
-  402ea8:	086b      	lsrs	r3, r5, #1
-  402eaa:	eb01 0183 	add.w	r1, r1, r3, lsl #2
-  402eae:	ed91 9a00 	vldr	s18, [r1]
-  402eb2:	edd1 7a01 	vldr	s15, [r1, #4]
-  402eb6:	e68c      	b.n	402bd2 <main+0x1ba>
+  402e9e:	428b      	cmp	r3, r1
+  402ea0:	f240 8160 	bls.w	403164 <main+0x748>
+  402ea4:	185d      	adds	r5, r3, r1
+  402ea6:	4618      	mov	r0, r3
+  402ea8:	460a      	mov	r2, r1
+  402eaa:	49b0      	ldr	r1, [pc, #704]	; (40316c <main+0x750>)
+  402eac:	086b      	lsrs	r3, r5, #1
+  402eae:	eb01 0183 	add.w	r1, r1, r3, lsl #2
+  402eb2:	ed91 9a00 	vldr	s18, [r1]
+  402eb6:	edd1 7a01 	vldr	s15, [r1, #4]
+  402eba:	e68c      	b.n	402bd6 <main+0x1ba>
 				harmony_shifts[1] = END_OF_SHIFTS; 	
-  402eb8:	4bac      	ldr	r3, [pc, #688]	; (40316c <main+0x754>)
-  402eba:	930b      	str	r3, [sp, #44]	; 0x2c
+  402ebc:	4bac      	ldr	r3, [pc, #688]	; (403170 <main+0x754>)
+  402ebe:	930b      	str	r3, [sp, #44]	; 0x2c
 			create_harmonies((float  *)processBuffer, out_buffer, inputPitch, harmony_shifts, (float)harm_volume, (float)dry_volume); 
-  402ebc:	4bac      	ldr	r3, [pc, #688]	; (403170 <main+0x758>)
-  402ebe:	4aad      	ldr	r2, [pc, #692]	; (403174 <main+0x75c>)
-  402ec0:	6819      	ldr	r1, [r3, #0]
-  402ec2:	ab0a      	add	r3, sp, #40	; 0x28
-  402ec4:	6815      	ldr	r5, [r2, #0]
-  402ec6:	ee18 2a10 	vmov	r2, s16
-  402eca:	48ab      	ldr	r0, [pc, #684]	; (403178 <main+0x760>)
-  402ecc:	f8df 82ac 	ldr.w	r8, [pc, #684]	; 40317c <main+0x764>
-  402ed0:	6800      	ldr	r0, [r0, #0]
-  402ed2:	9100      	str	r1, [sp, #0]
-  402ed4:	9501      	str	r5, [sp, #4]
-  402ed6:	49a9      	ldr	r1, [pc, #676]	; (40317c <main+0x764>)
-  402ed8:	4da9      	ldr	r5, [pc, #676]	; (403180 <main+0x768>)
-  402eda:	47a8      	blx	r5
-  402edc:	463a      	mov	r2, r7
+  402ec0:	4bac      	ldr	r3, [pc, #688]	; (403174 <main+0x758>)
+  402ec2:	4aad      	ldr	r2, [pc, #692]	; (403178 <main+0x75c>)
+  402ec4:	6819      	ldr	r1, [r3, #0]
+  402ec6:	ab0a      	add	r3, sp, #40	; 0x28
+  402ec8:	6815      	ldr	r5, [r2, #0]
+  402eca:	ee18 2a10 	vmov	r2, s16
+  402ece:	48ab      	ldr	r0, [pc, #684]	; (40317c <main+0x760>)
+  402ed0:	f8df 82ac 	ldr.w	r8, [pc, #684]	; 403180 <main+0x764>
+  402ed4:	6800      	ldr	r0, [r0, #0]
+  402ed6:	9100      	str	r1, [sp, #0]
+  402ed8:	9501      	str	r5, [sp, #4]
+  402eda:	49a9      	ldr	r1, [pc, #676]	; (403180 <main+0x764>)
+  402edc:	4da9      	ldr	r5, [pc, #676]	; (403184 <main+0x768>)
+  402ede:	47a8      	blx	r5
+  402ee0:	463a      	mov	r2, r7
 				dry_circ_buffer[circ_buf_idx++ & CIRC_MASK] = out_buffer[i];
-  402ede:	f3c2 030d 	ubfx	r3, r2, #0, #14
-  402ee2:	f858 1b04 	ldr.w	r1, [r8], #4
-  402ee6:	3201      	adds	r2, #1
-  402ee8:	eb04 0383 	add.w	r3, r4, r3, lsl #2
-  402eec:	6019      	str	r1, [r3, #0]
+  402ee2:	f3c2 030d 	ubfx	r3, r2, #0, #14
+  402ee6:	f858 1b04 	ldr.w	r1, [r8], #4
+  402eea:	3201      	adds	r2, #1
+  402eec:	eb04 0383 	add.w	r3, r4, r3, lsl #2
+  402ef0:	6019      	str	r1, [r3, #0]
 			for (i = 0; i < WIN_SIZE; i++)
-  402eee:	4ba5      	ldr	r3, [pc, #660]	; (403184 <main+0x76c>)
-  402ef0:	4598      	cmp	r8, r3
-  402ef2:	d1f4      	bne.n	402ede <main+0x4c6>
+  402ef2:	4ba5      	ldr	r3, [pc, #660]	; (403188 <main+0x76c>)
+  402ef4:	4598      	cmp	r8, r3
+  402ef6:	d1f4      	bne.n	402ee2 <main+0x4c6>
 			float n_freq = chorus_speed / PSOLA_SAMPLE_RATE; 
-  402ef4:	4ba4      	ldr	r3, [pc, #656]	; (403188 <main+0x770>)
-  402ef6:	ed9f 8aa5 	vldr	s16, [pc, #660]	; 40318c <main+0x774>
-  402efa:	edd3 7a00 	vldr	s15, [r3]
-  402efe:	f507 6380 	add.w	r3, r7, #1024	; 0x400
+  402ef8:	4ba4      	ldr	r3, [pc, #656]	; (40318c <main+0x770>)
+  402efa:	ed9f 8aa5 	vldr	s16, [pc, #660]	; 403190 <main+0x774>
+  402efe:	edd3 7a00 	vldr	s15, [r3]
+  402f02:	f507 6380 	add.w	r3, r7, #1024	; 0x400
 			uint32_t num_samples_in_period = 1 / n_freq; 
-  402f02:	4d9e      	ldr	r5, [pc, #632]	; (40317c <main+0x764>)
-  402f04:	ee88 7aa7 	vdiv.f32	s14, s17, s15
+  402f06:	4d9e      	ldr	r5, [pc, #632]	; (403180 <main+0x764>)
+  402f08:	ee88 7aa7 	vdiv.f32	s14, s17, s15
 						
 				// chorus
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  402f08:	ed9f aaa1 	vldr	s20, [pc, #644]	; 403190 <main+0x778>
-  402f0c:	eddf 9aa1 	vldr	s19, [pc, #644]	; 403194 <main+0x77c>
+  402f0c:	ed9f aaa1 	vldr	s20, [pc, #644]	; 403194 <main+0x778>
+  402f10:	eddf 9aa1 	vldr	s19, [pc, #644]	; 403198 <main+0x77c>
 				if (sin_cnt == num_samples_in_period)
 					sin_cnt = 0;
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  402f10:	ed9f 9aa1 	vldr	s18, [pc, #644]	; 403198 <main+0x780>
-  402f14:	9305      	str	r3, [sp, #20]
+  402f14:	ed9f 9aa1 	vldr	s18, [pc, #644]	; 40319c <main+0x780>
+  402f18:	9305      	str	r3, [sp, #20]
 			uint32_t num_samples_in_period = 1 / n_freq; 
-  402f16:	9502      	str	r5, [sp, #8]
-  402f18:	ee27 8a88 	vmul.f32	s16, s15, s16
-  402f1c:	f8cd 8018 	str.w	r8, [sp, #24]
-  402f20:	eefc 7ac7 	vcvt.u32.f32	s15, s14
-  402f24:	edcd 7a04 	vstr	s15, [sp, #16]
+  402f1a:	9502      	str	r5, [sp, #8]
+  402f1c:	ee27 8a88 	vmul.f32	s16, s15, s16
+  402f20:	f8cd 8018 	str.w	r8, [sp, #24]
+  402f24:	eefc 7ac7 	vcvt.u32.f32	s15, s14
+  402f28:	edcd 7a04 	vstr	s15, [sp, #16]
 				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
-  402f28:	4b9c      	ldr	r3, [pc, #624]	; (40319c <main+0x784>)
-  402f2a:	4a9d      	ldr	r2, [pc, #628]	; (4031a0 <main+0x788>)
-  402f2c:	ed93 7a00 	vldr	s14, [r3]
-  402f30:	edd2 7a00 	vldr	s15, [r2]
-  402f34:	4a9b      	ldr	r2, [pc, #620]	; (4031a4 <main+0x78c>)
-  402f36:	ee77 7a27 	vadd.f32	s15, s14, s15
+  402f2c:	4b9c      	ldr	r3, [pc, #624]	; (4031a0 <main+0x784>)
+  402f2e:	4a9d      	ldr	r2, [pc, #628]	; (4031a4 <main+0x788>)
+  402f30:	ed93 7a00 	vldr	s14, [r3]
+  402f34:	edd2 7a00 	vldr	s15, [r2]
+  402f38:	4a9b      	ldr	r2, [pc, #620]	; (4031a8 <main+0x78c>)
+  402f3a:	ee77 7a27 	vadd.f32	s15, s14, s15
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  402f3a:	9b03      	ldr	r3, [sp, #12]
+  402f3e:	9b03      	ldr	r3, [sp, #12]
 				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
-  402f3c:	edd2 6a00 	vldr	s13, [r2]
-  402f40:	4a99      	ldr	r2, [pc, #612]	; (4031a8 <main+0x790>)
+  402f40:	edd2 6a00 	vldr	s13, [r2]
+  402f44:	4a99      	ldr	r2, [pc, #612]	; (4031ac <main+0x790>)
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  402f42:	1c5e      	adds	r6, r3, #1
+  402f46:	1c5e      	adds	r6, r3, #1
 				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
-  402f44:	ee77 7aa6 	vadd.f32	s15, s15, s13
-  402f48:	4d98      	ldr	r5, [pc, #608]	; (4031ac <main+0x794>)
-  402f4a:	ee17 0a90 	vmov	r0, s15
-  402f4e:	4790      	blx	r2
-  402f50:	2200      	movs	r2, #0
-  402f52:	4b97      	ldr	r3, [pc, #604]	; (4031b0 <main+0x798>)
-  402f54:	47a8      	blx	r5
-  402f56:	4d97      	ldr	r5, [pc, #604]	; (4031b4 <main+0x79c>)
-  402f58:	460b      	mov	r3, r1
-  402f5a:	4602      	mov	r2, r0
-  402f5c:	4996      	ldr	r1, [pc, #600]	; (4031b8 <main+0x7a0>)
-  402f5e:	2000      	movs	r0, #0
-  402f60:	47a8      	blx	r5
-  402f62:	4689      	mov	r9, r1
-  402f64:	9902      	ldr	r1, [sp, #8]
-  402f66:	4680      	mov	r8, r0
-  402f68:	4a8f      	ldr	r2, [pc, #572]	; (4031a8 <main+0x790>)
-  402f6a:	6808      	ldr	r0, [r1, #0]
-  402f6c:	4790      	blx	r2
-  402f6e:	4d8f      	ldr	r5, [pc, #572]	; (4031ac <main+0x794>)
-  402f70:	460b      	mov	r3, r1
-  402f72:	4602      	mov	r2, r0
-  402f74:	4649      	mov	r1, r9
-  402f76:	4640      	mov	r0, r8
-  402f78:	47a8      	blx	r5
-  402f7a:	4a90      	ldr	r2, [pc, #576]	; (4031bc <main+0x7a4>)
-  402f7c:	4790      	blx	r2
+  402f48:	ee77 7aa6 	vadd.f32	s15, s15, s13
+  402f4c:	4d98      	ldr	r5, [pc, #608]	; (4031b0 <main+0x794>)
+  402f4e:	ee17 0a90 	vmov	r0, s15
+  402f52:	4790      	blx	r2
+  402f54:	2200      	movs	r2, #0
+  402f56:	4b97      	ldr	r3, [pc, #604]	; (4031b4 <main+0x798>)
+  402f58:	47a8      	blx	r5
+  402f5a:	4d97      	ldr	r5, [pc, #604]	; (4031b8 <main+0x79c>)
+  402f5c:	460b      	mov	r3, r1
+  402f5e:	4602      	mov	r2, r0
+  402f60:	4996      	ldr	r1, [pc, #600]	; (4031bc <main+0x7a0>)
+  402f62:	2000      	movs	r0, #0
+  402f64:	47a8      	blx	r5
+  402f66:	4689      	mov	r9, r1
+  402f68:	9902      	ldr	r1, [sp, #8]
+  402f6a:	4680      	mov	r8, r0
+  402f6c:	4a8f      	ldr	r2, [pc, #572]	; (4031ac <main+0x790>)
+  402f6e:	6808      	ldr	r0, [r1, #0]
+  402f70:	4790      	blx	r2
+  402f72:	4d8f      	ldr	r5, [pc, #572]	; (4031b0 <main+0x794>)
+  402f74:	460b      	mov	r3, r1
+  402f76:	4602      	mov	r2, r0
+  402f78:	4649      	mov	r1, r9
+  402f7a:	4640      	mov	r0, r8
+  402f7c:	47a8      	blx	r5
+  402f7e:	4a90      	ldr	r2, [pc, #576]	; (4031c0 <main+0x7a4>)
+  402f80:	4790      	blx	r2
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  402f7e:	eddd 7a03 	vldr	s15, [sp, #12]
+  402f82:	eddd 7a03 	vldr	s15, [sp, #12]
 				if (sin_cnt == num_samples_in_period)
-  402f82:	9a04      	ldr	r2, [sp, #16]
-  402f84:	4633      	mov	r3, r6
+  402f86:	9a04      	ldr	r2, [sp, #16]
+  402f88:	4633      	mov	r3, r6
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  402f86:	eef8 7a67 	vcvt.f32.u32	s15, s15
+  402f8a:	eef8 7a67 	vcvt.f32.u32	s15, s15
 				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
-  402f8a:	9d02      	ldr	r5, [sp, #8]
+  402f8e:	9d02      	ldr	r5, [sp, #8]
 				if (sin_cnt == num_samples_in_period)
-  402f8c:	42b2      	cmp	r2, r6
-  402f8e:	bf08      	it	eq
-  402f90:	2300      	moveq	r3, #0
+  402f90:	42b2      	cmp	r2, r6
+  402f92:	bf08      	it	eq
+  402f94:	2300      	moveq	r3, #0
 				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
-  402f92:	6028      	str	r0, [r5, #0]
+  402f96:	6028      	str	r0, [r5, #0]
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  402f94:	ee67 7a88 	vmul.f32	s15, s15, s16
+  402f98:	ee67 7a88 	vmul.f32	s15, s15, s16
 				if (sin_cnt == num_samples_in_period)
-  402f98:	9303      	str	r3, [sp, #12]
+  402f9c:	9303      	str	r3, [sp, #12]
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  402f9a:	4b89      	ldr	r3, [pc, #548]	; (4031c0 <main+0x7a8>)
-  402f9c:	ee17 0a90 	vmov	r0, s15
-  402fa0:	4798      	blx	r3
-  402fa2:	eef0 7a69 	vmov.f32	s15, s19
-  402fa6:	ee07 0a10 	vmov	s14, r0
+  402f9e:	4b89      	ldr	r3, [pc, #548]	; (4031c4 <main+0x7a8>)
+  402fa0:	ee17 0a90 	vmov	r0, s15
+  402fa4:	4798      	blx	r3
+  402fa6:	eef0 7a69 	vmov.f32	s15, s19
+  402faa:	ee07 0a10 	vmov	s14, r0
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
 				out_buffer[i] += delay_volume * delay_circ_buffer[curr_idx & CIRC_MASK];
 				
 				// reverb
 				out_buffer[i] += reverb_volume * 0.33f *
 						(dry_circ_buffer[(curr_idx - 2001)  & CIRC_MASK] +
-  402faa:	f46f 63fa 	mvn.w	r3, #2000	; 0x7d0
+  402fae:	f46f 63fa 	mvn.w	r3, #2000	; 0x7d0
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  402fae:	4a7c      	ldr	r2, [pc, #496]	; (4031a0 <main+0x788>)
+  402fb2:	4a7c      	ldr	r2, [pc, #496]	; (4031a4 <main+0x788>)
 														dry_circ_buffer[(curr_idx - 809 - chorus_delay)  & CIRC_MASK]));			
-  402fb0:	f46f 7e4a 	mvn.w	lr, #808	; 0x328
+  402fb4:	f46f 7e4a 	mvn.w	lr, #808	; 0x328
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  402fb4:	eee7 7a0a 	vfma.f32	s15, s14, s20
+  402fb8:	eee7 7a0a 	vfma.f32	s15, s14, s20
 						(dry_circ_buffer[(curr_idx - 2001)  & CIRC_MASK] +
-  402fb8:	18f9      	adds	r1, r7, r3
+  402fbc:	18f9      	adds	r1, r7, r3
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  402fba:	edd2 4a00 	vldr	s9, [r2]
+  402fbe:	edd2 4a00 	vldr	s9, [r2]
 						dry_circ_buffer[(curr_idx - 1503)  & CIRC_MASK] + 
-  402fbe:	f2a7 53df 	subw	r3, r7, #1503	; 0x5df
+  402fc2:	f2a7 53df 	subw	r3, r7, #1503	; 0x5df
 						dry_circ_buffer[(curr_idx - 1203)  & CIRC_MASK] ); 
-  402fc2:	f2a7 42b3 	subw	r2, r7, #1203	; 0x4b3
+  402fc6:	f2a7 42b3 	subw	r2, r7, #1203	; 0x4b3
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  402fc6:	487f      	ldr	r0, [pc, #508]	; (4031c4 <main+0x7ac>)
+  402fca:	487f      	ldr	r0, [pc, #508]	; (4031c8 <main+0x7ac>)
 						dry_circ_buffer[(curr_idx - 1503)  & CIRC_MASK] + 
-  402fc8:	f3c3 030d 	ubfx	r3, r3, #0, #14
+  402fcc:	f3c3 030d 	ubfx	r3, r3, #0, #14
 						(dry_circ_buffer[(curr_idx - 2001)  & CIRC_MASK] +
-  402fcc:	f3c1 010d 	ubfx	r1, r1, #0, #14
+  402fd0:	f3c1 010d 	ubfx	r1, r1, #0, #14
 						dry_circ_buffer[(curr_idx - 1203)  & CIRC_MASK] ); 
-  402fd0:	f3c2 020d 	ubfx	r2, r2, #0, #14
+  402fd4:	f3c2 020d 	ubfx	r2, r2, #0, #14
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  402fd4:	9502      	str	r5, [sp, #8]
+  402fd8:	9502      	str	r5, [sp, #8]
 						dry_circ_buffer[(curr_idx - 1503)  & CIRC_MASK] + 
-  402fd6:	eb04 0383 	add.w	r3, r4, r3, lsl #2
+  402fda:	eb04 0383 	add.w	r3, r4, r3, lsl #2
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  402fda:	edd5 5a00 	vldr	s11, [r5]
+  402fde:	edd5 5a00 	vldr	s11, [r5]
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  402fde:	ee67 7aa8 	vmul.f32	s15, s15, s17
+  402fe2:	ee67 7aa8 	vmul.f32	s15, s15, s17
 						dry_circ_buffer[(curr_idx - 1203)  & CIRC_MASK] ); 
-  402fe2:	eb04 0282 	add.w	r2, r4, r2, lsl #2
+  402fe6:	eb04 0282 	add.w	r2, r4, r2, lsl #2
 						(dry_circ_buffer[(curr_idx - 2001)  & CIRC_MASK] +
-  402fe6:	ed93 7a00 	vldr	s14, [r3]
-  402fea:	eb04 0181 	add.w	r1, r4, r1, lsl #2
+  402fea:	ed93 7a00 	vldr	s14, [r3]
+  402fee:	eb04 0181 	add.w	r1, r4, r1, lsl #2
 				out_buffer[i] += reverb_volume * 0.33f *
-  402fee:	4d6d      	ldr	r5, [pc, #436]	; (4031a4 <main+0x78c>)
+  402ff2:	4d6d      	ldr	r5, [pc, #436]	; (4031a8 <main+0x78c>)
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  402ff0:	ee64 4a89 	vmul.f32	s9, s9, s18
+  402ff4:	ee64 4a89 	vmul.f32	s9, s9, s18
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  402ff4:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+  402ff8:	eefc 7ae7 	vcvt.u32.f32	s15, s15
 						(dry_circ_buffer[(curr_idx - 2001)  & CIRC_MASK] +
-  402ff8:	ed91 6a00 	vldr	s12, [r1]
+  402ffc:	ed91 6a00 	vldr	s12, [r1]
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  402ffc:	f3c7 010d 	ubfx	r1, r7, #0, #14
+  403000:	f3c7 010d 	ubfx	r1, r7, #0, #14
 						(dry_circ_buffer[(curr_idx - 2001)  & CIRC_MASK] +
-  403000:	ee36 6a07 	vadd.f32	s12, s12, s14
+  403004:	ee36 6a07 	vadd.f32	s12, s12, s14
 				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
-  403004:	ee17 3a90 	vmov	r3, s15
+  403008:	ee17 3a90 	vmov	r3, s15
 						dry_circ_buffer[(curr_idx - 1503)  & CIRC_MASK] + 
-  403008:	edd2 7a00 	vldr	s15, [r2]
+  40300c:	edd2 7a00 	vldr	s15, [r2]
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  40300c:	4a6e      	ldr	r2, [pc, #440]	; (4031c8 <main+0x7b0>)
-  40300e:	eb0b 0181 	add.w	r1, fp, r1, lsl #2
+  403010:	4a6e      	ldr	r2, [pc, #440]	; (4031cc <main+0x7b0>)
+  403012:	eb0b 0181 	add.w	r1, fp, r1, lsl #2
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  403012:	1afb      	subs	r3, r7, r3
+  403016:	1afb      	subs	r3, r7, r3
 						dry_circ_buffer[(curr_idx - 1503)  & CIRC_MASK] + 
-  403014:	ee36 6a27 	vadd.f32	s12, s12, s15
+  403018:	ee36 6a27 	vadd.f32	s12, s12, s15
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  403018:	6812      	ldr	r2, [r2, #0]
-  40301a:	edd0 3a00 	vldr	s7, [r0]
+  40301c:	6812      	ldr	r2, [r2, #0]
+  40301e:	edd0 3a00 	vldr	s7, [r0]
 														dry_circ_buffer[(curr_idx - 199 - chorus_delay)  & CIRC_MASK] +
-  40301e:	f1a3 06c7 	sub.w	r6, r3, #199	; 0xc7
+  403022:	f1a3 06c7 	sub.w	r6, r3, #199	; 0xc7
 				out_buffer[i] += delay_volume * delay_circ_buffer[curr_idx & CIRC_MASK];
-  403022:	485e      	ldr	r0, [pc, #376]	; (40319c <main+0x784>)
+  403026:	485e      	ldr	r0, [pc, #376]	; (4031a0 <main+0x784>)
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  403024:	1aba      	subs	r2, r7, r2
+  403028:	1aba      	subs	r2, r7, r2
 														dry_circ_buffer[(curr_idx - 199 - chorus_delay)  & CIRC_MASK] +
-  403026:	f3c6 060d 	ubfx	r6, r6, #0, #14
+  40302a:	f3c6 060d 	ubfx	r6, r6, #0, #14
 				out_buffer[i] += reverb_volume * 0.33f *
-  40302a:	eddf 7a68 	vldr	s15, [pc, #416]	; 4031cc <main+0x7b4>
+  40302e:	eddf 7a68 	vldr	s15, [pc, #416]	; 4031d0 <main+0x7b4>
 				out_buffer[i] += delay_volume * delay_circ_buffer[curr_idx & CIRC_MASK];
-  40302e:	ed90 4a00 	vldr	s8, [r0]
+  403032:	ed90 4a00 	vldr	s8, [r0]
 														dry_circ_buffer[(curr_idx - 401 - chorus_delay)  & CIRC_MASK] +
-  403032:	f46f 70c8 	mvn.w	r0, #400	; 0x190
+  403036:	f46f 70c8 	mvn.w	r0, #400	; 0x190
 														dry_circ_buffer[(curr_idx - 199 - chorus_delay)  & CIRC_MASK] +
-  403036:	eb04 0686 	add.w	r6, r4, r6, lsl #2
+  40303a:	eb04 0686 	add.w	r6, r4, r6, lsl #2
 				out_buffer[i] += reverb_volume * 0.33f *
-  40303a:	ed95 5a00 	vldr	s10, [r5]
+  40303e:	ed95 5a00 	vldr	s10, [r5]
 														dry_circ_buffer[(curr_idx - 401 - chorus_delay)  & CIRC_MASK] +
-  40303e:	1818      	adds	r0, r3, r0
+  403042:	1818      	adds	r0, r3, r0
 														dry_circ_buffer[(curr_idx - 601 - chorus_delay)  & CIRC_MASK] +
-  403040:	f46f 7516 	mvn.w	r5, #600	; 0x258
+  403044:	f46f 7516 	mvn.w	r5, #600	; 0x258
 														dry_circ_buffer[(curr_idx - 199 - chorus_delay)  & CIRC_MASK] +
-  403044:	ed96 7a00 	vldr	s14, [r6]
+  403048:	ed96 7a00 	vldr	s14, [r6]
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  403048:	f3c3 060d 	ubfx	r6, r3, #0, #14
+  40304c:	f3c3 060d 	ubfx	r6, r3, #0, #14
 														dry_circ_buffer[(curr_idx - 401 - chorus_delay)  & CIRC_MASK] +
-  40304c:	f3c0 000d 	ubfx	r0, r0, #0, #14
+  403050:	f3c0 000d 	ubfx	r0, r0, #0, #14
 				out_buffer[i] += reverb_volume * 0.33f *
-  403050:	ee25 5a27 	vmul.f32	s10, s10, s15
+  403054:	ee25 5a27 	vmul.f32	s10, s10, s15
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  403054:	eb04 0686 	add.w	r6, r4, r6, lsl #2
+  403058:	eb04 0686 	add.w	r6, r4, r6, lsl #2
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  403058:	f3c2 020d 	ubfx	r2, r2, #0, #14
+  40305c:	f3c2 020d 	ubfx	r2, r2, #0, #14
 														dry_circ_buffer[(curr_idx - 401 - chorus_delay)  & CIRC_MASK] +
-  40305c:	eb04 0080 	add.w	r0, r4, r0, lsl #2
+  403060:	eb04 0080 	add.w	r0, r4, r0, lsl #2
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
-  403060:	3701      	adds	r7, #1
+  403064:	3701      	adds	r7, #1
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  403062:	eb0b 0282 	add.w	r2, fp, r2, lsl #2
+  403066:	eb0b 0282 	add.w	r2, fp, r2, lsl #2
 														dry_circ_buffer[(curr_idx - 199 - chorus_delay)  & CIRC_MASK] +
-  403066:	edd0 7a00 	vldr	s15, [r0]
+  40306a:	edd0 7a00 	vldr	s15, [r0]
 														dry_circ_buffer[(curr_idx - 601 - chorus_delay)  & CIRC_MASK] +
-  40306a:	1958      	adds	r0, r3, r5
+  40306e:	1958      	adds	r0, r3, r5
 														dry_circ_buffer[(curr_idx - 809 - chorus_delay)  & CIRC_MASK]));			
-  40306c:	4473      	add	r3, lr
+  403070:	4473      	add	r3, lr
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  40306e:	ed92 3a00 	vldr	s6, [r2]
+  403072:	ed92 3a00 	vldr	s6, [r2]
 														dry_circ_buffer[(curr_idx - 199 - chorus_delay)  & CIRC_MASK] +
-  403072:	ee77 7a27 	vadd.f32	s15, s14, s15
+  403076:	ee77 7a27 	vadd.f32	s15, s14, s15
 														dry_circ_buffer[(curr_idx - 601 - chorus_delay)  & CIRC_MASK] +
-  403076:	f3c0 000d 	ubfx	r0, r0, #0, #14
+  40307a:	f3c0 000d 	ubfx	r0, r0, #0, #14
 														dry_circ_buffer[(curr_idx - 199 - chorus_delay)  & CIRC_MASK] +
-  40307a:	ed96 7a00 	vldr	s14, [r6]
+  40307e:	ed96 7a00 	vldr	s14, [r6]
 														dry_circ_buffer[(curr_idx - 809 - chorus_delay)  & CIRC_MASK]));			
-  40307e:	f3c3 030d 	ubfx	r3, r3, #0, #14
+  403082:	f3c3 030d 	ubfx	r3, r3, #0, #14
 														dry_circ_buffer[(curr_idx - 601 - chorus_delay)  & CIRC_MASK] +
-  403082:	eb04 0080 	add.w	r0, r4, r0, lsl #2
+  403086:	eb04 0080 	add.w	r0, r4, r0, lsl #2
 														dry_circ_buffer[(curr_idx - 199 - chorus_delay)  & CIRC_MASK] +
-  403086:	ee77 7a87 	vadd.f32	s15, s15, s14
+  40308a:	ee77 7a87 	vadd.f32	s15, s15, s14
 														dry_circ_buffer[(curr_idx - 809 - chorus_delay)  & CIRC_MASK]));			
-  40308a:	eb04 0383 	add.w	r3, r4, r3, lsl #2
+  40308e:	eb04 0383 	add.w	r3, r4, r3, lsl #2
 														dry_circ_buffer[(curr_idx - 401 - chorus_delay)  & CIRC_MASK] +
-  40308e:	edd0 6a00 	vldr	s13, [r0]
+  403092:	edd0 6a00 	vldr	s13, [r0]
 														dry_circ_buffer[(curr_idx - 601 - chorus_delay)  & CIRC_MASK] +
-  403092:	ed93 7a00 	vldr	s14, [r3]
+  403096:	ed93 7a00 	vldr	s14, [r3]
 														dry_circ_buffer[(curr_idx - 401 - chorus_delay)  & CIRC_MASK] +
-  403096:	ee77 7aa6 	vadd.f32	s15, s15, s13
+  40309a:	ee77 7aa6 	vadd.f32	s15, s15, s13
 				out_buffer[i] += reverb_volume * 0.33f *
-  40309a:	9b02      	ldr	r3, [sp, #8]
+  40309e:	9b02      	ldr	r3, [sp, #8]
 														dry_circ_buffer[(curr_idx - 601 - chorus_delay)  & CIRC_MASK] +
-  40309c:	ee77 7a87 	vadd.f32	s15, s15, s14
+  4030a0:	ee77 7a87 	vadd.f32	s15, s15, s14
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  4030a0:	eee4 5aa7 	vfma.f32	s11, s9, s15
-  4030a4:	eef0 7a65 	vmov.f32	s15, s11
+  4030a4:	eee4 5aa7 	vfma.f32	s11, s9, s15
+  4030a8:	eef0 7a65 	vmov.f32	s15, s11
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  4030a8:	eeb0 7a65 	vmov.f32	s14, s11
+  4030ac:	eeb0 7a65 	vmov.f32	s14, s11
 				out_buffer[i] += reverb_volume * 0.33f *
-  4030ac:	eee6 7a05 	vfma.f32	s15, s12, s10
+  4030b0:	eee6 7a05 	vfma.f32	s15, s12, s10
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  4030b0:	eea3 7a23 	vfma.f32	s14, s6, s7
+  4030b4:	eea3 7a23 	vfma.f32	s14, s6, s7
 				out_buffer[i] += reverb_volume * 0.33f *
-  4030b4:	eee7 7a04 	vfma.f32	s15, s14, s8
+  4030b8:	eee7 7a04 	vfma.f32	s15, s14, s8
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
-  4030b8:	ed81 7a00 	vstr	s14, [r1]
+  4030bc:	ed81 7a00 	vstr	s14, [r1]
 				out_buffer[i] += reverb_volume * 0.33f *
-  4030bc:	ece3 7a01 	vstmia	r3!, {s15}
-  4030c0:	9302      	str	r3, [sp, #8]
+  4030c0:	ece3 7a01 	vstmia	r3!, {s15}
+  4030c4:	9302      	str	r3, [sp, #8]
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
-  4030c2:	9b05      	ldr	r3, [sp, #20]
-  4030c4:	429f      	cmp	r7, r3
-  4030c6:	f47f af2f 	bne.w	402f28 <main+0x510>
+  4030c6:	9b05      	ldr	r3, [sp, #20]
+  4030c8:	429f      	cmp	r7, r3
+  4030ca:	f47f af2f 	bne.w	402f2c <main+0x510>
 			}
 	
 			// scale output 
 			arm_scale_f32(out_buffer, (float)INT16_MAX * master_volume, out_buffer, WIN_SIZE);
-  4030ca:	4b41      	ldr	r3, [pc, #260]	; (4031d0 <main+0x7b8>)
-  4030cc:	eddf 7a41 	vldr	s15, [pc, #260]	; 4031d4 <main+0x7bc>
-  4030d0:	ed93 7a00 	vldr	s14, [r3]
-  4030d4:	f44f 6380 	mov.w	r3, #1024	; 0x400
-  4030d8:	4a28      	ldr	r2, [pc, #160]	; (40317c <main+0x764>)
-  4030da:	ee67 7a27 	vmul.f32	s15, s14, s15
-  4030de:	4d3e      	ldr	r5, [pc, #248]	; (4031d8 <main+0x7c0>)
-  4030e0:	4610      	mov	r0, r2
-  4030e2:	f8dd 8018 	ldr.w	r8, [sp, #24]
-  4030e6:	ee17 1a90 	vmov	r1, s15
-  4030ea:	47a8      	blx	r5
-  4030ec:	4a23      	ldr	r2, [pc, #140]	; (40317c <main+0x764>)
-  4030ee:	f8dd e01c 	ldr.w	lr, [sp, #28]
-  4030f2:	4b22      	ldr	r3, [pc, #136]	; (40317c <main+0x764>)
+  4030ce:	4b41      	ldr	r3, [pc, #260]	; (4031d4 <main+0x7b8>)
+  4030d0:	eddf 7a41 	vldr	s15, [pc, #260]	; 4031d8 <main+0x7bc>
+  4030d4:	ed93 7a00 	vldr	s14, [r3]
+  4030d8:	f44f 6380 	mov.w	r3, #1024	; 0x400
+  4030dc:	4a28      	ldr	r2, [pc, #160]	; (403180 <main+0x764>)
+  4030de:	ee67 7a27 	vmul.f32	s15, s14, s15
+  4030e2:	4d3e      	ldr	r5, [pc, #248]	; (4031dc <main+0x7c0>)
+  4030e4:	4610      	mov	r0, r2
+  4030e6:	f8dd 8018 	ldr.w	r8, [sp, #24]
+  4030ea:	ee17 1a90 	vmov	r1, s15
+  4030ee:	47a8      	blx	r5
+  4030f0:	4a23      	ldr	r2, [pc, #140]	; (403180 <main+0x764>)
+  4030f2:	f8dd e01c 	ldr.w	lr, [sp, #28]
+  4030f6:	4b22      	ldr	r3, [pc, #136]	; (403180 <main+0x764>)
 			
 			// Sound out 
 			uint32_t idx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=2)
 			{
 				outBuffer[i] = (uint16_t)(int16_t)(out_buffer[idx++]);  
-  4030f4:	f8da 6000 	ldr.w	r6, [sl]
-  4030f8:	1ad0      	subs	r0, r2, r3
-  4030fa:	ecf2 7a01 	vldmia	r2!, {s15}
-  4030fe:	eefd 7ae7 	vcvt.s32.f32	s15, s15
+  4030f8:	f8da 6000 	ldr.w	r6, [sl]
+  4030fc:	1ad0      	subs	r0, r2, r3
+  4030fe:	ecf2 7a01 	vldmia	r2!, {s15}
+  403102:	eefd 7ae7 	vcvt.s32.f32	s15, s15
 				outBuffer[i+1] = outBuffer[i]; 
-  403102:	eb0e 0502 	add.w	r5, lr, r2
+  403106:	eb0e 0502 	add.w	r5, lr, r2
 			for(i = 0; i < IO_BUF_SIZE; i+=2)
-  403106:	4590      	cmp	r8, r2
+  40310a:	4590      	cmp	r8, r2
 				outBuffer[i] = (uint16_t)(int16_t)(out_buffer[idx++]);  
-  403108:	edcd 7a02 	vstr	s15, [sp, #8]
-  40310c:	f8bd 3008 	ldrh.w	r3, [sp, #8]
-  403110:	5233      	strh	r3, [r6, r0]
+  40310c:	edcd 7a02 	vstr	s15, [sp, #8]
+  403110:	f8bd 3008 	ldrh.w	r3, [sp, #8]
+  403114:	5233      	strh	r3, [r6, r0]
 				outBuffer[i+1] = outBuffer[i]; 
-  403112:	5a33      	ldrh	r3, [r6, r0]
-  403114:	b29b      	uxth	r3, r3
-  403116:	5373      	strh	r3, [r6, r5]
+  403116:	5a33      	ldrh	r3, [r6, r0]
+  403118:	b29b      	uxth	r3, r3
+  40311a:	5373      	strh	r3, [r6, r5]
 			for(i = 0; i < IO_BUF_SIZE; i+=2)
-  403118:	d1eb      	bne.n	4030f2 <main+0x6da>
+  40311c:	d1eb      	bne.n	4030f6 <main+0x6da>
 			}
 			
 			// check if we're too slow 
 			if (dataReceived)
-  40311a:	4b30      	ldr	r3, [pc, #192]	; (4031dc <main+0x7c4>)
-  40311c:	781b      	ldrb	r3, [r3, #0]
-  40311e:	f003 02ff 	and.w	r2, r3, #255	; 0xff
-  403122:	2b00      	cmp	r3, #0
-  403124:	f47f ad3c 	bne.w	402ba0 <main+0x188>
+  40311e:	4b30      	ldr	r3, [pc, #192]	; (4031e0 <main+0x7c4>)
+  403120:	781b      	ldrb	r3, [r3, #0]
+  403122:	f003 02ff 	and.w	r2, r3, #255	; 0xff
+  403126:	2b00      	cmp	r3, #0
+  403128:	f47f ad3c 	bne.w	402ba4 <main+0x188>
 // 				{
 // 					// taking too long ... never 
 // 				}
 			}
 			else 
 				dataReceived = false; 
-  403128:	4b2c      	ldr	r3, [pc, #176]	; (4031dc <main+0x7c4>)
-  40312a:	701a      	strb	r2, [r3, #0]
-  40312c:	e538      	b.n	402ba0 <main+0x188>
+  40312c:	4b2c      	ldr	r3, [pc, #176]	; (4031e0 <main+0x7c4>)
+  40312e:	701a      	strb	r2, [r3, #0]
+  403130:	e538      	b.n	402ba4 <main+0x188>
 				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
-  40312e:	2001      	movs	r0, #1
+  403132:	2001      	movs	r0, #1
 				harmony_shifts[num_of_shifts] = END_OF_SHIFTS; 
-  403130:	aa16      	add	r2, sp, #88	; 0x58
-  403132:	4b0e      	ldr	r3, [pc, #56]	; (40316c <main+0x754>)
-  403134:	eb02 0080 	add.w	r0, r2, r0, lsl #2
-  403138:	f840 3c30 	str.w	r3, [r0, #-48]
-  40313c:	e6be      	b.n	402ebc <main+0x4a4>
+  403134:	aa16      	add	r2, sp, #88	; 0x58
+  403136:	4b0e      	ldr	r3, [pc, #56]	; (403170 <main+0x754>)
+  403138:	eb02 0080 	add.w	r0, r2, r0, lsl #2
+  40313c:	f840 3c30 	str.w	r3, [r0, #-48]
+  403140:	e6be      	b.n	402ec0 <main+0x4a4>
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
-  40313e:	eef8 6a66 	vcvt.f32.u32	s13, s13
-  403142:	ed9f 6a27 	vldr	s12, [pc, #156]	; 4031e0 <main+0x7c8>
-  403146:	ed9f 7a27 	vldr	s14, [pc, #156]	; 4031e4 <main+0x7cc>
+  403142:	eef8 6a66 	vcvt.f32.u32	s13, s13
+  403146:	ed9f 6a27 	vldr	s12, [pc, #156]	; 4031e4 <main+0x7c8>
+  40314a:	ed9f 7a27 	vldr	s14, [pc, #156]	; 4031e8 <main+0x7cc>
 		bend_difference = midi_note_frequencies[pitch_idx+2] - midi_note_frequencies[pitch_idx];
-  40314a:	edd0 5a02 	vldr	s11, [r0, #8]
+  40314e:	edd0 5a02 	vldr	s11, [r0, #8]
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
-  40314e:	ee76 6ac6 	vsub.f32	s13, s13, s12
+  403152:	ee76 6ac6 	vsub.f32	s13, s13, s12
 		bend_difference = midi_note_frequencies[pitch_idx+2] - midi_note_frequencies[pitch_idx];
-  403152:	ee35 6ac9 	vsub.f32	s12, s11, s18
+  403156:	ee35 6ac9 	vsub.f32	s12, s11, s18
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
-  403156:	ee26 7a87 	vmul.f32	s14, s13, s14
-  40315a:	eee7 7a06 	vfma.f32	s15, s14, s12
-  40315e:	e5a6      	b.n	402cae <main+0x296>
+  40315a:	ee26 7a87 	vmul.f32	s14, s13, s14
+  40315e:	eee7 7a06 	vfma.f32	s15, s14, s12
+  403162:	e5a6      	b.n	402cb2 <main+0x296>
 	while (lo < hi)
-  403160:	4618      	mov	r0, r3
-  403162:	e575      	b.n	402c50 <main+0x238>
-  403164:	20400054 	.word	0x20400054
-  403168:	004071f8 	.word	0x004071f8
-  40316c:	bf800000 	.word	0xbf800000
-  403170:	20400044 	.word	0x20400044
-  403174:	20400040 	.word	0x20400040
-  403178:	2040001c 	.word	0x2040001c
-  40317c:	20444400 	.word	0x20444400
-  403180:	00400da9 	.word	0x00400da9
-  403184:	20445400 	.word	0x20445400
-  403188:	20400034 	.word	0x20400034
-  40318c:	390dad45 	.word	0x390dad45
-  403190:	3a83126f 	.word	0x3a83126f
-  403194:	3c03126f 	.word	0x3c03126f
-  403198:	3e4ccccd 	.word	0x3e4ccccd
-  40319c:	20430000 	.word	0x20430000
-  4031a0:	2041c0d4 	.word	0x2041c0d4
-  4031a4:	20445400 	.word	0x20445400
-  4031a8:	00403d49 	.word	0x00403d49
-  4031ac:	00403df1 	.word	0x00403df1
-  4031b0:	3fe00000 	.word	0x3fe00000
-  4031b4:	00403a89 	.word	0x00403a89
-  4031b8:	3ff00000 	.word	0x3ff00000
-  4031bc:	00404351 	.word	0x00404351
-  4031c0:	00403491 	.word	0x00403491
-  4031c4:	20400038 	.word	0x20400038
-  4031c8:	2040003c 	.word	0x2040003c
-  4031cc:	3ea8f5c3 	.word	0x3ea8f5c3
-  4031d0:	20400050 	.word	0x20400050
-  4031d4:	46fffe00 	.word	0x46fffe00
-  4031d8:	00403519 	.word	0x00403519
-  4031dc:	2040401c 	.word	0x2040401c
-  4031e0:	427c0000 	.word	0x427c0000
-  4031e4:	3c800000 	.word	0x3c800000
+  403164:	4618      	mov	r0, r3
+  403166:	e575      	b.n	402c54 <main+0x238>
+  403168:	20400054 	.word	0x20400054
+  40316c:	004071f8 	.word	0x004071f8
+  403170:	bf800000 	.word	0xbf800000
+  403174:	20400044 	.word	0x20400044
+  403178:	20400040 	.word	0x20400040
+  40317c:	2040001c 	.word	0x2040001c
+  403180:	20444400 	.word	0x20444400
+  403184:	00400da9 	.word	0x00400da9
+  403188:	20445400 	.word	0x20445400
+  40318c:	20400034 	.word	0x20400034
+  403190:	390dad45 	.word	0x390dad45
+  403194:	3a83126f 	.word	0x3a83126f
+  403198:	3c03126f 	.word	0x3c03126f
+  40319c:	3e4ccccd 	.word	0x3e4ccccd
+  4031a0:	20430000 	.word	0x20430000
+  4031a4:	2041c0d4 	.word	0x2041c0d4
+  4031a8:	20445400 	.word	0x20445400
+  4031ac:	00403d49 	.word	0x00403d49
+  4031b0:	00403df1 	.word	0x00403df1
+  4031b4:	3fe00000 	.word	0x3fe00000
+  4031b8:	00403a89 	.word	0x00403a89
+  4031bc:	3ff00000 	.word	0x3ff00000
+  4031c0:	00404351 	.word	0x00404351
+  4031c4:	00403495 	.word	0x00403495
+  4031c8:	20400038 	.word	0x20400038
+  4031cc:	2040003c 	.word	0x2040003c
+  4031d0:	3ea8f5c3 	.word	0x3ea8f5c3
+  4031d4:	20400050 	.word	0x20400050
+  4031d8:	46fffe00 	.word	0x46fffe00
+  4031dc:	0040351d 	.word	0x0040351d
+  4031e0:	2040401c 	.word	0x2040401c
+  4031e4:	427c0000 	.word	0x427c0000
+  4031e8:	3c800000 	.word	0x3c800000
 
-004031e8 <arm_fill_f32>:
-  4031e8:	b430      	push	{r4, r5}
-  4031ea:	0895      	lsrs	r5, r2, #2
-  4031ec:	d00b      	beq.n	403206 <arm_fill_f32+0x1e>
-  4031ee:	460b      	mov	r3, r1
-  4031f0:	462c      	mov	r4, r5
-  4031f2:	3c01      	subs	r4, #1
-  4031f4:	6018      	str	r0, [r3, #0]
-  4031f6:	6058      	str	r0, [r3, #4]
-  4031f8:	6098      	str	r0, [r3, #8]
-  4031fa:	60d8      	str	r0, [r3, #12]
-  4031fc:	f103 0310 	add.w	r3, r3, #16
-  403200:	d1f7      	bne.n	4031f2 <arm_fill_f32+0xa>
-  403202:	eb01 1105 	add.w	r1, r1, r5, lsl #4
-  403206:	f012 0203 	ands.w	r2, r2, #3
-  40320a:	d003      	beq.n	403214 <arm_fill_f32+0x2c>
-  40320c:	3a01      	subs	r2, #1
-  40320e:	f841 0b04 	str.w	r0, [r1], #4
-  403212:	d1fb      	bne.n	40320c <arm_fill_f32+0x24>
-  403214:	bc30      	pop	{r4, r5}
-  403216:	4770      	bx	lr
+004031ec <arm_fill_f32>:
+  4031ec:	b430      	push	{r4, r5}
+  4031ee:	0895      	lsrs	r5, r2, #2
+  4031f0:	d00b      	beq.n	40320a <arm_fill_f32+0x1e>
+  4031f2:	460b      	mov	r3, r1
+  4031f4:	462c      	mov	r4, r5
+  4031f6:	3c01      	subs	r4, #1
+  4031f8:	6018      	str	r0, [r3, #0]
+  4031fa:	6058      	str	r0, [r3, #4]
+  4031fc:	6098      	str	r0, [r3, #8]
+  4031fe:	60d8      	str	r0, [r3, #12]
+  403200:	f103 0310 	add.w	r3, r3, #16
+  403204:	d1f7      	bne.n	4031f6 <arm_fill_f32+0xa>
+  403206:	eb01 1105 	add.w	r1, r1, r5, lsl #4
+  40320a:	f012 0203 	ands.w	r2, r2, #3
+  40320e:	d003      	beq.n	403218 <arm_fill_f32+0x2c>
+  403210:	3a01      	subs	r2, #1
+  403212:	f841 0b04 	str.w	r0, [r1], #4
+  403216:	d1fb      	bne.n	403210 <arm_fill_f32+0x24>
+  403218:	bc30      	pop	{r4, r5}
+  40321a:	4770      	bx	lr
 
-00403218 <arm_copy_f32>:
-  403218:	e92d 03f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9}
-  40321c:	ea5f 0992 	movs.w	r9, r2, lsr #2
-  403220:	d018      	beq.n	403254 <arm_copy_f32+0x3c>
-  403222:	4604      	mov	r4, r0
-  403224:	460b      	mov	r3, r1
-  403226:	464d      	mov	r5, r9
-  403228:	f8d4 8000 	ldr.w	r8, [r4]
-  40322c:	f8d4 c004 	ldr.w	ip, [r4, #4]
-  403230:	68a7      	ldr	r7, [r4, #8]
-  403232:	68e6      	ldr	r6, [r4, #12]
-  403234:	3d01      	subs	r5, #1
-  403236:	f8c3 8000 	str.w	r8, [r3]
-  40323a:	f8c3 c004 	str.w	ip, [r3, #4]
-  40323e:	609f      	str	r7, [r3, #8]
-  403240:	60de      	str	r6, [r3, #12]
-  403242:	f104 0410 	add.w	r4, r4, #16
-  403246:	f103 0310 	add.w	r3, r3, #16
-  40324a:	d1ed      	bne.n	403228 <arm_copy_f32+0x10>
-  40324c:	ea4f 1909 	mov.w	r9, r9, lsl #4
-  403250:	4448      	add	r0, r9
-  403252:	4449      	add	r1, r9
-  403254:	f012 0203 	ands.w	r2, r2, #3
-  403258:	d005      	beq.n	403266 <arm_copy_f32+0x4e>
-  40325a:	f850 3b04 	ldr.w	r3, [r0], #4
-  40325e:	3a01      	subs	r2, #1
-  403260:	f841 3b04 	str.w	r3, [r1], #4
-  403264:	d1f9      	bne.n	40325a <arm_copy_f32+0x42>
-  403266:	e8bd 03f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9}
-  40326a:	4770      	bx	lr
+0040321c <arm_copy_f32>:
+  40321c:	e92d 03f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9}
+  403220:	ea5f 0992 	movs.w	r9, r2, lsr #2
+  403224:	d018      	beq.n	403258 <arm_copy_f32+0x3c>
+  403226:	4604      	mov	r4, r0
+  403228:	460b      	mov	r3, r1
+  40322a:	464d      	mov	r5, r9
+  40322c:	f8d4 8000 	ldr.w	r8, [r4]
+  403230:	f8d4 c004 	ldr.w	ip, [r4, #4]
+  403234:	68a7      	ldr	r7, [r4, #8]
+  403236:	68e6      	ldr	r6, [r4, #12]
+  403238:	3d01      	subs	r5, #1
+  40323a:	f8c3 8000 	str.w	r8, [r3]
+  40323e:	f8c3 c004 	str.w	ip, [r3, #4]
+  403242:	609f      	str	r7, [r3, #8]
+  403244:	60de      	str	r6, [r3, #12]
+  403246:	f104 0410 	add.w	r4, r4, #16
+  40324a:	f103 0310 	add.w	r3, r3, #16
+  40324e:	d1ed      	bne.n	40322c <arm_copy_f32+0x10>
+  403250:	ea4f 1909 	mov.w	r9, r9, lsl #4
+  403254:	4448      	add	r0, r9
+  403256:	4449      	add	r1, r9
+  403258:	f012 0203 	ands.w	r2, r2, #3
+  40325c:	d005      	beq.n	40326a <arm_copy_f32+0x4e>
+  40325e:	f850 3b04 	ldr.w	r3, [r0], #4
+  403262:	3a01      	subs	r2, #1
+  403264:	f841 3b04 	str.w	r3, [r1], #4
+  403268:	d1f9      	bne.n	40325e <arm_copy_f32+0x42>
+  40326a:	e8bd 03f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9}
+  40326e:	4770      	bx	lr
 
-0040326c <arm_power_f32>:
-  40326c:	b430      	push	{r4, r5}
-  40326e:	088d      	lsrs	r5, r1, #2
-  403270:	eddf 7a18 	vldr	s15, [pc, #96]	; 4032d4 <arm_power_f32+0x68>
-  403274:	d01f      	beq.n	4032b6 <arm_power_f32+0x4a>
-  403276:	4603      	mov	r3, r0
-  403278:	462c      	mov	r4, r5
-  40327a:	edd3 6a00 	vldr	s13, [r3]
-  40327e:	ed93 7a01 	vldr	s14, [r3, #4]
-  403282:	ee66 6aa6 	vmul.f32	s13, s13, s13
-  403286:	ee27 6a07 	vmul.f32	s12, s14, s14
-  40328a:	ee76 7aa7 	vadd.f32	s15, s13, s15
-  40328e:	ed93 7a02 	vldr	s14, [r3, #8]
-  403292:	ee76 7a27 	vadd.f32	s15, s12, s15
-  403296:	ee67 6a07 	vmul.f32	s13, s14, s14
-  40329a:	ed93 7a03 	vldr	s14, [r3, #12]
-  40329e:	ee76 6aa7 	vadd.f32	s13, s13, s15
-  4032a2:	ee27 7a07 	vmul.f32	s14, s14, s14
-  4032a6:	3c01      	subs	r4, #1
-  4032a8:	f103 0310 	add.w	r3, r3, #16
-  4032ac:	ee77 7a26 	vadd.f32	s15, s14, s13
-  4032b0:	d1e3      	bne.n	40327a <arm_power_f32+0xe>
-  4032b2:	eb00 1005 	add.w	r0, r0, r5, lsl #4
-  4032b6:	f011 0103 	ands.w	r1, r1, #3
-  4032ba:	d007      	beq.n	4032cc <arm_power_f32+0x60>
-  4032bc:	ecb0 7a01 	vldmia	r0!, {s14}
-  4032c0:	ee27 7a07 	vmul.f32	s14, s14, s14
-  4032c4:	3901      	subs	r1, #1
-  4032c6:	ee77 7a87 	vadd.f32	s15, s15, s14
-  4032ca:	d1f7      	bne.n	4032bc <arm_power_f32+0x50>
-  4032cc:	edc2 7a00 	vstr	s15, [r2]
-  4032d0:	bc30      	pop	{r4, r5}
-  4032d2:	4770      	bx	lr
-  4032d4:	00000000 	.word	0x00000000
+00403270 <arm_power_f32>:
+  403270:	b430      	push	{r4, r5}
+  403272:	088d      	lsrs	r5, r1, #2
+  403274:	eddf 7a18 	vldr	s15, [pc, #96]	; 4032d8 <arm_power_f32+0x68>
+  403278:	d01f      	beq.n	4032ba <arm_power_f32+0x4a>
+  40327a:	4603      	mov	r3, r0
+  40327c:	462c      	mov	r4, r5
+  40327e:	edd3 6a00 	vldr	s13, [r3]
+  403282:	ed93 7a01 	vldr	s14, [r3, #4]
+  403286:	ee66 6aa6 	vmul.f32	s13, s13, s13
+  40328a:	ee27 6a07 	vmul.f32	s12, s14, s14
+  40328e:	ee76 7aa7 	vadd.f32	s15, s13, s15
+  403292:	ed93 7a02 	vldr	s14, [r3, #8]
+  403296:	ee76 7a27 	vadd.f32	s15, s12, s15
+  40329a:	ee67 6a07 	vmul.f32	s13, s14, s14
+  40329e:	ed93 7a03 	vldr	s14, [r3, #12]
+  4032a2:	ee76 6aa7 	vadd.f32	s13, s13, s15
+  4032a6:	ee27 7a07 	vmul.f32	s14, s14, s14
+  4032aa:	3c01      	subs	r4, #1
+  4032ac:	f103 0310 	add.w	r3, r3, #16
+  4032b0:	ee77 7a26 	vadd.f32	s15, s14, s13
+  4032b4:	d1e3      	bne.n	40327e <arm_power_f32+0xe>
+  4032b6:	eb00 1005 	add.w	r0, r0, r5, lsl #4
+  4032ba:	f011 0103 	ands.w	r1, r1, #3
+  4032be:	d007      	beq.n	4032d0 <arm_power_f32+0x60>
+  4032c0:	ecb0 7a01 	vldmia	r0!, {s14}
+  4032c4:	ee27 7a07 	vmul.f32	s14, s14, s14
+  4032c8:	3901      	subs	r1, #1
+  4032ca:	ee77 7a87 	vadd.f32	s15, s15, s14
+  4032ce:	d1f7      	bne.n	4032c0 <arm_power_f32+0x50>
+  4032d0:	edc2 7a00 	vstr	s15, [r2]
+  4032d4:	bc30      	pop	{r4, r5}
+  4032d6:	4770      	bx	lr
+  4032d8:	00000000 	.word	0x00000000
 
-004032d8 <arm_min_f32>:
-  4032d8:	e92d 03f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9}
-  4032dc:	f101 3cff 	add.w	ip, r1, #4294967295
-  4032e0:	ea5f 099c 	movs.w	r9, ip, lsr #2
-  4032e4:	f100 0704 	add.w	r7, r0, #4
-  4032e8:	edd0 7a00 	vldr	s15, [r0]
-  4032ec:	d05c      	beq.n	4033a8 <arm_min_f32+0xd0>
-  4032ee:	463c      	mov	r4, r7
-  4032f0:	464e      	mov	r6, r9
-  4032f2:	2004      	movs	r0, #4
-  4032f4:	2500      	movs	r5, #0
-  4032f6:	edd4 6a00 	vldr	s13, [r4]
-  4032fa:	eef4 6ae7 	vcmpe.f32	s13, s15
-  4032fe:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  403302:	ed94 7a01 	vldr	s14, [r4, #4]
-  403306:	bf48      	it	mi
-  403308:	eef0 7a66 	vmovmi.f32	s15, s13
-  40330c:	eef4 7ac7 	vcmpe.f32	s15, s14
-  403310:	f1a0 0803 	sub.w	r8, r0, #3
-  403314:	bf48      	it	mi
-  403316:	4645      	movmi	r5, r8
-  403318:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  40331c:	edd4 6a02 	vldr	s13, [r4, #8]
-  403320:	bfc8      	it	gt
-  403322:	eef0 7a47 	vmovgt.f32	s15, s14
-  403326:	eef4 7ae6 	vcmpe.f32	s15, s13
-  40332a:	f1a0 0802 	sub.w	r8, r0, #2
-  40332e:	bfc8      	it	gt
-  403330:	4645      	movgt	r5, r8
-  403332:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  403336:	ed94 7a03 	vldr	s14, [r4, #12]
-  40333a:	bfc8      	it	gt
-  40333c:	eef0 7a66 	vmovgt.f32	s15, s13
-  403340:	eef4 7ac7 	vcmpe.f32	s15, s14
-  403344:	f100 38ff 	add.w	r8, r0, #4294967295
-  403348:	bfc8      	it	gt
-  40334a:	4645      	movgt	r5, r8
-  40334c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  403350:	bfc8      	it	gt
-  403352:	4605      	movgt	r5, r0
+004032dc <arm_min_f32>:
+  4032dc:	e92d 03f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9}
+  4032e0:	f101 3cff 	add.w	ip, r1, #4294967295
+  4032e4:	ea5f 099c 	movs.w	r9, ip, lsr #2
+  4032e8:	f100 0704 	add.w	r7, r0, #4
+  4032ec:	edd0 7a00 	vldr	s15, [r0]
+  4032f0:	d05c      	beq.n	4033ac <arm_min_f32+0xd0>
+  4032f2:	463c      	mov	r4, r7
+  4032f4:	464e      	mov	r6, r9
+  4032f6:	2004      	movs	r0, #4
+  4032f8:	2500      	movs	r5, #0
+  4032fa:	edd4 6a00 	vldr	s13, [r4]
+  4032fe:	eef4 6ae7 	vcmpe.f32	s13, s15
+  403302:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  403306:	ed94 7a01 	vldr	s14, [r4, #4]
+  40330a:	bf48      	it	mi
+  40330c:	eef0 7a66 	vmovmi.f32	s15, s13
+  403310:	eef4 7ac7 	vcmpe.f32	s15, s14
+  403314:	f1a0 0803 	sub.w	r8, r0, #3
+  403318:	bf48      	it	mi
+  40331a:	4645      	movmi	r5, r8
+  40331c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  403320:	edd4 6a02 	vldr	s13, [r4, #8]
+  403324:	bfc8      	it	gt
+  403326:	eef0 7a47 	vmovgt.f32	s15, s14
+  40332a:	eef4 7ae6 	vcmpe.f32	s15, s13
+  40332e:	f1a0 0802 	sub.w	r8, r0, #2
+  403332:	bfc8      	it	gt
+  403334:	4645      	movgt	r5, r8
+  403336:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  40333a:	ed94 7a03 	vldr	s14, [r4, #12]
+  40333e:	bfc8      	it	gt
+  403340:	eef0 7a66 	vmovgt.f32	s15, s13
+  403344:	eef4 7ac7 	vcmpe.f32	s15, s14
+  403348:	f100 38ff 	add.w	r8, r0, #4294967295
+  40334c:	bfc8      	it	gt
+  40334e:	4645      	movgt	r5, r8
+  403350:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
   403354:	bfc8      	it	gt
-  403356:	eef0 7a47 	vmovgt.f32	s15, s14
-  40335a:	3e01      	subs	r6, #1
-  40335c:	f104 0410 	add.w	r4, r4, #16
-  403360:	f100 0004 	add.w	r0, r0, #4
-  403364:	d1c7      	bne.n	4032f6 <arm_min_f32+0x1e>
-  403366:	eb07 1709 	add.w	r7, r7, r9, lsl #4
-  40336a:	f01c 0c03 	ands.w	ip, ip, #3
-  40336e:	d01d      	beq.n	4033ac <arm_min_f32+0xd4>
-  403370:	ebcc 0101 	rsb	r1, ip, r1
-  403374:	2000      	movs	r0, #0
-  403376:	ecb7 7a01 	vldmia	r7!, {s14}
-  40337a:	eeb4 7ae7 	vcmpe.f32	s14, s15
-  40337e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  403382:	bf48      	it	mi
-  403384:	eef0 7a47 	vmovmi.f32	s15, s14
-  403388:	eb01 0400 	add.w	r4, r1, r0
-  40338c:	f100 0001 	add.w	r0, r0, #1
-  403390:	bf48      	it	mi
-  403392:	4625      	movmi	r5, r4
-  403394:	4560      	cmp	r0, ip
-  403396:	eeb0 7a67 	vmov.f32	s14, s15
-  40339a:	d1ec      	bne.n	403376 <arm_min_f32+0x9e>
-  40339c:	ed82 7a00 	vstr	s14, [r2]
-  4033a0:	601d      	str	r5, [r3, #0]
-  4033a2:	e8bd 03f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9}
-  4033a6:	4770      	bx	lr
-  4033a8:	464d      	mov	r5, r9
-  4033aa:	e7de      	b.n	40336a <arm_min_f32+0x92>
-  4033ac:	eeb0 7a67 	vmov.f32	s14, s15
-  4033b0:	e7f4      	b.n	40339c <arm_min_f32+0xc4>
-  4033b2:	bf00      	nop
+  403356:	4605      	movgt	r5, r0
+  403358:	bfc8      	it	gt
+  40335a:	eef0 7a47 	vmovgt.f32	s15, s14
+  40335e:	3e01      	subs	r6, #1
+  403360:	f104 0410 	add.w	r4, r4, #16
+  403364:	f100 0004 	add.w	r0, r0, #4
+  403368:	d1c7      	bne.n	4032fa <arm_min_f32+0x1e>
+  40336a:	eb07 1709 	add.w	r7, r7, r9, lsl #4
+  40336e:	f01c 0c03 	ands.w	ip, ip, #3
+  403372:	d01d      	beq.n	4033b0 <arm_min_f32+0xd4>
+  403374:	ebcc 0101 	rsb	r1, ip, r1
+  403378:	2000      	movs	r0, #0
+  40337a:	ecb7 7a01 	vldmia	r7!, {s14}
+  40337e:	eeb4 7ae7 	vcmpe.f32	s14, s15
+  403382:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  403386:	bf48      	it	mi
+  403388:	eef0 7a47 	vmovmi.f32	s15, s14
+  40338c:	eb01 0400 	add.w	r4, r1, r0
+  403390:	f100 0001 	add.w	r0, r0, #1
+  403394:	bf48      	it	mi
+  403396:	4625      	movmi	r5, r4
+  403398:	4560      	cmp	r0, ip
+  40339a:	eeb0 7a67 	vmov.f32	s14, s15
+  40339e:	d1ec      	bne.n	40337a <arm_min_f32+0x9e>
+  4033a0:	ed82 7a00 	vstr	s14, [r2]
+  4033a4:	601d      	str	r5, [r3, #0]
+  4033a6:	e8bd 03f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9}
+  4033aa:	4770      	bx	lr
+  4033ac:	464d      	mov	r5, r9
+  4033ae:	e7de      	b.n	40336e <arm_min_f32+0x92>
+  4033b0:	eeb0 7a67 	vmov.f32	s14, s15
+  4033b4:	e7f4      	b.n	4033a0 <arm_min_f32+0xc4>
+  4033b6:	bf00      	nop
 
-004033b4 <arm_max_f32>:
-  4033b4:	e92d 03f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9}
-  4033b8:	f101 3cff 	add.w	ip, r1, #4294967295
-  4033bc:	ea5f 099c 	movs.w	r9, ip, lsr #2
-  4033c0:	f100 0704 	add.w	r7, r0, #4
-  4033c4:	edd0 7a00 	vldr	s15, [r0]
-  4033c8:	d05c      	beq.n	403484 <arm_max_f32+0xd0>
-  4033ca:	463c      	mov	r4, r7
-  4033cc:	464e      	mov	r6, r9
-  4033ce:	2004      	movs	r0, #4
-  4033d0:	2500      	movs	r5, #0
-  4033d2:	edd4 6a00 	vldr	s13, [r4]
-  4033d6:	eef4 6ae7 	vcmpe.f32	s13, s15
-  4033da:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  4033de:	ed94 7a01 	vldr	s14, [r4, #4]
-  4033e2:	bfc8      	it	gt
-  4033e4:	eef0 7a66 	vmovgt.f32	s15, s13
-  4033e8:	eef4 7ac7 	vcmpe.f32	s15, s14
-  4033ec:	f1a0 0803 	sub.w	r8, r0, #3
-  4033f0:	bfc8      	it	gt
-  4033f2:	4645      	movgt	r5, r8
-  4033f4:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  4033f8:	edd4 6a02 	vldr	s13, [r4, #8]
-  4033fc:	bf48      	it	mi
-  4033fe:	eef0 7a47 	vmovmi.f32	s15, s14
-  403402:	eef4 7ae6 	vcmpe.f32	s15, s13
-  403406:	f1a0 0802 	sub.w	r8, r0, #2
-  40340a:	bf48      	it	mi
-  40340c:	4645      	movmi	r5, r8
-  40340e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  403412:	ed94 7a03 	vldr	s14, [r4, #12]
-  403416:	bf48      	it	mi
-  403418:	eef0 7a66 	vmovmi.f32	s15, s13
-  40341c:	eef4 7ac7 	vcmpe.f32	s15, s14
-  403420:	f100 38ff 	add.w	r8, r0, #4294967295
-  403424:	bf48      	it	mi
-  403426:	4645      	movmi	r5, r8
-  403428:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  40342c:	bf48      	it	mi
-  40342e:	4605      	movmi	r5, r0
+004033b8 <arm_max_f32>:
+  4033b8:	e92d 03f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9}
+  4033bc:	f101 3cff 	add.w	ip, r1, #4294967295
+  4033c0:	ea5f 099c 	movs.w	r9, ip, lsr #2
+  4033c4:	f100 0704 	add.w	r7, r0, #4
+  4033c8:	edd0 7a00 	vldr	s15, [r0]
+  4033cc:	d05c      	beq.n	403488 <arm_max_f32+0xd0>
+  4033ce:	463c      	mov	r4, r7
+  4033d0:	464e      	mov	r6, r9
+  4033d2:	2004      	movs	r0, #4
+  4033d4:	2500      	movs	r5, #0
+  4033d6:	edd4 6a00 	vldr	s13, [r4]
+  4033da:	eef4 6ae7 	vcmpe.f32	s13, s15
+  4033de:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4033e2:	ed94 7a01 	vldr	s14, [r4, #4]
+  4033e6:	bfc8      	it	gt
+  4033e8:	eef0 7a66 	vmovgt.f32	s15, s13
+  4033ec:	eef4 7ac7 	vcmpe.f32	s15, s14
+  4033f0:	f1a0 0803 	sub.w	r8, r0, #3
+  4033f4:	bfc8      	it	gt
+  4033f6:	4645      	movgt	r5, r8
+  4033f8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4033fc:	edd4 6a02 	vldr	s13, [r4, #8]
+  403400:	bf48      	it	mi
+  403402:	eef0 7a47 	vmovmi.f32	s15, s14
+  403406:	eef4 7ae6 	vcmpe.f32	s15, s13
+  40340a:	f1a0 0802 	sub.w	r8, r0, #2
+  40340e:	bf48      	it	mi
+  403410:	4645      	movmi	r5, r8
+  403412:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  403416:	ed94 7a03 	vldr	s14, [r4, #12]
+  40341a:	bf48      	it	mi
+  40341c:	eef0 7a66 	vmovmi.f32	s15, s13
+  403420:	eef4 7ac7 	vcmpe.f32	s15, s14
+  403424:	f100 38ff 	add.w	r8, r0, #4294967295
+  403428:	bf48      	it	mi
+  40342a:	4645      	movmi	r5, r8
+  40342c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
   403430:	bf48      	it	mi
-  403432:	eef0 7a47 	vmovmi.f32	s15, s14
-  403436:	3e01      	subs	r6, #1
-  403438:	f104 0410 	add.w	r4, r4, #16
-  40343c:	f100 0004 	add.w	r0, r0, #4
-  403440:	d1c7      	bne.n	4033d2 <arm_max_f32+0x1e>
-  403442:	eb07 1709 	add.w	r7, r7, r9, lsl #4
-  403446:	f01c 0c03 	ands.w	ip, ip, #3
-  40344a:	d01d      	beq.n	403488 <arm_max_f32+0xd4>
-  40344c:	ebcc 0101 	rsb	r1, ip, r1
-  403450:	2000      	movs	r0, #0
-  403452:	ecb7 7a01 	vldmia	r7!, {s14}
-  403456:	eeb4 7ae7 	vcmpe.f32	s14, s15
-  40345a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  40345e:	bfc8      	it	gt
-  403460:	eef0 7a47 	vmovgt.f32	s15, s14
-  403464:	eb01 0400 	add.w	r4, r1, r0
-  403468:	f100 0001 	add.w	r0, r0, #1
-  40346c:	bfc8      	it	gt
-  40346e:	4625      	movgt	r5, r4
-  403470:	4560      	cmp	r0, ip
-  403472:	eeb0 7a67 	vmov.f32	s14, s15
-  403476:	d1ec      	bne.n	403452 <arm_max_f32+0x9e>
-  403478:	ed82 7a00 	vstr	s14, [r2]
-  40347c:	601d      	str	r5, [r3, #0]
-  40347e:	e8bd 03f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9}
-  403482:	4770      	bx	lr
-  403484:	464d      	mov	r5, r9
-  403486:	e7de      	b.n	403446 <arm_max_f32+0x92>
-  403488:	eeb0 7a67 	vmov.f32	s14, s15
-  40348c:	e7f4      	b.n	403478 <arm_max_f32+0xc4>
-  40348e:	bf00      	nop
+  403432:	4605      	movmi	r5, r0
+  403434:	bf48      	it	mi
+  403436:	eef0 7a47 	vmovmi.f32	s15, s14
+  40343a:	3e01      	subs	r6, #1
+  40343c:	f104 0410 	add.w	r4, r4, #16
+  403440:	f100 0004 	add.w	r0, r0, #4
+  403444:	d1c7      	bne.n	4033d6 <arm_max_f32+0x1e>
+  403446:	eb07 1709 	add.w	r7, r7, r9, lsl #4
+  40344a:	f01c 0c03 	ands.w	ip, ip, #3
+  40344e:	d01d      	beq.n	40348c <arm_max_f32+0xd4>
+  403450:	ebcc 0101 	rsb	r1, ip, r1
+  403454:	2000      	movs	r0, #0
+  403456:	ecb7 7a01 	vldmia	r7!, {s14}
+  40345a:	eeb4 7ae7 	vcmpe.f32	s14, s15
+  40345e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  403462:	bfc8      	it	gt
+  403464:	eef0 7a47 	vmovgt.f32	s15, s14
+  403468:	eb01 0400 	add.w	r4, r1, r0
+  40346c:	f100 0001 	add.w	r0, r0, #1
+  403470:	bfc8      	it	gt
+  403472:	4625      	movgt	r5, r4
+  403474:	4560      	cmp	r0, ip
+  403476:	eeb0 7a67 	vmov.f32	s14, s15
+  40347a:	d1ec      	bne.n	403456 <arm_max_f32+0x9e>
+  40347c:	ed82 7a00 	vstr	s14, [r2]
+  403480:	601d      	str	r5, [r3, #0]
+  403482:	e8bd 03f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9}
+  403486:	4770      	bx	lr
+  403488:	464d      	mov	r5, r9
+  40348a:	e7de      	b.n	40344a <arm_max_f32+0x92>
+  40348c:	eeb0 7a67 	vmov.f32	s14, s15
+  403490:	e7f4      	b.n	40347c <arm_max_f32+0xc4>
+  403492:	bf00      	nop
 
-00403490 <arm_cos_f32>:
-  403490:	eddf 7a1e 	vldr	s15, [pc, #120]	; 40350c <arm_cos_f32+0x7c>
-  403494:	ee06 0a90 	vmov	s13, r0
-  403498:	eeb5 7a00 	vmov.f32	s14, #80	; 0x3e800000  0.250
-  40349c:	ee66 7aa7 	vmul.f32	s15, s13, s15
-  4034a0:	ee77 7a87 	vadd.f32	s15, s15, s14
-  4034a4:	eef5 7ac0 	vcmpe.f32	s15, #0.0
-  4034a8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-  4034ac:	eebd 7ae7 	vcvt.s32.f32	s14, s15
-  4034b0:	d504      	bpl.n	4034bc <arm_cos_f32+0x2c>
-  4034b2:	ee17 3a10 	vmov	r3, s14
-  4034b6:	3b01      	subs	r3, #1
-  4034b8:	ee07 3a10 	vmov	s14, r3
-  4034bc:	eeb8 7ac7 	vcvt.f32.s32	s14, s14
-  4034c0:	eddf 6a13 	vldr	s13, [pc, #76]	; 403510 <arm_cos_f32+0x80>
-  4034c4:	ee77 7ac7 	vsub.f32	s15, s15, s14
-  4034c8:	ee67 7aa6 	vmul.f32	s15, s15, s13
-  4034cc:	eefc 6ae7 	vcvt.u32.f32	s13, s15
-  4034d0:	ee16 3a90 	vmov	r3, s13
-  4034d4:	f3c3 0308 	ubfx	r3, r3, #0, #9
-  4034d8:	ee07 3a10 	vmov	s14, r3
-  4034dc:	eef8 6a47 	vcvt.f32.u32	s13, s14
-  4034e0:	eeb7 7a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
-  4034e4:	ee77 7ae6 	vsub.f32	s15, s15, s13
-  4034e8:	4a0a      	ldr	r2, [pc, #40]	; (403514 <arm_cos_f32+0x84>)
-  4034ea:	ee37 7a67 	vsub.f32	s14, s14, s15
-  4034ee:	eb02 0183 	add.w	r1, r2, r3, lsl #2
-  4034f2:	ed91 6a00 	vldr	s12, [r1]
-  4034f6:	edd1 6a01 	vldr	s13, [r1, #4]
-  4034fa:	ee27 7a06 	vmul.f32	s14, s14, s12
-  4034fe:	ee67 7aa6 	vmul.f32	s15, s15, s13
-  403502:	ee77 7a27 	vadd.f32	s15, s14, s15
-  403506:	ee17 0a90 	vmov	r0, s15
-  40350a:	4770      	bx	lr
-  40350c:	3e22f983 	.word	0x3e22f983
-  403510:	44000000 	.word	0x44000000
-  403514:	004073f8 	.word	0x004073f8
+00403494 <arm_cos_f32>:
+  403494:	eddf 7a1e 	vldr	s15, [pc, #120]	; 403510 <arm_cos_f32+0x7c>
+  403498:	ee06 0a90 	vmov	s13, r0
+  40349c:	eeb5 7a00 	vmov.f32	s14, #80	; 0x3e800000  0.250
+  4034a0:	ee66 7aa7 	vmul.f32	s15, s13, s15
+  4034a4:	ee77 7a87 	vadd.f32	s15, s15, s14
+  4034a8:	eef5 7ac0 	vcmpe.f32	s15, #0.0
+  4034ac:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4034b0:	eebd 7ae7 	vcvt.s32.f32	s14, s15
+  4034b4:	d504      	bpl.n	4034c0 <arm_cos_f32+0x2c>
+  4034b6:	ee17 3a10 	vmov	r3, s14
+  4034ba:	3b01      	subs	r3, #1
+  4034bc:	ee07 3a10 	vmov	s14, r3
+  4034c0:	eeb8 7ac7 	vcvt.f32.s32	s14, s14
+  4034c4:	eddf 6a13 	vldr	s13, [pc, #76]	; 403514 <arm_cos_f32+0x80>
+  4034c8:	ee77 7ac7 	vsub.f32	s15, s15, s14
+  4034cc:	ee67 7aa6 	vmul.f32	s15, s15, s13
+  4034d0:	eefc 6ae7 	vcvt.u32.f32	s13, s15
+  4034d4:	ee16 3a90 	vmov	r3, s13
+  4034d8:	f3c3 0308 	ubfx	r3, r3, #0, #9
+  4034dc:	ee07 3a10 	vmov	s14, r3
+  4034e0:	eef8 6a47 	vcvt.f32.u32	s13, s14
+  4034e4:	eeb7 7a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
+  4034e8:	ee77 7ae6 	vsub.f32	s15, s15, s13
+  4034ec:	4a0a      	ldr	r2, [pc, #40]	; (403518 <arm_cos_f32+0x84>)
+  4034ee:	ee37 7a67 	vsub.f32	s14, s14, s15
+  4034f2:	eb02 0183 	add.w	r1, r2, r3, lsl #2
+  4034f6:	ed91 6a00 	vldr	s12, [r1]
+  4034fa:	edd1 6a01 	vldr	s13, [r1, #4]
+  4034fe:	ee27 7a06 	vmul.f32	s14, s14, s12
+  403502:	ee67 7aa6 	vmul.f32	s15, s15, s13
+  403506:	ee77 7a27 	vadd.f32	s15, s14, s15
+  40350a:	ee17 0a90 	vmov	r0, s15
+  40350e:	4770      	bx	lr
+  403510:	3e22f983 	.word	0x3e22f983
+  403514:	44000000 	.word	0x44000000
+  403518:	004073f8 	.word	0x004073f8
 
-00403518 <arm_scale_f32>:
-  403518:	b470      	push	{r4, r5, r6}
-  40351a:	089e      	lsrs	r6, r3, #2
-  40351c:	ee07 1a90 	vmov	s15, r1
-  403520:	d023      	beq.n	40356a <arm_scale_f32+0x52>
-  403522:	4635      	mov	r5, r6
-  403524:	4614      	mov	r4, r2
-  403526:	4601      	mov	r1, r0
-  403528:	edd1 5a00 	vldr	s11, [r1]
-  40352c:	ed91 6a01 	vldr	s12, [r1, #4]
-  403530:	edd1 6a02 	vldr	s13, [r1, #8]
-  403534:	ed91 7a03 	vldr	s14, [r1, #12]
-  403538:	ee65 5aa7 	vmul.f32	s11, s11, s15
-  40353c:	ee26 6a27 	vmul.f32	s12, s12, s15
-  403540:	ee66 6aa7 	vmul.f32	s13, s13, s15
-  403544:	ee27 7a27 	vmul.f32	s14, s14, s15
-  403548:	3d01      	subs	r5, #1
-  40354a:	edc4 5a00 	vstr	s11, [r4]
-  40354e:	ed84 6a01 	vstr	s12, [r4, #4]
-  403552:	edc4 6a02 	vstr	s13, [r4, #8]
-  403556:	ed84 7a03 	vstr	s14, [r4, #12]
-  40355a:	f101 0110 	add.w	r1, r1, #16
-  40355e:	f104 0410 	add.w	r4, r4, #16
-  403562:	d1e1      	bne.n	403528 <arm_scale_f32+0x10>
-  403564:	0136      	lsls	r6, r6, #4
-  403566:	4430      	add	r0, r6
-  403568:	4432      	add	r2, r6
-  40356a:	f013 0303 	ands.w	r3, r3, #3
-  40356e:	d007      	beq.n	403580 <arm_scale_f32+0x68>
-  403570:	ecb0 7a01 	vldmia	r0!, {s14}
-  403574:	ee27 7a27 	vmul.f32	s14, s14, s15
-  403578:	3b01      	subs	r3, #1
-  40357a:	eca2 7a01 	vstmia	r2!, {s14}
-  40357e:	d1f7      	bne.n	403570 <arm_scale_f32+0x58>
-  403580:	bc70      	pop	{r4, r5, r6}
-  403582:	4770      	bx	lr
+0040351c <arm_scale_f32>:
+  40351c:	b470      	push	{r4, r5, r6}
+  40351e:	089e      	lsrs	r6, r3, #2
+  403520:	ee07 1a90 	vmov	s15, r1
+  403524:	d023      	beq.n	40356e <arm_scale_f32+0x52>
+  403526:	4635      	mov	r5, r6
+  403528:	4614      	mov	r4, r2
+  40352a:	4601      	mov	r1, r0
+  40352c:	edd1 5a00 	vldr	s11, [r1]
+  403530:	ed91 6a01 	vldr	s12, [r1, #4]
+  403534:	edd1 6a02 	vldr	s13, [r1, #8]
+  403538:	ed91 7a03 	vldr	s14, [r1, #12]
+  40353c:	ee65 5aa7 	vmul.f32	s11, s11, s15
+  403540:	ee26 6a27 	vmul.f32	s12, s12, s15
+  403544:	ee66 6aa7 	vmul.f32	s13, s13, s15
+  403548:	ee27 7a27 	vmul.f32	s14, s14, s15
+  40354c:	3d01      	subs	r5, #1
+  40354e:	edc4 5a00 	vstr	s11, [r4]
+  403552:	ed84 6a01 	vstr	s12, [r4, #4]
+  403556:	edc4 6a02 	vstr	s13, [r4, #8]
+  40355a:	ed84 7a03 	vstr	s14, [r4, #12]
+  40355e:	f101 0110 	add.w	r1, r1, #16
+  403562:	f104 0410 	add.w	r4, r4, #16
+  403566:	d1e1      	bne.n	40352c <arm_scale_f32+0x10>
+  403568:	0136      	lsls	r6, r6, #4
+  40356a:	4430      	add	r0, r6
+  40356c:	4432      	add	r2, r6
+  40356e:	f013 0303 	ands.w	r3, r3, #3
+  403572:	d007      	beq.n	403584 <arm_scale_f32+0x68>
+  403574:	ecb0 7a01 	vldmia	r0!, {s14}
+  403578:	ee27 7a27 	vmul.f32	s14, s14, s15
+  40357c:	3b01      	subs	r3, #1
+  40357e:	eca2 7a01 	vstmia	r2!, {s14}
+  403582:	d1f7      	bne.n	403574 <arm_scale_f32+0x58>
+  403584:	bc70      	pop	{r4, r5, r6}
+  403586:	4770      	bx	lr
 
-00403584 <log>:
-  403584:	e92d 43f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, lr}
-  403588:	b08b      	sub	sp, #44	; 0x2c
-  40358a:	4604      	mov	r4, r0
-  40358c:	460d      	mov	r5, r1
-  40358e:	f000 f87b 	bl	403688 <__ieee754_log>
-  403592:	4b37      	ldr	r3, [pc, #220]	; (403670 <log+0xec>)
-  403594:	f993 6000 	ldrsb.w	r6, [r3]
-  403598:	1c73      	adds	r3, r6, #1
-  40359a:	4680      	mov	r8, r0
-  40359c:	4689      	mov	r9, r1
-  40359e:	d00d      	beq.n	4035bc <log+0x38>
-  4035a0:	4622      	mov	r2, r4
-  4035a2:	462b      	mov	r3, r5
-  4035a4:	4620      	mov	r0, r4
-  4035a6:	4629      	mov	r1, r5
-  4035a8:	f000 febc 	bl	404324 <__aeabi_dcmpun>
-  4035ac:	b930      	cbnz	r0, 4035bc <log+0x38>
-  4035ae:	2200      	movs	r2, #0
-  4035b0:	2300      	movs	r3, #0
-  4035b2:	4620      	mov	r0, r4
-  4035b4:	4629      	mov	r1, r5
-  4035b6:	f000 feab 	bl	404310 <__aeabi_dcmpgt>
-  4035ba:	b120      	cbz	r0, 4035c6 <log+0x42>
-  4035bc:	4640      	mov	r0, r8
-  4035be:	4649      	mov	r1, r9
-  4035c0:	b00b      	add	sp, #44	; 0x2c
-  4035c2:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
-  4035c6:	4b2b      	ldr	r3, [pc, #172]	; (403674 <log+0xf0>)
-  4035c8:	9008      	str	r0, [sp, #32]
-  4035ca:	e9cd 4502 	strd	r4, r5, [sp, #8]
-  4035ce:	e9cd 4504 	strd	r4, r5, [sp, #16]
-  4035d2:	9301      	str	r3, [sp, #4]
-  4035d4:	b9de      	cbnz	r6, 40360e <log+0x8a>
-  4035d6:	4f28      	ldr	r7, [pc, #160]	; (403678 <log+0xf4>)
-  4035d8:	f04f 4660 	mov.w	r6, #3758096384	; 0xe0000000
-  4035dc:	4620      	mov	r0, r4
-  4035de:	4629      	mov	r1, r5
-  4035e0:	2200      	movs	r2, #0
-  4035e2:	2300      	movs	r3, #0
-  4035e4:	e9cd 6706 	strd	r6, r7, [sp, #24]
-  4035e8:	f000 fe6a 	bl	4042c0 <__aeabi_dcmpeq>
-  4035ec:	2800      	cmp	r0, #0
-  4035ee:	d037      	beq.n	403660 <log+0xdc>
-  4035f0:	2302      	movs	r3, #2
-  4035f2:	9300      	str	r3, [sp, #0]
-  4035f4:	4668      	mov	r0, sp
-  4035f6:	f000 fa3b 	bl	403a70 <matherr>
-  4035fa:	b1c8      	cbz	r0, 403630 <log+0xac>
-  4035fc:	9b08      	ldr	r3, [sp, #32]
-  4035fe:	b9e3      	cbnz	r3, 40363a <log+0xb6>
-  403600:	e9dd 8906 	ldrd	r8, r9, [sp, #24]
-  403604:	4640      	mov	r0, r8
-  403606:	4649      	mov	r1, r9
-  403608:	b00b      	add	sp, #44	; 0x2c
-  40360a:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
-  40360e:	f8df 9070 	ldr.w	r9, [pc, #112]	; 403680 <log+0xfc>
-  403612:	f04f 0800 	mov.w	r8, #0
-  403616:	4620      	mov	r0, r4
-  403618:	4629      	mov	r1, r5
-  40361a:	2200      	movs	r2, #0
-  40361c:	2300      	movs	r3, #0
-  40361e:	e9cd 8906 	strd	r8, r9, [sp, #24]
-  403622:	f000 fe4d 	bl	4042c0 <__aeabi_dcmpeq>
-  403626:	b168      	cbz	r0, 403644 <log+0xc0>
-  403628:	2302      	movs	r3, #2
-  40362a:	429e      	cmp	r6, r3
-  40362c:	9300      	str	r3, [sp, #0]
-  40362e:	d1e1      	bne.n	4035f4 <log+0x70>
-  403630:	f000 fede 	bl	4043f0 <__errno>
-  403634:	2322      	movs	r3, #34	; 0x22
-  403636:	6003      	str	r3, [r0, #0]
-  403638:	e7e0      	b.n	4035fc <log+0x78>
-  40363a:	f000 fed9 	bl	4043f0 <__errno>
-  40363e:	9b08      	ldr	r3, [sp, #32]
-  403640:	6003      	str	r3, [r0, #0]
-  403642:	e7dd      	b.n	403600 <log+0x7c>
-  403644:	2301      	movs	r3, #1
-  403646:	2e02      	cmp	r6, #2
-  403648:	9300      	str	r3, [sp, #0]
-  40364a:	d10b      	bne.n	403664 <log+0xe0>
-  40364c:	f000 fed0 	bl	4043f0 <__errno>
-  403650:	2321      	movs	r3, #33	; 0x21
-  403652:	6003      	str	r3, [r0, #0]
-  403654:	4809      	ldr	r0, [pc, #36]	; (40367c <log+0xf8>)
-  403656:	f000 fa0d 	bl	403a74 <nan>
-  40365a:	e9cd 0106 	strd	r0, r1, [sp, #24]
-  40365e:	e7cd      	b.n	4035fc <log+0x78>
-  403660:	2301      	movs	r3, #1
-  403662:	9300      	str	r3, [sp, #0]
-  403664:	4668      	mov	r0, sp
-  403666:	f000 fa03 	bl	403a70 <matherr>
-  40366a:	2800      	cmp	r0, #0
-  40366c:	d1f2      	bne.n	403654 <log+0xd0>
-  40366e:	e7ed      	b.n	40364c <log+0xc8>
-  403670:	20400058 	.word	0x20400058
-  403674:	00407bfc 	.word	0x00407bfc
-  403678:	c7efffff 	.word	0xc7efffff
-  40367c:	00407c14 	.word	0x00407c14
-  403680:	fff00000 	.word	0xfff00000
-  403684:	00000000 	.word	0x00000000
+00403588 <log>:
+  403588:	e92d 43f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, lr}
+  40358c:	b08b      	sub	sp, #44	; 0x2c
+  40358e:	4604      	mov	r4, r0
+  403590:	460d      	mov	r5, r1
+  403592:	f000 f879 	bl	403688 <__ieee754_log>
+  403596:	4b37      	ldr	r3, [pc, #220]	; (403674 <log+0xec>)
+  403598:	f993 6000 	ldrsb.w	r6, [r3]
+  40359c:	1c73      	adds	r3, r6, #1
+  40359e:	4680      	mov	r8, r0
+  4035a0:	4689      	mov	r9, r1
+  4035a2:	d00d      	beq.n	4035c0 <log+0x38>
+  4035a4:	4622      	mov	r2, r4
+  4035a6:	462b      	mov	r3, r5
+  4035a8:	4620      	mov	r0, r4
+  4035aa:	4629      	mov	r1, r5
+  4035ac:	f000 feba 	bl	404324 <__aeabi_dcmpun>
+  4035b0:	b930      	cbnz	r0, 4035c0 <log+0x38>
+  4035b2:	2200      	movs	r2, #0
+  4035b4:	2300      	movs	r3, #0
+  4035b6:	4620      	mov	r0, r4
+  4035b8:	4629      	mov	r1, r5
+  4035ba:	f000 fea9 	bl	404310 <__aeabi_dcmpgt>
+  4035be:	b120      	cbz	r0, 4035ca <log+0x42>
+  4035c0:	4640      	mov	r0, r8
+  4035c2:	4649      	mov	r1, r9
+  4035c4:	b00b      	add	sp, #44	; 0x2c
+  4035c6:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
+  4035ca:	4b2b      	ldr	r3, [pc, #172]	; (403678 <log+0xf0>)
+  4035cc:	9008      	str	r0, [sp, #32]
+  4035ce:	e9cd 4502 	strd	r4, r5, [sp, #8]
+  4035d2:	e9cd 4504 	strd	r4, r5, [sp, #16]
+  4035d6:	9301      	str	r3, [sp, #4]
+  4035d8:	b9de      	cbnz	r6, 403612 <log+0x8a>
+  4035da:	4f28      	ldr	r7, [pc, #160]	; (40367c <log+0xf4>)
+  4035dc:	f04f 4660 	mov.w	r6, #3758096384	; 0xe0000000
+  4035e0:	4620      	mov	r0, r4
+  4035e2:	4629      	mov	r1, r5
+  4035e4:	2200      	movs	r2, #0
+  4035e6:	2300      	movs	r3, #0
+  4035e8:	e9cd 6706 	strd	r6, r7, [sp, #24]
+  4035ec:	f000 fe68 	bl	4042c0 <__aeabi_dcmpeq>
+  4035f0:	2800      	cmp	r0, #0
+  4035f2:	d037      	beq.n	403664 <log+0xdc>
+  4035f4:	2302      	movs	r3, #2
+  4035f6:	9300      	str	r3, [sp, #0]
+  4035f8:	4668      	mov	r0, sp
+  4035fa:	f000 fa39 	bl	403a70 <matherr>
+  4035fe:	b1c8      	cbz	r0, 403634 <log+0xac>
+  403600:	9b08      	ldr	r3, [sp, #32]
+  403602:	b9e3      	cbnz	r3, 40363e <log+0xb6>
+  403604:	e9dd 8906 	ldrd	r8, r9, [sp, #24]
+  403608:	4640      	mov	r0, r8
+  40360a:	4649      	mov	r1, r9
+  40360c:	b00b      	add	sp, #44	; 0x2c
+  40360e:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
+  403612:	f8df 9070 	ldr.w	r9, [pc, #112]	; 403684 <log+0xfc>
+  403616:	f04f 0800 	mov.w	r8, #0
+  40361a:	4620      	mov	r0, r4
+  40361c:	4629      	mov	r1, r5
+  40361e:	2200      	movs	r2, #0
+  403620:	2300      	movs	r3, #0
+  403622:	e9cd 8906 	strd	r8, r9, [sp, #24]
+  403626:	f000 fe4b 	bl	4042c0 <__aeabi_dcmpeq>
+  40362a:	b168      	cbz	r0, 403648 <log+0xc0>
+  40362c:	2302      	movs	r3, #2
+  40362e:	429e      	cmp	r6, r3
+  403630:	9300      	str	r3, [sp, #0]
+  403632:	d1e1      	bne.n	4035f8 <log+0x70>
+  403634:	f000 fedc 	bl	4043f0 <__errno>
+  403638:	2322      	movs	r3, #34	; 0x22
+  40363a:	6003      	str	r3, [r0, #0]
+  40363c:	e7e0      	b.n	403600 <log+0x78>
+  40363e:	f000 fed7 	bl	4043f0 <__errno>
+  403642:	9b08      	ldr	r3, [sp, #32]
+  403644:	6003      	str	r3, [r0, #0]
+  403646:	e7dd      	b.n	403604 <log+0x7c>
+  403648:	2301      	movs	r3, #1
+  40364a:	2e02      	cmp	r6, #2
+  40364c:	9300      	str	r3, [sp, #0]
+  40364e:	d10b      	bne.n	403668 <log+0xe0>
+  403650:	f000 fece 	bl	4043f0 <__errno>
+  403654:	2321      	movs	r3, #33	; 0x21
+  403656:	6003      	str	r3, [r0, #0]
+  403658:	4809      	ldr	r0, [pc, #36]	; (403680 <log+0xf8>)
+  40365a:	f000 fa0b 	bl	403a74 <nan>
+  40365e:	e9cd 0106 	strd	r0, r1, [sp, #24]
+  403662:	e7cd      	b.n	403600 <log+0x78>
+  403664:	2301      	movs	r3, #1
+  403666:	9300      	str	r3, [sp, #0]
+  403668:	4668      	mov	r0, sp
+  40366a:	f000 fa01 	bl	403a70 <matherr>
+  40366e:	2800      	cmp	r0, #0
+  403670:	d1f2      	bne.n	403658 <log+0xd0>
+  403672:	e7ed      	b.n	403650 <log+0xc8>
+  403674:	20400058 	.word	0x20400058
+  403678:	00407bfc 	.word	0x00407bfc
+  40367c:	c7efffff 	.word	0xc7efffff
+  403680:	00407c14 	.word	0x00407c14
+  403684:	fff00000 	.word	0xfff00000
 
 00403688 <__ieee754_log>:
   403688:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}

@@ -133,7 +133,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 		}
 		else if (waiting_for_master_volume)
 		{
-			master_volume = (float)received_byte / 127.0f;
+			master_volume = 1.2f*(float)received_byte / 127.0f;
 			waiting_for_master_volume = false;
 		}
 		else if (waiting_for_dry_volume)
