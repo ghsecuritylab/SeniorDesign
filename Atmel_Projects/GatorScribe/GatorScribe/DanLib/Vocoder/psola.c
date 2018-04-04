@@ -207,13 +207,10 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 		readPos = (readPos+1) & RING_BUFFER_MASK;
 	}
 	
-	// no need to average 
-	//if (pitch_idx < 1) pitch_idx = 1; // just in case 
-	//arm_scale_f32(output, 1.0f / (float)pitch_idx, output, WIN_SIZE); 
-	
-	// variables for next harmonization  
-	//if ((pitch_idx-1) > 0)
-		//samplesLeftInPeriod = cum_samplesLeftInPeriod / (pitch_idx-1); // average the number of samples left in period 
+	// averaging -- not used currently 
+// 	float scale = 1.0f; 
+// 	if (current_num_shifts > 1) scale = 2.0f / (float)current_num_shifts ; // just in case 
+// 	arm_scale_f32(output, scale, output, WIN_SIZE); 
 	
 	currentPitch = inputPitch; 
 	inputPeriodLength = (uint32_t)(PSOLA_SAMPLE_RATE / currentPitch);

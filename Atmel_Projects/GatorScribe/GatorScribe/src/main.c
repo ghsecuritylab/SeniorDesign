@@ -63,13 +63,11 @@ static inline void get_frequency_from_all(float32_t frequency, float *closest_no
 }
 
 /*************** Application code buffers and consts start ***************/
-COMPILER_ALIGNED(WIN_SIZE) static float mixed_buffer[WIN_SIZE];
+COMPILER_ALIGNED(WIN_SIZE) static float out_buffer[WIN_SIZE];
 
-// for reverb 
 #define CIRC_BUF_SIZE 16384
 #define CIRC_MASK (CIRC_BUF_SIZE-1)
 COMPILER_ALIGNED(CIRC_BUF_SIZE) static float dry_circ_buffer[CIRC_BUF_SIZE];
-COMPILER_ALIGNED(WIN_SIZE) static float wet_circ_buffer[WIN_SIZE];
 COMPILER_ALIGNED(CIRC_BUF_SIZE) static float delay_circ_buffer[CIRC_BUF_SIZE];
 
 /*************** Application code buffers and consts end ***************/
@@ -108,7 +106,7 @@ volatile bool waiting_for_delay_volume = false;
 volatile float delay_volume = 0.0f;
 
 volatile bool waiting_for_delay_speed = false;
-volatile uint32_t delay_speed = 6000;
+volatile uint32_t delay_speed = 10000;
 
 volatile bool waiting_for_delay_feedback = false;
 volatile float delay_feedback = 0.0f;
@@ -117,7 +115,7 @@ volatile bool waiting_for_chorus_volume = false;
 volatile float chorus_volume = 0.0f;
 
 volatile bool waiting_for_chorus_speed = false;
-volatile float chorus_speed = 0.5f;
+volatile float chorus_speed = 0.02f;
 
 volatile bool autotune = true; 
 void USART_SERIAL_ISR_HANDLER(void)
@@ -177,7 +175,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 		}
 		else if (waiting_for_chorus_speed)
 		{
-			chorus_speed = 0.4f + 5.0f*(float)received_byte / 127.0f;;
+			chorus_speed = 0.05f + 2.0f*(float)received_byte / 127.0f;;
 			waiting_for_chorus_speed = false;
 		}
 		else if (received_byte == HARMONY_VOLUME_FLAG) 
@@ -341,8 +339,6 @@ int main(void)
 	uint32_t in_pitch_idx = 0; 
 	uint32_t sin_cnt = 0; 
 	uint32_t chorus_delay; 
-	uint32_t wet_idx = 0; 
-	arm_fill_f32(0.0f, wet_circ_buffer, WIN_SIZE); 
 	arm_fill_f32(0.0f, dry_circ_buffer, CIRC_BUF_SIZE);
 	arm_fill_f32(0.0f, delay_circ_buffer, CIRC_BUF_SIZE);
 	/*************** Application code variables end ***************/
@@ -406,61 +402,53 @@ int main(void)
 			}
 			
 			// return pitch shifted data from previous samples block  
-			create_harmonies((float  *)processBuffer, mixed_buffer, inputPitch, harmony_shifts, (float)harm_volume, (float)dry_volume); 
+			create_harmonies((float  *)processBuffer, out_buffer, inputPitch, harmony_shifts, (float)harm_volume, (float)dry_volume); 
 			
 			// save dry audio 
 			for (i = 0; i < WIN_SIZE; i++)
 			{
-				dry_circ_buffer[circ_buf_idx++ & CIRC_MASK] = mixed_buffer[i];
+				dry_circ_buffer[circ_buf_idx++ & CIRC_MASK] = out_buffer[i];
 			}
 			
-
-			// wet audio 
-			uint32_t curr_dry_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
-			uint32_t curr_wet_idx = wet_idx; 
+			// Add audio effects 
+			uint32_t curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 			// chorus params -- could make speed a param 
 			float n_freq = chorus_speed / PSOLA_SAMPLE_RATE; 
 			uint32_t num_samples_in_period = 1 / n_freq; 
-			float val; 
-			for (i = 0; i < WIN_SIZE; i++, curr_wet_idx++, curr_dry_idx++)
+			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{				
-				wet_circ_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * mixed_buffer[i]; 						
+				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
+						
 				// chorus
-				chorus_delay = (0.01f + 0.003f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
+				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
 				if (sin_cnt == num_samples_in_period)
 					sin_cnt = 0;
-				wet_circ_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_dry_idx - chorus_delay)  & CIRC_MASK] +
-														dry_circ_buffer[(curr_dry_idx - 199 - chorus_delay)  & CIRC_MASK] +
-														dry_circ_buffer[(curr_dry_idx - 401 - chorus_delay)  & CIRC_MASK] +
-														dry_circ_buffer[(curr_dry_idx - 601 - chorus_delay)  & CIRC_MASK] +
-														dry_circ_buffer[(curr_dry_idx - 809 - chorus_delay)  & CIRC_MASK]));			
+				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
+														dry_circ_buffer[(curr_idx - 199 - chorus_delay)  & CIRC_MASK] +
+														dry_circ_buffer[(curr_idx - 401 - chorus_delay)  & CIRC_MASK] +
+														dry_circ_buffer[(curr_idx - 601 - chorus_delay)  & CIRC_MASK] +
+														dry_circ_buffer[(curr_idx - 809 - chorus_delay)  & CIRC_MASK]));			
 	
 				// delay
-				delay_circ_buffer[curr_dry_idx & CIRC_MASK] = wet_circ_buffer[i] + delay_feedback * delay_circ_buffer[(curr_wet_idx - delay_speed)  & CIRC_MASK];	
-				wet_circ_buffer[i] += delay_volume * delay_circ_buffer[curr_dry_idx & CIRC_MASK];
+				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
+				out_buffer[i] += delay_volume * delay_circ_buffer[curr_idx & CIRC_MASK];
 				
 				// reverb
-				wet_circ_buffer[i] += reverb_volume * 0.33f *
-						(dry_circ_buffer[(curr_dry_idx - 2001)  & CIRC_MASK] +
-						dry_circ_buffer[(curr_dry_idx - 1503)  & CIRC_MASK] + 
-						dry_circ_buffer[(curr_dry_idx - 1203)  & CIRC_MASK] ); 
+				out_buffer[i] += reverb_volume * 0.33f *
+						(dry_circ_buffer[(curr_idx - 2001)  & CIRC_MASK] +
+						dry_circ_buffer[(curr_idx - 1503)  & CIRC_MASK] + 
+						dry_circ_buffer[(curr_idx - 1203)  & CIRC_MASK] ); 
 			}
-		
-			// mix wet and dry 
-			for (i = 0; i < WIN_SIZE; i++, wet_idx++)
-			{
-				 mixed_buffer[i] = wet_circ_buffer[i];
-			}
-
+	
 			// scale output 
-			arm_scale_f32(mixed_buffer, (float)INT16_MAX * master_volume * 0.5, mixed_buffer, WIN_SIZE);
- 			//arm_scale_f32(processBuffer, (float)INT16_MAX, mixed_buffer, WIN_SIZE); // sound in / sound out 
+			arm_scale_f32(out_buffer, (float)INT16_MAX * master_volume * 0.6f, out_buffer, WIN_SIZE);
+ 			//arm_scale_f32(processBuffer, (float)INT16_MAX, out_buffer, WIN_SIZE); // sound in / sound out 
 			
 			// Sound out 
 			uint32_t idx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=2)
 			{
-				outBuffer[i] = (uint16_t)(int16_t)(mixed_buffer[idx++]);  
+				outBuffer[i] = (uint16_t)(int16_t)(out_buffer[idx++]);  
 				outBuffer[i+1] = outBuffer[i]; 
 			}
 			
