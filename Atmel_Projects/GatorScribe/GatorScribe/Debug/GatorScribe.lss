@@ -9,9 +9,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   2 .relocate     00000a08  20400000  00407d54  00020000  2**3
                   CONTENTS, ALLOC, LOAD, CODE
-  3 .bss          000468e8  20404000  0040c000  00024000  2**14
+  3 .bss          000468e4  20404000  0040c000  00024000  2**14
                   ALLOC
-  4 .stack        00002000  2044a8e8  004528e8  00024000  2**0
+  4 .stack        00002004  2044a8e4  004528e4  00024000  2**0
                   ALLOC
   5 .heap         00000200  2044c8e8  004548e8  00024000  2**0
                   ALLOC
@@ -19,23 +19,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   7 .comment      000000b4  00000000  00000000  00020a34  2**0
                   CONTENTS, READONLY
-  8 .debug_info   000206f1  00000000  00000000  00020ae8  2**0
+  8 .debug_info   00020709  00000000  00000000  00020ae8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_abbrev 00004bc1  00000000  00000000  000411d9  2**0
+  9 .debug_abbrev 00004bb0  00000000  00000000  000411f1  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00009b52  00000000  00000000  00045d9a  2**0
+ 10 .debug_loc    00009b52  00000000  00000000  00045da1  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_aranges 00000cf0  00000000  00000000  0004f8ec  2**0
+ 11 .debug_aranges 00000cf0  00000000  00000000  0004f8f3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00001ee8  00000000  00000000  000505dc  2**0
+ 12 .debug_ranges 00001f28  00000000  00000000  000505e3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  00025dab  00000000  00000000  000524c4  2**0
+ 13 .debug_macro  00025dab  00000000  00000000  0005250b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   00014ce8  00000000  00000000  0007826f  2**0
+ 14 .debug_line   00014ced  00000000  00000000  000782b6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    0009d352  00000000  00000000  0008cf57  2**0
+ 15 .debug_str    0009d361  00000000  00000000  0008cfa3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_frame  00002d40  00000000  00000000  0012a2ac  2**2
+ 16 .debug_frame  00002d40  00000000  00000000  0012a304  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -133,7 +133,7 @@ void XDMAC_Handler(void)
   4001b2:	07da      	lsls	r2, r3, #31
   4001b4:	d522      	bpl.n	4001fc <XDMAC_Handler+0x50>
     {
-		// Update input buffer to be used 
+		// update input buffer to be used 
 		if(inPingMode)
   4001b6:	4c1c      	ldr	r4, [pc, #112]	; (400228 <XDMAC_Handler+0x7c>)
 		{
@@ -161,7 +161,7 @@ void XDMAC_Handler(void)
   4001ce:	4619      	mov	r1, r3
   4001d0:	f502 5080 	add.w	r0, r2, #4096	; 0x1000
 		
-		// Fill process buffer - only left channel 
+		// fill process buffer - only left channel 
 		uint32_t processIdx = 0; 
 		for(uint32_t i = 0; i < IO_BUF_SIZE; i+=2, processIdx++)
 		{
@@ -6033,7 +6033,7 @@ static inline void cpu_irq_restore(irqflags_t flags)
   4024fc:	20400a08 	.word	0x20400a08
   402500:	0040498d 	.word	0x0040498d
   402504:	20404000 	.word	0x20404000
-  402508:	2044a8e8 	.word	0x2044a8e8
+  402508:	2044a8e4 	.word	0x2044a8e4
   40250c:	00404ac1 	.word	0x00404ac1
   402510:	00400000 	.word	0x00400000
   402514:	e000ed00 	.word	0xe000ed00
@@ -6761,9 +6761,9 @@ void USART_SERIAL_ISR_HANDLER(void)
   402a00:	20445404 	.word	0x20445404
 
 00402a04 <main>:
+
 // uncomment to communicate to pc console over uart for debug 
 //#define USING_CONSOLE
-volatile uint32_t delay; 
 
 int main(void)
 {
@@ -6848,7 +6848,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
 	usart_settings.parity_type = opt->paritytype;
   402a70:	920c      	str	r2, [sp, #48]	; 0x30
 	}
-	
+	float inputPitch; 
 	float oneOverInputPitch = 1.0f;
 	float pitch_shift, power;
 	float harmony_shifts[MAX_NUM_SHIFTS+1];
@@ -6898,12 +6898,12 @@ __STATIC_INLINE void SCB_DisableICache(void)
 	usart_enable_rx(USART_SERIAL);
   402a9c:	4895      	ldr	r0, [pc, #596]	; (402cf4 <main+0x2f0>)
   402a9e:	47a8      	blx	r5
-	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY); 
+	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY);
   402aa0:	2101      	movs	r1, #1
   402aa2:	4894      	ldr	r0, [pc, #592]	; (402cf4 <main+0x2f0>)
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
   402aa4:	2500      	movs	r5, #0
-	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY); 
+	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY);
   402aa6:	4b96      	ldr	r3, [pc, #600]	; (402d00 <main+0x2fc>)
   402aa8:	4798      	blx	r3
   402aaa:	4b96      	ldr	r3, [pc, #600]	; (402d04 <main+0x300>)
@@ -7115,27 +7115,27 @@ __STATIC_INLINE void SCB_DisableICache(void)
   402bfa:	4b4f      	ldr	r3, [pc, #316]	; (402d38 <main+0x334>)
   402bfc:	eb03 0380 	add.w	r3, r3, r0, lsl #2
   402c00:	ed93 9a00 	vldr	s18, [r3]
-			if (autotune)
+				if (autotune)
   402c04:	4b4d      	ldr	r3, [pc, #308]	; (402d3c <main+0x338>)
   402c06:	781a      	ldrb	r2, [r3, #0]
-			if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
+				if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
   402c08:	4b4d      	ldr	r3, [pc, #308]	; (402d40 <main+0x33c>)
-				desired_pitch = closest_note;
+					desired_pitch = closest_note;
   402c0a:	2a00      	cmp	r2, #0
-			if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
+				if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
   402c0c:	681b      	ldr	r3, [r3, #0]
-				desired_pitch = closest_note;
+					desired_pitch = closest_note;
   402c0e:	bf14      	ite	ne
   402c10:	eef0 7a49 	vmovne.f32	s15, s18
   402c14:	eef0 7a48 	vmoveq.f32	s15, s16
-			if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
+				if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
   402c18:	2b37      	cmp	r3, #55	; 0x37
   402c1a:	d903      	bls.n	402c24 <main+0x220>
   402c1c:	4b48      	ldr	r3, [pc, #288]	; (402d40 <main+0x33c>)
   402c1e:	681b      	ldr	r3, [r3, #0]
   402c20:	2b48      	cmp	r3, #72	; 0x48
   402c22:	d91e      	bls.n	402c62 <main+0x25e>
-				bend_pitch(&desired_pitch, in_pitch_idx, (uint32_t)pitch_bend);
+					bend_pitch(&desired_pitch, in_pitch_idx, (uint32_t)pitch_bend);
   402c24:	4b46      	ldr	r3, [pc, #280]	; (402d40 <main+0x33c>)
   402c26:	681b      	ldr	r3, [r3, #0]
 	if (pitch_idx < 0 || pitch_idx > 127 || bend < 0 || bend > 127)
@@ -7166,22 +7166,22 @@ __STATIC_INLINE void SCB_DisableICache(void)
 		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
   402c5a:	ee26 7a87 	vmul.f32	s14, s13, s14
   402c5e:	eee7 7a06 	vfma.f32	s15, s14, s12
-			pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
   402c62:	eeb7 aa00 	vmov.f32	s20, #112	; 0x3f800000  1.0
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
   402c66:	aa09      	add	r2, sp, #36	; 0x24
-			pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
   402c68:	ee77 7ac8 	vsub.f32	s15, s15, s16
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
   402c6c:	f44f 7180 	mov.w	r1, #256	; 0x100
   402c70:	482d      	ldr	r0, [pc, #180]	; (402d28 <main+0x324>)
-			pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
   402c72:	eeb0 7a4a 	vmov.f32	s14, s20
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
   402c76:	4b35      	ldr	r3, [pc, #212]	; (402d4c <main+0x348>)
-			pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
   402c78:	eea9 7aa7 	vfma.f32	s14, s19, s15
-			harmony_shifts[0] = pitch_shift ;
+				harmony_shifts[0] = pitch_shift ;
   402c7c:	ed8d 7a0a 	vstr	s14, [sp, #40]	; 0x28
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
   402c80:	4798      	blx	r3
@@ -7230,7 +7230,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   402cfc:	004017f9 	.word	0x004017f9
   402d00:	00401801 	.word	0x00401801
   402d04:	20444400 	.word	0x20444400
-  402d08:	2044a868 	.word	0x2044a868
+  402d08:	2044a864 	.word	0x2044a864
   402d0c:	2044a80c 	.word	0x2044a80c
   402d10:	20434000 	.word	0x20434000
   402d14:	00403195 	.word	0x00403195
@@ -10096,13 +10096,13 @@ __STATIC_INLINE void SCB_DisableICache(void)
   404b5c:	4801      	ldr	r0, [pc, #4]	; (404b64 <__malloc_lock+0x8>)
   404b5e:	f001 bc11 	b.w	406384 <__retarget_lock_acquire_recursive>
   404b62:	bf00      	nop
-  404b64:	2044a8d0 	.word	0x2044a8d0
+  404b64:	2044a8cc 	.word	0x2044a8cc
 
 00404b68 <__malloc_unlock>:
   404b68:	4801      	ldr	r0, [pc, #4]	; (404b70 <__malloc_unlock+0x8>)
   404b6a:	f001 bc0d 	b.w	406388 <__retarget_lock_release_recursive>
   404b6e:	bf00      	nop
-  404b70:	2044a8d0 	.word	0x2044a8d0
+  404b70:	2044a8cc 	.word	0x2044a8cc
 
 00404b74 <_sbrk_r>:
   404b74:	b538      	push	{r3, r4, r5, lr}
@@ -10120,7 +10120,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   404b8e:	d0fb      	beq.n	404b88 <_sbrk_r+0x14>
   404b90:	602b      	str	r3, [r5, #0]
   404b92:	bd38      	pop	{r3, r4, r5, pc}
-  404b94:	2044a8e4 	.word	0x2044a8e4
+  404b94:	2044a8e0 	.word	0x2044a8e0
 
 00404b98 <__sprint_r.part.0>:
   404b98:	e92d 4ff8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
@@ -11782,20 +11782,20 @@ __STATIC_INLINE void SCB_DisableICache(void)
   405c4a:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
   405c4e:	f000 bb9b 	b.w	406388 <__retarget_lock_release_recursive>
   405c52:	bf00      	nop
-  405c54:	2044a8cc 	.word	0x2044a8cc
+  405c54:	2044a8c8 	.word	0x2044a8c8
   405c58:	00405ba9 	.word	0x00405ba9
 
 00405c5c <__sfp_lock_acquire>:
   405c5c:	4801      	ldr	r0, [pc, #4]	; (405c64 <__sfp_lock_acquire+0x8>)
   405c5e:	f000 bb91 	b.w	406384 <__retarget_lock_acquire_recursive>
   405c62:	bf00      	nop
-  405c64:	2044a8e0 	.word	0x2044a8e0
+  405c64:	2044a8dc 	.word	0x2044a8dc
 
 00405c68 <__sfp_lock_release>:
   405c68:	4801      	ldr	r0, [pc, #4]	; (405c70 <__sfp_lock_release+0x8>)
   405c6a:	f000 bb8d 	b.w	406388 <__retarget_lock_release_recursive>
   405c6e:	bf00      	nop
-  405c70:	2044a8e0 	.word	0x2044a8e0
+  405c70:	2044a8dc 	.word	0x2044a8dc
 
 00405c74 <__libc_fini_array>:
   405c74:	b538      	push	{r3, r4, r5, lr}
@@ -13408,7 +13408,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   406c1e:	6033      	str	r3, [r6, #0]
   406c20:	bd70      	pop	{r4, r5, r6, pc}
   406c22:	bf00      	nop
-  406c24:	2044a8e4 	.word	0x2044a8e4
+  406c24:	2044a8e0 	.word	0x2044a8e0
 
 00406c28 <__register_exitproc>:
   406c28:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -13496,7 +13496,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   406d06:	d0fb      	beq.n	406d00 <_close_r+0x14>
   406d08:	602b      	str	r3, [r5, #0]
   406d0a:	bd38      	pop	{r3, r4, r5, pc}
-  406d0c:	2044a8e4 	.word	0x2044a8e4
+  406d0c:	2044a8e0 	.word	0x2044a8e0
 
 00406d10 <_fclose_r>:
   406d10:	b570      	push	{r4, r5, r6, lr}
@@ -13600,7 +13600,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   406df2:	d0fb      	beq.n	406dec <_fstat_r+0x18>
   406df4:	602b      	str	r3, [r5, #0]
   406df6:	bd38      	pop	{r3, r4, r5, pc}
-  406df8:	2044a8e4 	.word	0x2044a8e4
+  406df8:	2044a8e0 	.word	0x2044a8e0
 
 00406dfc <_isatty_r>:
   406dfc:	b538      	push	{r3, r4, r5, lr}
@@ -13618,7 +13618,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   406e16:	d0fb      	beq.n	406e10 <_isatty_r+0x14>
   406e18:	602b      	str	r3, [r5, #0]
   406e1a:	bd38      	pop	{r3, r4, r5, pc}
-  406e1c:	2044a8e4 	.word	0x2044a8e4
+  406e1c:	2044a8e0 	.word	0x2044a8e0
 
 00406e20 <_lseek_r>:
   406e20:	b570      	push	{r4, r5, r6, lr}
@@ -13640,7 +13640,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   406e42:	6033      	str	r3, [r6, #0]
   406e44:	bd70      	pop	{r4, r5, r6, pc}
   406e46:	bf00      	nop
-  406e48:	2044a8e4 	.word	0x2044a8e4
+  406e48:	2044a8e0 	.word	0x2044a8e0
 
 00406e4c <_read_r>:
   406e4c:	b570      	push	{r4, r5, r6, lr}
@@ -13662,7 +13662,7 @@ __STATIC_INLINE void SCB_DisableICache(void)
   406e6e:	6033      	str	r3, [r6, #0]
   406e70:	bd70      	pop	{r4, r5, r6, pc}
   406e72:	bf00      	nop
-  406e74:	2044a8e4 	.word	0x2044a8e4
+  406e74:	2044a8e0 	.word	0x2044a8e0
 
 00406e78 <__aeabi_uldivmod>:
   406e78:	b953      	cbnz	r3, 406e90 <__aeabi_uldivmod+0x18>
@@ -14226,7 +14226,7 @@ void portable_delay_cycles(unsigned long n)
 20400044:	a80c 2044                                   ..D 
 
 20400048 <harmony_list_read>:
-20400048:	a868 2044                                   h.D 
+20400048:	a864 2044                                   d.D 
 
 2040004c <master_volume>:
 2040004c:	0000 3f80                                   ...?
@@ -14321,7 +14321,7 @@ void portable_delay_cycles(unsigned long n)
 20400894:	0000 0002                                   ....
 
 20400898 <__atexit_recursive_mutex>:
-20400898:	a8c0 2044                                   ..D 
+20400898:	a8bc 2044                                   ..D 
 
 2040089c <__global_locale>:
 2040089c:	0043 0000 0000 0000 0000 0000 0000 0000     C...............

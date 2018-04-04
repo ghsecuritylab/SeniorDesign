@@ -267,9 +267,26 @@ static inline void bend_pitch(float *pitch, uint32_t pitch_idx, uint32_t bend)
 	}
 }
 
+static void configure_uart(void)
+{
+	usart_serial_options_t usart_console_settings = {
+		USART_SERIAL_BAUDRATE,
+		USART_SERIAL_CHAR_LENGTH,
+		USART_SERIAL_PARITY,
+		USART_SERIAL_STOP_BIT
+	};
+	usart_serial_init(USART_SERIAL, &usart_console_settings);
+	usart_enable_tx(USART_SERIAL);
+	usart_enable_rx(USART_SERIAL);
+	
+	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY);
+	NVIC_SetPriority(USART1_IRQn, 2);
+	NVIC_ClearPendingIRQ(USART1_IRQn);
+	NVIC_EnableIRQ(USART1_IRQn);
+}
+
 // uncomment to communicate to pc console over uart for debug 
 //#define USING_CONSOLE
-volatile uint32_t delay; 
 
 int main(void)
 {
@@ -283,7 +300,9 @@ int main(void)
 	configure_console();
 #endif 
 	PSOLA_init(); 
+	configure_uart(); 
 	 
+	 // draw smiley face 
 // 	SCB_DisableICache(); 
 // 	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
 // 	gfx_draw_filled_rect(200, 100, 20, 20, GFX_COLOR_YELLOW);
@@ -297,20 +316,6 @@ int main(void)
 // 	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
 // 	SCB_EnableICache(); 
 	
-	usart_serial_options_t usart_console_settings = {
-		USART_SERIAL_BAUDRATE,
-		USART_SERIAL_CHAR_LENGTH,
-		USART_SERIAL_PARITY,
-		USART_SERIAL_STOP_BIT
-	};
-	usart_serial_init(USART_SERIAL, &usart_console_settings);
-	usart_enable_tx(USART_SERIAL);
-	usart_enable_rx(USART_SERIAL);
-	
-	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY); 
-	NVIC_SetPriority(USART1_IRQn, 2); 
-	NVIC_ClearPendingIRQ(USART1_IRQn);
-	NVIC_EnableIRQ(USART1_IRQn);
 	
 	// for serial debug 
 	//char *str = (char *)calloc(20, sizeof(char)); 
@@ -318,14 +323,12 @@ int main(void)
 	/*************** Application code variables start ***************/
 	uint32_t i;
 	
-	float inputPitch; 
-
-	for (i = 0; i < 11; i++)
+	for (i = 0; i < MAX_NUM_SHIFTS; i++)
 	{
 		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
 		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
 	}
-	
+	float inputPitch; 
 	float oneOverInputPitch = 1.0f;
 	float pitch_shift, power;
 	float harmony_shifts[MAX_NUM_SHIFTS+1];
@@ -356,19 +359,21 @@ int main(void)
 			oneOverInputPitch = 1.0f / inputPitch;
 			
 			// auto tune 
-			get_frequency_from_all(inputPitch, &closest_note, &in_pitch_idx);
+			{
+				get_frequency_from_all(inputPitch, &closest_note, &in_pitch_idx);
 			
-			if (autotune)
-				desired_pitch = closest_note;
-			else 
-				desired_pitch = inputPitch;
+				if (autotune)
+					desired_pitch = closest_note;
+				else 
+					desired_pitch = inputPitch;
 				
-			if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
-				bend_pitch(&desired_pitch, in_pitch_idx, (uint32_t)pitch_bend);
+				if (pitch_bend < 56 || pitch_bend > 72) // higher bounds for noise affecting pitch bend wheel 
+					bend_pitch(&desired_pitch, in_pitch_idx, (uint32_t)pitch_bend);
 				
-			pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-			harmony_shifts[0] = pitch_shift ;
-			num_of_shifts = 1;  
+				pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				harmony_shifts[0] = pitch_shift ;
+				num_of_shifts = 1;  
+			}
 				
 			// calculate power 
 			arm_power_f32((float  *)processBuffer, WIN_SIZE>>2, &power);
