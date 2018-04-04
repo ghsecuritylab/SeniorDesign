@@ -20,14 +20,13 @@
 #define IO_BUF_SIZE          2048	// x in total, x/2 left & x/2 right 
 #define IO_BUF_SIZE_PER_CHANNEL (IO_BUF_SIZE >> 1) 
 
-#define WIN_SIZE IO_BUF_SIZE_PER_CHANNEL // ((IO_BUF_SIZE_PER_CHANNEL*NUM_OF_OVERLAPS) >> 1) // decimated by 2, length 1024
+#define WIN_SIZE IO_BUF_SIZE_PER_CHANNEL 
 #define WIN_SIZE_D2 (WIN_SIZE>>1)
-
 /********************************** Defines End **********************************/
 
 /********************************** Externs Start **********************************/
 extern volatile bool dataReceived;
-extern volatile float *processBuffer;
+extern float processBuffer[IO_BUF_SIZE_PER_CHANNEL];
 extern volatile uint16_t *outBuffer; 
 /********************************** Externs End **********************************/
 

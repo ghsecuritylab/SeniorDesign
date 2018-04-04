@@ -167,7 +167,6 @@ static inline float get_raw_pitch(float * samples)
 	float pitchF = 0.0f;
 	int32_t i, j;
 	float si, si1;
-	float power; 
 	
 	arm_copy_f32(samples, sam, WIN_SIZE); 
 	int32_t curSamNb = WIN_SIZE;

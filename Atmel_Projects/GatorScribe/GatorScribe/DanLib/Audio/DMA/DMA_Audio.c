@@ -10,34 +10,31 @@
 #include "arm_math.h"
 
 /********************************** Static Variables Start **********************************/
-COMPILER_WORD_ALIGNED
-static lld_view1 linklist_write[2];
-COMPILER_WORD_ALIGNED
-static lld_view1 linklist_read[2];
+COMPILER_WORD_ALIGNED static lld_view1 linklist_write[2];
+COMPILER_WORD_ALIGNED static lld_view1 linklist_read[2];
 
 volatile static bool inPingMode = 1;
 volatile static bool outPingMode = 1;
 /********************************** Static Variables End **********************************/
+
+/********************************** Public Variables Start **********************************/
 COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t inPingBuffer[IO_BUF_SIZE];
 COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t inPongBuffer[IO_BUF_SIZE];
 COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t outPingBuffer[IO_BUF_SIZE];
 COMPILER_ALIGNED(IO_BUF_SIZE) uint16_t outPongBuffer[IO_BUF_SIZE];
 
-COMPILER_ALIGNED(IO_BUF_SIZE_PER_CHANNEL) float  processPingBuffer[IO_BUF_SIZE_PER_CHANNEL];	
-COMPILER_ALIGNED(IO_BUF_SIZE_PER_CHANNEL) float  processPongBuffer[IO_BUF_SIZE_PER_CHANNEL];
+// note that process buffer is of type float 
+COMPILER_ALIGNED(IO_BUF_SIZE_PER_CHANNEL) float processBuffer[IO_BUF_SIZE_PER_CHANNEL];	
 
-// in and process buffers are synchronized 
-volatile float  *processBuffer = processPingBuffer;
+// inBuffer points to new data just received 
 volatile uint16_t *inBuffer = inPingBuffer;
+
+// outBuffer points to buffer awaiting processed audio before being sent out 
 volatile uint16_t *outBuffer = outPingBuffer;
 
 volatile bool outOfTime = 0; 
 volatile bool dataReceived = false; 
 /********************************** Public Variables End **********************************/
-
-/********************************** Extern Variables Start **********************************/
-
-/*********************************** Extern Variables End ***********************************/
 
 #define One_over_max_int16 0.0000305185f 
 /******************************* XDMAC Interrupt Handler Start *******************************/ 
@@ -48,26 +45,26 @@ void XDMAC_Handler(void)
     dma_status = xdmac_channel_get_interrupt_status(XDMAC, XDMA_CH_SSC_RX);
     if (dma_status & XDMAC_CIS_BIS)
     {
-		// Update input and process buffers to be used 
+		// update input buffer to be used 
 		if(inPingMode)
 		{
 			inBuffer = inPingBuffer; 
-			processBuffer = processPingBuffer; 
 		}
 		else 
 		{
 			inBuffer = inPongBuffer; 
-			processBuffer = processPongBuffer; 
 		}
 		inPingMode = !inPingMode; 
 		
-		int processIdx = 0;
-		// Fill process buffer - only left channel decimated by 1
-		for(int i = 0; i < IO_BUF_SIZE; i+=2)
+		// fill process buffer - only left channel 
+		uint32_t processIdx = 0; 
+		for(uint32_t i = 0; i < IO_BUF_SIZE; i+=2, processIdx++)
 		{
-			processBuffer[processIdx++] = ((float )(int16_t)inBuffer[i]) * One_over_max_int16; 
+			processBuffer[processIdx] = ((float )(int16_t)inBuffer[i]) * One_over_max_int16; 
 		}
-		dataReceived = true; // can check for out of time here 
+		
+		// data is ready to be processed in the main 
+		dataReceived = true; 
     }
 	
 	dma_status = xdmac_channel_get_interrupt_status(XDMAC, XDMA_CH_SSC_TX);
