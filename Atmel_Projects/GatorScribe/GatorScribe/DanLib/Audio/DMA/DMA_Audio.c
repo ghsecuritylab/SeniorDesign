@@ -72,7 +72,7 @@ void XDMAC_Handler(void)
 	{
 		// update output buffer to be used 
 		if(outPingMode)
-		{
+		{   
 			outBuffer = outPingBuffer; 
 		}
 		else
