@@ -293,7 +293,7 @@ int main(void)
 	sysclk_init();
 	board_init();
  	SCB_DisableICache(); 
-// 	lcd_init(); 
+ 	lcd_init(); 
  	SCB_EnableICache();
 	audio_init();
 #ifdef USING_CONSOLE
@@ -303,19 +303,19 @@ int main(void)
 	configure_uart(); 
 	 
 	 // draw smiley face 
-// 	SCB_DisableICache(); 
-// 	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(200, 100, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(80, 180, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(100, 200, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(120, 220, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(140, 220, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(160, 220, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(180, 220, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(200, 200, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
-// 	SCB_EnableICache(); 
-	
+	SCB_DisableICache(); 
+	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(200, 100, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(80, 180, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(100, 200, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(120, 220, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(140, 220, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(160, 220, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(180, 220, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(200, 200, 20, 20, GFX_COLOR_YELLOW);
+	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
+	SCB_EnableICache();
+		
 	
 	// for serial debug 
 	//char *str = (char *)calloc(20, sizeof(char)); 
