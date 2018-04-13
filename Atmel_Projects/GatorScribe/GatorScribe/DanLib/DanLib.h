@@ -16,9 +16,12 @@
 
 typedef struct harmony 
 {
-	float freq; 
-	uint32_t idx; // index of frequency... also midi note 
+	volatile float freq; 
+	volatile uint32_t idx; // index of frequency... also midi note 
+	volatile bool active; 
 }harmony_t;
+
+#define MAX_NUM_HARMONIES 10 
 
 #define POWER_THRESHOLD 0.000001f
 #define ONE_OVER_64 0.015625000F
@@ -36,4 +39,17 @@ typedef struct harmony
 #define CHORUS_SPEED_FLAG 245 
 
 
+#define NOTE_ON 144
+#define NOTE_OFF 128 
+#define SLIDER 176
+#define PITCH_WHEEL 224
+#define DRY_VOLUME_CH 7
+#define HARM_VOLUME_CH 84 
+#define MASTER_VOLUME_CH 5 
+#define REVERB_CH 72 
+#define CHORUS_VOLUME_CH 73 
+#define CHORUS_SPEED_CH 93 
+#define DELAY_FEEDBACK_CH 91
+#define DELAY_SPEED_CH 71 
+#define DELAY_VOLUME_CH 74 
 #endif /* DANLIB_H_ */

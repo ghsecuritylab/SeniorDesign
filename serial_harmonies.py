@@ -40,7 +40,7 @@ chorus_speed_ch = 93
 delay_feedback_ch = 91
 delay_speed_ch = 71
 delay_vol_ch = 74
-autotune_button = 56 
+autotune_button = 192 
 pitch_bend = 224 
 
 try:
@@ -48,53 +48,8 @@ try:
         print('Using {}'.format(port))
         print('Waiting for messages...')
         for message in port:
-            if (message.bytes()[0] == 144): 
-                # add note to array to send 
-                notes.append(message.bytes()[1])
-                for k in range(len(notes)):
-                    ser.write([notes[k]])
-                ser.write([0]) # null terminated 
-                
-            elif (message.bytes()[0] == 128): 
-                # remove note from array to send 
-                notes.remove(message.bytes()[1])
-                for k in range(len(notes)):
-                    ser.write([notes[k]])
-                ser.write([0]) # null terminated 
-            elif (message.bytes()[0] == volume and message.bytes()[1] == harmony_ch):
-                ser.write([255])
-                ser.write([message.bytes()[2]])
-            elif (message.bytes()[0] == volume and message.bytes()[1] == master_ch):
-                ser.write([254])
-                ser.write([message.bytes()[2]])
-            elif (message.bytes()[0] == volume and message.bytes()[1] == reverb_vol_ch):
-                ser.write([251])
-                ser.write([message.bytes()[2]])
-            elif (message.bytes()[0] == volume and message.bytes()[1] == chorus_vol_ch):
-                ser.write([250])
-                ser.write([message.bytes()[2]])
-            elif (message.bytes()[0] == volume and message.bytes()[1] == delay_vol_ch):
-                ser.write([249])
-                ser.write([message.bytes()[2]])
-            elif (message.bytes()[0] == volume and message.bytes()[1] == delay_speed_ch):
-                ser.write([248])
-                ser.write([message.bytes()[2]])
-            elif (message.bytes()[0] == volume and message.bytes()[1] == dry_ch):
-                ser.write([247])
-                ser.write([message.bytes()[2]])
-            elif (message.bytes()[0] == volume and message.bytes()[1] == delay_feedback_ch):
-                ser.write([246])
-                ser.write([message.bytes()[2]])
-            elif (message.bytes()[0] == volume and message.bytes()[1] == chorus_speed_ch):
-                ser.write([245])
-                ser.write([message.bytes()[2]])
-            elif (message.bytes()[0] == pitch_bend):
-                ser.write([253])
-                ser.write([message.bytes()[2]])
-            elif (message.bytes()[1] == autotune_button and message.bytes()[2] == 127):
-                ser.write([252])
             
-            #print(notes)
+            ser.write(message.bytes())
             print(message.bytes())
 
             sys.stdout.flush()

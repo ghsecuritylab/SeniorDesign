@@ -86,17 +86,18 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	}
 		
 	// for each pitch shift 
-	while(pitch_shifts_in[pitch_idx] > 0.0f && pitch_idx < MAX_NUM_SHIFTS)
+	while(pitch_idx < MAX_NUM_SHIFTS && pitch_shifts_in[pitch_idx] > 0.0f)
 	{
 		periodRatio = 1.0f / pitch_shifts_in[pitch_idx]; 
 		inPtr = saved_inPtr; 
-		
-		if (pitch_idx > current_num_shifts - 1)
+
+		// find closest harmony within previous harmony list to better match the phase 
+		outPtr = outPtrList[0];
+		samplesLeftInPeriod = saved_samplesLeftInPeriod[0];
+		if (pitch_idx > 0)
 		{
-			// find closest harmony for the onset of a new harmony 
 			float tmp; 
 			float min = Abs(pitch_shifts_in[pitch_idx] - prev_pitch_shifts[0]); 
-			outPtr = outPtrList[0]; 
 			for (i = 1; i < current_num_shifts; i++)
 			{
 				tmp = Abs(pitch_shifts_in[pitch_idx] - prev_pitch_shifts[i]);
@@ -108,12 +109,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 				}
 			}
 		}
-		else 
-		{
-			outPtr = outPtrList[pitch_idx]; 
-			samplesLeftInPeriod = saved_samplesLeftInPeriod[pitch_idx]; 
-		}
-		
+
 		for (i = 0; i < WIN_SIZE; i++)
 		{		
 			if (samplesLeftInPeriod == 0)

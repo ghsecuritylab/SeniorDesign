@@ -81,162 +81,105 @@ COMPILER_ALIGNED(CIRC_BUF_SIZE) static float delay_circ_buffer[CIRC_BUF_SIZE];
 #define USART_SERIAL_PARITY          US_MR_PAR_NO
 #define USART_SERIAL_STOP_BIT        US_MR_NBSTOP_1_BIT
 
-volatile harmony_t harmony_list_a[MAX_NUM_SHIFTS]; 
-volatile harmony_t harmony_list_b[MAX_NUM_SHIFTS];
-volatile harmony_t *harmony_list_read = harmony_list_a; 
-volatile harmony_t *harmony_list_fill = harmony_list_b; 
-volatile uint32_t harmony_idx = 0;  
-
-volatile bool waiting_for_harm_volume = false;
+volatile harmony_t harmony_list[MAX_NUM_HARMONIES]; 
 volatile float harm_volume = 1.0f;
-
-volatile bool waiting_for_dry_volume = false;
 volatile float dry_volume = 1.0f;
- 
-volatile bool waiting_for_master_volume = false;
 volatile float master_volume = 1.0f;
-
-volatile bool waiting_for_pitch_bend = false;
 volatile uint32_t pitch_bend = NO_PITCH_BEND;
-
-volatile bool waiting_for_reverb_volume = false;
 volatile float reverb_volume = 0.0f; 
-
-volatile bool waiting_for_delay_volume = false;
 volatile float delay_volume = 0.0f;
-
-volatile bool waiting_for_delay_speed = false;
 volatile uint32_t delay_speed = 10000;
-
-volatile bool waiting_for_delay_feedback = false;
 volatile float delay_feedback = 0.2f;
-
-volatile bool waiting_for_chorus_volume = false;
 volatile float chorus_volume = 0.0f;
-
-volatile bool waiting_for_chorus_speed = false;
 volatile float chorus_speed = 0.02f;
-
 volatile bool autotune = true; 
+volatile uint32_t received_bytes[3];
+volatile uint32_t uart_cnt = 0;
+volatile uint32_t waiting_for_autotune = 0;
+
 void USART_SERIAL_ISR_HANDLER(void)
 {
+	
 	uint32_t dw_status = usart_get_status(USART_SERIAL);
 	if (dw_status & US_CSR_RXRDY) {
-		uint32_t received_byte;
-		usart_read(USART_SERIAL, &received_byte);
-		//usart_write(USART_SERIAL, received_byte); // for debug 
+		usart_read(USART_SERIAL, (uint32_t *)&received_bytes[uart_cnt++]);
 		
-		if (waiting_for_harm_volume)
+		if (waiting_for_autotune == 2 && uart_cnt == 3)
 		{
-			harm_volume = (float)received_byte / 127.0f; 
-			waiting_for_harm_volume = false; 
+			uart_cnt = 0; 
+			waiting_for_autotune--; 
 		}
-		else if (waiting_for_master_volume)
+		else if (waiting_for_autotune == 1 && uart_cnt == 2)
 		{
-			master_volume = 1.2f*(float)received_byte / 127.0f;
-			waiting_for_master_volume = false;
+			uart_cnt = 0; 
+			waiting_for_autotune = 0; 
+			if (received_bytes[1] == 7)
+				autotune = !autotune; 
 		}
-		else if (waiting_for_dry_volume)
+		else if (uart_cnt == 3)
 		{
-			dry_volume = 0.1f + 0.9f*(float)received_byte / 127.0f;
-			waiting_for_dry_volume = false;
-		}
-		else if (waiting_for_pitch_bend)
-		{
-			pitch_bend = received_byte;
-			waiting_for_pitch_bend = false;
-		}
-		else if (waiting_for_reverb_volume)
-		{
-			reverb_volume = (float)received_byte / 127.0f;;
-			waiting_for_reverb_volume = false;
-		}
-		else if (waiting_for_delay_volume)
-		{
-			delay_volume = 0.7f * (float)received_byte / 127.0f;
-			waiting_for_delay_volume = false;
-		}
-		else if (waiting_for_delay_speed)
-		{
-			// first value = longest delay
-			// first val - second val = shortest delay 
-			delay_speed = 16200 - 14000 * (float)received_byte / 127.0f;
-			waiting_for_delay_speed = false;
-		}
-		else if (waiting_for_delay_feedback)
-		{
-			delay_feedback = 0.8f * (float)received_byte / 127.0f;
-			waiting_for_delay_feedback = false;
-		}
-		else if (waiting_for_chorus_volume)
-		{
-			chorus_volume = (float)received_byte / 127.0f;;
-			waiting_for_chorus_volume = false;
-		}
-		else if (waiting_for_chorus_speed)
-		{
-			chorus_speed = 0.05f + 2.0f*(float)received_byte / 127.0f;;
-			waiting_for_chorus_speed = false;
-		}
-		else if (received_byte == HARMONY_VOLUME_FLAG) 
-		{
-			waiting_for_harm_volume = true; 
-		}
-		else if (received_byte == DRY_VOLUME_FLAG)
-		{
-			waiting_for_dry_volume = true;
-		}
-		else if (received_byte == MASTER_VOLUME_FLAG)
-		{
-			waiting_for_master_volume = true;
-		}
-		else if (received_byte == PITCH_BEND_FLAG)
-		{
-			waiting_for_pitch_bend = true;
-		}
-		else if (received_byte == REVERB_VOLUME_FLAG)
-		{
-			waiting_for_reverb_volume = true;
-		}
-		else if (received_byte == DELAY_VOLUME_FLAG)
-		{
-			waiting_for_delay_volume = true;
-		}
-		else if (received_byte == DELAY_SPEED_FLAG)
-		{
-			waiting_for_delay_speed = true;
-		}
-		else if (received_byte == DELAY_FEEDBACK_FLAG)
-		{
-			waiting_for_delay_feedback = true;
-		}
-		else if (received_byte == CHORUS_VOLUME_FLAG)
-		{
-			waiting_for_chorus_volume = true;
-		}
-		else if (received_byte == CHORUS_SPEED_FLAG)
-		{
-			waiting_for_chorus_speed = true;
-		}
-		else if (received_byte == AUTOTUNE_FLAG)
-		{
-			autotune = !autotune; 
-		}
-		else if (received_byte != 0 && harmony_idx < MAX_NUM_SHIFTS)
-		{
-			harmony_list_fill[harmony_idx].freq = midi_note_frequencies[received_byte]; 
-			harmony_list_fill[harmony_idx].idx = received_byte; 
-			harmony_idx++;
-		}
-		else 
-		{
-			harmony_list_fill[harmony_idx].freq = END_OF_SHIFTS; 
-			harmony_list_fill[harmony_idx].idx = 0; // dont care 
-			harmony_t *temp = (harmony_t *)harmony_list_read; 
-			harmony_list_read = harmony_list_fill;		
-			harmony_list_fill = temp; 
-			harmony_idx = 0; 
-		}
+			uart_cnt = 0; 
+			uint32_t *message = (uint32_t *)&received_bytes[0]; 
+			uint32_t *data1 = (uint32_t *)&received_bytes[1]; 
+			uint32_t *data2 = (uint32_t *)&received_bytes[2]; 
+			if (*message == 176 && *data1 == 0 && *data2 == 0)
+			{
+				waiting_for_autotune = 2; 
+			}
+			else if (*message == NOTE_ON)
+			{
+				for(int i = 0; i < MAX_NUM_HARMONIES; i++)
+				{
+					if (harmony_list[i].active == false)
+					{
+						harmony_list[i].active = true; 
+						harmony_list[i].freq = midi_note_frequencies[*data1]; 
+						harmony_list[i].idx = *data1; 
+						break; 
+					}
+				}
+			}
+			else if (*message == NOTE_OFF)
+			{
+				for (int i = 0; i < MAX_NUM_HARMONIES; i++)
+				{
+					if (harmony_list[i].active == true && harmony_list[i].idx == *data1)
+					{
+						harmony_list[i].active = false; 
+						break; 
+					}
+				}
+			}
+			else if (*message == SLIDER)
+			{
+				switch(*data1)
+				{
+					case DRY_VOLUME_CH: 
+						dry_volume = 0.1f + 0.9f*(float)*data2 / 127.0f; break; 
+					case HARM_VOLUME_CH: 
+						harm_volume = (float)*data2 / 127.0f; break; 
+					case MASTER_VOLUME_CH: 
+						master_volume = 1.2f*(float)*data2 / 127.0f; break; 
+					case REVERB_CH: 
+						reverb_volume = (float)*data2 / 127.0f; break; 
+					case CHORUS_VOLUME_CH: 
+						chorus_volume = (float)*data2 / 127.0f; break;
+					case CHORUS_SPEED_CH: 
+						chorus_speed = 0.05f + 2.0f*(float)*data2 / 127.0f; break;
+					case DELAY_FEEDBACK_CH: 
+						delay_feedback = 0.8f * (float)*data2 / 127.0f; break;
+					case DELAY_SPEED_CH: 
+						delay_speed = 16200 - 14000 * (float)*data2 / 127.0f; break; 
+					case DELAY_VOLUME_CH: 
+						delay_volume = 0.7f * (float)*data2 / 127.0f; break; 
+					default: break; 
+				}
+			}
+			else if (*message == PITCH_WHEEL)
+			{
+				pitch_bend = *data2; 
+			}
+		} 
 	}
 }
 /*************** UART Communication End ***************/
@@ -278,7 +221,6 @@ static void configure_uart(void)
 	usart_serial_init(USART_SERIAL, &usart_console_settings);
 	usart_enable_tx(USART_SERIAL);
 	usart_enable_rx(USART_SERIAL);
-	
 	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY);
 	NVIC_SetPriority(USART1_IRQn, 2);
 	NVIC_ClearPendingIRQ(USART1_IRQn);
@@ -292,9 +234,9 @@ int main(void)
 {
 	sysclk_init();
 	board_init();
- 	SCB_DisableICache(); 
- 	lcd_init(); 
- 	SCB_EnableICache();
+//  	SCB_DisableICache(); 
+//  	lcd_init(); 
+//  	SCB_EnableICache();
 	audio_init();
 #ifdef USING_CONSOLE
 	configure_console();
@@ -302,19 +244,19 @@ int main(void)
 	PSOLA_init(); 
 	configure_uart(); 
 	 
-	 // draw smiley face 
-	SCB_DisableICache(); 
-	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(200, 100, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(80, 180, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(100, 200, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(120, 220, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(140, 220, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(160, 220, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(180, 220, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(200, 200, 20, 20, GFX_COLOR_YELLOW);
-	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
-	SCB_EnableICache();
+// 	 // draw smiley face 
+// 	SCB_DisableICache(); 
+// 	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(200, 100, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(80, 180, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(100, 200, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(120, 220, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(140, 220, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(160, 220, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(180, 220, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(200, 200, 20, 20, GFX_COLOR_YELLOW);
+// 	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
+// 	SCB_EnableICache();
 		
 	
 	// for serial debug 
@@ -323,10 +265,11 @@ int main(void)
 	/*************** Application code variables start ***************/
 	uint32_t i;
 	
-	for (i = 0; i < MAX_NUM_SHIFTS; i++)
+	for (i = 0; i < MAX_NUM_HARMONIES; i++)
 	{
-		harmony_list_a[i].freq = 0.0f; harmony_list_b[i].freq = 0.0f; 
-		harmony_list_a[i].idx = 0.0f; harmony_list_b[i].idx = 0.0f; 
+		harmony_list[i].freq = 0.0f; 
+		harmony_list[i].idx = 0; 
+		harmony_list[i].active = false; 
 	}
 	float inputPitch; 
 	float oneOverInputPitch = 1.0f;
@@ -378,24 +321,25 @@ int main(void)
 			// calculate power 
 			arm_power_f32(processBuffer, WIN_SIZE>>2, &power);
 		
-			// determine whether you should add any harmonies 
+			// determine whether you should add any harmonies from keyboard 
 			if (inputPitch > MINIMUM_PITCH && power > POWER_THRESHOLD)
 			{
-				i = 0;
-				while(harmony_list_read[i].freq > 1.0f && i < MAX_NUM_SHIFTS-1)
+				for (i = 0; i < MAX_NUM_HARMONIES; i++)
 				{
-					if (Abs(harmony_list_read[i].freq - closest_note) > 1.0f) // don't harmonize input pitch twice 
+					if (harmony_list[i].active)
 					{
-						desired_pitch = harmony_list_read[i].freq; 
-						if (pitch_bend != 64)
-							bend_pitch(&desired_pitch, harmony_list_read[i].idx, (uint32_t)pitch_bend);
+						if (Abs(harmony_list[i].freq - closest_note) > 1.0f) // don't harmonize input pitch twice
+						{
+							desired_pitch = harmony_list[i].freq;
+							if (pitch_bend != 64)
+								bend_pitch(&desired_pitch, harmony_list[i].idx, (uint32_t)pitch_bend);
 							
-						pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-						
-						if (pitch_shift > 0.1f && pitch_shift < 6.0f) // range check 
-							harmony_shifts[num_of_shifts++] = pitch_shift;
+							pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+							
+							if (pitch_shift > 0.1f && pitch_shift < 6.0f) // range check
+								harmony_shifts[num_of_shifts++] = pitch_shift;
+						}
 					}
-					i++; 
 				}
 				harmony_shifts[num_of_shifts] = END_OF_SHIFTS; 
 			} 
