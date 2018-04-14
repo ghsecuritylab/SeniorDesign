@@ -396,7 +396,20 @@ int main(void)
 			{
 				// chord harmonies 
 				uint32_t chord_idx = 0;	
-				uint32_t saved_interval_idx = interval_idx; 			
+				uint32_t saved_interval_idx = interval_idx; 	
+				
+				// octave down
+				if(chord_harmonies[chord_idx] == true)
+				{
+					desired_pitch = closest_note_freq*powerf(1.059463094359f, -12);
+					if (pitch_bend < 56 || pitch_bend > 72)
+					bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
+					harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+					chord_freqs[chord_idx].active = true;
+					chord_freqs[chord_idx].freq = desired_pitch;
+				} else chord_freqs[chord_idx].active = false;
+				chord_idx++;
+						
 				// low harmonies 
 				int32_t steps_to_harmony = -12;
 				for (i = 0; i < 3; i++, chord_idx++)
@@ -431,18 +444,6 @@ int main(void)
 						chord_freqs[chord_idx].freq = desired_pitch;
 					} else chord_freqs[chord_idx].active = false; 
 				}
-				
-				// octave down
-				if(chord_harmonies[chord_idx] == true)
-				{
-					desired_pitch = closest_note_freq*powerf(1.059463094359f, -12);
-					if (pitch_bend < 56 || pitch_bend > 72)
-					bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
-					harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-					chord_freqs[chord_idx].active = true;
-					chord_freqs[chord_idx].freq = desired_pitch;
-				} else chord_freqs[chord_idx].active = false;
-				chord_idx++;
 				
 				// octave up
 				if(chord_harmonies[chord_idx] == true)
