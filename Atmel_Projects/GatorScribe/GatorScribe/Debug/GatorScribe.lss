@@ -31,9 +31,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  13 .debug_macro  00025d69  00000000  00000000  00053444  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   00014e7d  00000000  00000000  000791ad  2**0
+ 14 .debug_line   00014e7f  00000000  00000000  000791ad  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    0009d37b  00000000  00000000  0008e02a  2**0
+ 15 .debug_str    0009d379  00000000  00000000  0008e02c  2**0
                   CONTENTS, READONLY, DEBUGGING
  16 .debug_frame  00002d2c  00000000  00000000  0012b3a8  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -2090,7 +2090,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 					if (pitch_idx == 0)
   400f3e:	2b00      	cmp	r3, #0
   400f40:	d052      	beq.n	400fe8 <create_harmonies+0x258>
-							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
 						}
 					}
 					else
@@ -2104,21 +2104,21 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
   400f50:	ebab 0407 	sub.w	r4, fp, r7
 						{
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
-								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
   400f54:	18a3      	adds	r3, r4, r2
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
   400f56:	f3c2 010b 	ubfx	r1, r2, #0, #12
-								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
   400f5a:	ecb0 7a01 	vldmia	r0!, {s14}
   400f5e:	3201      	adds	r2, #1
   400f60:	f3c3 030b 	ubfx	r3, r3, #0, #12
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
   400f64:	eb0e 0181 	add.w	r1, lr, r1, lsl #2
-								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
   400f68:	ee27 7a08 	vmul.f32	s14, s14, s16
 						for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
   400f6c:	4295      	cmp	r5, r2
-								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
   400f6e:	eb06 0383 	add.w	r3, r6, r3, lsl #2
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
   400f72:	edd1 7a00 	vldr	s15, [r1]
@@ -2212,21 +2212,21 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
   400ff0:	4830      	ldr	r0, [pc, #192]	; (4010b4 <create_harmonies+0x324>)
   400ff2:	eb07 050c 	add.w	r5, r7, ip
   400ff6:	ebab 0407 	sub.w	r4, fp, r7
-							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
   400ffa:	18e2      	adds	r2, r4, r3
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
   400ffc:	f3c3 010b 	ubfx	r1, r3, #0, #12
-							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
   401000:	ecb0 7a01 	vldmia	r0!, {s14}
   401004:	3301      	adds	r3, #1
   401006:	f3c2 020b 	ubfx	r2, r2, #0, #12
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
   40100a:	eb0e 0181 	add.w	r1, lr, r1, lsl #2
-							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
   40100e:	ee27 7a29 	vmul.f32	s14, s14, s19
 						for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
   401012:	429d      	cmp	r5, r3
-							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
   401014:	eb06 0282 	add.w	r2, r6, r2, lsl #2
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
   401018:	edd1 7a00 	vldr	s15, [r1]
@@ -7004,23 +7004,23 @@ int main(void)
   402bb6:	18b3      	adds	r3, r6, r2
   402bb8:	085b      	lsrs	r3, r3, #1
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402bba:	ee77 7ac8 	vsub.f32	s15, s15, s16
+  402bba:	ee37 7ac8 	vsub.f32	s14, s15, s16
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402bbe:	ee36 7ac8 	vsub.f32	s14, s13, s16
+  402bbe:	ee76 7ac8 	vsub.f32	s15, s13, s16
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
   402bc2:	1c59      	adds	r1, r3, #1
-  402bc4:	eef0 7ae7 	vabs.f32	s15, s15
+  402bc4:	eeb0 7ac7 	vabs.f32	s14, s14
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402bc8:	eeb0 7ac7 	vabs.f32	s14, s14
+  402bc8:	eef0 7ae7 	vabs.f32	s15, s15
 		d2 = Abs(midi_note_frequencies[mid+1] - frequency);
-  402bcc:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+  402bcc:	eebc 7ac7 	vcvt.u32.f32	s14, s14
 		d1 = Abs(midi_note_frequencies[mid] - frequency);
-  402bd0:	eebc 7ac7 	vcvt.u32.f32	s14, s14
+  402bd0:	eefc 7ae7 	vcvt.u32.f32	s15, s15
 		if (d2 <= d1)
-  402bd4:	ee17 5a90 	vmov	r5, s15
-  402bd8:	ee17 0a10 	vmov	r0, s14
+  402bd4:	ee17 0a10 	vmov	r0, s14
+  402bd8:	ee17 5a90 	vmov	r5, s15
   402bdc:	42a8      	cmp	r0, r5
-  402bde:	d256      	bcs.n	402c8e <main+0x262>
+  402bde:	d956      	bls.n	402c8e <main+0x262>
   402be0:	e3d6      	b.n	403390 <main+0x964>
   402be2:	bf00      	nop
   402be4:	004016ad 	.word	0x004016ad
@@ -7237,7 +7237,6 @@ int main(void)
   402d66:	eef7 9a00 	vmov.f32	s19, #112	; 0x3f800000  1.0
 			num_of_shifts = 1;  
 			
-				
 			// calculate power 
 			arm_power_f32(processBuffer, WIN_SIZE>>2, &power);
   402d6a:	aa09      	add	r2, sp, #36	; 0x24
@@ -7287,15 +7286,15 @@ int main(void)
 				int32_t steps_to_harmony = -12;
 				for (i = 0; i < 3; i++, chord_idx++)
 				{
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
 						steps_to_harmony += major[interval_idx % 7];
   402dc4:	f8df e1ec 	ldr.w	lr, [pc, #492]	; 402fb4 <main+0x588>
   402dc8:	461d      	mov	r5, r3
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402dca:	ab0a      	add	r3, sp, #40	; 0x28
 		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
   402dcc:	ed9f 4a72 	vldr	s8, [pc, #456]	; 402f98 <main+0x56c>
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402dd0:	f853 702c 	ldr.w	r7, [r3, ip, lsl #2]
 		*pitch += (((float)pitch_bend - 64.0f) * ONE_OVER_64) * bend_difference;
   402dd4:	ed9f 5a71 	vldr	s10, [pc, #452]	; 402f9c <main+0x570>
@@ -7303,7 +7302,7 @@ int main(void)
   402dd8:	eddf 4a74 	vldr	s9, [pc, #464]	; 402fac <main+0x580>
 		result *= base;
   402ddc:	ed9f 7a74 	vldr	s14, [pc, #464]	; 402fb0 <main+0x584>
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402de0:	2f00      	cmp	r7, #0
   402de2:	d06f      	beq.n	402ec4 <main+0x498>
   402de4:	440f      	add	r7, r1
@@ -7315,16 +7314,16 @@ int main(void)
   402df2:	089b      	lsrs	r3, r3, #2
   402df4:	ebc3 03c3 	rsb	r3, r3, r3, lsl #3
   402df8:	1acb      	subs	r3, r1, r3
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402dfa:	3101      	adds	r1, #1
 						steps_to_harmony += major[interval_idx % 7];
   402dfc:	eb02 0383 	add.w	r3, r2, r3, lsl #2
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402e00:	42b9      	cmp	r1, r7
 						steps_to_harmony += major[interval_idx % 7];
   402e02:	f853 3cac 	ldr.w	r3, [r3, #-172]
   402e06:	4418      	add	r0, r3
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402e08:	d1ed      	bne.n	402de6 <main+0x3ba>
 					if(chord_harmonies[chord_idx] == true)
   402e0a:	4b61      	ldr	r3, [pc, #388]	; (402f90 <main+0x564>)
@@ -7420,7 +7419,7 @@ int main(void)
   402eb2:	ed43 7a14 	vstr	s15, [r3, #-80]	; 0xffffffb0
 				for (i = 0; i < 3; i++, chord_idx++)
   402eb6:	d016      	beq.n	402ee6 <main+0x4ba>
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402eb8:	ab0a      	add	r3, sp, #40	; 0x28
   402eba:	4639      	mov	r1, r7
   402ebc:	f853 702c 	ldr.w	r7, [r3, ip, lsl #2]
@@ -7428,7 +7427,7 @@ int main(void)
   402ec2:	d18f      	bne.n	402de4 <main+0x3b8>
 					if(chord_harmonies[chord_idx] == true)
   402ec4:	4b32      	ldr	r3, [pc, #200]	; (402f90 <main+0x564>)
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402ec6:	460f      	mov	r7, r1
 					if(chord_harmonies[chord_idx] == true)
   402ec8:	f813 300c 	ldrb.w	r3, [r3, ip]
@@ -7458,7 +7457,7 @@ int main(void)
 				interval_idx = saved_interval_idx;  	
 				for (i = 0; i < 3; i++, chord_idx++)
 				{
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402efc:	f85e 0b04 	ldr.w	r0, [lr], #4
 		bend_difference = midi_note_frequencies[pitch_idx] - midi_note_frequencies[pitch_idx-2];
   402f00:	eb03 0888 	add.w	r8, r3, r8, lsl #2
@@ -7478,7 +7477,7 @@ int main(void)
   402f12:	ed9f 4a26 	vldr	s8, [pc, #152]	; 402fac <main+0x580>
 		result *= base;
   402f16:	ed9f 7a26 	vldr	s14, [pc, #152]	; 402fb0 <main+0x584>
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402f1a:	2800      	cmp	r0, #0
   402f1c:	f000 8088 	beq.w	403030 <main+0x604>
   402f20:	4428      	add	r0, r5
@@ -7490,16 +7489,16 @@ int main(void)
   402f2e:	089b      	lsrs	r3, r3, #2
   402f30:	ebc3 03c3 	rsb	r3, r3, r3, lsl #3
   402f34:	1aeb      	subs	r3, r5, r3
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402f36:	3501      	adds	r5, #1
 						steps_to_harmony += major[interval_idx % 7];
   402f38:	eb02 0383 	add.w	r3, r2, r3, lsl #2
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402f3c:	4285      	cmp	r5, r0
 						steps_to_harmony += major[interval_idx % 7];
   402f3e:	f853 3cac 	ldr.w	r3, [r3, #-172]
   402f42:	4419      	add	r1, r3
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402f44:	d1ed      	bne.n	402f22 <main+0x4f6>
 					if(chord_harmonies[chord_idx] == true)
   402f46:	4b12      	ldr	r3, [pc, #72]	; (402f90 <main+0x564>)
@@ -7606,13 +7605,13 @@ int main(void)
 				for (i = 0; i < 3; i++, chord_idx++)
   403022:	d016      	beq.n	403052 <main+0x626>
   403024:	4605      	mov	r5, r0
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   403026:	f85e 0b04 	ldr.w	r0, [lr], #4
   40302a:	2800      	cmp	r0, #0
   40302c:	f47f af78 	bne.w	402f20 <main+0x4f4>
 					if(chord_harmonies[chord_idx] == true)
   403030:	4bb4      	ldr	r3, [pc, #720]	; (403304 <main+0x8d8>)
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   403032:	4628      	mov	r0, r5
 					if(chord_harmonies[chord_idx] == true)
   403034:	f813 300c 	ldrb.w	r3, [r3, ip]
@@ -8000,9 +7999,9 @@ int main(void)
 		if (d2 <= d1)
   403390:	4611      	mov	r1, r2
 	while (lo < hi)
-  403392:	428b      	cmp	r3, r1
-  403394:	f240 81df 	bls.w	403756 <main+0xd2a>
-  403398:	1858      	adds	r0, r3, r1
+  403392:	4299      	cmp	r1, r3
+  403394:	f080 81df 	bcs.w	403756 <main+0xd2a>
+  403398:	18c8      	adds	r0, r1, r3
   40339a:	461e      	mov	r6, r3
   40339c:	460a      	mov	r2, r1
   40339e:	49b8      	ldr	r1, [pc, #736]	; (403680 <main+0xc54>)
@@ -8298,12 +8297,12 @@ int main(void)
 														dry_circ_buffer[(curr_idx - 601 - chorus_delay)  & CIRC_MASK] +
   4035aa:	ee77 7a87 	vadd.f32	s15, s15, s14
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  4035ae:	eee7 5aa4 	vfma.f32	s11, s15, s9
+  4035ae:	eee4 5aa7 	vfma.f32	s11, s9, s15
   4035b2:	eef0 7a65 	vmov.f32	s15, s11
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
   4035b6:	eeb0 7a65 	vmov.f32	s14, s11
 				out_buffer[i] += reverb_volume * 0.33f *
-  4035ba:	eee6 7a05 	vfma.f32	s15, s12, s10
+  4035ba:	eee5 7a06 	vfma.f32	s15, s10, s12
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
   4035be:	eea3 7a23 	vfma.f32	s14, s6, s7
 				out_buffer[i] += reverb_volume * 0.33f *

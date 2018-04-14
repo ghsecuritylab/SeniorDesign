@@ -388,7 +388,6 @@ int main(void)
 			harmony_shifts[0] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
 			num_of_shifts = 1;  
 			
-				
 			// calculate power 
 			arm_power_f32(processBuffer, WIN_SIZE>>2, &power);
 		
@@ -402,7 +401,7 @@ int main(void)
 				int32_t steps_to_harmony = -12;
 				for (i = 0; i < 3; i++, chord_idx++)
 				{
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
 						steps_to_harmony += major[interval_idx % 7];
 					if(chord_harmonies[chord_idx] == true)
 					{
@@ -420,7 +419,7 @@ int main(void)
 				interval_idx = saved_interval_idx;  	
 				for (i = 0; i < 3; i++, chord_idx++)
 				{
-					for (int j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
 						steps_to_harmony += major[interval_idx % 7];
 					if(chord_harmonies[chord_idx] == true)
 					{
@@ -532,7 +531,9 @@ int main(void)
 	
 			// scale output 
 			arm_scale_f32(out_buffer, (float)INT16_MAX * master_volume, out_buffer, WIN_SIZE);
- 			//arm_scale_f32(processBuffer, (float)INT16_MAX, out_buffer, WIN_SIZE); // sound in / sound out 
+			
+			// debug sound in / sound out 
+ 			//arm_scale_f32(processBuffer, (float)INT16_MAX, out_buffer, WIN_SIZE); 
 			
 			// Sound out 
 			uint32_t idx = 0; 

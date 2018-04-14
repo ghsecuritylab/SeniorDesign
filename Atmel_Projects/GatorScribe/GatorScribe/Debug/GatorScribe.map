@@ -13905,7 +13905,7 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_macro   0x00025cef       0x10 src/main.o
  .debug_macro   0x00025cff       0x6a src/main.o
 
-.debug_line     0x00000000    0x14e7d
+.debug_line     0x00000000    0x14e7f
  .debug_line    0x00000000     0x1177 DanLib/Audio/DMA/DMA_Audio.o
  .debug_line    0x00001177     0x1069 DanLib/Audio/audio.o
  .debug_line    0x000021e0     0x1080 DanLib/Audio/WM8904_Driver/WM8904_Driver.o
@@ -13929,17 +13929,17 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
  .debug_line    0x000114b2      0xa9e src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
  .debug_line    0x00011f50      0x81b src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
  .debug_line    0x0001276b      0x417 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_line    0x00012b82     0x165d src/main.o
- .debug_line    0x000141df      0x186 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
- .debug_line    0x00014365      0x191 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
- .debug_line    0x000144f6      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
- .debug_line    0x00014697      0x19e ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
- .debug_line    0x00014835      0x1a0 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
- .debug_line    0x000149d5      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
- .debug_line    0x00014b76      0x1a2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
- .debug_line    0x00014d18      0x165 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_line    0x00012b82     0x165f src/main.o
+ .debug_line    0x000141e1      0x186 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_line    0x00014367      0x191 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_line    0x000144f8      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_line    0x00014699      0x19e ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_line    0x00014837      0x1a0 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_line    0x000149d7      0x1a1 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_line    0x00014b78      0x1a2 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_line    0x00014d1a      0x165 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
 
-.debug_str      0x00000000    0x9d37b
+.debug_str      0x00000000    0x9d379
  .debug_str     0x00000000    0x924dc DanLib/Audio/DMA/DMA_Audio.o
                               0x92c9d (size before relaxing)
  .debug_str     0x000924dc      0x142 DanLib/Audio/audio.o
@@ -13948,61 +13948,61 @@ OUTPUT(GatorScribe.elf elf32-littlearm)
                               0x9180a (size before relaxing)
  .debug_str     0x0009285a      0x269 DanLib/DYWA/dywapitchtrack.o
                               0x925d0 (size before relaxing)
- .debug_str     0x00092ac3      0x2b4 DanLib/Vocoder/psola.o
-                              0x92633 (size before relaxing)
- .debug_str     0x00092d77       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_str     0x00092ac3      0x2b2 DanLib/Vocoder/psola.o
+                              0x92631 (size before relaxing)
+ .debug_str     0x00092d75       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
                               0x81d87 (size before relaxing)
- .debug_str     0x00092dac       0x2c src/ASF/common/utils/stdio/read.o
+ .debug_str     0x00092daa       0x2c src/ASF/common/utils/stdio/read.o
                               0x81c00 (size before relaxing)
- .debug_str     0x00092dd8       0x26 src/ASF/common/utils/stdio/write.o
+ .debug_str     0x00092dd6       0x26 src/ASF/common/utils/stdio/write.o
                               0x81c01 (size before relaxing)
- .debug_str     0x00092dfe      0x252 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
+ .debug_str     0x00092dfc      0x252 src/ASF/sam/components/audio/codec/wm8904/wm8904.o
                               0x8de88 (size before relaxing)
- .debug_str     0x00093050      0x350 src/ASF/sam/drivers/ssc/ssc.o
+ .debug_str     0x0009304e      0x350 src/ASF/sam/drivers/ssc/ssc.o
                               0x82277 (size before relaxing)
- .debug_str     0x000933a0      0x380 src/ASF/sam/drivers/twihs/twihs.o
+ .debug_str     0x0009339e      0x380 src/ASF/sam/drivers/twihs/twihs.o
                               0x8220b (size before relaxing)
- .debug_str     0x00093720      0xaa2 src/ASF/sam/drivers/usart/usart.o
+ .debug_str     0x0009371e      0xaa2 src/ASF/sam/drivers/usart/usart.o
                               0x8279f (size before relaxing)
- .debug_str     0x000941c2      0x171 src/ASF/sam/drivers/xdmac/xdmac.o
+ .debug_str     0x000941c0      0x171 src/ASF/sam/drivers/xdmac/xdmac.o
                               0x8274d (size before relaxing)
- .debug_str     0x00094333      0x41b src/ASF/common/services/clock/samv71/sysclk.o
+ .debug_str     0x00094331      0x41b src/ASF/common/services/clock/samv71/sysclk.o
                               0x86a8c (size before relaxing)
- .debug_str     0x0009474e       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_str     0x0009474c       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                               0x81c57 (size before relaxing)
- .debug_str     0x000947e2      0x8ae src/ASF/sam/boards/samv71_xplained_ultra/init.o
+ .debug_str     0x000947e0      0x8ae src/ASF/sam/boards/samv71_xplained_ultra/init.o
                               0x8831a (size before relaxing)
- .debug_str     0x00095090      0x132 src/ASF/sam/drivers/mpu/mpu.o
+ .debug_str     0x0009508e      0x132 src/ASF/sam/drivers/mpu/mpu.o
                               0x8299d (size before relaxing)
- .debug_str     0x000951c2      0x551 src/ASF/sam/drivers/pio/pio.o
+ .debug_str     0x000951c0      0x551 src/ASF/sam/drivers/pio/pio.o
                               0x827ad (size before relaxing)
- .debug_str     0x00095713      0x111 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_str     0x00095711      0x111 src/ASF/sam/drivers/pio/pio_handler.o
                               0x828d8 (size before relaxing)
- .debug_str     0x00095824      0x658 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_str     0x00095822      0x658 src/ASF/sam/drivers/pmc/pmc.o
                               0x82911 (size before relaxing)
- .debug_str     0x00095e7c      0x61c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
+ .debug_str     0x00095e7a      0x61c src/ASF/sam/utils/cmsis/samv71/source/templates/gcc/startup_samv71.o
                               0x82443 (size before relaxing)
- .debug_str     0x00096498      0x137 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
+ .debug_str     0x00096496      0x137 src/ASF/sam/utils/cmsis/samv71/source/templates/system_samv71.o
                               0x72530 (size before relaxing)
- .debug_str     0x000965cf      0x768 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x000965cd      0x768 src/ASF/sam/utils/syscalls/gcc/syscalls.o
                                0x74d4 (size before relaxing)
- .debug_str     0x00096d37     0x5eb8 src/main.o
-                              0x98bfd (size before relaxing)
- .debug_str     0x0009cbef      0x15d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
+ .debug_str     0x00096d35     0x5eb8 src/main.o
+                              0x98bfb (size before relaxing)
+ .debug_str     0x0009cbed      0x15d ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_fill_f32.o)
                                 0x239 (size before relaxing)
- .debug_str     0x0009cd4c       0x23 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
+ .debug_str     0x0009cd4a       0x23 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_copy_f32.o)
                                 0x238 (size before relaxing)
- .debug_str     0x0009cd6f       0x2f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
+ .debug_str     0x0009cd6d       0x2f ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_power_f32.o)
                                 0x240 (size before relaxing)
- .debug_str     0x0009cd9e       0x45 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
+ .debug_str     0x0009cd9c       0x45 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_min_f32.o)
                                 0x262 (size before relaxing)
- .debug_str     0x0009cde3       0x35 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
+ .debug_str     0x0009cde1       0x35 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_max_f32.o)
                                 0x262 (size before relaxing)
- .debug_str     0x0009ce18       0x44 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
+ .debug_str     0x0009ce16       0x44 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_cos_f32.o)
                                 0x255 (size before relaxing)
- .debug_str     0x0009ce5c       0x26 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
+ .debug_str     0x0009ce5a       0x26 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_scale_f32.o)
                                 0x242 (size before relaxing)
- .debug_str     0x0009ce82      0x4f9 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
+ .debug_str     0x0009ce80      0x4f9 ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a(arm_common_tables.o)
                                 0x717 (size before relaxing)
 
 .debug_frame    0x00000000     0x2d2c

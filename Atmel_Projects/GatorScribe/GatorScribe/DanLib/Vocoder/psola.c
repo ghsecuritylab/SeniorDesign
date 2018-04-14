@@ -150,7 +150,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 						for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
 						{
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
-							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
 						}
 					}
 					else
@@ -158,7 +158,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 						for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
 						{
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
-								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + WEIRD_OFFSET) & RING_BUFFER_MASK];
+								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
 						}
 					}
 	
