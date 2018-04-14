@@ -23,19 +23,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_abbrev 00004bb5  00000000  00000000  000414c4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000a63a  00000000  00000000  00046079  2**0
+ 10 .debug_loc    0000a613  00000000  00000000  00046079  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_aranges 00000cf0  00000000  00000000  000506b3  2**0
+ 11 .debug_aranges 00000cf0  00000000  00000000  0005068c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000021c8  00000000  00000000  000513a3  2**0
+ 12 .debug_ranges 000021c8  00000000  00000000  0005137c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  00025d69  00000000  00000000  0005356b  2**0
+ 13 .debug_macro  00025d69  00000000  00000000  00053544  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   00014e79  00000000  00000000  000792d4  2**0
+ 14 .debug_line   00014e79  00000000  00000000  000792ad  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    0009d379  00000000  00000000  0008e14d  2**0
+ 15 .debug_str    0009d379  00000000  00000000  0008e126  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_frame  00002d2c  00000000  00000000  0012b4c8  2**2
+ 16 .debug_frame  00002d2c  00000000  00000000  0012b4a0  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -7554,15 +7554,15 @@ int main(void)
 					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
   402fba:	f85c 0b04 	ldr.w	r0, [ip], #4
   402fbe:	2100      	movs	r1, #0
-  402fc0:	f8cd a00c 	str.w	sl, [sp, #12]
+  402fc0:	9c04      	ldr	r4, [sp, #16]
 					if(chord_harmonies[chord_idx] == true)
 					{
 						desired_pitch = scale_pitch*powerf(1.059463094359f, steps_to_harmony);
 						if (pitch_bend < 56 || pitch_bend > 72)
 							bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
 						harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-  402fc4:	eeb7 6a00 	vmov.f32	s12, #112	; 0x3f800000  1.0
-  402fc8:	9c04      	ldr	r4, [sp, #16]
+  402fc2:	eeb7 6a00 	vmov.f32	s12, #112	; 0x3f800000  1.0
+  402fc6:	f8cd a010 	str.w	sl, [sp, #16]
 		bend_difference = midi_note_frequencies[pitch_idx] - midi_note_frequencies[pitch_idx-2];
   402fca:	eb03 0787 	add.w	r7, r3, r7, lsl #2
   402fce:	f8dd 8018 	ldr.w	r8, [sp, #24]
@@ -7718,7 +7718,7 @@ int main(void)
 				if(chord_harmonies[chord_idx] == true)
   4030e8:	4b87      	ldr	r3, [pc, #540]	; (403308 <main+0x8dc>)
   4030ea:	4656      	mov	r6, sl
-  4030ec:	f8dd a00c 	ldr.w	sl, [sp, #12]
+  4030ec:	f8dd a010 	ldr.w	sl, [sp, #16]
   4030f0:	79db      	ldrb	r3, [r3, #7]
   4030f2:	f003 02ff 	and.w	r2, r3, #255	; 0xff
   4030f6:	2b00      	cmp	r3, #0
@@ -7729,9 +7729,9 @@ int main(void)
   4030fe:	7a1b      	ldrb	r3, [r3, #8]
   403100:	2b00      	cmp	r3, #0
   403102:	f040 8342 	bne.w	40378a <main+0xd5e>
-						desired_pitch = scale_pitch*powerf(1.059463094359f, -12);
+						desired_pitch = scale_pitch*powerf(1.059463094359f, 12);
 					else
-						desired_pitch = closest_note_freq*powerf(1.059463094359f, -12);
+						desired_pitch = closest_note_freq*powerf(1.059463094359f, 12);
   403106:	eddf 9a82 	vldr	s19, [pc, #520]	; 403310 <main+0x8e4>
   40310a:	ee68 9aa9 	vmul.f32	s19, s17, s19
 					if (pitch_bend < 56 || pitch_bend > 72)
@@ -7931,7 +7931,7 @@ int main(void)
   403304:	3f879c7d 	.word	0x3f879c7d
   403308:	2041c114 	.word	0x2041c114
   40330c:	20400048 	.word	0x20400048
-  403310:	3efffff5 	.word	0x3efffff5
+  403310:	40000005 	.word	0x40000005
   403314:	bf666666 	.word	0xbf666666
   403318:	2044a818 	.word	0x2044a818
 									bend_pitch(&desired_pitch, harmony_list[i].idx, (uint32_t)pitch_bend);
@@ -8296,7 +8296,7 @@ int main(void)
 														dry_circ_buffer[(curr_idx - 601 - chorus_delay)  & CIRC_MASK] +
   4035b6:	ee77 7a87 	vadd.f32	s15, s15, s14
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
-  4035ba:	eee7 5aa4 	vfma.f32	s11, s15, s9
+  4035ba:	eee4 5aa7 	vfma.f32	s11, s9, s15
   4035be:	eef0 7a65 	vmov.f32	s15, s11
 				delay_circ_buffer[curr_idx & CIRC_MASK] = out_buffer[i] + delay_feedback * delay_circ_buffer[(curr_idx - delay_speed)  & CIRC_MASK];	
   4035c2:	eeb0 7a65 	vmov.f32	s14, s11
@@ -8417,7 +8417,7 @@ int main(void)
   4036d0:	46fffe00 	.word	0x46fffe00
   4036d4:	00403b41 	.word	0x00403b41
   4036d8:	2040401c 	.word	0x2040401c
-  4036dc:	3efffff5 	.word	0x3efffff5
+  4036dc:	40000005 	.word	0x40000005
   4036e0:	427c0000 	.word	0x427c0000
   4036e4:	3c800000 	.word	0x3c800000
 		*pitch += (((float)pitch_bend - 63.0f) * ONE_OVER_64) * bend_difference;
@@ -8487,7 +8487,7 @@ int main(void)
 						desired_pitch = scale_pitch*powerf(1.059463094359f, -12);
   403782:	ee69 7aa7 	vmul.f32	s15, s19, s15
   403786:	f7ff bb1c 	b.w	402dc2 <main+0x396>
-						desired_pitch = scale_pitch*powerf(1.059463094359f, -12);
+						desired_pitch = scale_pitch*powerf(1.059463094359f, 12);
   40378a:	ed5f 7a2c 	vldr	s15, [pc, #-176]	; 4036dc <main+0xcb0>
   40378e:	ee69 9aa7 	vmul.f32	s19, s19, s15
   403792:	e4bc      	b.n	40310e <main+0x6e2>
