@@ -21,23 +21,45 @@ typedef struct harmony
 	volatile bool active; 
 }harmony_t;
 
-#define MAX_NUM_HARMONIES 10 
+#define MAX_NUM_KEYS_HARMONIES 10 // not including root  
 
 #define POWER_THRESHOLD 0.000001f
 #define ONE_OVER_64 0.015625000F
 
-#define HARMONY_VOLUME_FLAG 255 
-#define MASTER_VOLUME_FLAG 254
-#define PITCH_BEND_FLAG 253
-#define AUTOTUNE_FLAG 252 
-#define REVERB_VOLUME_FLAG 251 
-#define CHORUS_VOLUME_FLAG 250
-#define DELAY_VOLUME_FLAG 246
-#define DELAY_SPEED_FLAG 248
-#define DRY_VOLUME_FLAG 247
-#define DELAY_FEEDBACK_FLAG 249
-#define CHORUS_SPEED_FLAG 245 
+enum harmonies
+{
+	OCTAVE_DOWN = -12,
+	MAJOR_2ND_BELOW = -10,
+	MAJOR_3RD_BELOW = -8,
+	PERFECT_4TH_BELOW = -7,
+	PERFECT_5TH_BELOW = -5,
+	MINOR_6TH_BELOW = -3,
+	DIMINISHED_7TH_BELOW = -1,
+	ROOT = 0,
+	MAJOR_2ND_ABOVE = 2,
+	MAJOR_3RD_ABOVE = 4,
+	PERFECT_4TH_ABOVE = 5,
+	PERFECT_5TH_ABOVE = 7,
+	MINOR_6TH_ABOVE = 9,
+	DIMINISHED_7TH_ABOVE = 11,
+	OCTAVE_UP = 12
+};
 
+enum scale_steps
+{
+	W = 2, 
+	H = 1
+};
+
+typedef uint32_t scale_t; 
+
+#define KEY_OF_E 64 
+
+typedef struct chord
+{
+	float freq; 
+	bool active; 
+}chord_t;
 
 #define NOTE_ON 144
 #define NOTE_OFF 128 

@@ -18,7 +18,7 @@
 #define MINIMUM_PITCH 100.0f 
 #define NO_SHIFT 1.0f 
 #define END_OF_SHIFTS -1.0f
-#define MAX_NUM_SHIFTS 11 // always doing root (1.0 shift) 
+#define MAX_NUM_SHIFTS 19 //11 // always doing root (1.0 shift) 
 #define NO_PITCH_BEND 64
 
 #define WEIRD_OFFSET 600
