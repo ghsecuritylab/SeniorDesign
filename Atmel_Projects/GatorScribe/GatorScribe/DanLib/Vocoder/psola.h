@@ -13,8 +13,6 @@
 #include "DMA_Audio.h"
 #include "arm_math.h"
 
-#define PSOLA_SAMPLE_RATE 46503.0f 
-
 #define MINIMUM_PITCH 100.0f 
 #define NO_SHIFT 1.0f 
 #define END_OF_SHIFTS -1.0f

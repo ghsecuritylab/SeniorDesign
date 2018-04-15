@@ -4,9 +4,6 @@
 #include "asf.h"
 #include "DMA_Audio.h"
 
-/*#define DYW_SAMPLING_RATE 23250*/
-#define DYW_SAMPLING_RATE 46503.0f 
-
 // structure to hold tracking data
 typedef struct _dywapitchtracker {
 	float	_prevPitch;

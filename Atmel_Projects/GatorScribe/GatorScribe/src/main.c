@@ -509,14 +509,14 @@ int main(void)
 			// Add audio effects 
 			uint32_t curr_idx = circ_buf_idx - (uint32_t)WIN_SIZE;
 			// chorus params 
-			float n_freq = chorus_speed / PSOLA_SAMPLE_RATE; 
+			float n_freq = chorus_speed / SAMPLE_RATE; 
 			uint32_t num_samples_in_period = 1 / n_freq; 
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{				
 				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
 						
 				// chorus
-				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * PSOLA_SAMPLE_RATE;
+				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * SAMPLE_RATE;
 				if (sin_cnt == num_samples_in_period)
 					sin_cnt = 0;
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +

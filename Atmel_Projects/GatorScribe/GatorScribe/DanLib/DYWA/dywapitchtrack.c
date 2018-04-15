@@ -185,15 +185,15 @@ static inline float get_raw_pitch(float * samples)
 	float minValue; 
 	
 	{ // compute ampltitudeThreshold and theDC
-		//first compute the DC and maxAMplitude - neglecting mean ... not totally necessary
+		//first compute the DC and maxAMplitude 
 		arm_max_f32(sam, WIN_SIZE, &maxValue, &temp_idx); 
 		arm_min_f32(sam, WIN_SIZE, &minValue, &temp_idx); 
-		/*
+		
 		float theDC = 0.0;
 		arm_mean_f32(sam, WIN_SIZE, &theDC); 
 		maxValue = maxValue - theDC;
 		minValue = minValue - theDC;
-		*/
+		
 		float amplitudeMax = (maxValue > -minValue ? maxValue : -minValue);
 		
 		ampltitudeThreshold = amplitudeMax*maximaThresholdRatio;		
@@ -207,7 +207,7 @@ static inline float get_raw_pitch(float * samples)
 	while(1) 
 	{
 		// delta
-		delta = DYW_SAMPLING_RATE/(_2power(curLevel)*maxF);
+		delta = SAMPLE_RATE/(_2power(curLevel)*maxF);
 				
 		if (curSamNb < 2) return pitchF;
 		
@@ -344,7 +344,7 @@ static inline float get_raw_pitch(float * samples)
 			if (similarity <= 2*delta) 
 			{
 				// two consecutive similar mode distances : ok !
-				pitchF = DYW_SAMPLING_RATE/(_2power(curLevel-1)*curModeDistance);
+				pitchF = SAMPLE_RATE/(_2power(curLevel-1)*curModeDistance);
 				return pitchF;
 			}
 		}

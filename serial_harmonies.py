@@ -27,21 +27,6 @@ try:
 except: 
     print("Error")
     exit() 
-    
-note_on = 144 
-note_off = 128 
-volume = 176 
-dry_ch = 7
-harmony_ch = 84 
-master_ch = 5 
-reverb_vol_ch = 72
-chorus_vol_ch = 73
-chorus_speed_ch = 93 
-delay_feedback_ch = 91
-delay_speed_ch = 71
-delay_vol_ch = 74
-autotune_button = 192 
-pitch_bend = 224 
 
 try:
     with mido.open_input('Oxygen 49') as port:
