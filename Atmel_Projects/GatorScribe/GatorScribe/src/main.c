@@ -98,7 +98,7 @@ volatile uint32_t received_bytes[3];
 volatile uint32_t uart_cnt = 0;
 volatile uint32_t waiting_for_button_press = 0;
 volatile bool chord_harmonies[9] = {false, false, false, false, false, false, false, false, false}; // last one is autotune  
-
+volatile uint32_t prev_midi_status = 0; 
 void USART_SERIAL_ISR_HANDLER(void)
 {
 	
@@ -121,7 +121,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 			70 Bb
 			71 B
 		*/ 
-		if (received_bytes[0] == CH_BUTTON && uart_cnt == 2)
+		if (received_bytes[0] == CH_BUTTON && uart_cnt == 2 && prev_midi_status == 176)
 		{
 			uart_cnt = 0; 
 			uint32_t *data1 = (uint32_t *)&received_bytes[1];
@@ -132,7 +132,8 @@ void USART_SERIAL_ISR_HANDLER(void)
 			uart_cnt = 0; 
 			uint32_t *message = (uint32_t *)&received_bytes[0]; 
 			uint32_t *data1 = (uint32_t *)&received_bytes[1]; 
-			uint32_t *data2 = (uint32_t *)&received_bytes[2]; 
+			uint32_t *data2 = (uint32_t *)&received_bytes[2];
+			prev_midi_status = *message;  
 			if (*message == 255 && *data1 == 255 && *data2 == 255)
 			{
 				// clear all harmonies 

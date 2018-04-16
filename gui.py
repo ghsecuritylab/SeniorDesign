@@ -61,6 +61,7 @@ class Central(QWidget):
         self.opacity = 0.9
         self.timer = QTimer()
         self.connectBoard()
+        self.prev_midi_status = -1 
         self.chord_harmonies = [False,False,False,False,False,False,False,False,False]
         self.restartChordHarms() 
 
@@ -144,13 +145,13 @@ class Central(QWidget):
             column = column + 1 
 
         # Create search and refresh buttons
-        # self.search_button = QPushButton('Search')
-        # self.search_button.setFont(QFont('Calibri',14))
-        # self.search_button.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent')
-        # self.search_button.setMinimumSize(self.search_button.minimumSizeHint().width()*2,self.search_button.minimumSizeHint().height())
-        # self.search_button.pressed.connect(lambda: self.search_button.setStyleSheet('background-color: rgb(192,192,192,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
-        # self.search_button.released.connect(lambda: self.search_button.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
-        # self.harmonizer_layout.addWidget(self.search_button,2,0,1,2,Qt.AlignCenter)
+        self.search_button = QPushButton('Search')
+        self.search_button.setFont(QFont('Calibri',14))
+        self.search_button.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent')
+        self.search_button.setMinimumSize(self.search_button.minimumSizeHint().width()*2,self.search_button.minimumSizeHint().height())
+        self.search_button.pressed.connect(lambda: self.search_button.setStyleSheet('background-color: rgb(192,192,192,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
+        self.search_button.released.connect(lambda: self.search_button.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
+        self.harmonizer_layout.addWidget(self.search_button,1,1,1,2,Qt.AlignLeft)
 
         # self.rectangle_label = QLabel()
         # self.pixmap = QPixmap(10,60)
@@ -263,16 +264,17 @@ class Central(QWidget):
             return
 
     def message_callback(self, message): 
-        if (message.bytes()[0] == 192): 
+        if (message.bytes()[0] == 192 and self.prev_midi_status == 176): 
             chord_idx = message.bytes()[1]
-            self.chord_harmonies[chord_idx] ^= True 
-            harmony = self.harmonizer_layout.itemAtPosition(self.chord_pos[0],chord_idx).widget()
-            if (self.chord_harmonies[chord_idx]):
-                harmony.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
-            else: 
-                harmony.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
-
+            if (chord_idx < 9):
+                self.chord_harmonies[chord_idx] ^= True 
+                harmony = self.harmonizer_layout.itemAtPosition(self.chord_pos[0],chord_idx).widget()
+                if (self.chord_harmonies[chord_idx]):
+                    harmony.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+                else: 
+                    harmony.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
             
+        self.prev_midi_status = message.bytes()[0]
         self.ser.write(message.bytes())
         print(message.bytes())
 
