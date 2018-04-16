@@ -20,7 +20,6 @@
 #define SAMPLE_RATE_32k 4 
 #define SAMPLE_RATE_48k 5
 
-#define SAMPLE_RATE SAMPLE_RATE_48k
 /********************************** Defines End **********************************/
 
 /********************************** Public Functions Start **********************************/

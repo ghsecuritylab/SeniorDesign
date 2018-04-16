@@ -57,7 +57,8 @@ static inline void get_frequency_from_all(float32_t frequency, float *closest_no
 		{
 			hi = mid;
 		}
-	}
+	}		
+	
 	*closest_note = midi_note_frequencies[hi];
 	*closest_note_idx = hi; 
 }
@@ -107,6 +108,10 @@ void USART_SERIAL_ISR_HANDLER(void)
 		
 		// [255, 255, key] would mean im sending the major key 
 		/*
+			60 C
+			61 Db 
+			62 D 
+			63 Eb
 			64 E 
 			65 F 
 			66 Gb
@@ -115,23 +120,12 @@ void USART_SERIAL_ISR_HANDLER(void)
 			69 A  
 			70 Bb
 			71 B
-			72 C 
-			73 Db 
-			74 D 
-			75 Eb
 		*/ 
-		if (waiting_for_button_press == 2 && uart_cnt == 3)
+		if (received_bytes[0] == CH_BUTTON && uart_cnt == 2)
 		{
 			uart_cnt = 0; 
-			waiting_for_button_press--; 
-		}
-		else if (waiting_for_button_press == 1 && uart_cnt == 2)
-		{
-			uart_cnt = 0; 
-			waiting_for_button_press = 0; 
-			uint32_t *data = (uint32_t *)&received_bytes[1]; 
-			
-			chord_harmonies[*data] = !chord_harmonies[*data]; 
+			uint32_t *data1 = (uint32_t *)&received_bytes[1];
+			chord_harmonies[*data1] = !chord_harmonies[*data1];
 		}
 		else if (uart_cnt == 3)
 		{
@@ -139,11 +133,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 			uint32_t *message = (uint32_t *)&received_bytes[0]; 
 			uint32_t *data1 = (uint32_t *)&received_bytes[1]; 
 			uint32_t *data2 = (uint32_t *)&received_bytes[2]; 
-			if (*message == 176 && *data1 == 0 && *data2 == 0)
-			{
-				waiting_for_button_press = 2; 
-			}
-			else if (*message == 255 && *data1 == 255)
+			if (*message == 255 && *data1 == 255)
 			{
 				key_root = *data2; 
 			}
@@ -171,7 +161,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 					}
 				}
 			}
-			else if (*message == SLIDER)
+			else if (*message == SLIDER) 
 			{
 				switch(*data1)
 				{
@@ -279,6 +269,7 @@ int main(void)
 #endif 
 	PSOLA_init(); 
 	configure_uart(); 
+	usart_write(USART_SERIAL, 255);
 	 
 // 	 // draw smiley face 
 // 	SCB_DisableICache(); 
@@ -377,7 +368,8 @@ int main(void)
 			}
 			
 			// auto tune or regular voice 
-			if (chord_harmonies[8])
+			bool *autotune = (bool *)&chord_harmonies[8]; 
+			if (*autotune)
 				desired_pitch = scale_pitch;
 			else 
 				desired_pitch = inputPitch;
@@ -401,7 +393,7 @@ int main(void)
 				// octave down
 				if(chord_harmonies[chord_idx] == true)
 				{
-					if (chord_harmonies[8])
+					if (*autotune)
 						desired_pitch = scale_pitch*powerf(1.059463094359f, -12);
 					else
 						desired_pitch = closest_note_freq*powerf(1.059463094359f, -12);
@@ -451,7 +443,7 @@ int main(void)
 				// octave up
 				if(chord_harmonies[chord_idx] == true)
 				{
-					if (chord_harmonies[8])
+					if (*autotune)
 						desired_pitch = scale_pitch*powerf(1.059463094359f, 12);
 					else
 						desired_pitch = closest_note_freq*powerf(1.059463094359f, 12);
@@ -516,7 +508,7 @@ int main(void)
 				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
 						
 				// chorus
-				chorus_delay = (0.008f + 0.001f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * SAMPLE_RATE;
+				chorus_delay = (0.008f + 0.003f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * SAMPLE_RATE;
 				if (sin_cnt == num_samples_in_period)
 					sin_cnt = 0;
 				out_buffer[i] += chorus_volume * (0.2f* (dry_circ_buffer[(curr_idx - chorus_delay)  & CIRC_MASK] +
@@ -550,16 +542,15 @@ int main(void)
 				outBuffer[i+1] = outBuffer[i]; 
 			}
 			
-			// check if we're too slow 
-			if (dataReceived)
-			{
+			// check if we're too slow ... uncomment for debug 
+// 			if (dataReceived)
+// 			{
 // 				while(1)
 // 				{
-// 					// taking too long ... uncomment for debug 
+// 					// taking too long 
 // 				}
-			}
-			else 
-				dataReceived = false; 
+// 			}
+
 		}
 	}
 }

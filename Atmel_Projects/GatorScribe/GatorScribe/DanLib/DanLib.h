@@ -66,6 +66,7 @@ typedef struct chord
 #define NOTE_OFF 128 
 #define SLIDER 176
 #define PITCH_WHEEL 224
+#define CH_BUTTON 192
 #define DRY_VOLUME_CH 7
 #define HARM_VOLUME_CH 84 
 #define MASTER_VOLUME_CH 5 
