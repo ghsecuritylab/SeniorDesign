@@ -16,13 +16,13 @@ class App(QMainWindow):
     def __init__(self):
         super().__init__()
         self.title = 'Scribes'
-        self.setWindowIcon(QIcon('uf_logo.png'))
         self.setWindowTitle(self.title)
         self.p = self.palette()
         self.setStyleSheet('background-color: rgb(42,41,46); color: rgb(200,209,218)')
         self.central_widget = Central(self)
         self.setCentralWidget(self.central_widget)
-        self.showMaximized()
+        self.resize(1920,400)  # resolution for mac is 1920 x 1200
+        #self.showMaximized()
         self.show()
         self.central_widget.startHarmonizer() 
 
@@ -144,7 +144,7 @@ class Central(QWidget):
             self.harmonizer_layout.addWidget(button,row,column,Qt.AlignCenter)
             column = column + 1 
 
-        # Create search and refresh buttons
+        # Create search button 
         self.search_button = QPushButton('Search')
         self.search_button.setFont(QFont('Calibri',14))
         self.search_button.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent')
@@ -152,11 +152,6 @@ class Central(QWidget):
         self.search_button.pressed.connect(lambda: self.search_button.setStyleSheet('background-color: rgb(192,192,192,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
         self.search_button.released.connect(lambda: self.search_button.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
         self.harmonizer_layout.addWidget(self.search_button,1,1,1,2,Qt.AlignLeft)
-
-        # self.rectangle_label = QLabel()
-        # self.pixmap = QPixmap(10,60)
-        # self.pixmap.fill(QColor(32,64,128))
-        # self.rectangle_label.setPixmap(self.pixmap)
 
     def paintEvent(self, event):
         paint = QPainter()
@@ -177,9 +172,7 @@ class Central(QWidget):
 
     def sendKeyChange(self, midi_key_num):
         if self.ser.isOpen():
-            self.ser.write([255])
-            self.ser.write([255])
-            self.ser.write([midi_key_num])
+            self.ser.write([255, 255, midi_key_num])
             print(midi_key_num)
         else: 
             self.connectBoard()
@@ -189,9 +182,7 @@ class Central(QWidget):
         for i in range(0,9): 
             self.chord_harmonies[i] = False 
         if self.ser.isOpen():
-            self.ser.write([255])
-            self.ser.write([255])
-            self.ser.write([255])
+            self.ser.write([255, 255, 255])
         else: 
             self.connectBoard()
             print('Error restarting')
@@ -241,8 +232,8 @@ class Central(QWidget):
             button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
         else: 
             button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
-        self.ser.write([192])
-        self.ser.write([chord_idx])
+        self.ser.write([176, 32, 0]) # tells board that it's a button from one of the channels (MIDI keyboard uses + and - buttons sometimes and sends same message)
+        self.ser.write([192, chord_idx])
 
     def connectBoard(self):
         if (os.path.exists("/dev/tty.usbmodem1462")):
@@ -285,5 +276,5 @@ class Central(QWidget):
 
 app = QApplication(sys.argv)
 ex = App()
-ex.setWindowOpacity(0.95)
+ex.setWindowOpacity(0.99)
 sys.exit(app.exec_())
