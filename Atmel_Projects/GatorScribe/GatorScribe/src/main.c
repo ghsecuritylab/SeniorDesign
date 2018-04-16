@@ -133,7 +133,13 @@ void USART_SERIAL_ISR_HANDLER(void)
 			uint32_t *message = (uint32_t *)&received_bytes[0]; 
 			uint32_t *data1 = (uint32_t *)&received_bytes[1]; 
 			uint32_t *data2 = (uint32_t *)&received_bytes[2]; 
-			if (*message == 255 && *data1 == 255)
+			if (*message == 255 && *data1 == 255 && *data2 == 255)
+			{
+				// clear all harmonies 
+				for(int i = 0; i < 9; i++)
+					chord_harmonies[i] = false; 
+			}
+			else if (*message == 255 && *data1 == 255)
 			{
 				key_root = *data2; 
 			}

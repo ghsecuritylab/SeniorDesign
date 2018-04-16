@@ -50,6 +50,7 @@ class Central(QWidget):
         self.current_key_mode = "Major"
         self.major_pos = [0,5]
         self.minor_pos = [1,5]
+        self.chord_pos = [3,0]
         self.init_harmonizer()
         self.layout.setSpacing(self.window_height/20)
         self.layout.addLayout(self.harmonizer_layout)
@@ -61,6 +62,7 @@ class Central(QWidget):
         self.timer = QTimer()
         self.connectBoard()
         self.chord_harmonies = [False,False,False,False,False,False,False,False,False]
+        self.restartChordHarms() 
 
     def init_harmonizer(self):
 
@@ -70,7 +72,7 @@ class Central(QWidget):
         self.harmonizer_layout = QGridLayout()
 
         # Create grid layout for user harmonizer control
-        self.harmonizer_layout.setSpacing(20)
+        self.harmonizer_layout.setSpacing(10)
 
         # Look for devices and create label to display current device
         self.device_list = mido.get_input_names()
@@ -91,6 +93,7 @@ class Central(QWidget):
         self.midi_lbl.resize(self.midi_lbl.minimumSizeHint().width()*1.2,self.midi_lbl.minimumSizeHint().height()*1.2)
         self.harmonizer_layout.addWidget(self.midi_lbl,1,0,1,5,Qt.AlignLeft)
 
+        # Create labels for all keys 
         self.key_array = ['C','C#/Db','D','D#/Eb','E','F','F#/Gb','G','G#/Ab','A','A#/Bb','B']
         row = 0
         column = self.starting_key_column
@@ -116,7 +119,7 @@ class Central(QWidget):
         button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
         button.setFont(QFont('Calibri Light',46))
         button.setMaximumSize(button.minimumSizeHint().width()*1.2,button.minimumSizeHint().height())
-        button.clicked.connect(self.chooseKey)
+        button.clicked.connect(self.chooseKeyMode)
         self.harmonizer_layout.addWidget(button,self.major_pos[0],self.major_pos[1],Qt.AlignCenter)
 
         # Minor Key 
@@ -124,8 +127,21 @@ class Central(QWidget):
         button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
         button.setFont(QFont('Calibri Light',46))
         button.setMaximumSize(button.minimumSizeHint().width()*1.2,button.minimumSizeHint().height())
-        button.clicked.connect(self.chooseKey)
+        button.clicked.connect(self.chooseKeyMode)
         self.harmonizer_layout.addWidget(button,self.minor_pos[0],self.minor_pos[1],Qt.AlignCenter)
+
+        #Show 9 harmony indicators 
+        self.harmony_array = ['Octave Down', 'Low 3rd', 'Low 5th', 'Low 6th', 'High 3rd', 'High 5th', 'High 6th', 'Octave Up']
+        row = self.chord_pos[0]
+        column = self.chord_pos[1]
+        for harmony in self.harmony_array:
+            button = QPushButton(harmony)
+            button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+            button.setFont(QFont('Calibri Light',36))
+            button.setMaximumSize(button.minimumSizeHint().width(),button.minimumSizeHint().height())
+            button.clicked.connect(self.changeChordHarmonies)
+            self.harmonizer_layout.addWidget(button,row,column,Qt.AlignCenter)
+            column = column + 1 
 
         # Create search and refresh buttons
         # self.search_button = QPushButton('Search')
@@ -168,12 +184,22 @@ class Central(QWidget):
             self.connectBoard()
             print('Cannot send key')
 
-    def chooseKey(self):
+    def restartChordHarms(self): 
+        for i in range(0,9): 
+            self.chord_harmonies[i] = False 
+        if self.ser.isOpen():
+            self.ser.write([255])
+            self.ser.write([255])
+            self.ser.write([255])
+        else: 
+            self.connectBoard()
+            print('Error restarting')
+
+    def chooseKeyMode(self): 
         button = self.sender()
         button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
         index = self.harmonizer_layout.indexOf(button)
         current_button_pos = self.harmonizer_layout.getItemPosition(index)
-
         if(current_button_pos[0] == self.major_pos[0] and current_button_pos[1] == self.major_pos[1]):
             if(self.current_key_mode != "Major"):
                 # dim minor button 
@@ -190,14 +216,32 @@ class Central(QWidget):
                 self.current_key_mode = "Minor"
                 self.current_key_midi_num -= 4
                 self.sendKeyChange(self.current_key_midi_num)
-        else:
-            old_key_button = self.harmonizer_layout.itemAtPosition(self.current_key_pos[0],self.current_key_pos[1]).widget()
-            old_key_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
-            self.current_key_pos = current_button_pos 
-            self.current_key_midi_num = self.base_key + (4*self.current_key_pos[0]) + (self.current_key_pos[1]-self.starting_key_column)
-            if(self.current_key_mode == "Minor"): 
-                self.current_key_midi_num -= 4
-            self.sendKeyChange(self.current_key_midi_num)
+
+    def chooseKey(self):
+        old_key_button = self.harmonizer_layout.itemAtPosition(self.current_key_pos[0],self.current_key_pos[1]).widget()
+        old_key_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+        button = self.sender()
+        button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+        index = self.harmonizer_layout.indexOf(button)
+        current_button_pos = self.harmonizer_layout.getItemPosition(index)
+        self.current_key_pos = current_button_pos 
+        self.current_key_midi_num = self.base_key + (4*self.current_key_pos[0]) + (self.current_key_pos[1]-self.starting_key_column)
+        if(self.current_key_mode == "Minor"): 
+            self.current_key_midi_num -= 4
+        self.sendKeyChange(self.current_key_midi_num)
+
+    def changeChordHarmonies(self): 
+        button = self.sender()
+        index = self.harmonizer_layout.indexOf(button)
+        current_button_pos = self.harmonizer_layout.getItemPosition(index)
+        chord_idx = current_button_pos[1] - self.chord_pos[1]
+        self.chord_harmonies[chord_idx] ^= True 
+        if (self.chord_harmonies[chord_idx]):
+            button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+        else: 
+            button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+        self.ser.write([192])
+        self.ser.write([chord_idx])
 
     def connectBoard(self):
         if (os.path.exists("/dev/tty.usbmodem1462")):
@@ -220,8 +264,14 @@ class Central(QWidget):
 
     def message_callback(self, message): 
         if (message.bytes()[0] == 192): 
-            self.chord_harmonies[message.bytes()[1]] ^= True 
-            #print(chord_harmonies)
+            chord_idx = message.bytes()[1]
+            self.chord_harmonies[chord_idx] ^= True 
+            harmony = self.harmonizer_layout.itemAtPosition(self.chord_pos[0],chord_idx).widget()
+            if (self.chord_harmonies[chord_idx]):
+                harmony.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+            else: 
+                harmony.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+
             
         self.ser.write(message.bytes())
         print(message.bytes())
