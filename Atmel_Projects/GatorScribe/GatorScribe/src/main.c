@@ -19,26 +19,17 @@ static void configure_uart(void)
 		USART_SERIAL_STOP_BIT
 	};
 	usart_serial_init(USART_SERIAL, &usart_console_settings);
-	usart_enable_tx(USART_SERIAL);
+	
+	/* Configure stdio UART. */
+	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
+	stdio_serial_init(CONF_UART, &usart_console_settings);
+	
+	//usart_enable_tx(USART_SERIAL);
 	usart_enable_rx(USART_SERIAL);
 	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY);
 	NVIC_SetPriority(USART1_IRQn, 2);
 	NVIC_ClearPendingIRQ(USART1_IRQn);
 	NVIC_EnableIRQ(USART1_IRQn);
-}
-
-static void configure_console(void)
-{
-	const usart_serial_options_t uart_serial_options = {
-		.baudrate = CONF_UART_BAUDRATE,
-		.charlength = CONF_UART_CHAR_LENGTH,
-		.paritytype = CONF_UART_PARITY,
-		.stopbits = CONF_UART_STOP_BITS,
-	};
-
-	/* Configure console UART. */
-	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
-	stdio_serial_init(CONF_UART, &uart_serial_options);
 }
 
 extern uint32_t max_power; 
@@ -48,8 +39,7 @@ int main(void)
 	board_init();
 	//lcd_init(); 
 	audio_init();
-	//configure_uart(); // can use this for just rx! 
-	configure_console(); 
+	configure_uart(); // can use this for just rx! 
 	
 	/* Initial Gatorscribe params */ 
 	uint32_t bpm = 100;
