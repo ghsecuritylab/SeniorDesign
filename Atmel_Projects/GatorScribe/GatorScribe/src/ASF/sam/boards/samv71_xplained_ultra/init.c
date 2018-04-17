@@ -389,6 +389,14 @@ void board_init(void)
 	SCB_EnableDCache();
 #endif
 
+#ifdef CONF_BOARD_ENABLE_I_CACHE
+	SCB_EnableICache();
+#endif
+
+#ifdef CONF_BOARD_ENABLE_D_CACHE
+	SCB_EnableDCache();
+#endif
+
 #ifdef CONF_BOARD_ENABLE_TCM_AT_INIT
 	/* TCM Configuration */
 	EFC->EEFC_FCR = (EEFC_FCR_FKEY_PASSWD | EEFC_FCR_FCMD_CGPB 

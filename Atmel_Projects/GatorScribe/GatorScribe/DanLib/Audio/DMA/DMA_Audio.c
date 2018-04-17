@@ -21,7 +21,7 @@ volatile static bool inPingMode = 1;
 volatile static bool outPingMode = 1;
 
 
-static int clickIdx = 0;
+volatile int clickIdx = 0;
 volatile static uint32_t metronome_time_elapsed = 0; 
 /********************************** Static Variables End **********************************/
 

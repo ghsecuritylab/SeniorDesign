@@ -1,16 +1,32 @@
 #include "asf.h"
 #include "DanLib.h"
 
+void USART_SERIAL_ISR_HANDLER(void)
+{
+	uint32_t received_byte = 0; 
+	uint32_t dw_status = usart_get_status(USART_SERIAL);
+	if (dw_status & US_CSR_RXRDY) {
+		usart_read(USART_SERIAL, &received_byte);
+		
+	}
+}
+static void configure_uart(void)
+{
+	usart_serial_options_t usart_console_settings = {
+		USART_SERIAL_BAUDRATE,
+		USART_SERIAL_CHAR_LENGTH,
+		USART_SERIAL_PARITY,
+		USART_SERIAL_STOP_BIT
+	};
+	usart_serial_init(USART_SERIAL, &usart_console_settings);
+	usart_enable_tx(USART_SERIAL);
+	usart_enable_rx(USART_SERIAL);
+	usart_enable_interrupt(USART_SERIAL, US_IER_RXRDY);
+	NVIC_SetPriority(USART1_IRQn, 2);
+	NVIC_ClearPendingIRQ(USART1_IRQn);
+	NVIC_EnableIRQ(USART1_IRQn);
+}
 
-/**
- * \brief Configure the console UART.
- *
- *   - 115200 baud rate
- *   - 8 bits of data
- *   - No parity
- *   - 1 stop bit
- *   - No flow control
- */
 static void configure_console(void)
 {
 	const usart_serial_options_t uart_serial_options = {
@@ -24,14 +40,16 @@ static void configure_console(void)
 	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
 	stdio_serial_init(CONF_UART, &uart_serial_options);
 }
+
 extern uint32_t max_power; 
 int main(void)
 {
 	sysclk_init();
 	board_init();
-	lcd_init(); 
+	//lcd_init(); 
 	audio_init();
-	configure_console();
+	//configure_uart(); // can use this for just rx! 
+	configure_console(); 
 	
 	/* Initial Gatorscribe params */ 
 	uint32_t bpm = 100;
@@ -46,10 +64,11 @@ int main(void)
 
 	while(1)
 	{
-		main_menu(&bpm, &playback_instrument, &time_signature, &key_signature, &title[0]);
-		gfx_draw_filled_rect(0, 0, gfx_get_width(), gfx_get_height(), GFX_COLOR_BLACK);
+		// wait for uart to get bpm, playback_instrument, time_signature, key_signature, and title 
+		
 		start_recording(events_in_time, &number_of_events, bpm, playback_instrument, time_signature, key_signature, title);
 		write_midi_file(bpm, playback_instrument, &time_signature, &key_signature, title, events_in_time, number_of_events);
+		while(1); 
 	}
 }
 

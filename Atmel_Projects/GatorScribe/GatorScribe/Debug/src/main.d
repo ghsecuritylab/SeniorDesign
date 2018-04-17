@@ -199,10 +199,9 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../DanLib/GUI/time_signature/time_signature.h \
  ../DanLib/GUI/key_signature/key_signature.h \
  ../DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.h \
- ../DanLib/Recording/YinFFT/pitchyinfast.h \
- ../DanLib/Recording/YinFFT/fvec.h ../DanLib/Recording/YinFFT/types.h \
- ../DanLib/Recording/recording.h \
- ../DanLib/Recording/MIDI/Generate_MIDI/MidiFile.h
+ ../DanLib/DYWA/dywapitchtrack.h ../DanLib/Recording/recording.h \
+ ../DanLib/Recording/MIDI/Generate_MIDI/MidiFile.h \
+ ../DanLib/DYWA/dywapitchtrack.h
 
 ../src/asf.h:
 
@@ -642,12 +641,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.h:
 
-../DanLib/Recording/YinFFT/pitchyinfast.h:
-
-../DanLib/Recording/YinFFT/fvec.h:
-
-../DanLib/Recording/YinFFT/types.h:
+../DanLib/DYWA/dywapitchtrack.h:
 
 ../DanLib/Recording/recording.h:
 
 ../DanLib/Recording/MIDI/Generate_MIDI/MidiFile.h:
+
+../DanLib/DYWA/dywapitchtrack.h:

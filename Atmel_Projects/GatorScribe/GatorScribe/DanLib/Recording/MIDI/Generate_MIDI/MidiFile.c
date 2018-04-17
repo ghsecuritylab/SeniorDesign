@@ -196,15 +196,16 @@ void write_midi_file(uint32_t bpm, midi_instrument_t playback_instrument, time_s
     }
     
     // end of header track
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) 
+	{
         write_out(endoftrack[i]);
-    
-	
-	printf("-"); // flag for beginning of midi file 
-    for (i = 0; i < outIdx; i++)
-    {
-        printf("%02x", out[i]);
-    }
-	printf("-"); // flag for end 
+	}
+
+	printf("-"); // flag for beginning of midi file
+	for (i = 0; i < outIdx; i++)
+	{
+		printf("%02x", out[i]);
+	}
+	printf("-"); // flag for end
 }
 

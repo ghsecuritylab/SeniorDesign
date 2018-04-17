@@ -8,6 +8,8 @@ DanLib\Audio\audio.c
 
 DanLib\Audio\WM8904_Driver\WM8904_Driver.c
 
+DanLib\DYWA\dywapitchtrack.c
+
 DanLib\GUI\key_signature\key_signature.c
 
 DanLib\GUI\main_menu.c
@@ -22,35 +24,11 @@ DanLib\GUI\tempo\tempo.c
 
 DanLib\GUI\time_signature\time_signature.c
 
-DanLib\LCDLib\gfx\gfx_generic.c
-
-DanLib\LCDLib\gfx\gfx_ili9488_90_00028_a0.c
-
-DanLib\LCDLib\gfx\gfx_text.c
-
-DanLib\LCDLib\gfx\sysfont.c
-
-DanLib\LCDLib\LCDLib.c
-
-DanLib\LCDLib\touch\touch.c
-
 DanLib\Recording\MIDI\Audio_to_MIDI\audio_to_midi.c
 
 DanLib\Recording\MIDI\Generate_MIDI\MidiFile.c
 
 DanLib\Recording\recording.c
-
-DanLib\Recording\YinFFT\cvec.c
-
-DanLib\Recording\YinFFT\fft.c
-
-DanLib\Recording\YinFFT\fvec.c
-
-DanLib\Recording\YinFFT\mathutils.c
-
-DanLib\Recording\YinFFT\ooura_fft8g.c
-
-DanLib\Recording\YinFFT\pitchyinfast.c
 
 src\ASF\common\components\touch\mxt\mxt_device_1.c
 

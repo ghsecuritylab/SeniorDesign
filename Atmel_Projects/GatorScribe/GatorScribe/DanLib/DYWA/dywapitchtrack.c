@@ -188,12 +188,12 @@ static inline float get_raw_pitch(float * samples)
 		//first compute the DC and maxAMplitude - neglecting mean ... not totally necessary
 		arm_max_f32(sam, WIN_SIZE, &maxValue, &temp_idx); 
 		arm_min_f32(sam, WIN_SIZE, &minValue, &temp_idx); 
-		/*
+		
 		float theDC = 0.0;
 		arm_mean_f32(sam, WIN_SIZE, &theDC); 
 		maxValue = maxValue - theDC;
 		minValue = minValue - theDC;
-		*/
+		
 		float amplitudeMax = (maxValue > -minValue ? maxValue : -minValue);
 		
 		ampltitudeThreshold = amplitudeMax*maximaThresholdRatio;		

@@ -454,6 +454,7 @@
       <Value>../DanLib/Recording</Value>
       <Value>../DanLib/Recording/YinFFT</Value>
       <Value>../DanLib/Recording/MIDI/Generate_MIDI</Value>
+      <Value>../DanLib/DYWA</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize more (-O2)</armgcc.compiler.optimization.level>
@@ -535,23 +536,19 @@
     <Folder Include="DanLib\" />
     <Folder Include="DanLib\Audio\DMA\" />
     <Folder Include="DanLib\Audio\WM8904_Driver\" />
+    <Folder Include="DanLib\DYWA\" />
     <Folder Include="DanLib\GUI\" />
-    <Folder Include="DanLib\GUI\Images\" />
     <Folder Include="DanLib\GUI\key_signature\" />
     <Folder Include="DanLib\GUI\playback_instrument\" />
     <Folder Include="DanLib\GUI\song_title\" />
     <Folder Include="DanLib\GUI\song_title\keyboard\" />
     <Folder Include="DanLib\GUI\tempo\" />
     <Folder Include="DanLib\GUI\time_signature\" />
-    <Folder Include="DanLib\LCDLib\" />
-    <Folder Include="DanLib\LCDLib\gfx\" />
-    <Folder Include="DanLib\LCDLib\touch\" />
     <Folder Include="DanLib\Audio" />
     <Folder Include="DanLib\Recording\" />
     <Folder Include="DanLib\Recording\MIDI\" />
     <Folder Include="DanLib\Recording\MIDI\Audio_to_MIDI\" />
     <Folder Include="DanLib\Recording\MIDI\Generate_MIDI\" />
-    <Folder Include="DanLib\Recording\YinFFT" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -651,22 +648,10 @@
     <Compile Include="DanLib\DanLib.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\GUI\Images\instruments_img.h">
+    <Compile Include="DanLib\DYWA\dywapitchtrack.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\GUI\Images\key_signatures_img.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\GUI\Images\main_menu_img.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\GUI\Images\tapTempo_img.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\GUI\Images\time_signatures_img.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\GUI\Images\title_img.h">
+    <Compile Include="DanLib\DYWA\dywapitchtrack.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\GUI\key_signature\key_signature.c">
@@ -711,45 +696,6 @@
     <Compile Include="DanLib\GUI\time_signature\time_signature.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DanLib\LCDLib\gfx\gfx.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\gfx\gfx_generic.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\gfx\gfx_generic.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\gfx\gfx_ili9488_90_00028_a0.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\gfx\gfx_ili9488_90_00028_a0.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\gfx\gfx_text.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\gfx\gfx_text.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\gfx\sysfont.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\gfx\sysfont.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\LCDLib.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\LCDLib.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\touch\touch.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\LCDLib\touch\touch.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="DanLib\Recording\MIDI\Audio_to_MIDI\audio_to_midi.c">
       <SubType>compile</SubType>
     </Compile>
@@ -766,51 +712,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DanLib\Recording\recording.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\aubio_priv.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\cvec.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\cvec.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\fft.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\fft.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\fvec.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\fvec.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\hanning.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\mathutils.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\mathutils.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\musicutils.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\ooura_fft8g.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\pitchyinfast.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\pitchyinfast.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="DanLib\Recording\YinFFT\types.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\common\components\touch\mxt\mxt_device_1.c">

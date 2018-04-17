@@ -73,25 +73,6 @@ static void configure_rtt(uint32_t count_8_note)
 	rtt_enable_interrupt(RTT, RTT_MR_RTTINCIEN);
 }
 
-static void configure_lcd_interrupt(void)
-{
-	/* Configure PIO as inputs. */
-	pio_configure(PIOD, PIO_INPUT, PIO_PD28, PIO_PULLUP);
-
-	/* Adjust PIO denounce filter parameters, uses 10 Hz filter. */
-	pio_set_debounce_filter(PIOD, PIO_PD28, 5);
-
-	/* Initialize PIO interrupt handlers, see PIO definition in board.h. */
-	pio_handler_set(PIOD, ID_PIOD, PIO_PD28, PIO_IT_FALL_EDGE, touch_interrupt_handler);
-
-	/* Enable PIO controller IRQs. */
-	NVIC_EnableIRQ(PIOD_IRQn);
-	NVIC_SetPriority(PIOD_IRQn, 10); 
-	touch_interrupt_handler(1,1);
-	/* Enable PIO line interrupts. */
-	pio_get_interrupt_status(PIOD);
-	pio_enable_interrupt(PIOD, PIO_PD28);
-}
 /**************************** Private Functions End *********************************/
 
 /**************************** RTT Interrupt Handler Start *********************************/
@@ -163,15 +144,9 @@ void RTT_Handler(void)
 #define NOTE_BUF_SIZE 128 
 #define NOTE_MASK (NOTE_BUF_SIZE-1)
 static midi_note_t notes[NOTE_BUF_SIZE]; 
+extern volatile int clickIdx; 
 void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title)
-{
-	// for uart debug 
-	//printf("\n\n\n\n\n\r");
-	//char str[20]; 
-	
-	aubio_pitchyinfast_t *yin_instance = new_aubio_pitchyinfast(YIN_BUF_SIZE);
-	configure_lcd_interrupt();
-	
+{		
 	/******** midi event variables *********/ 
 	*number_of_events = 0; 
 	float current_rhythm = 0.25;  // 16th note
@@ -193,6 +168,7 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 	up_beat = false; 
 	metronome_on = false;
 	recording = true;
+	clickIdx = 0; 
 	configure_rtt(32768 * 15 / bpm);
 	
 	// Wait a measure 
@@ -202,29 +178,27 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 		while(!note_16_received); 
 		note_16_received = 0; 
 	}
-	while(recording || *number_of_events == MAX_NUM_EVENTS-1)
+	uint32_t record_cnt = 0; 
+	while(recording && *number_of_events < MAX_NUM_EVENTS-1 && record_cnt < 30)
 	{
 		if (note_16_received)
 		{
-			get_midi_note((float32_t *)&processBuffer[0], &notes[note_cnt & NOTE_MASK], yin_instance);
-			
-			// for UART debug 
-			//get_midi_note_name(str, notes[note_cnt].note_number);
-			//printf("Beat %d : %s\n\r", ((sixteenth_note_cnt-2) & 3) + 1, str);
+			record_cnt++;
+			get_midi_note((float32_t *)&processBuffer[0], &notes[note_cnt & NOTE_MASK]);
 			
 			if (note_cnt > 0)
 			{
-				if (notes[note_cnt & NOTE_MASK].note_number != notes[(note_cnt-1) & NOTE_MASK].note_number || notes[note_cnt & NOTE_MASK].velocity > 1.05*notes[(note_cnt-1) & NOTE_MASK].velocity)
+				if (notes[note_cnt & NOTE_MASK].note_number != notes[(note_cnt-1) & NOTE_MASK].note_number || notes[note_cnt & NOTE_MASK].velocity > 10.0f*notes[(note_cnt-1) & NOTE_MASK].velocity)
 				{
 					events[*number_of_events].note_number = notes[(note_cnt-1) & NOTE_MASK].note_number;
 					events[*number_of_events].velocity = 64;
 					events[*number_of_events].rhythm = current_rhythm;
 					(*number_of_events)++;
-					current_rhythm = 0.25;
+					current_rhythm = 0.25f;
 				}
 				else
 				{
-					current_rhythm += 0.25;
+					current_rhythm += 0.25f;
 				}
 			}
 			note_cnt++; 
@@ -234,8 +208,6 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 	recording = false; 
 	metronome_on = false;
 	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN);
-	del_aubio_pitchyinfast(yin_instance); 
-	pio_disable_interrupt(PIOD, PIO_PD28);
 	
 	// add last note 
 	events[*number_of_events].note_number = notes[(note_cnt-1) & NOTE_MASK].note_number;

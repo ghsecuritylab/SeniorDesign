@@ -1,13 +1,6 @@
-DanLib/LCDLib/LCDLib.d DanLib/LCDLib/LCDLib.o: ../DanLib/LCDLib/LCDLib.c \
- ../DanLib/LCDLib/LCDLib.h ../DanLib/LCDLib/gfx/gfx.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h \
- ../src/ASF/sam/utils/compiler.h \
+DanLib/DYWA/dywapitchtrack.d DanLib/DYWA/dywapitchtrack.o: \
+ ../DanLib/DYWA/dywapitchtrack.c ../DanLib/DYWA/dywapitchtrack.h \
+ ../src/asf.h ../src/ASF/sam/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h \
  ../src/ASF/sam/utils/preprocessor/preprocessor.h \
@@ -21,6 +14,8 @@ DanLib/LCDLib/LCDLib.d DanLib/LCDLib/LCDLib.o: ../DanLib/LCDLib/LCDLib.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
@@ -121,6 +116,10 @@ DanLib/LCDLib/LCDLib.d DanLib/LCDLib/LCDLib.o: ../DanLib/LCDLib/LCDLib.c \
  ../src/ASF/sam/utils/cmsis/samv71/include/instance/uart4.h \
  ../src/ASF/sam/utils/cmsis/samv71/include/pio/samv71q21.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\reent.h \
@@ -145,24 +144,19 @@ DanLib/LCDLib/LCDLib.d DanLib/LCDLib/LCDLib.o: ../DanLib/LCDLib/LCDLib.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h \
  ../src/ASF/common/utils/interrupt.h \
  ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h \
- ../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h \
- ../src/ASF/sam/components/display/ili9488/ili9488.h \
- ../src/ASF/common/boards/board.h \
- ../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h \
- ../src/config/conf_ili9488.h ../DanLib/LCDLib/gfx/gfx_generic.h \
- ../DanLib/LCDLib/gfx/sysfont.h ../src/config/conf_sysfont.h \
- ../DanLib/LCDLib/gfx/gfx.h ../DanLib/LCDLib/gfx/gfx_text.h \
- ../DanLib/LCDLib/touch/touch.h ../src/asf.h \
  ../src/ASF/sam/utils/status_codes.h \
  ../src/ASF/common/services/delay/delay.h \
  ../src/ASF/common/services/clock/sysclk.h ../src/config/conf_clock.h \
  ../src/ASF/common/services/clock/samv71/sysclk.h \
  ../src/ASF/common/services/clock/osc.h \
  ../src/ASF/common/services/clock/samv71/osc.h \
+ ../src/ASF/common/boards/board.h \
+ ../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h \
  ../src/ASF/sam/drivers/pmc/pmc.h ../src/ASF/common/services/clock/pll.h \
  ../src/ASF/common/services/clock/samv71/pll.h \
  ../src/ASF/common/services/delay/sam/cycle_counter.h \
- ../src/ASF/common/services/gpio/gpio.h \
+ ../src/ASF/sam/components/display/ili9488/ili9488.h \
+ ../src/config/conf_ili9488.h ../src/ASF/common/services/gpio/gpio.h \
  ../src/ASF/common/services/gpio/sam_gpio/sam_gpio.h \
  ../src/ASF/sam/drivers/pio/pio.h \
  ../src/ASF/common/services/ioport/ioport.h \
@@ -184,25 +178,18 @@ DanLib/LCDLib/LCDLib.d DanLib/LCDLib/LCDLib.o: ../DanLib/LCDLib/LCDLib.c \
  ../src/config/conf_wm8904.h ../src/ASF/sam/drivers/xdmac/xdmac.h \
  ../src/ASF/common/components/touch/mxt/mxt_device_1.h \
  ../src/config/conf_mxt.h ../src/ASF/sam/drivers/pio/pio_handler.h \
- ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/LCDLib/gfx/gfx.h
+ ../src/ASF/sam/drivers/rtt/rtt.h ../DanLib/Audio/DMA/DMA_Audio.h \
+ ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
+ ../src/ASF/thirdparty/CMSIS/Include/core_cm7.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h
 
-../DanLib/LCDLib/LCDLib.h:
+../DanLib/DYWA/dywapitchtrack.h:
 
-../DanLib/LCDLib/gfx/gfx.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h:
+../src/asf.h:
 
 ../src/ASF/sam/utils/compiler.h:
 
@@ -231,6 +218,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gc
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h:
 
@@ -432,6 +423,14 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
 
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h:
+
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h:
@@ -480,30 +479,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h:
 
-../DanLib/LCDLib/gfx/gfx_ili9488_90_00028_a0.h:
-
-../src/ASF/sam/components/display/ili9488/ili9488.h:
-
-../src/ASF/common/boards/board.h:
-
-../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h:
-
-../src/config/conf_ili9488.h:
-
-../DanLib/LCDLib/gfx/gfx_generic.h:
-
-../DanLib/LCDLib/gfx/sysfont.h:
-
-../src/config/conf_sysfont.h:
-
-../DanLib/LCDLib/gfx/gfx.h:
-
-../DanLib/LCDLib/gfx/gfx_text.h:
-
-../DanLib/LCDLib/touch/touch.h:
-
-../src/asf.h:
-
 ../src/ASF/sam/utils/status_codes.h:
 
 ../src/ASF/common/services/delay/delay.h:
@@ -518,6 +493,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/common/services/clock/samv71/osc.h:
 
+../src/ASF/common/boards/board.h:
+
+../src/ASF/sam/boards/samv71_xplained_ultra/samv71_xplained_ultra.h:
+
 ../src/ASF/sam/drivers/pmc/pmc.h:
 
 ../src/ASF/common/services/clock/pll.h:
@@ -525,6 +504,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/common/services/clock/samv71/pll.h:
 
 ../src/ASF/common/services/delay/sam/cycle_counter.h:
+
+../src/ASF/sam/components/display/ili9488/ili9488.h:
+
+../src/config/conf_ili9488.h:
 
 ../src/ASF/common/services/gpio/gpio.h:
 
@@ -584,4 +567,18 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam/drivers/rtt/rtt.h:
 
-../DanLib/LCDLib/gfx/gfx.h:
+../DanLib/Audio/DMA/DMA_Audio.h:
+
+../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
+
+../src/ASF/thirdparty/CMSIS/Include/core_cm7.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:

@@ -63,66 +63,35 @@ static uint32_t get_average_power (float32_t *buffer)
 {
 	int32_t i;
 	uint32_t power = 0;
-	for ( i = 0; i < (YIN_BUF_SIZE); i++)
+	for ( i = 0; i < (WIN_SIZE); i++)
 	{
 		power += (abs(buffer[i]))^2;
 	}
-	return (power/(YIN_BUF_SIZE));
+	return (power/(WIN_SIZE));
 }
 
 /**************************** Private Functions End *********************************/
 uint32_t max_power = 0; 
-// LP filter 10-4000Hz
-static const float32_t lp_filter[] = {0.0027, 0.0103, 0.0258, 0.0499, 0.0801, 0.1105, 0.1332, 0.1416, 0.1332, 0.1105, 0.0801, 0.0499, 0.0258, 0.0103, 0.0027}; 
-static uint32_t lp_filter_length = 15; 
-static float32_t y[YIN_BUF_SIZE]; // buffer for processed input 
 /**************************** Public Functions Start *********************************/
-void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *object)
-{	
-	fvec_t input;
-	input.data = (smpl_t *)buffer;
-	input.length = YIN_BUF_SIZE;
+void get_midi_note(float32_t *buffer, midi_note_t *note)
+{		
+	uint32_t power = get_average_power(buffer); //arm_power_f32(buffer, WIN_SIZE, &power);  
+// 	if (power > max_power)
+// 	{
+// 		max_power = power;
+// 	}
+// 	
+// 	if (power < 0.1*max_power)
+// 	{
+// 		note->note_number = NO_NOTE;
+// 		note->velocity = NO_NOTE;
+// 		return;
+// 	}
 	
-	// LP-filtering
-	uint32_t j,i;
-	
-	fvec_t processed_input;
-	processed_input.data = (smpl_t *)y;
-	processed_input.length = YIN_BUF_SIZE;
-	for (j = 0; j < lp_filter_length; j++)
-		processed_input.data[j] = input.data[j];
-	for(j = lp_filter_length; j < input.length; j++)
-	{
-		processed_input.data[j] = 0;
-		for(i = 0; i < lp_filter_length; i++)
-		{
-			processed_input.data[j] += input.data[j-i]*lp_filter[i];
-		}
-	}
-		
-	// apply hanning window
-	for (i = 0; i < processed_input.length; i++)
-		processed_input.data[i] *= hanning[i];
-	
-	uint32_t power = get_average_power(processed_input.data);
-	if (power > max_power)
-	{
-		max_power = power;
-	}
-	
-	if (power < 0.1*max_power)
-	{
-		note->note_number = NO_NOTE;
-		note->velocity = NO_NOTE;
-		return;
-	}
-	
-
-	
-	float32_t freq = aubio_pitchyinfast_do(object, &processed_input); 
+	float32_t freq = computeWaveletPitch(buffer); 
 	
 	// Don't count notes below C1 
-	if (freq < 32.0 || freq > 4000.0 || aubio_pitchyinfast_get_confidence(object) < 0.8)
+	if (freq < 32.0 || freq > 4000.0)
 	{
 		note->note_number = NO_NOTE;
 		note->velocity = NO_NOTE;

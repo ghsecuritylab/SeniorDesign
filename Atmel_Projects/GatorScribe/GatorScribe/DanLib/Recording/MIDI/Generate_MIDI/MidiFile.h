@@ -14,7 +14,9 @@
 #include "key_signature.h"
 #include "time_signature.h"
 #include "audio_to_midi.h"
+#include "DanLib.h"
 
+#define DASH 0x2D
 #define TICKS_PER_QUARTER_NOTE 120
 #define CLOCKS_PER_CLICK 24
 #define NUM_32NDS_PER_QUARTER 8

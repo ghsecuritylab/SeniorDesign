@@ -8,7 +8,7 @@
 
 #ifndef AUDIO_TO_MIDI_H_
 #define AUDIO_TO_MIDI_H_
-#include "pitchyinfast.h"
+#include "DYWA/dywapitchtrack.h"
 
 #define NO_NOTE -1 
 #define END_OF_RECORDING -2 
@@ -26,7 +26,7 @@ typedef struct midi_event
 	float rhythm; // 0.25 = 16th, 0.5 = eight, 1 = quater, 2 = half, 3 = .half, 4 = whole
 }midi_event_t;
 
-void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *object);
+void get_midi_note(float32_t *buffer, midi_note_t *note);
 void get_midi_note_name(char *note_name, int16_t note_number);
 void get_frequency_str(char *freq_name, int16_t note_number);
 
