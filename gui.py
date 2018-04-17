@@ -69,9 +69,10 @@ class Central(QWidget):
         self.timer.start()  
 
     def board_reset_check(self):
-        status = self.ser.read().decode('ascii')
-        if (status == "0"):
-            self.restartGUI()
+        if self.ser.isOpen():
+            status = self.ser.read().decode('ascii')
+            if (status == "0"):
+                self.restartGUI()
  
     def init_harmonizer(self):
         self.gray_text = 'color: rgb(200,209,218)'
