@@ -90,7 +90,7 @@ volatile float master_volume = 1.0f;
 volatile uint32_t pitch_bend = NO_PITCH_BEND;
 volatile float reverb_volume = 0.0f; 
 volatile float delay_volume = 0.0f;
-volatile uint32_t delay_speed = 10000;
+volatile uint32_t delay_speed = 15500;
 volatile float delay_feedback = 0.2f;
 volatile float chorus_volume = 0.0f;
 volatile float chorus_speed = 0.02f;
@@ -139,6 +139,8 @@ void USART_SERIAL_ISR_HANDLER(void)
 				// clear all harmonies 
 				for(int i = 0; i < 9; i++)
 					chord_harmonies[i] = false; 
+					
+				key_root = KEY_OF_E; 
 			}
 			else if (*message == 255 && *data1 == 255)
 			{
@@ -177,7 +179,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 					case HARM_VOLUME_CH: 
 						harm_volume = (float)*data2 / 127.0f; break; 
 					case MASTER_VOLUME_CH: 
-						master_volume = 1.2f*(float)*data2 / 127.0f; break; 
+						master_volume = 0.8f*(float)*data2 / 127.0f; break; 
 					case REVERB_CH: 
 						reverb_volume = (float)*data2 / 127.0f; break; 
 					case CHORUS_VOLUME_CH: 
@@ -276,7 +278,7 @@ int main(void)
 #endif 
 	PSOLA_init(); 
 	configure_uart(); 
-	usart_write(USART_SERIAL, 255);
+	usart_write(USART_SERIAL, 0x30);
 	 
 // 	 // draw smiley face 
 // 	SCB_DisableICache(); 
@@ -347,7 +349,10 @@ int main(void)
 				
 			// find number of semitones from root 
 			float scale_pitch = closest_note_freq;
-			int32_t number_of_semitones_from_root = Abs((int32_t)closest_note_number - key_root);
+			uint32_t shifted_note_number = closest_note_number; 
+			while (shifted_note_number < key_root)
+				shifted_note_number += 12; 
+			uint32_t number_of_semitones_from_root = shifted_note_number - key_root;
 			while(number_of_semitones_from_root > 12)
 				number_of_semitones_from_root -= 12;
 						
@@ -361,7 +366,7 @@ int main(void)
 			
 			// find index in scale where the pitch lies 
 			uint32_t interval_idx = 0;
-			int32_t scale_step = 0;
+			uint32_t scale_step = 0;
 			for (i = 0; i < 7; i++)
 			{
 				scale_step += major[i];
@@ -512,7 +517,7 @@ int main(void)
 			uint32_t num_samples_in_period = 1 / n_freq; 
 			for (i = 0; i < WIN_SIZE; i++, curr_idx++)
 			{				
-				out_buffer[i] = (1.0f - 0.5*(delay_volume + chorus_volume + reverb_volume)) * out_buffer[i]; 
+				out_buffer[i] = (1.0f - 0.5*(delay_volume + 0.5f*(chorus_volume + reverb_volume))) * out_buffer[i]; 
 						
 				// chorus
 				chorus_delay = (0.008f + 0.003f *  arm_cos_f32(2.0f*(float)M_PI * (float)sin_cnt++ * n_freq)) * SAMPLE_RATE;
