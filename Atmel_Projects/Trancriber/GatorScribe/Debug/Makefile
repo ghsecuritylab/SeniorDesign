@@ -49,6 +49,7 @@ SUBDIRS :=  \
 ../DanLib/Recording/MIDI/ \
 ../DanLib/Recording/MIDI/Audio_to_MIDI/ \
 ../DanLib/Recording/MIDI/Generate_MIDI/ \
+../DanLib/Recording/YinFFT/ \
 ../src/ \
 ../src/ASF/ \
 ../src/ASF/common/ \
@@ -140,6 +141,12 @@ C_SRCS +=  \
 ../DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.c \
 ../DanLib/Recording/MIDI/Generate_MIDI/MidiFile.c \
 ../DanLib/Recording/recording.c \
+../DanLib/Recording/YinFFT/cvec.c \
+../DanLib/Recording/YinFFT/fft.c \
+../DanLib/Recording/YinFFT/fvec.c \
+../DanLib/Recording/YinFFT/mathutils.c \
+../DanLib/Recording/YinFFT/ooura_fft8g.c \
+../DanLib/Recording/YinFFT/pitchyinfast.c \
 ../src/ASF/common/components/touch/mxt/mxt_device_1.c \
 ../src/ASF/common/services/delay/sam/cycle_counter.c \
 ../src/ASF/common/services/serial/usart_serial.c \
@@ -189,6 +196,12 @@ DanLib/GUI/time_signature/time_signature.o \
 DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.o \
 DanLib/Recording/MIDI/Generate_MIDI/MidiFile.o \
 DanLib/Recording/recording.o \
+DanLib/Recording/YinFFT/cvec.o \
+DanLib/Recording/YinFFT/fft.o \
+DanLib/Recording/YinFFT/fvec.o \
+DanLib/Recording/YinFFT/mathutils.o \
+DanLib/Recording/YinFFT/ooura_fft8g.o \
+DanLib/Recording/YinFFT/pitchyinfast.o \
 src/ASF/common/components/touch/mxt/mxt_device_1.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
 src/ASF/common/services/serial/usart_serial.o \
@@ -231,6 +244,12 @@ DanLib/GUI/time_signature/time_signature.o \
 DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.o \
 DanLib/Recording/MIDI/Generate_MIDI/MidiFile.o \
 DanLib/Recording/recording.o \
+DanLib/Recording/YinFFT/cvec.o \
+DanLib/Recording/YinFFT/fft.o \
+DanLib/Recording/YinFFT/fvec.o \
+DanLib/Recording/YinFFT/mathutils.o \
+DanLib/Recording/YinFFT/ooura_fft8g.o \
+DanLib/Recording/YinFFT/pitchyinfast.o \
 src/ASF/common/components/touch/mxt/mxt_device_1.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
 src/ASF/common/services/serial/usart_serial.o \
@@ -273,6 +292,12 @@ DanLib/GUI/time_signature/time_signature.d \
 DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.d \
 DanLib/Recording/MIDI/Generate_MIDI/MidiFile.d \
 DanLib/Recording/recording.d \
+DanLib/Recording/YinFFT/cvec.d \
+DanLib/Recording/YinFFT/fft.d \
+DanLib/Recording/YinFFT/fvec.d \
+DanLib/Recording/YinFFT/mathutils.d \
+DanLib/Recording/YinFFT/ooura_fft8g.d \
+DanLib/Recording/YinFFT/pitchyinfast.d \
 src/ASF/common/components/touch/mxt/mxt_device_1.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
 src/ASF/common/services/serial/usart_serial.d \
@@ -315,6 +340,12 @@ DanLib/GUI/time_signature/time_signature.d \
 DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.d \
 DanLib/Recording/MIDI/Generate_MIDI/MidiFile.d \
 DanLib/Recording/recording.d \
+DanLib/Recording/YinFFT/cvec.d \
+DanLib/Recording/YinFFT/fft.d \
+DanLib/Recording/YinFFT/fvec.d \
+DanLib/Recording/YinFFT/mathutils.d \
+DanLib/Recording/YinFFT/ooura_fft8g.d \
+DanLib/Recording/YinFFT/pitchyinfast.d \
 src/ASF/common/components/touch/mxt/mxt_device_1.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
 src/ASF/common/services/serial/usart_serial.d \
@@ -357,6 +388,18 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -530,6 +573,13 @@ DanLib/Recording/MIDI/Generate_MIDI/%.o: ../DanLib/Recording/MIDI/Generate_MIDI/
 	
 
 DanLib/Recording/%.o: ../DanLib/Recording/%.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG -D__SAMV71Q21__ -Dscanf=iscanf -DARM_MATH_CM7=true -Dprintf=iprintf -DBOARD=SAMV71_XPLAINED_ULTRA -DILI9488_EBIMODE -D__FPU_PRESENT  -I"../src/ASF/common/boards" -I"../src/ASF/sam/utils" -I"../src/ASF/sam/utils/header_files" -I"../src/ASF/sam/utils/preprocessor" -I"../src/ASF/thirdparty/CMSIS/Include" -I"../src/ASF/thirdparty/CMSIS/Lib/GCC" -I"../src/ASF/sam/utils/fpu" -I"../src/ASF/common/utils" -I"../src/ASF/sam/utils/cmsis/samv71/source/templates" -I"../src/ASF/sam/utils/cmsis/samv71/include" -I"../src/ASF/sam/boards/samv71_xplained_ultra" -I"../src/ASF/sam/boards" -I"../src/ASF/common/services/ioport" -I"../src/ASF/common/services/clock" -I"../src/ASF/sam/drivers/pmc" -I"../src/ASF/common/services/gpio" -I"../src/ASF/sam/drivers/pio" -I"../src/ASF/sam/drivers/mpu" -I"../src" -I"../src/config" -I"../src/ASF/common/services/delay/sam" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/serial/sam_uart" -I"../src/ASF/common/services/serial" -I"../src/ASF/common/services/twi/sam_twihs" -I"../src/ASF/common/services/twi" -I"../src/ASF/sam/drivers/ssc" -I"../src/ASF/sam/drivers/twihs" -I"../src/ASF/sam/drivers/uart" -I"../src/ASF/sam/drivers/usart" -I"../src/ASF/sam/drivers/xdmac" -I"../src/ASF/common/utils/stdio/stdio_serial" -I"../src/ASF/sam/components/audio/codec/wm8904" -I"../DanLib" -I"../DanLib/LCDLib" -I"../src/ASF/sam/components/display/ili9488" -I"../DanLib/LCDLib/gfx" -I"../src/ASF/common/components/touch/mxt" -I"../src/ASF/sam/drivers/ebi/smc" -I"../DanLib/LCDLib/touch" -I"../DanLib/GUI" -I"../DanLib/GUI/Images" -I"../DanLib/GUI/key_signature" -I"../DanLib/GUI/playback_instrument" -I"../DanLib/GUI/song_title/keyboard" -I"../DanLib/GUI/song_title" -I"../DanLib/GUI/tempo" -I"../DanLib/GUI/time_signature" -I"../DanLib/Audio/DMA" -I"../DanLib/Audio/WM8904_Driver" -I"../DanLib/Audio" -I"../src/ASF/sam/drivers/rtt" -I"../DanLib/Recording/MIDI/Audio_to_MIDI" -I"../DanLib/Recording" -I"../DanLib/Recording/YinFFT" -I"../DanLib/Recording/MIDI/Generate_MIDI" -I"../DanLib/DYWA"  -O2 -fdata-sections -ffunction-sections -ffast-math -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500 -mfloat-abi=softfp -mfpu=fpv5-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+DanLib/Recording/YinFFT/%.o: ../DanLib/Recording/YinFFT/%.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMV71Q21__ -DDEBUG -D__SAMV71Q21__ -Dscanf=iscanf -DARM_MATH_CM7=true -Dprintf=iprintf -DBOARD=SAMV71_XPLAINED_ULTRA -DILI9488_EBIMODE -D__FPU_PRESENT  -I"../src/ASF/common/boards" -I"../src/ASF/sam/utils" -I"../src/ASF/sam/utils/header_files" -I"../src/ASF/sam/utils/preprocessor" -I"../src/ASF/thirdparty/CMSIS/Include" -I"../src/ASF/thirdparty/CMSIS/Lib/GCC" -I"../src/ASF/sam/utils/fpu" -I"../src/ASF/common/utils" -I"../src/ASF/sam/utils/cmsis/samv71/source/templates" -I"../src/ASF/sam/utils/cmsis/samv71/include" -I"../src/ASF/sam/boards/samv71_xplained_ultra" -I"../src/ASF/sam/boards" -I"../src/ASF/common/services/ioport" -I"../src/ASF/common/services/clock" -I"../src/ASF/sam/drivers/pmc" -I"../src/ASF/common/services/gpio" -I"../src/ASF/sam/drivers/pio" -I"../src/ASF/sam/drivers/mpu" -I"../src" -I"../src/config" -I"../src/ASF/common/services/delay/sam" -I"../src/ASF/common/services/delay" -I"../src/ASF/common/services/serial/sam_uart" -I"../src/ASF/common/services/serial" -I"../src/ASF/common/services/twi/sam_twihs" -I"../src/ASF/common/services/twi" -I"../src/ASF/sam/drivers/ssc" -I"../src/ASF/sam/drivers/twihs" -I"../src/ASF/sam/drivers/uart" -I"../src/ASF/sam/drivers/usart" -I"../src/ASF/sam/drivers/xdmac" -I"../src/ASF/common/utils/stdio/stdio_serial" -I"../src/ASF/sam/components/audio/codec/wm8904" -I"../DanLib" -I"../DanLib/LCDLib" -I"../src/ASF/sam/components/display/ili9488" -I"../DanLib/LCDLib/gfx" -I"../src/ASF/common/components/touch/mxt" -I"../src/ASF/sam/drivers/ebi/smc" -I"../DanLib/LCDLib/touch" -I"../DanLib/GUI" -I"../DanLib/GUI/Images" -I"../DanLib/GUI/key_signature" -I"../DanLib/GUI/playback_instrument" -I"../DanLib/GUI/song_title/keyboard" -I"../DanLib/GUI/song_title" -I"../DanLib/GUI/tempo" -I"../DanLib/GUI/time_signature" -I"../DanLib/Audio/DMA" -I"../DanLib/Audio/WM8904_Driver" -I"../DanLib/Audio" -I"../src/ASF/sam/drivers/rtt" -I"../DanLib/Recording/MIDI/Audio_to_MIDI" -I"../DanLib/Recording" -I"../DanLib/Recording/YinFFT" -I"../DanLib/Recording/MIDI/Generate_MIDI" -I"../DanLib/DYWA"  -O2 -fdata-sections -ffunction-sections -ffast-math -mlong-calls -g3 -Wall -mcpu=cortex-m7 -c -pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500 -mfloat-abi=softfp -mfpu=fpv5-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

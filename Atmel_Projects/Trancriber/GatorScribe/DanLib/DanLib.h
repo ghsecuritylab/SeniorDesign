@@ -16,7 +16,12 @@
 #include "recording.h"
 #include "MidiFile.h"
 #include "DYWA/dywapitchtrack.h"
+#include "pitchyinfast.h"
 
+#define DISABLE_SYSTICK() (SysTick->CTRL  = 0)
+#define ENABLE_SYSTICK() (SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk)
+
+#define NUM_AVG_TAPS 4 
 
 #define USART_SERIAL                 USART1
 #define USART_SERIAL_ID              ID_USART1

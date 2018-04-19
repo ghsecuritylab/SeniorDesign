@@ -40,6 +40,8 @@ if(ser.isOpen()):
                 
             x.tofile('my_song.mid') # simply name of file 
             print("Created MIDI File")
+        #else: 
+         #   print(msg)
 else: 
     print("Cannot open serial port")
             

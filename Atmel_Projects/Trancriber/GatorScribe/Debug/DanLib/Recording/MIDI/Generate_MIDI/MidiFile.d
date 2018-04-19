@@ -192,6 +192,8 @@ DanLib/Recording/MIDI/Generate_MIDI/MidiFile.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
+ ../DanLib/Recording/YinFFT/pitchyinfast.h \
+ ../DanLib/Recording/YinFFT/fvec.h ../DanLib/Recording/YinFFT/types.h \
  ../DanLib/DanLib.h ../DanLib/Audio/audio.h \
  ../DanLib/Audio/WM8904_Driver/WM8904_Driver.h ../DanLib/LCDLib/LCDLib.h \
  ../DanLib/LCDLib/gfx/gfx.h \
@@ -611,6 +613,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
+
+../DanLib/Recording/YinFFT/pitchyinfast.h:
+
+../DanLib/Recording/YinFFT/fvec.h:
+
+../DanLib/Recording/YinFFT/types.h:
 
 ../DanLib/DanLib.h:
 

@@ -145,8 +145,10 @@ void RTT_Handler(void)
 #define NOTE_MASK (NOTE_BUF_SIZE-1)
 static midi_note_t notes[NOTE_BUF_SIZE]; 
 extern volatile int clickIdx; 
+extern volatile bool start; 
 void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title)
 {		
+	aubio_pitchyinfast_t *yin = new_aubio_pitchyinfast(WIN_SIZE); 
 	/******** midi event variables *********/ 
 	*number_of_events = 0; 
 	float current_rhythm = 0.25;  // 16th note
@@ -169,6 +171,7 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 	metronome_on = false;
 	recording = true;
 	clickIdx = 0; 
+	
 	configure_rtt(32768 * 15 / bpm);
 	
 	// Wait a measure 
@@ -178,17 +181,19 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 		while(!note_16_received); 
 		note_16_received = 0; 
 	}
+
 	uint32_t record_cnt = 0; 
-	while(recording && *number_of_events < MAX_NUM_EVENTS-1 && record_cnt < 30)
+	while(recording && *number_of_events < MAX_NUM_EVENTS-1 && start == true)
 	{
 		if (note_16_received)
 		{
 			record_cnt++;
-			get_midi_note((float32_t *)&processBuffer[0], &notes[note_cnt & NOTE_MASK]);
+			get_midi_note((float32_t *)&processBuffer[0], &notes[note_cnt & NOTE_MASK], yin);
 			
 			if (note_cnt > 0)
 			{
-				if (notes[note_cnt & NOTE_MASK].note_number != notes[(note_cnt-1) & NOTE_MASK].note_number || notes[note_cnt & NOTE_MASK].velocity > 10.0f*notes[(note_cnt-1) & NOTE_MASK].velocity)
+				if (notes[note_cnt & NOTE_MASK].note_number != notes[(note_cnt-1) & NOTE_MASK].note_number 
+					|| notes[note_cnt & NOTE_MASK].velocity > 1.5f*notes[(note_cnt-1) & NOTE_MASK].velocity)
 				{
 					events[*number_of_events].note_number = notes[(note_cnt-1) & NOTE_MASK].note_number;
 					events[*number_of_events].velocity = 64;
@@ -208,6 +213,7 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 	recording = false; 
 	metronome_on = false;
 	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN);
+	del_aubio_pitchyinfast(yin); 
 	
 	// add last note 
 	events[*number_of_events].note_number = notes[(note_cnt-1) & NOTE_MASK].note_number;

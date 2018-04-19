@@ -10,6 +10,7 @@
 #define RECORDING_H_
 
 #include "DanLib.h"
+#include "pitchyinfast.h"
 
 #define MAX_NUM_EVENTS 10000
 

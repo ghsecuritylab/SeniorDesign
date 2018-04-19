@@ -79,13 +79,6 @@ static button_t get_button_pressed(int16_t x, int16_t y)
 	return buttonPressed; 
 }
 
-/* Systick Interrupt Handler */ 
-void SysTick_Handler(void)
-{
-	msCount++;
-	led_indicator_freq--;
-	led_indicator_duration++;
-}
 
 int tempoMenu(uint32_t initial_bpm) 
 {

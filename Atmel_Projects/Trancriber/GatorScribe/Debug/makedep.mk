@@ -30,6 +30,18 @@ DanLib\Recording\MIDI\Generate_MIDI\MidiFile.c
 
 DanLib\Recording\recording.c
 
+DanLib\Recording\YinFFT\cvec.c
+
+DanLib\Recording\YinFFT\fft.c
+
+DanLib\Recording\YinFFT\fvec.c
+
+DanLib\Recording\YinFFT\mathutils.c
+
+DanLib\Recording\YinFFT\ooura_fft8g.c
+
+DanLib\Recording\YinFFT\pitchyinfast.c
+
 src\ASF\common\components\touch\mxt\mxt_device_1.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
