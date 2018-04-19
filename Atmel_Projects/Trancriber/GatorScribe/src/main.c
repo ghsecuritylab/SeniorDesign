@@ -103,7 +103,7 @@ static void start_handler(const uint32_t id, const uint32_t index)
 static void tap_handler(const uint32_t id, const uint32_t index)
 {
 	if ((id == ID_PIOC) && (index == PIO_PC13)){
-		if (millisecond_cnt > 100)
+		if (millisecond_cnt > 250)
 		{
 			tap = true; 
 		}
@@ -145,19 +145,19 @@ int main(void)
 	NVIC_EnableIRQ(PIOC_IRQn);
 	
 	/* Initialize and start 1ms systick timer */
-	SysTick_Config(sysclk_get_cpu_hz()/1000);
+	SysTick_Config(sysclk_get_cpu_hz()/900); // calibrated for footswitch 
 	
 	midi_event_t events_in_time[MAX_NUM_EVENTS];
 	uint32_t number_of_events = 0; 
 	max_power = 100; // minimum initial max power
 	
-	uint32_t millisecond_cnt_buffer[NUM_AVG_TAPS]; 
+	int32_t millisecond_cnt_buffer[NUM_AVG_TAPS]; 
 	
 	while(1)
 	{
 		for (uint32_t i = 0; i < NUM_AVG_TAPS; i++)
 			millisecond_cnt_buffer[i] = 0;
-		uint32_t bpm_total = 0;
+		int32_t bpm_total = NUM_AVG_TAPS * bpm;
 		bool first_tap = false; 
 		uint32_t curr_tap_idx = 0; 
 		while(!start)
@@ -169,13 +169,22 @@ int main(void)
 					bpm_total -= millisecond_cnt_buffer[curr_tap_idx];
 					millisecond_cnt_buffer[curr_tap_idx] = millisecond_cnt; 
 					bpm_total += millisecond_cnt_buffer[curr_tap_idx++];  
-					bpm = 60000 / (bpm_total / 4);
+					if (bpm_total > 0)
+						bpm = 60000 / (bpm_total / NUM_AVG_TAPS);
+					else 
+						bpm = 100; 
 					if (curr_tap_idx == NUM_AVG_TAPS) 
 						curr_tap_idx = 0; 
+						
+					if (bpm > 254)
+						bpm = 254; 
+					usart_write(USART_SERIAL, 255);
+					delay_ms(50);
+					usart_write(USART_SERIAL, bpm);				
 				}
 				else 
 					first_tap = true; 
-				
+					
 				tap = false;
 				millisecond_cnt = 0;
 			}
@@ -190,7 +199,6 @@ int main(void)
 		tap = false; 
 		millisecond_cnt = 0; 
 		ENABLE_SYSTICK(); 
-		//SysTick_Config(sysclk_get_cpu_hz()/1000);
 	}
 }
 

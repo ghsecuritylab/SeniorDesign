@@ -193,7 +193,7 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 			if (note_cnt > 0)
 			{
 				if (notes[note_cnt & NOTE_MASK].note_number != notes[(note_cnt-1) & NOTE_MASK].note_number 
-					|| notes[note_cnt & NOTE_MASK].velocity > 1.5f*notes[(note_cnt-1) & NOTE_MASK].velocity)
+					|| notes[note_cnt & NOTE_MASK].velocity > 2.0f*notes[(note_cnt-1) & NOTE_MASK].velocity)
 				{
 					events[*number_of_events].note_number = notes[(note_cnt-1) & NOTE_MASK].note_number;
 					events[*number_of_events].velocity = 64;
@@ -220,6 +220,8 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 	events[*number_of_events].velocity = 64;
 	events[*number_of_events].rhythm = current_rhythm;
 	(*number_of_events)++;
+	
+	
 }
 
 /**************************** Public Functions End *********************************/
