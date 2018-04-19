@@ -1267,7 +1267,7 @@ void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *y
   40086e:	601e      	str	r6, [r3, #0]
 	}
 	
-	if (power < 0.05*max_power)
+	if (power < 0.01*max_power)
   400870:	f8df a17c 	ldr.w	sl, [pc, #380]	; 4009f0 <get_midi_note+0x258>
   400874:	4630      	mov	r0, r6
   400876:	47d0      	blx	sl
@@ -1427,8 +1427,8 @@ void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *y
   400998:	e7ec      	b.n	400974 <get_midi_note+0x1dc>
   40099a:	bf00      	nop
   40099c:	f3af 8000 	nop.w
-  4009a0:	9999999a 	.word	0x9999999a
-  4009a4:	3fa99999 	.word	0x3fa99999
+  4009a0:	47ae147b 	.word	0x47ae147b
+  4009a4:	3f847ae1 	.word	0x3f847ae1
   4009a8:	9999999a 	.word	0x9999999a
   4009ac:	3fe99999 	.word	0x3fe99999
   4009b0:	20400a68 	.word	0x20400a68
