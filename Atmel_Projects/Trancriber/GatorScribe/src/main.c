@@ -228,6 +228,7 @@ int main(void)
 		} 
 		
 		// tell GUI I'm ready to receive transcription params and start recording 
+		awaiting_gui_info = true; 
 		usart_write(USART_SERIAL, 254);
 		while(awaiting_gui_info); 
 		

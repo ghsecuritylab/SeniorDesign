@@ -70,9 +70,13 @@ class Central(QWidget):
 
     def board_reset_check(self):
         if self.ser.isOpen():
-            status = self.ser.read().decode('ascii')
-            if (status == "0"):
-                self.restartGUI()
+            serial_msg = self.ser.read() #.decode('ascii')
+            s = list(serial_msg)
+            if (len(s) > 0):
+                if (s[0] < 128):
+                    status = self.ser.read().decode('ascii')
+                    if (status == "0"):
+                        self.restartGUI()
  
     def init_harmonizer(self):
         self.gray_text = 'color: rgb(200,209,218)'
