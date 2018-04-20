@@ -14,7 +14,7 @@ enum CASE {
 	UPPER_CASE = 1
 };
 
-#define MAX_TITLE_SIZE 38
+#define MAX_TITLE_SIZE 30
 void titleMenu(char *str); 
 
 

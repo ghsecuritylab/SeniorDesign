@@ -54,8 +54,11 @@ volatile char title[MAX_TITLE_SIZE] = "Title Here";
 volatile bool start; 
 volatile bool tap; 
 volatile uint32_t millisecond_cnt;
-
-	
+volatile uint32_t title_char_cnt = 0; 
+volatile bool awaiting_gui_info = true; 
+volatile bool getting_title = false; 
+volatile uint32_t gui_info[5]; 
+volatile uint32_t gui_info_curr_idx = 0; 
 void USART_SERIAL_ISR_HANDLER(void)
 {
 	uint32_t received_byte = 0; 
@@ -63,6 +66,40 @@ void USART_SERIAL_ISR_HANDLER(void)
 	if (dw_status & US_CSR_RXRDY) {
 		usart_read(USART_SERIAL, &received_byte);
 		
+		if (received_byte == 255)
+		{
+			getting_title = true; 
+			title_char_cnt = 0; 
+			start = true; 
+			awaiting_gui_info = true; 
+		}
+		else 
+		{
+			if (getting_title)
+			{
+				title[title_char_cnt++] = (char)received_byte;
+				if (received_byte == 0 || title_char_cnt > MAX_TITLE_SIZE)
+				{
+					getting_title = false; 
+					gui_info_curr_idx = 0; 
+				}
+			}
+			else
+			{
+				gui_info[gui_info_curr_idx++] = received_byte; 
+				if (gui_info_curr_idx == 5)
+				{
+					gui_info_curr_idx = 0; 
+					time_sig = time_signatures[gui_info[0]]; 
+					key_sig.mode = gui_info[1]; 
+					key_sig.key = gui_info[2]; 
+					bpm = gui_info[3]; 
+					playback_instrument = gui_info[4]; 
+					awaiting_gui_info = false; 
+				}
+				
+			}
+		}
 	}
 }
 
@@ -189,6 +226,11 @@ int main(void)
 				millisecond_cnt = 0;
 			}
 		} 
+		
+		// tell GUI I'm ready to receive transcription params and start recording 
+		usart_write(USART_SERIAL, 254);
+		while(awaiting_gui_info); 
+		
 		delay_ms(100); 
 		start = true; 
 		DISABLE_SYSTICK(); 
