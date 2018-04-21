@@ -53,44 +53,53 @@ class Central(QWidget):
         self.timer.start()
         self.connectBoard()
 
-    def get_midi_file(self):    
-        msg = self.ser.read().decode('ascii')
-        x = np.array([], dtype='uint8')
-        i = 0 
-        while(msg != '-'): 
-            if (i == 1): 
-                midi_msg = midi_msg + msg
-                x = np.append(x, np.array([int(midi_msg,16)], dtype="uint8"))
-                i = 0
-            else:  
-                midi_msg = msg
-                i = i + 1
-
+    def get_midi_file(self):   
+        if (self.ser.isOpen()):
             msg = self.ser.read().decode('ascii')
-            #print(msg)
-            
-        x.tofile('my_song.mid') # simply name of file 
-        print("Created MIDI File")
+            x = np.array([], dtype='uint8')
+            i = 0 
+            while(msg != '-'): 
+                if (i == 1): 
+                    midi_msg = midi_msg + msg
+                    x = np.append(x, np.array([int(midi_msg,16)], dtype="uint8"))
+                    i = 0
+                else:  
+                    midi_msg = msg
+                    i = i + 1
+
+                msg = self.ser.read().decode('ascii')
+                #print(msg)
+                
+            x.tofile('my_song.mid') # simply name of file 
+            print("Created MIDI File")
+        else: 
+            print("No board connected")
+            self.connectBoard()
 
     def read_serial_port(self): 
-        # decode serial message from board 
-        serial_msg = self.ser.read() #.decode('ascii')
-        s = list(serial_msg)
-        #print(s)
-        if (len(s) > 0):
-            if (s[0] < 128):
-                msg = serial_msg.decode('ascii')
-                if (msg == '-'): 
-                    self.get_midi_file()
-                
-            if (s[0] == 255): # read bpm  
-                serial_msg = self.ser.read() #.decode('ascii')
-                s = list(serial_msg)
-                self.tempo_edit.setText(str(s[0]))
-                #print(s)
+        if self.ser.isOpen():        
+            # decode serial message from board 
+            serial_msg = self.ser.read() #.decode('ascii')
+            s = list(serial_msg)
+            #print(s)
+            if (len(s) > 0):
+                if (s[0] < 128):
+                    msg = serial_msg.decode('ascii')
+                    if (msg == '-'): 
+                        self.get_midi_file()
+                    
+                if (s[0] == 255): # read bpm  
+                    serial_msg = self.ser.read() #.decode('ascii')
+                    s = list(serial_msg)
+                    self.tempo_edit.setText(str(s[0]))
+                    #print(s)
 
-            elif (s[0] == 254): # start recording   
-                self.startGatorscribe()
+                elif (s[0] == 254): # start recording   
+                    self.startGatorscribe()
+
+        else:
+            print("No board connected")
+            self.connectBoard()
 
     def init_gatorscribe(self):
 
