@@ -97,10 +97,6 @@ class Central(QWidget):
                 elif (s[0] == 254): # start recording   
                     self.startGatorscribe()
 
-        else:
-            print("No board connected")
-            self.connectBoard()
-
     def init_gatorscribe(self):
 
         # Create label to mark gatorscribe area
