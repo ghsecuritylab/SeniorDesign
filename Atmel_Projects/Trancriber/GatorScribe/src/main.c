@@ -68,14 +68,18 @@ void USART_SERIAL_ISR_HANDLER(void)
 		
 		if (received_byte == 255)
 		{
-			getting_title = true;
-			title_char_cnt = 0;
-			start = true;
-			awaiting_gui_info = true;		
-		}
-		else if (received_byte == 254)
-		{
-			start = false; 
+			if (start == false)
+			{
+				getting_title = true;
+				title_char_cnt = 0;
+				start = true;
+				awaiting_gui_info = true;
+			}
+			else
+			{
+				start = false; 
+			}
+			
 		}
 		else 
 		{
@@ -137,7 +141,16 @@ void SysTick_Handler(void)
 static void start_handler(const uint32_t id, const uint32_t index)
 {
 	if ((id == ID_PIOA) && (index == PIO_PA9)){
-		start = !start; 
+		
+		if(start == false)
+		{
+			getting_title = true;
+			title_char_cnt = 0;
+			start = true;
+			awaiting_gui_info = true;
+		}
+		else 
+			start = false; 
 	}
 }
 
@@ -160,6 +173,8 @@ int main(void)
 	//lcd_init(); 
 	audio_init();
 	configure_uart(); 
+	
+	usart_write(USART_SERIAL, 253); // reset GUI 
 	
 	bpm = 100;
 	playback_instrument = PIANO;

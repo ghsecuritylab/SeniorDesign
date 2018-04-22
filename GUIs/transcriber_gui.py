@@ -72,6 +72,7 @@ class Central(QWidget):
                 
             x.tofile('my_song.mid') # simply name of file 
             print("Created MIDI File")
+            self.start_btn.setText("Start")
         else: 
             print("No board connected")
             self.connectBoard()
@@ -96,6 +97,8 @@ class Central(QWidget):
 
                 elif (s[0] == 254): # start recording   
                     self.startGatorscribe()
+                elif(s[0] == 253):
+                    self.reset_start_stop()
 
     def init_gatorscribe(self):
 
@@ -145,7 +148,7 @@ class Central(QWidget):
         # self.start_btn.clicked.connect(self.sendKey)
         # self.start_btn.clicked.connect(self.sendTempo)
         # self.start_btn.clicked.connect(self.sendInstrument)
-        self.start_btn.clicked.connect(self.startGatorscribe)
+        self.start_btn.clicked.connect(self.sendStartStopFlag)
 
         # Create horizontal menu
         self.horizontal_menu.addLayout(self.title_layout)
@@ -636,9 +639,12 @@ class Central(QWidget):
         self.current_instrument = instrument
         #print(self.current_instrument)
 
-    def sendStartStopFlag(self, start_stop):
+    def reset_start_stop(self): 
+        self    .start_btn.setText("Start")
+
+    def sendStartStopFlag(self):
         if self.ser.isOpen():
-            self.ser.write([start_stop])
+            self.ser.write([255])
         else:
             self.connectBoard()
             print('Cannot send info')
@@ -688,21 +694,16 @@ class Central(QWidget):
         self.constructMainMenu()
 
     def startGatorscribe(self):
-        if(self.start_btn.text() == "Start"):
-            if(self.ser.isOpen()):
-                self.sendStartStopFlag(255) 
-                self.sendTitle()
-                self.sendTime() 
-                self.sendKey() 
-                self.sendTempo() 
-                self.sendInstrument() 
-                self.start_btn.setText("Stop")
-                print("Recording!")
-            else:
-                print("Cannot open serial port")
-        else: 
-            self.sendStartStopFlag(254) 
-            self.start_btn.setText("Start")
+        if(self.ser.isOpen()):
+            self.sendTitle()
+            self.sendTime() 
+            self.sendKey() 
+            self.sendTempo() 
+            self.sendInstrument() 
+            self.start_btn.setText("Stop")
+            print("Recording!")
+        else:
+            print("Cannot open serial port")
 
 app = QApplication(sys.argv)
 ex = App()
