@@ -636,9 +636,9 @@ class Central(QWidget):
         self.current_instrument = instrument
         #print(self.current_instrument)
 
-    def sendStartFlag(self):
+    def sendStartStopFlag(self, start_stop):
         if self.ser.isOpen():
-            self.ser.write([255])
+            self.ser.write([start_stop])
         else:
             self.connectBoard()
             print('Cannot send info')
@@ -688,16 +688,21 @@ class Central(QWidget):
         self.constructMainMenu()
 
     def startGatorscribe(self):
-        if(self.ser.isOpen()):
-            self.sendStartFlag() #255 
-            self.sendTitle()
-            self.sendTime() 
-            self.sendKey() 
-            self.sendTempo() 
-            self.sendInstrument() 
-            print("Recording!")
-        else:
-            print("Cannot open serial port")
+        if(self.start_btn.text() == "Start"):
+            if(self.ser.isOpen()):
+                self.sendStartStopFlag(255) 
+                self.sendTitle()
+                self.sendTime() 
+                self.sendKey() 
+                self.sendTempo() 
+                self.sendInstrument() 
+                self.start_btn.setText("Stop")
+                print("Recording!")
+            else:
+                print("Cannot open serial port")
+        else: 
+            self.sendStartStopFlag(254) 
+            self.start_btn.setText("Start")
 
 app = QApplication(sys.argv)
 ex = App()

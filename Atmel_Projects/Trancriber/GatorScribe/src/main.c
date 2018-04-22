@@ -51,8 +51,8 @@ volatile midi_instrument_t playback_instrument;
 volatile time_signature_t time_sig; 
 volatile key_signature_t key_sig;
 volatile char title[MAX_TITLE_SIZE] = "Title Here";
-volatile bool start; 
-volatile bool tap; 
+volatile bool start = false; 
+volatile bool tap = false; 
 volatile uint32_t millisecond_cnt;
 volatile uint32_t title_char_cnt = 0; 
 volatile bool awaiting_gui_info = true; 
@@ -68,10 +68,14 @@ void USART_SERIAL_ISR_HANDLER(void)
 		
 		if (received_byte == 255)
 		{
-			getting_title = true; 
-			title_char_cnt = 0; 
-			start = true; 
-			awaiting_gui_info = true; 
+			getting_title = true;
+			title_char_cnt = 0;
+			start = true;
+			awaiting_gui_info = true;		
+		}
+		else if (received_byte == 254)
+		{
+			start = false; 
 		}
 		else 
 		{

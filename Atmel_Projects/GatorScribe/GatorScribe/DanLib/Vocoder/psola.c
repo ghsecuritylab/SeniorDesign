@@ -75,9 +75,9 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	float inputPeriodLengthRecip = 1.0f / inputPeriodLength;
 	uint32_t samplesLeftInPeriod = 0; 
 	
-	float scale = 1.0f;  
-	if (current_num_shifts > 1) 
-		scale = 1.0f / log2f((float)(current_num_shifts+1)); 
+	//float scale = 1.0f;  
+	//if (current_num_shifts > 1) 
+	float scale = 1.0f / log2f((float)(current_num_shifts+1)); 
 	
 	// pre-compute window function	
 	for (olaIdx = 0, w = 0; olaIdx < 2*inputPeriodLength; olaIdx++, w++)

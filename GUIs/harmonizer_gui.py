@@ -289,8 +289,10 @@ class Central(QWidget):
             self.ser = serial.Serial(port='/dev/tty.usbmodem1462', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=0.001)
         elif (os.path.exists("/dev/tty.usbmodem1442")):
             self.ser = serial.Serial(port='/dev/tty.usbmodem1442', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=0.001)
-        elif (os.path.exists("/dev/tty.usbserial-A904RDA3")):
-            self.ser = serial.Serial(port='/dev/tty.usbserial-A904RDA3', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=0.001)
+        elif (os.path.exists("/dev/tty.usbserial-A904RDA2")):
+            self.ser = serial.Serial(port='/dev/tty.usbserial-A904RDA2', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=0.001)
+        #elif (os.path.exists("/dev/tty.usbserial-A904RDA3")):
+        #    self.ser = serial.Serial(port='/dev/tty.usbserial-A904RDA3', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=0.001)
         else:
             self.ser = serial.Serial(baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=0.001)
             print("Error, no board connected")

@@ -86,7 +86,7 @@ volatile uint32_t key_root = KEY_OF_E;
 volatile harmony_t harmony_list[MAX_NUM_KEYS_HARMONIES]; 
 volatile float harm_volume = 1.0f;
 volatile float dry_volume = 1.0f;
-volatile float master_volume = 1.0f;
+volatile float master_volume = MASTER_VOL_BASE; 
 volatile uint32_t pitch_bend = NO_PITCH_BEND;
 volatile float reverb_volume = 0.0f; 
 volatile float delay_volume = 0.0f;
@@ -179,7 +179,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 					case HARM_VOLUME_CH: 
 						harm_volume = (float)*data2 / 127.0f; break; 
 					case MASTER_VOLUME_CH: 
-						master_volume = 0.8f*(float)*data2 / 127.0f; break; 
+						master_volume = MASTER_VOL_BASE*(float)*data2 / 127.0f; break; 
 					case REVERB_CH: 
 						reverb_volume = (float)*data2 / 127.0f; break; 
 					case CHORUS_VOLUME_CH: 

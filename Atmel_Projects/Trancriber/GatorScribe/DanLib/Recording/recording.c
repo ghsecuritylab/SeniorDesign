@@ -154,6 +154,10 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 	float current_rhythm = 0.25;  // 16th note
 	int note_cnt = 0; 
 	
+	uint32_t midi_note_offset = 0; 
+	if (playback_instrument == GUITAR)
+		midi_note_offset = 12; 
+	
 	time_sig = time_signature.sig;
 	if (time_sig == FOUR_FOUR)
 		number_of_beats_in_a_measure = 4;
@@ -182,13 +186,15 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 		note_16_received = 0; 
 	}
 
-	uint32_t record_cnt = 0; 
+	uint32_t record_cnt = 0;
 	while(recording && *number_of_events < MAX_NUM_EVENTS-1 && start == true)
 	{
 		if (note_16_received)
 		{
 			record_cnt++;
 			get_midi_note((float32_t *)&processBuffer[0], &notes[note_cnt & NOTE_MASK], yin);
+			if (notes[note_cnt & NOTE_MASK].note_number != NO_NOTE)
+				notes[note_cnt & NOTE_MASK].note_number += midi_note_offset; 
 			
 			if (note_cnt > 0)
 			{

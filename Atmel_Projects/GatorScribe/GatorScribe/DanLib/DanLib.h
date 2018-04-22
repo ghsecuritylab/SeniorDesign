@@ -62,6 +62,8 @@ typedef struct chord
 	bool active; 
 }chord_t;
 
+#define MASTER_VOL_BASE 0.6f
+
 #define NOTE_ON 144
 #define NOTE_OFF 128 
 #define SLIDER 176
