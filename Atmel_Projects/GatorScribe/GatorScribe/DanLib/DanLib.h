@@ -24,8 +24,8 @@ typedef struct harmony
 
 #define MAX_NUM_KEYS_HARMONIES 10 // not including root  
 
-#define POWER_THRESHOLD 0.000001f
-#define ONE_OVER_64 0.015625000F
+#define POWER_THRESHOLD 0.0001f
+#define ONE_OVER_64 0.015625000f
 
 enum harmonies
 {
