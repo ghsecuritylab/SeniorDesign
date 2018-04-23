@@ -309,6 +309,8 @@ int main(void)
 	arm_fill_f32(0.0f, delay_circ_buffer, CIRC_BUF_SIZE);
 	scale_t major[] = {W,W,H,W,W,W,H}; 
 	uint32_t harmony_steps[] = {2, 2, 1}; // third, fifth, sixth
+	float scale_correct_history[SCALE_CORRECT_HISTORY_SIZE]; arm_fill_f32(SCALE_NONE, scale_correct_history, SCALE_CORRECT_HISTORY_SIZE); 
+	uint32_t scale_correct_idx = 0; 
 	/*************** Application code variables end ***************/
 	
 	while(1)
@@ -339,18 +341,47 @@ int main(void)
 			if (number_of_semitones_from_root == 1 || number_of_semitones_from_root == 3 ||
 			number_of_semitones_from_root == 6 || number_of_semitones_from_root == 8 || number_of_semitones_from_root == 10 )
 			{
-				
-				if (inputPitch < midi_note_frequencies[closest_note_number])
+				float low_avg = 0.5f * (midi_note_frequencies[closest_note_number] + midi_note_frequencies[closest_note_number-1]); 
+				float hi_avg = 0.5f * (midi_note_frequencies[closest_note_number] + midi_note_frequencies[closest_note_number+1]);
+				if (inputPitch < low_avg)
 				{
 					number_of_semitones_from_root -=1;
 					scale_pitch = midi_note_frequencies[closest_note_number - 1];
+					scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_DOWN; 
 				}
-				else
+				else if (inputPitch > hi_avg)
 				{
 					number_of_semitones_from_root +=1;
 					scale_pitch = midi_note_frequencies[closest_note_number + 1];
+					scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_UP;
 				}
-			}			
+				else
+				{
+					float sum = 0.0f; 
+					for(i = 0; i < SCALE_CORRECT_HISTORY_SIZE; i++)
+					{
+						sum += scale_correct_history[i]; 
+					}
+					sum /= (float)SCALE_CORRECT_HISTORY_MASK; 
+						
+					if(sum < 0.0f)
+					{
+						number_of_semitones_from_root -=1;
+						scale_pitch = midi_note_frequencies[closest_note_number - 1];
+						scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_DOWN;
+					}
+					else 
+					{
+						number_of_semitones_from_root +=1;
+						scale_pitch = midi_note_frequencies[closest_note_number + 1];
+						scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_UP;
+					}
+				}
+			}	
+			else
+			{
+				scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_NONE;
+			}		
 			
 			// find index in scale where the pitch lies 
 			uint32_t interval_idx = 0;

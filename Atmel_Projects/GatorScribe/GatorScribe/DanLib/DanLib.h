@@ -52,6 +52,15 @@ enum scale_steps
 	H = 1
 };
 
+
+// scale correct directions
+#define SCALE_DOWN -1.0f
+#define SCALE_NONE 0.0f 
+#define SCALE_UP 1.0f
+#define SCALE_CORRECT_HISTORY_SIZE 8
+#define SCALE_CORRECT_HISTORY_MASK (SCALE_CORRECT_HISTORY_SIZE-1)
+
+
 typedef uint32_t scale_t; 
 
 #define KEY_OF_E 64 
