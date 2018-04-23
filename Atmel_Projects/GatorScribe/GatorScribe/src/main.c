@@ -463,7 +463,7 @@ int main(void)
 				{
 					if (harmony_list[i].active)
 					{
-						if (Abs(harmony_list[i].freq - closest_note_freq) > 1.0f) // don't harmonize input pitch twice
+						if (Abs(harmony_list[i].freq - harmony_shifts[0]) > 8.0f) // don't harmonize input pitch twice
 						{
 							desired_pitch = harmony_list[i].freq;
 							bool already_harmonized = false; 
