@@ -49,7 +49,7 @@ void PSOLA_init(void)
 	
 	readPos = RING_BUFFER_SIZE - WIN_SIZE; // + WEIRD_OFFSET; 
 	inPtr = 0; 
-	inputPeriodLength = SAMPLE_RATE / MINIMUM_PITCH; 
+	inputPeriodLength = PSOLA_SAMPLE_RATE / MINIMUM_PITCH; 
 	currentPitch = MINIMUM_PITCH; 
 }
 
@@ -212,7 +212,7 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 	//arm_scale_f32(output, 2.0f, output, WIN_SIZE); 
 	
 	currentPitch = inputPitch; 
-	inputPeriodLength = (uint32_t)(SAMPLE_RATE / currentPitch);
+	inputPeriodLength = (uint32_t)(PSOLA_SAMPLE_RATE / currentPitch);
 	current_num_shifts = pitch_idx; 
 	arm_copy_f32(pitch_shifts_in, prev_pitch_shifts, MAX_NUM_SHIFTS); 
 }

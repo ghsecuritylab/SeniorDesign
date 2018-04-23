@@ -16,7 +16,7 @@
 #define XDMA_CH_SSC_RX    0
 #define XDMA_CH_SSC_TX    1
 
-#define SAMPLE_RATE 47200.0f
+#define SAMPLE_RATE 45750.0f
 
 /** Micro-block w-length for single transfer  */
 #define IO_BUF_SIZE          2048	// x in total, x/2 left & x/2 right 

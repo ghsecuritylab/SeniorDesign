@@ -269,9 +269,6 @@ int main(void)
 {
 	sysclk_init();
 	board_init();
-//  	SCB_DisableICache(); 
-//  	lcd_init(); 
-//  	SCB_EnableICache();
 	audio_init();
 #ifdef USING_CONSOLE
 	configure_console();
@@ -279,24 +276,6 @@ int main(void)
 	PSOLA_init(); 
 	configure_uart(); 
 	usart_write(USART_SERIAL, 0x30);
-	 
-// 	 // draw smiley face 
-// 	SCB_DisableICache(); 
-// 	gfx_draw_filled_rect(100, 100, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(200, 100, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(80, 180, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(100, 200, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(120, 220, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(140, 220, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(160, 220, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(180, 220, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(200, 200, 20, 20, GFX_COLOR_YELLOW);
-// 	gfx_draw_filled_rect(220, 180, 20, 20, GFX_COLOR_YELLOW);
-// 	SCB_EnableICache();
-		
-	
-	// for serial debug 
-	//char *str = (char *)calloc(20, sizeof(char)); 
 	
 	/*************** Application code variables start ***************/
 	uint32_t i;
@@ -356,12 +335,21 @@ int main(void)
 			while(number_of_semitones_from_root > 12)
 				number_of_semitones_from_root -= 12;
 						
-			// adjust for pitch outside of major scale 		
-			if (number_of_semitones_from_root == 1 || number_of_semitones_from_root == 4 ||
+			// adjust for pitch in between notes in major scale 	
+			if (number_of_semitones_from_root == 1 || number_of_semitones_from_root == 3 ||
 			number_of_semitones_from_root == 6 || number_of_semitones_from_root == 8 || number_of_semitones_from_root == 10 )
 			{
-				number_of_semitones_from_root +=1;
-				scale_pitch = midi_note_frequencies[closest_note_number + 1];
+				
+				if (inputPitch < midi_note_frequencies[closest_note_number])
+				{
+					number_of_semitones_from_root -=1;
+					scale_pitch = midi_note_frequencies[closest_note_number - 1];
+				}
+				else
+				{
+					number_of_semitones_from_root +=1;
+					scale_pitch = midi_note_frequencies[closest_note_number + 1];
+				}
 			}			
 			
 			// find index in scale where the pitch lies 
@@ -379,17 +367,8 @@ int main(void)
 				}
 			}
 			
-			// auto tune or regular voice 
-			bool *autotune = (bool *)&chord_harmonies[8]; 
-			if (*autotune)
-				desired_pitch = scale_pitch;
-			else 
-				desired_pitch = inputPitch;
-				
-			if (pitch_bend < 56 || pitch_bend > 72) 
-				bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
-				
-			harmony_shifts[0] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+			// regular voice 
+			harmony_shifts[0] = 1.0f; 
 			num_of_shifts = 1;  
 			
 			// calculate power 
@@ -401,6 +380,18 @@ int main(void)
 				// chord harmonies 
 				uint32_t chord_idx = 0;	
 				uint32_t saved_interval_idx = interval_idx; 	
+				
+				// autotune 
+				bool *autotune = (bool *)&chord_harmonies[8]; 
+				if (*autotune)
+				{
+					desired_pitch = scale_pitch;
+	
+					if (pitch_bend < 56 || pitch_bend > 72) 
+						bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
+				
+					harmony_shifts[0] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				}
 				
 				// octave down
 				if(chord_harmonies[chord_idx] == true)

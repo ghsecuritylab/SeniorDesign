@@ -364,24 +364,6 @@ class Central(QWidget):
             self.dev_lbl.setText('No Device')
             print("Error, no midi device connected")
 
-    # def paintEvent(self, event):
-    #     paint = QPainter()
-    #     paint.begin(self)
-    #     self.drawShapes(event, paint)
-
-    # def drawShapes(self, event, paint):
-    #     color = self.blue
-    #     alpha = 240
-    #     color.setAlpha(alpha)
-    #     paint.setBrush(QBrush(color))
-    #     paint.setPen(Qt.NoPen)
-    #     rect_width = int(self.window_width/250)
-    #     width = self.dev_lbl.width()
-    #     top_rect = QRect(self.midi_lbl.x()*0.9,self.midi_lbl.y()*1.1,self.midi_lbl.width()*1.2,self.midi_lbl.height()*0.5)
-    #     paint.drawRect(top_rect)
-    #     paint.drawRect(top_rect.x() + top_rect.width(),top_rect.y() + (top_rect.height()-rect_width),self.dev_lbl.x() + self.dev_lbl.width() - (top_rect.x() + top_rect.width()),rect_width)
-
-
 app = QApplication(sys.argv)
 ex = App()
 ex.setWindowOpacity(0.99)
