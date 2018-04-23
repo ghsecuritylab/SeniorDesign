@@ -357,14 +357,9 @@ int main(void)
 				}
 				else
 				{
-					float sum = 0.0f; 
-					for(i = 0; i < SCALE_CORRECT_HISTORY_SIZE; i++)
-					{
-						sum += scale_correct_history[i]; 
-					}
-					sum /= (float)SCALE_CORRECT_HISTORY_MASK; 
-						
-					if(sum < 0.0f)
+					float avg_direction = 0.0f; 
+					arm_mean_f32(scale_correct_history, SCALE_CORRECT_HISTORY_SIZE, &avg_direction); 
+					if(avg_direction < 0.0f)
 					{
 						number_of_semitones_from_root -=1;
 						scale_pitch = midi_note_frequencies[closest_note_number - 1];
