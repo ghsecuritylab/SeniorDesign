@@ -341,8 +341,10 @@ int main(void)
 			if (number_of_semitones_from_root == 1 || number_of_semitones_from_root == 3 ||
 			number_of_semitones_from_root == 6 || number_of_semitones_from_root == 8 || number_of_semitones_from_root == 10 )
 			{
-				float low_avg = 0.75f * (midi_note_frequencies[closest_note_number] + midi_note_frequencies[closest_note_number-1]); 
-				float hi_avg = 0.25f * (midi_note_frequencies[closest_note_number] + midi_note_frequencies[closest_note_number+1]);
+				float low_avg = 0.5f * (midi_note_frequencies[closest_note_number] + midi_note_frequencies[closest_note_number-1]); 
+				low_avg = 0.5f * (low_avg + midi_note_frequencies[closest_note_number]); 
+				float hi_avg = 0.5f * (midi_note_frequencies[closest_note_number] + midi_note_frequencies[closest_note_number+1]);
+				hi_avg = 0.5f * (hi_avg + midi_note_frequencies[closest_note_number]); 
 				if (inputPitch < low_avg)
 				{
 					number_of_semitones_from_root -=1;
@@ -375,7 +377,10 @@ int main(void)
 			}	
 			else
 			{
-				scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_NONE;
+				if (inputPitch < closest_note_freq)
+					scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_UP;
+				else 
+					scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_DOWN;
 			}		
 			
 			// find index in scale where the pitch lies 
