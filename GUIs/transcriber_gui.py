@@ -156,10 +156,11 @@ class Central(QWidget):
         self.horizontal_menu.addStretch()
 
         # Class variables for key signature
-        self.major_minor = 0
-        self.current_key = 'C'
-        self.major_keys_dict = {'C':0, 'G':1, 'D':2, 'A':3, 'E':4, 'B':5, 'F#':6, 'C#':7, 'F':-1, 'Bb':-2, 'Eb':-3, 'Ab':-4, 'Db':-5, 'Gb':-6, 'Cb':-7}
-        self.minor_keys_dict = {'A':0, 'E':1, 'B':2, 'F#':3, 'C#':4, 'G#':5, 'D#':6, 'A#':7, 'D':-1, 'G':-2, 'C':-3, 'F':-4, 'Bb':-5, 'Eb':-6, 'Ab':-7}
+        self.current_key = 'C Major\nA minor'
+        self.midi_keys_dict = {'C Major\nA minor':0, 'G Major\nE minor':1, 'D Major\nB minor':2, 'A Major\nF# minor':3, 'E Major\nC# minor':4, 
+            'B Major\nG# minor':5, 'F# Major\nD# minor':6, 'C# Major\nA# minor':7, 'F Major\nD minor':-1, 'Bb Major\nG minor':-2, 'Eb Major\nC minor':-3, 
+            'Ab Major\nF minor':-4, 'Db Major\nBb minor':-5, 'Gb Major\nEb minor':-6, 'Cb Major\nAb minor':-7}
+       # self.minor_keys_dict = {'A Minor':0, 'E':1, 'B':2, 'F#':3, 'C#':4, 'G#':5, 'D#':6, 'A#':7, 'D':-1, 'G':-2, 'C':-3, 'F':-4, 'Bb':-5, 'Eb':-6, 'Ab':-7}
 
         # Class variables for instruments
         self.instrument_dict = {'guitar.png':27, 'piano.png':0, 'violin.png':40, 'trumpet.png':56, 'synth.png':80, 'sax.png':64}
@@ -231,14 +232,14 @@ class Central(QWidget):
             color.setAlpha(alpha*self.opacity)
             paint.setBrush(QBrush(color))
             paint.drawRect(QRect(self.instrument_lbl.x()-(rect_width*3),self.instrument_pic.y(),rect_width,self.instrument_lbl.y()-self.instrument_pic.y()+self.instrument_lbl.height()))
-            pen_color = QColor(200,209,218)
-            pen_color.setAlpha(alpha*self.opacity)
-            paint.setPen(pen_color)
-            paint.setFont(QFont('Calibri Light',self.window_width/92))
-            key = 'Major'
-            if self.major_minor:
-                key = 'Minor'
-            paint.drawText(QRect(self.key_btn.x()+self.key_btn.width()+(rect_width),self.key_btn.y()+self.key_btn.height()-(rect_width*8),self.key_btn.width(),rect_width*5),Qt.AlignLeft,key)
+            # pen_color = QColor(200,209,218)
+            # pen_color.setAlpha(alpha*self.opacity)
+            # paint.setPen(pen_color)
+            # paint.setFont(QFont('Calibri Light',self.window_width/92))
+            # key = 'Major'
+            # if self.major_minor:
+            #     key = 'Minor'
+            # paint.drawText(QRect(self.key_btn.x()+self.key_btn.width()+(rect_width),self.key_btn.y()+self.key_btn.height()-(rect_width*8),self.key_btn.width(),rect_width*5),Qt.AlignLeft,key)
         elif paint_code is 1:
             color.setAlpha(alpha*self.opacity)
             paint.setBrush(QBrush(color))
@@ -293,21 +294,22 @@ class Central(QWidget):
                     i = 0
                 else:
                     i = i + 1
-            paint.setPen(QColor(200,209,218))
-            paint.setFont(QFont('Calibri Light',self.window_width/128))
-            top_widget = self.options_layout.itemAtPosition(0,0).widget()
-            paint.drawText(QRect(top_widget.x(),top_widget.y()-(rect_width*5),top_widget.x(),rect_width*5),Qt.AlignLeft,'Major Keys')
-            middle_widget = self.options_layout.itemAtPosition(self.options_layout.rowCount()/2,0).widget()
-            right_widget = self.options_layout.itemAtPosition(2,self.options_layout.columnCount()-1).widget()
-            bottom_widget = self.options_layout.itemAtPosition(self.options_layout.rowCount()-1,0).widget()
-            paint.drawText(QRect(bottom_widget.x(),bottom_widget.y()+bottom_widget.height()+(rect_width*3),bottom_widget.x(),rect_width*5),Qt.AlignLeft,'Minor Keys')
-            paint.setBrush(QColor(200,209,218,32))
-            paint.setPen(QColor(200,209,218,0))
-            path = QPainterPath()
-            path.addRoundedRect(QRectF(top_widget.x()-(rect_width*5),top_widget.y()-(rect_width),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y()-top_widget.y())-(rect_width*2)),10,10)
-            paint.drawPath(path)
-            path.addRoundedRect(QRectF(middle_widget.x()-(rect_width*5),middle_widget.y()-(rect_width),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y()-top_widget.y())-(rect_width*2)),10,10)
-            paint.drawPath(path)
+            # paint.setPen(QColor(200,209,218))
+            # paint.setFont(QFont('Calibri Light',self.window_width/128))
+            # top_widget = self.options_layout.itemAtPosition(0,0).widget()
+            # middle_widget = self.options_layout.itemAtPosition(self.options_layout.rowCount()/2,0).widget()
+            # right_widget = self.options_layout.itemAtPosition(2,self.options_layout.columnCount()-1).widget()
+            # bottom_widget = self.options_layout.itemAtPosition(self.options_layout.rowCount()-1,0).widget()
+            # paint.setBrush(QColor(200,209,218,32))
+            # paint.setPen(QColor(200,209,218,0))
+            # path = QPainterPath()
+            # path.addRoundedRect(QRectF(top_widget.x()-(rect_width*5),top_widget.y()-(rect_width*2),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y())-(rect_width*5)),10,10)
+            # paint.drawPath(path)
+
+            # path.addRoundedRect(QRectF(middle_widget.x()-(rect_width*5),middle_widget.y()-(rect_width),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y()-top_widget.y())-(rect_width*2)),10,10)
+            # paint.drawPath(path)
+            # path.addRoundedRect(QRectF(bottom_widget.x()-(rect_width*5),bottom_widget.y()-(rect_width),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y()-top_widget.y())-(rect_width*2)),10,10)
+            # paint.drawPath(path)
 
 
     # Traverse through input layout to change the transparency of each widget
@@ -377,7 +379,7 @@ class Central(QWidget):
         self.time_button = QPushButton(self.time_list[self.time_index])
         self.time_button.setStyleSheet(self.remove_background)
         self.time_button.setFont(QFont('Calibri Light',self.window_width/20))
-        self.time_button.setMaximumSize(self.time_button.minimumSizeHint().width()*1.2,self.time_button.minimumSizeHint().height()*0.9)
+        self.time_button.setMaximumSize(self.time_button.minimumSizeHint().width()*1.2,self.time_button.minimumSizeHint().height())
         self.time_button.clicked.connect(self.constructTimeMenu)
 
         self.time_layout.addWidget(self.time_button)
@@ -393,8 +395,8 @@ class Central(QWidget):
         self.key_lbl.setAlignment(Qt.AlignLeft)
         self.key_btn = QPushButton(self.current_key)
         self.key_btn.setStyleSheet(self.remove_background)
-        self.key_btn.setFont(QFont('Calibri Light',self.window_width/20))
-        self.key_btn.setMaximumSize(self.key_btn.minimumSizeHint().width()*2.4,self.key_btn.minimumSizeHint().height()*0.9)
+        self.key_btn.setFont(QFont('Calibri Light',self.window_width/39))
+        self.key_btn.setMaximumSize(self.key_btn.minimumSizeHint().width()*1.2,self.key_btn.minimumSizeHint().height())
         self.key_btn.clicked.connect(self.constructKeyMenu)
         self.key_layout.addWidget(self.key_btn)
         self.key_layout.addWidget(self.key_lbl)
@@ -413,7 +415,7 @@ class Central(QWidget):
         self.tempo_edit.setFont(QFont('Calibri Light',self.window_width/20))
         self.tempo_edit.setAlignment(Qt.AlignLeft)
         self.tempo_edit.setMaxLength(3)
-        self.tempo_edit.setMaximumSize(self.tempo_edit.minimumSizeHint().width()*2.4,self.tempo_edit.minimumSizeHint().height()*0.9)
+        self.tempo_edit.setMaximumSize(self.tempo_edit.minimumSizeHint().width()*2.4,self.tempo_edit.minimumSizeHint().height())
         self.tempo_edit.setText('100')
         #self.tempo_edit.editingFinished.connect(self.sendTempo)
         self.tempo_layout.addWidget(self.tempo_edit)
@@ -471,39 +473,28 @@ class Central(QWidget):
 
         row = 0
         column = 0
-        for key,value in self.major_keys_dict.items():
+        i = 0
+        for key,value in self.midi_keys_dict.items():
             button = QPushButton(key)
             button.setStyleSheet(self.remove_background)
-            button.setFont(QFont('Calibri Light',self.window_width/40))
-            button.setMaximumSize(button.minimumSizeHint().width()*1.2,button.minimumSizeHint().height()*0.9)
-            button.clicked.connect(lambda: self.changeKey(0))
+            button.setFont(QFont('Calibri',self.window_width/70))
+            button.setMaximumSize(button.minimumSizeHint().width(),button.minimumSizeHint().height())
+            button.clicked.connect(self.changeKey)
             button.clicked.connect(self.constructMainMenu)
             self.options_layout.addWidget(button,row,column,Qt.AlignLeft)
             if column < 4:
                 column = column + 1
             else:
                 column = 0
-                row = row + 1
-        for key,value in self.minor_keys_dict.items():
-            button = QPushButton(key)
-            button.setStyleSheet(self.remove_background)
-            button.setFont(QFont('Calibri Light',self.window_width/40))
-            button.setMaximumSize(button.minimumSizeHint().width()*1.2,button.minimumSizeHint().height()*0.9)
-            button.clicked.connect(lambda: self.changeKey(1))
-            button.clicked.connect(self.constructMainMenu)
-            self.options_layout.addWidget(button,row,column,Qt.AlignLeft)
-            if column < 4:
-                column = column + 1
-            else:
-                column = 0
-                row = row + 1
+                row = row + 2
+            i = i + 1
 
         self.paint_code = 3
         self.fadeIn()
 
     def initInstrumentMenu(self):
 
-        self.pic_size = QSize(self.window_height/6,self.window_height/6)
+        self.pic_size = 0.8*QSize(self.window_height/6,self.window_height/6)
 
         self.guitar = QPushButton()
         self.guitar.setStyleSheet(self.remove_background)
@@ -624,14 +615,12 @@ class Central(QWidget):
         self.time_index = number
         self.constructMainMenu()
 
-    def changeKey(self, major_minor):
-        self.major_minor = major_minor
+    def changeKey(self):
         button = self.sender()
         self.current_key = button.text()
 
     def changeInstrument(self,instrument):
         self.current_instrument = instrument
-        #print(self.current_instrument)
 
     def reset_start_stop(self): 
         self.start_btn.setText("Start")
@@ -663,17 +652,10 @@ class Central(QWidget):
 
     def sendKey(self):
         if self.ser.isOpen():
-            self.ser.write([self.major_minor])
-            if self.major_minor:
-                self.ser.write([self.minor_keys_dict.get(self.current_key)])
-            else:
-                self.ser.write([self.major_keys_dict.get(self.current_key)])
+            self.ser.write([self.midi_keys_dict.get(self.current_key) + 7]) # can't send negative numbers. add 7 on board 
         else:
             self.connectBoard()
-            if self.major_minor:
-                print('Cannot send key ' + str(self.minor_keys_dict[self.current_key]) + ' | Board not connected')
-            else:
-                print('Cannot send key ' + str(self.major_keys_dict[self.current_key]) + ' | Board not connected')
+            print('Cannot send key. Board not connected')
 
     def sendTempo(self):
         if self.ser.isOpen():

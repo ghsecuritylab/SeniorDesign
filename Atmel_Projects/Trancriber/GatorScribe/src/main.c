@@ -95,14 +95,14 @@ void USART_SERIAL_ISR_HANDLER(void)
 			else
 			{
 				gui_info[gui_info_curr_idx++] = received_byte; 
-				if (gui_info_curr_idx == 5)
+				if (gui_info_curr_idx == 4)
 				{
 					gui_info_curr_idx = 0; 
 					time_sig = time_signatures[gui_info[0]]; 
-					key_sig.mode = gui_info[1]; 
-					key_sig.key = gui_info[2]; 
-					bpm = gui_info[3]; 
-					playback_instrument = gui_info[4]; 
+					key_sig.mode = MAJOR;  // GUI converts the minor to major 
+					key_sig.key = (int32_t)gui_info[1] - 7; // GUI adds 7 since it cant send negative numbers 
+					bpm = gui_info[2]; 
+					playback_instrument = gui_info[3]; 
 					awaiting_gui_info = false; 
 				}
 				
