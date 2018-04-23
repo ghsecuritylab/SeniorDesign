@@ -17,7 +17,7 @@ class App(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.title = 'Scribes'
+        self.title = 'Vocal Harmonizer'
         self.setWindowTitle(self.title)
         self.p = self.palette()
         self.setStyleSheet('background-color: rgb(42,41,46); color: rgb(200,209,218)')
@@ -148,11 +148,17 @@ class Central(QWidget):
         self.current_key_button = self.key_buttons[4]
         self.setOriginalKey()
 
+        # button = QLabel('Chord')
+        # button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+        # button.setFont(QFont('Calibri Light',46))
+        # button.setMaximumSize(button.minimumSizeHint().width(),button.minimumSizeHint().height())
+        # self.harmonizer_layout.addWidget(button,self.chord_pos[0]-1,0,Qt.AlignLeft | Qt.AlignTop)
+
         button = QLabel('Harmonies')
         button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
         button.setFont(QFont('Calibri Light',46))
         button.setMaximumSize(button.minimumSizeHint().width(),button.minimumSizeHint().height())
-        self.harmonizer_layout.addWidget(button,self.chord_pos[0]-1,0,Qt.AlignLeft | Qt.AlignTop)
+        self.harmonizer_layout.addWidget(button,self.chord_pos[0]-1,0,Qt.AlignCenter | Qt.AlignTop)
 
         button = QLabel(' ')
         button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,244)")
