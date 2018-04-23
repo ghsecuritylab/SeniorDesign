@@ -33,8 +33,8 @@ class Central(QWidget):
         self.p = self.palette()
         self.p.setColor(self.backgroundRole(), QColor(127,255,127))
         self.purple = QColor(93,107,68)
-        self.blue = QColor(50,209,255)
-        self.green = QColor(104,216,196)
+        self.blue = QColor(50,200,255)
+        self.green = QColor(104,236,196)
         self.orange = QColor(251,165,125)
         self.magenta = QColor(157,39,89)
         self.yellow = QColor(177,176,148)
@@ -167,7 +167,7 @@ class Central(QWidget):
         self.current_instrument = 'piano.png'
 
         # Array to hold all colors
-        self.color_array = [self.blue, self.purple, self.green, self.orange, self.magenta, self.yellow]
+        self.color_array = [self.blue, self.yellow, self.green, self.orange, self.magenta]
 
         # Create all components of the instrument menu
         self.initInstrumentMenu()
@@ -290,27 +290,18 @@ class Central(QWidget):
                 paint.setBrush(QBrush(color))
                 current_widget = widget.widget()
                 paint.drawRect(QRect(current_widget.x()-(rect_width*3),current_widget.y(),rect_width,current_widget.height()))
-                if i > 4:
+                if i > 3:
                     i = 0
                 else:
                     i = i + 1
-            # paint.setPen(QColor(200,209,218))
-            # paint.setFont(QFont('Calibri Light',self.window_width/128))
-            # top_widget = self.options_layout.itemAtPosition(0,0).widget()
-            # middle_widget = self.options_layout.itemAtPosition(self.options_layout.rowCount()/2,0).widget()
-            # right_widget = self.options_layout.itemAtPosition(2,self.options_layout.columnCount()-1).widget()
-            # bottom_widget = self.options_layout.itemAtPosition(self.options_layout.rowCount()-1,0).widget()
-            # paint.setBrush(QColor(200,209,218,32))
-            # paint.setPen(QColor(200,209,218,0))
-            # path = QPainterPath()
-            # path.addRoundedRect(QRectF(top_widget.x()-(rect_width*5),top_widget.y()-(rect_width*2),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y())-(rect_width*5)),10,10)
-            # paint.drawPath(path)
-
-            # path.addRoundedRect(QRectF(middle_widget.x()-(rect_width*5),middle_widget.y()-(rect_width),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y()-top_widget.y())-(rect_width*2)),10,10)
-            # paint.drawPath(path)
-            # path.addRoundedRect(QRectF(bottom_widget.x()-(rect_width*5),bottom_widget.y()-(rect_width),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y()-top_widget.y())-(rect_width*2)),10,10)
-            # paint.drawPath(path)
-
+            top_widget = self.options_layout.itemAtPosition(0,0).widget()
+            middle_widget = self.options_layout.itemAtPosition(self.options_layout.rowCount()/2,0).widget()
+            right_widget = self.options_layout.itemAtPosition(2,self.options_layout.columnCount()-1).widget()
+            bottom_widget = self.options_layout.itemAtPosition(self.options_layout.rowCount()-1,0).widget()
+            paint.setBrush(QColor(200,209,218,20))
+            path = QPainterPath()
+            path.addRoundedRect(QRectF(top_widget.x()-(rect_width*5),top_widget.y()-(rect_width*2),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y())-(rect_width*5)),10,10)
+            paint.drawPath(path)
 
     # Traverse through input layout to change the transparency of each widget
     def fadeOptions(self, layout):
