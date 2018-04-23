@@ -147,11 +147,6 @@ class Central(QWidget):
         self.start_btn.setMinimumSize(self.start_btn.minimumSizeHint().width()*2,self.start_btn.minimumSizeHint().height())
         self.start_btn.pressed.connect(lambda: self.start_btn.setStyleSheet('background-color: rgb(192,192,192,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
         self.start_btn.released.connect(lambda: self.start_btn.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
-        # self.start_btn.clicked.connect(self.sendTitle)
-        # self.start_btn.clicked.connect(lambda: self.sendTime(self.time_index))
-        # self.start_btn.clicked.connect(self.sendKey)
-        # self.start_btn.clicked.connect(self.sendTempo)
-        # self.start_btn.clicked.connect(self.sendInstrument)
         self.start_btn.clicked.connect(self.sendStartStopFlag)
 
         # Create horizontal menu
@@ -409,7 +404,7 @@ class Central(QWidget):
 
          # Create tempo layout
         self.tempo_layout = QVBoxLayout()
-        self.tempo_lbl = QLabel('BPM')
+        self.tempo_lbl = QLabel('Tempo')
         self.tempo_lbl.setFont(QFont('Calibri Light',self.window_width/128))  # Edit label font
         self.tempo_lbl.setStyleSheet('color: rgb(170,179,188)')
         self.tempo_lbl.setMaximumSize(self.tempo_lbl.minimumSizeHint().width(),self.tempo_lbl.height())
@@ -429,7 +424,7 @@ class Central(QWidget):
 
         # Create instrument layout
         self.instrument_layout = QVBoxLayout()
-        self.instrument_lbl = QLabel('Instrument')
+        self.instrument_lbl = QLabel('Playback Instrument')
         self.instrument_lbl.setFont(QFont('Calibri Light',self.window_width/128))  # Edit label font
         self.instrument_lbl.setStyleSheet('color: rgb(170,179,188)')
         self.instrument_lbl.setAlignment(Qt.AlignLeft)
