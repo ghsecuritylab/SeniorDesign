@@ -60,7 +60,7 @@ class Central(QWidget):
         self.layout.setSpacing(self.window_height/20)
         self.layout.addLayout(self.harmonizer_layout)
         self.layout.addStretch()
-        self.layout.setContentsMargins(self.window_width/25,self.window_width/50,self.window_height/50,self.window_height/50)
+        self.layout.setContentsMargins(self.window_width/50,self.window_width/50,self.window_height/50,self.window_height/50)
         self.setLayout(self.layout)
         self.opacity = 0.9
         self.timer = QTimer()   
@@ -161,7 +161,7 @@ class Central(QWidget):
         self.harmonizer_layout.addWidget(button,self.chord_pos[0]-1,0,Qt.AlignCenter)
 
         #Show 9 harmony indicators 
-        self.harmony_array = ['Octave Below   ', '3rd Below  ', '5th Below   ', '6th Below   ', '3rd Above   ', '5th Above   ', '6th Above   ', 'Octave Above   ', 'Autotune   ']
+        self.harmony_array = ['Octave Below ', '3rd Below ', '5th Below ', '6th Below ', '3rd Above ', '5th Above ', '6th Above ', 'Octave Above ', 'Autotune']
         self.harmony_buttons = [QPushButton(" ")] * 9
         row = self.chord_pos[0]
         column = self.chord_pos[1]
