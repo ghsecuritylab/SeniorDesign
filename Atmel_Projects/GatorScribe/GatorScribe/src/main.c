@@ -410,7 +410,7 @@ int main(void)
 					else
 						desired_pitch = closest_note_freq*powerf(1.059463094359f, -12);
 					if (pitch_bend < 56 || pitch_bend > 72)
-					bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
+						bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
 					harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
 					chord_freqs[chord_idx].active = true;
 					chord_freqs[chord_idx].freq = desired_pitch;

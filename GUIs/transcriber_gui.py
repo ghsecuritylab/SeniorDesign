@@ -80,25 +80,29 @@ class Central(QWidget):
     def read_serial_port(self): 
         if self.ser.isOpen():        
             # decode serial message from board 
-            serial_msg = self.ser.read() #.decode('ascii')
-            s = list(serial_msg)
-            #print(s)
-            if (len(s) > 0):
-                if (s[0] < 128):
-                    msg = serial_msg.decode('ascii')
-                    if (msg == '-'): 
-                        self.get_midi_file()
-                    
-                if (s[0] == 255): # read bpm  
-                    serial_msg = self.ser.read() #.decode('ascii')
-                    s = list(serial_msg)
-                    self.tempo_edit.setText(str(s[0]))
-                    #print(s)
+            try:
+                serial_msg = self.ser.read() #.decode('ascii')
+                s = list(serial_msg)
+                #print(s)
+                if (len(s) > 0):
+                    if (s[0] < 128):
+                        msg = serial_msg.decode('ascii')
+                        if (msg == '-'): 
+                            self.get_midi_file()
+                        
+                    if (s[0] == 255): # read bpm  
+                        serial_msg = self.ser.read() #.decode('ascii')
+                        s = list(serial_msg)
+                        self.tempo_edit.setText(str(s[0]))
+                        #print(s)
 
-                elif (s[0] == 254): # start recording   
-                    self.startGatorscribe()
-                elif(s[0] == 253):
-                    self.reset_start_stop()
+                    elif (s[0] == 254): # start recording   
+                        self.startGatorscribe()
+                    elif(s[0] == 253):
+                        self.reset_start_stop()
+            except: 
+                self.start_btn.setText("Reconnect")
+                self.ser.close() 
 
     def init_gatorscribe(self):
 
@@ -614,17 +618,12 @@ class Central(QWidget):
             self.ser = serial.Serial(port='/dev/tty.usbmodem1442', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=0.2)
         elif (os.path.exists("/dev/tty.usbserial-A904RDA3")):
             self.ser = serial.Serial(port='/dev/tty.usbserial-A904RDA3', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=0.1)
-        else:
-            self.ser = serial.Serial(baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=0.1)
-            print("No board connected")
-            return
-        try:
-            self.ser.isOpen()
+        if(self.ser.isOpen()):
             print("Serial port is open")
-        except:
-            print("Error")
             self.start_btn.setText('Start')
-            return
+        else:
+            print("No board connected")
+            self.start_btn.setText('Reconnect')
 
     def changeTime(self,number):
         self.time_index = number
@@ -640,14 +639,17 @@ class Central(QWidget):
         #print(self.current_instrument)
 
     def reset_start_stop(self): 
-        self    .start_btn.setText("Start")
+        self.start_btn.setText("Start")
 
     def sendStartStopFlag(self):
         if self.ser.isOpen():
-            self.ser.write([255])
+            try: 
+                self.ser.write([255])
+            except: 
+                return
         else:
+            print('Reconnecting...')
             self.connectBoard()
-            print('Cannot send info')
 
     def sendTitle(self):
         if self.ser.isOpen():

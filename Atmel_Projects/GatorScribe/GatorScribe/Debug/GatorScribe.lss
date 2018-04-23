@@ -7335,7 +7335,7 @@ int main(void)
   402e04:	681b      	ldr	r3, [r3, #0]
   402e06:	2b48      	cmp	r3, #72	; 0x48
   402e08:	d91e      	bls.n	402e48 <main+0x400>
-					bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
+						bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
   402e0a:	4b6a      	ldr	r3, [pc, #424]	; (402fb4 <main+0x56c>)
   402e0c:	681b      	ldr	r3, [r3, #0]
 	if (pitch_idx < 0 || pitch_idx > 127 || bend < 0 || bend > 127)

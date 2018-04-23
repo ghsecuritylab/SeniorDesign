@@ -45,15 +45,15 @@ class Central(QWidget):
         self.magenta = QColor(157,39,89)
         self.yellow = QColor(177,176,148)
         self.base_key = 60
-        self.starting_key_column = 6
-        self.setOriginalKey() 
-        self.major_pos = [0,5]
-        self.minor_pos = [1,5]
-        self.chord_pos = [3,0]
+        self.starting_key_column = 4
+        self.major_pos = [0,3]
+        self.minor_pos = [1,3]
+        self.chord_pos = [4,0]
         self.prev_midi_status = -1 
         self.chord_harmonies = [False,False,False,False,False,False,False,False,False]
         self.ser = serial.Serial()
         self.midi_port_open = 0; 
+        self.midi_device_buttons = [QPushButton(" "), QPushButton(" "), QPushButton(" "), QPushButton(" ")]
         self.connectBoard()
         self.init_harmonizer()
         self.sendResetToBoard()
@@ -70,13 +70,22 @@ class Central(QWidget):
 
     def board_reset_check(self):
         if self.ser.isOpen():
-            serial_msg = self.ser.read() #.decode('ascii')
-            s = list(serial_msg)
-            if (len(s) > 0):
-                if (s[0] < 128):
-                    status = self.ser.read().decode('ascii')
-                    if (status == "0"):
-                        self.restartGUI()
+            try: 
+                serial_msg = self.ser.read() #.decode('ascii')
+                s = list(serial_msg)
+                if (len(s) > 0):
+                    if (s[0] < 128):
+                        status = serial_msg.decode('ascii')
+                        if (status == "0"):
+                            self.restartGUI()
+            except: 
+                self.ser.close() 
+
+    def lambdaChooseKey(self, m):
+        return lambda: self.chooseKey(m) 
+
+    def lambdaChangeChordHarmonies(self, m):
+        return lambda: self.changeChordHarmonies(m) 
  
     def init_harmonizer(self):
         self.gray_text = 'color: rgb(200,209,218)'
@@ -90,7 +99,7 @@ class Central(QWidget):
         # Look for devices and create label to display current device
         self.device_list = mido.get_input_names()
         self.dev_lbl = QLabel()
-        self.dev_lbl.setStyleSheet(self.gray_text)
+        self.dev_lbl.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
         if self.device_list:
             self.dev_lbl.setText(mido.get_input_names()[0])  # Set label to first device in list
         else:
@@ -99,62 +108,73 @@ class Central(QWidget):
         self.dev_lbl.setMaximumSize(self.dev_lbl.minimumSizeHint().width()*1.2,self.dev_lbl.minimumSizeHint().height()*1.3)
         self.harmonizer_layout.addWidget(self.dev_lbl,0,0,1,5,Qt.AlignLeft)
 
-        # Create label to describe shown device as MIDI device
-        self.midi_lbl = QLabel('MIDI Device')
-        self.midi_lbl.setFont(QFont("Calibri Light",12))
-        self.midi_lbl.setStyleSheet(self.remove_background + '; color: rgb(42,41,46)')
-        self.midi_lbl.resize(self.midi_lbl.minimumSizeHint().width()*1.2,self.midi_lbl.minimumSizeHint().height()*1.2)
-        self.harmonizer_layout.addWidget(self.midi_lbl,1,0,1,5,Qt.AlignLeft)
-
         # Create labels for all keys 
         self.key_array = ['C','C#/Db','D','D#/Eb','E','F','F#/Gb','G','G#/Ab','A','A#/Bb','B']
+        self.key_buttons = [QPushButton(" ")] * 12
         row = 0
         column = self.starting_key_column
+        i = 0
         for key in self.key_array:
-            button = QPushButton(key)
-            button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
-            button.setFont(QFont('Calibri Light',46))
-            button.setMaximumSize(button.minimumSizeHint().width()*1.2,button.minimumSizeHint().height())
-            button.clicked.connect(self.chooseKey)
-            self.harmonizer_layout.addWidget(button,row,column,Qt.AlignCenter)
-            if column < 9:
+            self.key_buttons[i] = QPushButton(key)
+            self.key_buttons[i].setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+            self.key_buttons[i].setFont(QFont('Calibri Light',46))
+            self.key_buttons[i].setMaximumSize(self.key_buttons[i].minimumSizeHint().width()*1.2,self.key_buttons[i].minimumSizeHint().height())
+            self.key_buttons[i].clicked.connect(self.lambdaChooseKey(i))
+            self.harmonizer_layout.addWidget(self.key_buttons[i],row,column,Qt.AlignCenter)
+            i = i + 1
+            if column < self.starting_key_column+3:
                 column = column + 1
             else:
                 column = self.starting_key_column
                 row = row + 1
 
-        # Show default key signature
-        button = self.harmonizer_layout.itemAtPosition(self.current_key_pos[0],self.current_key_pos[1]).widget()
-        button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
-
         # Major key 
-        button = QPushButton('Major')
-        button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
-        button.setFont(QFont('Calibri Light',46))
-        button.setMaximumSize(button.minimumSizeHint().width()*1.2,button.minimumSizeHint().height())
-        button.clicked.connect(self.chooseKeyMode)
-        self.harmonizer_layout.addWidget(button,self.major_pos[0],self.major_pos[1],Qt.AlignCenter)
+        self.major_button = QPushButton('Major')
+        self.major_button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+        self.major_button.setFont(QFont('Calibri Light',46))
+        self.major_button.setMaximumSize(self.major_button.minimumSizeHint().width()*1.2,self.major_button.minimumSizeHint().height())
+        self.major_button.clicked.connect(lambda: self.chooseKeyMode("Major"))
+        self.harmonizer_layout.addWidget(self.major_button,self.major_pos[0],self.major_pos[1],Qt.AlignCenter)
 
         # Minor Key 
-        button = QPushButton('Minor')
-        button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+        self.minor_button = QPushButton('Minor')
+        self.minor_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+        self.minor_button.setFont(QFont('Calibri Light',46))
+        self.minor_button.setMaximumSize(self.minor_button.minimumSizeHint().width()*1.2,self.minor_button.minimumSizeHint().height())
+        self.minor_button.clicked.connect(lambda: self.chooseKeyMode("Minor"))
+        self.harmonizer_layout.addWidget(self.minor_button,self.minor_pos[0],self.minor_pos[1],Qt.AlignCenter)
+
+         # Show default key signature
+        self.current_key_button = self.key_buttons[4]
+        self.setOriginalKey()
+
+        button = QLabel('Harmonies')
+        button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+        button.setFont(QFont('Calibri Light',46))
+        button.setMaximumSize(button.minimumSizeHint().width(),button.minimumSizeHint().height())
+        self.harmonizer_layout.addWidget(button,self.chord_pos[0]-1,0,Qt.AlignLeft | Qt.AlignTop)
+
+        button = QLabel(' ')
+        button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,244)")
         button.setFont(QFont('Calibri Light',46))
         button.setMaximumSize(button.minimumSizeHint().width()*1.2,button.minimumSizeHint().height())
-        button.clicked.connect(self.chooseKeyMode)
-        self.harmonizer_layout.addWidget(button,self.minor_pos[0],self.minor_pos[1],Qt.AlignCenter)
+        self.harmonizer_layout.addWidget(button,self.chord_pos[0]-1,0,Qt.AlignCenter)
 
         #Show 9 harmony indicators 
-        self.harmony_array = ['Octave Down', 'Low 3rd', 'Low 5th', 'Low 6th', 'High 3rd', 'High 5th', 'High 6th', 'Octave Up', 'Autotune']
+        self.harmony_array = ['Octave Below   ', '3rd Below  ', '5th Below   ', '6th Below   ', '3rd Above   ', '5th Above   ', '6th Above   ', 'Octave Above   ', 'Autotune   ']
+        self.harmony_buttons = [QPushButton(" ")] * 9
         row = self.chord_pos[0]
         column = self.chord_pos[1]
+        i = 0
         for harmony in self.harmony_array:
-            button = QPushButton(harmony)
-            button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
-            button.setFont(QFont('Calibri Light',36))
-            button.setMaximumSize(button.minimumSizeHint().width(),button.minimumSizeHint().height())
-            button.clicked.connect(self.changeChordHarmonies)
-            self.harmonizer_layout.addWidget(button,row,column,Qt.AlignCenter)
+            self.harmony_buttons[i] = QPushButton(harmony)
+            self.harmony_buttons[i].setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+            self.harmony_buttons[i].setFont(QFont('Calibri Light',36))
+            self.harmony_buttons[i].setMaximumSize(self.harmony_buttons[i].minimumSizeHint().width(),self.harmony_buttons[i].minimumSizeHint().height())
+            self.harmony_buttons[i].clicked.connect(self.lambdaChangeChordHarmonies(i))
+            self.harmonizer_layout.addWidget(self.harmony_buttons[i],row,column,Qt.AlignCenter)
             column = column + 1 
+            i = i + 1
 
         # Create search button 
         self.search_button = QPushButton('Search')
@@ -163,47 +183,45 @@ class Central(QWidget):
         self.search_button.setMinimumSize(self.search_button.minimumSizeHint().width()*2,self.search_button.minimumSizeHint().height())
         self.search_button.pressed.connect(lambda: self.search_button.setStyleSheet('background-color: rgb(192,192,192,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
         self.search_button.released.connect(lambda: self.search_button.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
-        # self.search_button.connect(self.searchMidi)
-        self.harmonizer_layout.addWidget(self.search_button,2,0,Qt.AlignLeft)
+        self.search_button.clicked.connect(self.searchMidi)
+        self.harmonizer_layout.addWidget(self.search_button,1,0,Qt.AlignLeft)
 
         # Create restart button 
         self.restart_button = QPushButton('Restart')
         self.restart_button.setFont(QFont('Calibri',14))
         self.restart_button.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent')
-        self.restart_button.setMinimumSize(self.search_button.minimumSizeHint().width()*2,self.restart_button.minimumSizeHint().height())
+        self.restart_button.setMinimumSize(self.restart_button.minimumSizeHint().width()*2,self.restart_button.minimumSizeHint().height())
         self.restart_button.pressed.connect(lambda: self.restart_button.setStyleSheet('background-color: rgb(192,192,192,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
         self.restart_button.released.connect(lambda: self.restart_button.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
         self.restart_button.clicked.connect(self.restartGUI)
-        self.harmonizer_layout.addWidget(self.restart_button,2,1,Qt.AlignLeft)
+        self.harmonizer_layout.addWidget(self.restart_button,1,1,Qt.AlignLeft)
+
+    def searchMidi(self): 
+        if self.midi_port_open:
+            self.midi_port.close() 
+            self.midi_port_open = False
+        midi_device = mido.get_input_names()
+        for i in range(len(midi_device)): 
+            self.midi_device_buttons[i] = QPushButton(midi_device[i])
+            self.midi_device_buttons[i].setFont(QFont('Calibri',14))
+            self.midi_device_buttons[i].setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent')
+            self.midi_device_buttons[i].setMinimumSize(self.midi_device_buttons[i].minimumSizeHint().width()*2,self.midi_device_buttons[i].minimumSizeHint().height())
+            self.midi_device_buttons[i].pressed.connect(lambda: self.midi_device_buttons[i].setStyleSheet('background-color: rgb(192,192,192,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
+            self.midi_device_buttons[i].released.connect(lambda: self.midi_device_buttons[i].setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
+            self.midi_device_buttons[i].clicked.connect(lambda: self.midi_device_clicked(self.midi_device_buttons[i])) #self.open_midi_port(midi_device[i]); search_button.deleteLater)
+            self.harmonizer_layout.addWidget(self.midi_device_buttons[i],i,2,Qt.AlignLeft)
+
+    def midi_device_clicked(self, midi_button): 
+        self.open_midi_port(midi_button.text()) 
+        for i in range(len(self.midi_device_buttons)): 
+            self.midi_device_buttons[0].deleteLater()  
 
     # callback for restart button 
     def restartGUI(self): 
         self.connectBoard() 
 
-        # Dim old key signature 
-        old_key_button = self.harmonizer_layout.itemAtPosition(self.current_key_pos[0],self.current_key_pos[1]).widget()
-        old_key_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
-
         self.resetKeyAndHarmonies() 
 
-        # Highlight default key signature
-        button = self.harmonizer_layout.itemAtPosition(self.current_key_pos[0],self.current_key_pos[1]).widget()
-        button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
-
-        # Dim minor 
-        button = self.harmonizer_layout.itemAtPosition(self.minor_pos[0],self.minor_pos[1]).widget()
-        button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
-
-        # Highlight major 
-        button = self.harmonizer_layout.itemAtPosition(self.major_pos[0],self.major_pos[1]).widget()
-        button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
-
-        row = self.chord_pos[0]
-        column = self.chord_pos[1]
-        for harmony in self.harmony_array:
-            harmony_button = self.harmonizer_layout.itemAtPosition(row,column).widget()
-            harmony_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
-            column = column + 1 
         if self.midi_port_open:
             self.midi_port.close() 
             self.midi_port_open = False
@@ -214,49 +232,61 @@ class Central(QWidget):
             self.ser.write([255, 255, 255])
 
     def setOriginalKey(self): 
-        self.current_key_pos = [1,self.starting_key_column]
+        old_key_button = self.current_key_button
+        old_key_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
         self.current_key_midi_num = 64 # E 
         self.current_key_mode = "Major"
+        self.current_key_button = self.key_buttons[4]
+        self.current_key_button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+
+        # Dim minor 
+        self.minor_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+
+        # Highlight major 
+        self.major_button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+
 
     def resetKeyAndHarmonies(self): 
         self.setOriginalKey() 
+        
         for i in range(0,9): 
             self.chord_harmonies[i] = False 
+
+        row = self.chord_pos[0]
+        column = self.chord_pos[1]
+        for i in range(len(self.harmony_buttons)): #.harmony_array:
+            harmony_button = self.harmony_buttons[i] #self.harmonizer_layout.itemAtPosition(row,column).widget()
+            harmony_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+            column = column + 1 
+
         self.sendResetToBoard()
         
-    def chooseKeyMode(self): 
+    def chooseKeyMode(self, mode): 
         if self.ser.isOpen():
             button = self.sender()
             button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
-            index = self.harmonizer_layout.indexOf(button)
-            current_button_pos = self.harmonizer_layout.getItemPosition(index)
-            if(current_button_pos[0] == self.major_pos[0] and current_button_pos[1] == self.major_pos[1]):
+            if(mode == "Major"):
                 if(self.current_key_mode != "Major"):
                     # dim minor button 
-                    minor_button = self.harmonizer_layout.itemAtPosition(self.minor_pos[0],self.minor_pos[1]).widget()
-                    minor_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+                    self.minor_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
                     self.current_key_mode = "Major"
                     self.current_key_midi_num -= 3
                     self.sendKeyChange(self.current_key_midi_num) 
-            elif(current_button_pos[0] == self.minor_pos[0] and current_button_pos[1] == self.minor_pos[1]): 
+            elif(mode == "Minor"):
                 if (self.current_key_mode != "Minor"):
                     # dim major button 
-                    major_button = self.harmonizer_layout.itemAtPosition(self.major_pos[0],self.major_pos[1]).widget()
-                    major_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+                    self.major_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
                     self.current_key_mode = "Minor"
                     self.current_key_midi_num += 3
                     self.sendKeyChange(self.current_key_midi_num)
 
-    def chooseKey(self):
+    def chooseKey(self, key_offset):
         if self.ser.isOpen():
-            old_key_button = self.harmonizer_layout.itemAtPosition(self.current_key_pos[0],self.current_key_pos[1]).widget()
+            old_key_button = self.current_key_button
             old_key_button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
-            button = self.sender()
-            button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
-            index = self.harmonizer_layout.indexOf(button)
-            current_button_pos = self.harmonizer_layout.getItemPosition(index)
-            self.current_key_pos = current_button_pos 
-            self.current_key_midi_num = self.base_key + (4*self.current_key_pos[0]) + (self.current_key_pos[1]-self.starting_key_column)
+            self.current_key_button = self.sender()
+            self.current_key_button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+            self.current_key_midi_num = self.base_key + key_offset
             if(self.current_key_mode == "Minor"): 
                 self.current_key_midi_num +=3
             self.sendKeyChange(self.current_key_midi_num)
@@ -268,17 +298,13 @@ class Central(QWidget):
         else: 
             print('Cannot send key')
 
-    def changeChordHarmonies(self): 
+    def changeChordHarmonies(self, chord_idx): 
         if self.ser.isOpen():   
-            button = self.sender()
-            index = self.harmonizer_layout.indexOf(button)
-            current_button_pos = self.harmonizer_layout.getItemPosition(index)
-            chord_idx = current_button_pos[1] - self.chord_pos[1]
             self.chord_harmonies[chord_idx] ^= True 
             if (self.chord_harmonies[chord_idx]):
-                button.setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
+                self.harmony_buttons[chord_idx].setStyleSheet(self.remove_background + "; color: rgb(59,202,243,244)")
             else: 
-                button.setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
+                self.harmony_buttons[chord_idx].setStyleSheet(self.remove_background + "; color: rgb(200,209,218,50)")
             self.ser.write([176, 32, 0]) # tells board that it's a button from one of the channels (MIDI keyboard uses + and - buttons sometimes and sends same message)
             self.ser.write([192, chord_idx])
 
@@ -298,11 +324,12 @@ class Central(QWidget):
             print("Error, no board connected")
             return
         try:
-            self.ser.isOpen()
-            print("Serial port is open")
+            if(self.ser.isOpen()): 
+                print("Serial port is open")
+            else:
+                print("Error, no board connected")
         except:
-            print("Error")
-            self.harmonizer_start.setText('Start')
+            print("Error, no board connected")
             return
 
     def message_callback(self, message): 
@@ -321,32 +348,38 @@ class Central(QWidget):
             self.ser.write(message.bytes())
         print(message.bytes())
 
-    def open_midi_port(self):
-        midi_device = mido.get_input_names()
-        if (midi_device):
-            self.midi_port = mido.open_input(midi_device[0])
+    def open_midi_port(self, device=None):
+        if(device == None): 
+            midi_device = mido.get_input_names()
+            if (midi_device):
+                device = midi_device[0]
+        
+        if (device):
+            self.midi_port = mido.open_input(device)
             self.midi_port.callback = self.message_callback
             self.midi_port_open = True
+            self.dev_lbl.setText(mido.get_input_names()[0])
             print("Midi device connected")
         else: 
+            self.dev_lbl.setText('No Device')
             print("Error, no midi device connected")
 
-    def paintEvent(self, event):
-        paint = QPainter()
-        paint.begin(self)
-        self.drawShapes(event, paint)
+    # def paintEvent(self, event):
+    #     paint = QPainter()
+    #     paint.begin(self)
+    #     self.drawShapes(event, paint)
 
-    def drawShapes(self, event, paint):
-        color = self.blue
-        alpha = 240
-        color.setAlpha(alpha)
-        paint.setBrush(QBrush(color))
-        paint.setPen(Qt.NoPen)
-        rect_width = int(self.window_width/250)
-        width = self.dev_lbl.width()
-        top_rect = QRect(self.midi_lbl.x()*0.95,self.midi_lbl.y()*0.99,self.midi_lbl.width()*1.1,self.midi_lbl.height()*1.2)
-        paint.drawRect(top_rect)
-        paint.drawRect(top_rect.x() + top_rect.width(),top_rect.y() + (top_rect.height()-rect_width),self.dev_lbl.x() + self.dev_lbl.width() - (top_rect.x() + top_rect.width()),rect_width)
+    # def drawShapes(self, event, paint):
+    #     color = self.blue
+    #     alpha = 240
+    #     color.setAlpha(alpha)
+    #     paint.setBrush(QBrush(color))
+    #     paint.setPen(Qt.NoPen)
+    #     rect_width = int(self.window_width/250)
+    #     width = self.dev_lbl.width()
+    #     top_rect = QRect(self.midi_lbl.x()*0.9,self.midi_lbl.y()*1.1,self.midi_lbl.width()*1.2,self.midi_lbl.height()*0.5)
+    #     paint.drawRect(top_rect)
+    #     paint.drawRect(top_rect.x() + top_rect.width(),top_rect.y() + (top_rect.height()-rect_width),self.dev_lbl.x() + self.dev_lbl.width() - (top_rect.x() + top_rect.width()),rect_width)
 
 
 app = QApplication(sys.argv)
