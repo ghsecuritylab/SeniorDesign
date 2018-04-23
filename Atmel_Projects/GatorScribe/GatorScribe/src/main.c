@@ -311,6 +311,7 @@ int main(void)
 	uint32_t harmony_steps[] = {2, 2, 1}; // third, fifth, sixth
 	float scale_correct_history[SCALE_CORRECT_HISTORY_SIZE]; arm_fill_f32(SCALE_NONE, scale_correct_history, SCALE_CORRECT_HISTORY_SIZE); 
 	uint32_t scale_correct_idx = 0; 
+	float dry_freq = 0; 
 	/*************** Application code variables end ***************/
 	
 	while(1)
@@ -400,6 +401,7 @@ int main(void)
 			
 			// regular voice 
 			harmony_shifts[0] = 1.0f; 
+			dry_freq = inputPitch; 
 			num_of_shifts = 1;  
 			
 			// calculate power 
@@ -422,6 +424,7 @@ int main(void)
 						bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
 				
 					harmony_shifts[0] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+					dry_freq = desired_pitch; 
 				}
 				
 				// octave down
@@ -494,8 +497,9 @@ int main(void)
 				{
 					if (harmony_list[i].active)
 					{
-						if (Abs(harmony_list[i].freq - harmony_shifts[0]) > 8.0f) // don't harmonize input pitch twice
+						if (Abs(harmony_list[i].freq - dry_freq) > 8.0f) // don't harmonize input pitch twice
 						{
+							// check if chord harmonies are already doing this harmony 
 							desired_pitch = harmony_list[i].freq;
 							bool already_harmonized = false; 
 							for (int k = 0; k < 8; k++)
