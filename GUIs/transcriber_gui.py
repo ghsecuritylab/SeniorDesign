@@ -742,7 +742,9 @@ class Central(QWidget):
         self.current_instrument = instrument
 
     def reset_start_stop(self):
+        self.tuner_btn.setText('Tuner')
         self.start_btn.setText("Start")
+        self.constructMainMenu() 
 
     def reset_board(self): 
         if self.ser.isOpen():

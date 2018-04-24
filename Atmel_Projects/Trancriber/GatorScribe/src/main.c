@@ -231,7 +231,12 @@ int main(void)
 	union float_bytes {
 		float val;
 		unsigned char bytes[sizeof(float)];
-	} tune_pitch;
+	} average_pitch;
+	
+	float running_sum = 0.0f; 
+	float pitch_history[4]; arm_fill_f32(0.0f, pitch_history, 4); 
+	uint32_t pitch_history_cnt = 0; 
+	
 	
 	while(1)
 	{
@@ -274,19 +279,29 @@ int main(void)
 			{ 
 				if (tuning)
 				{
-					tune_pitch.val = aubio_pitchyinfast_do(yin, (float32_t *)tuner_buffer);
-					if (tune_pitch.val > 30.0f && tune_pitch.val < 7902.0f)
+					 
+					float inPitch = aubio_pitchyinfast_do(yin, (float32_t *)tuner_buffer);
+					if (inPitch > 30.0f && inPitch < 7902.0f)
 					{
+						running_sum -= pitch_history[pitch_history_cnt & 3];
+						pitch_history[pitch_history_cnt & 3] = inPitch; 
+						running_sum += pitch_history[pitch_history_cnt++ & 3];
+						
+						average_pitch.val = running_sum / 4.0f	; 
+						
+						if(Abs(average_pitch.val - inPitch) > 10.0f) 
+							average_pitch.val = inPitch; 
+							
 						delay_ms(20);
 						usart_write(USART_SERIAL, 252);
 						delay_ms(20);
-						usart_write(USART_SERIAL, tune_pitch.bytes[0]);
+						usart_write(USART_SERIAL, average_pitch.bytes[0]);
 						delay_ms(20);
-						usart_write(USART_SERIAL, tune_pitch.bytes[1]);
+						usart_write(USART_SERIAL, average_pitch.bytes[1]);
 						delay_ms(20);
-						usart_write(USART_SERIAL, tune_pitch.bytes[2]);
+						usart_write(USART_SERIAL, average_pitch.bytes[2]);
 						delay_ms(20);
-						usart_write(USART_SERIAL, tune_pitch.bytes[3]);
+						usart_write(USART_SERIAL, average_pitch.bytes[3]);
 					}
 				}
 				tune_ready = false;
