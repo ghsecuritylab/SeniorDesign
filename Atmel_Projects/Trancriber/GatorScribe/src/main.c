@@ -58,7 +58,8 @@ volatile uint32_t title_char_cnt = 0;
 volatile bool awaiting_gui_info = true; 
 volatile bool getting_title = false; 
 volatile uint32_t gui_info[5]; 
-volatile uint32_t gui_info_curr_idx = 0; 
+volatile uint32_t gui_info_curr_idx = 0;
+volatile bool tuning = false;  
 void USART_SERIAL_ISR_HANDLER(void)
 {
 	uint32_t received_byte = 0; 
@@ -80,6 +81,22 @@ void USART_SERIAL_ISR_HANDLER(void)
 				start = false; 
 			}
 			
+		}
+		else if (received_byte == 254)
+		{
+			tuning = true;  
+		}
+		else if (received_byte == 253)
+		{
+			tuning = false;
+		}
+		else if (received_byte == 252)
+		{
+			tuning = false;
+			start = false; 
+			awaiting_gui_info = false; 
+			getting_title = false; 
+			title_char_cnt = 0;
 		}
 		else 
 		{
@@ -183,6 +200,7 @@ int main(void)
 	start = false; 
 	tap = false; 
 	millisecond_cnt = 0; 
+	tuning = false; 
 	
 	pio_set_input(PIOA, PIO_PA9, PIO_PULLUP); 
 	pio_set_debounce_filter(PIOA, PIO_PA9, 10); 
@@ -202,12 +220,18 @@ int main(void)
 	
 	/* Initialize and start 1ms systick timer */
 	SysTick_Config(sysclk_get_cpu_hz()/900); // calibrated for footswitch 
+	aubio_pitchyinfast_t *yin = new_aubio_pitchyinfast(YIN_BUF_SIZE); 
 	
 	midi_event_t events_in_time[MAX_NUM_EVENTS];
 	uint32_t number_of_events = 0; 
 	max_power = 100; // minimum initial max power
 	
 	int32_t millisecond_cnt_buffer[NUM_AVG_TAPS]; 
+	
+	union float_bytes {
+		float val;
+		unsigned char bytes[sizeof(float)];
+	} tune_pitch;
 	
 	while(1)
 	{
@@ -216,6 +240,7 @@ int main(void)
 		int32_t bpm_total = NUM_AVG_TAPS * bpm;
 		bool first_tap = false; 
 		uint32_t curr_tap_idx = 0; 
+		tune_ready = false; 
 		while(!start)
 		{
 			if (tap)
@@ -235,7 +260,7 @@ int main(void)
 					if (bpm > 254)
 						bpm = 254; 
 					usart_write(USART_SERIAL, 255);
-					delay_ms(50);
+					delay_ms(40);
 					usart_write(USART_SERIAL, bpm);				
 				}
 				else 
@@ -243,6 +268,28 @@ int main(void)
 					
 				tap = false;
 				millisecond_cnt = 0;
+			}
+			
+			if(tune_ready)
+			{ 
+				if (tuning)
+				{
+					tune_pitch.val = aubio_pitchyinfast_do(yin, (float32_t *)tuner_buffer);
+					if (tune_pitch.val > 30.0f && tune_pitch.val < 7902.0f)
+					{
+						delay_ms(20);
+						usart_write(USART_SERIAL, 252);
+						delay_ms(20);
+						usart_write(USART_SERIAL, tune_pitch.bytes[0]);
+						delay_ms(20);
+						usart_write(USART_SERIAL, tune_pitch.bytes[1]);
+						delay_ms(20);
+						usart_write(USART_SERIAL, tune_pitch.bytes[2]);
+						delay_ms(20);
+						usart_write(USART_SERIAL, tune_pitch.bytes[3]);
+					}
+				}
+				tune_ready = false;
 			}
 		} 
 		
@@ -254,7 +301,7 @@ int main(void)
 		delay_ms(100); 
 		start = true; 
 		DISABLE_SYSTICK(); 
-		start_recording(events_in_time, &number_of_events, bpm, (midi_instrument_t)playback_instrument, (time_signature_t)time_sig, (key_signature_t)key_sig, (char *)title);
+		start_recording(events_in_time, &number_of_events, bpm, (midi_instrument_t)playback_instrument, (time_signature_t)time_sig, (key_signature_t)key_sig, (char *)title, yin);
 		write_midi_file(bpm, (midi_instrument_t)playback_instrument, (time_signature_t *)&time_sig,  (key_signature_t *)&key_sig, (char *)title, events_in_time, number_of_events);
 		delay_ms(100); 
 		start = false; 

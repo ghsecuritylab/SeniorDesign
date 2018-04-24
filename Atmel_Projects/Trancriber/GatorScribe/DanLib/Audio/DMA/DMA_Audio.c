@@ -12,10 +12,8 @@
 
 
 /********************************** Static Variables Start **********************************/
-COMPILER_WORD_ALIGNED
-static lld_view1 linklist_write[2];
-COMPILER_WORD_ALIGNED
-static lld_view1 linklist_read[2];
+COMPILER_WORD_ALIGNED static lld_view1 linklist_write[2];
+COMPILER_WORD_ALIGNED static lld_view1 linklist_read[2];
 
 volatile static bool inPingMode = 1;
 volatile static bool outPingMode = 1;
@@ -31,10 +29,14 @@ uint16_t inPongBuffer[BUF_SIZE];
 uint16_t outPingBuffer[BUF_SIZE];
 uint16_t outPongBuffer[BUF_SIZE];
 
-COMPILER_WORD_ALIGNED
-volatile float32_t processPingBuffer[PROCESS_BUF_SIZE];	
-COMPILER_WORD_ALIGNED
-volatile float32_t processPongBuffer[PROCESS_BUF_SIZE];
+COMPILER_ALIGNED(PROCESS_BUF_SIZE) volatile float32_t processPingBuffer[PROCESS_BUF_SIZE];	
+COMPILER_ALIGNED(PROCESS_BUF_SIZE) volatile float32_t processPongBuffer[PROCESS_BUF_SIZE];
+
+COMPILER_ALIGNED(YIN_BUF_SIZE) volatile float tuner_fill_buffer[YIN_BUF_SIZE]; 
+COMPILER_ALIGNED(YIN_BUF_SIZE) volatile float tuner_buffer[YIN_BUF_SIZE]; 
+volatile uint32_t tuner_idx = 0; 
+volatile bool tune_ready = false; 
+
 volatile float32_t *processBuffer = processPongBuffer; 
 volatile float32_t *fillBuffer = processPingBuffer;
 volatile uint16_t *inBuffer = inPingBuffer;
@@ -66,7 +68,19 @@ void XDMAC_Handler(void)
 			inBuffer = inPongBuffer; 
 		}
 		inPingMode = !inPingMode; 
-		int processIdx = 0; 
+		
+		// fill and copy tuner buffer necessary
+		for(int i = 0; i < BUF_SIZE; i+=4)
+		{
+			tuner_fill_buffer[tuner_idx++] = (float32_t)((int16_t)inBuffer[i]);
+		}
+		if(tuner_idx >= YIN_BUF_SIZE)
+		{
+			tuner_idx = 0;
+			arm_copy_f32(tuner_fill_buffer, tuner_buffer, YIN_BUF_SIZE);
+			tune_ready = true;
+		}
+				
 		if (metronome_on)
 		{	
 			if (one_beat)
@@ -110,12 +124,11 @@ void XDMAC_Handler(void)
 				outBuffer[i] = (uint16_t)((int16_t)inBuffer[i] / 2);	
 		}
 		
-		// Fill process buffer 
-		for(int i = 0; i < BUF_SIZE; i++)
+		uint32_t processIdx = 0; 
+		// Fill process buffer - decimation by 2 
+		for(int i = 0; i < BUF_SIZE; i+=4)
 		{
-			/* Check if divisible by 4 for decimation by 2 */
-			if ((i & 0x03) == 0)
-				fillBuffer[processIdx++] = (float32_t)((int16_t)inBuffer[i]);
+			fillBuffer[processIdx++] = (float32_t)((int16_t)inBuffer[i]);
 		}
 		
 		if (processPingMode)

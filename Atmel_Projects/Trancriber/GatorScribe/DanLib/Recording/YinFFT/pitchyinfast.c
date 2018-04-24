@@ -33,6 +33,8 @@
 #include "cvec.h"
 #include "fft.h"
 #include "pitchyinfast.h"
+#include "hanning.h"
+
 
 struct _aubio_pitchyinfast_t
 {
@@ -74,8 +76,38 @@ void del_aubio_pitchyinfast (aubio_pitchyinfast_t * o)
 	AUBIO_FREE (o);
 }
 
-float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input)
+// LP filter 10-4000Hz
+static const float32_t lp_filter[] = {0.0027, 0.0103, 0.0258, 0.0499, 0.0801, 0.1105, 0.1332, 0.1416, 0.1332, 0.1105, 0.0801, 0.0499, 0.0258, 0.0103, 0.0027};
+static uint32_t lp_filter_length = 15;
+static float32_t y[YIN_BUF_SIZE]; // buffer for processed input
+float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, float32_t * in_data)
 {
+	fvec_t input;
+	input.data = (smpl_t *)in_data;
+	input.length = YIN_BUF_SIZE;
+		
+	// LP-filtering
+	uint32_t j,i;
+		
+	fvec_t processed_input;
+	processed_input.data = (smpl_t *)y;
+	processed_input.length = YIN_BUF_SIZE;
+	for (j = 0; j < lp_filter_length; j++)
+		processed_input.data[j] = input.data[j];
+	for(j = lp_filter_length; j < input.length; j++)
+	{
+		processed_input.data[j] = 0;
+		for(i = 0; i < lp_filter_length; i++)
+		{
+			processed_input.data[j] += input.data[j-i]*lp_filter[i];
+		}
+	}
+		
+	// apply hanning window
+	for (i = 0; i < processed_input.length; i++)
+		processed_input.data[i] *= hanning[i];	
+		
+	input.data = processed_input.data; 
 	const smpl_t tol = o->tol;
 	fvec_t* yin = o->yin;
 	const uint_t length = yin->length;
@@ -91,7 +123,7 @@ float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input)
   // r_t+tau(0) -> zero lag term done in the for loop for every tau
   {
     fvec_t *squares = o->tmpdata;
-    fvec_weighted_copy(input, input, squares);
+    fvec_weighted_copy(&input, &input, squares);
     tmp_slice.data = squares->data;
     tmp_slice.length = W;
     o->sqdiff->data[0] = fvec_sum(&tmp_slice);
@@ -108,9 +140,9 @@ float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input)
   {
     fvec_t *compmul = o->tmpdata;
     fvec_t *rt_of_tau = o->samples_fft;
-    aubio_fft_do_complex(o->fft, input, o->samples_fft);
+    aubio_fft_do_complex(o->fft, &input, o->samples_fft);
     // build kernel, take a copy of first half of samples
-    tmp_slice.data = input->data;
+    tmp_slice.data = input.data;
     tmp_slice.length = W;
     kernel_ptr.data = o->kernel->data + 1;
     kernel_ptr.length = W;

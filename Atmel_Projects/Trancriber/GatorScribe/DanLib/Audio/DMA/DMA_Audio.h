@@ -10,6 +10,8 @@
 #define DMA_AUDIO_H_
 
 #include "arm_math.h"
+#include "YinFFT/pitchyinfast.h"
+
 /********************************** Defines Start **********************************/
 /** XDMA channels used */
 #define XDMA_CH_SSC_RX    0
@@ -33,6 +35,9 @@ extern volatile bool processPingMode;
 
 extern volatile float32_t processPingBuffer[PROCESS_BUF_SIZE];
 extern volatile float32_t processPongBuffer[PROCESS_BUF_SIZE];
+
+extern volatile bool tune_ready; 
+extern volatile float tuner_buffer[YIN_BUF_SIZE];
 /********************************** Externs End **********************************/
 
 /********************************** Public Functions Start **********************************/

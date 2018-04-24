@@ -1,5 +1,6 @@
 import sys
 import mido
+import struct
 import serial
 import os
 import numpy as np
@@ -39,47 +40,47 @@ class Central(QWidget):
         self.magenta = QColor(157,39,89)
         self.yellow = QColor(177,176,148)
         self.init_gatorscribe()
-        self.layout.setSpacing(self.window_height/20)
+        self.layout.setSpacing(self.window_height/40)
         self.layout.addLayout(self.horizontal_menu)
         self.layout.addLayout(self.options_layout)
         self.layout.addStretch()
-        self.layout.setContentsMargins(self.window_width/25,self.window_width/50,self.window_height/50,self.window_height/50)
+        self.layout.setContentsMargins(self.window_width/25,self.window_width/50,self.window_height/15,self.window_height/50)
         self.setLayout(self.layout)
         self.ser = serial.Serial()
         self.opacity = 0.9
-        self.timer = QTimer()   
-        self.timer.setInterval(200)
-        self.timer.timeout.connect(self.read_serial_port)  
+        self.timer = QTimer()
+        self.timer.setInterval(180)
+        self.timer.timeout.connect(self.read_serial_port)
         self.timer.start()
         self.connectBoard()
 
-    def get_midi_file(self):   
+    def get_midi_file(self):
         if (self.ser.isOpen()):
             msg = self.ser.read().decode('ascii')
             x = np.array([], dtype='uint8')
-            i = 0 
-            while(msg != '-'): 
-                if (i == 1): 
+            i = 0
+            while(msg != '-'):
+                if (i == 1):
                     midi_msg = midi_msg + msg
                     x = np.append(x, np.array([int(midi_msg,16)], dtype="uint8"))
                     i = 0
-                else:  
+                else:
                     midi_msg = msg
                     i = i + 1
 
                 msg = self.ser.read().decode('ascii')
                 #print(msg)
-                
-            x.tofile('my_song.mid') # simply name of file 
+
+            x.tofile('my_song.mid') # simply name of file
             print("Created MIDI File")
             self.start_btn.setText("Start")
-        else: 
+        else:
             print("No board connected")
             self.connectBoard()
 
-    def read_serial_port(self): 
-        if self.ser.isOpen():        
-            # decode serial message from board 
+    def read_serial_port(self):
+        if self.ser.isOpen():
+            # decode serial message from board
             try:
                 serial_msg = self.ser.read() #.decode('ascii')
                 s = list(serial_msg)
@@ -87,25 +88,65 @@ class Central(QWidget):
                 if (len(s) > 0):
                     if (s[0] < 128):
                         msg = serial_msg.decode('ascii')
-                        if (msg == '-'): 
+                        if (msg == '-'):
                             self.get_midi_file()
-                        
-                    if (s[0] == 255): # read bpm  
+
+                    if (s[0] == 255): # read bpm
                         serial_msg = self.ser.read() #.decode('ascii')
                         s = list(serial_msg)
                         self.tempo_edit.setText(str(s[0]))
                         #print(s)
 
-                    elif (s[0] == 254): # start recording   
+                    elif (s[0] == 254): # start recording
                         self.startGatorscribe()
                     elif(s[0] == 253):
                         self.reset_start_stop()
-            except: 
+                    elif(s[0] == 252):
+                        print("Getting pitch")
+                        self.getPitch()
+            except:
                 self.start_btn.setText("Reconnect")
-                self.ser.close() 
+                self.ser.close()
+
+    def getPitch(self): 
+        s = [0,0,0,0]
+        for i in range(0,4): 
+            serial_msg = self.ser.read() #.decode('ascii')
+            s[i] = list(serial_msg)[0]
+        aa= bytearray(s) 
+        values = struct.unpack('<f', aa)
+        self.input_freq = values[0]
+        print(values[0]) 
+        self.updateTuner()
+
+    def find_nearest(self,array,value):
+        idx = (np.abs(array-value)).argmin()
+        return (idx)
+
+    def updateTuner(self):
+        freq_index = self.find_nearest(self.freq_array, self.input_freq)
+        self.closest_freq = self.freq_array[freq_index]
+        lower_index = freq_index-1
+        lower_freq = self.freq_array[lower_index]
+        higher_index = freq_index+1
+        higher_freq = self.freq_array[higher_index]
+        left_freq = (lower_freq + self.closest_freq) / 2
+        right_freq = (higher_freq + self.closest_freq) / 2
+        print("Lower Frequency: " + str(lower_freq))
+        print("Closest Frequency: " + str(self.closest_freq))
+        print("Higher Frequency: " + str(higher_freq))
+        if (self.input_freq < self.closest_freq):
+            self.percent_change = (self.input_freq - self.closest_freq)/(self.closest_freq - left_freq)
+        else:
+            self.percent_change = (self.input_freq - self.closest_freq)/(right_freq - self.closest_freq)
+        print("P change = " + str(self.percent_change))
+        print("Index is " + str(freq_index))
+        print(self.freq_dict[self.freq_array[freq_index]])
+        print(self.freq_dict[self.freq_array[lower_index]])
+        print(self.freq_dict[self.freq_array[higher_index]])
+        self.update()
 
     def init_gatorscribe(self):
-
         # Create label to mark gatorscribe area
         self.gatorscribe_lbl = QLabel('Transcribe')
         self.gatorscribe_lbl.setFont(QFont('Calibri Light',12))
@@ -140,6 +181,15 @@ class Central(QWidget):
         self.title_layout.addWidget(self.title_lbl)
         self.title_layout.setSpacing(0)
 
+        # Create tuner button
+        self.tuner_btn = QPushButton('Tuner')
+        self.tuner_btn.setFont(QFont('Calibri',self.window_width/128))
+        self.tuner_btn.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent')
+        self.tuner_btn.setMinimumSize(self.tuner_btn.minimumSizeHint().width()*2,self.tuner_btn.minimumSizeHint().height())
+        self.tuner_btn.pressed.connect(lambda: self.tuner_btn.setStyleSheet('background-color: rgb(192,192,192,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
+        self.tuner_btn.released.connect(lambda: self.tuner_btn.setStyleSheet('background-color: rgb(127,127,127,127); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent'))
+        self.tuner_btn.clicked.connect(self.toggleTuner)
+
         # Create start button for gatorscribe
         self.start_btn = QPushButton('Start')
         self.start_btn.setFont(QFont('Calibri',self.window_width/128))
@@ -151,14 +201,16 @@ class Central(QWidget):
 
         # Create horizontal menu
         self.horizontal_menu.addLayout(self.title_layout)
+        self.horizontal_menu.addWidget(self.tuner_btn)
         self.horizontal_menu.addWidget(self.start_btn)
+        self.horizontal_menu.setAlignment(self.tuner_btn,Qt.AlignLeft)
         self.horizontal_menu.setAlignment(self.start_btn,Qt.AlignLeft)
-        self.horizontal_menu.addStretch()
+        #self.horizontal_menu.addStretch()
 
         # Class variables for key signature
         self.current_key = 'C Major\nA minor'
-        self.midi_keys_dict = {'C Major\nA minor':0, 'G Major\nE minor':1, 'D Major\nB minor':2, 'A Major\nF# minor':3, 'E Major\nC# minor':4, 
-            'B Major\nG# minor':5, 'F# Major\nD# minor':6, 'C# Major\nA# minor':7, 'F Major\nD minor':-1, 'Bb Major\nG minor':-2, 'Eb Major\nC minor':-3, 
+        self.midi_keys_dict = {'C Major\nA minor':0, 'G Major\nE minor':1, 'D Major\nB minor':2, 'A Major\nF# minor':3, 'E Major\nC# minor':4,
+            'B Major\nG# minor':5, 'F# Major\nD# minor':6, 'C# Major\nA# minor':7, 'F Major\nD minor':-1, 'Bb Major\nG minor':-2, 'Eb Major\nC minor':-3,
             'Ab Major\nF minor':-4, 'Db Major\nBb minor':-5, 'Gb Major\nEb minor':-6, 'Cb Major\nAb minor':-7}
        # self.minor_keys_dict = {'A Minor':0, 'E':1, 'B':2, 'F#':3, 'C#':4, 'G#':5, 'D#':6, 'A#':7, 'D':-1, 'G':-2, 'C':-3, 'F':-4, 'Bb':-5, 'Eb':-6, 'Ab':-7}
 
@@ -169,6 +221,32 @@ class Central(QWidget):
         # Array to hold all colors
         self.color_array = [self.blue, self.yellow, self.green, self.orange, self.magenta]
 
+        # Look up table for set frequencies
+        self.freq_array = np.array([8.176,8.662,9.177,9.723,10.301,10.913,11.562,12.250,12.978,13.750,14.568,15.434,
+                            16.35,17.32,18.35,19.45,20.60,21.83,23.12,24.50,25.96,27.50,29.14,30.87,32.70,34.65,36.71,38.89,41.20,43.65,
+                            46.25,49.00,51.91,55.00,58.27,61.74,65.41,69.30,73.42,77.78,82.41,87.31,92.50,98.00,103.83,110.00,116.54,123.47,
+                            130.81,138.59,146.83,155.56,164.81,174.61,185.00,196.00,207.65,220.00,233.08,246.94,261.63,277.18,293.66,311.13,
+                            329.63,349.23,369.99,392.00,415.30,440.00,466.16,493.88,523.25,554.37,587.33,622.25,659.25,698.46,739.99,783.99,
+                            830.61,880.00,932.33,987.77,1046.50,1108.73,1174.66,1244.51,1318.51,1396.91,1479.98,1567.98,1661.22,1760.00,1864.66,
+                            1975.53,2093.00,2217.46,2349.32,2489.02,2637.02,2793.83,2959.96,3135.96,3322.44,3520.00,3729.31,3951.07,4186.01,4434.92,
+                            4698.63,4978.03,5274.04,5587.65,5919.91,6271.93,6644.88,7040.00,7458.62,7902.13])
+
+        self.note_array = [ 'C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+                            'C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+                            'C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+                            'C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+                            'C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+                            'C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+                            'C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+                            'C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+                            'C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+                            'C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+
+        self.percent_change = 0.0
+        self.input_freq = 395.0
+        self.freq_dict = dict(zip(self.freq_array,self.note_array))
+        self.closest_freq = self.freq_array[40]
+
         # Create all components of the instrument menu
         self.initInstrumentMenu()
 
@@ -177,6 +255,9 @@ class Central(QWidget):
 
         # Create all components of the time menu
         self.initTimeMenu()
+
+        # Create all components of the tuner menu
+        self.initTunerMenu()
 
         # Fill in options grid layout
         self.options_layout.addLayout(self.time_layout,0,0,Qt.AlignLeft | Qt.AlignVCenter)
@@ -232,14 +313,6 @@ class Central(QWidget):
             color.setAlpha(alpha*self.opacity)
             paint.setBrush(QBrush(color))
             paint.drawRect(QRect(self.instrument_lbl.x()-(rect_width*3),self.instrument_pic.y(),rect_width,self.instrument_lbl.y()-self.instrument_pic.y()+self.instrument_lbl.height()))
-            # pen_color = QColor(200,209,218)
-            # pen_color.setAlpha(alpha*self.opacity)
-            # paint.setPen(pen_color)
-            # paint.setFont(QFont('Calibri Light',self.window_width/92))
-            # key = 'Major'
-            # if self.major_minor:
-            #     key = 'Minor'
-            # paint.drawText(QRect(self.key_btn.x()+self.key_btn.width()+(rect_width),self.key_btn.y()+self.key_btn.height()-(rect_width*8),self.key_btn.width(),rect_width*5),Qt.AlignLeft,key)
         elif paint_code is 1:
             color.setAlpha(alpha*self.opacity)
             paint.setBrush(QBrush(color))
@@ -300,8 +373,27 @@ class Central(QWidget):
             bottom_widget = self.options_layout.itemAtPosition(self.options_layout.rowCount()-1,0).widget()
             paint.setBrush(QColor(200,209,218,20))
             path = QPainterPath()
-            path.addRoundedRect(QRectF(top_widget.x()-(rect_width*5),top_widget.y()-(rect_width*2),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y())-(rect_width*5)),10,10)
+            path.addRoundedRect(QRectF(top_widget.x()-(rect_width*5),top_widget.y()-(rect_width*2),right_widget.x()+right_widget.width()+(rect_width*10)-top_widget.x(),(middle_widget.y())-(rect_width)),10,10)
             paint.drawPath(path)
+        elif paint_code is 4:
+            base_line_y = self.exit_btn.y()-self.options_layout.rowMinimumHeight(0)/2.2
+            base_line_x = self.exit_btn.x() - ((self.tuner_btn.x()+self.tuner_btn.width()) - (self.exit_btn.x()+self.exit_btn.width()))
+            base_line_width = (2*((self.tuner_btn.x()+self.tuner_btn.width()) - (self.exit_btn.x()+self.exit_btn.width())))+self.exit_btn.width()
+            paint.setBrush(QColor(50,200,255, 255))
+            paint.drawRect(QRect(base_line_x,base_line_y,base_line_width,self.window_height/500))
+            marker_height = self.options_layout.rowMinimumHeight(0)/2
+            marker_y = base_line_y - (marker_height/2)
+            paint.setBrush(QColor(50,200,255, 60))
+            paint.drawRect(QRect(self.exit_btn.x()+(self.exit_btn.width()/2),marker_y,self.window_height/500,marker_height))
+            marker_x = self.exit_btn.x()+(self.exit_btn.width()/2) + (self.percent_change*(base_line_width/2))
+            marker_width = self.window_height/250
+            if(abs(self.percent_change) < 0.1): 
+                paint.setBrush(QColor(104,236,196, 255))
+            else: 
+                paint.setBrush(QColor(QColor(157,39,89, 255)))
+            
+            paint.drawRect(QRect(marker_x,marker_y,marker_width,marker_height))
+            self.tuner_note.setText(self.freq_dict[self.closest_freq])
 
     # Traverse through input layout to change the transparency of each widget
     def fadeOptions(self, layout):
@@ -322,7 +414,7 @@ class Central(QWidget):
     def fadeOut(self):
         self.opacity = 0.9
         while self.opacity >= 0:
-            QTest.qWait(10)
+            QTest.qWait(0.5)
             self.fadeOptions(self.options_layout)
             self.opacity = self.opacity - 0.1
 
@@ -330,7 +422,7 @@ class Central(QWidget):
     def fadeIn(self):
         self.opacity = 0.0
         while self.opacity <= 0.9:
-            QTest.qWait(10)
+            QTest.qWait(0.5)
             self.fadeOptions(self.options_layout)
             self.opacity = self.opacity + 0.1
         self.hide()
@@ -350,6 +442,7 @@ class Central(QWidget):
                         if widget is not None:
                             self.options_layout.removeWidget(widget)
                             widget.setParent(None)
+        self.options_layout.setRowMinimumHeight(0,0)
         painter = QPainter()
         painter.eraseRect(0,self.title_lbl.y(),self.window_width,self.window_height-self.title_edit.y())
         self.hide()
@@ -484,7 +577,6 @@ class Central(QWidget):
         self.fadeIn()
 
     def initInstrumentMenu(self):
-
         self.pic_size = 0.8*QSize(self.window_height/6,self.window_height/6)
 
         self.guitar = QPushButton()
@@ -535,6 +627,17 @@ class Central(QWidget):
         self.sax.clicked.connect(lambda: self.changeInstrument('sax.png'))
         self.sax.clicked.connect(self.constructMainMenu)
 
+    def initTunerMenu(self):
+        self.exit_btn = QPushButton('')
+        self.exit_btn.setFont(QFont('Calibri',self.window_width/128))
+        self.exit_btn.setStyleSheet('background-color: rgb(127,127,127,0); border-width: 2px; border-style: outset; border-radius: 5px; padding: 2px; border-color: transparent')
+        self.exit_btn.setMaximumSize(self.exit_btn.minimumSizeHint().width()*3,self.exit_btn.minimumSizeHint().height())
+
+        self.tuner_note = QLabel('E')
+        self.tuner_note.setFont(QFont('Calibri Light',80))
+        self.tuner_note.setStyleSheet('background-color: rgb(128,128,128,0); color: rgb(255,255,255)')
+        self.tuner_note.setAlignment(Qt.AlignHCenter)
+
     def constructMainMenu(self):
         self.fadeOut()
         self.clearGridLayout()
@@ -577,6 +680,19 @@ class Central(QWidget):
         self.paint_code = 2
         self.fadeIn()
 
+    def constructTunerMenu(self):
+        self.fadeOut()
+        self.clearGridLayout()
+        self.options_layout.setRowMinimumHeight(0,self.button_44.minimumSizeHint().height()*3)
+        self.options_layout.addWidget(self.exit_btn,1,0,Qt.AlignVCenter)
+
+        self.options_layout.addWidget(self.tuner_note, 0, 0, Qt.AlignVCenter | Qt.AlignTop)
+
+        print(self.options_layout.rowMinimumHeight(0))
+        self.paint_code = 4
+        self.fadeIn()
+
+
     def editTitle(self):
         self.editing_title = True
         self.grad_position = 0.0
@@ -597,10 +713,22 @@ class Central(QWidget):
             self.ser = serial.Serial(port='/dev/tty.usbserial-A904RDA3', baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, timeout=0.1)
         if(self.ser.isOpen()):
             print("Serial port is open")
+            self.reset_board()
             self.start_btn.setText('Start')
         else:
             print("No board connected")
             self.start_btn.setText('Reconnect')
+
+    def toggleTuner(self):
+        if (self.tuner_btn.text() == 'Tuner'):
+            self.tuner_btn.setText('Back')
+            self.sendStartTuning()
+            self.constructTunerMenu();
+        else:
+            self.tuner_btn.setText('Tuner')
+            self.sendStopTuning()
+            self.constructMainMenu();
+            
 
     def changeTime(self,number):
         self.time_index = number
@@ -613,14 +741,44 @@ class Central(QWidget):
     def changeInstrument(self,instrument):
         self.current_instrument = instrument
 
-    def reset_start_stop(self): 
+    def reset_start_stop(self):
         self.start_btn.setText("Start")
+
+    def reset_board(self): 
+        if self.ser.isOpen():
+            try:
+                self.ser.write([252])
+            except:
+                return
+        else:
+            print('Reconnecting...')
+            self.connectBoard()
 
     def sendStartStopFlag(self):
         if self.ser.isOpen():
-            try: 
+            try:
                 self.ser.write([255])
-            except: 
+            except:
+                return
+        else:
+            print('Reconnecting...')
+            self.connectBoard()
+
+    def sendStartTuning(self):
+        if self.ser.isOpen():
+            try:
+                self.ser.write([254])
+            except:
+                return
+        else:
+            print('Reconnecting...')
+            self.connectBoard()
+
+    def sendStopTuning(self):
+        if self.ser.isOpen():
+            try:
+                self.ser.write([253])
+            except:
                 return
         else:
             print('Reconnecting...')
@@ -643,7 +801,7 @@ class Central(QWidget):
 
     def sendKey(self):
         if self.ser.isOpen():
-            self.ser.write([self.midi_keys_dict.get(self.current_key) + 7]) # can't send negative numbers. add 7 on board 
+            self.ser.write([self.midi_keys_dict.get(self.current_key) + 7]) # can't send negative numbers. add 7 on board
         else:
             self.connectBoard()
             print('Cannot send key. Board not connected')
@@ -666,10 +824,10 @@ class Central(QWidget):
     def startGatorscribe(self):
         if(self.ser.isOpen()):
             self.sendTitle()
-            self.sendTime() 
-            self.sendKey() 
-            self.sendTempo() 
-            self.sendInstrument() 
+            self.sendTime()
+            self.sendKey()
+            self.sendTempo()
+            self.sendInstrument()
             self.start_btn.setText("Stop")
             print("Recording!")
         else:

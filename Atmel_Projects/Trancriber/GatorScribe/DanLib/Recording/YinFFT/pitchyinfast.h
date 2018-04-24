@@ -46,7 +46,7 @@ extern "C" {
 #include "arm_math.h"
 #include "fvec.h"
 
-#define YIN_FFT_SAMPLING_RATE 23600.0f //22900 
+#define YIN_FFT_SAMPLING_RATE 23560.0f
 #define YIN_BUF_SIZE 2048
 
 /** pitch detection object */
@@ -73,7 +73,7 @@ void del_aubio_pitchyinfast (aubio_pitchyinfast_t * o);
   \param cands_out pitch period candidates, in samples
 
 */
-float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, fvec_t * input); 
+float32_t aubio_pitchyinfast_do (aubio_pitchyinfast_t * o, float32_t * in_data); 
 
 
 /** set tolerance parameter for YIN algorithm

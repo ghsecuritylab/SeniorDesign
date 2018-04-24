@@ -378,10 +378,11 @@ int main(void)
 			}	
 			else
 			{
-				if (inputPitch < closest_note_freq)
-					scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_UP;
-				else 
-					scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_DOWN;
+// 				if (inputPitch < closest_note_freq)
+// 					scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_UP;
+// 				else 
+// 					scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_DOWN;
+				scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_NONE;
 			}		
 			
 			// find index in scale where the pitch lies 

@@ -185,7 +185,9 @@ DanLib/DYWA/dywapitchtrack.d DanLib/DYWA/dywapitchtrack.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h \
+ ../DanLib/Recording/YinFFT/pitchyinfast.h \
+ ../DanLib/Recording/YinFFT/fvec.h ../DanLib/Recording/YinFFT/types.h
 
 ../DanLib/DYWA/dywapitchtrack.h:
 
@@ -582,3 +584,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\fastmath.h:
+
+../DanLib/Recording/YinFFT/pitchyinfast.h:
+
+../DanLib/Recording/YinFFT/fvec.h:
+
+../DanLib/Recording/YinFFT/types.h:

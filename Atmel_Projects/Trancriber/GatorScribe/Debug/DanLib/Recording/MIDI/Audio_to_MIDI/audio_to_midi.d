@@ -191,7 +191,8 @@ DanLib/Recording/MIDI/Audio_to_MIDI/audio_to_midi.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  ../DanLib/Recording/YinFFT/pitchyinfast.h \
  ../DanLib/Recording/YinFFT/fvec.h ../DanLib/Recording/YinFFT/types.h \
- ../DanLib/Recording/YinFFT/fvec.h ../DanLib/Recording/YinFFT/hanning.h
+ ../DanLib/Recording/YinFFT/pitchyinfast.h \
+ ../DanLib/Recording/YinFFT/fvec.h
 
 ../src/asf.h:
 
@@ -597,6 +598,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../DanLib/Recording/YinFFT/types.h:
 
-../DanLib/Recording/YinFFT/fvec.h:
+../DanLib/Recording/YinFFT/pitchyinfast.h:
 
-../DanLib/Recording/YinFFT/hanning.h:
+../DanLib/Recording/YinFFT/fvec.h:

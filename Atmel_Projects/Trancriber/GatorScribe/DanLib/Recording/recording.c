@@ -146,9 +146,8 @@ void RTT_Handler(void)
 static midi_note_t notes[NOTE_BUF_SIZE]; 
 extern volatile int clickIdx; 
 extern volatile bool start; 
-void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title)
+void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t bpm, midi_instrument_t playback_instrument, time_signature_t time_signature , key_signature_t key_signature, char *title, aubio_pitchyinfast_t *yin)
 {		
-	aubio_pitchyinfast_t *yin = new_aubio_pitchyinfast(WIN_SIZE); 
 	/******** midi event variables *********/ 
 	*number_of_events = 0; 
 	float current_rhythm = 0.25;  // 16th note
@@ -199,7 +198,7 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 			if (note_cnt > 0)
 			{
 				if (notes[note_cnt & NOTE_MASK].note_number != notes[(note_cnt-1) & NOTE_MASK].note_number 
-					|| notes[note_cnt & NOTE_MASK].velocity > 2.0f*notes[(note_cnt-1) & NOTE_MASK].velocity)
+					|| notes[note_cnt & NOTE_MASK].velocity > 1.2f*notes[(note_cnt-1) & NOTE_MASK].velocity)
 				{
 					events[*number_of_events].note_number = notes[(note_cnt-1) & NOTE_MASK].note_number;
 					events[*number_of_events].velocity = 64;
@@ -219,7 +218,6 @@ void start_recording(midi_event_t *events, uint32_t *number_of_events, uint32_t 
 	recording = false; 
 	metronome_on = false;
 	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN);
-	del_aubio_pitchyinfast(yin); 
 	
 	// add last note 
 	events[*number_of_events].note_number = notes[(note_cnt-1) & NOTE_MASK].note_number;
