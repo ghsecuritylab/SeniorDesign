@@ -80,7 +80,7 @@ void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *y
 		max_power = power;
 	}
 	
-	if (power < 0.1f*max_power)
+	if (power < 0.00000001f)
 	{
 		note->note_number = NO_NOTE;
 		note->velocity = NO_NOTE;
@@ -91,7 +91,7 @@ void get_midi_note(float32_t *buffer, midi_note_t *note, aubio_pitchyinfast_t *y
 	float32_t freq = aubio_pitchyinfast_do(yin, buffer); 
 	
 	// Don't count notes below C1 
-	if (freq < 39.0f || freq > 4000.0f || aubio_pitchyinfast_get_confidence(yin) < 0.8)
+	if (freq < 75.0f || freq > 4000.0f || aubio_pitchyinfast_get_confidence(yin) < 0.65f)
 	{
 		note->note_number = NO_NOTE;
 		note->velocity = NO_NOTE;

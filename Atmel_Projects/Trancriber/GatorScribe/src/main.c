@@ -224,7 +224,7 @@ int main(void)
 	
 	midi_event_t events_in_time[MAX_NUM_EVENTS];
 	uint32_t number_of_events = 0; 
-	max_power = 100; // minimum initial max power
+	max_power = 0.005f; // minimum initial max power
 	
 	int32_t millisecond_cnt_buffer[NUM_AVG_TAPS]; 
 	

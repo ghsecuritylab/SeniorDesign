@@ -21,6 +21,9 @@
 
 #define LAG_OFFSET 600
 
+extern volatile float sample_rate_new; 
+
+
 void PSOLA_init(void); 
 void create_harmonies(float* input, float *output, float inputPitch, float *pitch_shifts_in, float harm_volume, float dry_volume); 
 

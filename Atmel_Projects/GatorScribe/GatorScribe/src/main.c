@@ -419,14 +419,17 @@ int main(void)
 				bool *autotune = (bool *)&chord_harmonies[8]; 
 				if (*autotune)
 				{
-					desired_pitch = scale_pitch;
-	
-					if (pitch_bend < 56 || pitch_bend > 72) 
-						bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
-				
-					harmony_shifts[0] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-					dry_freq = desired_pitch; 
+					desired_pitch = scale_pitch; 
 				}
+				else
+				{
+					desired_pitch = inputPitch; 
+				}
+				if (pitch_bend < 56 || pitch_bend > 72)
+					bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
+				
+				harmony_shifts[0] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				dry_freq = desired_pitch;
 				
 				// octave down
 				if(chord_harmonies[chord_idx] == true)
@@ -561,10 +564,11 @@ int main(void)
 				out_buffer[i] += delay_volume * delay_circ_buffer[curr_idx & CIRC_MASK];
 				
 				// reverb
-				out_buffer[i] += reverb_volume * 0.33f *
-						(dry_circ_buffer[(curr_idx - 2001)  & CIRC_MASK] +
-						dry_circ_buffer[(curr_idx - 1503)  & CIRC_MASK] + 
-						dry_circ_buffer[(curr_idx - 1203)  & CIRC_MASK] ); 
+				out_buffer[i] += reverb_volume * 0.25f * 
+ 						(dry_circ_buffer[(curr_idx - 2001)  & CIRC_MASK] +
+ 						dry_circ_buffer[(curr_idx - 3501)  & CIRC_MASK] + 
+						dry_circ_buffer[(curr_idx - 3001)  & CIRC_MASK] +
+						dry_circ_buffer[(curr_idx - 3705)  & CIRC_MASK] ); 
 			}
 	
 			// scale output 

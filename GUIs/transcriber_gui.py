@@ -74,6 +74,7 @@ class Central(QWidget):
             x.tofile('my_song.mid') # simply name of file
             print("Created MIDI File")
             self.start_btn.setText("Start")
+            os.popen("open my_song.mid") # open file 
         else:
             print("No board connected")
             self.connectBoard()
