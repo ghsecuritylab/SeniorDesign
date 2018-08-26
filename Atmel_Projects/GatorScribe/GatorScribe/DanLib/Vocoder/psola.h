@@ -13,13 +13,15 @@
 #include "DMA_Audio.h"
 #include "arm_math.h"
 
-#define MINIMUM_PITCH 100.0f 
+#define PSOLA_SAMPLE_RATE 47250.0f //48000.0f
+
+#define MINIMUM_PITCH 70.0f //100.0f 
 #define NO_SHIFT 1.0f 
 #define END_OF_SHIFTS -1.0f
 #define MAX_NUM_SHIFTS 19 // always doing root (1.0 shift) 
 #define NO_PITCH_BEND 64
 
-#define LAG_OFFSET 600
+#define LAG_OFFSET 0 //600
 
 extern volatile float sample_rate_new; 
 
