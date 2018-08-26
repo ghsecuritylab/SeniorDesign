@@ -30,7 +30,7 @@ COMPILER_ALIGNED(IO_BUF_SIZE_PER_CHANNEL) float processBuffer[IO_BUF_SIZE_PER_CH
 volatile uint16_t *inBuffer = inPingBuffer;
 
 // outBuffer points to buffer awaiting processed audio before being sent out 
-volatile uint16_t *outBuffer = outPingBuffer;
+volatile uint16_t *sound_out = outPingBuffer;
 
 volatile bool outOfTime = 0; 
 volatile bool dataReceived = false; 
@@ -73,11 +73,11 @@ void XDMAC_Handler(void)
 		// update output buffer to be used 
 		if(outPingMode)
 		{   
-			outBuffer = outPingBuffer; 
+			sound_out = outPingBuffer; 
 		}
 		else
 		{
-			outBuffer = outPongBuffer; 
+			sound_out = outPongBuffer; 
 		}
 		outPingMode = !outPingMode; 
 	}

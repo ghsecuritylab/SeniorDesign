@@ -54,7 +54,7 @@ void PSOLA_init(void)
 }
 
 // assumes valid pitch shifts 
-void create_harmonies(float* input, float *output, float inputPitch, float *pitch_shifts_in, float harm_volume, float dry_volume)
+void create_harmonies(float* input, float *output, float inputPitch, float *pitch_shifts_in, float harmony_vol,  float autotune_flag, float autotune_vol)
 {
 	uint32_t i, w; 
 	int32_t olaIdx; 
@@ -145,23 +145,22 @@ void create_harmonies(float* input, float *output, float inputPitch, float *pitc
 					outPtr = (outPtr + (uint32_t)((float)inputPeriodLength * periodRatio)) & RING_BUFFER_MASK; 
 				
 					// OLA 
-					if (pitch_idx == 0)
+					if (pitch_idx == 0 && autotune_flag == 1)
 					{
 						for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
 						{
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
-							dry_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
+								autotune_vol * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
 						}
 					}
-					else
+					else 
 					{
 						for (olaIdx = -inputPeriodLength, w = 0; olaIdx < inputPeriodLength; olaIdx++, w++)
 						{
 							output_ring_buffer[(uint32_t)(olaIdx + (int64_t)outPtr) & RING_BUFFER_MASK] +=
-								harm_volume * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
+								harmony_vol * window[w] * input_ring_buffer[(uint32_t)(olaIdx + (int64_t)inPtr + LAG_OFFSET) & RING_BUFFER_MASK];
 						}
 					}
-	
 					
 					if (inHalfAway < RING_BUFFER_SIZE_D2) 
 					{

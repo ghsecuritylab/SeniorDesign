@@ -175,7 +175,7 @@ void USART_SERIAL_ISR_HANDLER(void)
 				switch(*data1)
 				{
 					case DRY_VOLUME_CH: 
-						dry_volume = 0.1f + 0.9f*(float)*data2 / 127.0f; break; 
+						dry_volume = (float)*data2 / 127.0f; break; 
 					case HARM_VOLUME_CH: 
 						harm_volume = (float)*data2 / 127.0f; break; 
 					case MASTER_VOLUME_CH: 
@@ -378,10 +378,6 @@ int main(void)
 			}	
 			else
 			{
-// 				if (inputPitch < closest_note_freq)
-// 					scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_UP;
-// 				else 
-// 					scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_DOWN;
 				scale_correct_history[scale_correct_idx++ & SCALE_CORRECT_HISTORY_MASK] = SCALE_NONE;
 			}		
 			
@@ -400,139 +396,142 @@ int main(void)
 				}
 			}
 			
-			// regular voice 
-			harmony_shifts[0] = 1.0f; 
 			dry_freq = inputPitch; 
-			num_of_shifts = 1;  
-			
-			// calculate power 
-			arm_power_f32(processBuffer, WIN_SIZE>>2, &power);
+			num_of_shifts = 0; 
+			bool *autotune = (bool *)&chord_harmonies[8];  
 		
-			// determine whether you should add any harmonies 
-			if (inputPitch > MINIMUM_PITCH && power > POWER_THRESHOLD)
-			{
-				// chord harmonies 
-				uint32_t chord_idx = 0;	
-				uint32_t saved_interval_idx = interval_idx; 	
+			// chord harmonies 
+			uint32_t chord_idx = 0;	
+			uint32_t saved_interval_idx = interval_idx; 	
 				
-				// autotune 
-				bool *autotune = (bool *)&chord_harmonies[8]; 
-				if (*autotune)
-				{
-					desired_pitch = scale_pitch; 
-				}
-				else
-				{
-					desired_pitch = inputPitch; 
-				}
+			// autotune 
+			if (*autotune)
+			{
+				desired_pitch = scale_pitch; 
+					
 				if (pitch_bend < 56 || pitch_bend > 72)
 					bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
-				
+					
 				harmony_shifts[0] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				num_of_shifts++; 
 				dry_freq = desired_pitch;
+			}
 				
-				// octave down
-				if(chord_harmonies[chord_idx] == true)
-				{
-					if (*autotune)
-						desired_pitch = scale_pitch*powerf(1.059463094359f, -12);
-					else
-						desired_pitch = closest_note_freq*powerf(1.059463094359f, -12);
-					if (pitch_bend < 56 || pitch_bend > 72)
-						bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
-					harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-					chord_freqs[chord_idx].active = true;
-					chord_freqs[chord_idx].freq = desired_pitch;
-				} else chord_freqs[chord_idx].active = false;
-				chord_idx++;
+			// octave down
+			if(chord_harmonies[chord_idx] == true)
+			{
+				if (*autotune)
+					desired_pitch = scale_pitch*powerf(1.059463094359f, -12);
+				else
+					desired_pitch = closest_note_freq*powerf(1.059463094359f, -12);
+				if (pitch_bend < 56 || pitch_bend > 72)
+					bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
+				harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				chord_freqs[chord_idx].active = true;
+				chord_freqs[chord_idx].freq = desired_pitch;
+			} else chord_freqs[chord_idx].active = false;
+			chord_idx++;
 						
-				// low harmonies 
-				int32_t steps_to_harmony = -12;
-				for (i = 0; i < 3; i++, chord_idx++)
-				{
-					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
-						steps_to_harmony += major[interval_idx % 7];
-					if(chord_harmonies[chord_idx] == true)
-					{
-						desired_pitch = scale_pitch*powerf(1.059463094359f, steps_to_harmony);
-						if (pitch_bend < 56 || pitch_bend > 72)
-							bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
-						harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-						chord_freqs[chord_idx].active = true;
-						chord_freqs[chord_idx].freq = desired_pitch;
-					} else chord_freqs[chord_idx].active = false;
-				}
-				
-				// high harmonies 
-				steps_to_harmony = 0;
-				interval_idx = saved_interval_idx;  	
-				for (i = 0; i < 3; i++, chord_idx++)
-				{
-					for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
-						steps_to_harmony += major[interval_idx % 7];
-					if(chord_harmonies[chord_idx] == true)
-					{
-						desired_pitch = scale_pitch*powerf(1.059463094359f, steps_to_harmony);
-						if (pitch_bend < 56 || pitch_bend > 72)
-							bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
-						harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
-						chord_freqs[chord_idx].active = true;
-						chord_freqs[chord_idx].freq = desired_pitch;
-					} else chord_freqs[chord_idx].active = false; 
-				}
-				
-				// octave up
+			// low harmonies 
+			int32_t steps_to_harmony = -12;
+			for (i = 0; i < 3; i++, chord_idx++)
+			{
+				for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					steps_to_harmony += major[interval_idx % 7];
 				if(chord_harmonies[chord_idx] == true)
 				{
-					if (*autotune)
-						desired_pitch = scale_pitch*powerf(1.059463094359f, 12);
-					else
-						desired_pitch = closest_note_freq*powerf(1.059463094359f, 12);
+					desired_pitch = scale_pitch*powerf(1.059463094359f, steps_to_harmony);
 					if (pitch_bend < 56 || pitch_bend > 72)
 						bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
 					harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
 					chord_freqs[chord_idx].active = true;
 					chord_freqs[chord_idx].freq = desired_pitch;
 				} else chord_freqs[chord_idx].active = false;
-
-				// keyboard harmonies  
-				float pitch_shift; 
-				for (i = 0; i < MAX_NUM_KEYS_HARMONIES; i++)
+			}
+				
+			// high harmonies 
+			steps_to_harmony = 0;
+			interval_idx = saved_interval_idx;  	
+			for (i = 0; i < 3; i++, chord_idx++)
+			{
+				for (uint32_t j = 0; j < harmony_steps[i]; j++, interval_idx++)
+					steps_to_harmony += major[interval_idx % 7];
+				if(chord_harmonies[chord_idx] == true)
 				{
-					if (harmony_list[i].active)
+					desired_pitch = scale_pitch*powerf(1.059463094359f, steps_to_harmony);
+					if (pitch_bend < 56 || pitch_bend > 72)
+						bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
+					harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+					chord_freqs[chord_idx].active = true;
+					chord_freqs[chord_idx].freq = desired_pitch;
+				} else chord_freqs[chord_idx].active = false; 
+			}
+				
+			// octave up
+			if(chord_harmonies[chord_idx] == true)
+			{
+				if (*autotune)
+					desired_pitch = scale_pitch*powerf(1.059463094359f, 12);
+				else
+					desired_pitch = closest_note_freq*powerf(1.059463094359f, 12);
+				if (pitch_bend < 56 || pitch_bend > 72)
+					bend_pitch(&desired_pitch, closest_note_number, (uint32_t)pitch_bend);
+				harmony_shifts[num_of_shifts++] = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+				chord_freqs[chord_idx].active = true;
+				chord_freqs[chord_idx].freq = desired_pitch;
+			} else chord_freqs[chord_idx].active = false;
+
+			// keyboard harmonies  
+			float pitch_shift; 
+			for (i = 0; i < MAX_NUM_KEYS_HARMONIES; i++)
+			{
+				if (harmony_list[i].active)
+				{
+					if (Abs(harmony_list[i].freq - dry_freq) > 8.0f) // don't harmonize input pitch twice
 					{
-						if (Abs(harmony_list[i].freq - dry_freq) > 8.0f) // don't harmonize input pitch twice
+						// check if chord harmonies are already doing this harmony 
+						desired_pitch = harmony_list[i].freq;
+						bool already_harmonized = false; 
+						for (int k = 0; k < 8; k++)
 						{
-							// check if chord harmonies are already doing this harmony 
-							desired_pitch = harmony_list[i].freq;
-							bool already_harmonized = false; 
-							for (int k = 0; k < 8; k++)
+							if (chord_freqs[k].active && Abs(desired_pitch - chord_freqs[k].freq) < 1.0f)
 							{
-								if (chord_freqs[k].active && Abs(desired_pitch - chord_freqs[k].freq) < 1.0f)
-								{
-									already_harmonized = true; 
-									break; 
-								}
+								already_harmonized = true; 
+								break; 
 							}
+						}
 							
-							if (already_harmonized == false)
-							{
-								if (pitch_bend != 64)
-									bend_pitch(&desired_pitch, harmony_list[i].idx, (uint32_t)pitch_bend);
+						if (already_harmonized == false)
+						{
+							if (pitch_bend != 64)
+								bend_pitch(&desired_pitch, harmony_list[i].idx, (uint32_t)pitch_bend);
 							
-								pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
+							pitch_shift = 1.0f - (inputPitch-desired_pitch)*oneOverInputPitch;
 							
-								if (pitch_shift > 0.1f && pitch_shift < 6.0f) // range check
-									harmony_shifts[num_of_shifts++] = pitch_shift;
-							}
+							if (pitch_shift > 0.1f && pitch_shift < 6.0f) // range check
+								harmony_shifts[num_of_shifts++] = pitch_shift;
 						}
 					}
 				}
-			} 
-			
-			harmony_shifts[num_of_shifts] = END_OF_SHIFTS; 
-			
-			create_harmonies(processBuffer, out_buffer, inputPitch, harmony_shifts, (float)harm_volume, (float)dry_volume); 
+			}			
+			if (num_of_shifts > 0)
+			{
+				harmony_shifts[num_of_shifts] = END_OF_SHIFTS; 
+				create_harmonies(processBuffer, out_buffer, inputPitch, harmony_shifts, (float)harm_volume,  *autotune, (float)dry_volume);
+				if (*autotune == 0)
+				{
+					arm_scale_f32(processBuffer, (float)dry_volume, processBuffer, WIN_SIZE);
+					arm_add_f32(out_buffer, processBuffer, out_buffer, WIN_SIZE);
+					arm_scale_f32(out_buffer, 0.5f, out_buffer, WIN_SIZE);
+				}
+			}
+			else 
+			{
+				harmony_shifts[0] = 1.0f; 
+				harmony_shifts[1] = END_OF_SHIFTS; 
+				create_harmonies(processBuffer, out_buffer, inputPitch, harmony_shifts, (float)harm_volume, *autotune, (float)dry_volume);
+				arm_scale_f32(processBuffer, (float)dry_volume, out_buffer, WIN_SIZE); 
+			}
 			
 			// save dry audio 
 			for (i = 0; i < WIN_SIZE; i++)
@@ -581,8 +580,8 @@ int main(void)
 			uint32_t idx = 0; 
 			for(i = 0; i < IO_BUF_SIZE; i+=2)
 			{
-				outBuffer[i] = (uint16_t)(int16_t)(out_buffer[idx++]);  
-				outBuffer[i+1] = outBuffer[i]; 
+				sound_out[i] = (uint16_t)(int16_t)(out_buffer[idx++]);  
+				sound_out[i+1] = sound_out[i]; 
 			}
 			
 			// check if we're too slow ... uncomment for debug 

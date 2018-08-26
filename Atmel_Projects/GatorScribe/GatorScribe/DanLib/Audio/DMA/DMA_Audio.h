@@ -29,7 +29,7 @@
 /********************************** Externs Start **********************************/
 extern volatile bool dataReceived;
 extern float processBuffer[IO_BUF_SIZE_PER_CHANNEL];
-extern volatile uint16_t *outBuffer; 
+extern volatile uint16_t *sound_out; 
 /********************************** Externs End **********************************/
 
 /********************************** Public Functions Start **********************************/
