@@ -7,6 +7,12 @@ We created a monophonic pitch detection system that records a sample directly fr
 
 ## Vocal Harmonizer
 After producing a working demonstration of *Gatorscribe*, we created a real-time vocal harmonizer that takes input from a singer through a microphone and layers the output with several pitch-shifted versions of their voice. The user has a desktop GUI interface that allows them to choose what notes in a set musical key they would like to shift their voice to. Also, they can use a MIDI-compliant musical device such as a keyboard to play notes that our embedded software will interpret as desired pitch shifts for their voice. The final effect sounds like a choir of the same singer harmonizing simultaneously.
+<br/>
+<br/>
+<br/>
+<br/>
+![Gatorscribe](https://raw.githubusercontent.com/Danngonz3/SeniorDesign/master/GUIs/Gatorscribe.png)
+*Gatorscribe User Interface*
 
 ## Tech
 We used the following technologies in some capacity during our development.
